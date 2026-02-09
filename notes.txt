@@ -1,0 +1,23 @@
+* Ingress Nginx
+* Cloud SQL => Pgrator
+* Prometheus => Mimir
+* Sårbarheter
+
+* OpenSearch v3 (fra Aiven)
+* Kafka Native ACL
+
+Console
+   * Vulnerability Management: Significant work on the CVE/vulnerability pipeline, including
+     new filters for nais-system namespaces, CVSS score integration, and Mean Time To Fix
+     (MTTF) history tracking.
+   * Managed Services (Valkey & OpenSearch): Full lifecycle management was introduced,
+     including name validation, keyspace notification support for Valkey, and expanded
+     version support for OpenSearch.
+   * Security & RBAC: Refactored secret access and elevation logic to enforce strict team
+     membership. Introduced "Team Viewer" roles and improved RBAC client lookups using
+     ClusterName.
+   * Unleash Integration: Integrated bifrostclient for automated Unleash management,
+     including release channel support and instance deletion.
+
+* Elevering og Nais Cli (Kyrre)
+

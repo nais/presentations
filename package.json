@@ -1,0 +1,17 @@
+{
+  "name": "nais-presentations",
+  "version": "1.0.0",
+  "private": true,
+  "packageManager": "pnpm@10.25.0",
+  "description": "nais Presentations Monorepo",
+  "scripts": {
+    "dev": "pnpm -r --parallel dev",
+    "dev:brukerforum": "pnpm --filter @nais/2026-02-nais-brukerforum dev",
+    "build": "pnpm -r build",
+    "lint": "pnpm -r lint",
+    "lint:fix": "pnpm -r lint:fix",
+    "format": "pnpm -r format",
+    "format:check": "pnpm -r format:check",
+    "check": "pnpm -r check"
+  }
+}

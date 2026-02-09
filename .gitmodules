@@ -1,0 +1,3 @@
+[submodule "shared/public/logos"]
+	path = shared/public/logos
+	url = git@github.com:nais/logo.git

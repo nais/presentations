@@ -1,0 +1,327 @@
+/* nais.io Light Theme */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Poppins:wght@400;600;700;900&display=swap');
+
+:root {
+  /* nais.io brand palette — light theme */
+  --nais-bg: #ffffff;
+  --nais-surface: #f1f5f9;
+  --nais-card: #f8fafc;
+  --nais-text: #0f172a;
+  --nais-text-secondary: #64748b;
+  --nais-heading: #0f172a;
+  --nais-accent: #e8384f;
+  --nais-accent-hover: #dc2626;
+  --nais-accent-light: #fef2f2;
+  --nais-border: #e2e8f0;
+  --nais-highlight: #e8384f;
+  --nais-gradient-from: #e8384f;
+  --nais-gradient-to: #dc2626;
+  --nais-code-bg: #f1f5f9;
+  --nais-success: #10b981;
+
+  --slidev-theme-primary: var(--nais-accent);
+}
+
+html {
+  background: var(--nais-bg);
+  color: var(--nais-text);
+}
+
+/* Typography */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  color: var(--nais-heading);
+}
+
+body,
+p,
+li {
+  font-family: 'Inter', sans-serif;
+  color: var(--nais-text);
+}
+
+code,
+pre,
+.font-mono {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* Slide background */
+.slidev-layout,
+.slidev-page > div {
+  background: var(--nais-bg);
+  position: relative;
+}
+
+/* Subtle dot grid background pattern */
+.slidev-layout::before,
+.slidev-page > div::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, #cbd5e1 0.75px, transparent 0.75px);
+  background-size: 24px 24px;
+  opacity: 0.35;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Disable the second pseudo-element layer entirely */
+.slidev-layout::after,
+.slidev-page > div::after {
+  display: none;
+}
+
+/* Content above dot grid */
+.slidev-layout > *,
+.slidev-page > div > * {
+  position: relative;
+  z-index: 2;
+}
+
+/* Accent utilities */
+.text-accent {
+  color: var(--nais-accent);
+}
+
+.text-muted {
+  color: var(--nais-text-secondary);
+}
+
+.bg-surface {
+  background: var(--nais-surface);
+}
+
+.bg-card {
+  background: var(--nais-card);
+}
+
+.border-default {
+  border-color: var(--nais-border);
+}
+
+/* Stat emphasis */
+.stat-number {
+  font-size: 4rem;
+  font-weight: 700;
+  color: var(--nais-accent);
+  font-family: 'JetBrains Mono', monospace;
+  line-height: 1;
+}
+
+/* Cards */
+.nais-card {
+  background: var(--nais-card);
+  border: 1px solid var(--nais-border);
+  border-radius: 1rem;
+  padding: 1.5rem;
+}
+
+.nais-card.accent {
+  border-color: var(--nais-accent);
+}
+
+/* Quote/callout styling */
+.callout {
+  background: var(--nais-surface);
+  border-left: 4px solid var(--nais-accent);
+  padding: 1.5rem;
+  margin: 1rem 0;
+  font-style: italic;
+  border-radius: 0 0.5rem 0.5rem 0;
+  color: var(--nais-text);
+}
+
+/* Benefits list */
+.benefits-list {
+  list-style: none;
+  padding: 0;
+}
+
+.benefits-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+  font-size: 0.95rem;
+}
+
+.benefits-list .check {
+  color: var(--nais-success);
+  flex-shrink: 0;
+}
+
+/* Subtitle */
+.subtitle {
+  color: var(--nais-text-secondary);
+  font-size: 1.2rem;
+  margin-top: -0.5rem;
+}
+
+/* Info card */
+.info-card {
+  background: var(--nais-surface);
+  border: 1px solid var(--nais-border);
+  border-radius: 0.75rem;
+  padding: 1rem 1.25rem;
+}
+
+/* Badge */
+.tool-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--nais-surface);
+  border: 1px solid var(--nais-border);
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+}
+
+/* Icon badge – colored circle behind icon */
+.icon-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 0.75rem;
+  flex-shrink: 0;
+}
+
+.icon-badge.accent {
+  background: var(--nais-accent-light);
+  color: var(--nais-accent);
+}
+
+.icon-badge.blue {
+  background: #eff6ff;
+  color: #3b82f6;
+}
+
+.icon-badge.green {
+  background: #ecfdf5;
+  color: #10b981;
+}
+
+.icon-badge.purple {
+  background: #f5f3ff;
+  color: #8b5cf6;
+}
+
+.icon-badge.amber {
+  background: #fffbeb;
+  color: #f59e0b;
+}
+
+/* Screenshot placeholder */
+.screenshot-placeholder {
+  background: linear-gradient(135deg, var(--nais-surface) 0%, #e2e8f0 100%);
+  border: 2px dashed var(--nais-border);
+  border-radius: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 0.5rem;
+  color: var(--nais-text-secondary);
+  font-size: 0.8rem;
+  min-height: 180px;
+  position: relative;
+  overflow: hidden;
+}
+
+.screenshot-placeholder img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 0.75rem;
+}
+
+/* Feature card with accent left border */
+.feature-card {
+  background: var(--nais-card);
+  border: 1px solid var(--nais-border);
+  border-left: 4px solid var(--nais-accent);
+  border-radius: 0 0.75rem 0.75rem 0;
+  padding: 1.25rem 1.5rem;
+  text-align: left;
+}
+
+.feature-card.blue {
+  border-left-color: #3b82f6;
+}
+
+.feature-card.green {
+  border-left-color: #10b981;
+}
+
+.feature-card.purple {
+  border-left-color: #8b5cf6;
+}
+
+.feature-card.amber {
+  border-left-color: #f59e0b;
+}
+
+/* Section number pill */
+.section-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background: var(--nais-accent);
+  color: white;
+  font-weight: 700;
+  font-size: 0.9rem;
+  font-family: 'JetBrains Mono', monospace;
+  flex-shrink: 0;
+}
+
+/* Gradient header bar */
+.gradient-bar {
+  height: 4px;
+  background: linear-gradient(90deg, var(--nais-gradient-from), var(--nais-gradient-to));
+  border-radius: 2px;
+  margin: 0.5rem auto 0;
+  width: 80px;
+}
+
+/* Tag / chip */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.chip.accent {
+  background: var(--nais-accent-light);
+  color: var(--nais-accent);
+}
+
+.chip.blue {
+  background: #eff6ff;
+  color: #3b82f6;
+}
+
+.chip.green {
+  background: #ecfdf5;
+  color: #10b981;
+}
+
+.chip.purple {
+  background: #f5f3ff;
+  color: #8b5cf6;
+}

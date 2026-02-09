@@ -1,0 +1,34 @@
+{
+  "name": "@nais/2026-02-nais-brukerforum",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "nais Brukerforum February 2026",
+  "scripts": {
+    "dev": "slidev --port 3031",
+    "build": "slidev build --base /2026-02-nais-brukerforum/",
+    "export": "slidev export",
+    "lint": "eslint . --ext .vue,.ts,.js",
+    "lint:fix": "eslint . --ext .vue,.ts,.js --fix",
+    "format": "prettier --write \"**/*.{vue,ts,js,css,json}\"",
+    "format:check": "prettier --check \"**/*.{vue,ts,js,css,json}\"",
+    "check": "pnpm lint && pnpm format:check"
+  },
+  "dependencies": {
+    "@slidev/cli": "^52.11.3",
+    "@slidev/theme-default": "^0.25.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.2",
+    "@iconify-json/carbon": "^1.2.18",
+    "@typescript-eslint/eslint-plugin": "^8.53.1",
+    "@typescript-eslint/parser": "^8.53.1",
+    "@unocss/reset": "^66.6.0",
+    "eslint": "^9.39.2",
+    "eslint-plugin-vue": "^10.7.0",
+    "prettier": "^3.8.1",
+    "typescript": "^5.9.3",
+    "unocss": "^66.6.0",
+    "vue-eslint-parser": "^10.2.0"
+  }
+}
