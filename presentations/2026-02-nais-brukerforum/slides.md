@@ -385,9 +385,8 @@ layout: default
           <li class="flex items-start gap-2"><span class="i-carbon-checkmark-filled text-sm mt-0.5" style="color: var(--nais-success);"></span> Filtrering nais-system namespaces</li>
         </ul>
       </div>
-      <div class="screenshot-placeholder" style="min-height: 100px;">
-        <span class="i-carbon-image text-2xl" style="color: var(--nais-border);"></span>
-        <span>Screenshot: Vulnerability dashboard</span>
+      <div style="border-radius: 8px; overflow: hidden; border: 1px solid var(--nais-border);">
+        <img src="/images/26-02-nais-console-vulnerabilities.png" alt="Vulnerability dashboard" style="width: 100%; display: block;" />
       </div>
     </div>
     <div class="flex flex-col">
@@ -399,9 +398,8 @@ layout: default
           <li class="flex items-start gap-2"><span class="i-carbon-checkmark-filled text-sm mt-0.5" style="color: var(--nais-success);"></span> Kafka Native ACL</li>
         </ul>
       </div>
-      <div class="screenshot-placeholder" style="min-height: 100px;">
-        <span class="i-carbon-image text-2xl" style="color: var(--nais-border);"></span>
-        <span>Screenshot: Managed services i Console</span>
+      <div style="border-radius: 8px; overflow: hidden; border: 1px solid var(--nais-border);">
+        <img src="/images/26-02-nais-console-opensearch.png" alt="OpenSearch i Console" style="width: 100%; display: block;" />
       </div>
     </div>
   </div>
@@ -411,67 +409,44 @@ layout: default
 layout: default
 ---
 
-<!-- Slide 9: Pågående & veien videre -->
+<!-- Slide 9: De lange linjene – Denne perioden -->
 
 ::header::
-<h1 class="text-3xl font-bold">Pågående & veien videre</h1>
-<div class="gradient-bar"></div>
+<h1 class="text-3xl font-bold">De lange linjene mot sommeren</h1>
+<p class="subtitle">Denne perioden</p>
 
 ::default::
 <div class="flex justify-center mt-2">
-  <div class="grid grid-cols-3 gap-5" style="max-width: 920px; width: 100%;">
-    <div class="nais-card flex flex-col gap-3 px-5 py-5" style="border-top: 4px solid var(--nais-accent);">
-      <div class="flex items-center gap-3">
-        <div class="icon-badge accent">
-          <span class="i-carbon-network-3 text-xl"></span>
-        </div>
-        <span class="chip accent">Pågående</span>
+  <div class="flex flex-col items-center gap-5" style="max-width: 920px; width: 100%;">
+    <div class="flex gap-3 w-full">
+      <div class="chip accent"><span class="i-carbon-unlocked text-xs"></span> Redusere leverandørbindinger</div>
+      <div class="chip blue"><span class="i-carbon-user-flow text-xs"></span> Forenkle brukerflyt</div>
+      <div class="chip green"><span class="i-carbon-piggy-bank text-xs"></span> Redusere kostnader</div>
+      <div class="chip purple"><span class="i-carbon-gui text-xs"></span> Enhetlig brukeropplevelse</div>
+    </div>
+    <div class="grid grid-cols-3 gap-5 w-full">
+      <div class="nais-card flex flex-col gap-3 px-5 py-5" style="border-top: 4px solid var(--nais-accent);">
+        <h3 class="text-base font-bold">CloudSQL → Nais Postgres</h3>
+        <ul class="text-xs space-y-1.5" style="color: var(--nais-text-secondary); list-style: none; padding: 0;">
+          <li class="flex items-start gap-2"><span class="i-carbon-checkmark-filled text-xs mt-0.5" style="color: var(--nais-success);"></span> Redusere avhengighet til Google</li>
+          <li class="flex items-start gap-2"><span class="i-carbon-checkmark-filled text-xs mt-0.5" style="color: var(--nais-success);"></span> Øke portabilitet</li>
+          <li class="flex items-start gap-2"><span class="i-carbon-checkmark-filled text-xs mt-0.5" style="color: var(--nais-success);"></span> Redusere kostnader</li>
+        </ul>
       </div>
-      <h3 class="text-base font-bold">Ingress-nginx</h3>
-      <p class="text-xs" style="color: var(--nais-text-secondary);">Evaluerer erstatning for ingress-nginx. Gateway API og alternativer vurderes.</p>
-      <div class="text-xs font-mono mt-auto" style="color: var(--nais-accent);">Q1–Q2 2026</div>
-    </div>
-    <div class="nais-card flex flex-col gap-3 px-5 py-5" style="border-top: 4px solid #3b82f6;">
-      <div class="flex items-center gap-3">
-        <div class="icon-badge blue">
-          <span class="i-carbon-chart-line-data text-xl"></span>
-        </div>
-        <span class="chip blue">Pågående</span>
+      <div class="nais-card flex flex-col gap-3 px-5 py-5" style="border-top: 4px solid #3b82f6;">
+        <h3 class="text-base font-bold">Prometheus → Mimir</h3>
+        <ul class="text-xs space-y-1.5" style="color: var(--nais-text-secondary); list-style: none; padding: 0;">
+          <li class="flex items-start gap-2"><span class="i-carbon-checkmark-filled text-xs mt-0.5" style="color: var(--nais-success);"></span> Redusere kostnader</li>
+          <li class="flex items-start gap-2"><span class="i-carbon-checkmark-filled text-xs mt-0.5" style="color: var(--nais-success);"></span> Forenkle oppsett</li>
+        </ul>
       </div>
-      <h3 class="text-base font-bold">Prometheus → Mimir</h3>
-      <p class="text-xs" style="color: var(--nais-text-secondary);">Migrering til skalerbar metrikk-backend med lang-tidslagring.</p>
-      <div class="text-xs font-mono mt-auto" style="color: #3b82f6;">Q1 2026</div>
-    </div>
-    <div class="nais-card flex flex-col gap-3 px-5 py-5" style="border-top: 4px solid #10b981;">
-      <div class="flex items-center gap-3">
-        <div class="icon-badge green">
-          <span class="i-carbon-data-base text-xl"></span>
-        </div>
-        <span class="chip green">Pågående</span>
+      <div class="nais-card flex flex-col gap-3 px-5 py-5" style="border-top: 4px solid #10b981;">
+        <h3 class="text-base font-bold">Ressursstyring i API</h3>
+        <ul class="text-xs space-y-1.5" style="color: var(--nais-text-secondary); list-style: none; padding: 0;">
+          <li class="flex items-start gap-2"><span class="i-carbon-checkmark-filled text-xs mt-0.5" style="color: var(--nais-success);"></span> Ressursstyring gjennom Nais API</li>
+          <li class="flex items-start gap-2"><span class="i-carbon-checkmark-filled text-xs mt-0.5" style="color: var(--nais-success);"></span> Redusere kostnader</li>
+        </ul>
       </div>
-      <h3 class="text-base font-bold">Cloud SQL → Pgrator</h3>
-      <p class="text-xs" style="color: var(--nais-text-secondary);">Ny migreringsløsning for databaser — erstatter Cloud SQL Proxy.</p>
-      <div class="text-xs font-mono mt-auto" style="color: #10b981;">Q1 2026</div>
-    </div>
-  </div>
-</div>
-<div class="flex justify-center mt-4">
-  <div class="flex gap-3" style="max-width: 920px;">
-    <div class="chip purple">
-      <span class="i-carbon-document-security text-xs"></span>
-      SBOM for deploy
-    </div>
-    <div class="chip amber">
-      <span class="i-carbon-clean text-xs"></span>
-      Avvikle KrakenD
-    </div>
-    <div class="chip blue">
-      <span class="i-carbon-data-base text-xs"></span>
-      DB audit-logging
-    </div>
-    <div class="chip green">
-      <span class="i-carbon-network-overlay text-xs"></span>
-      IPv6 lastbalanserere
     </div>
   </div>
 </div>
@@ -480,7 +455,66 @@ layout: default
 layout: default
 ---
 
-<!-- Slide 10: Elevering og Nais CLI -->
+<!-- Slide 10: De lange linjene – Neste periode -->
+
+::header::
+<h1 class="text-3xl font-bold">De lange linjene mot sommeren</h1>
+<p class="subtitle">Neste periode?</p>
+
+::default::
+<div class="flex justify-center mt-2">
+  <div class="flex flex-col items-center gap-5" style="max-width: 920px; width: 100%;">
+    <div class="grid grid-cols-3 gap-5 w-full">
+      <div class="nais-card flex flex-col gap-3 px-5 py-5" style="border-top: 4px solid var(--nais-accent);">
+        <h3 class="text-base font-bold">Google IAM → Zitadel</h3>
+        <ul class="text-xs space-y-1.5" style="color: var(--nais-text-secondary); list-style: none; padding: 0;">
+          <li class="flex items-start gap-2"><span class="i-carbon-checkmark-filled text-xs mt-0.5" style="color: var(--nais-success);"></span> Redusere avhengighet til Google</li>
+          <li class="flex items-start gap-2"><span class="i-carbon-checkmark-filled text-xs mt-0.5" style="color: var(--nais-success);"></span> Øke portabilitet</li>
+        </ul>
+      </div>
+      <div class="nais-card flex flex-col gap-3 px-5 py-5" style="border-top: 4px solid #3b82f6;">
+        <h3 class="text-base font-bold">Entra ID → TokenX M2M</h3>
+        <ul class="text-xs space-y-1.5" style="color: var(--nais-text-secondary); list-style: none; padding: 0;">
+          <li class="flex items-start gap-2"><span class="i-carbon-checkmark-filled text-xs mt-0.5" style="color: var(--nais-success);"></span> Redusere avhengighet til Microsoft</li>
+          <li class="flex items-start gap-2"><span class="i-carbon-checkmark-filled text-xs mt-0.5" style="color: var(--nais-success);"></span> Øke portabilitet</li>
+        </ul>
+      </div>
+      <div class="nais-card flex flex-col gap-3 px-5 py-5" style="border-top: 4px solid #10b981;">
+        <h3 class="text-base font-bold">Deploy Actions → Nais CLI</h3>
+        <ul class="text-xs space-y-1.5" style="color: var(--nais-text-secondary); list-style: none; padding: 0;">
+          <li class="flex items-start gap-2"><span class="i-carbon-checkmark-filled text-xs mt-0.5" style="color: var(--nais-success);"></span> Forenkle brukerflyt</li>
+          <li class="flex items-start gap-2"><span class="i-carbon-checkmark-filled text-xs mt-0.5" style="color: var(--nais-success);"></span> Redusere kompleksitet</li>
+        </ul>
+      </div>
+    </div>
+    <div class="flex gap-4 w-full">
+      <div class="nais-card flex items-center gap-3 px-5 py-4 flex-1" style="border-left: 4px solid #8b5cf6;">
+        <div class="icon-badge purple" style="width: 2.25rem; height: 2.25rem;">
+          <span class="i-carbon-warning-hex text-lg"></span>
+        </div>
+        <div>
+          <h3 class="text-sm font-bold">Beredskapsøvelse</h3>
+          <p class="text-xs" style="color: var(--nais-text-secondary);">Kontinuitetsplan for Nais-plattformen</p>
+        </div>
+      </div>
+      <div class="nais-card flex items-center gap-3 px-5 py-4 flex-1" style="border-left: 4px solid #f59e0b;">
+        <div class="icon-badge amber" style="width: 2.25rem; height: 2.25rem;">
+          <span class="i-carbon-notification text-lg"></span>
+        </div>
+        <div>
+          <h3 class="text-sm font-bold">Nais Alerts?</h3>
+          <p class="text-xs" style="color: var(--nais-text-secondary);">Under vurdering</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+---
+layout: default
+---
+
+<!-- Slide 11: Elevering og Nais CLI -->
 
 ::header::
 <h1 class="text-3xl font-bold">Elevering og Nais CLI</h1>
@@ -528,7 +562,7 @@ layout: default
 layout: default
 ---
 
-<!-- Slide 11: Diskusjon -->
+<!-- Slide 12: Diskusjon -->
 
 ::header::
 <h1 class="text-3xl font-bold">Diskusjon & erfaringsdeling</h1>
@@ -570,7 +604,7 @@ layout: default
 layout: cta
 ---
 
-<!-- Slide 12: Closing -->
+<!-- Slide 13: Closing -->
 
 ::header::
 <div class="flex flex-col items-center gap-4">
