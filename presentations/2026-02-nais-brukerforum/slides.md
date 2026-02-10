@@ -448,6 +448,12 @@ layout: default
         </ul>
       </div>
     </div>
+    <div class="flex justify-center mt-2">
+      <span class="chip accent">
+        <span class="i-carbon-user-avatar text-xs"></span>
+        Presentert av Johnny og Frode
+      </span>
+    </div>
   </div>
 </div>
 
@@ -507,6 +513,12 @@ layout: default
         </div>
       </div>
     </div>
+    <div class="flex justify-center mt-2">
+      <span class="chip accent">
+        <span class="i-carbon-user-avatar text-xs"></span>
+        Presentert av Johnny og Frode
+      </span>
+    </div>
   </div>
 </div>
 
@@ -550,9 +562,8 @@ layout: default
       </div>
     </div>
     <div class="flex flex-col gap-4">
-      <div class="screenshot-placeholder" style="min-height: 260px;">
-        <span class="i-carbon-image text-3xl" style="color: var(--nais-border);"></span>
-        <span>Screenshot: Nais CLI i aksjon</span>
+      <div style="border-radius: 8px; overflow: hidden; border: 1px solid var(--nais-border);">
+        <img src="/images/26-02-nais-cli.png" alt="Nais CLI i aksjon" style="width: 100%; display: block;" />
       </div>
     </div>
   </div>
