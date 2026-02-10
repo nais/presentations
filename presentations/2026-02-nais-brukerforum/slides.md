@@ -135,28 +135,28 @@ layout: default
 <div class="flex justify-center mt-4">
   <div class="grid grid-cols-3 gap-5" style="max-width: 900px; width: 100%;">
     <div class="nais-card flex flex-col items-center text-center px-5 py-6">
-      <div style="height: 7.5rem; display: flex; flex-direction: column; align-items: center; justify-content: end; gap: 0.75rem;">
-        <div class="icon-badge accent">
-          <span class="i-carbon-roadmap text-xl"></span>
-        </div>
+      <div class="icon-badge accent">
+        <span class="i-carbon-roadmap text-xl"></span>
+      </div>
+      <div style="height: 3.5rem; display: flex; align-items: end; margin-top: 0.75rem;">
         <h3 class="text-base font-bold">Onboarding & migrering</h3>
       </div>
       <p class="text-xs mt-3" style="color: var(--nais-text-secondary);">Hva er status for onboarding av teams og migrering av applikasjoner?</p>
     </div>
     <div class="nais-card flex flex-col items-center text-center px-5 py-6">
-      <div style="height: 7.5rem; display: flex; flex-direction: column; align-items: center; justify-content: end; gap: 0.75rem;">
-        <div class="icon-badge amber">
-          <span class="i-carbon-warning-hex text-xl"></span>
-        </div>
-        <h3 class="text-base font-bold">Utfordringer</h3>
+      <div class="icon-badge amber">
+        <span class="i-carbon-warning-hex text-xl"></span>
+      </div>
+      <div style="height: 3.5rem; display: flex; align-items: end; margin-top: 0.75rem;">
+        <h3 class="text-base font-bold">Utfordringer & erfaringer</h3>
       </div>
       <p class="text-xs mt-3" style="color: var(--nais-text-secondary);">Er det noen utfordringer vi bør være klar over og kan bistå med?</p>
     </div>
     <div class="nais-card flex flex-col items-center text-center px-5 py-6">
-      <div style="height: 7.5rem; display: flex; flex-direction: column; align-items: center; justify-content: end; gap: 0.75rem;">
-        <div class="icon-badge purple">
-          <span class="i-carbon-idea text-xl"></span>
-        </div>
+      <div class="icon-badge purple">
+        <span class="i-carbon-idea text-xl"></span>
+      </div>
+      <div style="height: 3.5rem; display: flex; align-items: end; margin-top: 0.75rem;">
         <h3 class="text-base font-bold">Ønsker for foredrag</h3>
       </div>
       <p class="text-xs mt-3" style="color: var(--nais-text-secondary);">Hvilke temaer kan det være ønskelig å ta opp som foredrag eller diskusjoner?</p>
@@ -246,12 +246,7 @@ layout: default
 <!-- Slide 6: Postgres Operator -->
 
 ::header::
-<div class="flex items-center justify-center gap-3">
-  <div class="icon-badge accent" style="width: 2.25rem; height: 2.25rem;">
-    <span class="i-carbon-data-base text-lg"></span>
-  </div>
-  <h1 class="text-3xl font-bold">Postgres Operator</h1>
-</div>
+<h1 class="text-3xl font-bold">Postgres Operator</h1>
 <p class="subtitle">Kostnadseffektive, robuste databaser</p>
 
 ::default::
@@ -284,24 +279,24 @@ layout: default
   <div class="flex justify-center" style="width: 880px; margin-top: -0.5rem;">
     <div class="flex flex-col items-center text-center" style="width: 240px;">
       <h3 class="text-base font-bold">Dawn</h3>
-      <p class="text-xs mt-1" style="color: var(--nais-text-secondary);">Grunnleggende operator-støtte for Postgres</p>
+      <p class="text-xs mt-1" style="color: var(--nais-text-secondary);">Lansering av Zalando-operatoren med logging, Grafana-dashboard og Console-integrasjon</p>
       <span class="chip green mt-2">Sep 2025</span>
     </div>
     <div style="width: 60px;"></div>
     <div class="flex flex-col items-center text-center" style="width: 240px;">
       <h3 class="text-base font-bold">Day</h3>
-      <p class="text-xs mt-1" style="color: var(--nais-text-secondary);">Personlig tilgang til databaser</p>
+      <p class="text-xs mt-1" style="color: var(--nais-text-secondary);">Personlig databasetilgang via nais cli med OAuth2—uten å gå via applikasjonens shell</p>
       <span class="chip green mt-2">Nov 2025</span>
     </div>
     <div style="width: 60px;"></div>
     <div class="flex flex-col items-center text-center" style="width: 240px;">
       <h3 class="text-base font-bold">Rise</h3>
-      <p class="text-xs mt-1" style="color: var(--nais-text-secondary);">Fullverdig operator-løsning</p>
+      <p class="text-xs mt-1" style="color: var(--nais-text-secondary);">Egen Postgres-CRD med uavhengig livssyklus fra applikasjonen og dedikert operator</p>
       <span class="chip green mt-2">Des 2025</span>
     </div>
   </div>
   <div class="callout text-sm" style="max-width: 700px;">
-    Neste steg: <strong>Audit of the Operator</strong> — audit-logging for databaser
+    Basert på Zalando Postgres Operator — erstatter Cloud SQL for nye databaser
   </div>
 </div>
 
@@ -309,27 +304,81 @@ layout: default
 layout: default
 ---
 
-<!-- Slide 7: Console & Managed Services -->
+<!-- Slide 7: Database Audit Logs -->
 
 ::header::
-<div class="flex items-center justify-center gap-3">
-  <div class="icon-badge accent" style="width: 2.25rem; height: 2.25rem;">
-    <span class="i-carbon-dashboard text-lg"></span>
+<h1 class="text-3xl font-bold">Database Audit Logs</h1>
+<p class="subtitle">Sporbarhet og etterlevelse via pgaudit</p>
+
+::default::
+<div class="flex justify-center mt-2">
+  <div class="flex flex-col items-center gap-5" style="max-width: 900px; width: 100%;">
+    <div class="flex items-center gap-4 w-full">
+      <div class="nais-card flex items-center gap-4 px-5 py-4 flex-1" style="border-left: 4px solid var(--nais-accent);">
+        <div class="icon-badge accent" style="width: 2.5rem; height: 2.5rem; flex-shrink: 0;">
+          <span class="i-carbon-data-base text-lg"></span>
+        </div>
+        <div>
+          <h3 class="text-sm font-bold">Team-prosjekt</h3>
+          <p class="text-xs" style="color: var(--nais-text-secondary);">pgaudit-logger lagres i teamets GCP-prosjekt med 30 dagers default-retensjon</p>
+        </div>
+      </div>
+      <div class="i-carbon-arrow-right text-2xl" style="color: var(--nais-accent); flex-shrink: 0;"></div>
+      <div class="nais-card flex items-center gap-4 px-5 py-4 flex-1" style="border-left: 4px solid #3b82f6;">
+        <div class="icon-badge blue" style="width: 2.5rem; height: 2.5rem; flex-shrink: 0;">
+          <span class="i-carbon-cloud-logging text-lg"></span>
+        </div>
+        <div>
+          <h3 class="text-sm font-bold">Nais Audit Logs</h3>
+          <p class="text-xs" style="color: var(--nais-text-secondary);">Overføres til sentralt audit-prosjekt — én bucket per team med 365 dagers retensjon</p>
+        </div>
+      </div>
+    </div>
+    <div class="grid grid-cols-3 gap-4 w-full">
+      <div class="nais-card flex flex-col items-center text-center gap-2 px-4 py-4">
+        <div class="icon-badge green" style="width: 2.25rem; height: 2.25rem;">
+          <span class="i-carbon-settings-adjust text-lg"></span>
+        </div>
+        <h3 class="text-sm font-bold">1. Aktiver database-flagg</h3>
+        <p class="text-xs" style="color: var(--nais-text-secondary);">Sett <code>cloudsql.enable_pgaudit</code> og <code>pgaudit.log</code> i nais-spec</p>
+      </div>
+      <div class="nais-card flex flex-col items-center text-center gap-2 px-4 py-4">
+        <div class="icon-badge purple" style="width: 2.25rem; height: 2.25rem;">
+          <span class="i-carbon-terminal text-lg"></span>
+        </div>
+        <h3 class="text-sm font-bold">2. Kjør nais CLI</h3>
+        <p class="text-xs" style="color: var(--nais-text-secondary);"><code>nais postgres enable-audit</code> oppretter pgaudit-extension og konfigurerer databasen</p>
+      </div>
+      <div class="nais-card flex flex-col items-center text-center gap-2 px-4 py-4">
+        <div class="icon-badge amber" style="width: 2.25rem; height: 2.25rem;">
+          <span class="i-carbon-locked text-lg"></span>
+        </div>
+        <h3 class="text-sm font-bold">Tilgang til logger</h3>
+        <p class="text-xs" style="color: var(--nais-text-secondary);">Hvert team har tilgang til sine audit-logger — retensjon kan tilpasses</p>
+      </div>
+    </div>
+    <div class="callout text-sm" style="max-width: 700px;">
+      Tilgjengelig for Cloud SQL i dag — støtte for Zalando Postgres er under utvikling
+    </div>
   </div>
-  <h1 class="text-3xl font-bold">Console & Managed Services</h1>
 </div>
+
+---
+layout: default
+---
+
+<!-- Slide 8: Console & Managed Services -->
+
+::header::
+<h1 class="text-3xl font-bold">Console & Managed Services</h1>
+<p class="subtitle">Sårbarhetshåndtering og nye managed services</p>
 
 ::default::
 <div class="flex justify-center mt-2">
   <div class="grid grid-cols-2 gap-5" style="max-width: 880px; width: 100%;">
     <div class="flex flex-col">
       <div class="feature-card purple mb-4" style="min-height: 180px;">
-        <h3 class="text-base font-bold flex items-center gap-2 mb-3">
-          <div class="icon-badge purple" style="width: 2rem; height: 2rem;">
-            <span class="i-carbon-warning-alt text-sm"></span>
-          </div>
-          Vulnerability Management
-        </h3>
+        <h3 class="text-base font-bold mb-3">Vulnerability Management</h3>
         <ul class="text-sm space-y-2" style="color: var(--nais-text-secondary); list-style: none; padding: 0;">
           <li class="flex items-start gap-2"><span class="i-carbon-checkmark-filled text-sm mt-0.5" style="color: var(--nais-success);"></span> CVSS-score integrasjon</li>
           <li class="flex items-start gap-2"><span class="i-carbon-checkmark-filled text-sm mt-0.5" style="color: var(--nais-success);"></span> Mean Time To Fix historikk</li>
@@ -343,12 +392,7 @@ layout: default
     </div>
     <div class="flex flex-col">
       <div class="feature-card green mb-4" style="min-height: 180px;">
-        <h3 class="text-base font-bold flex items-center gap-2 mb-3">
-          <div class="icon-badge green" style="width: 2rem; height: 2rem;">
-            <span class="i-carbon-container-services text-sm"></span>
-          </div>
-          Valkey, OpenSearch & Kafka
-        </h3>
+        <h3 class="text-base font-bold mb-3">Valkey, OpenSearch & Kafka</h3>
         <ul class="text-sm space-y-2" style="color: var(--nais-text-secondary); list-style: none; padding: 0;">
           <li class="flex items-start gap-2"><span class="i-carbon-checkmark-filled text-sm mt-0.5" style="color: var(--nais-success);"></span> Valkey: livssyklus, metrics, keyspace</li>
           <li class="flex items-start gap-2"><span class="i-carbon-checkmark-filled text-sm mt-0.5" style="color: var(--nais-success);"></span> OpenSearch v3 via Nais API</li>
@@ -367,7 +411,7 @@ layout: default
 layout: default
 ---
 
-<!-- Slide 8: Pågående & veien videre -->
+<!-- Slide 9: Pågående & veien videre -->
 
 ::header::
 <h1 class="text-3xl font-bold">Pågående & veien videre</h1>
@@ -436,7 +480,7 @@ layout: default
 layout: default
 ---
 
-<!-- Slide 9: Elevering og Nais CLI -->
+<!-- Slide 10: Elevering og Nais CLI -->
 
 ::header::
 <h1 class="text-3xl font-bold">Elevering og Nais CLI</h1>
@@ -484,7 +528,7 @@ layout: default
 layout: default
 ---
 
-<!-- Slide 10: Diskusjon -->
+<!-- Slide 11: Diskusjon -->
 
 ::header::
 <h1 class="text-3xl font-bold">Diskusjon & erfaringsdeling</h1>
@@ -526,7 +570,7 @@ layout: default
 layout: cta
 ---
 
-<!-- Slide 11: Closing -->
+<!-- Slide 12: Closing -->
 
 ::header::
 <div class="flex flex-col items-center gap-4">
