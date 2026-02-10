@@ -7,7 +7,7 @@ info: |
   Februar 2026
 author: nais
 keywords: nais, platform, kubernetes, brukerforum
-favicon: /logos/nais-v2-rosa.svg
+favicon: /logos/nais-v2-rosa-square.svg
 htmlAttrs:
   lang: 'no'
 class: text-center
