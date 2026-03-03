@@ -1,0 +1,55 @@
+/* motherfucking nais theme */
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@400;700&display=swap');
+
+:root {
+  --bg: #111;
+  --text: #eee;
+  --muted: #888;
+  --accent: #e8384f;
+
+  --slidev-theme-primary: var(--accent);
+}
+
+html, body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  color: var(--text);
+}
+
+code, pre, .font-mono {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.slidev-layout,
+.slidev-page > div {
+  background: var(--bg);
+}
+
+/* kill all the pseudo-element background crap */
+.slidev-layout::before,
+.slidev-layout::after,
+.slidev-page > div::before,
+.slidev-page > div::after {
+  display: none;
+}
+
+.accent {
+  color: var(--accent);
+}
+
+.muted {
+  color: var(--muted);
+}
+
+.big {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 4rem;
+  font-weight: 700;
+  line-height: 1;
+}
