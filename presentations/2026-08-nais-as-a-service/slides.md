@@ -1,5 +1,6 @@
 ---
 layout: cover
+transition: view-transition
 ---
 
 <h1 class="text-5xl font-black">Nais as a Service</h1>

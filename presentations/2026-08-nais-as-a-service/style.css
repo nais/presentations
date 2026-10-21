@@ -52,29 +52,17 @@ pre,
   font-family: 'JetBrains Mono', monospace;
 }
 
-/* Slide background */
+/* Slides are transparent; the background lives in global-bottom.vue so it
+   stays put between slides. */
 .slidev-layout,
 .slidev-page > div {
-  background: var(--nais-bg);
+  background: transparent;
   position: relative;
 }
 
-/* Subtle dot grid background pattern */
 .slidev-layout::before,
 .slidev-page > div::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  /* Dot grid plus the soft spectrum glows from nais.io. */
-  background-image:
-    radial-gradient(circle, #334155 0.75px, transparent 0.75px),
-    radial-gradient(40% 35% at 88% 8%, rgb(98 0 255 / 0.22), transparent 70%),
-    radial-gradient(35% 30% at 8% 92%, rgb(92 178 218 / 0.16), transparent 70%),
-    radial-gradient(30% 30% at 60% 105%, rgb(247 104 145 / 0.16), transparent 70%);
-  background-size: 24px 24px, 100% 100%, 100% 100%, 100% 100%;
-  opacity: 1;
-  pointer-events: none;
-  z-index: 0;
+  display: none;
 }
 
 /* Disable the second pseudo-element layer entirely */
@@ -496,4 +484,19 @@ body,
   display: block;
   width: 9rem;
   height: 9rem;
+}
+
+/* Shared elements that morph between slides (Chrome View Transitions). */
+.default-header h1 {
+  view-transition-name: slide-title;
+}
+
+::view-transition-group(*) {
+  animation-duration: 0.45s;
+  animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.3s;
 }

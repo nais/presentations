@@ -203,6 +203,7 @@ header span {
 }
 
 .app {
+  view-transition-name: app-hex;
   width: 110px;
   height: 126px;
   clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);

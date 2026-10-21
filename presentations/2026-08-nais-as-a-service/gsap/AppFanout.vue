@@ -113,6 +113,7 @@ useSteps((tl) => {
 }
 
 .app {
+  view-transition-name: app-hex;
   background: #1e293b;
   border: 1px solid #334155;
 }

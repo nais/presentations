@@ -321,6 +321,7 @@ useSteps((tl) => {
 }
 
 .app {
+  view-transition-name: app-hex;
   left: 50%;
   top: 50%;
   width: 84px;

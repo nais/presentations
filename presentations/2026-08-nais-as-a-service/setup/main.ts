@@ -17,7 +17,10 @@ function animate(page) {
       !el.closest(SELF) &&
       !el.parentElement?.closest(".anim-item, .card-row > *"),
   );
-  const all = [...header, ...items];
+  // Elements that morph in a view transition must not also run an entrance.
+  const morphs = (el) => globalThis.getComputedStyle(el).viewTransitionName !== "none";
+  const all = [...header, ...items].filter((el) => !morphs(el));
+  header.splice(0, header.length, ...header.filter((el) => !morphs(el)));
   if (!all.length) return;
   gsap.killTweensOf(all);
   const tl = gsap.timeline({
