@@ -10,7 +10,7 @@ layout: cover
 Overgang: «Hei, jeg heter Hans Kristian og jobber i Nais-teamet i Nav.»
 
 - Målgruppe: teknologiledere, arkitekter og beslutningstakere
-- Tesen: Plattformen Nav bygde for seg selv er nå en tjeneste for staten
+- Tesen: Plattformen Nav bygde for seg selv er nå en tjeneste for det offentlige
 - Ingen demo i dag, bare animasjoner
 -->
 

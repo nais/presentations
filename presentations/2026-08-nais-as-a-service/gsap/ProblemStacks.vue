@@ -68,7 +68,7 @@
       </div>
     </div>
     <p ref="thesis" class="thesis">
-      Plattformen Nav bygde for seg selv er nå en tjeneste for staten.
+      Plattformen Nav bygde for seg selv er nå en tjeneste for det offentlige.
     </p>
   </div>
 </template>
