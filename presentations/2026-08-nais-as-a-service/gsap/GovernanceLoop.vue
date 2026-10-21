@@ -33,7 +33,7 @@ import { STAGGER, useEnter, POP } from "./motion.js";
 gsap.registerPlugin(MotionPathPlugin, DrawSVGPlugin);
 
 const STEPS = [
-  { label: "Etatsforum", icon: "i-carbon-group" },
+  { label: "Naisdag", icon: "i-carbon-group" },
   { label: "Innspill", icon: "i-carbon-chat" },
   { label: "Nais-teamet", icon: "i-carbon-user-multiple" },
   { label: "Veikart", icon: "i-carbon-map" },

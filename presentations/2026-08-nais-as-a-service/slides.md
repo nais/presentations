@@ -50,7 +50,7 @@ layout: default
 <HubSpokes center="Nais" :spokes="[
   { icon: 'i-carbon-cloud', title: 'Plattform', text: 'Kubernetes, datatjenester, innlogging, observability og Console' },
   { icon: 'i-carbon-user-multiple', title: 'Team', text: '15 personer som drifter, utvikler og har vakt døgnet rundt' },
-  { icon: 'i-carbon-group', title: 'Fellesskap', text: 'Slack, dokumentasjon, Nais Champions og etatsforum' },
+  { icon: 'i-carbon-group', title: 'Fellesskap', text: 'Slack, dokumentasjon, champions i teamene og Naisdag' },
 ]" />
 
 <!--
@@ -122,7 +122,7 @@ Ett klikk per steg: bygg, deploy, pods, live.
 
 ---
 layout: default
-clicks: 7
+clicks: 6
 ---
 
 ::header::
@@ -162,34 +162,26 @@ clicks: 3
 <p class="subtitle">Teamet ser status for alle workloads</p>
 
 ::default::
-<ConsoleSpotlight src="/images/26-02-nais-console-vulnerabilities.png" alt="Sårbarhetsoversikt i Nais Console" :regions="[
-  { x: 73, y: 3, w: 26, h: 18, label: 'Andel workloads med SBOM' },
-  { x: 73, y: 22, w: 26, h: 18, label: 'Kritiske sårbarheter og risikoscore' },
-  { x: 1, y: 30, w: 70, h: 68, label: 'Historikk per alvorlighetsgrad' },
-]" />
+<ConsoleVulns />
 
 <!--
-Skjermbilde fra Console. I Console ser teamet også apper og status, deployer, kostnad per team og app, secrets, Unleash og ressursbruk.
+Illustrasjon av Console. Klikk 1: alle bygg får SBOM. Klikk 2: en ny CVE dukker opp. Klikk 3: teamet oppdaterer avhengigheten og deployer. I Console ser teamet også apper og status, deployer, kostnad per team og app, secrets, Unleash og ressursbruk.
 -->
 
 ---
 layout: default
-clicks: 3
+clicks: 2
 ---
 
 ::header::
-<h1 class="text-3xl font-bold">Console: datatjenester</h1>
-<p class="subtitle">Tilgang, innstillinger og vedlikehold på ett sted</p>
+<h1 class="text-3xl font-bold">Console: data og kostnad</h1>
+<p class="subtitle">Hva teamet har, og hva det koster</p>
 
 ::default::
-<ConsoleSpotlight src="/images/26-02-nais-console-opensearch.png" alt="OpenSearch-instans i Nais Console" :regions="[
-  { x: 1, y: 34, w: 76, h: 41, label: 'Hvilke apper som har tilgang, og hvilket nivå' },
-  { x: 78, y: 10, w: 21, h: 44, label: 'Status og innstillinger' },
-  { x: 78, y: 77, w: 21, h: 22, label: 'Vedlikeholdsvindu' },
-]" />
+<ConsoleData />
 
 <!--
-Skjermbilde av en OpenSearch-instans i Console.
+Illustrasjon av Console. Klikk 1: datatjenestene appene bruker. Klikk 2: kostnad per app.
 -->
 
 ---
@@ -378,7 +370,7 @@ layout: default
 
 ::header::
 <h1 class="text-3xl font-bold">Hvem bestemmer</h1>
-<p class="subtitle">Nais-teamet bestemmer veikartet, etatene gir innspill</p>
+<p class="subtitle">Nais-teamet bestemmer veikartet, etatene gir innspill på Naisdag</p>
 
 ::default::
 <GovernanceLoop />
@@ -473,13 +465,13 @@ layout: default
 <HubSpokes center="Hjelp" center-icon="i-carbon-help" :start="-90" :spokes="[
   { icon: 'i-carbon-logo-slack', title: 'Slack', text: 'Direkte kontakt med Nais-teamet' },
   { icon: 'i-carbon-document', title: 'docs.nais.io', text: 'Dokumentasjon og veiledninger' },
-  { icon: 'i-carbon-badge', title: 'Nais Champions', text: 'Erfarne utviklere i etatene' },
+  { icon: 'i-carbon-badge', title: 'Champions', text: 'Champions i teamene' },
   { icon: 'i-carbon-education', title: 'Workshops', text: 'Praktiske økter med Nais-teamet' },
-  { icon: 'i-carbon-group', title: 'Etatsforum', text: 'Etatene møtes jevnlig' },
+  { icon: 'i-carbon-group', title: 'Naisdag', text: 'Etatene møtes og gir innspill' },
 ]" />
 
 <!--
-Fra den gamle opplæringssliden: workshops, champions-program, Slack og dokumentasjon.
+Fra den gamle opplæringssliden: workshops, champions, Slack og dokumentasjon.
 -->
 
 ---
