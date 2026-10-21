@@ -169,7 +169,7 @@ onBeforeUnmount(() => tl?.kill());
 
 .note {
   margin: 0.4rem 0 0;
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   text-align: center;
   color: var(--nais-text-secondary);
 }

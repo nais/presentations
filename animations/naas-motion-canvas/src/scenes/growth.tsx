@@ -49,7 +49,7 @@ export default makeScene2D(function* (view) {
   const nTeams = createSignal(0);
   const nApps = createSignal(0);
   const nDeploys = createSignal(0);
-  const fmt = (v: number) => Math.round(v).toLocaleString('nb-NO');
+  const fmt = (v: number) => Math.round(v).toLocaleString('nb-NO').replace(/\s/g, '\u202f');
 
   view.add(
     <Node ref={world} scale={2.4} y={40}>
@@ -94,16 +94,16 @@ export default makeScene2D(function* (view) {
     </Node>,
   );
 
-  const counter = (value: () => number, label: string, x: number) => (
+  const counter = (value: () => number, label: string, x: number, prefix = '') => (
     <Rect layout direction="column" alignItems="center" x={x} y={420} opacity={0} gap={4}>
-      <Txt text={() => fmt(value())} fill={TEXT} fontSize={84} fontWeight={700} shadowColor={ACCENT} shadowBlur={30} />
+      <Txt text={() => prefix + fmt(value())} fill={TEXT} fontSize={84} fontWeight={700} shadowColor={ACCENT} shadowBlur={30} />
       <Txt text={label} fill={MUTED} fontSize={28} fontFamily="Inter, sans-serif" />
     </Rect>
   );
   const counters = [
-    counter(nTeams, 'team', -560),
+    counter(nTeams, 'etater', -560),
     counter(nApps, 'applikasjoner', 0),
-    counter(nDeploys, 'deploys per uke', 560),
+    counter(nDeploys, 'deployer per uke (Nav, alle miljøer)', 560, '≈'),
   ] as Rect[];
   // Dark band behind the counters so hexes never fight the numbers.
   const band = (
@@ -117,7 +117,7 @@ export default makeScene2D(function* (view) {
   view.add([band, topBand]);
   view.add(counters);
   view.add(
-    <Txt ref={title} text="Fra 150 team til 2000 apper" y={-450} fill={TEXT}
+    <Txt ref={title} text={"4 etater, 5\u202f212 apper"} y={-450} fill={TEXT}
       fontSize={64} fontWeight={700} opacity={0} />,
   );
 
@@ -138,9 +138,9 @@ export default makeScene2D(function* (view) {
     band.opacity(1, 0.6),
     topBand.opacity(1, 0.6),
     sequence(0.12, ...counters.map(c => c.opacity(1, 0.6))),
-    nTeams(TEAMS, grow, easeOutCubic),
-    nApps(2000, grow + 0.6, easeOutCubic),
-    nDeploys(2500, grow + 1.0, easeOutCubic),
+    nTeams(4, grow, easeOutCubic),
+    nApps(5212, grow + 0.6, easeOutCubic),
+    nDeploys(21500, grow + 1.0, easeOutCubic),
     sequence(
       grow / TEAMS,
       ...teams.map((_, i) =>

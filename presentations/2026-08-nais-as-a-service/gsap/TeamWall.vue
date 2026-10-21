@@ -185,7 +185,7 @@ onBeforeUnmount(() => tl?.kill());
 
 figcaption {
   margin-top: 0.3rem;
-  font-size: 0.65rem;
+  font-size: 0.7rem;
   font-weight: 600;
   line-height: 1.2;
   text-align: center;

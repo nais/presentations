@@ -48,7 +48,10 @@ export default function setup({ app, router }) {
 
   // Slides next to the current one are already mounted, so setting the start
   // state here (before Vue shows the slide) avoids a flash of the end state.
-  router.afterEach((to) => {
+  // Only on slide change: clicks also update the route (query), and the
+  // header must not re-animate on every click.
+  router.afterEach((to, from) => {
+    if (to.params.no === from.params.no) return;
     if (reducedMotion() || to.path.includes("print") || "print" in to.query)
       return;
     const no = Number(to.params.no);

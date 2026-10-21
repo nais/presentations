@@ -33,7 +33,7 @@
 import { ref } from "vue";
 import gsap from "gsap";
 import { DrawSVGPlugin } from "gsap/DrawSVGPlugin";
-import { STAGGER, useSteps } from "./motion.js";
+import { STAGGER, useSteps, POP } from "./motion.js";
 
 gsap.registerPlugin(DrawSVGPlugin);
 
@@ -67,7 +67,7 @@ useSteps((tl) => {
       autoAlpha: 1,
       scale: 1,
       stagger: STAGGER,
-      ease: "back.out(2)",
+      ease: POP,
     })
     .addLabel("s1")
     .to(wires[props.detach], {
@@ -77,10 +77,10 @@ useSteps((tl) => {
     })
     .to(orgs[props.detach], {
       y: 14,
-      x: 24,
-      rotation: 3,
+      x: -4,
+      rotation: 2,
       boxShadow: "0 12px 24px rgb(0 0 0 / 0.12)",
-      ease: "back.out(1.6)",
+      ease: POP,
     })
     .addLabel("s2")
     .to(exit.value, { autoAlpha: 1, y: 0 })
@@ -115,16 +115,16 @@ useSteps((tl) => {
 
 .hub strong {
   font-family: "Poppins", sans-serif;
-  font-size: 1.05rem;
+  font-size: 1.2rem;
 }
 
 .hub span {
-  font-size: 0.75rem;
+  font-size: 0.85rem;
 }
 
 .hub em {
   font-style: normal;
-  font-size: 0.7rem;
+  font-size: 0.8rem;
   margin-top: 0.3rem;
   padding: 0.1rem 0.5rem;
   border-radius: 999px;
@@ -157,7 +157,7 @@ useSteps((tl) => {
   border-radius: 14px;
   border: 2px solid var(--nais-border);
   background: var(--nais-card);
-  font-size: 0.8rem;
+  font-size: 0.9rem;
 }
 
 .org-head {
@@ -170,7 +170,7 @@ useSteps((tl) => {
 .org strong {
   display: block;
   font-family: "Poppins", sans-serif;
-  font-size: 0.95rem;
+  font-size: 1.1rem;
   margin: 0.1rem 0 0.3rem;
 }
 
@@ -179,7 +179,7 @@ useSteps((tl) => {
   padding-left: 1rem;
   list-style: disc;
   color: var(--nais-text-secondary);
-  font-size: 0.72rem;
+  font-size: 0.85rem;
 }
 
 .owned {
@@ -187,7 +187,7 @@ useSteps((tl) => {
   display: inline-block;
   padding: 0.1rem 0.5rem;
   border-radius: 999px;
-  font-size: 0.7rem;
+  font-size: 0.8rem;
   font-weight: 700;
   color: #166534;
   background: #dcfce7;

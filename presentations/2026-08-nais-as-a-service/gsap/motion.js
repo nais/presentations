@@ -7,6 +7,8 @@ export const EASE = "power3.out";
 export const DUR = 0.7;
 export const STAGGER = 0.08;
 export const RISE = 24;
+// Accent ease for things that pop in (nodes, hexes, badges). Same everywhere.
+export const POP = "back.out(1.7)";
 
 export const reducedMotion = () =>
   globalThis.matchMedia?.("(prefers-reduced-motion: reduce)").matches ?? false;

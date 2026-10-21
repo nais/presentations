@@ -21,7 +21,7 @@
 <script setup>
 import { ref } from "vue";
 import gsap from "gsap";
-import { RISE, useSteps } from "./motion.js";
+import { RISE, useSteps, POP } from "./motion.js";
 
 // Generic left-to-right chain. Click n lights node n and moves the packet there.
 const props = defineProps({
@@ -48,7 +48,7 @@ useSteps((tl) => {
         scale: 1,
         autoAlpha: 1,
         filter: "grayscale(0)",
-        ease: "back.out(1.8)",
+        ease: POP,
         duration: 0.5,
       })
       .to(
@@ -87,7 +87,7 @@ useSteps((tl) => {
 
 .track {
   position: absolute;
-  top: 36px;
+  top: 41px;
   left: calc(50% / v-bind("nodes.length"));
   right: calc(50% / v-bind("nodes.length"));
   height: 4px;
@@ -123,8 +123,8 @@ useSteps((tl) => {
 }
 
 .hex {
-  width: 64px;
-  height: 72px;
+  width: 72px;
+  height: 82px;
   clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
   background: linear-gradient(
     135deg,
@@ -142,27 +142,27 @@ useSteps((tl) => {
 }
 
 .hex span {
-  font-size: 1.8rem;
+  font-size: 2rem;
   color: #fff;
 }
 
 h3 {
   font-family: "Poppins", sans-serif;
-  font-size: 0.95rem;
+  font-size: 1.2rem;
   font-weight: 700;
   margin: 0 0 0.2rem;
 }
 
 p {
-  font-size: 0.75rem;
-  line-height: 1.4;
+  font-size: 0.85rem;
+  line-height: 1.35;
   color: var(--nais-text-secondary);
   margin: 0;
 }
 
 .stat {
   margin-top: 0.4rem;
-  font-size: 0.75rem;
+  font-size: 0.95rem;
   font-weight: 700;
   color: var(--nais-accent);
 }

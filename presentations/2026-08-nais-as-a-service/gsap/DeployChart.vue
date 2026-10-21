@@ -98,7 +98,7 @@ useEnter((tl) => {
 .legend {
   margin-top: 0.4rem;
   text-align: center;
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   color: var(--nais-text-secondary);
 }
 

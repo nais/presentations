@@ -73,7 +73,7 @@ header {
   gap: 0.5rem;
   font-family: "Poppins", sans-serif;
   font-weight: 700;
-  font-size: 1.05rem;
+  font-size: 1.2rem;
   margin-bottom: 0.6rem;
 }
 
@@ -92,14 +92,14 @@ ul {
 }
 
 li {
-  font-size: 0.85rem;
-  line-height: 1.45;
+  font-size: 0.95rem;
+  line-height: 1.4;
   margin-bottom: 0.3rem;
 }
 
 .note {
   margin: 0.6rem 0 0;
-  font-size: 0.75rem;
+  font-size: 0.8rem;
   color: var(--nais-text-secondary);
 }
 </style>

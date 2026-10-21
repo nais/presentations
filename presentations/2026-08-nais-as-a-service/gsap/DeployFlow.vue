@@ -69,7 +69,7 @@
 <script setup>
 import { onMounted, onBeforeUnmount, ref, watch } from "vue";
 import { useIsSlideActive, useSlideContext } from "@slidev/client";
-import { DUR, EASE, STAGGER, reducedMotion } from "./motion.js";
+import { DUR, EASE, STAGGER, reducedMotion, POP } from "./motion.js";
 import gsap from "gsap";
 import { DrawSVGPlugin } from "gsap/DrawSVGPlugin";
 import { MotionPathPlugin } from "gsap/MotionPathPlugin";
@@ -144,23 +144,19 @@ onMounted(() => {
       duration: DUR,
       ease: EASE,
     })
-      .to(inner(0), { scale: 1, duration: 0.6, ease: "back.out(2)" }, "-=0.3")
+      .to(inner(0), { scale: 1, duration: 0.6, ease: POP }, "-=0.3")
       .addLabel("s0");
 
     for (let i = 0; i < 4; i++) {
       tl.set(packet.value, { autoAlpha: 1 }, "+=0.01")
         .to(lines[i], { drawSVG: "100%", duration: 0.9, ease: "power2.inOut" })
         .to(packet.value, hop(i), "<")
-        .to(
-          inner(i + 1),
-          { scale: 1, duration: 0.6, ease: "back.out(2.2)" },
-          "-=0.25",
-        );
+        .to(inner(i + 1), { scale: 1, duration: 0.6, ease: POP }, "-=0.25");
       if (i === 2) {
         tl.to(podEls, {
           scale: 1,
           duration: 0.4,
-          ease: "back.out(3)",
+          ease: POP,
           stagger: 0.08,
         });
       }

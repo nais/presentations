@@ -39,7 +39,7 @@ import { onBeforeUnmount, onMounted, ref, watch } from "vue";
 import { useIsSlideActive, useSlideContext } from "@slidev/client";
 import gsap from "gsap";
 import { DrawSVGPlugin } from "gsap/DrawSVGPlugin";
-import { DUR, EASE, RISE, reducedMotion } from "./motion.js";
+import { DUR, EASE, RISE, reducedMotion, POP } from "./motion.js";
 
 gsap.registerPlugin(DrawSVGPlugin);
 
@@ -106,7 +106,7 @@ onMounted(() => {
         filter: "grayscale(0)",
         opacity: 1,
         duration: 0.5,
-        ease: "back.out(2)",
+        ease: POP,
       },
       i ? "-=0.15" : 0,
     ).to(texts[i], { autoAlpha: 1, y: 0 }, "<0.1");
@@ -215,7 +215,7 @@ onBeforeUnmount(() => tl?.kill());
 .text {
   position: absolute;
   top: 90px;
-  width: 176px;
+  width: 200px;
   text-align: center;
 }
 
@@ -226,7 +226,7 @@ onBeforeUnmount(() => tl?.kill());
 
 .text h3 {
   font-family: "Poppins", sans-serif;
-  font-size: 1.05rem;
+  font-size: 1.15rem;
   font-weight: 700;
   color: var(--nais-accent);
   margin: 0 0 0.2rem;
@@ -241,8 +241,8 @@ onBeforeUnmount(() => tl?.kill());
 }
 
 .text p {
-  font-size: 0.8rem;
-  line-height: 1.4;
+  font-size: 0.85rem;
+  line-height: 1.35;
   color: var(--nais-text-secondary);
   margin: 0;
 }

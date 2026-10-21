@@ -16,7 +16,7 @@
 <script setup>
 import { ref } from "vue";
 import gsap from "gsap";
-import { STAGGER, useSteps } from "./motion.js";
+import { STAGGER, useSteps, POP } from "./motion.js";
 
 // Layers listed top to bottom. s0 builds the stack, s1 lands the app, s2 dims the rest.
 defineProps({
@@ -39,10 +39,10 @@ useSteps((tl) => {
     y: 0,
     autoAlpha: 1,
     stagger: STAGGER * 1.5,
-    ease: "back.out(1.4)",
+    ease: POP,
   })
     .addLabel("s0")
-    .to(appEl.value, { y: 0, autoAlpha: 1, ease: "bounce.out", duration: 0.9 })
+    .to(appEl.value, { y: 0, autoAlpha: 1, ease: POP, duration: 0.9 })
     .addLabel("s1")
     .to(layers, {
       opacity: 0.35,
@@ -50,7 +50,7 @@ useSteps((tl) => {
       stagger: STAGGER / 2,
       duration: 0.5,
     })
-    .to(badgeEl.value, { autoAlpha: 1, scale: 1, ease: "back.out(2)" }, "<0.2")
+    .to(badgeEl.value, { autoAlpha: 1, scale: 1, ease: POP }, "<0.2")
     .addLabel("s2");
   return tl;
 });
@@ -77,21 +77,21 @@ useSteps((tl) => {
   display: flex;
   align-items: baseline;
   gap: 0.75rem;
-  padding: 0.45rem 0.9rem;
+  padding: 0.3rem 0.9rem;
   border-radius: 10px;
   background: var(--nais-card);
   border: 1px solid var(--nais-border);
-  font-size: 0.85rem;
+  font-size: 1rem;
 }
 
 .layer strong {
   font-family: "Poppins", sans-serif;
-  min-width: 11rem;
+  min-width: 15rem;
 }
 
 .parts {
   color: var(--nais-text-secondary);
-  font-size: 0.75rem;
+  font-size: 0.85rem;
 }
 
 .layer.app {
