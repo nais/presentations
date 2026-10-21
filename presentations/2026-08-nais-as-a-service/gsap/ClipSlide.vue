@@ -1,0 +1,53 @@
+<template>
+  <div class="clip-slide" data-motion-self>
+    <img v-if="isPrintMode" :src="poster" alt="" class="clip-media" />
+    <video
+      v-else
+      ref="video"
+      :src="clip"
+      :poster="poster"
+      class="clip-media"
+      muted
+      playsinline
+      preload="auto"
+    />
+  </div>
+</template>
+
+<script setup>
+import { ref, watch } from "vue";
+import { useIsSlideActive, useNav } from "@slidev/client";
+import clip from "../assets/naas-growth.mp4";
+import poster from "../assets/naas-growth-poster.jpg";
+
+const { isPrintMode } = useNav();
+const active = useIsSlideActive();
+const video = ref();
+
+// Restart from the beginning every time the slide is entered.
+watch(
+  [active, video],
+  ([on, el]) => {
+    if (!el) return;
+    if (!on) return el.pause();
+    el.currentTime = 0;
+    el.play().catch(() => {});
+  },
+  { immediate: true },
+);
+</script>
+
+<style scoped>
+.clip-slide {
+  position: absolute;
+  inset: 0;
+  background: #000;
+}
+
+.clip-media {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+</style>
