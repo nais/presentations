@@ -33,15 +33,15 @@ const STEPS = [
     out: ["min-app-7f9c-x2   Running", "min-app-7f9c-k8   Running"],
   },
   {
-    cmd: "nais app logs min-app",
+    cmd: "nais app log min-app",
     out: ["INFO  mottok søknad", "INFO  søknad lagret"],
   },
   {
-    cmd: "nais postgres proxy min-app",
+    cmd: "nais cloudsql proxy min-app",
     out: ["✓ Proxy kjører på localhost:5432"],
   },
   {
-    cmd: "nais vulns summary",
+    cmd: "nais vulnerability summary",
     out: ["Kritiske: 0   Høye: 2   Workloads med SBOM: 100 %"],
   },
 ];

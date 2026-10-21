@@ -10,7 +10,7 @@
       class="node"
       :class="{ end: i === nodes.length - 1 }"
     >
-      <div class="hex"><span :class="n.icon" /></div>
+      <div class="hex"><i class="lit" /><span :class="n.icon" /></div>
       <h3>{{ n.label }}</h3>
       <p v-if="n.sub">{{ n.sub }}</p>
       <div v-if="n.stat" class="stat">{{ n.stat }}</div>
@@ -39,18 +39,17 @@ useSteps((tl) => {
   const last = props.nodes.length - 1;
   gsap.set(fill.value, { scaleX: 0, transformOrigin: "0 50%" });
   gsap.set(packet.value, { left: "0%", autoAlpha: 0 });
-  gsap.set(hexes, { scale: 0.6, autoAlpha: 0.25, filter: "grayscale(1)" });
+  // Inactive hexes stay opaque so the track never shows through them.
+  gsap.set(hexes, { scale: 0.8 });
+  gsap.set(q(".hex .lit"), { opacity: 0 });
+  gsap.set(q(".hex span"), { color: "#64748b" });
   gsap.set(q(".node > :not(.hex)"), { autoAlpha: 0, y: RISE });
 
   const light = (i) =>
     tl
-      .to(hexes[i], {
-        scale: 1,
-        autoAlpha: 1,
-        filter: "grayscale(0)",
-        ease: POP,
-        duration: 0.5,
-      })
+      .to(hexes[i], { scale: 1, ease: POP, duration: 0.5 })
+      .to(hexes[i].querySelector(".lit"), { opacity: 1, duration: 0.4 }, "<")
+      .to(hexes[i].querySelector("span"), { color: "#fff", duration: 0.4 }, "<")
       .to(
         texts[i].querySelectorAll(":scope > :not(.hex)"),
         { autoAlpha: 1, y: 0, stagger: 0.06 },
@@ -119,29 +118,39 @@ useSteps((tl) => {
   flex-direction: column;
   align-items: center;
   text-align: center;
-  padding: 0 0.4rem;
+  min-width: 0;
+  padding: 0 0.6rem;
 }
 
 .hex {
   width: 72px;
   height: 82px;
   clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
-  background: linear-gradient(
-    135deg,
-    var(--nais-gradient-from),
-    var(--nais-gradient-to)
-  );
+  position: relative;
+  z-index: 1;
+  background: #1c2740;
   display: flex;
   align-items: center;
   justify-content: center;
   margin-bottom: 0.6rem;
 }
 
-.node.end .hex {
+.lit {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    var(--nais-gradient-from),
+    var(--nais-gradient-to)
+  );
+}
+
+.node.end .lit {
   background: var(--nais-success);
 }
 
 .hex span {
+  position: relative;
   font-size: 2rem;
   color: #fff;
 }

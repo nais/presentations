@@ -23,12 +23,18 @@
               <div class="box"><b>Jobs 2</b><small>● 2 completed</small></div>
             </div>
             <div class="chips">
-              <span>Cloud SQL 2</span><span>Buckets 1</span><span>Valkey 1</span><span>Kafka Topics 3</span><span>Secrets 5</span>
+              <span>Cloud SQL 2</span><span>Buckets 1</span><span>Valkey 1</span><span>Kafka Topics 3</span>
             </div>
           </div>
           <div>
             <h5>Latest activity</h5>
-            <p v-for="a in ACTIVITY" :key="a" class="act">{{ a }}</p>
+            <div v-for="a in ACTIVITY" :key="a.text" class="activity">
+              <span class="i-carbon-cube" />
+              <div>
+                <p>{{ a.text }}</p>
+                <small>{{ a.when }}</small>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -148,9 +154,7 @@
             <p class="mono">
               {{ ke ? "2026.10.14-a1b2c3" : "2026.10.21-d4e5f6" }}
             </p>
-            <p v-if="!ke && fixed" class="fixed">
-              ✓ Avhengighet oppdatert og deployet
-            </p>
+            <p v-if="!ke && fixed" class="fixed">✓ Fixed and redeployed</p>
           </div>
         </div>
       </section>
@@ -174,9 +178,9 @@ const props = defineProps({
 });
 
 const ACTIVITY = [
-  "api-soknad oppdatert i prod",
-  "worker oppdatert i dev",
-  "frontend oppdatert i prod",
+  { text: "api-soknad oppdatert i prod", when: "for 12 minutter siden" },
+  { text: "worker oppdatert i dev", when: "for 1 time siden" },
+  { text: "frontend oppdatert i prod", when: "i går" },
 ];
 const APPS = ["api-soknad", "frontend", "worker"];
 const TABS = [
@@ -306,13 +310,13 @@ useSteps((tl) => {
 }
 
 .view {
-  font-size: 0.68rem;
+  font-size: 0.74rem;
 }
 
 h2 {
   margin: 0 0 0.3rem;
   font-family: "Poppins", sans-serif;
-  font-size: 1.15rem;
+  font-size: 1.3rem;
   color: #0f172a;
 }
 
@@ -328,7 +332,7 @@ h2 em {
 
 h5 {
   margin: 0.45rem 0 0.25rem;
-  font-size: 0.62rem;
+  font-size: 0.66rem;
   letter-spacing: 0.05em;
   text-transform: uppercase;
   color: #334155;
@@ -336,14 +340,14 @@ h5 {
 
 .cols {
   display: grid;
-  grid-template-columns: 1.6fr 1fr;
+  grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
   gap: 1rem;
 }
 
 .tiles {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 0.8rem;
+  gap: 0.75rem;
 }
 
 .tiles.three {
@@ -353,18 +357,18 @@ h5 {
 .tile {
   display: flex;
   flex-direction: column;
-  padding: 0.2rem 0.55rem;
+  padding: 0.28rem 0.6rem;
   border-radius: 8px;
   border: 1px solid #e2e8f0;
 }
 
 .tile b {
-  font-size: 1rem;
+  font-size: 1.05rem;
   color: #0f172a;
 }
 
 .tile small {
-  font-size: 0.6rem;
+  font-size: 0.66rem;
   color: #475569;
 }
 
@@ -408,15 +412,36 @@ h5 {
 .chips {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.25rem;
-  margin-top: 0.35rem;
+  gap: 0.35rem;
+  margin-top: 0.45rem;
 }
 
 .chips span {
   padding: 0.05rem 0.4rem;
   border-radius: 999px;
   border: 1px solid #cbd5e1;
-  font-size: 0.6rem;
+  font-size: 0.66rem;
+}
+
+.activity {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 0.6rem;
+}
+
+.activity span {
+  flex: none;
+  font-size: 1rem;
+  color: #1d4ed8;
+}
+
+.activity p {
+  margin: 0;
+}
+
+.activity small {
+  color: #64748b;
+  font-size: 0.64rem;
 }
 
 .act {
@@ -459,7 +484,7 @@ h5 {
 
 .area {
   width: 100%;
-  height: 190px;
+  height: 210px;
 }
 
 .gl {
@@ -537,6 +562,7 @@ h5 {
 }
 
 .fixed {
+  overflow-wrap: anywhere;
   color: #15803d;
   font-weight: 700;
 }
@@ -544,7 +570,7 @@ h5 {
 .note {
   position: absolute;
   right: 0;
-  bottom: 0;
+  top: 0;
   margin: 0;
   font-size: 0.6rem;
   color: #64748b;

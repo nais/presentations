@@ -259,7 +259,7 @@ clicks: 1
 
 ::header::
 <div class="pillar-tag" style="--pc: #5cb2da"><span class="i-carbon-activity" /> Oversikt</div>
-<h1 class="text-2xl font-bold">Console: teamets oversikt</h1>
+<h1 class="text-xl font-bold">Console: teamets oversikt</h1>
 
 ::default::
 <ConsoleMock story="team" />
@@ -279,7 +279,7 @@ clicks: 1
 
 ::header::
 <div class="pillar-tag" style="--pc: #5cb2da"><span class="i-carbon-activity" /> Oversikt</div>
-<h1 class="text-2xl font-bold">Console: én app</h1>
+<h1 class="text-xl font-bold">Console: én app</h1>
 
 ::default::
 <ConsoleMock story="app" />
@@ -307,7 +307,7 @@ clicks: 5
 Overgang: «Det var utviklerens side. Nå snur vi bildet: alt som måtte stå for at dagen ble kjedelig.»
 
 - Kommandoene finnes i nais CLI (sjekket i nais/cli). Utdata er illustrasjon
-- nais login, app status, app logs, postgres proxy, vulns summary
+- nais login, app status, app log, cloudsql proxy, vulnerability summary
 -->
 
 ---
@@ -370,7 +370,7 @@ layout: default
 
 ::header::
 <h1 class="text-3xl font-bold">Nais-teamet</h1>
-<p class="subtitle">15 personer, 4 etater</p>
+<p class="subtitle">15 personer i Nav. Drifter for fire etater.</p>
 
 ::default::
 <TeamWall />
@@ -378,7 +378,7 @@ layout: default
 <!--
 Overgang: «Teamet bygger også sikkerheten inn i hver leveranse.»
 
-- Hele teamet: femten personer for fire etater
+- Hele teamet: femten personer, alle ansatt i Nav, som drifter for fire etater
 - Navn fra GitHub-teamet nais/nais
 -->
 
@@ -415,7 +415,7 @@ clicks: 2
 
 ::header::
 <div class="pillar-tag" style="--pc: #34c27a"><span class="i-carbon-certificate-check" /> Sikkerhet</div>
-<h1 class="text-2xl font-bold">Console: sårbarheter</h1>
+<h1 class="text-xl font-bold">Console: sårbarheter</h1>
 
 ::default::
 <ConsoleMock story="vulns" />

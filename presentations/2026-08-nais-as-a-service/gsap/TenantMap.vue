@@ -170,8 +170,9 @@ useSteps((tl) => {
 .org strong {
   display: block;
   font-family: "Poppins", sans-serif;
-  font-size: 1.1rem;
+  font-size: 0.95rem;
   margin: 0.1rem 0 0.3rem;
+  overflow-wrap: anywhere;
 }
 
 .org ul {

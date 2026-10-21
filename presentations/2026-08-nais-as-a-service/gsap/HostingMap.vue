@@ -6,8 +6,21 @@
       <small>Nais startet her i 2016</small>
     </div>
     <svg class="move" viewBox="0 0 120 60" aria-hidden="true">
-      <path ref="arrow" d="M5 30 C40 5 80 5 110 30" />
-      <path ref="head" d="M100 20 L112 31 L98 37" />
+      <defs>
+        <marker
+          id="hm-head"
+          viewBox="0 0 10 10"
+          refX="5"
+          refY="5"
+          markerWidth="4"
+          markerHeight="4"
+          orient="auto"
+          overflow="visible"
+        >
+          <path d="M0 0 L10 5 L0 10 Z" class="tip" />
+        </marker>
+      </defs>
+      <path ref="arrow" d="M5 34 C40 8 76 8 100 30" />
     </svg>
     <div class="zones">
       <section v-for="z in ZONES" :key="z.name" class="zone" :class="z.tone">
@@ -54,13 +67,12 @@ const ZONES = [
 
 const root = ref();
 const arrow = ref();
-const head = ref();
 const caption = ref();
 
 // s0: zones and chips appear. s1: the on-prem to cloud move is drawn.
 useSteps((tl) => {
   const q = gsap.utils.selector(root.value);
-  gsap.set([arrow.value, head.value], { drawSVG: "0%" });
+  gsap.set(arrow.value, { drawSVG: "0%" });
   gsap.set(caption.value, { autoAlpha: 0, y: 12 });
   tl.from(q(".zone"), { scale: 0.9, autoAlpha: 0, stagger: STAGGER * 2 })
     .from(
@@ -77,7 +89,8 @@ useSteps((tl) => {
     .from(q(".onprem"), { autoAlpha: 0, x: -20 }, "-=0.2")
     .addLabel("s0")
     .to(arrow.value, { drawSVG: "100%", duration: 0.8, ease: "power2.inOut" })
-    .to(head.value, { drawSVG: "100%", duration: 0.25 })
+    // Arrowhead only once the line has arrived, so it is never drawn half-way.
+    .set(arrow.value, { attr: { "marker-end": "url(#hm-head)" } })
     .to(
       q(".onprem"),
       { opacity: 0.45, filter: "grayscale(1)", duration: 0.5 },
@@ -130,11 +143,18 @@ useSteps((tl) => {
 }
 
 .move {
+  position: relative;
+  z-index: 2;
   width: 100%;
   overflow: visible;
 }
 
-.move path {
+.move .tip {
+  fill: var(--nais-accent);
+  stroke: none;
+}
+
+.move > path {
   fill: none;
   stroke: var(--nais-accent);
   stroke-width: 4;
