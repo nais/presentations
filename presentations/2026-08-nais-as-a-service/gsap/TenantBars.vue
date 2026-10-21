@@ -6,7 +6,7 @@
         <div class="bar" :style="{ width: `${width(t.apps)}%` }" />
       </div>
       <span class="value" :data-v="t.apps">{{
-        t.apps.toLocaleString("nb-NO")
+        t.apps.toLocaleString("nb-NO").replace(/\s/g, "\u202f")
       }}</span>
     </div>
     <p class="note">Applikasjoner per installasjon (logaritmisk skala)</p>
@@ -22,7 +22,7 @@ import { EASE, STAGGER, reducedMotion } from "./motion.js";
 // NaaS-installasjoner, Grafana 2026-10-21. Rediger tallene her.
 const TENANTS = [
   {
-    name: "nav",
+    name: "Nav",
     apps: 4684,
     topics: 1922,
     cloudsql: 1105,
@@ -31,7 +31,7 @@ const TENANTS = [
     jobs: 395,
   },
   {
-    name: "ssb",
+    name: "SSB",
     apps: 292,
     topics: 4,
     cloudsql: 23,
@@ -40,7 +40,7 @@ const TENANTS = [
     jobs: 24,
   },
   {
-    name: "ldir",
+    name: "Landbruksdirektoratet",
     apps: 164,
     topics: 5,
     cloudsql: 121,
@@ -49,7 +49,7 @@ const TENANTS = [
     jobs: 1,
   },
   {
-    name: "atil",
+    name: "Arbeidstilsynet",
     apps: 72,
     topics: 0,
     cloudsql: 21,
@@ -100,7 +100,9 @@ onMounted(() => {
         onUpdate() {
           state.forEach(
             (s, i) =>
-              (values[i].textContent = Math.round(s.v).toLocaleString("nb-NO")),
+              (values[i].textContent = Math.round(s.v)
+                .toLocaleString("nb-NO")
+                .replace(/\s/g, "\u202f")),
           );
         },
       },
@@ -127,15 +129,16 @@ onBeforeUnmount(() => tl?.kill());
 
 .row {
   display: grid;
-  grid-template-columns: 3rem 1fr 4rem;
+  grid-template-columns: 11rem 1fr 4rem;
   align-items: center;
   gap: 0.75rem;
   margin-bottom: 0.45rem;
 }
 
 .name {
-  font-family: "JetBrains Mono", monospace;
-  font-weight: 700;
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  text-align: right;
   font-size: 0.9rem;
   color: var(--nais-text);
 }

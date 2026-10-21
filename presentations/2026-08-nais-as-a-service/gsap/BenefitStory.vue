@@ -17,11 +17,12 @@
       <div class="node"><span :class="it.icon" /></div>
       <div class="text">
         <h3>{{ it.title }}</h3>
-        <p>{{ it.description }}</p>
+        <p :class="{ ph: it.placeholder }">{{ it.description }}</p>
       </div>
     </div>
     <div
-      ref="burst"
+      v-if="burst"
+      ref="burstEl"
       class="burst"
       :style="{
         left: `${(pts.at(-1)[0] / 900) * 100}%`,
@@ -44,6 +45,7 @@ gsap.registerPlugin(DrawSVGPlugin);
 
 const props = defineProps({
   items: { type: Array, required: true },
+  burst: { type: Boolean, default: true },
 });
 
 const n = props.items.length;
@@ -62,7 +64,7 @@ const { $clicks } = useSlideContext();
 const active = useIsSlideActive();
 const root = ref();
 const line = ref();
-const burst = ref();
+const burstEl = ref();
 let tl;
 
 function go(c) {
@@ -108,13 +110,20 @@ onMounted(() => {
       },
       i ? "-=0.15" : 0,
     ).to(texts[i], { autoAlpha: 1, y: 0 }, "<0.1");
-    if (i === n - 1) {
+    if (i === n - 1 && props.burst) {
       tl.fromTo(
         bits,
         { x: 0, y: 0, autoAlpha: 1, rotation: 0, scale: 1 },
         {
-          x: () => gsap.utils.random(-220, 220),
-          y: () => gsap.utils.random(-220, 60),
+          x: () =>
+            (n - 1) % 2
+              ? gsap.utils.random(-30, 150)
+              : gsap.utils.random(-220, 220),
+          // Fly away from the text: down when the last label sits above the node.
+          y: () =>
+            (n - 1) % 2
+              ? gsap.utils.random(30, 150)
+              : gsap.utils.random(-230, -40),
           rotation: () => gsap.utils.random(-360, 360),
           scale: 0.4,
           duration: 1.4,
@@ -206,7 +215,7 @@ onBeforeUnmount(() => tl?.kill());
 .text {
   position: absolute;
   top: 90px;
-  width: 150px;
+  width: 176px;
   text-align: center;
 }
 
@@ -221,6 +230,14 @@ onBeforeUnmount(() => tl?.kill());
   font-weight: 700;
   color: var(--nais-accent);
   margin: 0 0 0.2rem;
+}
+
+.text p.ph {
+  border: 2px dashed #d97706;
+  background: #fffbeb;
+  color: #92400e;
+  border-radius: 6px;
+  padding: 0.15rem 0.3rem;
 }
 
 .text p {

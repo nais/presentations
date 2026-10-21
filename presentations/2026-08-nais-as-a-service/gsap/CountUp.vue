@@ -1,6 +1,6 @@
 <template>
-  <div data-motion-count>
-    <StatHighlight :number="display" :label="label" />
+  <div class="count" data-motion-count>
+    <StatHighlight :number="prefix + display" :label="label" />
   </div>
 </template>
 
@@ -15,10 +15,13 @@ const props = defineProps({
   number: { type: [String, Number], required: true },
   label: { type: String, required: true },
   delay: { type: Number, default: 0 },
+  prefix: { type: String, default: "" },
 });
 
 const target = Number(props.number);
-const fmt = (v) => Math.round(v).toLocaleString("nb-NO");
+// Narrow no-break space as thousands separator; reads tighter than nb-NO default.
+const fmt = (v) =>
+  Math.round(v).toLocaleString("nb-NO").replace(/\s/g, "\u202f");
 const display = ref(fmt(target));
 const state = { v: target };
 const active = useIsSlideActive();
@@ -41,3 +44,11 @@ watch(
   { immediate: true },
 );
 </script>
+
+<style scoped>
+.count :deep(.stat-number) {
+  font-family: "Poppins", sans-serif;
+  font-variant-numeric: tabular-nums;
+  font-size: 3rem;
+}
+</style>
