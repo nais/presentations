@@ -113,25 +113,26 @@ defineProps({
   color: #8b949e;
 }
 
-.diff code {
+.pr .diff code {
   display: block;
-  background: transparent;
-  color: #e6edf3;
+  background: #0d1117 !important;
+  color: #8b949e !important;
   border-radius: 0;
+  margin: 0;
   padding: 0 0.5rem;
   font-family: "JetBrains Mono", monospace;
   font-size: 0.72rem;
   white-space: pre;
 }
 
-.diff code.add {
-  background: rgb(46 160 67 / 0.15);
-  color: #aff5b4;
+.pr .diff code.add {
+  background: rgb(46 160 67 / 0.15) !important;
+  color: #aff5b4 !important;
 }
 
-.diff code.del {
-  background: rgb(248 81 73 / 0.15);
-  color: #ffdcd7;
+.pr .diff code.del {
+  background: rgb(248 81 73 / 0.15) !important;
+  color: #ffdcd7 !important;
 }
 
 .checks {

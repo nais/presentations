@@ -1,4 +1,4 @@
-import {Line, Node, Polygon, Rect, Txt, makeScene2D} from '@motion-canvas/2d';
+import {Node, Polygon, Rect, Txt, makeScene2D} from '@motion-canvas/2d';
 import {NORWAY, SPACING} from '../norway';
 import {
   all,
@@ -31,7 +31,7 @@ const cells: {x: number; y: number; ring: number; angle: number; tenant?: Tenant
   angle: (Math.atan2(x, -y) + Math.PI * 2) % (Math.PI * 2),
 }));
 // Final zoom: the whole country fits between the title and the counters.
-const FIT = 0.56;
+const FIT = 0.62;
 // Framing: centre of the country's bounding box, used for the final camera.
 const BOX = {
   x: (Math.min(...NORWAY.map((c) => c[0])) + Math.max(...NORWAY.map((c) => c[0]))) / 2,
@@ -78,7 +78,6 @@ export default makeScene2D(function* (view) {
   const coreLabel = createRef<Txt>();
   const title = createRef<Txt>();
   const hexes: Polygon[] = [];
-  const lines: Line[] = [];
 
   const nTeams = createSignal(0);
   const nApps = createSignal(0);
@@ -87,16 +86,6 @@ export default makeScene2D(function* (view) {
 
   view.add(
     <Node ref={world} scale={2.4} y={-45}>
-      {teams.map(c => (
-        <Line
-          ref={l => lines.push(l)}
-          points={[[0, 0], [c.x, c.y]]}
-          stroke={c.tenant.name === 'Nav' ? ACCENT : c.tenant.stroke}
-          lineWidth={2}
-          opacity={0.18}
-          end={0}
-        />
-      ))}
       {teams.map(c => (
         <Polygon
           ref={p => hexes.push(p)}
@@ -139,11 +128,11 @@ export default makeScene2D(function* (view) {
   ] as Rect[];
   // Dark band behind the counters so hexes never fight the numbers.
   const band = (
-    <Rect width={1920} height={260} y={410} opacity={0}
+    <Rect width={1920} height={200} y={430} opacity={0}
       fill={'#0b1120'} shadowColor={'#0b1120'} shadowBlur={80} />
   ) as Rect;
   const topBand = (
-    <Rect width={1920} height={200} y={-500} opacity={0}
+    <Rect width={1920} height={120} y={-500} opacity={0}
       fill={'#0b1120'} shadowColor={'#0b1120'} shadowBlur={80} />
   ) as Rect;
   view.add([band, topBand]);
@@ -168,7 +157,7 @@ export default makeScene2D(function* (view) {
   yield* all(
     world().scale(FIT, grow + 1.8, easeInOutCubic),
     world().x(-BOX.x * FIT, grow + 1.8, easeInOutCubic),
-    world().y(-60 - BOX.y * FIT, grow + 1.8, easeInOutCubic),
+    world().y(-40 - BOX.y * FIT, grow + 1.8, easeInOutCubic),
         band.opacity(1, 0.6),
     topBand.opacity(1, 0.6),
     sequence(0.12, ...counters.map(c => c.opacity(1, 0.6))),
@@ -179,7 +168,6 @@ export default makeScene2D(function* (view) {
       grow / TEAMS,
       ...teams.map((_, i) =>
         all(
-          lines[i].end(1, 0.5, easeOutExpo),
           hexes[i].scale(1, 0.55, easeOutBack),
           hexes[i].stroke(ACCENT, 0.15).to(teams[i].tenant.stroke, 0.9),
           hexes[i].fill(FLASH, 0.15).to(teams[i].tenant.fill, 0.9),
@@ -192,7 +180,10 @@ export default makeScene2D(function* (view) {
   yield* all(
     core().shadowBlur(160, 0.5).to(90, 0.8),
     core().fill(ACCENT_DARK, 0.5).to(ACCENT, 0.8),
-    ...lines.map(l => l.opacity(0.6, 0.5).to(0.18, 0.8)),
+    ...hexes.map((h, i) => delay(teams[i].ring * 0.03, all(h.stroke(ACCENT, 0.3).to(teams[i].tenant.stroke, 0.6), h.fill(FLASH, 0.3).to(teams[i].tenant.fill, 0.6)))),
+  );
+  // A second ripple from Oslo through the whole country.
+  yield* all(
     ...hexes.map((h, i) => delay(teams[i].ring * 0.03, all(h.stroke(ACCENT, 0.3).to(teams[i].tenant.stroke, 0.6), h.fill(FLASH, 0.3).to(teams[i].tenant.fill, 0.6)))),
   );
   yield* waitFor(0.8);

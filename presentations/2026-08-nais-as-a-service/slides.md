@@ -185,10 +185,10 @@ clicks: 3
 ---
 
 ::header::
+<div class="pillar-tag" style="--pc: #FF9100"><span class="i-carbon-rocket" /> Utviklingsfart</div>
 <h1 class="text-3xl font-bold">Fra pull request til produksjon</h1>
 
 ::default::
-<div class="pillar-tag" style="--pc: #FF9100"><span class="i-carbon-rocket" /> Utviklingsfart</div>
 <PrFlow />
 
 <!--
