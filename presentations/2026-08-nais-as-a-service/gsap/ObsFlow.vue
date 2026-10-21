@@ -182,18 +182,18 @@ rect {
 }
 
 rect.app {
-  fill: #0f172a;
-  stroke: #0f172a;
+  fill: #1e293b;
+  stroke: #475569;
 }
 
 rect.mid {
-  fill: #f8fafc;
-  stroke: #cbd5e1;
+  fill: #131d33;
+  stroke: #334155;
 }
 
 rect.store {
-  fill: #fef2f2;
-  stroke: #fecdd3;
+  fill: rgb(255 51 119 / 0.14);
+  stroke: rgb(255 51 119 / 0.5);
 }
 
 .label {
@@ -201,7 +201,7 @@ rect.store {
   font-family: "Poppins", sans-serif;
   font-weight: 700;
   font-size: 18px;
-  fill: #0f172a;
+  fill: #f1f5f9;
 }
 
 .sub {

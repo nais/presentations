@@ -1,6 +1,6 @@
 <template>
   <div ref="root" class="deploy-flow" data-motion-self>
-    <h2 ref="headline" class="headline">Fra git push til produksjon</h2>
+    <h2 ref="headline" class="headline">Og så: git push</h2>
     <svg
       viewBox="0 0 900 300"
       class="diagram"

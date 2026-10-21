@@ -96,7 +96,10 @@ useSteps((tl) => {
       { scaleX: 0, transformOrigin: "0 50%", stagger: STAGGER },
       "<0.2",
     )
-    .to(q(".span.bad"), { backgroundColor: "#fef2f2", duration: 0.3 })
+    .to(q(".span.bad"), {
+      backgroundColor: "rgba(255,51,119,0.15)",
+      duration: 0.3,
+    })
     .addLabel("s2")
     .to(q(".logs"), { autoAlpha: 1, y: 0 })
     .from(q(".logs code"), { autoAlpha: 0, x: -10, stagger: STAGGER }, "<0.2")

@@ -2,59 +2,91 @@
   <div class="browser">
     <div class="chrome">
       <i /><i /><i />
-      <span class="tab">Nais Console</span>
       <span class="url"><span class="i-carbon-locked" /> {{ url }}</span>
+    </div>
+    <div class="topbar">
+      <strong><span class="logo" />Console</strong>
+      <span v-for="t in TOP" :key="t">{{ t }}</span>
     </div>
     <div class="body">
       <nav>
-        <span v-for="n in NAV" :key="n" :class="{ on: n === active }">{{
-          n
-        }}</span>
+        <template v-for="(g, gi) in NAV" :key="gi">
+          <span v-for="n in g" :key="n" :class="{ on: n === active }">{{
+            n
+          }}</span>
+          <hr v-if="gi < NAV.length - 1" />
+        </template>
       </nav>
-      <main><slot /></main>
+      <main>
+        <div v-if="crumbs.length" class="crumbs">
+          <template v-for="(c, i) in crumbs" :key="c">
+            <span :class="{ cur: i === crumbs.length - 1 }">{{ c }}</span> /
+          </template>
+        </div>
+        <slot />
+      </main>
     </div>
   </div>
 </template>
 
 <script setup>
-// Fictitious Console window around a mock. Nothing here is real data.
+// Fictitious Console window, structured like the real Console. No real data.
 defineProps({
   url: { type: String, required: true },
   active: { type: String, default: "" },
+  crumbs: { type: Array, default: () => [] },
 });
+const TOP = ["Utilization", "Cost", "Vulnerabilities", "Activity Log"];
 const NAV = [
-  "Oversikt",
-  "Apper",
-  "Jobber",
-  "Postgres",
-  "Valkey",
-  "OpenSearch",
-  "Sårbarheter",
-  "Kostnad",
-  "Hemmeligheter",
-  "Unleash",
+  ["Team Overview"],
+  ["Applications", "Jobs"],
+  [
+    "Secrets",
+    "Configs",
+    "Cloud SQL",
+    "Buckets",
+    "Valkey",
+    "OpenSearch",
+    "Kafka Topics",
+    "BigQuery",
+    "Unleash",
+  ],
+  ["Alerts", "Issues", "Deployments", "Cost", "Utilization", "Vulnerabilities"],
+  ["Members", "Repositories", "Settings", "Activity Log"],
 ];
 </script>
 
 <style scoped>
 .browser {
+  /* Console is light; keep the mock readable inside a dark deck. */
+  --nais-bg: #ffffff;
+  --nais-surface: #f1f5f9;
+  --nais-card: #f8fafc;
+  --nais-text: #0f172a;
+  --nais-heading: #0f172a;
+  --nais-text-secondary: #475569;
+  --nais-border: #e2e8f0;
+  --nais-accent-light: #fef2f2;
+  color: var(--nais-text);
   width: 100%;
-  max-width: 940px;
+  max-width: 800px;
+  height: 352px;
   margin: 0 auto;
+  display: flex;
+  flex-direction: column;
   border-radius: 12px;
   overflow: hidden;
-  border: 1px solid var(--nais-border);
+  border: 1px solid #334155;
   background: #fff;
-  box-shadow: 0 16px 40px rgb(15 23 42 / 0.1);
+  box-shadow: 0 16px 40px rgb(0 0 0 / 0.35);
 }
 
 .chrome {
   display: flex;
   align-items: center;
   gap: 6px;
-  padding: 0.35rem 0.7rem;
-  background: var(--nais-surface);
-  border-bottom: 1px solid var(--nais-border);
+  padding: 0.3rem 0.7rem;
+  background: #e2e8f0;
 }
 
 .chrome i {
@@ -72,58 +104,96 @@ const NAV = [
   background: #34d399;
 }
 
-.tab {
-  margin-left: 0.6rem;
-  padding: 0.1rem 0.7rem;
-  border-radius: 6px 6px 0 0;
-  background: #fff;
-  font-size: 0.75rem;
-  font-weight: 600;
-}
-
 .url {
   flex: 1;
   display: flex;
   align-items: center;
   gap: 0.3rem;
-  margin-left: 0.6rem;
-  padding: 0.1rem 0.6rem;
+  margin-left: 0.8rem;
+  padding: 0.05rem 0.6rem;
   border-radius: 999px;
   background: #fff;
-  border: 1px solid var(--nais-border);
   font-family: "JetBrains Mono", monospace;
-  font-size: 0.72rem;
-  color: var(--nais-text-secondary);
+  font-size: 0.62rem;
+  color: #475569;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.3rem 0.8rem;
+  background: #1e293b;
+  color: #e2e8f0;
+  font-size: 0.65rem;
+}
+
+.topbar strong {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.8rem;
+  color: #fff;
+  margin-right: 0.4rem;
+}
+
+.logo {
+  width: 10px;
+  height: 12px;
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  background: #f76891;
 }
 
 .body {
+  flex: 1;
+  min-height: 0;
   display: grid;
-  grid-template-columns: 8.5rem 1fr;
+  grid-template-columns: 7.2rem 1fr;
 }
 
 nav {
   display: flex;
   flex-direction: column;
-  gap: 1px;
-  padding: 0.5rem 0.4rem;
-  background: #f8fafc;
+  padding: 0.3rem 0.35rem;
   border-right: 1px solid var(--nais-border);
+  overflow: hidden;
 }
 
 nav span {
-  padding: 0.12rem 0.5rem;
-  border-radius: 6px;
-  font-size: 0.75rem;
-  color: var(--nais-text-secondary);
+  padding: 0.02rem 0.45rem;
+  border-radius: 5px;
+  font-size: 0.6rem;
+  line-height: 1.3;
+  color: #334155;
 }
 
 nav span.on {
-  background: var(--nais-accent-light);
-  color: var(--nais-accent);
+  background: #dbeafe;
+  color: #1e3a8a;
   font-weight: 700;
 }
 
+nav hr {
+  width: 100%;
+  margin: 0.08rem 0;
+  border: none;
+  border-top: 1px solid var(--nais-border);
+}
+
 main {
-  padding: 0.7rem 0.9rem;
+  position: relative;
+  min-width: 0;
+  padding: 0.6rem 1rem;
+  overflow: hidden;
+}
+
+.crumbs {
+  font-size: 0.65rem;
+  color: #1d4ed8;
+  margin-bottom: 0.2rem;
+}
+
+.crumbs .cur {
+  color: var(--nais-text);
 }
 </style>

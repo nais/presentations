@@ -47,7 +47,7 @@
       </div>
     </div>
     <p ref="thesis" class="thesis">
-      Én felles plattform: bygd én gang, driftet av ett team.
+      Plattformen Nav bygde for seg selv er nå en tjeneste for staten.
     </p>
   </div>
 </template>
@@ -65,7 +65,7 @@ const STACKS = [
   { cx: 62.5, w: 20, tone: "#334155", people: 3, cracked: 3 },
   { cx: 87.5, w: 18, tone: "#52627a", people: 2 },
 ];
-const layerTop = (k) => 282 - (k + 1) * 34;
+const layerTop = (k) => 254 - (k + 1) * 34;
 const SHARED = { left: 15, width: 70 };
 
 const root = ref();
@@ -122,9 +122,9 @@ useSteps((tl) => {
   tl.to(q(".warn"), { autoAlpha: 0, duration: 0.3 }, "merge").to(
     tiles,
     {
-      left: (i) => SHARED.left + i * (SHARED.width / 4) + 0.5 + "%",
-      width: SHARED.width / 4 - 1 + "%",
-      background: "#0f172a",
+      left: (i) => SHARED.left + i * (SHARED.width / 4) + 1.3 + "%",
+      width: SHARED.width / 4 - 2.6 + "%",
+      background: "#1e293b",
       duration: 0.8,
       ease: "power2.inOut",
     },
@@ -144,13 +144,13 @@ useSteps((tl) => {
 
 .stage {
   position: relative;
-  height: 340px;
+  height: 310px;
 }
 
 .team,
 .nais-team {
   position: absolute;
-  top: 34px;
+  top: 8px;
   translate: -50% 0;
   display: flex;
   gap: 2px;
@@ -177,12 +177,12 @@ useSteps((tl) => {
 
 .tile {
   position: absolute;
-  top: 72px;
+  top: 44px;
   padding: 0.2rem 0;
   border-radius: 8px;
   text-align: center;
   color: #fff;
-  background: #1e293b;
+  background: #334155;
   font-family: "Poppins", sans-serif;
   font-weight: 700;
   font-size: 0.95rem;
@@ -212,14 +212,14 @@ useSteps((tl) => {
 
 .callout {
   position: absolute;
-  top: 300px;
+  top: 268px;
   translate: -50% 0;
   display: flex;
   align-items: center;
   gap: 0.4rem;
   padding: 0.3rem 0.7rem;
   border-radius: 999px;
-  background: #fff;
+  background: var(--nais-surface);
   border: 2px solid var(--nais-accent);
   color: var(--nais-text);
   font-weight: 700;

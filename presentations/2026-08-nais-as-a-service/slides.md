@@ -7,24 +7,16 @@ layout: cover
 <p class="text-sm mt-6 opacity-70">Hans Kristian Flaatten · Nais-teamet i Nav</p>
 
 <!--
-Hei! 20–25 minutter, ingen demo, bare animasjoner. Målgruppe: tech leads og arkitekter, og de som bestemmer i etatene.
--->
+Overgang: «Hei, jeg heter Hans Kristian og jobber i Nais-teamet i Nav.»
 
----
-layout: none
-transition: fade
----
-
-<ClipSlide />
-
-<!--
-La klippet gå. Ikke snakk over det.
+- Målgruppe: tech leads, arkitekter og de som bestemmer i etatene
+- Tesen: Plattformen Nav bygde for seg selv er nå en tjeneste for staten
+- Ingen demo i dag, bare animasjoner
 -->
 
 ---
 layout: default
 clicks: 2
-transition: fade
 ---
 
 ::header::
@@ -35,26 +27,47 @@ transition: fade
 <ProblemStacks />
 
 <!--
-Klikk 1: kostnaden. Klikk 2: én felles plattform.
+Overgang: «Og den felles plattformen er ikke en idé. Den har vokst siden 2016. Se.»
+
+- Hver etat som bygger egen plattform, trenger knapp og dyr kompetanse
+- Samme arbeid gjøres fire ganger, og sikkerheten blir ujevn
+- Klikk: de fire stablene smelter sammen til én felles plattform
+-->
+
+---
+layout: none
+transition: fade
+---
+
+<ClipSlide />
+
+<!--
+Overgang: «(Ingen overgang. La klippet gå, ikke snakk over det.)»
+
+- 4 etater, 5 212 apper (Grafana, 21. oktober 2026)
+- ≈21 500 deployer per uke er Nav, alle miljøer (Mimir)
+- Fargene viser de mindre etatene spredt i bikuben
 -->
 
 ---
 layout: default
+transition: fade
 ---
 
 ::header::
 <h1 class="text-3xl font-bold">Hva er Nais</h1>
-<p class="subtitle">Plattform, team og fellesskap</p>
+<p class="subtitle">En plattform laget av Nav for å gi fart og flyt til utviklerne av det offentlige Norge</p>
 
 ::default::
-<HubSpokes center="Nais" :spokes="[
-  { icon: 'i-carbon-cloud', title: 'Plattform', text: 'Kubernetes, datatjenester, innlogging, observability og Console' },
-  { icon: 'i-carbon-user-multiple', title: 'Team', text: '15 personer som drifter, utvikler og har vakt døgnet rundt' },
-  { icon: 'i-carbon-group', title: 'Fellesskap', text: 'Slack, dokumentasjon, champions i teamene og Naisdag' },
-]" />
+<NaisPillars />
+<p class="anim-item text-center mt-8">Vi mener at det skal være lett å gjøre rett.</p>
 
 <!--
-Tre deler. Plattformen alene er ikke nok – det er teamet og fellesskapet som gjør at det virker.
+Overgang: «Seks ting Nais skal gi dere. Jeg kommer tilbake til dem underveis. Først: brukes dette faktisk?»
+
+- Teksten og søylene er hentet fra nais.io
+- Vi mener at det skal være lett å gjøre rett
+- Hjørnemerket på senere slides viser hvilken søyle de handler om
 -->
 
 ---
@@ -73,22 +86,27 @@ layout: default
     <CountUp number="21500" prefix="≈" label="Deployer per uke (Nav)" :delay="0.16" />
     <CountUp number="154" label="Team som deployer (Nav)" :delay="0.24" />
   </div>
-  <div class="grid grid-cols-2 gap-8 w-full items-end">
-    <TenantBars />
-    <DeployChart />
+  <YearChart metric="deploys" />
+  <div class="anim-item tenant-logos">
+    <img src="./assets/logos/nav.svg" alt="Nav" class="h-7" />
+    <img src="./assets/logos/ssb.svg" alt="SSB" class="h-7" />
+    <img src="./assets/logos/ldir.svg" alt="Landbruksdirektoratet" class="h-8" />
+    <img src="./assets/logos/atil.svg" alt="Arbeidstilsynet" class="h-7" />
   </div>
-  <Placeholder class="anim-item">logoer for Nav, SSB, Landbruksdirektoratet og Arbeidstilsynet</Placeholder>
 </div>
 
 <!--
-Apper per etat: Grafana 21. oktober 2026 (72 + 164 + 292 = 528 utenfor Nav).
-Deployer og team: Mimir, bare Nav, 21. oktober 2026. ≈21 500 per uke i alle miljøer, ≈9 000 i prod. 154 team har deployet siste 28 dager.
-Andre tall fra Mimir hvis noen spør: ≈11 000 pods, 229 noder, ≈120 mill. forespørsler og ≈250 mill. Kafka-meldinger per dag.
-PLASSHOLDER: logoer.
+Overgang: «Grunnen til at tallene er så store, kommer på neste slides.»
+
+- Apper per etat: Grafana 21. oktober 2026 (72 + 164 + 292 = 528 utenfor Nav)
+- ≈21 500 deployer per uke i Nav, alle miljøer. ≈9 000 i prod (Mimir)
+- 154 team har deployet siste 28 dager
+- Reserve: ukegrafen fra Mimir (11 uker, aug.–okt. 2026) ligger i DeployChart hvis noen spør
+- PLASSHOLDER: årstall for veksten fra Nais-teamet
 -->
 
 ---
-layout: pillars
+layout: default
 clicks: 5
 ---
 
@@ -103,9 +121,37 @@ clicks: 5
   { icon: 'i-carbon-group', title: 'Ansatte', description: 'Fornøyde ansatte' },
   { icon: 'i-carbon-face-satisfied', title: 'Brukere', description: 'Fornøyde brukere' },
 ]" />
+<div class="grid grid-cols-2 gap-4 max-w-3xl mx-auto w-full mt-2">
+  <Placeholder class="anim-item">DORA for Nav: deployfrekvens</Placeholder>
+  <Placeholder class="anim-item">DORA for Nav: ledetid for endringer</Placeholder>
+</div>
 
 <!--
-Ett klikk per steg, konfetti til slutt.
+Overgang: «Grunnen til at 154 team deployer 21 500 ganger i uka, er at dette er alt de må skrive.»
+
+- Ett klikk per steg, konfetti til slutt
+- PLASSHOLDER: DORA-tall for Nav (deployfrekvens og ledetid)
+-->
+
+---
+layout: default
+clicks: 7
+---
+
+::header::
+<div class="pillar-tag" style="--pc: #FF9100"><span class="i-carbon-rocket" /> Utviklingsfart</div>
+<h1 class="text-3xl font-bold">Ett manifest, ferdig oppsett</h1>
+<p class="subtitle">Ingen Terraform, ingen infrastrukturkunnskap</p>
+
+::default::
+<ManifestDeep />
+
+<!--
+Overgang: «Så skal vi se hva som skjer når de trykker på knappen.»
+
+- Feltnavn fra Application-eksempelet i nais/doc
+- Hvert klikk skriver én blokk, og ressursen dukker opp rundt appen
+- Ingen Terraform, ingen infrastrukturkunnskap
 -->
 
 ---
@@ -114,34 +160,23 @@ clicks: 4
 ---
 
 ::default::
+<div class="pillar-tag" style="--pc: #FF9100"><span class="i-carbon-rocket" /> Utviklingsfart</div>
 <DeployFlow />
 
 <!--
-Ett klikk per steg: bygg, deploy, pods, live.
+Overgang: «Men hva skjer egentlig på plattformsiden?»
+
+- Bygg i GitHub Actions, deploy med Nais, pods i Kubernetes, live
+- Ett klikk per steg
 -->
 
 ---
 layout: default
-clicks: 6
+clicks: 1
 ---
 
 ::header::
-<h1 class="text-3xl font-bold">Ett manifest, ferdig oppsett</h1>
-<p class="subtitle">Ingen Terraform, ingen infrastrukturkunnskap</p>
-
-::default::
-<ManifestDeep />
-
-<!--
-Klikk gjennom blokkene i nais.yaml. Feltnavn fra Application-eksempelet i nais/doc.
--->
-
----
-layout: default
-clicks: 2
----
-
-::header::
+<div class="pillar-tag" style="--pc: #9b6fd6"><span class="i-carbon-settings" /> Automatisering</div>
 <h1 class="text-3xl font-bold">Hva skjer på app-siden</h1>
 <p class="subtitle">Naiserator gjør manifestet om til ressurser</p>
 
@@ -149,61 +184,130 @@ clicks: 2
 <AppFanout />
 
 <!--
-Klikk 1: Kubernetes-ressursene Naiserator lager. Klikk 2: operatorene som tar over (Config Connector, aivenator, azurerator, digdirator, jwker).
+Overgang: «Det var én app. Zoom ut, og her er hele hylla.»
+
+- Naiserator lager Kubernetes-ressursene: Deployment, Service, Ingress, NetworkPolicy og flere
+- Operatorer tar over resten: Config Connector, aivenator, azurerator, digdirator, jwker
 -->
 
 ---
 layout: default
-clicks: 3
+clicks: 8
 ---
 
 ::header::
-<h1 class="text-3xl font-bold">Console: sårbarheter</h1>
-<p class="subtitle">Teamet ser status for alle workloads</p>
+<div class="pillar-tag" style="--pc: #9b6fd6"><span class="i-carbon-settings" /> Automatisering</div>
+<h1 class="text-3xl font-bold">Verktøykassa</h1>
+<p class="subtitle">Alt rundt appen, klart til bruk</p>
 
 ::default::
-<ConsoleVulns />
+<Toolbox mode="open" />
 
 <!--
-Illustrasjon av Console. Klikk 1: alle bygg får SBOM. Klikk 2: en ny CVE dukker opp. Klikk 3: teamet oppdaterer avhengigheten og deployer. I Console ser teamet også apper og status, deployer, kostnad per team og app, secrets, Unleash og ressursbruk.
+Overgang: «Jeg åpner to skuffer. Først: hva skjer når noe feiler?»
+
+- Én skuff per klikk, til slutt alt på en gang
+- Gruppert etter inventaret over verktøykassa. Utfasede ting er utelatt
+- MCP for kodeagenter ligger i Verktøy-skuffen
 -->
 
 ---
 layout: default
-clicks: 2
 ---
 
 ::header::
-<h1 class="text-3xl font-bold">Console: data og kostnad</h1>
-<p class="subtitle">Hva teamet har, og hva det koster</p>
+<div class="pillar-tag" style="--pc: #5cb2da"><span class="i-carbon-activity" /> Oversikt</div>
+<h1 class="text-3xl font-bold">Fra feil til fiks</h1>
+<p class="subtitle">Logger, metrikker og traces uten oppsett</p>
 
 ::default::
-<ConsoleData />
+<ObsFlow />
 
 <!--
-Illustrasjon av Console. Klikk 1: datatjenestene appene bruker. Klikk 2: kostnad per app.
+Overgang: «Så la oss jakte på en feil.»
+
+- Kilde: docs.nais.io, «How Nais APM works»
+- Logger: stdout via fluentbit til Loki. Traces og metrikker: OTel collector til Tempo og Mimir
+- Alt vises i Grafana. Skrus på med observability.autoInstrumentation
 -->
 
 ---
 layout: default
-clicks: 6
+clicks: 4
 ---
 
 ::header::
-<h1 class="text-3xl font-bold">En dag som utvikler</h1>
+<div class="pillar-tag" style="--pc: #5cb2da"><span class="i-carbon-activity" /> Oversikt</div>
+<h1 class="text-3xl font-bold">Jakten på feilen</h1>
+<p class="subtitle">Signalene henger sammen, rett ut av boksen</p>
 
 ::default::
-<JourneyPath :items="[
-  { icon: 'i-carbon-cafe', title: '08:30 Console', description: 'Kostnad og sårbarheter for teamet på ett sted' },
-  { icon: 'i-carbon-bot', title: '09:00 Koder med KI', description: 'Agenten spør plattformen via MCP' },
-  { icon: 'i-carbon-pull-request', title: '11:00 Pull request', description: 'Review, tester og skanning i pipelinen' },
-  { icon: 'i-carbon-rocket', title: '11:15 Merge', description: 'I prod på minutter, uten å bestille noe' },
-  { icon: 'i-carbon-data-base', title: '13:00 Ny database', description: 'Postgres med noen linjer i nais.yaml' },
-  { icon: 'i-carbon-home', title: '16:00 Hjem i tide', description: 'Logger, metrikker og traces er på plass' },
-]" />
+<BugHunt />
 
 <!--
-Fortell som en historie. Poenget: ingen billetter, ingen venting.
+Overgang: «Og alt dette ser teamet også i Console.»
+
+- Illustrasjon, ikke ekte tall
+- Varsel, trace, logger for samme trace, fiks
+- Signalene henger sammen uten oppsett
+-->
+
+---
+layout: default
+clicks: 1
+---
+
+::header::
+<div class="pillar-tag" style="--pc: #5cb2da"><span class="i-carbon-activity" /> Oversikt</div>
+<h1 class="text-2xl font-bold">Console: teamets oversikt</h1>
+
+::default::
+<ConsoleMock story="team" />
+
+<!--
+Overgang: «Og hver app kan teamet se for seg.»
+
+- Illustrasjon bygd etter Console sin struktur, ingen ekte data
+- Team health, inventar og siste aktivitet
+- Klikk: kostnad per tjeneste
+-->
+
+---
+layout: default
+clicks: 1
+---
+
+::header::
+<div class="pillar-tag" style="--pc: #5cb2da"><span class="i-carbon-activity" /> Oversikt</div>
+<h1 class="text-2xl font-bold">Console: én app</h1>
+
+::default::
+<ConsoleMock story="app" />
+
+<!--
+Overgang: «Og for de som liker terminalen:»
+
+- Klikk: teamet åpner én app
+- Helse, siste deploy, persistens og kostnad for akkurat den appen
+-->
+
+---
+layout: default
+clicks: 5
+---
+
+::header::
+<div class="pillar-tag" style="--pc: #5cb2da"><span class="i-carbon-activity" /> Oversikt</div>
+<h1 class="text-2xl font-bold">Og fra terminalen</h1>
+
+::default::
+<CliDemo />
+
+<!--
+Overgang: «Det var utviklerens side. Nå snur vi bildet: alt som måtte stå for at dagen ble kjedelig.»
+
+- Kommandoene finnes i nais CLI (sjekket i nais/cli). Utdata er illustrasjon
+- nais login, app status, app logs, postgres proxy, vulns summary
 -->
 
 ---
@@ -213,39 +317,16 @@ clicks: 2
 
 ::header::
 <h1 class="text-3xl font-bold">Hva dere slipper å drive</h1>
+<p class="subtitle">Dere bruker verktøyene. Vi drifter alt under.</p>
 
 ::default::
-<StackBuild :layers="[
-  { name: 'Console og nais CLI', parts: 'Kostnad per team og app, sårbarheter, MCP for kodeagenter' },
-  { name: 'Utrulling og forsyningskjede', parts: 'GitHub Actions, SBOM, signering' },
-  { name: 'Innlogging', parts: 'Texas, TokenX, ID-porten, Maskinporten, Entra ID' },
-  { name: 'Datatjenester', parts: 'Postgres, Valkey, OpenSearch, Kafka, Unleash' },
-  { name: 'Observability', parts: 'Grafana, Mimir, Loki, Tempo' },
-  { name: 'Kubernetes og nettverk', parts: 'GKE, nettverkspolicyer, ingress' },
-  { name: 'Google Cloud', parts: 'Cloud SQL, buckets, BigQuery' },
-]" />
+<Toolbox mode="ops" />
 
 <!--
-Klikk 1: appen lander. Klikk 2: alt under dimmes – det er vår jobb.
--->
+Overgang: «Og når noe likevel skjer om natta?»
 
----
-layout: default
-clicks: 2
----
-
-::header::
-<h1 class="text-3xl font-bold">Hvem gjør hva</h1>
-<p class="subtitle">Delt ansvar</p>
-
-::default::
-<Responsibility :sides="[
-  { title: 'Etaten', icon: 'i-carbon-building', items: ['Koden og produktet', 'Dataene', 'Egne team og prioriteringer'] },
-  { title: 'Nais', icon: 'i-carbon-cloud', items: ['Drift og oppgraderinger', 'Sikkerhet i plattformen', 'Vakt døgnet rundt'] },
-]" />
-
-<!--
-Klikk 1: etatens side. Klikk 2: Nais sin side.
+- Samme verktøykasse, dempet
+- Klikk 1: driften Nais tar. Klikk 2: streken mellom etatens del og Nais sin del
 -->
 
 ---
@@ -255,7 +336,7 @@ clicks: 3
 
 ::header::
 <h1 class="text-3xl font-bold">Kl. 03:00</h1>
-<p class="subtitle">Vakt døgnet rundt er inkludert i NaaS</p>
+<p class="subtitle">Samme varsel, samme Grafana. Forskjellen er hvem sin telefon som ringer.</p>
 
 ::default::
 <div class="flex flex-col gap-6 w-full">
@@ -266,7 +347,7 @@ clicks: 3
     { icon: 'i-carbon-checkmark', label: 'Løst', sub: 'Dere sov gjennom det' },
   ]" />
   <div class="grid grid-cols-2 gap-6 items-center max-w-4xl mx-auto w-full">
-    <Placeholder class="anim-item">hendelsesforløp fra en ekte natt: hva skjedde, hvem ble varslet, hvor lang tid til løst</Placeholder>
+    <Placeholder class="anim-item">en ekte natt i fire steg: varsel, trace, logger, fiks (hva skjedde og hvor lang tid det tok)</Placeholder>
     <div class="anim-item text-center">
       <div class="text-5xl font-bold text-nais-accent" style="font-family: Poppins">99,88 %</div>
       <p class="mt-1">ingress-svar uten 5xx i Nav, siste 30 dager</p>
@@ -276,9 +357,11 @@ clicks: 3
 </div>
 
 <!--
-Nais-teamet har vakt døgnet rundt, sammen med Googles 24/7-support. Det er inkludert i NaaS.
-PLASSHOLDER: hendelsesforløp (hva skjedde, varsling, tid til løst).
-99,88 % er målt i Mimir, Nav, siste 30 dager. Ingen formell SLA.
+Overgang: «Hvem var våkne? Disse femten.»
+
+- Vakt døgnet rundt er inkludert i NaaS: Nais-teamet, med Googles 24/7-support ved behov
+- 99,88 % er målt i Mimir, Nav, siste 30 dager. Ingen formell SLA
+- PLASSHOLDER: en ekte natt i fire steg
 -->
 
 ---
@@ -286,14 +369,17 @@ layout: default
 ---
 
 ::header::
-<h1 class="text-3xl font-bold">Fra feil til fiks</h1>
-<p class="subtitle">Logger, metrikker og traces uten oppsett</p>
+<h1 class="text-3xl font-bold">Nais-teamet</h1>
+<p class="subtitle">15 personer, 4 etater</p>
 
 ::default::
-<ObsFlow />
+<TeamWall />
 
 <!--
-Kilde: docs.nais.io, «How Nais APM works». Logger fra stdout går via fluentbit til Loki. Traces og metrikker går via OpenTelemetry collector til Tempo og Mimir. Alt vises i Grafana. Automatisk instrumentering skrus på med observability.autoInstrumentation i nais.yaml.
+Overgang: «Teamet bygger også sikkerheten inn i hver leveranse.»
+
+- Hele teamet: femten personer for fire etater
+- Navn fra GitHub-teamet nais/nais
 -->
 
 ---
@@ -302,21 +388,7 @@ clicks: 4
 ---
 
 ::header::
-<h1 class="text-3xl font-bold">Jakten på feilen</h1>
-<p class="subtitle">Signalene henger sammen, rett ut av boksen</p>
-
-::default::
-<BugHunt />
-
-<!--
-Illustrasjon, ikke ekte tall. Klikk 1: varsel på feilrate. Klikk 2: tracen viser at databasekallet feiler. Klikk 3: loggene for samme trace. Klikk 4: fiksen er ute, feilraten faller.
--->
----
-layout: default
-clicks: 4
----
-
-::header::
+<div class="pillar-tag" style="--pc: #34c27a"><span class="i-carbon-certificate-check" /> Sikkerhet</div>
 <h1 class="text-3xl font-bold">Sikkerhet i forsyningskjeden</h1>
 
 ::default::
@@ -329,7 +401,31 @@ clicks: 4
 ]" />
 
 <!--
-Kode fra KI-agenter går gjennom akkurat samme løp. Signering med Sigstore Cosign, sårbarheter via Dependency-Track. 5 608 workloads fra Mimir 21. oktober 2026.
+Overgang: «Og teamet ser resultatet i Console.»
+
+- SBOM og signering skjer automatisk i bygget
+- Kode fra KI-agenter går gjennom akkurat samme løp
+- 5 608 workloads skannes (Mimir, 21. oktober 2026)
+-->
+
+---
+layout: default
+clicks: 2
+---
+
+::header::
+<div class="pillar-tag" style="--pc: #34c27a"><span class="i-carbon-certificate-check" /> Sikkerhet</div>
+<h1 class="text-2xl font-bold">Console: sårbarheter</h1>
+
+::default::
+<ConsoleMock story="vulns" />
+
+<!--
+Overgang: «Så langt har jeg snakket til utviklerne. Nå til dere som skal signere.»
+
+- Illustrasjon, ingen ekte data eller CVE-er
+- Klikk 1: appen har en kjent utnyttet sårbarhet, teamet åpner Vulnerabilities
+- Klikk 2: avhengigheten er oppdatert og deployet, tallet går til null
 -->
 
 ---
@@ -338,15 +434,19 @@ clicks: 1
 ---
 
 ::header::
+<div class="pillar-tag" style="--pc: #4a9be8"><span class="i-carbon-migrate" /> Suveren og autonom</div>
 <h1 class="text-3xl font-bold">Hva kjører hvor</h1>
 <p class="subtitle">Vi er ærlige om avhengighetene</p>
 
 ::default::
 <HostingMap />
-<p class="anim-item text-center text-sm opacity-70 mt-3">NaaS passer ikke for skjermingsverdig informasjon eller systemer som må kjøre on-prem.</p>
 
 <!--
-Ikke lov bort suverenitet vi ikke har. Det vi kan si: Nais har flyttet én gang, og kan flytte igjen.
+Overgang: «Og hvis dere vil flytte, er det deres valg.»
+
+- Google Cloud: GKE, Cloud SQL, buckets, BigQuery. Aiven: Kafka, OpenSearch, Valkey
+- Nais drifter observability-stakken selv
+- Nais startet on-prem i 2016 og flyttet til Google Cloud
 -->
 
 ---
@@ -355,13 +455,18 @@ clicks: 3
 ---
 
 ::header::
+<div class="pillar-tag" style="--pc: #4a9be8"><span class="i-carbon-migrate" /> Suveren og autonom</div>
 <h1 class="text-3xl font-bold">Deres data, deres exit</h1>
 
 ::default::
 <TenantMap :tenants="['Nav', 'SSB', 'Landbruksdirektoratet', 'Arbeidstilsynet']" :detach="3" exit-text="Exit-planen er dokumentert. Den har aldri vært brukt." />
 
 <!--
-Hver etat eier sin egen GCP-organisasjon. Nav eier betalingskontoen. Klikk 2: en etat kobler seg fra, og alt blir med.
+Overgang: «Hvem bestemmer så hva som skjer med plattformen?»
+
+- Hver etat eier sin egen GCP-organisasjon. Nav eier betalingskontoen
+- Klikk 2: en etat kobler seg fra, og alt blir med
+- Exit-planen er dokumentert, men aldri brukt
 -->
 
 ---
@@ -376,7 +481,11 @@ layout: default
 <GovernanceLoop />
 
 <!--
-Ærlig: vi sier nei oftere enn ja, fordi vi vil gjøre det skikkelig.
+Overgang: «Når vi sier ja til én etat, sier vi ja til alle.»
+
+- Nais-teamet bestemmer veikartet
+- Etatene gir innspill på Naisdag
+- 1–2 nye etater per år
 -->
 
 ---
@@ -385,14 +494,43 @@ clicks: 2
 ---
 
 ::header::
+<div class="pillar-tag" style="--pc: #ff5c6c"><span class="i-carbon-partnership" /> Et Nais-fellesskap</div>
 <h1 class="text-3xl font-bold">Bedre sammen</h1>
 <p class="subtitle">Det én etat trenger, får alle</p>
 
 ::default::
 <ShareLoop :agencies="['Nav', 'SSB', 'Landbruksdirektoratet', 'Arbeidstilsynet']" caption="Forbedringer kommer alle etatene til gode" />
+<Placeholder class="anim-item max-w-3xl mx-auto mt-12">sitat fra en etat om NaaS (navn, rolle, etat)</Placeholder>
 
 <!--
-Klikk 1: et behov fra én etat. Klikk 2: alle får forbedringen. PLASSHOLDER: et konkret eksempel på noe én etat ba om som alle fikk.
+Overgang: «Og dere står ikke alene.»
+
+- Forbedringer for én etat kommer alle til gode
+- PLASSHOLDER: konkret eksempel og sitat fra en etat
+-->
+
+---
+layout: default
+---
+
+::header::
+<div class="pillar-tag" style="--pc: #ff5c6c"><span class="i-carbon-partnership" /> Et Nais-fellesskap</div>
+<h1 class="text-3xl font-bold">Støtte og fellesskap</h1>
+<p class="subtitle">Dere er ikke alene</p>
+
+::default::
+<HubSpokes center="Hjelp" center-icon="i-carbon-help" :start="-90" :spokes="[
+  { icon: 'i-carbon-logo-slack', title: 'Slack', text: 'Direkte kontakt med Nais-teamet' },
+  { icon: 'i-carbon-document', title: 'docs.nais.io', text: 'Dokumentasjon og veiledninger' },
+  { icon: 'i-carbon-badge', title: 'Champions', text: 'Champions i teamene' },
+  { icon: 'i-carbon-education', title: 'Workshops', text: 'Praktiske økter med Nais-teamet' },
+  { icon: 'i-carbon-group', title: 'Naisdag', text: 'Etatene møtes og gir innspill' },
+]" />
+
+<!--
+Overgang: «Alt dette er inkludert i én pris. Og den er selvkost.»
+
+- Slack, docs.nais.io, champions i teamene, workshops og Naisdag
 -->
 
 ---
@@ -414,64 +552,10 @@ layout: default
 </div>
 
 <!--
-Management 20 000 + to app-clustere à 10 000 = 40 000 kr/mnd før forbruk.
--->
+Overgang: «Hvem kan så bli med?»
 
----
-layout: default
----
-
-::header::
-<h1 class="text-3xl font-bold">Bevis</h1>
-
-::default::
-<ProofWall
-  :tiles="[
-    { label: 'Deployfrekvens (DORA)', need: 'DORA-tall for Nav' },
-    { label: 'Ledetid for endringer (DORA)', need: 'DORA-tall for Nav' },
-    { label: 'Fra avtale til første app i prod', need: 'onboarding-tid' },
-  ]"
-  :quote="{ need: 'sitat fra en etat om NaaS' }"
-/>
-
-<!--
-PLASSHOLDER: DORA-tall, sitat fra etat, onboarding-tid.
--->
-
----
-layout: default
----
-
-::header::
-<h1 class="text-3xl font-bold">Nais-teamet</h1>
-<p class="subtitle">15 personer, 4 etater</p>
-
-::default::
-<TeamWall />
-
-<!--
-Dette er hele teamet. Femten personer drifter plattformen for fire etater.
--->
-
----
-layout: default
----
-
-::header::
-<h1 class="text-3xl font-bold">Støtte og fellesskap</h1>
-<p class="subtitle">Dere er ikke alene</p>
-
-::default::
-<HubSpokes center="Hjelp" center-icon="i-carbon-help" :start="-90" :spokes="[
-  { icon: 'i-carbon-logo-slack', title: 'Slack', text: 'Direkte kontakt med Nais-teamet' },
-  { icon: 'i-carbon-document', title: 'docs.nais.io', text: 'Dokumentasjon og veiledninger' },
-  { icon: 'i-carbon-badge', title: 'Champions', text: 'Champions i teamene' },
-  { icon: 'i-carbon-education', title: 'Workshops', text: 'Praktiske økter med Nais-teamet' },
-  { icon: 'i-carbon-group', title: 'Naisdag', text: 'Etatene møtes og gir innspill' },
-]" />
-
-<!--
-Fra den gamle opplæringssliden: workshops, champions, Slack og dokumentasjon.
+- Management 20 000 + to app-clustere à 10 000 = 40 000 kr/mnd før forbruk
+- Forbruk i Google Cloud og Aiven kommer i tillegg, til selvkost
 -->
 
 ---
@@ -491,9 +575,13 @@ layout: default
   <div class="anim-item who-chip"><span class="i-carbon-checkmark-filled" /> Forvaltningsorganer med særskilte fullmakter</div>
   <div class="anim-item who-chip"><span class="i-carbon-checkmark-filled" /> Statlige ombud</div>
 </div>
+<p class="anim-item text-center mt-6 opacity-80">NaaS passer ikke for skjermingsverdig informasjon eller systemer som må kjøre on-prem.</p>
 
 <!--
-Egenregi i staten: kommuner, statsforetak og private kan ikke bruke NaaS (si det muntlig hvis noen spør).
+Overgang: «Slik kommer dere i gang.»
+
+- Egenregi i staten: kommuner, statsforetak og private kan ikke bruke NaaS
+- Ikke for skjermingsverdig informasjon eller systemer som må kjøre on-prem
 -->
 
 ---
@@ -511,9 +599,13 @@ clicks: 4
   { icon: 'i-carbon-migrate', title: 'Migrering', description: 'Varighet: PLASSHOLDER', placeholder: true },
   { icon: 'i-carbon-checkmark-outline', title: 'Drift', description: 'Dere utvikler, vi drifter' },
 ]" />
+<Placeholder class="anim-item max-w-xl mx-auto">fra avtale til første app i prod (onboarding-tid)</Placeholder>
 
 <!--
-PLASSHOLDER: antall uker for demo, pilot og migrering.
+Overgang: «Og hvis det ikke passer: dere kan gå når som helst, med alt.»
+
+- Demo, pilot, migrering, drift
+- PLASSHOLDER: varighet per steg og tid fra avtale til første app i prod
 -->
 
 ---
@@ -522,17 +614,20 @@ layout: cta
 
 ::header::
 <h1 class="text-3xl font-bold">Dere kan gå når som helst, med alt</h1>
-<p class="subtitle">Vi tror dere blir</p>
+<p class="subtitle">Utviklerne får fart fra dag én, etaten beholder eierskap og exit, og det koster selvkost.</p>
 
 ::default::
 <div class="flex items-center justify-center gap-10 w-full">
-  <Placeholder class="anim-item w-56 h-44">QR-kode til booking av demo eller pilot</Placeholder>
+  <div class="anim-item qr-tile"><img src="./assets/kontakt-qr.svg" alt="QR-kode til e-post nais@nav.no" /></div>
   <div class="anim-item text-left">
-    <p class="text-2xl font-bold" style="font-family: Poppins">Book en demo eller start en pilot</p>
-    <Placeholder class="mt-4">kontaktperson: navn, e-post og telefon</Placeholder>
+    <p class="text-2xl font-bold" style="font-family: Poppins">Snakk med oss om Nais kan passe hos dere</p>
+    <p class="text-xl mt-3"><a href="mailto:nais@nav.no" class="text-accent font-bold">nais@nav.no</a> · <a href="https://nais.io" class="text-accent">nais.io</a></p>
   </div>
 </div>
 
 <!--
-Koble tilbake til exit-sliden: dere eier alt. PLASSHOLDER: QR-kode og kontaktperson.
+Overgang: «Takk.»
+
+- Koble tilbake til exit-sliden: etaten eier alt
+- QR-koden åpner e-post til nais@nav.no (som «Kontakt oss» på nais.io)
 -->

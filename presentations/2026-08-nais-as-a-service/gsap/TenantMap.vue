@@ -148,7 +148,7 @@ useSteps((tl) => {
 .tenants {
   display: grid;
   grid-template-columns: repeat(v-bind(n), minmax(0, 1fr));
-  gap: 1rem;
+  gap: 1.4rem;
 }
 
 .org {
@@ -189,8 +189,8 @@ useSteps((tl) => {
   border-radius: 999px;
   font-size: 0.8rem;
   font-weight: 700;
-  color: #166534;
-  background: #dcfce7;
+  color: #6ee7b7;
+  background: rgb(16 185 129 / 0.2);
 }
 
 .exit {

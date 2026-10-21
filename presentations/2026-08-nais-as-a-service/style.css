@@ -65,9 +65,14 @@ pre,
   content: '';
   position: absolute;
   inset: 0;
-  background-image: radial-gradient(circle, #cbd5e1 0.75px, transparent 0.75px);
-  background-size: 24px 24px;
-  opacity: 0.35;
+  /* Dot grid plus the soft spectrum glows from nais.io. */
+  background-image:
+    radial-gradient(circle, #334155 0.75px, transparent 0.75px),
+    radial-gradient(40% 35% at 88% 8%, rgb(98 0 255 / 0.22), transparent 70%),
+    radial-gradient(35% 30% at 8% 92%, rgb(92 178 218 / 0.16), transparent 70%),
+    radial-gradient(30% 30% at 60% 105%, rgb(247 104 145 / 0.16), transparent 70%);
+  background-size: 24px 24px, 100% 100%, 100% 100%, 100% 100%;
+  opacity: 1;
   pointer-events: none;
   z-index: 0;
 }
@@ -416,4 +421,79 @@ pre,
   font-size: 1.15rem;
   font-weight: 600;
   color: #166534;
+}
+
+/* ---- Dark theme inspired by nais.io (deck-local; shared files untouched) ---- */
+:root {
+  --nais-bg: #0b1120;
+  --nais-surface: #131d33;
+  --nais-card: #111a2e;
+  --nais-text: #e2e8f0;
+  --nais-text-secondary: #a3b1c6;
+  --nais-heading: #f8fafc;
+  --nais-border: #263352;
+  --nais-accent: #ff3377;
+  --nais-accent-hover: #ff5c93;
+  --nais-accent-light: rgb(255 51 119 / 0.14);
+  --nais-highlight: #ff3377;
+  --nais-gradient-from: #ff3377;
+  --nais-gradient-to: #e8384f;
+  --nais-code-bg: #0f172a;
+  --nais-success: #34d399;
+}
+
+html,
+body,
+#app {
+  background: var(--nais-bg);
+  color: var(--nais-text);
+}
+
+
+.subtitle {
+  color: var(--nais-text-secondary) !important;
+}
+
+.who-chip {
+  background: rgb(52 211 153 / 0.12) !important;
+  border-color: rgb(52 211 153 / 0.45) !important;
+  color: #a7f3d0 !important;
+}
+
+/* Small pillar tag in the slide corner (nais.io's six pillars). */
+.pillar-tag {
+  position: absolute;
+  top: 1.2rem;
+  right: 1.5rem;
+  z-index: 5;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.15rem 0.7rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #fff;
+  background: color-mix(in srgb, var(--pc, #ff3377) 35%, transparent);
+  border: 1px solid color-mix(in srgb, var(--pc, #ff3377) 70%, transparent);
+}
+
+.tenant-logos {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2.5rem;
+  opacity: 0.9;
+}
+
+.qr-tile {
+  padding: 0.6rem;
+  border-radius: 14px;
+  background: #fff;
+}
+
+.qr-tile img {
+  display: block;
+  width: 9rem;
+  height: 9rem;
 }

@@ -158,6 +158,7 @@ onBeforeUnmount(() => tl?.kill());
   position: relative;
   width: 100%;
   aspect-ratio: 3 / 1;
+  margin-bottom: 2.6rem;
 }
 
 .story-svg {
@@ -199,7 +200,7 @@ onBeforeUnmount(() => tl?.kill());
   clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
   position: relative;
   z-index: 1;
-  background: #e2e8f0;
+  background: #1c2740;
   display: flex;
   align-items: center;
   justify-content: center;

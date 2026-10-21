@@ -99,7 +99,12 @@ useEnter((tl) => {
     )
     .to(
       agencies.slice(-2),
-      { x: 120, backgroundColor: "#dcfce7", stagger: 0.25, duration: 0.6 },
+      {
+        x: 120,
+        backgroundColor: "rgba(16,185,129,0.3)",
+        stagger: 0.25,
+        duration: 0.6,
+      },
       2,
     )
     .to(gate.value, { scaleY: 1, duration: 0.3 }, 2.9);
@@ -190,7 +195,7 @@ useEnter((tl) => {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #fff;
+  background: var(--nais-surface);
   border: 1px solid var(--nais-border);
   font-size: 1.4rem;
 }

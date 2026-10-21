@@ -156,18 +156,18 @@ useSteps((tl) => {
 }
 
 .zone.gcp {
-  background: #eff6ff;
-  border-color: #bfdbfe;
+  background: rgb(92 178 218 / 0.12);
+  border-color: rgb(92 178 218 / 0.45);
 }
 
 .zone.aiven {
-  background: #fff7ed;
-  border-color: #fed7aa;
+  background: rgb(255 145 0 / 0.12);
+  border-color: rgb(255 145 0 / 0.45);
 }
 
 .zone.self {
-  background: #fef2f2;
-  border-color: #fecaca;
+  background: rgb(255 51 119 / 0.12);
+  border-color: rgb(255 51 119 / 0.45);
 }
 
 header {
@@ -189,7 +189,7 @@ header {
 .chip {
   padding: 0.25rem 0.65rem;
   border-radius: 999px;
-  background: #fff;
+  background: var(--nais-surface);
   border: 1px solid var(--nais-border);
   font-size: 0.9rem;
   font-weight: 600;

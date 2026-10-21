@@ -1,8 +1,10 @@
 <template>
   <div ref="root" class="manifest" data-motion-self>
-    <pre
-      class="code"
-    ><code><span class="base">{{ BASE }}</span><span v-for="b in BLOCKS" :key="b.code" class="block">{{ b.code }}</span></code></pre>
+    <div ref="left" class="left">
+      <pre
+        class="code"
+      ><code><span class="base">{{ BASE }}</span><span v-for="b in BLOCKS" :key="b.code" class="block">{{ b.code }}</span></code></pre>
+    </div>
     <div class="canvas">
       <svg
         class="wires"
@@ -28,12 +30,52 @@
         v-for="r in DOCKS"
         :key="r.label"
         class="dock"
-        :class="{ ext: r.ext }"
+        :class="[{ ext: r.ext }, 'a-' + r.a]"
         :data-step="r.step"
         :style="{ left: r.x + '%', top: r.y + '%' }"
       >
         <span :class="r.icon" />
         <strong>{{ r.label }}</strong>
+      </div>
+    </div>
+    <div ref="galaxy" class="galaxy">
+      <svg viewBox="0 0 1000 400" aria-hidden="true">
+        <text x="10" y="24" class="env">dev</text>
+        <text x="10" y="224" class="env">prod</text>
+        <line x1="0" y1="200" x2="1000" y2="200" class="split" />
+        <line
+          v-for="(l, i) in LINKS"
+          :key="'l' + i"
+          :x1="l[0].x"
+          :y1="l[0].y"
+          :x2="l[1].x"
+          :y2="l[1].y"
+          class="link"
+        />
+        <g
+          v-for="(c, i) in CLUSTERS"
+          :key="i"
+          class="cl"
+          :transform="`translate(${c.x} ${c.y})`"
+        >
+          <circle
+            v-for="k in 3"
+            :key="k"
+            :cx="Math.cos(k * 2.1) * 17"
+            :cy="Math.sin(k * 2.1) * 17"
+            r="2.6"
+            :fill="c.color"
+            opacity="0.7"
+          />
+          <polygon
+            points="0,-11 9.5,-5.5 9.5,5.5 0,11 -9.5,5.5 -9.5,-5.5"
+            :fill="c.me ? '#ff3377' : c.color"
+          />
+        </g>
+      </svg>
+      <p class="zoom-text">Hundrevis av apper. Ett plattformteam.</p>
+      <div class="zoom-badge">
+        <span class="i-carbon-user-multiple" /> Nais-teamet
       </div>
     </div>
   </div>
@@ -62,39 +104,98 @@ const BLOCKS = [
   },
   { code: "  observability:\n    autoInstrumentation: { enabled: true }\n" },
 ];
-// Where each resource docks around the app (percent of the canvas).
+// Fixed slots around the app, reserved from the start so nothing moves.
+// Inbound on the left and top, data on the right, observability at the bottom.
+// a: anchor (l = chip starts at x, r = chip ends at x, c = centred).
 const DOCKS = [
-  { step: 1, x: 50, y: 9, label: "Adresse + TLS", icon: "i-carbon-globe" },
-  { step: 2, x: 85, y: 30, label: "Postgres", icon: "i-carbon-data-base" },
-  { step: 2, x: 85, y: 68, label: "Bucket", icon: "i-carbon-box" },
-  { step: 3, x: 78, y: 91, label: "Kafka", icon: "i-carbon-flow-stream" },
-  { step: 4, x: 15, y: 68, label: "Innlogging", icon: "i-carbon-password" },
+  {
+    step: 1,
+    x: 50,
+    y: 7,
+    a: "c",
+    label: "Adresse + TLS",
+    icon: "i-carbon-globe",
+  },
+  {
+    step: 2,
+    x: 64,
+    y: 28,
+    a: "l",
+    label: "Postgres",
+    icon: "i-carbon-data-base",
+  },
+  { step: 2, x: 64, y: 50, a: "l", label: "Bucket", icon: "i-carbon-box" },
+  {
+    step: 3,
+    x: 64,
+    y: 72,
+    a: "l",
+    label: "Kafka",
+    icon: "i-carbon-flow-stream",
+  },
+  {
+    step: 4,
+    x: 36,
+    y: 60,
+    a: "r",
+    label: "Innlogging",
+    icon: "i-carbon-password",
+  },
   {
     step: 5,
-    x: 15,
-    y: 28,
+    x: 36,
+    y: 34,
+    a: "r",
     label: "frontend",
     icon: "i-carbon-application-web",
     ext: true,
   },
   {
     step: 6,
-    x: 30,
-    y: 91,
+    x: 50,
+    y: 93,
+    a: "c",
     label: "Logger · metrikker · traces",
     icon: "i-carbon-chart-line",
   },
 ];
 
+// Zoom-out constellation: many app clusters, three team colours, dev and prod.
+const TEAMS = ["#5cb2da", "#9b6fd6", "#34c27a"];
+const CLUSTERS = [];
+for (let row = 0; row < 6; row++)
+  for (let col = 0; col < 16; col++) {
+    const jx = ((col * 37 + row * 53) % 17) - 8;
+    const jy = ((col * 29 + row * 41) % 13) - 6;
+    CLUSTERS.push({
+      x: 90 + col * 56 + jx,
+      y: 35 + row * 60 + (row > 2 ? 20 : 0) + jy,
+      color: TEAMS[Math.floor(col / 6) % 3],
+      me: row === 4 && col === 8,
+    });
+  }
+const LINKS = [];
+CLUSTERS.forEach((c, i) => {
+  if (i % 3 === 0 && i % 16 !== 15) LINKS.push([c, CLUSTERS[i + 1]]);
+  if (i % 5 === 0 && CLUSTERS[i + 16]) LINKS.push([c, CLUSTERS[i + 16]]);
+});
+
 const root = ref();
+const left = ref();
+const galaxy = ref();
+
 // s0: minimal manifest and the app. s1..s6: one block is written and its
-// resources fly out and dock around the app; the previous block dims.
+// resources dock around the app; the previous block dims.
+// s7: zoom out to the whole environment.
 useSteps((tl) => {
   const q = gsap.utils.selector(root.value);
+  const g = gsap.utils.selector(galaxy.value);
   const blocks = q(".block");
   gsap.set(blocks, { height: 0, autoAlpha: 0 });
-  gsap.set(q(".dock"), { autoAlpha: 0, x: -260, scale: 0.5 });
+  gsap.set(q(".dock"), { autoAlpha: 0, scale: 0.4 });
   gsap.set(q(".wire"), { opacity: 0 });
+  gsap.set(galaxy.value, { autoAlpha: 0 });
+  gsap.set(g(".zoom-text, .zoom-badge"), { autoAlpha: 0, y: 16 });
   tl.from(q(".code"), { autoAlpha: 0, x: -24 })
     .from(q(".app"), { scale: 0.5, autoAlpha: 0, ease: POP }, "-=0.3")
     .addLabel("s0");
@@ -119,29 +220,44 @@ useSteps((tl) => {
     )
       .to(
         q(`.dock[data-step="${step}"]`),
-        {
-          autoAlpha: 1,
-          x: 0,
-          scale: 1,
-          ease: POP,
-          duration: 0.7,
-          stagger: 0.1,
-        },
+        { autoAlpha: 1, scale: 1, ease: POP, duration: 0.6, stagger: 0.1 },
         "-=0.1",
       )
       .to(
         q(`.wire[data-step="${step}"]`),
         { opacity: 0.6, duration: 0.3 },
-        "<0.3",
+        "<0.2",
       )
       .addLabel(`s${step}`);
   });
+  tl.to(left.value, { autoAlpha: 0, x: -60, duration: 0.5 })
+    .to(
+      q(".canvas"),
+      { scale: 0.15, autoAlpha: 0, duration: 0.9, ease: "power2.inOut" },
+      "<",
+    )
+    .to(galaxy.value, { autoAlpha: 1, duration: 0.4 }, "-=0.5")
+    .from(
+      g(".cl"),
+      {
+        scale: 0,
+        transformOrigin: "50% 50%",
+        stagger: { each: 0.008, from: "center" },
+        duration: 0.4,
+      },
+      "<",
+    )
+    .from(g(".link, .split, .env"), { autoAlpha: 0, duration: 0.5 }, "-=0.2")
+    .to(g(".zoom-text"), { autoAlpha: 1, y: 0 })
+    .to(g(".zoom-badge"), { autoAlpha: 1, y: 0, ease: POP }, "-=0.3")
+    .addLabel(`s${BLOCKS.length + 1}`);
   return tl;
 });
 </script>
 
 <style scoped>
 .manifest {
+  position: relative;
   display: grid;
   grid-template-columns: 1.05fr 1fr;
   gap: 1.5rem;
@@ -156,6 +272,7 @@ useSteps((tl) => {
   padding: 0.7rem 0.9rem;
   border-radius: 14px;
   background: #0f172a;
+  border: 1px solid #263352;
   color: #e2e8f0;
   font-family: "JetBrains Mono", monospace;
   font-size: 0.72rem;
@@ -195,11 +312,19 @@ useSteps((tl) => {
   translate: -50% -50%;
 }
 
+.dock.a-l {
+  translate: 0 -50%;
+}
+
+.dock.a-r {
+  translate: -100% -50%;
+}
+
 .app {
   left: 50%;
   top: 50%;
-  width: 104px;
-  height: 118px;
+  width: 84px;
+  height: 96px;
   clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
   background: linear-gradient(
     135deg,
@@ -212,26 +337,27 @@ useSteps((tl) => {
   align-items: center;
   justify-content: center;
   font-family: "Poppins", sans-serif;
+  font-size: 0.85rem;
 }
 
 .app span {
-  font-size: 1.8rem;
+  font-size: 1.5rem;
 }
 
 .dock {
   display: flex;
   align-items: center;
   gap: 0.35rem;
-  padding: 0.3rem 0.7rem;
+  padding: 0.2rem 0.6rem;
   border-radius: 999px;
-  background: var(--nais-bg);
+  background: var(--nais-surface);
   border: 2px solid var(--nais-border);
   white-space: nowrap;
-  font-size: 0.95rem;
+  font-size: 0.85rem;
 }
 
 .dock span {
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   color: var(--nais-accent);
 }
 
@@ -241,5 +367,66 @@ useSteps((tl) => {
 
 .dock.ext span {
   color: var(--nais-text-secondary);
+}
+
+.galaxy {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+}
+
+.galaxy svg {
+  width: 100%;
+  height: 100%;
+}
+
+.link {
+  stroke: #475569;
+  stroke-width: 1.5;
+}
+
+.split {
+  stroke: #334155;
+  stroke-dasharray: 6 6;
+}
+
+.env {
+  fill: #a3b1c6;
+  font-size: 18px;
+  font-family: "JetBrains Mono", monospace;
+}
+
+.zoom-text {
+  position: absolute;
+  left: 50%;
+  top: 40%;
+  translate: -50% -50%;
+  margin: 0;
+  padding: 0.5rem 1.2rem;
+  border-radius: 14px;
+  background: rgb(11 17 32 / 0.88);
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-size: 1.6rem;
+  white-space: nowrap;
+}
+
+.zoom-badge {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  translate: -50% 0;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.3rem 1rem;
+  border-radius: 999px;
+  color: #fff;
+  font-weight: 700;
+  background: linear-gradient(
+    135deg,
+    var(--nais-gradient-from),
+    var(--nais-gradient-to)
+  );
 }
 </style>

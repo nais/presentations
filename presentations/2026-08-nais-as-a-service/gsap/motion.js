@@ -68,3 +68,33 @@ export function useEnter(build) {
   });
   onBeforeUnmount(() => tl?.kill());
 }
+
+// Fake mouse for UI mocks: glide to an element, then click. Positions are
+// measured when the tween starts, relative to the cursor's positioned parent,
+// and corrected for Slidev's slide scaling.
+const offsetIn = (el, cursor) => {
+  const parent = cursor.offsetParent;
+  const pr = parent.getBoundingClientRect();
+  const scale = pr.width / parent.offsetWidth || 1;
+  const r = el.getBoundingClientRect();
+  return {
+    x: (r.left + r.width / 2 - pr.left) / scale,
+    y: (r.top + r.height / 2 - pr.top) / scale,
+  };
+};
+export function cursorClick(tl, cursor, _root, target) {
+  if (reducedMotion()) return tl;
+  return tl
+    .to(cursor, {
+      autoAlpha: 1,
+      x: () => offsetIn(target, cursor).x,
+      y: () => offsetIn(target, cursor).y,
+      duration: 0.7,
+      ease: "power2.inOut",
+    })
+    .fromTo(
+      cursor.querySelector(".ripple"),
+      { scale: 0, autoAlpha: 0.8 },
+      { scale: 1, autoAlpha: 0, duration: 0.4 },
+    );
+}

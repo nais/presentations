@@ -100,8 +100,8 @@ useSteps((tl) => {
     .to(
       agencies,
       {
-        backgroundColor: "#dcfce7",
-        borderColor: "#86efac",
+        backgroundColor: "rgba(16,185,129,0.3)",
+        borderColor: "#34d399",
         stagger: 0.05,
         duration: 0.3,
       },
@@ -118,7 +118,7 @@ useSteps((tl) => {
   position: relative;
   width: 100%;
   max-width: 720px;
-  height: 320px;
+  height: 270px;
   margin: 0 auto;
 }
 
