@@ -630,6 +630,7 @@ h5 {
 .table .th,
 .table .tr {
   display: grid;
+  gap: 1rem;
   grid-template-columns: 1.4fr 1fr 1fr;
   padding: 0.35rem 0.5rem;
   border-bottom: 1px solid #e2e8f0;

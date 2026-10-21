@@ -58,7 +58,6 @@ const NAV = [
 
 <style scoped>
 .browser {
-  view-transition-name: console-window;
   /* Console is light; keep the mock readable inside a dark deck. */
   --nais-bg: #ffffff;
   --nais-surface: #f1f5f9;
@@ -120,7 +119,6 @@ const NAV = [
 }
 
 .topbar {
-  view-transition-name: console-topbar;
   display: flex;
   align-items: center;
   gap: 1rem;
@@ -154,7 +152,6 @@ const NAV = [
 }
 
 nav {
-  view-transition-name: console-nav;
   display: flex;
   flex-direction: column;
   padding: 0.6rem 0.45rem;

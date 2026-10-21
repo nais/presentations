@@ -1,6 +1,6 @@
 ---
 layout: cover
-transition: view-transition
+transition: fade
 ---
 
 <h1 class="text-5xl font-black">Nais as a Service</h1>
@@ -197,6 +197,7 @@ Overgang: «Men hva skjer egentlig på plattformsiden?»
 
 ---
 layout: default
+transition: view-transition
 clicks: 1
 ---
 
