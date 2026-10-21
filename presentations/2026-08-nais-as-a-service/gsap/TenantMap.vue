@@ -11,10 +11,10 @@
       preserveAspectRatio="none"
       aria-hidden="true"
     >
-      <path v-for="(t, i) in tenants" :key="t" :d="wire(i)" class="wire" />
+      <path v-for="(t, i) in shown" :key="t" :d="wire(i)" class="wire" />
     </svg>
     <div class="tenants">
-      <div v-for="t in tenants" :key="t" class="org">
+      <div v-for="t in shown" :key="t" class="org">
         <div class="org-head">GCP-organisasjon</div>
         <strong>{{ t }}</strong>
         <ul v-if="!incoming.includes(t)">
@@ -26,6 +26,7 @@
         <div class="owned">Eies av tenanten</div>
       </div>
     </div>
+    <div v-if="more > 0" class="more">+{{ more }} til</div>
     <p ref="exit" class="exit">{{ exitText }}</p>
   </div>
 </template>
@@ -41,13 +42,17 @@ gsap.registerPlugin(DrawSVGPlugin);
 // s0 draws the map, s1 shows ownership, s2 detaches one tenant, s3 shows the exit plan.
 const props = defineProps({
   tenants: { type: Array, required: true },
+  maxVisible: { type: Number, default: 3 },
   detach: { type: Number, default: 3 },
   exitText: { type: String, default: "" },
   // Signed tenants without production workloads yet.
   incoming: { type: Array, default: () => [] },
 });
 
-const n = props.tenants.length;
+// Only the first maxVisible tenants get a card; the rest collapse into «+N til».
+const shown = props.tenants.slice(0, props.maxVisible);
+const more = props.tenants.length - shown.length;
+const n = shown.length;
 const wire = (i) => {
   const x = ((i + 0.5) / n) * 1000;
   return `M500 0 C500 60 ${x} 60 ${x} 120`;
@@ -151,12 +156,12 @@ useSteps((tl) => {
 .tenants {
   display: grid;
   grid-template-columns: repeat(v-bind(n), minmax(0, 1fr));
-  gap: 1.3rem;
+  gap: 1.6rem;
 }
 
 .org {
   position: relative;
-  padding: 0.4rem 0.55rem 0.5rem;
+  padding: 0.6rem 0.8rem 0.7rem;
   border-radius: 14px;
   border: 2px solid var(--nais-border);
   background: var(--nais-card);
@@ -173,8 +178,8 @@ useSteps((tl) => {
 .org strong {
   display: block;
   font-family: "Poppins", sans-serif;
-  font-size: 0.82rem;
-  margin: 0.1rem 0 0.2rem;
+  font-size: 1.05rem;
+  margin: 0.1rem 0 0.3rem;
   overflow-wrap: anywhere;
 }
 
@@ -183,7 +188,7 @@ useSteps((tl) => {
   padding-left: 1rem;
   list-style: disc;
   color: var(--nais-text-secondary);
-  font-size: 0.72rem;
+  font-size: 0.85rem;
 }
 
 .incoming {
@@ -202,6 +207,17 @@ useSteps((tl) => {
   font-weight: 700;
   color: #6ee7b7;
   background: rgb(16 185 129 / 0.2);
+}
+
+.more {
+  margin: 0.6rem auto 0;
+  width: max-content;
+  padding: 0.15rem 0.8rem;
+  border-radius: 999px;
+  border: 1px dashed var(--nais-border);
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: var(--nais-text-secondary);
 }
 
 .exit {

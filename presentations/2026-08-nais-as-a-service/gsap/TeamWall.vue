@@ -51,25 +51,26 @@ let tl;
 
 // Built on each slide enter: positions can only be measured while the slide
 // is displayed (neighbouring slides are mounted hidden).
-// Logo: a hexagonal ring with three cells as the streak, like the Nais mark.
 // Shapes on a pointy-top hex grid: rows alternate whole and half steps, so
 // neighbours never overlap. 15 cells each.
+// Logo: cells of a 7-row hex lattice whose centre area falls inside the
+// Nais mark (shared/public/logos/nais-v2-rosa.svg), sampled with isPointInFill.
 const LOGO = [
-  [-1, 1],
-  [0, 1],
-  [1, 1],
-  [-1.5, 2],
-  [1.5, 2],
-  [-2, 3],
-  [2, 3],
-  [-1.5, 4],
-  [1.5, 4],
-  [-1, 5],
-  [0, 5],
-  [1, 5],
-  [-1.5, 0],
-  [-2, -1],
-  [-2.5, -2],
+  [0.25, 0],
+  [-1.25, 1],
+  [-0.25, 1],
+  [-0.75, 2],
+  [-1.25, 3],
+  [-0.25, 3],
+  [0.75, 3],
+  [-1.75, 4],
+  [1.25, 4],
+  [-1.25, 5],
+  [0.75, 5],
+  [1.75, 5],
+  [-0.75, 6],
+  [0.25, 6],
+  [1.25, 6],
 ];
 const HEART = [
   [-2, 0],
@@ -89,8 +90,8 @@ const HEART = [
   [0.5, 3],
 ];
 const SHAPE_SCALE = 0.55;
-const STEP_X = 50;
-const STEP_Y = 43;
+const STEP_X = 58;
+const STEP_Y = 50;
 
 function build() {
   const el = root.value;

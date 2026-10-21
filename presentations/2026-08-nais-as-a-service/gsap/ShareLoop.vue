@@ -7,7 +7,7 @@
       aria-hidden="true"
     >
       <line
-        v-for="(a, i) in agencies"
+        v-for="(a, i) in list"
         :key="a"
         x1="50"
         y1="50"
@@ -17,7 +17,7 @@
     </svg>
     <div class="core"><strong>Nais</strong></div>
     <div
-      v-for="(a, i) in agencies"
+      v-for="(a, i) in list"
       :key="a"
       class="agency"
       :style="{ left: pos(i).x + '%', top: pos(i).y + '%' }"
@@ -26,7 +26,7 @@
     </div>
     <div ref="pulse" class="pulse" />
     <div
-      v-for="(a, i) in agencies"
+      v-for="(a, i) in list"
       :key="'b' + a"
       class="beam"
       :style="{ left: pos(i).x + '%', top: pos(i).y + '%' }"
@@ -36,18 +36,27 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { computed, ref } from "vue";
 import gsap from "gsap";
 import { POP, STAGGER, useSteps } from "./motion.js";
+
+// Visible nodes: first maxVisible names, plus «+N» when there are more.
+const list = computed(() => {
+  const v = props.agencies.slice(0, props.maxVisible);
+  const rest = props.agencies.length - v.length;
+  return rest > 0 ? [...v, `+${rest}`] : v;
+});
 
 // s0: agencies around Nais. s1: one agency's need travels to Nais.
 // s2: the improvement reaches every agency.
 const props = defineProps({
   agencies: { type: Array, required: true },
+  // Show at most this many; the rest collapse into one «+N» node.
+  maxVisible: { type: Number, default: 4 },
   caption: { type: String, default: "" },
 });
 const pos = (i) => {
-  const a = ((-90 + (i * 360) / props.agencies.length) * Math.PI) / 180;
+  const a = ((-90 + (i * 360) / list.value.length) * Math.PI) / 180;
   return { x: 50 + 38 * Math.cos(a), y: 50 + 38 * Math.sin(a) };
 };
 

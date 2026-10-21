@@ -17,7 +17,7 @@ Overgang: «Hei, jeg heter Hans Kristian og jobber i Nais-teamet i Nav.»
 
 ---
 layout: default
-clicks: 2
+clicks: 1
 ---
 
 ::header::
@@ -31,9 +31,9 @@ clicks: 2
 Overgang: «Og den felles plattformen er ikke en idé. Den har vokst siden 2016. Se.»
 
 - Hver etat som bygger egen plattform, trenger knapp og dyr kompetanse
-- Klikk 1: det som ofte blir resultatet. Eksempel: en Azure landing zone og en wiki. Utviklerne mangler resten
-- Få lykkes. Det krever ressurser og vilje over år. Plattform er et produkt, ikke et prosjekt
-- Klikk 2: én felles plattform. ≈ 150 årsverk er Nav sitt eget anslag
+- Få lykkes med å bygge og drifte en plattform utviklerne liker. Ofte ender det med en landingssone og en wiki, eller en halvferdig plattform. Eksempel: en Azure landing zone og en wiki
+- Det krever ressurser og vilje over år. Plattform er et produkt, ikke et prosjekt
+- Klikk 1: én felles plattform. ≈ 150 årsverk er Nav sitt eget anslag
 -->
 
 ---
@@ -181,18 +181,22 @@ Overgang: «Så skal vi se hva som skjer når de trykker på knappen.»
 
 ---
 layout: default
-clicks: 4
+clicks: 3
 ---
+
+::header::
+<h1 class="text-3xl font-bold">Fra pull request til produksjon</h1>
 
 ::default::
 <div class="pillar-tag" style="--pc: #FF9100"><span class="i-carbon-rocket" /> Utviklingsfart</div>
-<DeployFlow />
+<PrFlow />
 
 <!--
 Overgang: «Men hva skjer egentlig på plattformsiden?»
 
-- Bygg i GitHub Actions, deploy med Nais, pods i Kubernetes, live
-- Ett klikk per steg
+- Alt går via GitHub: pull request, sjekker, review, merge
+- Klikk 1: sjekker (bygg, test, nais validate) og godkjenning. Klikk 2: merge, så bygger nais/docker-build-push med SBOM og signering, og nais apply deployer
+- Klikk 3: PR-en viser at den er deployet
 -->
 
 ---
@@ -486,7 +490,7 @@ clicks: 3
 <h1 class="text-3xl font-bold">Deres data, deres exit</h1>
 
 ::default::
-<TenantMap :tenants="['Nav', 'SSB', 'Landbruksdirektoratet', 'Arbeidstilsynet', 'KS Digital', 'Novari']" :incoming="['KS Digital', 'Novari']" :detach="3" exit-text="Exit-planen er dokumentert. Ingen har trengt den." />
+<TenantMap :tenants="['Nav', 'SSB', 'Din virksomhet', 'Landbruksdirektoratet', 'Arbeidstilsynet', 'KS Digital', 'Novari']" :incoming="['KS Digital', 'Novari']" :detach="2" exit-text="Exit-planen er dokumentert. Ingen har trengt den." />
 
 <!--
 Overgang: «Hvem bestemmer så hva som skjer med plattformen?»

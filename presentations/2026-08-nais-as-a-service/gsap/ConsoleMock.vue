@@ -203,13 +203,13 @@
         </div>
       </section>
 
-      <div v-if="story === 'vulns'" class="overlay pr">
+      <div v-if="story === 'vulns'" class="overlay pr-wrap">
         <small class="ann">Utenfor Console · GitHub</small>
-        <b>Bump eksempel-lib from 1.4.2 to 1.4.3</b>
-        <div class="checks">
-          <span class="check">● build</span><span class="check">● test</span>
-        </div>
-        <span class="merged">✓ Merged</span>
+        <PrCard
+          compact
+          title="Bump eksempel-lib from 1.4.2 to 1.4.3"
+          :number="57"
+        />
       </div>
       <div v-if="story === 'vulns'" class="overlay pipe">
         <small class="ann">Utenfor Console · GitHub Actions</small>
@@ -229,6 +229,7 @@ import { computed, ref } from "vue";
 import gsap from "gsap";
 import BrowserFrame from "./BrowserFrame.vue";
 import Cursor from "./Cursor.vue";
+import PrCard from "./PrCard.vue";
 import { cursorClick, useSteps } from "./motion.js";
 
 // story "team": team overview -> Cost. story "app": Applications -> one app.
@@ -357,10 +358,10 @@ useSteps((tl) => {
     tl.to({}, { duration: 0.4 }).addLabel("s1");
   } else {
     // 1: open the finding. 2: dependency PR. 3: build and deploy. 4: rescan.
-    const pr = q(".pr");
+    const pr = q(".pr-wrap");
     const pipe = q(".pipe");
     gsap.set([pr, pipe], { autoAlpha: 0, x: 40 });
-    gsap.set(pr.querySelector(".merged"), { autoAlpha: 0 });
+    gsap.set(pr.querySelector(".deployed"), { display: "none" });
     cursorClick(
       tl,
       cur.value.$el,
@@ -373,12 +374,14 @@ useSteps((tl) => {
     mark({ detail: true });
     tl.to({}, { duration: 0.3 }).addLabel("s1");
     tl.to(pr, { autoAlpha: 1, x: 0 })
-      .to(pr.querySelectorAll(".check"), {
+      .to(pr.querySelectorAll(".dotc"), {
+        backgroundColor: "#3fb950",
         color: "#34d399",
         stagger: 0.3,
         duration: 0.3,
       })
-      .to(pr.querySelector(".merged"), { autoAlpha: 1, duration: 0.3 })
+      .set(pr.querySelector(".state.open"), { display: "none" })
+      .set(pr.querySelector(".state.merged"), { display: "inline" })
       .addLabel("s2");
     tl.to(pr, { autoAlpha: 0, x: 40, duration: 0.3 }).to(
       pipe,
@@ -746,7 +749,7 @@ h5 {
   right: 0.4rem;
   bottom: 0.4rem;
   z-index: 5;
-  width: 18rem;
+  width: 20rem;
   padding: 0.5rem 0.7rem;
   border-radius: 12px;
   border: 2px dashed #ff3377;

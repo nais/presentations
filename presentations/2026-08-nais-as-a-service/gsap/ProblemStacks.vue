@@ -39,18 +39,6 @@
         <span class="generic">Tenant</span><span class="name">{{ t }}<small v-if="i >= STACKS.length">på vei inn</small></span>
       </div>
       <div ref="band" class="band">Drift og vakt døgnet rundt</div>
-      <div ref="scaffold" class="scaffold">
-        <div class="dev">
-          <span class="i-carbon-user" /> <em>Venter på ops</em>
-        </div>
-        <div v-for="m in MISSING" :key="m" class="hollow">
-          {{ m }} <small>mangler</small>
-        </div>
-        <div class="landing">Landingssone i skyen</div>
-        <p class="scap">
-          Mange ender med en landingssone og en wiki. Utviklerne mangler resten.
-        </p>
-      </div>
       <div ref="years" class="years">
         <b ref="yearsN">0</b> årsverk <small>anslag</small>
       </div>
@@ -62,6 +50,9 @@
       </div>
       <div class="callout c2">
         <span class="i-carbon-copy" /> Samme arbeid fire ganger
+      </div>
+      <div class="callout c4">
+        <span class="i-carbon-construction" /> Halvferdige løsninger
       </div>
       <div class="callout c3">
         <span class="i-carbon-warning" /> Ujevn sikkerhet
@@ -96,10 +87,6 @@ const LAYERS = [
   { name: "Deploy", sub: "bygg, SBOM, signering, utrulling" },
   { name: "Utviklerverktøy", sub: "Console, Nais CLI, MCP" },
 ];
-// What a half-built platform typically lacks (beat 2): everything above the cloud.
-const MISSING = LAYERS.slice(1)
-  .map((l) => l.name)
-  .reverse();
 const STACKS = [
   { cx: 12.5, w: 20, tone: "#475569", people: 3 },
   { cx: 37.5, w: 18, tone: "#64748b", people: 2, missing: 2 },
@@ -126,13 +113,11 @@ const tileSlot = (i) => ({
 const root = ref();
 const naisTeam = ref();
 const thesis = ref();
-const scaffold = ref();
 const years = ref();
 const yearsN = ref();
 const band = ref();
 
-// s0: four fragile stacks with pain callouts. s1: what one of them usually
-// turns out to be. s2: they merge into one platform built over ≈150 årsverk.
+// s0: four fragile stacks with pain callouts. s1: they merge into one platform built over ≈150 årsverk.
 useSteps((tl) => {
   const q = gsap.utils.selector(root.value);
   const layers = q(".layer");
@@ -141,7 +126,6 @@ useSteps((tl) => {
   const n = { v: 0 };
   gsap.set(naisTeam.value, { autoAlpha: 0, scale: 0.6 });
   gsap.set(thesis.value, { autoAlpha: 0, y: 12 });
-  gsap.set(scaffold.value, { autoAlpha: 0, scale: 0.92 });
   gsap.set(years.value, { autoAlpha: 0, scale: 0.7 });
   gsap.set(band.value, { autoAlpha: 0, x: 16 });
   gsap.set(extra, { autoAlpha: 0, y: -10 });
@@ -164,21 +148,6 @@ useSteps((tl) => {
     })
     .addLabel("s0")
     .to(q(".callout"), { autoAlpha: 0, scale: 0.8, duration: 0.3 })
-    .to(
-      [...layers, ...tiles, ...q(".team")],
-      { opacity: 0.12, duration: 0.4 },
-      "<",
-    )
-    .to(scaffold.value, { autoAlpha: 1, scale: 1, duration: 0.5 })
-    .from(q(".hollow"), { x: -14, autoAlpha: 0, stagger: STAGGER / 2 }, "<0.2")
-    .from(q(".scap"), { autoAlpha: 0, y: 8 })
-    .addLabel("s1")
-    .to(scaffold.value, { autoAlpha: 0, scale: 0.92, duration: 0.4 })
-    .to(
-      [...layers, ...tiles, ...q(".team")],
-      { opacity: 1, duration: 0.4 },
-      "<",
-    )
     .to(q(".team"), { left: "50%", autoAlpha: 0, duration: 0.6, ease: EASE })
     .to(naisTeam.value, { autoAlpha: 1, scale: 1, ease: POP }, "-=0.2");
   // Every agency's layer k slides to the shared row k; the first one stays.
@@ -227,7 +196,7 @@ useSteps((tl) => {
       "<",
     )
     .to(thesis.value, { autoAlpha: 1, y: 0 }, "-=0.4")
-    .addLabel("s2");
+    .addLabel("s1");
   return tl;
 });
 </script>
@@ -362,7 +331,7 @@ useSteps((tl) => {
   border: 2px solid var(--nais-accent);
   color: var(--nais-text);
   font-weight: 700;
-  font-size: 0.82rem;
+  font-size: 0.74rem;
   white-space: nowrap;
 }
 
@@ -371,84 +340,19 @@ useSteps((tl) => {
 }
 
 .c1 {
-  left: 12%;
+  left: 12.5%;
 }
 
 .c2 {
-  left: 39%;
+  left: 37.5%;
 }
 
 .c3 {
-  left: 64%;
+  left: 63%;
 }
 
-.scaffold {
-  position: absolute;
-  left: 50%;
-  top: 0;
-  translate: -50% 0;
-  width: 24rem;
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
-  z-index: 3;
-}
-
-.dev {
-  align-self: center;
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-  font-size: 1.2rem;
-  margin-bottom: 2px;
-}
-
-.dev em {
-  font-style: normal;
-  font-size: 0.72rem;
-  font-weight: 700;
-  padding: 0.05rem 0.5rem;
-  border-radius: 999px;
-  color: #fde68a;
-  background: rgb(251 191 36 / 0.18);
-  border: 1px solid rgb(251 191 36 / 0.5);
-}
-
-.hollow {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 23px;
-  padding: 0 0.7rem;
-  border-radius: 7px;
-  border: 2px dashed #475569;
-  font-size: 0.78rem;
-  color: #a3b1c6;
-}
-
-.hollow small {
-  font-size: 0.68rem;
-  font-weight: 700;
-  color: #fca5a5;
-}
-
-.landing {
-  height: 26px;
-  border-radius: 7px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 700;
-  font-size: 0.82rem;
-  color: #fff;
-  background: #475569;
-}
-
-.scap {
-  margin: 0.4rem 0 0;
-  text-align: center;
-  font-weight: 600;
-  font-size: 0.85rem;
+.c4 {
+  left: 87%;
 }
 
 .years {
