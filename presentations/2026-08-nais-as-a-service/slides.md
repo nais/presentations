@@ -291,6 +291,36 @@ PLASSHOLDER: hendelsesforløp (hva skjedde, varsling, tid til løst).
 
 ---
 layout: default
+---
+
+::header::
+<h1 class="text-3xl font-bold">Fra feil til fiks</h1>
+<p class="subtitle">Logger, metrikker og traces uten oppsett</p>
+
+::default::
+<ObsFlow />
+
+<!--
+Kilde: docs.nais.io, «How Nais APM works». Logger fra stdout går via fluentbit til Loki. Traces og metrikker går via OpenTelemetry collector til Tempo og Mimir. Alt vises i Grafana. Automatisk instrumentering skrus på med observability.autoInstrumentation i nais.yaml.
+-->
+
+---
+layout: default
+clicks: 4
+---
+
+::header::
+<h1 class="text-3xl font-bold">Jakten på feilen</h1>
+<p class="subtitle">Signalene henger sammen, rett ut av boksen</p>
+
+::default::
+<BugHunt />
+
+<!--
+Illustrasjon, ikke ekte tall. Klikk 1: varsel på feilrate. Klikk 2: tracen viser at databasekallet feiler. Klikk 3: loggene for samme trace. Klikk 4: fiksen er ute, feilraten faller.
+-->
+---
+layout: default
 clicks: 4
 ---
 
