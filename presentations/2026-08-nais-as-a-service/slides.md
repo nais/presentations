@@ -23,7 +23,42 @@ La klippet gå. Ikke snakk over det.
 
 ---
 layout: default
+clicks: 2
 transition: fade
+---
+
+::header::
+<h1 class="text-3xl font-bold">Problemet</h1>
+<p class="subtitle">Hver etat bygger sin egen plattform</p>
+
+::default::
+<ProblemStacks />
+
+<!--
+Klikk 1: kostnaden. Klikk 2: én felles plattform.
+-->
+
+---
+layout: default
+---
+
+::header::
+<h1 class="text-3xl font-bold">Hva er Nais</h1>
+<p class="subtitle">Plattform, team og fellesskap</p>
+
+::default::
+<HubSpokes center="Nais" :spokes="[
+  { icon: 'i-carbon-cloud', title: 'Plattform', text: 'Kubernetes, datatjenester, innlogging, observability og Console' },
+  { icon: 'i-carbon-user-multiple', title: 'Team', text: '15 personer som drifter, utvikler og har vakt døgnet rundt' },
+  { icon: 'i-carbon-group', title: 'Fellesskap', text: 'Slack, dokumentasjon, Nais Champions og etatsforum' },
+]" />
+
+<!--
+Tre deler. Plattformen alene er ikke nok – det er teamet og fellesskapet som gjør at det virker.
+-->
+
+---
+layout: default
 ---
 
 ::header::
@@ -53,6 +88,27 @@ PLASSHOLDER: logoer.
 -->
 
 ---
+layout: pillars
+clicks: 5
+---
+
+::header::
+<h1 class="text-3xl font-bold">Hva Nais har betydd for Nav</h1>
+
+::default::
+<BenefitStory :items="[
+  { icon: 'i-carbon-building', title: 'Fundament', description: 'Fundament for autonome team' },
+  { icon: 'i-carbon-rocket', title: 'Fart og flyt', description: 'Nais gir fart og flyt i Nav' },
+  { icon: 'i-carbon-user-speaker', title: 'Utviklere', description: 'Fornøyde utviklere' },
+  { icon: 'i-carbon-group', title: 'Ansatte', description: 'Fornøyde ansatte' },
+  { icon: 'i-carbon-face-satisfied', title: 'Brukere', description: 'Fornøyde brukere' },
+]" />
+
+<!--
+Ett klikk per steg, konfetti til slutt.
+-->
+
+---
 layout: default
 clicks: 4
 ---
@@ -62,6 +118,78 @@ clicks: 4
 
 <!--
 Ett klikk per steg: bygg, deploy, pods, live.
+-->
+
+---
+layout: default
+clicks: 7
+---
+
+::header::
+<h1 class="text-3xl font-bold">Ett manifest, ferdig oppsett</h1>
+<p class="subtitle">Ingen Terraform, ingen infrastrukturkunnskap</p>
+
+::default::
+<ManifestDeep />
+
+<!--
+Klikk gjennom blokkene i nais.yaml. Feltnavn fra Application-eksempelet i nais/doc.
+-->
+
+---
+layout: default
+clicks: 2
+---
+
+::header::
+<h1 class="text-3xl font-bold">Hva skjer på app-siden</h1>
+<p class="subtitle">Naiserator gjør manifestet om til ressurser</p>
+
+::default::
+<AppFanout />
+
+<!--
+Klikk 1: Kubernetes-ressursene Naiserator lager. Klikk 2: operatorene som tar over (Config Connector, aivenator, azurerator, digdirator, jwker).
+-->
+
+---
+layout: default
+clicks: 3
+---
+
+::header::
+<h1 class="text-3xl font-bold">Console: sårbarheter</h1>
+<p class="subtitle">Teamet ser status for alle workloads</p>
+
+::default::
+<ConsoleSpotlight src="/images/26-02-nais-console-vulnerabilities.png" alt="Sårbarhetsoversikt i Nais Console" :regions="[
+  { x: 73, y: 3, w: 26, h: 18, label: 'Andel workloads med SBOM' },
+  { x: 73, y: 22, w: 26, h: 18, label: 'Kritiske sårbarheter og risikoscore' },
+  { x: 1, y: 30, w: 70, h: 68, label: 'Historikk per alvorlighetsgrad' },
+]" />
+
+<!--
+Skjermbilde fra Console. I Console ser teamet også apper og status, deployer, kostnad per team og app, secrets, Unleash og ressursbruk.
+-->
+
+---
+layout: default
+clicks: 3
+---
+
+::header::
+<h1 class="text-3xl font-bold">Console: datatjenester</h1>
+<p class="subtitle">Tilgang, innstillinger og vedlikehold på ett sted</p>
+
+::default::
+<ConsoleSpotlight src="/images/26-02-nais-console-opensearch.png" alt="OpenSearch-instans i Nais Console" :regions="[
+  { x: 1, y: 34, w: 76, h: 41, label: 'Hvilke apper som har tilgang, og hvilket nivå' },
+  { x: 78, y: 10, w: 21, h: 44, label: 'Status og innstillinger' },
+  { x: 78, y: 77, w: 21, h: 22, label: 'Vedlikeholdsvindu' },
+]" />
+
+<!--
+Skjermbilde av en OpenSearch-instans i Console.
 -->
 
 ---
@@ -107,6 +235,25 @@ clicks: 2
 
 <!--
 Klikk 1: appen lander. Klikk 2: alt under dimmes – det er vår jobb.
+-->
+
+---
+layout: default
+clicks: 2
+---
+
+::header::
+<h1 class="text-3xl font-bold">Hvem gjør hva</h1>
+<p class="subtitle">Delt ansvar</p>
+
+::default::
+<Responsibility :sides="[
+  { title: 'Etaten', icon: 'i-carbon-building', items: ['Koden og produktet', 'Dataene', 'Egne team og prioriteringer'] },
+  { title: 'Nais', icon: 'i-carbon-cloud', items: ['Drift og oppgraderinger', 'Sikkerhet i plattformen', 'Vakt døgnet rundt'] },
+]" />
+
+<!--
+Klikk 1: etatens side. Klikk 2: Nais sin side.
 -->
 
 ---
@@ -212,6 +359,22 @@ layout: default
 
 ---
 layout: default
+clicks: 2
+---
+
+::header::
+<h1 class="text-3xl font-bold">Bedre sammen</h1>
+<p class="subtitle">Det én etat trenger, får alle</p>
+
+::default::
+<ShareLoop :agencies="['Nav', 'SSB', 'Landbruksdirektoratet', 'Arbeidstilsynet']" caption="Forbedringer kommer alle etatene til gode" />
+
+<!--
+Klikk 1: et behov fra én etat. Klikk 2: alle får forbedringen. PLASSHOLDER: et konkret eksempel på noe én etat ba om som alle fikk.
+-->
+
+---
+layout: default
 ---
 
 ::header::
@@ -269,24 +432,24 @@ Dette er hele teamet. Femten personer drifter plattformen for fire etater.
 -->
 
 ---
-layout: pillars
-clicks: 5
+layout: default
 ---
 
 ::header::
-<h1 class="text-3xl font-bold">Hva Nais har betydd for Nav</h1>
+<h1 class="text-3xl font-bold">Støtte og fellesskap</h1>
+<p class="subtitle">Dere er ikke alene</p>
 
 ::default::
-<BenefitStory :items="[
-  { icon: 'i-carbon-building', title: 'Fundament', description: 'Fundament for autonome team' },
-  { icon: 'i-carbon-rocket', title: 'Fart og flyt', description: 'Nais gir fart og flyt i Nav' },
-  { icon: 'i-carbon-user-speaker', title: 'Utviklere', description: 'Fornøyde utviklere' },
-  { icon: 'i-carbon-group', title: 'Ansatte', description: 'Fornøyde ansatte' },
-  { icon: 'i-carbon-face-satisfied', title: 'Brukere', description: 'Fornøyde brukere' },
+<HubSpokes center="Hjelp" center-icon="i-carbon-help" :start="-90" :spokes="[
+  { icon: 'i-carbon-logo-slack', title: 'Slack', text: 'Direkte kontakt med Nais-teamet' },
+  { icon: 'i-carbon-document', title: 'docs.nais.io', text: 'Dokumentasjon og veiledninger' },
+  { icon: 'i-carbon-badge', title: 'Nais Champions', text: 'Erfarne utviklere i etatene' },
+  { icon: 'i-carbon-education', title: 'Workshops', text: 'Praktiske økter med Nais-teamet' },
+  { icon: 'i-carbon-group', title: 'Etatsforum', text: 'Etatene møtes jevnlig' },
 ]" />
 
 <!--
-Ett klikk per steg, konfetti til slutt.
+Fra den gamle opplæringssliden: workshops, champions-program, Slack og dokumentasjon.
 -->
 
 ---

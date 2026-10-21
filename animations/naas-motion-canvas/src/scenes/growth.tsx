@@ -39,21 +39,29 @@ for (let q = -RINGS; q <= RINGS; q++)
   }
 
 // NaaS tenants, apps per tenant from Grafana 2026-10-21. One hex ≈ 41 apps,
-// at least one hex each. Each tenant gets a contiguous wedge.
+// at least one hex each. Small tenants are scattered across the honeycomb.
 type Tenant = {name: string; apps: number; fill: string; stroke: string};
 const TENANTS: Tenant[] = [
   {name: 'Nav', apps: 4684, fill: HEX_FILL, stroke: HEX_STROKE},
-  {name: 'SSB', apps: 292, fill: '#2a1a2e', stroke: '#9d3b5a'},
-  {name: 'Landbruksdirektoratet', apps: 164, fill: '#2e1a22', stroke: '#c2415d'},
-  {name: 'Arbeidstilsynet', apps: 72, fill: '#331b20', stroke: '#e8607a'},
+  {name: 'SSB', apps: 292, fill: '#3a1a26', stroke: '#e8607a'},
+  {name: 'Landbruksdirektoratet', apps: 164, fill: '#33280f', stroke: '#e0a43a'},
+  {name: 'Arbeidstilsynet', apps: 72, fill: '#0f2e2e', stroke: '#3fb8a8'},
 ];
 const total = TENANTS.reduce((a, t) => a + t.apps, 0);
 const counts = TENANTS.map(t => Math.max(1, Math.round((t.apps / total) * cells.length)));
 counts[0] += cells.length - counts.reduce((a, b) => a + b, 0);
+// Even spread: walk the cells in angle order and drop small-tenant hexes at
+// evenly spaced positions, offset by a fixed seed so renders are stable.
 cells.sort((a, b) => a.angle - b.angle || a.ring - b.ring);
-let at = 0;
-TENANTS.forEach((t, i) => {
-  for (let k = 0; k < counts[i]; k++) cells[at++].tenant = t;
+cells.forEach(c => (c.tenant = TENANTS[0]));
+const small = TENANTS.slice(1).flatMap((t, i) => Array(counts[i + 1]).fill(t));
+const order = [0, 7, 3, 10, 1, 8, 5, 12, 2, 9, 4, 11, 6]; // seeded interleave
+small.forEach((t, k) => {
+  const slot = order[k % order.length];
+  const idx = Math.floor(((slot + 0.5) / order.length) * cells.length);
+  let j = idx;
+  while (cells[j].tenant !== TENANTS[0] || cells[j].ring < 2) j = (j + 1) % cells.length;
+  cells[j].tenant = t;
 });
 // Grow ring by ring, clockwise within each ring.
 const teams = [...cells].sort((a, b) => a.ring - b.ring || a.angle - b.angle);
@@ -144,17 +152,6 @@ export default makeScene2D(function* (view) {
       fontSize={64} fontWeight={700} opacity={0} />,
   );
 
-  const legend = (
-    <Rect layout direction="row" gap={40} y={-375} opacity={0}>
-      {TENANTS.map(t => (
-        <Rect layout direction="row" gap={12} alignItems="center">
-          <Polygon sides={6} size={26} fill={t.fill} stroke={t.stroke} lineWidth={3} />
-          <Txt text={t.name} fill={MUTED} fontSize={26} fontFamily="Inter, sans-serif" />
-        </Rect>
-      ))}
-    </Rect>
-  ) as Rect;
-  view.add(legend);
 
   // 1. Platform appears
   yield* all(
@@ -195,6 +192,5 @@ export default makeScene2D(function* (view) {
     ...lines.map(l => l.opacity(0.9, 0.5).to(0.35, 0.8)),
     ...hexes.map((h, i) => delay((teams[i].ring - 1) * 0.06, all(h.stroke(ACCENT, 0.3).to(teams[i].tenant.stroke, 0.6), h.fill(FLASH, 0.3).to(teams[i].tenant.fill, 0.6)))),
   );
-  yield* legend.opacity(1, 0.6);
   yield* waitFor(0.8);
 });
