@@ -9,10 +9,12 @@
             <h5>Team health</h5>
             <div class="tiles">
               <div class="tile ok"><b>0</b><small>Issues</small></div>
-              <div class="tile ok"><b>0</b><small>Vulnerabilities</small></div>
+              <div class="tile" :class="ke ? 'bad' : 'ok'">
+                <b>{{ ke }}</b><small>Known exploited</small>
+              </div>
               <div class="tile ok"><b>0</b><small>Alerts firing</small></div>
               <div class="tile warn">
-                <b>+4 %</b><small>Cost vs last month</small>
+                <b>+4&#8239;%</b><small>Cost vs last month</small>
               </div>
             </div>
             <h5>Inventory</h5>
@@ -107,13 +109,13 @@
               </div>
               <div class="tile ok"><b>2/2</b><small>Instances</small></div>
               <div class="tile ok">
-                <b>+2 %</b><small>Cost vs last month</small>
+                <b>+2&#8239;%</b><small>Cost vs last month</small>
               </div>
             </div>
           </div>
           <div>
             <h5>Latest deployment <span class="badge">Success</span></h5>
-            <p class="act">for 2 timer siden</p>
+            <p class="act">2 hours ago</p>
             <h5>Persistence</h5>
             <p class="act mono">soknad-db (Cloud SQL)</p>
             <p class="act mono">soknad-vedlegg (bucket)</p>
@@ -139,25 +141,82 @@
             <div class="prio">
               <span>{{ ke }} High</span><span>0 Elevated</span><span>2 Monitor</span>
             </div>
-            <h5>CVSS severity</h5>
-            <div class="tiles three">
+            <h5 v-if="!detail">CVSS severity</h5>
+            <div v-if="!detail" class="tiles three">
               <div class="tile" :class="ke ? 'bad' : 'ok'">
                 <b>{{ ke }}</b><small>Critical</small>
               </div>
               <div class="tile ok"><b>0</b><small>High</small></div>
               <div class="tile ok"><b>2</b><small>Medium</small></div>
             </div>
+            <div v-if="ke" class="finding" data-finding>
+              <span class="kev">Known exploited</span> CVE-2026-XXXXX ·
+              eksempel-lib
+            </div>
+            <div v-if="detail && ke" class="detail">
+              <div>
+                <small>Package</small><code>pkg:npm/eksempel-lib@1.4.2</code>
+              </div>
+              <div><small>Fix available</small><code>1.4.3</code></div>
+              <div>
+                <span class="pill hi">Priority: High</span><span class="pill">Internet-facing</span>
+              </div>
+            </div>
           </div>
           <div class="image">
+            <div v-if="scanning" class="scan">Scanning new image…</div>
+
             <h5>Image</h5>
             <small>Tag</small>
             <p class="mono">
               {{ ke ? "2026.10.14-a1b2c3" : "2026.10.21-d4e5f6" }}
             </p>
-            <p v-if="!ke && fixed" class="fixed">✓ Fixed and redeployed</p>
+            <p v-if="!ke && fixed" class="fixed">✓ Vulnerability resolved</p>
           </div>
         </div>
       </section>
+
+      <section v-show="view === 'deploys'" class="view">
+        <h2>api-soknad <em>prod</em></h2>
+        <div class="tabs">
+          <span
+            v-for="t in TABS"
+            :key="t"
+            :class="{ on: t === 'Deployments' }"
+            :data-tab3="t"
+          >{{ t }}</span>
+        </div>
+        <div class="table">
+          <div class="th">
+            <span>Image tag</span><span>State</span><span>When</span>
+          </div>
+          <div class="tr">
+            <span class="mono">2026.10.21-d4e5f6</span>
+            <span :class="deploy === 'success' ? 'green' : 'amber'">{{
+              deploy === "success" ? "● Success" : "● Running"
+            }}</span>
+            <span>just now</span>
+          </div>
+          <div class="tr">
+            <span class="mono">2026.10.14-a1b2c3</span><span class="green">● Success</span><span>7 days ago</span>
+          </div>
+        </div>
+      </section>
+
+      <div v-if="story === 'vulns'" class="overlay pr">
+        <small class="ann">Utenfor Console · GitHub</small>
+        <b>Bump eksempel-lib from 1.4.2 to 1.4.3</b>
+        <div class="checks">
+          <span class="check">● build</span><span class="check">● test</span>
+        </div>
+        <span class="merged">✓ Merged</span>
+      </div>
+      <div v-if="story === 'vulns'" class="overlay pipe">
+        <small class="ann">Utenfor Console · GitHub Actions</small>
+        <div class="steps">
+          <span>Build</span><span>SBOM</span><span>Signering</span><span>Deploy</span>
+        </div>
+      </div>
 
       <p class="note">Illustrasjon</p>
       <Cursor ref="cur" />
@@ -167,20 +226,21 @@
 
 <script setup>
 import { computed, ref } from "vue";
+import gsap from "gsap";
 import BrowserFrame from "./BrowserFrame.vue";
 import Cursor from "./Cursor.vue";
 import { cursorClick, useSteps } from "./motion.js";
 
 // story "team": team overview -> Cost. story "app": Applications -> one app.
-// story "vulns": app overview with a known exploited CVE -> Vulnerabilities tab -> fixed.
+// story "vulns": finding -> dependency PR -> build and deploy -> rescan and resolved.
 const props = defineProps({
   story: { type: String, required: true },
 });
 
 const ACTIVITY = [
-  { text: "api-soknad oppdatert i prod", when: "for 12 minutter siden" },
-  { text: "worker oppdatert i dev", when: "for 1 time siden" },
-  { text: "frontend oppdatert i prod", when: "i går" },
+  { text: "api-soknad updated in prod", when: "12 minutes ago" },
+  { text: "worker updated in dev", when: "1 hour ago" },
+  { text: "frontend updated in prod", when: "yesterday" },
 ];
 const APPS = ["api-soknad", "frontend", "worker"];
 const TABS = [
@@ -218,8 +278,11 @@ const COST = [
 
 const START = { team: "overview", app: "apps", vulns: "app" };
 const view = ref(START[props.story]);
-const ke = ref(props.story === "vulns" ? 1 : 0);
+const ke = ref(1);
 const fixed = ref(false);
+const detail = ref(false);
+const deploy = ref("none");
+const scanning = ref(false);
 
 const frame = computed(() => {
   const app = ["team-eksempel", "Applications", "api-soknad"];
@@ -244,6 +307,11 @@ const frame = computed(() => {
       active: "Applications",
       crumbs: app,
     },
+    deploys: {
+      url: "console.nais.io/team/team-eksempel/prod/app/api-soknad/deployments",
+      active: "Applications",
+      crumbs: [...app, "Deployments"],
+    },
     vulns: {
       url: "console.nais.io/team/team-eksempel/prod/app/api-soknad/vulnerabilities",
       active: "Applications",
@@ -262,10 +330,17 @@ useSteps((tl) => {
     [...root.value.closest(".browser").querySelectorAll("nav span")].find(
       (n) => n.textContent === label,
     );
-  const marks = [
-    { t: 0, s: { view: START[props.story], ke: ke.value, fixed: false } },
-  ];
-  const mark = (s) => marks.push({ t: tl.duration(), s });
+  const base = {
+    view: START[props.story],
+    ke: 1,
+    fixed: false,
+    detail: false,
+    deploy: "none",
+    scanning: false,
+  };
+  const marks = [{ t: 0, s: base }];
+  const mark = (s) =>
+    marks.push({ t: tl.duration(), s: { ...marks.at(-1).s, ...s } });
   tl.from(root.value, { autoAlpha: 0, duration: 0.4 }).addLabel("s0");
   if (props.story === "team") {
     cursorClick(
@@ -274,30 +349,71 @@ useSteps((tl) => {
       root.value.closest(".body"),
       navItem("Cost"),
     );
-    mark({ view: "cost", ke: 0, fixed: false });
+    mark({ view: "cost" });
     tl.from(q(".area"), { autoAlpha: 0, duration: 0.5 }).addLabel("s1");
   } else if (props.story === "app") {
     cursorClick(tl, cur.value.$el, root.value, q(".tr.target"));
-    mark({ view: "app", ke: 0, fixed: false });
+    mark({ view: "app" });
     tl.to({}, { duration: 0.4 }).addLabel("s1");
   } else {
+    // 1: open the finding. 2: dependency PR. 3: build and deploy. 4: rescan.
+    const pr = q(".pr");
+    const pipe = q(".pipe");
+    gsap.set([pr, pipe], { autoAlpha: 0, x: 40 });
+    gsap.set(pr.querySelector(".merged"), { autoAlpha: 0 });
     cursorClick(
       tl,
       cur.value.$el,
       root.value,
       q('[data-tab="Vulnerabilities"]'),
     );
-    mark({ view: "vulns", ke: 1, fixed: false });
-    tl.to({}, { duration: 0.4 }).addLabel("s1");
-    tl.to({}, { duration: 0.6 });
-    mark({ view: "vulns", ke: 0, fixed: true });
-    tl.to({}, { duration: 0.4 }).addLabel("s2");
+    mark({ view: "vulns" });
+    tl.to({}, { duration: 0.3 });
+    cursorClick(tl, cur.value.$el, root.value, q(".finding") || q(".ke"));
+    mark({ detail: true });
+    tl.to({}, { duration: 0.3 }).addLabel("s1");
+    tl.to(pr, { autoAlpha: 1, x: 0 })
+      .to(pr.querySelectorAll(".check"), {
+        color: "#34d399",
+        stagger: 0.3,
+        duration: 0.3,
+      })
+      .to(pr.querySelector(".merged"), { autoAlpha: 1, duration: 0.3 })
+      .addLabel("s2");
+    tl.to(pr, { autoAlpha: 0, x: 40, duration: 0.3 }).to(
+      pipe,
+      { autoAlpha: 1, x: 0 },
+      "<",
+    );
+    tl.to(pipe.querySelectorAll(".steps span"), {
+      backgroundColor: "#ff3377",
+      color: "#fff",
+      stagger: 0.25,
+      duration: 0.25,
+    });
+    mark({ view: "deploys", deploy: "running", detail: false });
+    tl.to({}, { duration: 0.8 });
+    mark({ deploy: "success" });
+    tl.to(pipe, { autoAlpha: 0, x: 40, duration: 0.3 }).addLabel("s3");
+    cursorClick(
+      tl,
+      cur.value.$el,
+      root.value,
+      q('[data-tab3="Vulnerabilities"]'),
+    );
+    mark({ view: "vulns", scanning: true });
+    tl.to({}, { duration: 1 });
+    mark({ scanning: false, ke: 0, fixed: true });
+    tl.to({}, { duration: 0.4 }).addLabel("s4");
   }
   tl.eventCallback("onUpdate", () => {
     const m = [...marks].reverse().find((x) => tl.time() >= x.t - 0.001);
     view.value = m.s.view;
     ke.value = m.s.ke;
     fixed.value = m.s.fixed;
+    detail.value = m.s.detail;
+    deploy.value = m.s.deploy;
+    scanning.value = m.s.scanning;
   });
   return tl;
 });
@@ -565,6 +681,113 @@ h5 {
   overflow-wrap: anywhere;
   color: #15803d;
   font-weight: 700;
+}
+
+.finding {
+  margin-top: 0.45rem;
+  padding: 0.3rem 0.5rem;
+  border-radius: 8px;
+  border: 1px solid #fca5a5;
+  background: #fef2f2;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.64rem;
+}
+
+.kev {
+  font-family: "Inter", sans-serif;
+  font-weight: 700;
+  color: #b91c1c;
+}
+
+.detail {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 0.8rem;
+  margin-top: 0.3rem;
+  padding: 0.3rem 0.5rem;
+  border-radius: 8px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  font-size: 0.64rem;
+}
+
+.detail small {
+  display: block;
+  color: #64748b;
+}
+
+.pill {
+  display: inline-block;
+  margin-right: 0.3rem;
+  padding: 0 0.4rem;
+  border-radius: 999px;
+  background: #e2e8f0;
+}
+
+.pill.hi {
+  background: #fde68a;
+}
+
+.amber {
+  color: #b45309;
+}
+
+.scan {
+  margin-bottom: 0.3rem;
+  padding: 0.15rem 0.4rem;
+  border-radius: 6px;
+  background: linear-gradient(90deg, #e2e8f0, #f8fafc, #e2e8f0);
+  font-size: 0.64rem;
+}
+
+.overlay {
+  position: absolute;
+  right: 0.4rem;
+  bottom: 0.4rem;
+  z-index: 5;
+  width: 18rem;
+  padding: 0.5rem 0.7rem;
+  border-radius: 12px;
+  border: 2px dashed #ff3377;
+  background: #0f172a;
+  color: #e2e8f0;
+  font-size: 0.72rem;
+  box-shadow: 0 10px 30px rgb(0 0 0 / 0.35);
+}
+
+.ann {
+  display: block;
+  margin-bottom: 0.25rem;
+  font-size: 0.62rem;
+  color: #fca5c0;
+}
+
+.checks {
+  display: flex;
+  gap: 0.8rem;
+  margin-top: 0.3rem;
+  color: #fbbf24;
+}
+
+.merged {
+  display: inline-block;
+  margin-top: 0.3rem;
+  padding: 0 0.5rem;
+  border-radius: 999px;
+  background: #7c3aed;
+  color: #fff;
+  font-weight: 700;
+}
+
+.steps {
+  display: flex;
+  gap: 0.3rem;
+}
+
+.steps span {
+  padding: 0.1rem 0.45rem;
+  border-radius: 6px;
+  background: #1e293b;
 }
 
 .note {

@@ -107,7 +107,7 @@ useEnter((tl) => {
   display: flex;
   align-items: flex-end;
   gap: 10px;
-  height: 140px;
+  height: 112px;
 }
 
 .col {

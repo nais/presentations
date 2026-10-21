@@ -46,6 +46,7 @@ const TENANTS: Tenant[] = [
   {name: 'SSB', apps: 292, fill: '#3a1a26', stroke: '#e8607a'},
   {name: 'Landbruksdirektoratet', apps: 164, fill: '#33280f', stroke: '#e0a43a'},
   {name: 'Arbeidstilsynet', apps: 72, fill: '#0f2e2e', stroke: '#3fb8a8'},
+  // KS Digital and Novari have signed but run no apps yet, so they get no hexes.
 ];
 const total = TENANTS.reduce((a, t) => a + t.apps, 0);
 const counts = TENANTS.map(t => Math.max(1, Math.round((t.apps / total) * cells.length)));
@@ -132,7 +133,7 @@ export default makeScene2D(function* (view) {
     </Rect>
   );
   const counters = [
-    counter(nTeams, 'etater', -560),
+    counter(nTeams, 'tenants', -560),
     counter(nApps, 'applikasjoner', 0),
     counter(nDeploys, 'deployer per uke (Nav, alle miljøer)', 560, '≈'),
   ] as Rect[];
@@ -148,7 +149,7 @@ export default makeScene2D(function* (view) {
   view.add([band, topBand]);
   view.add(counters);
   view.add(
-    <Txt ref={title} text={"4 etater, 5\u202f212 apper"} y={-450} fill={TEXT}
+    <Txt ref={title} text={"6 tenants, 5\u202f212 apper"} y={-450} fill={TEXT}
       fontSize={64} fontWeight={700} opacity={0} />,
   );
 
@@ -169,7 +170,7 @@ export default makeScene2D(function* (view) {
         band.opacity(1, 0.6),
     topBand.opacity(1, 0.6),
     sequence(0.12, ...counters.map(c => c.opacity(1, 0.6))),
-    nTeams(4, grow, easeOutCubic),
+    nTeams(6, grow, easeOutCubic),
     nApps(5212, grow + 0.6, easeOutCubic),
     nDeploys(21500, grow + 1.0, easeOutCubic),
     sequence(

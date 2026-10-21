@@ -10,6 +10,7 @@
         :id="`obs-${p.id}`"
         :d="p.d"
         class="path"
+        :class="{ dash: p.dash }"
         :style="{ stroke: p.color }"
       />
       <g v-for="p in PATHS.filter((x) => x.dots)" :key="'d' + p.id">
@@ -39,6 +40,7 @@
         <text y="-2" class="label">{{ n.label }}</text>
         <text y="18" class="sub">{{ n.sub }}</text>
       </g>
+      <text x="360" y="142" class="scrape">PodMonitor</text>
     </svg>
     <div class="legend">
       <span><i style="background: #e0a43a" /> Logger</span>
@@ -58,7 +60,8 @@ import { POP, STAGGER, useEnter } from "./motion.js";
 gsap.registerPlugin(MotionPathPlugin, DrawSVGPlugin);
 
 // Pipeline as described in nais/doc docs/observability/apm/explanations/how-nais-apm-works.md:
-// stdout -> fluentbit -> Loki; OpenTelemetry collector -> Tempo and Mimir.
+// stdout -> Fluent Bit -> Loki; OpenTelemetry Collector -> Tempo and Mimir;
+// metrics endpoint -> PodMonitor -> Mimir.
 const NODES = [
   {
     x: 105,
@@ -68,12 +71,12 @@ const NODES = [
     sub: "autoInstrumentation",
     kind: "app",
   },
-  { x: 330, y: 70, w: 150, label: "fluentbit", sub: "stdout", kind: "mid" },
+  { x: 330, y: 70, w: 150, label: "Fluent Bit", sub: "stdout", kind: "mid" },
   {
     x: 330,
     y: 220,
     w: 190,
-    label: "OTel collector",
+    label: "OTel Collector",
     sub: "OpenTelemetry",
     kind: "mid",
   },
@@ -108,6 +111,8 @@ const PATHS = [
     d: "M205 165 C215 215 225 228 235 228 L425 228 C470 228 480 255 510 255",
     dots: true,
   },
+  // Metrics are also scraped from the app via PodMonitor straight into Mimir.
+  { id: "scrape", color: "#e8384f", d: "M205 150 L510 150", dash: true },
   { id: "g1", color: "#94a3b8", d: "M640 45 C690 45 690 140 730 145" },
   { id: "g2", color: "#94a3b8", d: "M640 150 L730 150" },
   { id: "g3", color: "#94a3b8", d: "M640 255 C690 255 690 160 730 155" },
@@ -169,6 +174,17 @@ useEnter((tl) => {
 svg {
   width: 100%;
   overflow: visible;
+}
+
+.path.dash {
+  stroke-dasharray: 6 6;
+}
+
+.scrape {
+  text-anchor: middle;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 13px;
+  fill: #fca5c0;
 }
 
 .path {

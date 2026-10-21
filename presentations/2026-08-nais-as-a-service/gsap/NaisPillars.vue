@@ -26,7 +26,7 @@ const PILLARS = [
     title: "Utviklingsfart",
     color: "#FF9100",
     icon: "i-carbon-rocket",
-    text: "Fra kode til produksjon, uten nedetid.",
+    text: "Fra kode til produksjon uten nedetid.",
   },
   {
     title: "Automatisering",
@@ -50,7 +50,7 @@ const PILLARS = [
     title: "Suveren og autonom",
     color: "#4a9be8",
     icon: "i-carbon-migrate",
-    text: "Industristandarder, så alt kan flytte på seg.",
+    text: "Åpne standarder, så alt kan flyttes.",
   },
   {
     title: "Et Nais-fellesskap",

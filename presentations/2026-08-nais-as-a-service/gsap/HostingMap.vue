@@ -2,7 +2,7 @@
   <div ref="root" class="hosting" data-motion-self>
     <div class="onprem">
       <span class="i-carbon-bare-metal-server" />
-      <strong>On-prem</strong>
+      <strong>Eget datasenter</strong>
       <small>Nais startet her i 2016</small>
     </div>
     <svg class="move" viewBox="0 0 120 60" aria-hidden="true">

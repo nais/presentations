@@ -3,7 +3,7 @@
     <div class="hub">
       <strong>Nais-teamet</strong>
       <span>drifter plattformen</span>
-      <em>Betalingskonto: Nav</em>
+      <em>Faktureringskonto: Nav</em>
     </div>
     <svg
       class="wires"
@@ -17,12 +17,13 @@
       <div v-for="t in tenants" :key="t" class="org">
         <div class="org-head">GCP-organisasjon</div>
         <strong>{{ t }}</strong>
-        <ul>
+        <ul v-if="!incoming.includes(t)">
           <li>Clustere</li>
-          <li>Data og databaser</li>
+          <li>Data</li>
           <li>Apper</li>
         </ul>
-        <div class="owned">Eies av etaten</div>
+        <p v-else class="incoming">På vei inn</p>
+        <div class="owned">Eies av tenanten</div>
       </div>
     </div>
     <p ref="exit" class="exit">{{ exitText }}</p>
@@ -42,6 +43,8 @@ const props = defineProps({
   tenants: { type: Array, required: true },
   detach: { type: Number, default: 3 },
   exitText: { type: String, default: "" },
+  // Signed tenants without production workloads yet.
+  incoming: { type: Array, default: () => [] },
 });
 
 const n = props.tenants.length;
@@ -76,9 +79,9 @@ useSteps((tl) => {
       ease: "power2.in",
     })
     .to(orgs[props.detach], {
-      y: 14,
-      x: -4,
-      rotation: 2,
+      y: 18,
+      x: 0,
+      rotation: 0,
       boxShadow: "0 12px 24px rgb(0 0 0 / 0.12)",
       ease: POP,
     })
@@ -135,7 +138,7 @@ useSteps((tl) => {
 .wires {
   display: block;
   width: 100%;
-  height: 56px;
+  height: 40px;
 }
 
 .wire {
@@ -148,12 +151,12 @@ useSteps((tl) => {
 .tenants {
   display: grid;
   grid-template-columns: repeat(v-bind(n), minmax(0, 1fr));
-  gap: 1.4rem;
+  gap: 1.3rem;
 }
 
 .org {
   position: relative;
-  padding: 0.6rem 0.8rem 0.7rem;
+  padding: 0.4rem 0.55rem 0.5rem;
   border-radius: 14px;
   border: 2px solid var(--nais-border);
   background: var(--nais-card);
@@ -170,8 +173,8 @@ useSteps((tl) => {
 .org strong {
   display: block;
   font-family: "Poppins", sans-serif;
-  font-size: 0.95rem;
-  margin: 0.1rem 0 0.3rem;
+  font-size: 0.82rem;
+  margin: 0.1rem 0 0.2rem;
   overflow-wrap: anywhere;
 }
 
@@ -180,7 +183,14 @@ useSteps((tl) => {
   padding-left: 1rem;
   list-style: disc;
   color: var(--nais-text-secondary);
-  font-size: 0.85rem;
+  font-size: 0.72rem;
+}
+
+.incoming {
+  margin: 0.2rem 0 0;
+  font-size: 0.75rem;
+  font-style: italic;
+  color: var(--nais-text-secondary);
 }
 
 .owned {
@@ -195,7 +205,7 @@ useSteps((tl) => {
 }
 
 .exit {
-  margin: 2rem 0 0;
+  margin: 1.4rem 0 0;
   text-align: center;
   font-size: 0.95rem;
   font-weight: 600;

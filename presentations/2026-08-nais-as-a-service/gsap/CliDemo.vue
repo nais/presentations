@@ -27,22 +27,22 @@ import { useSteps } from "./motion.js";
 // Command names checked against github.com/nais/cli (internal/*/command), 2026-10-21.
 // Output is illustrative.
 const STEPS = [
-  { cmd: "nais login", out: ["✓ Logget inn som utvikler@etaten.no"] },
+  { cmd: "nais login", out: ["✓ Logged in as utvikler@eksempel.no"] },
   {
-    cmd: "nais app status min-app",
-    out: ["min-app-7f9c-x2   Running", "min-app-7f9c-k8   Running"],
+    cmd: "nais app status api-soknad",
+    out: ["api-soknad-7f9c-x2   Running", "api-soknad-7f9c-k8   Running"],
   },
   {
-    cmd: "nais app log min-app",
-    out: ["INFO  mottok søknad", "INFO  søknad lagret"],
+    cmd: "nais app log api-soknad",
+    out: ["INFO  received application", "INFO  application stored"],
   },
   {
-    cmd: "nais cloudsql proxy min-app",
-    out: ["✓ Proxy kjører på localhost:5432"],
+    cmd: "nais cloudsql proxy api-soknad",
+    out: ["✓ Proxy listening on localhost:5432"],
   },
   {
     cmd: "nais vulnerability summary",
-    out: ["Kritiske: 0   Høye: 2   Workloads med SBOM: 100 %"],
+    out: ["Known exploited: 1   Critical: 1   High: 0"],
   },
 ];
 

@@ -51,23 +51,106 @@ let tl;
 
 // Built on each slide enter: positions can only be measured while the slide
 // is displayed (neighbouring slides are mounted hidden).
+// Shapes on a pointy-top hex grid: rows alternate whole and half steps, so
+// neighbours never overlap. 15 cells each.
+const LOGO = [
+  [1, 0],
+  [-1.5, 1],
+  [0.5, 1],
+  [-2, 2],
+  [0, 2],
+  [-2.5, 3],
+  [-0.5, 3],
+  [0.5, 3],
+  [1.5, 3],
+  [-3, 4],
+  [-1, 4],
+  [2, 4],
+  [-0.5, 5],
+  [0.5, 5],
+  [1.5, 5],
+];
+const HEART = [
+  [-2, 0],
+  [-1, 0],
+  [1, 0],
+  [2, 0],
+  [-2.5, 1],
+  [-1.5, 1],
+  [-0.5, 1],
+  [0.5, 1],
+  [1.5, 1],
+  [2.5, 1],
+  [-1, 2],
+  [0, 2],
+  [1, 2],
+  [-0.5, 3],
+  [0.5, 3],
+];
+const SHAPE_SCALE = 0.55;
+const STEP_X = 54;
+const STEP_Y = 46;
+
 function build() {
   const el = root.value;
   const items = [...el.querySelectorAll(".member")];
   const names = el.querySelectorAll("figcaption");
-  // Clean fly-in from off-screen straight into the wall.
+  const cx = el.offsetWidth / 2;
+  const cy = el.offsetHeight / 2;
+  // offsetLeft/Top are unscaled layout values, unlike getBoundingClientRect.
+  const centre = (m) => [m.offsetLeft + m.offsetWidth / 2, m.offsetTop + 50];
+  const place = (shape) => {
+    const my = (Math.max(...shape.map((c) => c[1])) * STEP_Y) / 2;
+    return items.map((m, i) => {
+      const [x, y] = centre(m);
+      const [col, row] = shape[i % shape.length];
+      return { x: cx + col * STEP_X - x, y: cy + row * STEP_Y - my - y };
+    });
+  };
+  const logo = place(LOGO);
+  const heart = place(HEART);
+  // Fly in, form the Nais logo, then a heart, then settle into the wall.
   tl = gsap
     .timeline({ paused: true, defaults: { ease: EASE, duration: DUR } })
     .set(names, { autoAlpha: 0 })
-    .from(items, {
-      x: () => gsap.utils.random(-900, 900),
-      y: (i) => (i % 2 ? -1 : 1) * gsap.utils.random(400, 700),
+    .set(items, {
+      x: (i) => logo[i].x + gsap.utils.random(-900, 900),
+      y: (i) => logo[i].y + (i % 2 ? -1 : 1) * gsap.utils.random(400, 700),
       rotation: () => gsap.utils.random(-60, 60),
-      scale: 0.5,
+      scale: SHAPE_SCALE,
       autoAlpha: 0,
-      duration: 1.1,
-      stagger: STAGGER / 2,
     })
+    .to(items, {
+      x: (i) => logo[i].x,
+      y: (i) => logo[i].y,
+      rotation: 0,
+      autoAlpha: 1,
+      duration: 0.8,
+      stagger: STAGGER / 3,
+    })
+    .to(
+      items,
+      {
+        x: (i) => heart[i].x,
+        y: (i) => heart[i].y,
+        duration: 0.7,
+        ease: "power3.inOut",
+        stagger: STAGGER / 5,
+      },
+      "+=0.6",
+    )
+    .to(
+      items,
+      {
+        x: 0,
+        y: 0,
+        scale: 1,
+        duration: 0.7,
+        ease: "power3.inOut",
+        stagger: STAGGER / 5,
+      },
+      "+=0.6",
+    )
     .to(names, { autoAlpha: 1, stagger: STAGGER / 4, duration: 0.4 }, "-=0.3");
 
   return tl;

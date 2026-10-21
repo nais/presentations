@@ -24,7 +24,7 @@
         />
       </svg>
       <div class="app">
-        <span class="i-carbon-application" /><strong>min-app</strong>
+        <span class="i-carbon-application" /><strong>api-soknad</strong>
       </div>
       <div
         v-for="r in DOCKS"
@@ -73,7 +73,7 @@
           />
         </g>
       </svg>
-      <p class="zoom-text">Hundrevis av apper. Ett plattformteam.</p>
+      <p class="zoom-text">Tusenvis av apper. Ett plattformteam.</p>
       <div class="zoom-badge">
         <span class="i-carbon-user-multiple" /> Nais-teamet
       </div>
@@ -89,9 +89,9 @@ import { POP, useSteps } from "./motion.js";
 // Field names checked against the Application example in nais/doc
 // (docs/workloads/application/reference/example.md), 2026-10-21.
 const BASE =
-  "apiVersion: nais.io/v1alpha1\nkind: Application\nmetadata: { name: min-app }\nspec:\n  image: ghcr.io/navikt/min-app:1.0.0\n  replicas: { min: 2, max: 4 }\n";
+  "apiVersion: nais.io/v1alpha1\nkind: Application\nmetadata: { name: api-soknad, namespace: team-eksempel }\nspec:\n  image: ghcr.io/team-eksempel/api-soknad:1.0.0\n  replicas: { min: 2, max: 4 }\n";
 const BLOCKS = [
-  { code: "  ingresses: [https://min-app.nav.no]\n" },
+  { code: "  ingresses: [https://api-soknad.eksempel.no]\n" },
   {
     code: "  gcp:\n    sqlInstances: [{ type: POSTGRES_18 }]\n    buckets: [{ name: min-bucket }]\n",
   },
@@ -113,7 +113,7 @@ const DOCKS = [
     x: 50,
     y: 7,
     a: "c",
-    label: "Adresse + TLS",
+    label: "Adresse og TLS",
     icon: "i-carbon-globe",
   },
   {
@@ -138,7 +138,7 @@ const DOCKS = [
     x: 36,
     y: 60,
     a: "r",
-    label: "Innlogging",
+    label: "Innlogging og tilgang",
     icon: "i-carbon-password",
   },
   {

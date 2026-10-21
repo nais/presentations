@@ -11,14 +11,14 @@
       </div>
     </div>
     <div class="queue">
-      <h3>1–2 nye etater per år</h3>
+      <h3>1–2 nye tenants per år</h3>
       <div class="lane">
         <div v-for="k in 5" :key="k" class="agency">
           <span class="i-carbon-building" />
         </div>
         <div ref="gate" class="gate" />
       </div>
-      <p>Vi tar inn så mange vi klarer å gjøre skikkelig</p>
+      <p>Vi tar inn så mange som vi kan følge opp skikkelig</p>
     </div>
   </div>
 </template>

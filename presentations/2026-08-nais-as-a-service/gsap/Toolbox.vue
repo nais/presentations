@@ -11,7 +11,7 @@
       <div class="app">
         <span class="i-carbon-application" /><strong>Appen</strong>
       </div>
-      <p ref="mine" class="mine">Etaten: koden, dataene, produktet</p>
+      <p ref="mine" class="mine">Tenanten: koden, dataene, produktet</p>
     </div>
     <div class="col">
       <div v-for="g in GROUPS.slice(4)" :key="g.title" class="drawer">
@@ -55,24 +55,24 @@ const GROUPS = [
   },
   { title: "Meldinger", icon: "i-carbon-flow-stream", items: ["Kafka"] },
   {
-    title: "Innlogging",
+    title: "Innlogging og tilgang",
     icon: "i-carbon-password",
     items: ["ID-porten", "Maskinporten", "Entra ID", "TokenX", "Texas"],
   },
   {
-    title: "Observability",
+    title: "Oversikt",
     icon: "i-carbon-chart-line",
-    items: ["Logger", "Metrikker", "Traces", "Alarmer", "Grafana"],
+    items: ["Logger", "Metrikker", "Traces", "Varsler", "Grafana"],
   },
   {
-    title: "Sikkerhet og flagg",
+    title: "Sikkerhet og funksjonsflagg",
     icon: "i-carbon-security",
     items: [
       "SBOM",
       "Signering",
       "Sårbarheter",
       "Nettverksregler",
-      "Hemmeligheter",
+      "Secrets",
       "Unleash",
     ],
   },
@@ -84,12 +84,12 @@ const GROUPS = [
 ];
 const OPS = [
   "Oppgraderinger",
-  "Patching",
+  "Sikkerhetsoppdateringer",
   "Sertifikater",
   "Kafka-cluster",
   "Grafana-stakken",
-  "Nettverkspolicyer",
-  "Vakt 24/7",
+  "Nettverksregler",
+  "Vakt døgnet rundt",
 ];
 
 const root = ref();
