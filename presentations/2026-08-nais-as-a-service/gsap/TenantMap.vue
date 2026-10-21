@@ -161,7 +161,7 @@ useSteps((tl) => {
 
 .org {
   position: relative;
-  padding: 0.6rem 0.8rem 0.7rem;
+  padding: 0.5rem 0.8rem 0.55rem;
   border-radius: 14px;
   border: 2px solid var(--nais-border);
   background: var(--nais-card);
@@ -188,7 +188,8 @@ useSteps((tl) => {
   padding-left: 1rem;
   list-style: disc;
   color: var(--nais-text-secondary);
-  font-size: 0.85rem;
+  font-size: 0.78rem;
+  line-height: 1.35;
 }
 
 .incoming {
@@ -210,7 +211,7 @@ useSteps((tl) => {
 }
 
 .more {
-  margin: 0.6rem auto 0;
+  margin: 0.4rem auto 0;
   width: max-content;
   padding: 0.15rem 0.8rem;
   border-radius: 999px;
@@ -221,7 +222,7 @@ useSteps((tl) => {
 }
 
 .exit {
-  margin: 1.4rem 0 0;
+  margin: 0.8rem 0 0;
   text-align: center;
   font-size: 0.95rem;
   font-weight: 600;
