@@ -1,4 +1,5 @@
 import {Line, Node, Polygon, Rect, Txt, makeScene2D} from '@motion-canvas/2d';
+import {NORWAY, SPACING} from '../norway';
 import {
   all,
   createRef,
@@ -20,23 +21,22 @@ const MUTED = '#94a3b8';
 const HEX_FILL = '#1e293b';
 const HEX_STROKE = '#334155';
 
-const R = 34; // hex radius (centre to vertex)
-const RINGS = 6; // full rings around the centre: 6 + 12 + ... + 36 = 126 hexes
-
-// Pointy-top hexes on an axial grid. Polygon's first vertex points up, so no
-// rotation is needed and grid spacing matches the shape.
-const gap = R * 1.4;
-const cells: {x: number; y: number; ring: number; angle: number; tenant?: Tenant}[] = [];
-for (let q = -RINGS; q <= RINGS; q++)
-  for (let r = -RINGS; r <= RINGS; r++) {
-    const ring = (Math.abs(q) + Math.abs(r) + Math.abs(q + r)) / 2;
-    if (ring === 0 || ring > RINGS) continue;
-    const x = gap * Math.sqrt(3) * (q + r / 2);
-    const y = gap * 1.5 * r;
-    // Clockwise from straight up, 0..2π.
-    const angle = (Math.atan2(x, -y) + Math.PI * 2) % (Math.PI * 2);
-    cells.push({x, y, ring, angle});
-  }
+// Hexes fill an outline of mainland Norway, centred on Oslo (Nav HQ, the hub).
+const R = SPACING / (Math.sqrt(3) * 1.4); // hex radius, same gap ratio as before
+const cells: {x: number; y: number; ring: number; angle: number; tenant?: Tenant}[] = NORWAY.map(([x, y]) => ({
+  x,
+  y,
+  // "ring" = distance band from Oslo, so the country grows outward from there.
+  ring: Math.round(Math.hypot(x, y) / SPACING),
+  angle: (Math.atan2(x, -y) + Math.PI * 2) % (Math.PI * 2),
+}));
+// Final zoom: the whole country fits between the title and the counters.
+const FIT = 0.56;
+// Framing: centre of the country's bounding box, used for the final camera.
+const BOX = {
+  x: (Math.min(...NORWAY.map((c) => c[0])) + Math.max(...NORWAY.map((c) => c[0]))) / 2,
+  y: (Math.min(...NORWAY.map((c) => c[1])) + Math.max(...NORWAY.map((c) => c[1]))) / 2,
+};
 
 // NaaS tenants, apps per tenant from Grafana 2026-10-21. One hex ≈ 41 apps,
 // at least one hex each. Small tenants are scattered across the honeycomb.
@@ -61,7 +61,7 @@ small.forEach((t, k) => {
   const slot = order[k % order.length];
   const idx = Math.floor(((slot + 0.5) / order.length) * cells.length);
   let j = idx;
-  while (cells[j].tenant !== TENANTS[0] || cells[j].ring < 2) j = (j + 1) % cells.length;
+  while (cells[j].tenant !== TENANTS[0] || cells[j].ring < 1) j = (j + 1) % cells.length;
   cells[j].tenant = t;
 });
 // Grow ring by ring, clockwise within each ring.
@@ -93,7 +93,7 @@ export default makeScene2D(function* (view) {
           points={[[0, 0], [c.x, c.y]]}
           stroke={c.tenant.name === 'Nav' ? ACCENT : c.tenant.stroke}
           lineWidth={2}
-          opacity={0.35}
+          opacity={0.18}
           end={0}
         />
       ))}
@@ -113,7 +113,7 @@ export default makeScene2D(function* (view) {
       <Polygon
         ref={core}
         sides={6}
-        size={R * 2.6}
+        size={64}
         fill={ACCENT}
         stroke={'#ff7a8a'}
         lineWidth={3}
@@ -121,7 +121,7 @@ export default makeScene2D(function* (view) {
         shadowBlur={0}
         scale={0}
       >
-        <Txt ref={coreLabel} text="nais" fill={TEXT} fontWeight={700} fontSize={26} opacity={0} />
+        <Txt ref={coreLabel} text="nais" fill={TEXT} fontWeight={700} fontSize={18} opacity={0} />
       </Polygon>
     </Node>,
   );
@@ -166,7 +166,9 @@ export default makeScene2D(function* (view) {
   // 2. Teams grow outwards, wired to the platform, while the camera pulls back
   const grow = 5.2;
   yield* all(
-    world().scale(0.62, grow + 1.8, easeInOutCubic),
+    world().scale(FIT, grow + 1.8, easeInOutCubic),
+    world().x(-BOX.x * FIT, grow + 1.8, easeInOutCubic),
+    world().y(-60 - BOX.y * FIT, grow + 1.8, easeInOutCubic),
         band.opacity(1, 0.6),
     topBand.opacity(1, 0.6),
     sequence(0.12, ...counters.map(c => c.opacity(1, 0.6))),
@@ -190,8 +192,8 @@ export default makeScene2D(function* (view) {
   yield* all(
     core().shadowBlur(160, 0.5).to(90, 0.8),
     core().fill(ACCENT_DARK, 0.5).to(ACCENT, 0.8),
-    ...lines.map(l => l.opacity(0.9, 0.5).to(0.35, 0.8)),
-    ...hexes.map((h, i) => delay((teams[i].ring - 1) * 0.06, all(h.stroke(ACCENT, 0.3).to(teams[i].tenant.stroke, 0.6), h.fill(FLASH, 0.3).to(teams[i].tenant.fill, 0.6)))),
+    ...lines.map(l => l.opacity(0.6, 0.5).to(0.18, 0.8)),
+    ...hexes.map((h, i) => delay(teams[i].ring * 0.03, all(h.stroke(ACCENT, 0.3).to(teams[i].tenant.stroke, 0.6), h.fill(FLASH, 0.3).to(teams[i].tenant.fill, 0.6)))),
   );
   yield* waitFor(0.8);
 });
