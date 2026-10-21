@@ -45,8 +45,8 @@ transition: fade
 <!--
 Overgang: «(Ingen overgang. La klippet gå, ikke snakk over det.)»
 
-- 6 tenants, 5 212 apper (Grafana, 21. oktober 2026). KS Digital og Novari har signert, men har ikke apper i produksjon ennå
-- ≈21 500 deployer per uke er Nav, alle miljøer (Mimir)
+- 6 tenants, 5 212 apper (Grafana, 21. oktober 2026). KS Digital og Novari har signert, men har ikke apper i produksjon ennå
+- ≈21 500 deployer per uke er Nav, alle miljøer (Mimir)
 - Fargene viser de mindre tenantene spredt i bikuben
 -->
 
@@ -77,7 +77,7 @@ layout: default
 
 ::header::
 <h1 class="text-3xl font-bold">Tre tenants utenfor Nav kjører 528 apper</h1>
-<p class="subtitle">Og Nav deployer rundt 21 500 ganger i uka</p>
+<p class="subtitle">Og Nav deployer rundt 21 500 ganger i uka</p>
 
 ::default::
 <div class="flex flex-col items-center gap-4 w-full">
@@ -103,7 +103,7 @@ layout: default
 Overgang: «Grunnen til at tallene er så store, kommer på neste slides.»
 
 - Apper per tenant: Grafana 21. oktober 2026 (72 + 164 + 292 = 528 utenfor Nav)
-- ≈21 500 deployer per uke i Nav, alle miljøer. ≈9 000 i prod (Mimir)
+- ≈21 500 deployer per uke i Nav, alle miljøer. ≈9 000 i prod (Mimir)
 - 154 team har deployet siste 28 dager
 - Reserve: ukegrafen fra Mimir (11 uker, aug.–okt. 2026) ligger i DeployChart hvis noen spør
 - PLASSHOLDER: årstall for veksten fra Nais-teamet
@@ -373,7 +373,7 @@ clicks: 3
   <div class="grid grid-cols-2 gap-6 items-center max-w-4xl mx-auto w-full">
     <Placeholder class="anim-item">en ekte natt i fire steg: varsel, trace, logger, fiks (hva skjedde og hvor lang tid det tok)</Placeholder>
     <div class="anim-item text-center">
-      <div class="text-5xl font-bold" style="font-family: Poppins; color: var(--nais-success)">99,88 %</div>
+      <div class="text-5xl font-bold" style="font-family: Poppins; color: var(--nais-success)">99,88 %</div>
       <p class="mt-1">ingress-svar uten 5xx i Nav, siste 30 dager</p>
       <p class="opacity-70">Målt, ikke SLA</p>
     </div>
@@ -384,7 +384,7 @@ clicks: 3
 Overgang: «Hvem var våkne? Disse femten.»
 
 - Vakt døgnet rundt er inkludert i NaaS: Nais-teamet, med Googles døgnåpne support ved behov. Google-supporten er inkludert i prisen
-- 99,88 % er målt i Mimir, Nav, siste 30 dager. Tallet inkluderer feil i appene selv. Ingen formell SLA
+- 99,88 % er målt i Mimir, Nav, siste 30 dager. Tallet inkluderer feil i appene selv. Ingen formell SLA
 - PLASSHOLDER: en ekte natt i fire steg
 -->
 
@@ -420,7 +420,7 @@ clicks: 4
   { icon: 'i-carbon-build-tool', label: 'Bygg', sub: 'All kode, også fra KI-agenter' },
   { icon: 'i-carbon-list-boxes', label: 'SBOM', sub: 'Lages automatisk (CycloneDX)' },
   { icon: 'i-carbon-certificate', label: 'Signering', sub: 'Signert og attestert' },
-  { icon: 'i-carbon-scan', label: 'Sårbarheter', sub: 'Følges opp per workload', stat: '5 608 workloads skannes (apper og jobber)' },
+  { icon: 'i-carbon-scan', label: 'Sårbarheter', sub: 'Følges opp per workload', stat: '5 608 workloads skannes (apper og jobber)' },
   { icon: 'i-carbon-dashboard', label: 'Console', sub: 'Teamet ser status' },
 ]" />
 
@@ -429,7 +429,7 @@ Overgang: «Og teamet ser resultatet i Console.»
 
 - SBOM og signering skjer automatisk i bygget
 - Kode fra KI-agenter går gjennom akkurat samme løp
-- 5 608 workloads skannes (Mimir, 21. oktober 2026)
+- 5 608 workloads skannes (Mimir, 21. oktober 2026)
 -->
 
 ---
@@ -580,7 +580,7 @@ layout: default
 <!--
 Overgang: «150 årsverk, og 15 personer som holder det i gang. Hvem kan så bli med?»
 
-- Management 20 000 + to app-clustere (typisk dev og prod) à 10 000 = 40 000 kr/mnd før forbruk
+- Management 20 000 + to app-clustere (typisk dev og prod) à 10 000 = 40 000 kr/mnd før forbruk
 - PLASSHOLDER: hvordan tenantene faktureres (Nav eier faktureringskontoen, selvkost)
 - Forbruk i Google Cloud og Aiven kommer i tillegg, til selvkost
 -->

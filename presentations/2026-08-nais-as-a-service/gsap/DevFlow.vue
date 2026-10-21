@@ -18,11 +18,11 @@
         :key="t"
         class="org tenant"
         :class="{ fresh: i === TENANTS.length - 1 }"
-        :style="{ left: '84%', top: 14 + i * 40 + 'px' }"
+        :style="{ left: '86%', top: 14 + i * 42 + 'px' }"
       >
         {{ t }}
       </div>
-      <div class="ok" style="left: 84%; top: 196px">✓ første deploy dag én</div>
+      <div class="ok" style="left: 86%; top: 204px">✓ første deploy dag én</div>
       <div v-for="k in 14" :key="k" class="dev">
         <span class="i-carbon-user" /><i />
       </div>
@@ -74,8 +74,8 @@ useSteps((tl) => {
       };
     const t = Math.floor(i / 2) % 5;
     return {
-      left: 73.5 + (i % 4 === 1 ? 0 : 2.5) + "%",
-      top: 14 + t * 40 + "px",
+      left: 71 + (i % 4 === 1 ? 0 : 2.5) + "%",
+      top: 14 + t * 42 + "px",
     };
   };
   const n = { v: 0 };
@@ -160,7 +160,7 @@ useSteps((tl) => {
 
 .stage {
   position: relative;
-  height: 212px;
+  height: 220px;
   margin: 0.5rem 0 0.8rem;
 }
 
@@ -171,6 +171,7 @@ useSteps((tl) => {
 }
 
 .org {
+  z-index: 2;
   padding: 0.25rem 0.7rem;
   border-radius: 10px;
   border: 2px solid var(--nais-border);
@@ -187,8 +188,10 @@ useSteps((tl) => {
 }
 
 .org.tenant {
-  font-size: 0.78rem;
-  padding: 0.15rem 0.6rem;
+  font-size: 0.85rem;
+  padding: 0.12rem 0.7rem;
+  min-width: 8.5rem;
+  text-align: center;
 }
 
 .ok {

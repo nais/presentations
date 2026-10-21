@@ -36,7 +36,7 @@
             : tileSlot(i)
         "
       >
-        <span class="generic">Tenant</span><span class="name">{{ t }}</span>
+        <span class="generic">Tenant</span><span class="name">{{ t }}<small v-if="i >= STACKS.length">på vei inn</small></span>
       </div>
       <div ref="band" class="band">Drift og vakt døgnet rundt</div>
       <div ref="scaffold" class="scaffold">
@@ -287,6 +287,21 @@ useSteps((tl) => {
   overflow: hidden;
 }
 
+.tile small {
+  display: block;
+  font-family: "Inter", sans-serif;
+  font-size: 0.5rem;
+  font-weight: 400;
+  line-height: 1;
+  opacity: 0.85;
+}
+
+.tile.extra {
+  border: 1px dashed #64748b;
+  background: transparent !important;
+  padding: 0.05rem 0 0.1rem;
+}
+
 .layer {
   position: absolute;
   height: 21px;
@@ -438,9 +453,8 @@ useSteps((tl) => {
 
 .years {
   position: absolute;
-  left: 50%;
+  left: 8%;
   top: 0;
-  translate: calc(-50% - 11rem) 0;
   display: flex;
   align-items: baseline;
   gap: 0.35rem;

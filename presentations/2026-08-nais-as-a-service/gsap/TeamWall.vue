@@ -51,24 +51,25 @@ let tl;
 
 // Built on each slide enter: positions can only be measured while the slide
 // is displayed (neighbouring slides are mounted hidden).
+// Logo: a hexagonal ring with three cells as the streak, like the Nais mark.
 // Shapes on a pointy-top hex grid: rows alternate whole and half steps, so
 // neighbours never overlap. 15 cells each.
 const LOGO = [
-  [1, 0],
-  [-1.5, 1],
-  [0.5, 1],
-  [-2, 2],
-  [0, 2],
-  [-2.5, 3],
-  [-0.5, 3],
-  [0.5, 3],
-  [1.5, 3],
-  [-3, 4],
-  [-1, 4],
-  [2, 4],
-  [-0.5, 5],
-  [0.5, 5],
-  [1.5, 5],
+  [-1, 1],
+  [0, 1],
+  [1, 1],
+  [-1.5, 2],
+  [1.5, 2],
+  [-2, 3],
+  [2, 3],
+  [-1.5, 4],
+  [1.5, 4],
+  [-1, 5],
+  [0, 5],
+  [1, 5],
+  [-1.5, 0],
+  [-2, -1],
+  [-2.5, -2],
 ];
 const HEART = [
   [-2, 0],
@@ -88,8 +89,8 @@ const HEART = [
   [0.5, 3],
 ];
 const SHAPE_SCALE = 0.55;
-const STEP_X = 54;
-const STEP_Y = 46;
+const STEP_X = 50;
+const STEP_Y = 43;
 
 function build() {
   const el = root.value;
@@ -100,7 +101,8 @@ function build() {
   // offsetLeft/Top are unscaled layout values, unlike getBoundingClientRect.
   const centre = (m) => [m.offsetLeft + m.offsetWidth / 2, m.offsetTop + 50];
   const place = (shape) => {
-    const my = (Math.max(...shape.map((c) => c[1])) * STEP_Y) / 2;
+    const rows = shape.map((c) => c[1]);
+    const my = ((Math.max(...rows) + Math.min(...rows)) * STEP_Y) / 2;
     return items.map((m, i) => {
       const [x, y] = centre(m);
       const [col, row] = shape[i % shape.length];
