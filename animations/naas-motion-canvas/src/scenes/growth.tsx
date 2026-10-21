@@ -20,20 +20,45 @@ const MUTED = '#94a3b8';
 const HEX_FILL = '#1e293b';
 const HEX_STROKE = '#334155';
 
-const R = 34; // hex radius
-const TEAMS = 150;
+const R = 34; // hex radius (centre to vertex)
+const RINGS = 6; // full rings around the centre: 6 + 12 + ... + 36 = 126 hexes
 
-// Axial hex coordinates sorted by ring, centre excluded.
-const cells: {x: number; y: number; ring: number}[] = [];
-for (let q = -9; q <= 9; q++)
-  for (let r = -9; r <= 9; r++) {
+// Pointy-top hexes on an axial grid. Polygon's first vertex points up, so no
+// rotation is needed and grid spacing matches the shape.
+const gap = R * 1.4;
+const cells: {x: number; y: number; ring: number; angle: number; tenant?: Tenant}[] = [];
+for (let q = -RINGS; q <= RINGS; q++)
+  for (let r = -RINGS; r <= RINGS; r++) {
     const ring = (Math.abs(q) + Math.abs(r) + Math.abs(q + r)) / 2;
-    if (ring === 0 || ring > 8) continue;
-    const gap = R * 1.4;
-    cells.push({x: gap * Math.sqrt(3) * (q + r / 2), y: gap * 1.5 * r, ring});
+    if (ring === 0 || ring > RINGS) continue;
+    const x = gap * Math.sqrt(3) * (q + r / 2);
+    const y = gap * 1.5 * r;
+    // Clockwise from straight up, 0..2π.
+    const angle = (Math.atan2(x, -y) + Math.PI * 2) % (Math.PI * 2);
+    cells.push({x, y, ring, angle});
   }
-cells.sort((a, b) => a.ring - b.ring || Math.atan2(a.y, a.x) - Math.atan2(b.y, b.x));
-const teams = cells.slice(0, TEAMS);
+
+// NaaS tenants, apps per tenant from Grafana 2026-10-21. One hex ≈ 41 apps,
+// at least one hex each. Each tenant gets a contiguous wedge.
+type Tenant = {name: string; apps: number; fill: string; stroke: string};
+const TENANTS: Tenant[] = [
+  {name: 'Nav', apps: 4684, fill: HEX_FILL, stroke: HEX_STROKE},
+  {name: 'SSB', apps: 292, fill: '#2a1a2e', stroke: '#9d3b5a'},
+  {name: 'Landbruksdirektoratet', apps: 164, fill: '#2e1a22', stroke: '#c2415d'},
+  {name: 'Arbeidstilsynet', apps: 72, fill: '#331b20', stroke: '#e8607a'},
+];
+const total = TENANTS.reduce((a, t) => a + t.apps, 0);
+const counts = TENANTS.map(t => Math.max(1, Math.round((t.apps / total) * cells.length)));
+counts[0] += cells.length - counts.reduce((a, b) => a + b, 0);
+cells.sort((a, b) => a.angle - b.angle || a.ring - b.ring);
+let at = 0;
+TENANTS.forEach((t, i) => {
+  for (let k = 0; k < counts[i]; k++) cells[at++].tenant = t;
+});
+// Grow ring by ring, clockwise within each ring.
+const teams = [...cells].sort((a, b) => a.ring - b.ring || a.angle - b.angle);
+const TEAMS = teams.length;
+const FLASH = '#3b1a24';
 
 export default makeScene2D(function* (view) {
   view.fill('#0b1120');
@@ -52,12 +77,12 @@ export default makeScene2D(function* (view) {
   const fmt = (v: number) => Math.round(v).toLocaleString('nb-NO').replace(/\s/g, '\u202f');
 
   view.add(
-    <Node ref={world} scale={2.4} y={40}>
+    <Node ref={world} scale={2.4} y={-45}>
       {teams.map(c => (
         <Line
           ref={l => lines.push(l)}
           points={[[0, 0], [c.x, c.y]]}
-          stroke={ACCENT}
+          stroke={c.tenant.name === 'Nav' ? ACCENT : c.tenant.stroke}
           lineWidth={2}
           opacity={0.35}
           end={0}
@@ -70,9 +95,8 @@ export default makeScene2D(function* (view) {
           y={c.y}
           sides={6}
           size={R * 2}
-          rotation={30}
-          fill={HEX_FILL}
-          stroke={HEX_STROKE}
+          fill={c.tenant.fill}
+          stroke={c.tenant.stroke}
           lineWidth={2}
           scale={0}
         />
@@ -81,7 +105,6 @@ export default makeScene2D(function* (view) {
         ref={core}
         sides={6}
         size={R * 2.6}
-        rotation={30}
         fill={ACCENT}
         stroke={'#ff7a8a'}
         lineWidth={3}
@@ -89,7 +112,7 @@ export default makeScene2D(function* (view) {
         shadowBlur={0}
         scale={0}
       >
-        <Txt ref={coreLabel} text="nais" fill={TEXT} fontWeight={700} fontSize={26} rotation={-30} opacity={0} />
+        <Txt ref={coreLabel} text="nais" fill={TEXT} fontWeight={700} fontSize={26} opacity={0} />
       </Polygon>
     </Node>,
   );
@@ -121,6 +144,18 @@ export default makeScene2D(function* (view) {
       fontSize={64} fontWeight={700} opacity={0} />,
   );
 
+  const legend = (
+    <Rect layout direction="row" gap={40} y={-375} opacity={0}>
+      {TENANTS.map(t => (
+        <Rect layout direction="row" gap={12} alignItems="center">
+          <Polygon sides={6} size={26} fill={t.fill} stroke={t.stroke} lineWidth={3} />
+          <Txt text={t.name} fill={MUTED} fontSize={26} fontFamily="Inter, sans-serif" />
+        </Rect>
+      ))}
+    </Rect>
+  ) as Rect;
+  view.add(legend);
+
   // 1. Platform appears
   yield* all(
     core().scale(1, 0.9, easeOutBack),
@@ -134,8 +169,7 @@ export default makeScene2D(function* (view) {
   const grow = 5.2;
   yield* all(
     world().scale(0.62, grow + 1.8, easeInOutCubic),
-    world().y(-55, grow + 1.8, easeInOutCubic),
-    band.opacity(1, 0.6),
+        band.opacity(1, 0.6),
     topBand.opacity(1, 0.6),
     sequence(0.12, ...counters.map(c => c.opacity(1, 0.6))),
     nTeams(4, grow, easeOutCubic),
@@ -147,8 +181,8 @@ export default makeScene2D(function* (view) {
         all(
           lines[i].end(1, 0.5, easeOutExpo),
           hexes[i].scale(1, 0.55, easeOutBack),
-          hexes[i].stroke(ACCENT, 0.15).to(HEX_STROKE, 0.9),
-          hexes[i].fill('#3b1a24', 0.15).to(HEX_FILL, 0.9),
+          hexes[i].stroke(ACCENT, 0.15).to(teams[i].tenant.stroke, 0.9),
+          hexes[i].fill(FLASH, 0.15).to(teams[i].tenant.fill, 0.9),
         ),
       ),
     ),
@@ -159,7 +193,8 @@ export default makeScene2D(function* (view) {
     core().shadowBlur(160, 0.5).to(90, 0.8),
     core().fill(ACCENT_DARK, 0.5).to(ACCENT, 0.8),
     ...lines.map(l => l.opacity(0.9, 0.5).to(0.35, 0.8)),
-    ...hexes.map((h, i) => delay((teams[i].ring - 1) * 0.06, all(h.stroke(ACCENT, 0.3).to(HEX_STROKE, 0.6), h.fill('#3b1a24', 0.3).to(HEX_FILL, 0.6)))),
+    ...hexes.map((h, i) => delay((teams[i].ring - 1) * 0.06, all(h.stroke(ACCENT, 0.3).to(teams[i].tenant.stroke, 0.6), h.fill(FLASH, 0.3).to(teams[i].tenant.fill, 0.6)))),
   );
+  yield* legend.opacity(1, 0.6);
   yield* waitFor(0.8);
 });

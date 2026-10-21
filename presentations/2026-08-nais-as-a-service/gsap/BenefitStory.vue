@@ -14,7 +14,7 @@
         top: `${(pts[i][1] / 300) * 100}%`,
       }"
     >
-      <div class="node"><span :class="it.icon" /></div>
+      <div class="node"><i class="lit" /><span :class="it.icon" /></div>
       <div class="text">
         <h3>{{ it.title }}</h3>
         <p :class="{ ph: it.placeholder }">{{ it.description }}</p>
@@ -50,7 +50,7 @@ const props = defineProps({
 
 const n = props.items.length;
 const pts = props.items.map((_, i) => [
-  75 + (i * 750) / (n - 1),
+  110 + (i * 680) / (n - 1),
   i % 2 ? 110 : 190,
 ]);
 const d = pts.reduce((acc, [x, y], i) => {
@@ -103,13 +103,15 @@ onMounted(() => {
       nodes[i],
       {
         scale: 1.25,
-        filter: "grayscale(0)",
-        opacity: 1,
         duration: 0.5,
         ease: POP,
       },
       i ? "-=0.15" : 0,
-    ).to(texts[i], { autoAlpha: 1, y: 0 }, "<0.1");
+    )
+      // Inactive hexes stay opaque (they cover the track); only the colour fades in.
+      .to(nodes[i].querySelector(".lit"), { opacity: 1, duration: 0.5 }, "<")
+      .to(nodes[i].querySelector("span"), { color: "#fff", duration: 0.5 }, "<")
+      .to(texts[i], { autoAlpha: 1, y: 0 }, "<0.1");
     if (i === n - 1 && props.burst) {
       tl.fromTo(
         bits,
@@ -195,21 +197,29 @@ onBeforeUnmount(() => tl?.kill());
   width: 64px;
   height: 72px;
   clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  position: relative;
+  z-index: 1;
+  background: #e2e8f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lit {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
   background: linear-gradient(
     135deg,
     var(--nais-gradient-from),
     var(--nais-gradient-to)
   );
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  filter: grayscale(1);
-  opacity: 0.35;
 }
 
 .node span {
+  position: relative;
   font-size: 1.9rem;
-  color: #fff;
+  color: #94a3b8;
 }
 
 .text {
