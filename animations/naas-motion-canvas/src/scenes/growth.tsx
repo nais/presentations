@@ -21,12 +21,19 @@ const MUTED = '#94a3b8';
 const HEX_FILL = '#1e293b';
 const HEX_STROKE = '#334155';
 
-// Hexes fill an outline of mainland Norway, centred on Oslo (Nav HQ, the hub).
+// Hexes fill an outline of mainland Norway.
 const R = SPACING / (Math.sqrt(3) * 1.4); // hex radius, same gap ratio as before
-const cells: {x: number; y: number; ring: number; angle: number; tenant?: Tenant}[] = NORWAY.map(([x, y]) => ({
+// The hub sits at the geometric centre of Norway (mean of all cells), and the
+// country grows outward from there.
+const MX = NORWAY.reduce((a, c) => a + c[0], 0) / NORWAY.length;
+const MY = NORWAY.reduce((a, c) => a + c[1], 0) / NORWAY.length;
+// Snap to the land cell nearest the mean, so the hub sits on land.
+const [CX, CY] = NORWAY.reduce((b, c) => (Math.hypot(c[0] - MX, c[1] - MY) < Math.hypot(b[0] - MX, b[1] - MY) ? c : b));
+const SHIFTED = NORWAY.map(([x, y]) => [x - CX, y - CY] as [number, number]);
+const cells: {x: number; y: number; ring: number; angle: number; tenant?: Tenant}[] = SHIFTED.filter(([x, y]) => x !== 0 || y !== 0).map(([x, y]) => ({
   x,
   y,
-  // "ring" = distance band from Oslo, so the country grows outward from there.
+  // "ring" = distance band from the centre.
   ring: Math.round(Math.hypot(x, y) / SPACING),
   angle: (Math.atan2(x, -y) + Math.PI * 2) % (Math.PI * 2),
 }));
@@ -34,8 +41,8 @@ const cells: {x: number; y: number; ring: number; angle: number; tenant?: Tenant
 const FIT = 0.62;
 // Framing: centre of the country's bounding box, used for the final camera.
 const BOX = {
-  x: (Math.min(...NORWAY.map((c) => c[0])) + Math.max(...NORWAY.map((c) => c[0]))) / 2,
-  y: (Math.min(...NORWAY.map((c) => c[1])) + Math.max(...NORWAY.map((c) => c[1]))) / 2,
+  x: (Math.min(...SHIFTED.map((c) => c[0])) + Math.max(...SHIFTED.map((c) => c[0]))) / 2,
+  y: (Math.min(...SHIFTED.map((c) => c[1])) + Math.max(...SHIFTED.map((c) => c[1]))) / 2,
 };
 
 // NaaS tenants, apps per tenant from Grafana 2026-10-21. One hex ≈ 41 apps,
@@ -158,9 +165,7 @@ export default makeScene2D(function* (view) {
     world().scale(FIT, grow + 1.8, easeInOutCubic),
     world().x(-BOX.x * FIT, grow + 1.8, easeInOutCubic),
     world().y(-40 - BOX.y * FIT, grow + 1.8, easeInOutCubic),
-        band.opacity(1, 0.6),
-    topBand.opacity(1, 0.6),
-    sequence(0.12, ...counters.map(c => c.opacity(1, 0.6))),
+        sequence(0.12, ...counters.map(c => c.opacity(1, 0.6))),
     nTeams(6, grow, easeOutCubic),
     nApps(5212, grow + 0.6, easeOutCubic),
     nDeploys(21500, grow + 1.0, easeOutCubic),
