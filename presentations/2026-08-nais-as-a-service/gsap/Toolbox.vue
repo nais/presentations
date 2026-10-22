@@ -9,7 +9,7 @@
     <div class="centre">
       <div ref="ring" class="ring" />
       <div class="app">
-        <span class="i-carbon-application" /><strong>Appen</strong>
+        <span class="i-carbon-application" /><strong>min-app</strong>
       </div>
       <p ref="mine" class="mine">Tenanten: koden, dataene, produktet</p>
     </div>

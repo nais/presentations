@@ -640,7 +640,7 @@ Overgang: «Når vi sier ja til én tenant, sier vi ja til alle.»
 
 ---
 layout: default
-clicks: 2
+clicks: 3
 ---
 
 ::header::
@@ -649,40 +649,23 @@ clicks: 2
 <p class="subtitle">Det én tenant trenger, får alle</p>
 
 ::default::
-<ShareLoop :agencies="['Nav', 'SSB', 'Landbruksdirektoratet', 'Arbeidstilsynet', 'KS Digital', 'Novari']" />
-<p class="evidence anim-item text-center mt-10">«Løse felles oppgaver én gang i fellesskap i stedet for hver for seg.» <span>KS, Altinget 10.06.2025</span></p>
-<p class="evidence anim-item text-center mt-1">«Vi tar nå i bruk NAV sin skybaserte applikasjonsplattform NAIS som er basert på Google cloud.» <span>Landbruksdirektoratet, stillingsannonse</span></p>
-
-<!--
-Overgang: «Og dere står ikke alene.»
-
-- Forbedringer for én tenant kommer alle til gode (siste klikk: alle nodene blir grønne)
-- KS i Altinget 10.06.2025: «løse felles oppgaver én gang i fellesskap i stedet for hver for seg», https://www.altinget.no/artikkel/etterlysning-taktskifte-i-digitaliseringsarbeidet
-- Sitat fra Landbruksdirektoratets stillingsannonse: https://www.finn.no/451519458
--->
-
----
-layout: default
----
-
-::header::
-<div class="pillar-tag" style="--pc: #ff5c6c"><span class="i-carbon-partnership" /> Et Nais-fellesskap</div>
-<h1 class="text-3xl font-bold">Støtte og fellesskap</h1>
-<p class="subtitle">Dere er ikke alene</p>
-
-::default::
-<HubSpokes center="Hjelp" center-icon="i-carbon-help" :start="-90" :spokes="[
+<ShareLoop :agencies="['Nav', 'SSB', 'Landbruksdirektoratet', 'Arbeidstilsynet', 'KS Digital', 'Novari']" :support="[
   { icon: 'i-carbon-logo-slack', title: 'Slack', text: 'Direkte kontakt med Nais-teamet' },
   { icon: 'i-carbon-document', title: 'docs.nais.io', text: 'Dokumentasjon og veiledninger' },
   { icon: 'i-carbon-badge', title: 'Champions', text: 'Champions i teamene' },
   { icon: 'i-carbon-education', title: 'Arbeidsøkter', text: 'Praktiske økter med Nais-teamet' },
   { icon: 'i-carbon-group', title: 'Naisdag', text: 'Tenantene møtes og gir innspill' },
 ]" />
+<p class="evidence anim-item text-center mt-10">«Løse felles oppgaver én gang i fellesskap i stedet for hver for seg.» <span>KS, Altinget 10.06.2025</span></p>
+<p class="evidence anim-item text-center mt-1">«Vi tar nå i bruk NAV sin skybaserte applikasjonsplattform NAIS som er basert på Google cloud.» <span>Landbruksdirektoratet, stillingsannonse</span></p>
 
 <!--
 Overgang: «Og dere får ikke bare hjelp fra oss. Utviklerne kan det allerede.»
 
-- Slack, docs.nais.io, champions i teamene, workshops og Naisdag
+- Forbedringer for én tenant kommer alle til gode (klikk 2: alle nodene blir grønne)
+- Klikk 3: dere står ikke alene. Slack, docs.nais.io, champions i teamene, arbeidsøkter og Naisdag
+- KS i Altinget 10.06.2025: «løse felles oppgaver én gang i fellesskap i stedet for hver for seg», https://www.altinget.no/artikkel/etterlysning-taktskifte-i-digitaliseringsarbeidet
+- Sitat fra Landbruksdirektoratets stillingsannonse: https://www.finn.no/451519458
 -->
 
 ---

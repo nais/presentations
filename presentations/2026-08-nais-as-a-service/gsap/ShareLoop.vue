@@ -24,6 +24,14 @@
     >
       {{ a }}
     </div>
+    <div
+      v-for="(sp, i) in support"
+      :key="'s' + sp.title"
+      class="agency sup"
+      :style="{ left: pos(i).x + '%', top: pos(i).y + '%' }"
+    >
+      <span :class="sp.icon" /> <b>{{ sp.title }}</b><small>{{ sp.text }}</small>
+    </div>
     <div ref="pulse" class="pulse" />
     <div
       v-for="(a, i) in list"
@@ -54,6 +62,9 @@ const props = defineProps({
   // Show at most this many; the rest collapse into one «+N» node.
   maxVisible: { type: Number, default: 4 },
   caption: { type: String, default: "" },
+  // Optional extra click: the agencies exit and support channels take their
+  // places around the same hub. Use as many items as visible nodes.
+  support: { type: Array, default: () => [] },
 });
 const pos = (i) => {
   const a = ((-90 + (i * 360) / list.value.length) * Math.PI) / 180;
@@ -66,7 +77,7 @@ const captionEl = ref();
 useSteps((tl) => {
   const q = gsap.utils.selector(root.value);
   const beams = q(".beam");
-  const agencies = q(".agency");
+  const agencies = q(".agency:not(.sup)");
   const from = pos(1);
   gsap.set(pulse.value, {
     left: `${from.x}%`,
@@ -75,6 +86,8 @@ useSteps((tl) => {
   });
   gsap.set(beams, { autoAlpha: 0, left: "50%", top: "50%" });
   gsap.set(captionEl.value, { autoAlpha: 0, y: 12 });
+  const sup = q(".sup");
+  gsap.set(sup, { autoAlpha: 0, scale: 0.6 });
   tl.from(q(".core"), { scale: 0.5, autoAlpha: 0, ease: POP })
     .from(
       q(".lines line"),
@@ -118,6 +131,27 @@ useSteps((tl) => {
     )
     .to(captionEl.value, { autoAlpha: 1, y: 0 })
     .addLabel("s2");
+  if (sup.length) {
+    // The hub stays; agencies fly out radially and support channels land.
+    const quotes =
+      root.value.closest(".slidev-layout")?.querySelectorAll(".evidence") ?? [];
+    tl.to([captionEl.value, ...quotes], { autoAlpha: 0, duration: 0.3 })
+      .to(
+        agencies,
+        {
+          x: (i) => (pos(i).x - 50) * 4,
+          y: (i) => (pos(i).y - 50) * 3,
+          autoAlpha: 0,
+          duration: 0.5,
+          ease: "power2.in",
+          stagger: 0.04,
+        },
+        "<",
+      )
+      .to(q(".core"), { scale: 1.08, duration: 0.2, yoyo: true, repeat: 1 })
+      .to(sup, { autoAlpha: 1, scale: 1, ease: POP, stagger: STAGGER }, "<0.1")
+      .addLabel("s3");
+  }
   return tl;
 });
 </script>
@@ -206,5 +240,24 @@ useSteps((tl) => {
   text-align: center;
   font-size: 1.15rem;
   font-weight: 600;
+}
+
+.agency.sup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.05rem;
+  min-width: 9.5rem;
+  padding: 0.3rem 0.7rem;
+  white-space: nowrap;
+}
+
+.sup span {
+  color: var(--nais-accent);
+}
+
+.sup small {
+  font-size: 0.66rem;
+  color: var(--nais-text-secondary);
 }
 </style>
