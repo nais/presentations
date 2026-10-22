@@ -23,11 +23,13 @@ const HEX_STROKE = '#334155';
 
 // Hexes fill an outline of mainland Norway.
 const R = SPACING / (Math.sqrt(3) * 1.4); // hex radius, same gap ratio as before
-// The hub sits at the geometric centre of Norway (mean of all cells), and the
-// country grows outward from there.
-const MX = NORWAY.reduce((a, c) => a + c[0], 0) / NORWAY.length;
-const MY = NORWAY.reduce((a, c) => a + c[1], 0) / NORWAY.length;
-// Snap to the land cell nearest the mean, so the hub sits on land.
+// The hub sits in the middle of southern Norway, and the country grows
+// outward from there.
+// Hub target: the middle of southern Norway (Hallingdal/Valdres, about
+// 60.8°N 9.0°E), in the same projection as norway.ts (Oslo at 0,0, about
+// 90.8 units per degree, longitude scaled by cos(64.5°)).
+const MX = (9.0 - 10.75) * Math.cos((64.5 * Math.PI) / 180) * 90.84;
+const MY = (59.91 - 60.8) * 90.84;
 const [CX, CY] = NORWAY.reduce((b, c) => (Math.hypot(c[0] - MX, c[1] - MY) < Math.hypot(b[0] - MX, b[1] - MY) ? c : b));
 const SHIFTED = NORWAY.map(([x, y]) => [x - CX, y - CY] as [number, number]);
 const cells: {x: number; y: number; ring: number; angle: number; tenant?: Tenant}[] = SHIFTED.filter(([x, y]) => x !== 0 || y !== 0).map(([x, y]) => ({
