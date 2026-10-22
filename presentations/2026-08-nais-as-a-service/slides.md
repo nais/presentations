@@ -164,6 +164,7 @@ Overgang: «Så skal vi se hva som skjer når de trykker på knappen.»
 - Feltnavn fra Application-eksempelet i nais/doc
 - Hvert klikk skriver én blokk, og ressursen dukker opp rundt appen
 - Ingen Terraform, ingen egen infrastruktur
+- Utvikleren ber KI-agenten om en app med Postgres og ID-porten. Agenten bruker Nais MCP-serveren (nais/cli, read-only GraphQL: get_nais_context, schema og nais://schema) og den åpne dokumentasjonen, og skriver manifestet vi ser bygge seg opp
 -->
 
 ---
@@ -184,6 +185,7 @@ Overgang: «Men hva skjer egentlig på plattformsiden?»
 - Alt går via GitHub: pull request, sjekker, review, merge
 - Klikk 1: sjekker (bygg, test, nais validate) og godkjenning. Klikk 2: merge, så bygger nais/docker-build-push med SBOM og signering, og nais apply deployer
 - Klikk 3: PR-en viser at den er deployet
+- PR-en er åpnet av Copilot-agenten på vegne av utvikleren. Kari Nordmann reviewer, Copilot kommenterer, og et menneske merger
 -->
 
 ---
@@ -424,7 +426,7 @@ clicks: 9
 <!--
 Overgang: «Så: hvor kjører dette, og hvem eier det? Nå snakker jeg til dere som skal signere.»
 
-- Klikk 1–4: ett ledd per klikk. SBOM og signering skjer automatisk i bygget. Kode fra KI-agenter går gjennom akkurat samme løp
+- Klikk 1–4: ett ledd per klikk. SBOM og signering skjer automatisk i bygget. Husk manifestet og PR-en agenten laget tidligere: den koden gikk gjennom akkurat samme løp som all annen kode
 - Klikk 5: Console vokser ut av det siste leddet. Klikk 6–9: funnet åpnes, PR oppdaterer avhengigheten, bygg og deploy, ny skanning og løst
 - Console-delen er illustrasjon, ikke ekte data eller CVE-er
 - DORA 2025: «AI doesn't fix a team; it amplifies what's already there», https://cloud.google.com/blog/products/ai-machine-learning/announcing-the-2025-dora-report

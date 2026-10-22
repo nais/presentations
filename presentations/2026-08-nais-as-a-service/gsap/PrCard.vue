@@ -4,7 +4,8 @@
       <span class="i-carbon-pull-request icon" />
       <div>
         <b>{{ title }}</b>
-        <small>{{ repo }} · #{{ number }}</small>
+        <small>{{ repo }} · #{{ number
+        }}<template v-if="author"> · {{ author }}</template></small>
       </div>
       <span class="state open">Open</span>
       <span class="state merged">Merged</span>
@@ -54,6 +55,8 @@ const props = defineProps({
   env: { type: String, default: "prod-gcp" },
   // Show GitHub Copilot code review as a second reviewer.
   copilot: { type: Boolean, default: false },
+  // Who opened the PR, e.g. "opened by agent for Kari".
+  author: { type: String, default: "" },
   compact: { type: Boolean, default: false },
 });
 // Checks as rows like GitHub's: strings or { name, time, required }.

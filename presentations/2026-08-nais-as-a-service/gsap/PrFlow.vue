@@ -7,6 +7,7 @@
         :diff="DIFF"
         :checks="CHECKS"
         reviewer="Kari Nordmann"
+        author="opened by Copilot agent"
         copilot
       />
     </div>

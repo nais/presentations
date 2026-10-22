@@ -1,6 +1,15 @@
 <template>
   <div ref="root" class="manifest" data-motion-self>
     <div ref="left" class="left">
+      <div ref="chat" class="chat">
+        <p class="me">
+          <b>Utvikler</b> Lag en Nais-app med Postgres og innlogging med
+          ID-porten
+        </p>
+        <p class="bot">
+          <b>KI-agent</b> <span class="tool">get_nais_context</span><span class="tool">nais://schema</span> Skriver nais.yaml …
+        </p>
+      </div>
       <pre
         class="code"
       ><code><span class="base">{{ BASE }}</span><span v-for="b in BLOCKS" :key="b.code" class="block">{{ b.code }}</span></code></pre>
@@ -184,6 +193,7 @@ CLUSTERS.forEach((c, i) => {
 });
 
 const root = ref();
+const chat = ref();
 const left = ref();
 const galaxy = ref();
 
@@ -199,7 +209,9 @@ useSteps((tl) => {
   gsap.set(q(".wire"), { opacity: 0 });
   gsap.set(galaxy.value, { autoAlpha: 0 });
   gsap.set(g(".zoom-text, .zoom-badge"), { autoAlpha: 0, y: 16 });
-  tl.from(q(".code"), { autoAlpha: 0, x: -24 })
+  // The agent request comes first; the manifest is what the agent writes.
+  tl.from(chat.value, { autoAlpha: 0, y: -12 })
+    .from(q(".code"), { autoAlpha: 0, x: -24 }, "+=0.3")
     .from(q(".app"), { scale: 0.5, autoAlpha: 0, ease: POP }, "-=0.3")
     .addLabel("s0");
   blocks.forEach((b, i) => {
@@ -270,16 +282,49 @@ useSteps((tl) => {
   align-items: center;
 }
 
+.chat {
+  margin-bottom: 0.3rem;
+  padding: 0.25rem 0.6rem;
+  border-radius: 10px;
+  background: #0d1117;
+  border: 1px solid #30363d;
+  font-size: 0.68rem;
+  line-height: 1.4;
+}
+
+.chat p {
+  margin: 0;
+}
+
+.chat b {
+  margin-right: 0.4rem;
+  color: #8b949e;
+}
+
+.chat .bot b {
+  color: #c297ff;
+}
+
+.tool {
+  margin-right: 0.3rem;
+  padding: 0 0.35rem;
+  border-radius: 999px;
+  background: #1f2937;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.6rem;
+  color: #a5b4fc;
+}
+
 .code {
   margin: 0;
-  padding: 0.7rem 0.9rem;
+  padding: 0.5rem 0.9rem;
   border-radius: 14px;
   background: #0f172a;
   border: 1px solid #263352;
   color: #e2e8f0;
   font-family: "JetBrains Mono", monospace;
-  font-size: 0.72rem;
-  line-height: 1.45;
+  font-size: 0.7rem;
+  line-height: 1.32;
   white-space: pre;
   overflow: hidden;
 }

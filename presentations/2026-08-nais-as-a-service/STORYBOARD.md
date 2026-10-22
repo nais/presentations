@@ -78,6 +78,13 @@ Beskriver decket slik det er nå (`slides.md`, komponenter i `gsap/`).
 
 Ingen. Anslag er merket «anslag» på sliden eller i notatene.
 
+### KI i utviklerhistorien
+
+- Slide 7: utvikleren ber KI-agenten om appen, og agenten skriver manifestet (Nais MCP: get_nais_context, nais://schema)
+- Slide 8: PR-en er åpnet av Copilot-agenten; Kari Nordmann reviewer og et menneske merger
+- Slide 19: forsyningskjeden viser at agentens kode går gjennom samme løp
+- Ikke tatt med: feilsøking med agent på «Fra feil til fiks». Nais MCP-serveren er read-only GraphQL mot Nais API og har ingen verktøy for traces eller logger
+
 ### Spørsmål til avklaring
 
 - Avklart: eget datasenter kobles til med VPN eller Cloud Interconnect, per tenant
