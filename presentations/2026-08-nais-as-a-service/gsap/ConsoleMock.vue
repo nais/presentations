@@ -81,7 +81,7 @@
             v-for="a in APPS"
             :key="a"
             class="tr"
-            :class="{ target: a === 'api-soknad' }"
+            :class="{ target: a === 'min-app' }"
           >
             <span class="mono">{{ a }}</span><span>prod</span><span class="green">● Running</span>
           </div>
@@ -90,7 +90,7 @@
 
       <!-- App overview -->
       <section v-show="view === 'app'" class="view">
-        <h2>api-soknad <em>prod</em></h2>
+        <h2>min-app <em>prod</em></h2>
         <div class="tabs">
           <span
             v-for="t in TABS"
@@ -117,16 +117,16 @@
             <h5>Latest deployment <span class="badge">Success</span></h5>
             <p class="act">2 hours ago</p>
             <h5>Persistence</h5>
-            <p class="act mono">soknad-db (Cloud SQL)</p>
-            <p class="act mono">soknad-vedlegg (bucket)</p>
-            <p class="act mono">soknad_stats (BigQuery)</p>
+            <p class="act mono">min-app-db (Cloud SQL)</p>
+            <p class="act mono">min-app-vedlegg (bucket)</p>
+            <p class="act mono">min_app_stats (BigQuery)</p>
           </div>
         </div>
       </section>
 
       <!-- App vulnerabilities -->
       <section v-show="view === 'vulns'" class="view">
-        <h2>api-soknad <em>prod</em></h2>
+        <h2>min-app <em>prod</em></h2>
         <div class="tabs">
           <span
             v-for="t in TABS"
@@ -177,7 +177,7 @@
       </section>
 
       <section v-show="view === 'deploys'" class="view">
-        <h2>api-soknad <em>prod</em></h2>
+        <h2>min-app <em>prod</em></h2>
         <div class="tabs">
           <span
             v-for="t in TABS"
@@ -240,11 +240,11 @@ const props = defineProps({
 });
 
 const ACTIVITY = [
-  { text: "api-soknad updated in prod", when: "12 minutes ago" },
+  { text: "min-app updated in prod", when: "12 minutes ago" },
   { text: "worker updated in dev", when: "1 hour ago" },
   { text: "frontend updated in prod", when: "yesterday" },
 ];
-const APPS = ["api-soknad", "frontend", "worker"];
+const APPS = ["min-app", "frontend", "worker"];
 const TABS = [
   "Overview",
   "Instance Groups",
@@ -287,7 +287,7 @@ const deploy = ref("none");
 const scanning = ref(false);
 
 const frame = computed(() => {
-  const app = ["team-eksempel", "Applications", "api-soknad"];
+  const app = ["team-eksempel", "Applications", "min-app"];
   return {
     overview: {
       url: "console.nais.io/team/team-eksempel",
@@ -305,17 +305,17 @@ const frame = computed(() => {
       crumbs: ["team-eksempel", "Applications"],
     },
     app: {
-      url: "console.nais.io/team/team-eksempel/prod/app/api-soknad",
+      url: "console.nais.io/team/team-eksempel/prod/app/min-app",
       active: "Applications",
       crumbs: app,
     },
     deploys: {
-      url: "console.nais.io/team/team-eksempel/prod/app/api-soknad/deployments",
+      url: "console.nais.io/team/team-eksempel/prod/app/min-app/deployments",
       active: "Applications",
       crumbs: [...app, "Deployments"],
     },
     vulns: {
-      url: "console.nais.io/team/team-eksempel/prod/app/api-soknad/vulnerabilities",
+      url: "console.nais.io/team/team-eksempel/prod/app/min-app/vulnerabilities",
       active: "Applications",
       crumbs: [...app, "Vulnerabilities"],
     },

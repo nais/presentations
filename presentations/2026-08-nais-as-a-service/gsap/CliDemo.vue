@@ -29,15 +29,15 @@ import { useSteps } from "./motion.js";
 const STEPS = [
   { cmd: "nais login", out: ["✓ Logged in as utvikler@direktorat.no"] },
   {
-    cmd: "nais app status api-soknad",
-    out: ["api-soknad-7f9c-x2   Running", "api-soknad-7f9c-k8   Running"],
+    cmd: "nais app status min-app",
+    out: ["min-app-7f9c-x2   Running", "min-app-7f9c-k8   Running"],
   },
   {
-    cmd: "nais app log api-soknad",
+    cmd: "nais app log min-app",
     out: ["INFO  received application", "INFO  application stored"],
   },
   {
-    cmd: "nais cloudsql proxy api-soknad",
+    cmd: "nais cloudsql proxy min-app",
     out: ["✓ Proxy listening on localhost:5432"],
   },
   {

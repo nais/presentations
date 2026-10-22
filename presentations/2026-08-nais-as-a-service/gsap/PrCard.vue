@@ -45,7 +45,7 @@ import { computed } from "vue";
 // classes .check, .review, .merged, .open and .deployed.
 const props = defineProps({
   title: { type: String, required: true },
-  repo: { type: String, default: "team-eksempel/api-soknad" },
+  repo: { type: String, default: "team-eksempel/min-app" },
   number: { type: Number, default: 42 },
   file: { type: String, default: "" },
   diff: { type: Array, default: () => [] },

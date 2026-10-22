@@ -24,7 +24,7 @@
         />
       </svg>
       <div class="app">
-        <span class="i-carbon-application" /><strong>api-soknad</strong>
+        <span class="i-carbon-application" /><strong>min-app</strong>
       </div>
       <div
         v-for="r in DOCKS"
@@ -89,9 +89,9 @@ import { POP, useSteps } from "./motion.js";
 // Field names checked against the Application example in nais/doc
 // (docs/workloads/application/reference/example.md), 2026-10-21.
 const BASE =
-  "apiVersion: nais.io/v1alpha1\nkind: Application\nmetadata: { name: api-soknad, namespace: team-eksempel }\nspec:\n  image: ghcr.io/team-eksempel/api-soknad:1.0.0\n  replicas: { min: 2, max: 4 }\n";
+  "apiVersion: nais.io/v1alpha1\nkind: Application\nmetadata: { name: min-app, namespace: team-eksempel }\nspec:\n  image: ghcr.io/team-eksempel/min-app:1.0.0\n  replicas: { min: 2, max: 4 }\n";
 const BLOCKS = [
-  { code: "  ingresses: [https://api-soknad.eksempel.no]\n" },
+  { code: "  ingresses: [https://min-app.eksempel.no]\n" },
   {
     code: "  gcp:\n    sqlInstances: [{ type: POSTGRES_18 }]\n    buckets: [{ name: min-bucket }]\n",
   },
@@ -107,27 +107,30 @@ const BLOCKS = [
 // Fixed slots around the app, reserved from the start so nothing moves.
 // Inbound on the left and top, data on the right, observability at the bottom.
 // a: anchor (l = chip starts at x, r = chip ends at x, c = centred).
+// Even radial slots around the app hexagon (canvas ≈ 446 x 300 px): top and
+// bottom centred, three on the right, two on the left, each at least ~60 px
+// from the hexagon so every connector stays visible.
 const DOCKS = [
   {
     step: 1,
     x: 50,
-    y: 7,
+    y: 12,
     a: "c",
     label: "Adresse og TLS",
     icon: "i-carbon-globe",
   },
   {
     step: 2,
-    x: 64,
+    x: 72,
     y: 28,
     a: "l",
     label: "Postgres",
     icon: "i-carbon-data-base",
   },
-  { step: 2, x: 64, y: 50, a: "l", label: "Bucket", icon: "i-carbon-box" },
+  { step: 2, x: 77, y: 50, a: "l", label: "Bucket", icon: "i-carbon-box" },
   {
     step: 3,
-    x: 64,
+    x: 72,
     y: 72,
     a: "l",
     label: "Kafka",
@@ -135,16 +138,16 @@ const DOCKS = [
   },
   {
     step: 4,
-    x: 36,
-    y: 60,
+    x: 28,
+    y: 72,
     a: "r",
     label: "Tilgang",
     icon: "i-carbon-password",
   },
   {
     step: 5,
-    x: 36,
-    y: 34,
+    x: 28,
+    y: 28,
     a: "r",
     label: "frontend",
     icon: "i-carbon-application-web",
@@ -153,7 +156,7 @@ const DOCKS = [
   {
     step: 6,
     x: 50,
-    y: 93,
+    y: 88,
     a: "c",
     label: "Logger · metrikker · traces",
     icon: "i-carbon-chart-line",
