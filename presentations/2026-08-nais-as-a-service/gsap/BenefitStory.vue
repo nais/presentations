@@ -14,7 +14,12 @@
         top: `${(pts[i][1] / 300) * 100}%`,
       }"
     >
-      <div class="node"><i class="lit" /><span :class="it.icon" /></div>
+      <div
+        class="node"
+        :data-anchor="!burst && i === items.length - 1 ? 'hex' : null"
+      >
+        <i class="lit" /><span :class="it.icon" />
+      </div>
       <div class="text">
         <h3>{{ it.title }}</h3>
         <p :class="{ ph: it.placeholder }">{{ it.description }}</p>

@@ -807,6 +807,7 @@ layout: cta
 
 ::default::
 <div class="flex items-center justify-center gap-10 w-full">
+  <NorwayHoney />
   <div class="anim-item qr-tile"><img src="./assets/kontakt-qr.svg" alt="QR-kode til e-post nais@nav.no" /></div>
   <div class="anim-item text-left">
     <p class="text-2xl font-bold" style="font-family: Poppins">Book demo eller pilot: nais@nav.no</p>
@@ -819,4 +820,5 @@ Overgang: «Takk.»
 
 - Utviklerne får fart fra dag én, tenanten beholder eierskapet og kan gå når som helst, og prisen er selvkost
 - QR-koden åpner e-post til nais@nav.no (som «Kontakt oss» på nais.io)
+- Den siste sekskanten fra «Drift» flyr inn i Norge-kartet, ved siden av Nav. Kartet er det samme som i åpningsklippet
 -->

@@ -1,6 +1,11 @@
 <template>
   <div class="clip-slide" data-motion-self>
-    <img v-if="isPrintMode" :src="poster" alt="" class="clip-media" />
+    <img
+      v-if="isPrintMode || reduced"
+      :src="poster"
+      alt=""
+      class="clip-media"
+    />
     <video
       v-else
       ref="video"
@@ -19,10 +24,13 @@ import { ref, watch } from "vue";
 import { useIsSlideActive, useNav } from "@slidev/client";
 import clip from "../assets/naas-growth.mp4";
 import poster from "../assets/naas-growth-poster.jpg";
+import { reducedMotion } from "./motion.js";
 
 const { isPrintMode } = useNav();
 const active = useIsSlideActive();
 const video = ref();
+// Reduced motion: show the poster instead of autoplaying the clip.
+const reduced = reducedMotion();
 
 // Restart from the beginning every time the slide is entered.
 watch(
