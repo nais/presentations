@@ -17,11 +17,9 @@
       <div v-for="t in shown" :key="t" class="org">
         <div class="org-head">GCP-organisasjon</div>
         <strong>{{ t }}</strong>
-        <ul v-if="!incoming.includes(t)">
-          <li>Clustere</li>
-          <li>Data</li>
-          <li>Apper</li>
-        </ul>
+        <p v-if="!incoming.includes(t)" class="parts">
+          Clustere · data · apper
+        </p>
         <p v-else class="incoming">På vei inn</p>
         <div class="owned">Eies av tenanten</div>
       </div>
@@ -143,7 +141,7 @@ useSteps((tl) => {
 .wires {
   display: block;
   width: 100%;
-  height: 40px;
+  height: 30px;
 }
 
 .wire {
@@ -192,6 +190,12 @@ useSteps((tl) => {
   line-height: 1.35;
 }
 
+.parts {
+  margin: 0.1rem 0 0;
+  font-size: 0.85rem;
+  color: var(--nais-text-secondary);
+}
+
 .incoming {
   margin: 0.2rem 0 0;
   font-size: 0.75rem;
@@ -222,7 +226,7 @@ useSteps((tl) => {
 }
 
 .exit {
-  margin: 0.8rem 0 0;
+  margin: 0.5rem 0 0;
   text-align: center;
   font-size: 0.95rem;
   font-weight: 600;

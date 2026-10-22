@@ -217,10 +217,8 @@
           <span>Build</span><span>SBOM</span><span>Signering</span><span>Deploy</span>
         </div>
       </div>
-
-      <p class="note">Illustrasjon</p>
-      <Cursor ref="cur" />
     </div>
+    <template #overlay><Cursor ref="cur" /></template>
   </BrowserFrame>
 </template>
 
@@ -233,8 +231,11 @@ import PrCard from "./PrCard.vue";
 import { cursorClick, useSteps } from "./motion.js";
 
 // story "team": team overview -> Cost. story "app": Applications -> one app.
+// story "tour": both in one walk (team -> Cost -> Applications -> app).
 // story "vulns": finding -> dependency PR -> build and deploy -> rescan and resolved.
 const props = defineProps({
+  // Slide click where this component starts (when it shares a slide).
+  offset: { type: Number, default: 0 },
   story: { type: String, required: true },
 });
 
@@ -277,7 +278,7 @@ const COST = [
   },
 ];
 
-const START = { team: "overview", app: "apps", vulns: "app" };
+const START = { team: "overview", app: "apps", vulns: "app", tour: "overview" };
 const view = ref(START[props.story]);
 const ke = ref(1);
 const fixed = ref(false);
@@ -329,7 +330,7 @@ useSteps((tl) => {
   const q = (s) => root.value.querySelector(s);
   const navItem = (label) =>
     [...root.value.closest(".browser").querySelectorAll("nav span")].find(
-      (n) => n.textContent === label,
+      (n) => n.textContent.trim() === label,
     );
   const base = {
     view: START[props.story],
@@ -352,6 +353,27 @@ useSteps((tl) => {
     );
     mark({ view: "cost" });
     tl.from(q(".area"), { autoAlpha: 0, duration: 0.5 }).addLabel("s1");
+  } else if (props.story === "tour") {
+    // Team view -> cost -> Applications -> one app, in one continuous walk.
+    cursorClick(
+      tl,
+      cur.value.$el,
+      root.value.closest(".body"),
+      navItem("Cost"),
+    );
+    mark({ view: "cost" });
+    tl.from(q(".area"), { autoAlpha: 0, duration: 0.5 }).addLabel("s1");
+    cursorClick(
+      tl,
+      cur.value.$el,
+      root.value.closest(".body"),
+      navItem("Applications"),
+    );
+    mark({ view: "apps" });
+    tl.to({}, { duration: 0.4 }).addLabel("s2");
+    cursorClick(tl, cur.value.$el, root.value, q(".tr.target"));
+    mark({ view: "app" });
+    tl.to({}, { duration: 0.4 }).addLabel("s3");
   } else if (props.story === "app") {
     cursorClick(tl, cur.value.$el, root.value, q(".tr.target"));
     mark({ view: "app" });
@@ -419,7 +441,7 @@ useSteps((tl) => {
     scanning.value = m.s.scanning;
   });
   return tl;
-});
+}, props.offset);
 </script>
 
 <style scoped>

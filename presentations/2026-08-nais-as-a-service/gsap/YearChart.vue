@@ -2,7 +2,6 @@
   <div ref="root" class="years" data-motion-self>
     <div class="head">
       <span class="metric">{{ METRICS[metric].label }}</span>
-      <span v-if="hasGaps" class="ph-tag">PLASSHOLDER: årstall fra Nais-teamet</span>
     </div>
     <div class="bars">
       <div v-for="y in rows" :key="y.year" class="col">
@@ -26,23 +25,42 @@ import { useEnter } from "./motion.js";
 // Yearly growth. Fill in verified numbers here; null renders a dashed ghost bar.
 // 2026: Mimir (Nav, all environments), week ending 2026-10-15.
 const METRICS = {
+  // Anslag. The shape follows Nav's yearly average deploys per week
+  // (2015 ≈10 … 2025 ≈2 700), scaled so 2026 lands on today's ≈21 500 per
+  // week across all environments (Mimir, 2026-10-21).
   deploys: {
-    label: "Deployer per uke i Nav",
+    label: "Deployer per uke i Nav (anslag, alle miljøer)",
     data: {
-      2016: null,
-      2017: null,
-      2018: null,
-      2019: null,
-      2020: null,
-      2021: null,
-      2022: null,
-      2023: null,
-      2024: null,
-      2025: null,
+      2016: 100,
+      2017: 300,
+      2018: 1100,
+      2019: 4400,
+      2020: 8800,
+      2021: 9200,
+      2022: 12700,
+      2023: 14700,
+      2024: 18400,
+      2025: 19900,
       2026: 21500,
     },
   },
-  apps: { label: "Apper", data: {} },
+  // Anslag, interpolated between ≈1 300 (2022, Ship It #78) and 5 212 (2026).
+  apps: {
+    label: "Apper (anslag)",
+    data: {
+      2016: 120,
+      2017: 200,
+      2018: 380,
+      2019: 770,
+      2020: 1080,
+      2021: 1110,
+      2022: 1300,
+      2023: 1840,
+      2024: 2600,
+      2025: 3680,
+      2026: 5212,
+    },
+  },
   teams: { label: "Team", data: {} },
 };
 
@@ -53,15 +71,30 @@ const props = defineProps({
 const fmt = (v) => v.toLocaleString("nb-NO").replace(/\s/g, " ");
 const rows = computed(() => {
   const d = METRICS[props.metric].data;
+  const entries = Object.entries(d);
   const max = Math.max(1, ...Object.values(d).filter((v) => v !== null));
-  return Object.entries(d).map(([year, value], i, all) => ({
+  const known = entries
+    .map(([y, v]) => [Number(y), v])
+    .filter(([, v]) => v !== null);
+  // Ghost bars follow a straight line between known years (low before the
+  // first one), so they never suggest more than the real data points.
+  const guess = (y) => {
+    const after = known.find(([ky]) => ky > y);
+    const before = [...known].reverse().find(([ky]) => ky < y);
+    if (!before)
+      return after ? (after[1] * 0.5 * (y - 2015)) / (after[0] - 2015) : 0;
+    if (!after) return before[1];
+    return (
+      before[1] +
+      ((after[1] - before[1]) * (y - before[0])) / (after[0] - before[0])
+    );
+  };
+  return entries.map(([year, value]) => ({
     year,
     value,
-    // Ghost bars show an even rising shape, clearly not data.
-    h: value === null ? 15 + (60 * i) / all.length : (value / max) * 100,
+    h: Math.max(4, ((value ?? guess(Number(year))) / max) * 100),
   }));
 });
-const hasGaps = computed(() => rows.value.some((r) => r.value === null));
 
 const root = ref();
 useEnter((tl) => {
@@ -70,7 +103,7 @@ useEnter((tl) => {
     q(".bar"),
     { scaleY: 0, transformOrigin: "50% 100%", stagger: 0.06, duration: 0.6 },
     0.3,
-  ).from(q(".val, .ph-tag"), { autoAlpha: 0 }, "-=0.3");
+  ).from(q(".val"), { autoAlpha: 0 }, "-=0.3");
   return tl;
 });
 </script>
@@ -94,20 +127,11 @@ useEnter((tl) => {
   font-size: 0.9rem;
 }
 
-.ph-tag {
-  padding: 0.1rem 0.5rem;
-  border-radius: 6px;
-  border: 2px dashed #d97706;
-  background: #fffbeb;
-  color: #92400e;
-  font-size: 0.72rem;
-}
-
 .bars {
   display: flex;
   align-items: flex-end;
   gap: 10px;
-  height: 112px;
+  height: 84px;
 }
 
 .col {

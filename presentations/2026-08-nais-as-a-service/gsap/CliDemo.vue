@@ -27,7 +27,7 @@ import { useSteps } from "./motion.js";
 // Command names checked against github.com/nais/cli (internal/*/command), 2026-10-21.
 // Output is illustrative.
 const STEPS = [
-  { cmd: "nais login", out: ["✓ Logged in as utvikler@eksempel.no"] },
+  { cmd: "nais login", out: ["✓ Logged in as utvikler@direktorat.no"] },
   {
     cmd: "nais app status api-soknad",
     out: ["api-soknad-7f9c-x2   Running", "api-soknad-7f9c-k8   Running"],

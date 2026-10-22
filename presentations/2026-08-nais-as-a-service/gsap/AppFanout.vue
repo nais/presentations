@@ -64,7 +64,8 @@ useSteps((tl) => {
   gsap.set(q(".bus"), { scaleX: 0 });
   gsap.set(q(".group h4, .chip"), { autoAlpha: 0, y: 12 });
   gsap.set(q(".group"), { borderColor: "transparent" });
-  tl.from(q(".app"), { autoAlpha: 0, y: -16 })
+  // The Application node arrives through the view transition, so no entrance.
+  tl.to({}, { duration: 0.01 })
     .from(q(".s1"), { scaleY: 0, transformOrigin: "50% 0%", duration: 0.3 })
     .from(q(".ctrl"), { autoAlpha: 0, scale: 0.7, ease: POP })
     .addLabel("s0")

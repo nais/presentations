@@ -18,7 +18,16 @@
       >{{ d }}</code>
     </div>
     <div class="checks">
-      <span v-for="c in checks" :key="c" class="check"><i class="dotc" /> {{ c }}</span>
+      <div v-for="c in rows" :key="c.name" class="check">
+        <i class="dotc" />
+        <span class="cname">{{ c.name }}</span>
+        <span v-if="c.required" class="req">Required</span>
+        <span class="ctime">{{ c.time }}</span>
+      </div>
+    </div>
+    <div v-if="copilot" class="review">
+      <span class="avatar copilot"><i class="i-simple-icons-githubcopilot" /></span>
+      GitHub Copilot <b class="neutral">Reviewed</b>
     </div>
     <div v-if="reviewer" class="review">
       <span class="avatar">{{ reviewer[0] }}</span> {{ reviewer }}
@@ -31,9 +40,10 @@
 </template>
 
 <script setup>
+import { computed } from "vue";
 // Fictitious GitHub pull request card, dark theme. The parent animates the
 // classes .check, .review, .merged, .open and .deployed.
-defineProps({
+const props = defineProps({
   title: { type: String, required: true },
   repo: { type: String, default: "team-eksempel/api-soknad" },
   number: { type: Number, default: 42 },
@@ -42,8 +52,18 @@ defineProps({
   checks: { type: Array, default: () => ["build", "test"] },
   reviewer: { type: String, default: "" },
   env: { type: String, default: "prod-gcp" },
+  // Show GitHub Copilot code review as a second reviewer.
+  copilot: { type: Boolean, default: false },
   compact: { type: Boolean, default: false },
 });
+// Checks as rows like GitHub's: strings or { name, time, required }.
+const rows = computed(() =>
+  props.checks.map((c, i) =>
+    typeof c === "string"
+      ? { name: c, time: ["1m 12s", "2m 40s", "8s"][i % 3], required: true }
+      : c,
+  ),
+);
 </script>
 
 <style scoped>
@@ -136,11 +156,48 @@ defineProps({
 }
 
 .checks {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.3rem 0.9rem;
   margin-top: 0.5rem;
-  font-size: 0.75rem;
+  border: 1px solid #30363d;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.check {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.18rem 0.5rem;
+  font-size: 0.72rem;
+  border-top: 1px solid #21262d;
+}
+
+.check:first-child {
+  border-top: none;
+}
+
+.cname {
+  font-family: "JetBrains Mono", monospace;
+}
+
+.req {
+  padding: 0 0.35rem;
+  border-radius: 999px;
+  border: 1px solid #30363d;
+  font-size: 0.6rem;
+  color: #8b949e;
+}
+
+.ctime {
+  margin-left: auto;
+  color: #8b949e;
+}
+
+.neutral {
+  color: #8b949e !important;
+}
+
+.copilot {
+  background: #30363d !important;
 }
 
 .dotc {

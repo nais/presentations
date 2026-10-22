@@ -46,6 +46,9 @@
 </template>
 
 <script setup>
+const props = defineProps({
+  offset: { type: Number, default: 0 },
+});
 import { ref } from "vue";
 import gsap from "gsap";
 import { DrawSVGPlugin } from "gsap/DrawSVGPlugin";
@@ -113,7 +116,7 @@ useSteps((tl) => {
     .to(ok.value, { autoAlpha: 1, scale: 1, ease: POP }, "<0.3")
     .addLabel("s4");
   return tl;
-});
+}, props.offset);
 </script>
 
 <style scoped>

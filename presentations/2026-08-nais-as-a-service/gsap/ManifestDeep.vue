@@ -138,7 +138,7 @@ const DOCKS = [
     x: 36,
     y: 60,
     a: "r",
-    label: "Innlogging og tilgang",
+    label: "Tilgang",
     icon: "i-carbon-password",
   },
   {

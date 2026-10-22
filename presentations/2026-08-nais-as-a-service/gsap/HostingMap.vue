@@ -26,12 +26,18 @@
       <section v-for="z in ZONES" :key="z.name" class="zone" :class="z.tone">
         <header><span :class="z.icon" /> {{ z.name }}</header>
         <div class="chips">
-          <span v-for="c in z.items" :key="c" class="chip">{{ c }}</span>
+          <span v-for="c in z.items" :key="c" class="chip" :data-chip="c">{{
+            c
+          }}</span>
+          <template v-if="z.tone === 'self'">
+            <span v-for="c in COMING" :key="c" class="chip coming">{{ c }} <em>på vei</em></span>
+          </template>
         </div>
       </section>
     </div>
     <p ref="caption" class="caption">
-      Flyttet til Google Cloud. Plattformen har flyttet før.
+      Flyttet til Google Cloud. Plattformen har flyttet før. Eget datasenter
+      kobles til med VPN eller Cloud Interconnect.
     </p>
   </div>
 </template>
@@ -44,6 +50,9 @@ import { STAGGER, useSteps, POP } from "./motion.js";
 
 gsap.registerPlugin(DrawSVGPlugin);
 
+// Work in progress: Nais Postgres (CloudNativePG) and Nais Buckets
+// bucket abstraction replace Cloud SQL and Cloud Storage over time.
+const COMING = ["Nais Postgres", "Nais Buckets"];
 const ZONES = [
   {
     name: "Google Cloud",
@@ -76,7 +85,7 @@ useSteps((tl) => {
   gsap.set(caption.value, { autoAlpha: 0, y: 12 });
   tl.from(q(".zone"), { scale: 0.9, autoAlpha: 0, stagger: STAGGER * 2 })
     .from(
-      q(".chip"),
+      q(".chip:not(.coming)"),
       {
         scale: 0.6,
         autoAlpha: 0,
@@ -102,7 +111,19 @@ useSteps((tl) => {
       "<",
     )
     .to(caption.value, { autoAlpha: 1, y: 0 })
-    .addLabel("s1");
+    .addLabel("s1")
+    .to(q('[data-chip="Cloud SQL"], [data-chip="Buckets"]'), {
+      opacity: 0.4,
+      borderStyle: "dashed",
+      duration: 0.4,
+    })
+    .fromTo(
+      q(".chip.coming"),
+      { autoAlpha: 0, x: -40 },
+      { autoAlpha: 1, x: 0, stagger: 0.15, ease: POP },
+      "<0.2",
+    )
+    .addLabel("s2");
   return tl;
 });
 </script>
@@ -164,7 +185,7 @@ useSteps((tl) => {
 
 .zones {
   display: grid;
-  grid-template-columns: 1.2fr 1fr 1.1fr;
+  grid-template-columns: 1.1fr 0.9fr 1.3fr;
   gap: 0.8rem;
 }
 
@@ -213,6 +234,17 @@ header {
   border: 1px solid var(--nais-border);
   font-size: 0.9rem;
   font-weight: 600;
+}
+
+.chip.coming {
+  border-style: dashed;
+  border-color: #ff3377;
+}
+
+.chip.coming em {
+  font-style: normal;
+  font-size: 0.72rem;
+  color: #fca5c0;
 }
 
 .caption {

@@ -23,7 +23,7 @@
       <div class="node nav" :style="pos(NAV)">Nav</div>
       <div class="cloud" :style="pos(CLOUD)">
         Konsulentmiljøer
-        <span class="ph">PLASSHOLDER: antall konsulentselskaper</span>
+        <span class="note">de fleste store konsulentselskapene</span>
       </div>
       <div
         v-for="t in TENANTS"
@@ -310,12 +310,10 @@ useSteps((tl) => {
   font-size: 1rem;
 }
 
-.ph {
+.note {
   padding: 0.05rem 0.5rem;
   border-radius: 6px;
-  border: 2px dashed #d97706;
-  background: rgb(217 119 6 / 0.12);
-  color: #fbbf24;
+  color: var(--nais-text-secondary);
   font-family: "Inter", sans-serif;
   font-size: 0.68rem;
   font-weight: 600;

@@ -28,6 +28,7 @@
         <slot />
       </main>
     </div>
+    <slot name="overlay" />
   </div>
 </template>
 
@@ -58,6 +59,7 @@ const NAV = [
 
 <style scoped>
 .browser {
+  position: relative;
   /* Console is light; keep the mock readable inside a dark deck. */
   --nais-bg: #ffffff;
   --nais-surface: #f1f5f9;

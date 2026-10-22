@@ -158,7 +158,7 @@ onBeforeUnmount(() => tl?.kill());
   position: relative;
   width: 100%;
   aspect-ratio: 3 / 1;
-  margin-bottom: 2.6rem;
+  margin-bottom: 2rem;
 }
 
 .story-svg {

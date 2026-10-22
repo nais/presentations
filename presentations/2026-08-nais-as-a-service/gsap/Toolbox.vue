@@ -102,16 +102,13 @@ useSteps((tl) => {
   const q = gsap.utils.selector(root.value);
   const drawers = q(".drawer");
   gsap.set([ring.value, mine.value], { autoAlpha: 0, scale: 0.8 });
-  tl.from(q(".app"), { scale: 0.5, autoAlpha: 0, ease: POP });
+  // The app hexagon arrives through the view transition, so no entrance here.
+  tl.to({}, { duration: 0.01 });
   if (props.mode === "open") {
     gsap.set(q(".drawer p"), { height: 0, autoAlpha: 0 });
     gsap.set(drawers, { opacity: 0.4 });
     gsap.set(caption.value, { autoAlpha: 0, y: 12 });
-    tl.from(
-      drawers,
-      { x: (i) => (i < 4 ? -30 : 30), stagger: 0.05 },
-      "<",
-    ).addLabel("s0");
+    tl.from(drawers, { autoAlpha: 0, stagger: 0.05 }, "<").addLabel("s0");
     drawers.forEach((d, i) => {
       tl.to(d, { opacity: 1, borderColor: "#e8384f", duration: 0.3 })
         .to(

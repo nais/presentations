@@ -15,7 +15,9 @@ export const reducedMotion = () =>
 
 // Click-driven timeline: build(tl) adds labels s0..sN; click n plays to sN.
 // s0 is the intro that plays on slide enter. Going back rewinds quickly.
-export function useSteps(build) {
+// offset: the slide click at which this timeline's s0 is reached, so two
+// click-driven components can share one slide (the second starts later).
+export function useSteps(build, offset = 0) {
   const { $clicks } = useSlideContext();
   const active = useIsSlideActive();
   let tl;
@@ -24,7 +26,9 @@ export function useSteps(build) {
     return "s0";
   };
   const go = (c) => {
-    const l = label(c);
+    const k = c - offset;
+    if (k < 0) return tl.pause(0);
+    const l = label(k);
     if (reducedMotion()) return tl.seek(l);
     if (tl.labels[l] < tl.time())
       tl.tweenTo(l, { duration: 0.5, ease: "power2.out" });
@@ -38,10 +42,11 @@ export function useSteps(build) {
       active,
       (on) => {
         if (!on) return;
-        if ($clicks.value > 0) tl.seek(label($clicks.value));
+        const k = $clicks.value - offset;
+        if (k > 0) tl.seek(label(k));
         else {
           tl.seek(0);
-          go(0);
+          if (k === 0) go($clicks.value);
         }
       },
       { immediate: true },

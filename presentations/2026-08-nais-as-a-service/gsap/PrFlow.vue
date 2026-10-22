@@ -6,7 +6,8 @@
         file=".nais/app.yaml"
         :diff="DIFF"
         :checks="CHECKS"
-        reviewer="kollega"
+        reviewer="Kari Nordmann"
+        copilot
       />
     </div>
     <div class="pipe">
@@ -23,7 +24,9 @@
           <small>{{ s.sub }}</small>
         </div>
       </div>
-      <div class="pods"><i v-for="k in 4" :key="k" /></div>
+      <div class="pods">
+        <i v-for="k in 4" :key="k">pod</i><small>Nye pods starter i Kubernetes</small>
+      </div>
     </div>
   </div>
 </template>
@@ -74,6 +77,7 @@ useSteps((tl) => {
   gsap.set(q(".review, .deployed"), { autoAlpha: 0 });
   gsap.set(steps, { opacity: 0.3 });
   gsap.set(q(".pods i"), { scale: 0 });
+  gsap.set(q(".pods small"), { autoAlpha: 0 });
   tl.from(q(".pr"), { y: 20, autoAlpha: 0 })
     .from(q(".pipe"), { autoAlpha: 0, x: 20 }, "<0.2")
     .addLabel("s0")
@@ -97,6 +101,7 @@ useSteps((tl) => {
       { scale: 1, ease: POP, stagger: STAGGER, duration: 0.4 },
       "-=0.9",
     )
+    .to(q(".pods small"), { autoAlpha: 1, duration: 0.3 })
     .addLabel("s2")
     .to(q(".deployed"), { autoAlpha: 1, duration: 0.3 })
     .addLabel("s3");
@@ -163,9 +168,23 @@ useSteps((tl) => {
 }
 
 .pods i {
-  width: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
   height: 22px;
   border-radius: 6px;
   background: var(--nais-accent);
+  font-style: normal;
+  font-size: 0.6rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.pods small {
+  align-self: center;
+  margin-left: 0.4rem;
+  font-size: 0.72rem;
+  color: var(--nais-text-secondary);
 }
 </style>

@@ -101,7 +101,7 @@ const TENANTS = [
   "KS Digital",
   "Novari",
 ];
-const STEP = 24;
+const STEP = 22;
 const TOP = 62;
 const layerTop = (k) => TOP + (LAYERS.length - 1 - k) * STEP;
 const SHARED = { left: 8, width: 76 };
@@ -210,7 +210,7 @@ useSteps((tl) => {
 
 .stage {
   position: relative;
-  height: 302px;
+  height: 276px;
 }
 
 .team,
@@ -273,7 +273,7 @@ useSteps((tl) => {
 
 .layer {
   position: absolute;
-  height: 21px;
+  height: 19px;
   border-radius: 6px;
   border: 2px solid transparent;
   display: flex;
@@ -305,7 +305,7 @@ useSteps((tl) => {
   left: 84.8%;
   top: 62px;
   width: 2.2rem;
-  height: 189px;
+  height: 173px;
   border-radius: 8px;
   writing-mode: vertical-rl;
   display: flex;
@@ -320,7 +320,7 @@ useSteps((tl) => {
 
 .callout {
   position: absolute;
-  top: 264px;
+  top: 244px;
   translate: -50% 0;
   display: flex;
   align-items: center;
@@ -382,7 +382,7 @@ useSteps((tl) => {
 }
 
 .thesis {
-  margin: 0.2rem 0 0;
+  margin: -0.4rem 0 0;
   text-align: center;
   font-family: "Poppins", sans-serif;
   font-weight: 700;
