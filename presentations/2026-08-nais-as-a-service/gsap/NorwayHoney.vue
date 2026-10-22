@@ -24,10 +24,10 @@ import {
 } from "../../../animations/naas-motion-canvas/src/norway.ts";
 import { POP, useEnter } from "./motion.js";
 
-// Scale the lattice into a 230 x 270 box (Norway's bounding box, y down).
+// Scale the lattice into a 328 x 380 box (Norway's bounding box, y down).
 const xs = NORWAY.map((p) => p[0]);
 const ys = NORWAY.map((p) => p[1]);
-const K = 270 / (Math.max(...ys) - Math.min(...ys) + SPACING);
+const K = 380 / (Math.max(...ys) - Math.min(...ys) + SPACING);
 const CELLS = NORWAY.map(([x, y]) => ({
   x: (x - Math.min(...xs)) * K,
   y: (y - Math.min(...ys)) * K,
@@ -70,15 +70,15 @@ useEnter((tl) => {
 <style scoped>
 .honey {
   position: relative;
-  width: 230px;
-  height: 280px;
+  width: 328px;
+  height: 390px;
   flex: none;
 }
 
 .cell {
   position: absolute;
-  width: 7.8px;
-  height: 9px;
+  width: 11px;
+  height: 12.7px;
   translate: -50% -50%;
   clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
   background: #334155;
@@ -94,18 +94,22 @@ useEnter((tl) => {
 
 .tag {
   position: absolute;
-  font-size: 0.7rem;
+  padding: 0.15rem 0.6rem;
+  border-radius: 999px;
+  background: rgb(15 23 42 / 0.85);
+  font-family: "Poppins", sans-serif;
+  font-size: 1.15rem;
   font-weight: 700;
   white-space: nowrap;
 }
 
 .tnav {
-  translate: 10px -50%;
+  translate: 16px -120%;
   color: #5cb2da;
 }
 
 .tyou {
-  translate: calc(-100% - 10px) -50%;
+  translate: 16px 70%;
   color: #ff3377;
 }
 </style>

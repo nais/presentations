@@ -615,6 +615,7 @@ body,
 /* View transitions (Chrome). Names apply only while a transition runs, so
    the GSAP entrances still run on normal navigation and in other browsers. */
 :active-view-transition .slidev-layout h1 { view-transition-name: slide-title; }
+:active-view-transition .slidev-layout .subtitle { view-transition-name: slide-subtitle; }
 :active-view-transition .manifest .code,
 :active-view-transition .prflow .diff { view-transition-name: manifest-code; }
 :active-view-transition .prflow .step:has(.i-carbon-rocket),
@@ -626,11 +627,19 @@ body,
 :active-view-transition .split .seg.pay { view-transition-name: price-card; }
 
 ::view-transition-group(*) { animation-duration: 0.6s; animation-timing-function: cubic-bezier(0.65, 0, 0.35, 1); }
-::view-transition-old(slide-title) { animation: vt-title-out 0.35s ease-in both; }
-::view-transition-new(slide-title) { animation: vt-title-in 0.45s 0.15s ease-out both; }
+/* The old title leaves before the new one arrives, so they never overlap. */
+::view-transition-old(slide-title),
+::view-transition-old(slide-subtitle) { animation: vt-title-out 0.3s ease-in both; }
+::view-transition-new(slide-title),
+::view-transition-new(slide-subtitle) { animation: vt-title-in 0.4s 0.3s ease-out both; }
 /* The Console leaves on its own: it shrinks to the right and dims. */
 ::view-transition-old(console-browser):only-child { animation: vt-console-out 0.5s ease-in both; }
 
+/* The whole old slide fades out before the new one fades in: no ghosting. */
+::view-transition-old(root) { animation: vt-fade-out 0.3s ease-in both; }
+::view-transition-new(root) { animation: vt-fade-in 0.4s 0.25s ease-out both; }
+@keyframes vt-fade-out { to { opacity: 0; } }
+@keyframes vt-fade-in { from { opacity: 0; } }
 @keyframes vt-title-out { to { transform: translateY(-24px); opacity: 0; } }
 @keyframes vt-title-in { from { transform: translateY(24px); opacity: 0; } }
 @keyframes vt-console-out { to { transform: translateX(30%) scale(0.6); opacity: 0; filter: brightness(0.4); } }

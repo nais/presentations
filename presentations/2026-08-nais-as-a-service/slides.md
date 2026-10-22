@@ -146,6 +146,7 @@ Overgang: «Og hva er det utviklerne faktisk skriver? Dette.»
 -->
 
 ---
+transition: view-transition
 layout: default
 clicks: 6
 ---
@@ -191,7 +192,6 @@ Overgang: «Men hva skjer egentlig på plattformsiden?»
 
 ---
 layout: default
-transition: view-transition
 clicks: 2
 ---
 
@@ -253,6 +253,7 @@ Overgang: «Og alt dette ser teamet også i Console.»
 -->
 
 ---
+transition: view-transition
 layout: default
 clicks: 3
 ---
@@ -272,7 +273,6 @@ Overgang: «Og fordi teamet ser kostnaden, gjør de noe med den.»
 -->
 
 ---
-transition: view-transition
 layout: default
 clicks: 3
 ---
@@ -431,6 +431,7 @@ Overgang: «Teamet bygger også sikkerheten inn i hver leveranse.»
 -->
 
 ---
+transition: view-transition
 layout: default
 clicks: 9
 ---
@@ -462,7 +463,6 @@ Overgang: «Så: hvor kjører dette, og hvem eier det? Nå snakker jeg til dere 
 -->
 
 ---
-transition: view-transition
 layout: default
 clicks: 6
 ---
@@ -560,6 +560,7 @@ Overgang: «Og hvis dere vil flytte, er det deres valg.»
 -->
 
 ---
+transition: view-transition
 layout: default
 clicks: 3
 ---
@@ -582,7 +583,6 @@ Overgang: «Og dette tar dere med dere.»
 -->
 
 ---
-transition: view-transition
 layout: default
 clicks: 1
 ---
@@ -697,6 +697,7 @@ Overgang: «Så hva koster det?»
 -->
 
 ---
+transition: view-transition
 layout: default
 ---
 
@@ -730,7 +731,6 @@ Overgang: «Hva betyr selvkost her?»
 -->
 
 ---
-transition: view-transition
 layout: default
 ---
 
@@ -774,6 +774,7 @@ Overgang: «Slik kommer dere i gang.»
 -->
 
 ---
+transition: view-transition
 layout: default
 clicks: 4
 ---
@@ -806,12 +807,14 @@ layout: cta
 <p class="subtitle">Dere kan gå når som helst, med alt</p>
 
 ::default::
-<div class="flex items-center justify-center gap-10 w-full">
+<div class="flex items-center justify-center gap-20 w-full">
   <NorwayHoney />
+  <div class="flex flex-col items-center gap-5">
   <div class="anim-item qr-tile"><img src="./assets/kontakt-qr.svg" alt="QR-kode til e-post nais@nav.no" /></div>
-  <div class="anim-item text-left">
-    <p class="text-2xl font-bold" style="font-family: Poppins">Book demo eller pilot: nais@nav.no</p>
+  <div class="anim-item text-center">
+    <p class="text-2xl font-bold" style="font-family: Poppins">Book demo eller pilot</p>
     <p class="text-xl mt-3"><a href="mailto:nais@nav.no" class="text-accent font-bold">nais@nav.no</a> · <a href="https://nais.io" class="text-accent">nais.io</a></p>
+  </div>
   </div>
 </div>
 
