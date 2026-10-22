@@ -259,7 +259,7 @@ useSteps((tl) => {
     .addLabel("s0");
   const at = (x, y) => ({ left: x / 10 + "%", top: (y / 320) * 100 + "%" });
   gsap.set([chip.value, http.value, ok.value], { autoAlpha: 0 });
-  gsap.set(chip.value, at(400, 262));
+  gsap.set(chip.value, at(400, 226));
   caption(0);
   travel([["user-ww"], ["ww-idp"], ["ww-idp", true], ["ww-a"]], "#ff3377");
   tl.to(q(".n-a"), { borderColor: "#34d399", duration: 0.3 }).addLabel("s1");
@@ -273,7 +273,7 @@ useSteps((tl) => {
   }).addLabel("s2");
   caption(2);
   tl.to(wire("a-ta"), { drawSVG: "100%", duration: 0.3 })
-    .to(chip.value, { ...at(490, 262), duration: 0.6, ease: "power2.inOut" })
+    .to(chip.value, { ...at(490, 226), duration: 0.6, ease: "power2.inOut" })
     .to(http.value, { autoAlpha: 1, y: 0, duration: 0.4 })
     .addLabel("s3");
   caption(3);
@@ -285,9 +285,10 @@ useSteps((tl) => {
     .addLabel("s4");
   caption(4);
   tl.to(wire("ta-b"), { drawSVG: "100%", duration: 0.3 })
-    .to(chip.value, { ...at(700, 262), duration: 0.7, ease: "power2.inOut" })
+    .to(chip.value, { ...at(700, 226), duration: 0.7, ease: "power2.inOut" })
     .to(wire("b-tb"), { drawSVG: "100%", duration: 0.2 })
     .to(q(".n-b"), { borderColor: "#34d399", duration: 0.3 })
+    .to(chip.value, { autoAlpha: 0, duration: 0.25 })
     .to(ok.value, { autoAlpha: 1, ease: POP })
     .addLabel("s5");
   tl.eventCallback("onUpdate", () => {
@@ -309,7 +310,8 @@ useSteps((tl) => {
     "<",
   )
     .to(yaml.value, { autoAlpha: 1 })
-    .to(contrast.value, { autoAlpha: 1 })
+    .to(caps[caps.length - 1], { autoAlpha: 0, duration: 0.2 })
+    .to(contrast.value, { autoAlpha: 1 }, "<")
     .addLabel("s8");
   return tl;
 });
@@ -447,7 +449,7 @@ useSteps((tl) => {
   position: absolute;
   left: 0;
   right: 0;
-  top: 290px;
+  top: 304px;
   height: 24px;
 }
 
@@ -463,7 +465,7 @@ useSteps((tl) => {
   z-index: 4;
   display: flex;
   flex-direction: column;
-  translate: -50% -50%;
+  translate: -50% 0;
   min-width: 13rem;
   padding: 0.2rem 0.45rem;
   border-radius: 10px;
@@ -530,7 +532,7 @@ useSteps((tl) => {
   position: absolute;
   z-index: 4;
   left: 74%;
-  top: 31%;
+  top: 75%;
   translate: -50% 0;
   padding: 0.1rem 0.6rem;
   border-radius: 999px;
