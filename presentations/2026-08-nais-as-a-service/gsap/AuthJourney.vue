@@ -306,7 +306,7 @@ useSteps(
     )
       .from(q(".blabel"), { autoAlpha: 0, stagger: 0.1 }, "-=0.4")
       .from(
-        q(props.star ? ".node:not(.n-idp):not(.n-mp)" : ".node"),
+        q(props.star ? ".stage .node:not(.n-idp):not(.n-mp)" : ".node"),
         { scale: 0.6, autoAlpha: 0, stagger: 0.04, ease: POP },
         "-=0.3",
       )

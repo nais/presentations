@@ -25,11 +25,18 @@ export function useSteps(build, offset = 0) {
     for (let i = c; i > 0; i--) if (`s${i}` in tl.labels) return `s${i}`;
     return "s0";
   };
+  // Jump to a label with callbacks (counters, page swaps) firing on the way,
+  // but not those placed exactly on the label: they belong to the next step,
+  // just as when tweenTo() stops there.
+  const jump = (l) => {
+    const t = tl.labels[l] ?? 0;
+    tl.seek(Math.max(0, t - 0.001), false).seek(t);
+  };
   const go = (c) => {
     const k = c - offset;
     if (k < 0) return tl.pause(0);
     const l = label(k);
-    if (reducedMotion()) return tl.seek(l);
+    if (reducedMotion()) return jump(l);
     if (tl.labels[l] < tl.time())
       tl.tweenTo(l, { duration: 0.5, ease: "power2.out" });
     else tl.tweenTo(l);
@@ -41,7 +48,9 @@ export function useSteps(build, offset = 0) {
     );
     // Print/PDF export: jump straight to the state for the current click.
     if (isPrintMode.value) {
-      tl.seek(label(Math.max(0, $clicks.value - offset)));
+      const k = $clicks.value - offset;
+      if (k < 0) tl.pause(0);
+      else jump(label(k));
       return;
     }
     watch(
@@ -49,7 +58,7 @@ export function useSteps(build, offset = 0) {
       (on) => {
         if (!on) return;
         const k = $clicks.value - offset;
-        if (k > 0) tl.seek(label(k));
+        if (k > 0) jump(label(k));
         else {
           tl.seek(0);
           if (k === 0) go($clicks.value);
@@ -99,7 +108,8 @@ const offsetIn = (el, cursor) => {
 // target may be an element or a function returning one; it is resolved when
 // the tween starts, so it is safe to pass selectors for views not yet shown.
 export function cursorClick(tl, cursor, _root, target) {
-  if (reducedMotion()) return tl;
+  // Same timeline under reduced motion: useSteps jumps instead of playing,
+  // so nothing moves, and state marks keep their place after the click.
   const el = () => (typeof target === "function" ? target() : target);
   return tl
     .to(cursor, {
