@@ -81,12 +81,19 @@ useSteps((tl) => {
       duration: 0.5,
       ease: "power2.in",
     })
+    // The wire snaps, then the card drops and bounces: it is now on its own.
+    .to(
+      orgs[props.detach],
+      { y: -6, duration: 0.1, ease: "power1.out" },
+      "-=0.15",
+    )
     .to(orgs[props.detach], {
-      y: 18,
-      x: 0,
+      y: 40,
       rotation: 0,
       boxShadow: "0 12px 24px rgb(0 0 0 / 0.12)",
-      ease: POP,
+      borderColor: "#34d399",
+      ease: "bounce.out",
+      duration: 0.9,
     })
     .addLabel("s2")
     .to(exit.value, { autoAlpha: 1, y: 0 })

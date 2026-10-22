@@ -3,8 +3,10 @@
     <div ref="chain" class="chain">
       <FlowChain :nodes="nodes" />
       <p class="evidence">
-        «AI doesn't fix a team; it amplifies what's already there.»
-        <span>DORA 2025</span>
+        «Reduser risiko for målrettet manipulasjon av IKT-produkter i
+        leverandørkjeden.»
+        <span>NSM Grunnprinsipper for IKT-sikkerhet 2.1.4</span>
+        <small class="nis2">NIS2 er på vei inn i norsk rett.</small>
       </p>
     </div>
     <div ref="consoleEl" class="console">
@@ -57,6 +59,13 @@ useSteps((tl) => {
 
 .chain {
   padding-top: 0.5rem;
+}
+
+.nis2 {
+  display: block;
+  margin-top: 0.15rem;
+  font-size: 0.7rem;
+  opacity: 0.7;
 }
 
 .chain .evidence {

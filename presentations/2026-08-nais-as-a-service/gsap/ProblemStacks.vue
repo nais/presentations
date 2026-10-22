@@ -40,7 +40,7 @@
       </div>
       <div ref="band" class="band">Drift og vakt døgnet rundt</div>
       <div ref="years" class="years">
-        <b ref="yearsN">0</b> årsverk <small>anslag</small>
+        ≈ <b ref="yearsN">0</b> årsverk <small>anslag</small>
       </div>
       <div ref="naisTeam" class="nais-team">
         <span class="i-carbon-user-multiple" /> Nais-teamet
@@ -123,7 +123,6 @@ useSteps((tl) => {
   const layers = q(".layer");
   const tiles = q(".tile:not(.extra)");
   const extra = q(".tile.extra");
-  const n = { v: 0 };
   gsap.set(naisTeam.value, { autoAlpha: 0, scale: 0.6 });
   gsap.set(thesis.value, { autoAlpha: 0, y: 12 });
   gsap.set(years.value, { autoAlpha: 0, scale: 0.7 });
@@ -150,6 +149,12 @@ useSteps((tl) => {
     .to(q(".callout"), { autoAlpha: 0, scale: 0.8, duration: 0.3 })
     .to(q(".team"), { left: "50%", autoAlpha: 0, duration: 0.6, ease: EASE })
     .to(naisTeam.value, { autoAlpha: 1, scale: 1, ease: POP }, "-=0.2");
+  // Anticipation: the stacks pull in a little before they merge.
+  tl.to(q(".layer:not(.missing)"), {
+    scaleX: 0.94,
+    duration: 0.12,
+    ease: "power1.in",
+  }).addLabel("merge");
   // Every agency's layer k slides to the shared row k; the first one stays.
   layers.forEach((el) => {
     const i = Number(el.dataset.i);
@@ -159,7 +164,9 @@ useSteps((tl) => {
         left: SHARED.left + "%",
         width: SHARED.width + "%",
         autoAlpha: i === 0 ? 1 : 0,
-        background: "linear-gradient(90deg, #e8384f, #dc2626)",
+        scaleX: 1,
+        background: "linear-gradient(90deg, #e8384f, #ff3377)",
+        boxShadow: "0 0 18px rgb(255 51 119 / 0.45)",
         borderStyle: "solid",
         duration: 0.8,
         ease: "power2.inOut",
@@ -186,13 +193,10 @@ useSteps((tl) => {
     .to(q(".layer .sub"), { autoAlpha: 1, duration: 0.4 }, "<")
     .to(band.value, { autoAlpha: 1, x: 0 }, "<")
     .to(years.value, { autoAlpha: 1, scale: 1, ease: POP })
+    // textContent tween (not onUpdate), so print-mode seeks show the number too.
     .to(
-      n,
-      {
-        v: 150,
-        duration: 1.2,
-        onUpdate: () => (yearsN.value.textContent = "≈ " + Math.round(n.v)),
-      },
+      yearsN.value,
+      { textContent: 150, snap: { textContent: 1 }, duration: 1.2 },
       "<",
     )
     .to(thesis.value, { autoAlpha: 1, y: 0 }, "-=0.4")
