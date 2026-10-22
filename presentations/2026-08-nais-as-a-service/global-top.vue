@@ -16,7 +16,7 @@ const stage = ref();
 const hex = ref();
 let shown; // the anchor currently hidden behind the stage hex
 let tween;
-let parked = false; // the stage hex has a last known anchor position
+let parkedOn = 0; // slide whose anchor the stage hex last sat on
 
 const anchorOn = (no) =>
   [
@@ -38,12 +38,30 @@ const box = (el) => {
   };
 };
 
+// Where the anchor ends up once its entrance is done: measure with the
+// inline transforms (GSAP entrances) on it and its ancestors switched off.
+const finalBox = (el) => {
+  const page = el.closest(".slidev-page");
+  const saved = [];
+  for (let e = el; e && e !== page; e = e.parentElement) {
+    saved.push([e, e.style.transform, e.style.translate, e.style.scale]);
+    e.style.transform = e.style.translate = e.style.scale = "none";
+  }
+  const b = box(el);
+  for (const [e, t, tr, sc] of saved) {
+    e.style.transform = t;
+    e.style.translate = tr;
+    e.style.scale = sc;
+  }
+  return b;
+};
+
 const reveal = () => {
-  if (shown) gsap.set(shown, { visibility: "visible" });
+  shown?.classList.remove("hero-hidden");
   shown = null;
 };
 
-async function go(no) {
+async function go(no, prev) {
   if (!stage.value) return;
   tween?.kill();
   reveal();
@@ -53,56 +71,63 @@ async function go(no) {
   await new Promise((r) => globalThis.setTimeout(r, 60));
   if (no !== currentSlideNo.value) return;
   const el = anchorOn(no);
-  // No anchor: nothing shows; the hex keeps its last spot for the next flight.
-  if (!el) return;
-  if (reducedMotion() || !parked) {
-    // Nothing to travel from: the slide's own hex shows as normal.
-    const b = box(el);
-    gsap.set(hex.value, {
-      autoAlpha: 0,
-      x: b.x,
-      y: b.y,
-      width: b.w,
-      height: b.h,
-    });
-    parked = true;
+  const from = parkedOn;
+  parkedOn = el ? no : 0;
+  // Fly only from an anchor on the slide we just left; otherwise the
+  // slide's own entrance runs untouched.
+  if (!el || reducedMotion() || !from || from !== prev) {
+    if (el) {
+      const b = finalBox(el);
+      gsap.set(hex.value, { x: b.x, y: b.y, width: b.w, height: b.h });
+    }
     return;
   }
   shown = el;
-  gsap.set(el, { visibility: "hidden" });
+  el.classList.add("hero-hidden");
   gsap.set(hex.value, { autoAlpha: 1 });
-  const from = {
+  const start = {
     x: gsap.getProperty(hex.value, "x"),
     y: gsap.getProperty(hex.value, "y"),
     w: hex.value.offsetWidth,
     h: hex.value.offsetHeight,
   };
+  const end = finalBox(el);
   const p = { t: 0 };
-  // Track the anchor every frame, so it lands where the anchor ends up.
-  tween = gsap.to(p, {
-    t: 1,
-    duration: 0.6,
-    ease: "power3.inOut",
-    onUpdate: () => {
-      const b = box(el);
-      const l = (a, z) => a + (z - a) * p.t;
-      gsap.set(hex.value, {
-        x: l(from.x, b.x),
-        y: l(from.y, b.y),
-        width: l(from.w, b.w),
-        height: l(from.h, b.h),
-      });
-    },
-    onComplete: () => {
-      reveal();
-      gsap.set(hex.value, { autoAlpha: 0 });
-    },
-  });
+  const l = (a, z) => a + (z - a) * p.t;
+  tween = gsap
+    .timeline()
+    .to(p, {
+      t: 1,
+      duration: 0.6,
+      ease: "power3.inOut",
+      onUpdate: () =>
+        gsap.set(hex.value, {
+          x: l(start.x, end.x),
+          y: l(start.y, end.y),
+          width: l(start.w, end.w),
+          height: l(start.h, end.h),
+        }),
+    })
+    // Hand over once the slide's hex has grown to its final size (max 1.5 s),
+    // in one frame: no gap, no double hex.
+    .add(() => {
+      const t0 = globalThis.performance.now();
+      const check = () => {
+        if (shown !== el) return gsap.ticker.remove(check);
+        const live = box(el);
+        if (live.w >= end.w * 0.97 || globalThis.performance.now() - t0 > 1500) {
+          gsap.ticker.remove(check);
+          reveal();
+          gsap.set(hex.value, { autoAlpha: 0 });
+        }
+      };
+      gsap.ticker.add(check);
+    });
 }
 
 // The stage hex is visible only in flight; on arrival the slide's own hex
 // takes over, so labels and slide animations stay as they are.
-watch(currentSlideNo, (no) => go(no), { flush: "post" });
+watch(currentSlideNo, (no, prev) => go(no, prev), { flush: "post" });
 watch(stage, (s) => s && go(currentSlideNo.value));
 onBeforeUnmount(() => {
   tween?.kill();
@@ -133,6 +158,10 @@ onBeforeUnmount(() => {
 
 ::view-transition-old(hero-stage) {
   display: none;
+}
+
+.hero-hidden {
+  visibility: hidden !important;
 }
 
 .hero-hex {
