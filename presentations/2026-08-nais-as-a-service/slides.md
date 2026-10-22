@@ -3,6 +3,10 @@ layout: cover
 transition: fade
 ---
 
+::logo::
+<CoverLogo />
+
+::default::
 <h1 class="text-5xl font-black">Nais as a Service</h1>
 <p class="subtitle text-xl mt-4">Gir fart og flyt på utviklingen av Norge</p>
 <p class="text-sm mt-6 opacity-70">Hans Kristian Flaatten · Nais-teamet i Nav</p>
@@ -699,6 +703,7 @@ Overgang: «Så hva koster det?»
 ---
 transition: view-transition
 layout: default
+clicks: 1
 ---
 
 ::header::
@@ -706,25 +711,13 @@ layout: default
 <p class="subtitle">Dere betaler for det dere bruker, pluss 200 000 kr i året</p>
 
 ::default::
-<div class="price">
-  <div class="anim-item price-card">
-    <span class="i-carbon-cloud" />
-    <b>Egen infrastruktur og forbruk</b>
-    <small>Til selvkost, uten påslag. Teamene ser kostnaden i Console.</small>
-  </div>
-  <div class="anim-item plus">+</div>
-  <div class="anim-item price-card">
-    <span class="i-carbon-receipt" />
-    <b>200 000 kr i året</b>
-    <small>Administrativt gebyr: en liten del av Nais-teamet, administrasjon og videre utvikling</small>
-  </div>
-</div>
-<p class="anim-item text-center mt-6">Plattformen er allerede bygd. Det Nav allerede bærer, betaler dere ikke for.</p>
+<PriceStack />
 
 <!--
 Overgang: «Hva betyr selvkost her?»
 
 - Tenanten betaler egen infrastruktur og fakturerbart forbruk til selvkost, uten påslag
+- Klikk 1: gebyret på 200 000 kr i året legges oppå forbruket
 - I tillegg et administrativt gebyr på 200 000 kr i året. Det dekker en liten del av Nais-teamet på 15, ekstra administrasjon og videre utvikling av Nais
 - Plattformen er allerede bygd og videreutvikles av Nav. Det tenantene ikke betaler for, er det Nav allerede bærer
 - Nav fakturerer hver tenant månedlig til selvkost. Nav eier faktureringskontoen
@@ -749,6 +742,7 @@ Overgang: «Hvem kan så bli med?»
 
 ---
 layout: default
+clicks: 1
 ---
 
 ::header::
@@ -756,21 +750,13 @@ layout: default
 <p class="subtitle">Statlige virksomheter i egenregi</p>
 
 ::default::
-<div class="flex flex-wrap justify-center gap-4 max-w-4xl mx-auto">
-  <div class="anim-item who-chip"><span class="i-carbon-checkmark-filled" /> Departementer</div>
-  <div class="anim-item who-chip"><span class="i-carbon-checkmark-filled" /> Direktorater</div>
-  <div class="anim-item who-chip"><span class="i-carbon-checkmark-filled" /> Etater og tilsyn</div>
-  <div class="anim-item who-chip"><span class="i-carbon-checkmark-filled" /> Forvaltningsbedrifter</div>
-  <div class="anim-item who-chip"><span class="i-carbon-checkmark-filled" /> Forvaltningsorganer med særskilte fullmakter</div>
-  <div class="anim-item who-chip"><span class="i-carbon-checkmark-filled" /> Statlige ombud</div>
-</div>
-<p class="anim-item text-center mt-6 opacity-80">NaaS passer ikke for skjermingsverdig informasjon eller systemer som må kjøre i eget datasenter.</p>
+<WhoLanes />
 
 <!--
 Overgang: «Slik kommer dere i gang.»
 
 - Egenregi i staten: kommuner, statsforetak og private kan ikke bruke NaaS
-- Ikke for skjermingsverdig informasjon eller systemer som må kjøre i eget datasenter
+- Klikk 1: kandidatene sorteres i «passer» og «passer ikke». Ikke for skjermingsverdig informasjon eller systemer som må kjøre i eget datasenter
 -->
 
 ---

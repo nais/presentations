@@ -14,6 +14,7 @@ import { nextTick, onBeforeUnmount, ref, watch } from "vue";
 import { useIsSlideActive, useNav, useSlideContext } from "@slidev/client";
 import gsap from "gsap";
 import { DUR, EASE, STAGGER, reducedMotion } from "./motion.js";
+import { LOGO } from "./logo.js";
 
 // GitHub team nais/nais (2026-10-21). Avatars live in assets/team/<login>.png.
 const TEAM = [
@@ -62,23 +63,6 @@ let tl;
 // neighbours never overlap. 15 cells each.
 // Logo: cells of a 7-row hex lattice whose centre area falls inside the
 // Nais mark (shared/public/logos/nais-v2-rosa.svg), sampled with isPointInFill.
-const LOGO = [
-  [0.25, 0],
-  [-1.25, 1],
-  [-0.25, 1],
-  [-0.75, 2],
-  [-1.25, 3],
-  [-0.25, 3],
-  [0.75, 3],
-  [-1.75, 4],
-  [1.25, 4],
-  [-1.25, 5],
-  [0.75, 5],
-  [1.75, 5],
-  [-0.75, 6],
-  [0.25, 6],
-  [1.25, 6],
-];
 const HEART = [
   [-2, 0],
   [-1, 0],
