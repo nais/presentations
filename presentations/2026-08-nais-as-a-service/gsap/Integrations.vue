@@ -16,7 +16,7 @@
         :class="n.kind"
       />
     </svg>
-    <div class="core"><b>Appen</b><small>på Nais</small></div>
+    <div class="core"><b>min-app</b><small>på Nais</small></div>
     <div
       v-for="n in NODES"
       :key="n.label"
@@ -114,10 +114,9 @@ useSteps((tl) => {
       { scale: 0.7, autoAlpha: 0, stagger: STAGGER, ease: POP },
       "<0.1",
     )
-    .addLabel("s0")
-    .to(q("line.out"), { autoAlpha: 1, stagger: STAGGER, duration: 0.3 })
-    .to(q(".node.out"), { autoAlpha: 1, stagger: STAGGER, ease: POP }, "<")
-    .addLabel("s1");
+    .addLabel("s0");
+  // The network side (outbound, own data centre, third parties) now has its
+  // own topology slide; this star only shows login and tokens.
   return tl;
 });
 </script>

@@ -8,8 +8,8 @@
       </div>
       <div class="seg nav">
         <b>Nav bærer</b>
-        <span>≈ 150 årsverk utvikling (anslag), det meste av Nais-teamet og videre
-          utvikling</span>
+        <span>Det Nav allerede bærer: utviklingen av plattformen og det meste av
+          Nais-teamet</span>
       </div>
     </div>
     <p class="cap">

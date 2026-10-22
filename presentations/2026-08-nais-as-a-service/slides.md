@@ -290,6 +290,7 @@ Overgang: «Og for de som liker terminalen:»
 - Feltene er fra Application-spec (gcp.sqlInstances tier og diskSize). Kronebeløpene er illustrasjon
 - Knytter an til prisen: tenanten betaler forbruket sitt direkte til selvkost, så teamets valg slår rett ut på regningen
 -->
+
 ---
 layout: default
 clicks: 5
@@ -311,7 +312,7 @@ Overgang: «Det var utviklerens side. Nå snur vi bildet: alt som må stå for a
 
 ---
 layout: default
-clicks: 2
+clicks: 4
 ---
 
 ::header::
@@ -322,10 +323,31 @@ clicks: 2
 <IsoLayers />
 
 <!--
-Overgang: «Og alt dette må noen drifte.»
+Overgang: «Og fordi containere deler maskiner, bruker de mindre enn virtuelle maskiner.»
 
 - Lagene bygges nedenfra: infrastruktur fra skyleverandøren, Kubernetes, operatorene (hjertet i Nais) og appene
 - Klikk 1: pods for app A, B og C fordelt over tre soner i én region. Klikk 2: de skalerer ut
+- Klikk 3: datasenter-b faller ut, og podene startes i a og c. Appen merker det ikke
+- Klikk 4: laget nederst byttes (eget datasenter → Google Cloud), mens operatorene og appene står stille. Nais har flyttet før, og det er dette som gjør exit og flytting mulig
+-->
+
+---
+layout: default
+---
+
+::header::
+<h1 class="text-3xl font-bold">Ressursutnyttelse</h1>
+<p class="subtitle">Containere deler maskiner. Virtuelle maskiner står ofte halvtomme.</p>
+
+::default::
+<ResourceIcebergs />
+
+<!--
+Overgang: «Og alt dette må noen drifte.»
+
+- 2–10x er et anslag: spennet fra den gamle Nav-presentasjonen. Det avhenger av hvor godt virtuelle maskiner ble dimensjonert før; containere deler maskiner og skalerer etter behov
+- For beslutningstakere: dere betaler for det appene bruker, ikke for tomme maskiner
+- Nais Postgres og Nais Buckets er på vei, blant annet for å få ned kostnaden
 -->
 
 ---
@@ -420,7 +442,7 @@ clicks: 9
   { icon: 'i-carbon-build-tool', label: 'Bygg', sub: 'All kode, også fra KI-agenter' },
   { icon: 'i-carbon-list-boxes', label: 'SBOM', sub: 'Lages automatisk (CycloneDX)' },
   { icon: 'i-carbon-certificate', label: 'Signering', sub: 'Signert og attestert' },
-  { icon: 'i-carbon-scan', label: 'Sårbarheter', sub: 'Følges opp per workload', stat: '5 608 workloads skannes (apper og jobber)' },
+  { icon: 'i-carbon-scan', label: 'Sårbarheter', sub: 'Følges opp per workload' },
   { icon: 'i-carbon-dashboard', label: 'Console', sub: 'Teamet ser status' },
 ]" />
 
@@ -431,7 +453,8 @@ Overgang: «Så: hvor kjører dette, og hvem eier det? Nå snakker jeg til dere 
 - Klikk 5: Console vokser ut av det siste leddet. Klikk 6–9: funnet åpnes, PR oppdaterer avhengigheten, bygg og deploy, ny skanning og løst
 - Console-delen er illustrasjon, ikke ekte data eller CVE-er
 - DORA 2025: «AI doesn't fix a team; it amplifies what's already there», https://cloud.google.com/blog/products/ai-machine-learning/announcing-the-2025-dora-report
-- 5 608 workloads skannes (Mimir, 21. oktober 2026)
+- 5 608 workloads (apper og jobber) skannes for sårbarheter i Nav (Mimir, 21. oktober 2026). Tallet er tatt av sliden; nevn det muntlig
+- Plass til ett lovsitat om forsyningskjede (kommer fra research)
 -->
 
 ---
@@ -471,7 +494,7 @@ clicks: 2
 <HostingMap />
 
 <!--
-Overgang: «Og plattformen snakker med verden rundt.»
+Overgang: «Og slik henger nettverket sammen.»
 
 - Google Cloud: GKE, Cloud SQL, buckets, BigQuery. Aiven: Kafka, OpenSearch, Valkey
 - Nais drifter observability-stakken selv
@@ -482,48 +505,55 @@ Overgang: «Og plattformen snakker med verden rundt.»
 
 ---
 layout: default
-clicks: 1
+clicks: 6
 ---
 
 ::header::
-<div class="pillar-tag" style="--pc: #9b6fd6"><span class="i-carbon-settings" /> Automatisering</div>
-<h1 class="text-3xl font-bold">Sømløs integrasjon</h1>
+<div class="pillar-tag" style="--pc: #4a9be8"><span class="i-carbon-migrate" /> Suveren og autonom</div>
+<h1 class="text-2xl font-bold">Nettverket rundt min-app</h1>
 
 ::default::
-<Integrations />
+<NetTopology />
 
 <!--
-Overgang: «Og slik ser én forespørsel ut.»
+Overgang: «Og hvem slipper inn? Innloggingen er bygd inn.»
 
-- ID-porten, Maskinporten, Entra ID og TokenX er innebygd (docs.nais.io, auth). Texas tar seg av tokens mellom tjenester
-- Klikk 1: utgående trafikk til eksterne adresser tillates per vertsnavn i accessPolicy.outbound.external
-- Tenantens eget datasenter kobles til med VPN eller Cloud Interconnect, satt opp per tenant
+- Klikk 0: min-app i et Nais-cluster (VPC) i tenantens egen GCP-organisasjon
+- Klikk 1: nettverkspolicyer fra accessPolicy. Alt er stengt som standard; en app som ikke er nevnt, blir stoppet
+- Klikk 2: trafikk ut går bare til vertsnavn i accessPolicy.outbound.external, fra faste utgående IP-er per miljø (docs.nais.io, environments) som partnere kan åpne for
+- Klikk 3: Cloud SQL med privat IP, trafikken forlater ikke Google-nettverket. Aiven-tjenester (Kafka) krever TLS-klientsertifikat
+- Klikk 4: tenantens eget datasenter via VPN eller Cloud Interconnect, satt opp per tenant
+- Klikk 5: brukere kommer inn via ingress med TLS. Interne ingresser nås bare via naisdevice
+- Klikk 6: en annen tenant har sin egen organisasjon og sitt eget nettverk, ingenting er delt
 -->
 
 ---
 layout: default
-clicks: 8
+clicks: 9
 ---
 
 ::header::
 <div class="pillar-tag" style="--pc: #34c27a"><span class="i-carbon-certificate-check" /> Sikkerhet</div>
-<h1 class="text-2xl font-bold">Én forespørsel gjennom Nais</h1>
+<h1 class="text-2xl font-bold">Innlogging uten egen kode</h1>
 
 ::default::
-<AuthJourney />
+<AuthJourney star />
 
 <!--
 Overgang: «Og hvis dere vil flytte, er det deres valg.»
 
-- Klikk 1: Wonderwall (innloggings-sidecar) sender innbyggeren til ID-porten. min-app får forespørselen med Authorization-header. Wonderwall validerer ikke tokenet; appen gjør det via Texas
-- Klikk 2: tokenet har mottaker (aud) min-app. Et token er bare gyldig for mottakeren det er laget for
-- Klikk 3: min-app kaller Texas: POST til NAIS_TOKEN_EXCHANGE_ENDPOINT med identity_provider=tokenx, target=prod-gcp:team-b:api og user_token (docs.nais.io, TokenX)
-- Klikk 4: Texas bytter tokenet via TokenX. Samme bruker, ny mottaker: prod-gcp:team-b:api. Hvorfor: lekker tokenet, kan det ikke brukes mot andre tjenester, og hvert API ser hvem brukeren er
-- Klikk 5: API-ets Texas introspekterer tokenet (NAIS_TOKEN_INTROSPECTION_ENDPOINT): riktig mottaker, riktig bruker
-- Klikk 6: accessPolicy.inbound stopper en app som ikke har lov
-- Klikk 7: Maskinporten-token for et eksternt API, også via Texas
-- Klikk 8: manifestlinjene. Kilde: docs.nais.io (auth, ID-porten, TokenX, Entra ID, Maskinporten)
+- Klikk 0: ID-porten, Maskinporten, Entra ID og TokenX/Texas er innebygd
+- Klikk 1: nodene flyr inn i én forespørsel gjennom Nais, og grensene for cluster og pods tegnes
+- Klikk 2: Wonderwall (innloggings-sidecar) sender innbyggeren til ID-porten. min-app får forespørselen med Authorization-header. Wonderwall validerer ikke tokenet; appen gjør det via Texas
+- Klikk 3: tokenet har mottaker (aud) min-app. Et token er bare gyldig for mottakeren det er laget for
+- Klikk 4: min-app kaller Texas: POST til NAIS_TOKEN_EXCHANGE_ENDPOINT med identity_provider=tokenx, target=prod-gcp:team-b:api og user_token (docs.nais.io, TokenX)
+- Klikk 5: Texas bytter tokenet via TokenX. Samme bruker, ny mottaker: prod-gcp:team-b:api. Hvorfor: lekker tokenet, kan det ikke brukes mot andre tjenester, og hvert API ser hvem brukeren er
+- Klikk 6: API-ets Texas introspekterer tokenet (NAIS_TOKEN_INTROSPECTION_ENDPOINT): riktig mottaker, riktig bruker
+- Klikk 7: accessPolicy.inbound stopper en app som ikke har lov
+- Klikk 8: Maskinporten-token for et eksternt API, også via Texas
+- Klikk 9: manifestlinjene. Kilde: docs.nais.io (auth, ID-porten, TokenX, Entra ID, Maskinporten)
 -->
+
 ---
 layout: default
 clicks: 3
@@ -698,14 +728,14 @@ layout: default
     <small>Administrativt gebyr: en liten del av Nais-teamet, administrasjon og videre utvikling</small>
   </div>
 </div>
-<p class="anim-item text-center mt-6">≈ 150 årsverk (anslag) er allerede investert av Nav. Det betaler dere ikke for.</p>
+<p class="anim-item text-center mt-6">Plattformen er allerede bygd. Det Nav allerede bærer, betaler dere ikke for.</p>
 
 <!--
 Overgang: «Hva betyr selvkost her?»
 
 - Tenanten betaler egen infrastruktur og fakturerbart forbruk til selvkost, uten påslag
 - I tillegg et administrativt gebyr på 200 000 kr i året. Det dekker en liten del av Nais-teamet på 15, ekstra administrasjon og videre utvikling av Nais
-- ≈ 150 årsverk (anslag) er Navs samlede investering så langt. Tenantene betaler ikke for den
+- Plattformen er allerede bygd og videreutvikles av Nav. Det tenantene ikke betaler for, er det Nav allerede bærer
 - Nav fakturerer hver tenant månedlig til selvkost. Nav eier faktureringskontoen
 -->
 
@@ -720,29 +750,10 @@ layout: default
 <SelfCostSplit />
 
 <!--
-Overgang: «Og fordi containere deler maskiner, blir infrastrukturen billigere.»
-
-- Det tenanten ser og betaler: egen infrastruktur og forbruk til selvkost, pluss 200 000 kr i året. Under vannflaten: det Nav allerede bærer, ≈ 150 årsverk (anslag), det meste av teamet og utviklingen
-- Størrelsene er illustrasjon, ikke tall
--->
-
----
-layout: default
----
-
-::header::
-<h1 class="text-3xl font-bold">Ressursutnyttelse</h1>
-<p class="subtitle">Containere deler maskiner. Virtuelle maskiner står ofte halvtomme.</p>
-
-::default::
-<ResourceIcebergs />
-
-<!--
 Overgang: «Hvem kan så bli med?»
 
-- 2–10x er et anslag: spennet fra den gamle Nav-presentasjonen. Det avhenger av hvor godt virtuelle maskiner ble dimensjonert før; containere deler maskiner og skalerer etter behov
-- For beslutningstakere: dere betaler for det appene bruker, ikke for tomme maskiner
-- Nais Postgres og Nais Buckets er på vei, blant annet for å få ned kostnaden
+- Det tenanten ser og betaler: egen infrastruktur og forbruk til selvkost, pluss 200 000 kr i året. Under vannflaten: det Nav allerede bærer, det meste av teamet og utviklingen
+- Størrelsene er illustrasjon, ikke tall
 -->
 
 ---

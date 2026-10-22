@@ -1,5 +1,7 @@
 <template>
   <div ref="root" class="auth" data-motion-self>
+    <!-- Optional overview first: the integration star, then FLIP into the journey. -->
+    <div v-if="star" ref="starEl" class="star"><Integrations /></div>
     <div ref="stage" class="stage">
       <svg
         class="wires"
@@ -25,7 +27,7 @@
           height="96"
           rx="12"
         />
-        <text class="blabel" x="226" y="146">pod: appen</text>
+        <text class="blabel" x="226" y="146">pod: min-app</text>
         <rect
           class="bound pod"
           x="640"
@@ -86,6 +88,7 @@ import { ref } from "vue";
 import gsap from "gsap";
 import { DrawSVGPlugin } from "gsap/DrawSVGPlugin";
 import { MotionPathPlugin } from "gsap/MotionPathPlugin";
+import Integrations from "./Integrations.vue";
 import { POP, useSteps } from "./motion.js";
 
 gsap.registerPlugin(DrawSVGPlugin, MotionPathPlugin);
@@ -115,7 +118,7 @@ const NODES = [
   },
   {
     id: "a",
-    label: "Appen",
+    label: "min-app",
     icon: "i-carbon-application",
     x: 400,
     y: 190,
@@ -183,7 +186,7 @@ const WIRES = [
   { id: "ta-ext", d: "M510 172 C620 110 760 70 840 48", kind: "d" },
 ];
 const CAPTIONS = [
-  "Wonderwall sender innbyggeren til ID-porten. Appen får forespørselen med token, uten egen OIDC-kode.",
+  "Wonderwall sender innbyggeren til ID-porten. min-app får forespørselen med token, uten egen OIDC-kode.",
   "Tokenet er laget for min-app. Det kan ikke brukes mot andre tjenester.",
   "min-app ber Texas bytte tokenet med TokenX, med API-et som mottaker.",
   "Samme bruker, ny mottaker. Tokenet gjelder bare for dette ene API-et. Lekker det, kan det ikke brukes andre steder.",
@@ -203,7 +206,17 @@ accessPolicy:
       - application: api
         namespace: team-b`;
 
+const props = defineProps({
+  // Start with the login/token overview (1 click), then fly into the journey.
+  star: { type: Boolean, default: false },
+});
+const STAR_OF = {
+  idp: "ID-porten",
+  mp: "Maskinporten",
+  ext: "Eksterne API-er",
+};
 const root = ref();
+const starEl = ref();
 const stage = ref();
 const packet = ref();
 const block = ref();
@@ -217,107 +230,156 @@ const swapped = ref(false);
 // s0: boundaries and nodes. s1: login. s2-s5: the TokenX exchange (token claims,
 // call to Texas, new audience, introspection at the API). s6: an app outside
 // accessPolicy is blocked. s7: Maskinporten. s8: the manifest lines.
-useSteps((tl) => {
-  const q = gsap.utils.selector(root.value);
-  const wire = (id) => root.value.querySelector(`[data-w="${id}"]`);
-  const caps = q(".cap .c");
-  gsap.set(q(".wire"), { drawSVG: "0%" });
-  gsap.set([packet.value, block.value, yaml.value, contrast.value, ...caps], {
-    autoAlpha: 0,
-  });
-  // Draws the wire, then sends the packet along it (reverse: back the other way).
-  const travel = (ids, color) => {
-    ids.forEach(([id, back]) => {
-      const w = wire(id);
-      tl.to(w, { drawSVG: "100%", duration: 0.3 })
-        .set(packet.value, { autoAlpha: 1, backgroundColor: color })
-        .to(packet.value, {
-          motionPath: {
-            path: w,
-            align: w,
-            alignOrigin: [0.5, 0.5],
-            start: back ? 1 : 0,
-            end: back ? 0 : 1,
-          },
-          duration: 0.45,
-          ease: "power1.inOut",
-        });
+useSteps(
+  (tl) => {
+    const q = gsap.utils.selector(root.value);
+    const wire = (id) => root.value.querySelector(`[data-w="${id}"]`);
+    const caps = q(".cap .c");
+    gsap.set(q(".wire"), { drawSVG: "0%" });
+    gsap.set([packet.value, block.value, yaml.value, contrast.value, ...caps], {
+      autoAlpha: 0,
     });
-    tl.to(packet.value, { autoAlpha: 0, duration: 0.15 });
-  };
-  const caption = (i) => {
-    if (i) tl.to(caps[i - 1], { autoAlpha: 0, duration: 0.2 });
-    tl.to(caps[i], { autoAlpha: 1, duration: 0.3 }, i ? "<" : ">");
-  };
-  tl.from(q(".bound"), { drawSVG: "0%", duration: 0.8, stagger: 0.15 })
-    .from(q(".blabel"), { autoAlpha: 0, stagger: 0.1 }, "-=0.4")
-    .from(
-      q(".node"),
-      { scale: 0.6, autoAlpha: 0, stagger: 0.04, ease: POP },
-      "-=0.3",
+    // Draws the wire, then sends the packet along it (reverse: back the other way).
+    const travel = (ids, color) => {
+      ids.forEach(([id, back]) => {
+        const w = wire(id);
+        tl.to(w, { drawSVG: "100%", duration: 0.3 })
+          .set(packet.value, { autoAlpha: 1, backgroundColor: color })
+          .to(packet.value, {
+            motionPath: {
+              path: w,
+              align: w,
+              alignOrigin: [0.5, 0.5],
+              start: back ? 1 : 0,
+              end: back ? 0 : 1,
+            },
+            duration: 0.45,
+            ease: "power1.inOut",
+          });
+      });
+      tl.to(packet.value, { autoAlpha: 0, duration: 0.15 });
+    };
+    const caption = (i) => {
+      if (i) tl.to(caps[i - 1], { autoAlpha: 0, duration: 0.2 });
+      tl.to(caps[i], { autoAlpha: 1, duration: 0.3 }, i ? "<" : ">");
+    };
+    if (props.star) {
+      // FLIP: the shared nodes start where they sit in the star and fly into place.
+      const starNode = (id) =>
+        [...starEl.value.querySelectorAll(".node")].find((n) =>
+          n.textContent.includes(STAR_OF[id]),
+        );
+      const delta = (id, axis) => (_, el) => {
+        const from = starNode(id)?.getBoundingClientRect();
+        const to = el.getBoundingClientRect();
+        if (!from) return 0;
+        const k = el.offsetWidth / to.width || 1;
+        return axis === "x"
+          ? (from.left + from.width / 2 - (to.left + to.width / 2)) * k
+          : (from.top + from.height / 2 - (to.top + to.height / 2)) * k;
+      };
+      gsap.set(q(".n-idp, .n-mp"), { autoAlpha: 0 });
+      tl.to(starEl.value, { autoAlpha: 0, duration: 0.4 }).set(
+        q(".n-idp, .n-mp, .n-ext"),
+        { autoAlpha: 1 },
+        "<",
+      );
+      Object.keys(STAR_OF).forEach((id) =>
+        tl.fromTo(
+          q(`.n-${id}`),
+          { x: delta(id, "x"), y: delta(id, "y") },
+          {
+            x: 0,
+            y: 0,
+            duration: 0.8,
+            ease: "power3.inOut",
+            immediateRender: false,
+          },
+          "<",
+        ),
+      );
+    }
+    tl.from(
+      q(".bound"),
+      { drawSVG: "0%", duration: 0.8, stagger: 0.15 },
+      props.star ? "<" : 0,
     )
-    .addLabel("s0");
-  const at = (x, y) => ({ left: x / 10 + "%", top: (y / 320) * 100 + "%" });
-  gsap.set([chip.value, http.value, ok.value], { autoAlpha: 0 });
-  gsap.set(chip.value, at(400, 226));
-  caption(0);
-  travel([["user-ww"], ["ww-idp"], ["ww-idp", true], ["ww-a"]], "#ff3377");
-  tl.to(q(".n-a"), { borderColor: "#34d399", duration: 0.3 }).addLabel("s1");
-  // TokenX exchange, step by step (NAIS_TOKEN_EXCHANGE_ENDPOINT, docs.nais.io).
-  caption(1);
-  tl.to(chip.value, {
-    autoAlpha: 1,
-    scale: 1,
-    ease: POP,
-    duration: 0.5,
-  }).addLabel("s2");
-  caption(2);
-  tl.to(wire("a-ta"), { drawSVG: "100%", duration: 0.3 })
-    .to(chip.value, { ...at(490, 226), duration: 0.6, ease: "power2.inOut" })
-    .to(http.value, { autoAlpha: 1, y: 0, duration: 0.4 })
-    .addLabel("s3");
-  caption(3);
-  // The chip flips at t0; its content switches to the exchanged token there.
-  const t0 = tl.duration() + 0.25;
-  tl.to(chip.value, { scaleX: 0, duration: 0.25, ease: "power2.in" })
-    .to(chip.value, { scaleX: 1, duration: 0.3, ease: "power2.out" })
-    .to(http.value, { autoAlpha: 0, duration: 0.3 }, "<")
-    .addLabel("s4");
-  caption(4);
-  tl.to(wire("ta-b"), { drawSVG: "100%", duration: 0.3 })
-    .to(chip.value, { ...at(700, 226), duration: 0.7, ease: "power2.inOut" })
-    .to(wire("b-tb"), { drawSVG: "100%", duration: 0.2 })
-    .to(q(".n-b"), { borderColor: "#34d399", duration: 0.3 })
-    .to(chip.value, { autoAlpha: 0, duration: 0.25 })
-    .to(ok.value, { autoAlpha: 1, ease: POP })
-    .addLabel("s5");
-  tl.eventCallback("onUpdate", () => {
-    swapped.value = tl.time() >= t0;
-  });
-  caption(5);
-  tl.to([chip.value, ok.value], { autoAlpha: 0, duration: 0.3 }, "<");
-  travel([["c-b"]], "#f87171");
-  tl.to(block.value, { autoAlpha: 1, ease: POP }).addLabel("s6");
-  caption(6);
-  tl.to(block.value, { autoAlpha: 0, duration: 0.2 }, "<");
-  travel([["ta-mp"], ["ta-mp", true], ["ta-ext"]], "#fbbf24");
-  tl.addLabel("s7");
-  caption(7);
-  // Final state: the manifest is the hero; the diagram stays readable, dimmed, on the left.
-  tl.to(
-    stage.value,
-    { scale: 0.5, y: 50, opacity: 0.55, duration: 0.7, ease: "power2.inOut" },
-    "<",
-  )
-    .to(yaml.value, { autoAlpha: 1 })
-    .to(caps[caps.length - 1], { autoAlpha: 0, duration: 0.2 })
-    .to(contrast.value, { autoAlpha: 1 }, "<")
-    .addLabel("s8");
-  return tl;
-});
+      .from(q(".blabel"), { autoAlpha: 0, stagger: 0.1 }, "-=0.4")
+      .from(
+        q(props.star ? ".node:not(.n-idp):not(.n-mp)" : ".node"),
+        { scale: 0.6, autoAlpha: 0, stagger: 0.04, ease: POP },
+        "-=0.3",
+      )
+      .addLabel("s0");
+    const at = (x, y) => ({ left: x / 10 + "%", top: (y / 320) * 100 + "%" });
+    gsap.set([chip.value, http.value, ok.value], { autoAlpha: 0 });
+    gsap.set(chip.value, at(400, 226));
+    caption(0);
+    travel([["user-ww"], ["ww-idp"], ["ww-idp", true], ["ww-a"]], "#ff3377");
+    tl.to(q(".n-a"), { borderColor: "#34d399", duration: 0.3 }).addLabel("s1");
+    // TokenX exchange, step by step (NAIS_TOKEN_EXCHANGE_ENDPOINT, docs.nais.io).
+    caption(1);
+    tl.to(chip.value, {
+      autoAlpha: 1,
+      scale: 1,
+      ease: POP,
+      duration: 0.5,
+    }).addLabel("s2");
+    caption(2);
+    tl.to(wire("a-ta"), { drawSVG: "100%", duration: 0.3 })
+      .to(chip.value, { ...at(490, 226), duration: 0.6, ease: "power2.inOut" })
+      .to(http.value, { autoAlpha: 1, y: 0, duration: 0.4 })
+      .addLabel("s3");
+    caption(3);
+    // The chip flips at t0; its content switches to the exchanged token there.
+    const t0 = tl.duration() + 0.25;
+    tl.to(chip.value, { scaleX: 0, duration: 0.25, ease: "power2.in" })
+      .to(chip.value, { scaleX: 1, duration: 0.3, ease: "power2.out" })
+      .to(http.value, { autoAlpha: 0, duration: 0.3 }, "<")
+      .addLabel("s4");
+    caption(4);
+    tl.to(wire("ta-b"), { drawSVG: "100%", duration: 0.3 })
+      .to(chip.value, { ...at(700, 226), duration: 0.7, ease: "power2.inOut" })
+      .to(wire("b-tb"), { drawSVG: "100%", duration: 0.2 })
+      .to(q(".n-b"), { borderColor: "#34d399", duration: 0.3 })
+      .to(chip.value, { autoAlpha: 0, duration: 0.25 })
+      .to(ok.value, { autoAlpha: 1, ease: POP })
+      .addLabel("s5");
+    tl.eventCallback("onUpdate", () => {
+      swapped.value = tl.time() >= t0;
+    });
+    caption(5);
+    tl.to([chip.value, ok.value], { autoAlpha: 0, duration: 0.3 }, "<");
+    travel([["c-b"]], "#f87171");
+    tl.to(block.value, { autoAlpha: 1, ease: POP }).addLabel("s6");
+    caption(6);
+    tl.to(block.value, { autoAlpha: 0, duration: 0.2 }, "<");
+    travel([["ta-mp"], ["ta-mp", true], ["ta-ext"]], "#fbbf24");
+    tl.addLabel("s7");
+    caption(7);
+    // Final state: the manifest is the hero; the diagram stays readable, dimmed, on the left.
+    tl.to(
+      stage.value,
+      { scale: 0.5, y: 50, opacity: 0.55, duration: 0.7, ease: "power2.inOut" },
+      "<",
+    )
+      .to(yaml.value, { autoAlpha: 1 })
+      .to(caps[caps.length - 1], { autoAlpha: 0, duration: 0.2 })
+      .to(contrast.value, { autoAlpha: 1 }, "<")
+      .addLabel("s8");
+    return tl;
+  },
+  props.star ? 2 : 0,
+);
 </script>
 
 <style scoped>
+.star {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+}
+
 .auth {
   position: relative;
   width: 100%;
