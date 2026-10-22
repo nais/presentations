@@ -34,7 +34,7 @@ import { ref } from "vue";
 import gsap from "gsap";
 import { POP, STAGGER, useSteps } from "./motion.js";
 
-// mode "open": one drawer per click, then the caption (clicks: 8).
+// mode "open": one row of drawers per click, then the caption (clicks: 5).
 // mode "ops": the same grid dimmed as a callback, then the ops layer and the
 // line between the agency's part and Nais' part (clicks: 2).
 const props = defineProps({
@@ -105,18 +105,40 @@ useSteps((tl) => {
   // The app hexagon arrives through the view transition, so no entrance here.
   tl.to({}, { duration: 0.01 });
   if (props.mode === "open") {
-    gsap.set(q(".drawer p"), { height: 0, autoAlpha: 0 });
+    // clip-path instead of height:auto: no layout work while it animates.
+    gsap.set(q(".drawer p"), { clipPath: "inset(0 0 100% 0)", autoAlpha: 0 });
     gsap.set(drawers, { opacity: 0.4 });
     gsap.set(caption.value, { autoAlpha: 0, y: 12 });
     tl.from(drawers, { autoAlpha: 0, stagger: 0.05 }, "<").addLabel("s0");
-    drawers.forEach((d, i) => {
-      tl.to(d, { opacity: 1, borderColor: "#e8384f", duration: 0.3 })
-        .to(
+    // Four waves: row by row, left and right drawer together.
+    const waves = [0, 1, 2, 3].map((r) =>
+      drawers.filter((_, i) => i % 4 === r),
+    );
+    waves.forEach((wave, w) => {
+      wave.forEach((d, j) => {
+        const side = drawers.indexOf(d) < 4 ? 1 : -1;
+        tl.fromTo(
+          d,
+          { x: 40 * side },
+          {
+            x: 0,
+            opacity: 1,
+            borderColor: "#e8384f",
+            duration: 0.4,
+            ease: "power3.out",
+          },
+          j ? "<0.1" : ">",
+        ).to(
           d.querySelector("p"),
-          { height: "auto", autoAlpha: 1, duration: 0.5 },
+          { clipPath: "inset(0 0 0% 0)", autoAlpha: 1, duration: 0.5 },
           "<",
-        )
-        .addLabel(`s${i + 1}`);
+        );
+      });
+      tl.to(
+        q(".app"),
+        { scale: 1.08, duration: 0.15, yoyo: true, repeat: 1 },
+        "<",
+      ).addLabel(`s${w + 1}`);
     });
     tl.to(drawers, {
       borderColor: "rgba(255,51,119,0.5)",
@@ -125,7 +147,7 @@ useSteps((tl) => {
       duration: 0.3,
     })
       .to(caption.value, { autoAlpha: 1, y: 0 })
-      .addLabel(`s${drawers.length + 1}`);
+      .addLabel(`s${waves.length + 1}`);
   } else {
     gsap.set(drawers, { opacity: 0.45 });
     gsap.set(ops.value, { autoAlpha: 0, y: 16 });

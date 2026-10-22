@@ -213,7 +213,7 @@ Overgang: «Tusenvis av apper, og hver får den samme hylla. Her er den.»
 
 ---
 layout: default
-clicks: 8
+clicks: 5
 ---
 
 ::header::
@@ -225,9 +225,9 @@ clicks: 8
 <Toolbox mode="open" />
 
 <!--
-Overgang: «Jeg åpner skuffene én etter én. Etterpå: hva skjer når noe feiler?»
+Overgang: «Hva skjer når noe feiler?»
 
-- Én skuff per klikk, til slutt alt på en gang
+- Én rad skuffer per klikk (fire bølger), til slutt alt på en gang
 - Gruppert etter inventaret over verktøykassa. Utfasede ting er utelatt
 - MCP for kodeagenter ligger i Verktøy-skuffen
 -->
@@ -625,6 +625,7 @@ Overgang: «Hvem bestemmer så hva som skjer med plattformen?»
 
 ---
 layout: default
+clicks: 1
 ---
 
 ::header::

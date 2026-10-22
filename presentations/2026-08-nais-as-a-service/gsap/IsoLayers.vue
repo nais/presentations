@@ -91,12 +91,17 @@ useSteps((tl) => {
     .to(q(".zones"), { autoAlpha: 1, x: 0 }, "<0.2")
     .to(q(".pod:not(.extra):not(.moved)"), {
       scale: 1,
-      ease: POP,
+      ease: "elastic.out(1,0.5)",
       stagger: 0.05,
       duration: 0.4,
     })
     .addLabel("s1")
-    .to(q(".pod.extra"), { scale: 1, ease: POP, stagger: 0.05, duration: 0.4 })
+    .to(q(".pod.extra"), {
+      scale: 1,
+      ease: "elastic.out(1,0.5)",
+      stagger: 0.05,
+      duration: 0.8,
+    })
     .addLabel("s2")
     // Zone b fails: it turns red, its pods fade, and spare pods land in a and c.
     .to(zone("datasenter-b"), {

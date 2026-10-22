@@ -40,7 +40,7 @@ import { ref } from "vue";
 import gsap from "gsap";
 import { MotionPathPlugin } from "gsap/MotionPathPlugin";
 import { DrawSVGPlugin } from "gsap/DrawSVGPlugin";
-import { STAGGER, useEnter, POP } from "./motion.js";
+import { STAGGER, useSteps, POP } from "./motion.js";
 
 gsap.registerPlugin(MotionPathPlugin, DrawSVGPlugin);
 
@@ -65,7 +65,8 @@ const ring = ref();
 const dot = ref();
 const gate = ref();
 
-useEnter((tl) => {
+// s0: ring, steps and queue. s1 (click): one turn of the year, two agencies get in.
+useSteps((tl) => {
   const q = gsap.utils.selector(root.value);
   const agencies = q(".agency");
   const slots = q(".slots i");
@@ -83,7 +84,9 @@ useEnter((tl) => {
       { scale: 0.5, autoAlpha: 0, stagger: STAGGER * 2, ease: POP },
       0.3,
     )
-    .from(dot.value, { autoAlpha: 0, duration: 0.2 }, 1)
+    .from(agencies, { x: -40, autoAlpha: 0, stagger: STAGGER }, 0.8)
+    .addLabel("s0")
+    .from(dot.value, { autoAlpha: 0, duration: 0.2 }, "s0")
     .to(
       dot.value,
       {
@@ -97,18 +100,17 @@ useEnter((tl) => {
         duration: 3,
         ease: "none",
       },
-      1,
+      "s0",
     )
     .from(
       q(".queue h3, .queue p"),
       { autoAlpha: 0, y: 12, stagger: STAGGER },
       0.6,
     )
-    .from(agencies, { x: -40, autoAlpha: 0, stagger: STAGGER }, 0.8)
     .to(
       gate.value,
       { scaleY: 0, transformOrigin: "50% 0%", duration: 0.3 },
-      1.8,
+      "s0+=0.8",
     )
     .to(
       agencies.slice(-2),
@@ -124,9 +126,10 @@ useEnter((tl) => {
         stagger: 0.25,
         duration: 0.6,
       },
-      2,
+      "s0+=1",
     )
-    .to(gate.value, { scaleY: 1, duration: 0.3 }, 2.9);
+    .to(gate.value, { scaleY: 1, duration: 0.3 }, "s0+=1.9")
+    .addLabel("s1", "s0+=3.2");
   return tl;
 });
 </script>

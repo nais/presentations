@@ -132,6 +132,17 @@ useSteps((tl) => {
     )
     .addLabel("s0");
   merge();
+  // Anticipation: the chart dips a little before the cost spikes.
+  tl.to(line1.value.ownerSVGElement, {
+    scaleY: 0.96,
+    transformOrigin: "50% 100%",
+    duration: 0.1,
+    ease: "power1.in",
+  }).to(line1.value.ownerSVGElement, {
+    scaleY: 1,
+    duration: 0.25,
+    ease: "back.out(3)",
+  });
   tl.to(line2.value, { drawSVG: "100%", duration: 1, ease: "none" }).addLabel(
     "s1",
   );
