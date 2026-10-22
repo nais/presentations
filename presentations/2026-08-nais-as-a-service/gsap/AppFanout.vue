@@ -1,32 +1,74 @@
 <template>
   <div ref="root" class="fan" data-motion-self>
-    <div class="node app">
-      <span class="i-carbon-document" /> Application <small>nais.yaml</small>
-    </div>
-    <div class="stem s1" />
-    <div class="node ctrl">
-      <span class="i-carbon-settings-adjust" /> Naiserator
-    </div>
-    <div class="stem s2" />
-    <div class="bus" />
-    <div class="groups">
-      <section class="group">
-        <div class="drop" />
-        <h4>Kubernetes-ressurser</h4>
-        <div class="grid k8s">
-          <div v-for="k in CORE" :key="k" class="chip">{{ k }}</div>
-        </div>
-      </section>
-      <section class="group">
-        <div class="drop" />
-        <h4>Via operatorer</h4>
-        <div class="grid ops">
-          <div v-for="k in OPS" :key="k.name" class="chip op">
-            <strong>{{ k.name }}</strong>
-            <small>{{ k.by }}</small>
+    <div class="fan-body">
+      <div class="node app">
+        <span class="i-carbon-document" /> Application <small>nais.yaml</small>
+      </div>
+      <div class="stem s1" />
+      <div class="node ctrl">
+        <span class="i-carbon-settings-adjust" /> Naiserator
+      </div>
+      <div class="stem s2" />
+      <div class="bus" />
+      <div class="groups">
+        <section class="group">
+          <div class="drop" />
+          <h4>Kubernetes-ressurser</h4>
+          <div class="grid k8s">
+            <div v-for="k in CORE" :key="k" class="chip">{{ k }}</div>
           </div>
-        </div>
-      </section>
+        </section>
+        <section class="group">
+          <div class="drop" />
+          <h4>Via operatorer</h4>
+          <div class="grid ops">
+            <div v-for="k in OPS" :key="k.name" class="chip op">
+              <strong>{{ k.name }}</strong>
+              <small>{{ k.by }}</small>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+    <div ref="galaxy" class="galaxy">
+      <svg viewBox="0 0 1000 400" aria-hidden="true">
+        <text x="10" y="24" class="env">dev</text>
+        <text x="10" y="224" class="env">prod</text>
+        <line x1="0" y1="200" x2="1000" y2="200" class="split" />
+        <line
+          v-for="(l, i) in LINKS"
+          :key="'l' + i"
+          :x1="l[0].x"
+          :y1="l[0].y"
+          :x2="l[1].x"
+          :y2="l[1].y"
+          class="link"
+        />
+        <g
+          v-for="(c, i) in CLUSTERS"
+          :key="i"
+          class="cl"
+          :transform="`translate(${c.x} ${c.y})`"
+        >
+          <circle
+            v-for="k in 3"
+            :key="k"
+            :cx="Math.cos(k * 2.1) * 17"
+            :cy="Math.sin(k * 2.1) * 17"
+            r="2.6"
+            :fill="c.color"
+            opacity="0.7"
+          />
+          <polygon
+            points="0,-11 9.5,-5.5 9.5,5.5 0,11 -9.5,5.5 -9.5,-5.5"
+            :fill="c.me ? '#ff3377' : c.color"
+          />
+        </g>
+      </svg>
+      <p class="zoom-text">Tusenvis av apper. Ett plattformteam.</p>
+      <div class="zoom-badge">
+        <span class="i-carbon-user-multiple" /> Nais-teamet
+      </div>
     </div>
   </div>
 </template>
@@ -56,7 +98,28 @@ const OPS = [
   { name: "TokenX-klient", by: "jwker" },
 ];
 
+// Zoom-out constellation: many app clusters, three team colours, dev and prod.
+const TEAMS = ["#5cb2da", "#9b6fd6", "#34c27a"];
+const CLUSTERS = [];
+for (let row = 0; row < 6; row++)
+  for (let col = 0; col < 16; col++) {
+    const jx = ((col * 37 + row * 53) % 17) - 8;
+    const jy = ((col * 29 + row * 41) % 13) - 6;
+    CLUSTERS.push({
+      x: 90 + col * 56 + jx,
+      y: 35 + row * 60 + (row > 2 ? 20 : 0) + jy,
+      color: TEAMS[Math.floor(col / 6) % 3],
+      me: row === 4 && col === 8,
+    });
+  }
+const LINKS = [];
+CLUSTERS.forEach((c, i) => {
+  if (i % 3 === 0 && i % 16 !== 15) LINKS.push([c, CLUSTERS[i + 1]]);
+  if (i % 5 === 0 && CLUSTERS[i + 16]) LINKS.push([c, CLUSTERS[i + 16]]);
+});
+
 const root = ref();
+const galaxy = ref();
 // s0: Application and Naiserator. s1: trunk, bus and drops draw, then both groups pop.
 useSteps((tl) => {
   const q = gsap.utils.selector(root.value);
@@ -80,12 +143,41 @@ useSteps((tl) => {
       "-=0.1",
     )
     .addLabel("s1");
+  // s2: zoom out from one app to the whole environment.
+  const g = gsap.utils.selector(galaxy.value);
+  gsap.set(galaxy.value, { autoAlpha: 0 });
+  gsap.set(g(".zoom-text, .zoom-badge"), { autoAlpha: 0, y: 16 });
+  tl.to(q(".fan-body"), {
+    scale: 0.15,
+    autoAlpha: 0,
+    duration: 0.9,
+    ease: "power2.inOut",
+  })
+    .to(galaxy.value, { autoAlpha: 1, duration: 0.4 }, "-=0.5")
+    .from(
+      g(".cl"),
+      {
+        scale: 0,
+        transformOrigin: "50% 50%",
+        stagger: { each: 0.008, from: "center" },
+        duration: 0.4,
+      },
+      "<",
+    )
+    .from(g(".link, .split, .env"), { autoAlpha: 0, duration: 0.5 }, "-=0.2")
+    .to(g(".zoom-text"), { autoAlpha: 1, y: 0 })
+    .to(g(".zoom-badge"), { autoAlpha: 1, y: 0, ease: POP }, "-=0.3")
+    .addLabel("s2");
   return tl;
 });
 </script>
 
 <style scoped>
 .fan {
+  position: relative;
+}
+
+.fan-body {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -219,5 +311,66 @@ h4 {
   font-size: 0.72rem;
   color: var(--nais-text-secondary);
   white-space: nowrap;
+}
+.galaxy {
+  will-change: transform, opacity;
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+}
+
+.galaxy svg {
+  width: 100%;
+  height: 100%;
+}
+
+.link {
+  stroke: #475569;
+  stroke-width: 1.5;
+}
+
+.split {
+  stroke: #334155;
+  stroke-dasharray: 6 6;
+}
+
+.env {
+  fill: #a3b1c6;
+  font-size: 18px;
+  font-family: "JetBrains Mono", monospace;
+}
+
+.zoom-text {
+  position: absolute;
+  left: 50%;
+  top: 40%;
+  translate: -50% -50%;
+  margin: 0;
+  padding: 0.5rem 1.2rem;
+  border-radius: 14px;
+  background: rgb(11 17 32 / 0.88);
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-size: 1.6rem;
+  white-space: nowrap;
+}
+
+.zoom-badge {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  translate: -50% 0;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.3rem 1rem;
+  border-radius: 999px;
+  color: #fff;
+  font-weight: 700;
+  background: linear-gradient(
+    135deg,
+    var(--nais-gradient-from),
+    var(--nais-gradient-to)
+  );
 }
 </style>

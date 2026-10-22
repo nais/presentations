@@ -147,7 +147,7 @@ Overgang: «Og hva er det utviklerne faktisk skriver? Dette.»
 
 ---
 layout: default
-clicks: 7
+clicks: 6
 ---
 
 ::header::
@@ -191,7 +191,7 @@ Overgang: «Men hva skjer egentlig på plattformsiden?»
 ---
 layout: default
 transition: view-transition
-clicks: 1
+clicks: 2
 ---
 
 ::header::
@@ -203,10 +203,11 @@ clicks: 1
 <AppFanout />
 
 <!--
-Overgang: «Det var én app. Zoom ut, og her er hele hylla.»
+Overgang: «Tusenvis av apper, og hver får den samme hylla. Her er den.»
 
 - Naiserator lager Kubernetes-ressursene: Deployment, Service, Ingress, NetworkPolicy og flere
 - Operatorer tar over resten: Config Connector, aivenator, azurerator, digdirator, jwker
+- Klikk 2: zoom ut fra én app til tusenvis av apper og ett plattformteam
 -->
 
 ---
