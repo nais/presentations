@@ -756,6 +756,7 @@ clicks: 1
 Overgang: «Slik kommer dere i gang.»
 
 - Egenregi i staten: kommuner, statsforetak og private kan ikke bruke NaaS
+- Kommunal sektor er med gjennom offentlig-offentlig samarbeid via KS Digital og Novari.
 - Klikk 1: kandidatene sorteres i «passer» og «passer ikke». Ikke for skjermingsverdig informasjon eller systemer som må kjøre i eget datasenter
 -->
 

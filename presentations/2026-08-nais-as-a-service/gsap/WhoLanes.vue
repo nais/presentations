@@ -26,7 +26,6 @@ import { POP, useSteps } from "./motion.js";
 // s0: all candidates in one mixed pile. s1: they sort into two lanes.
 const CHIPS = [
   { t: "Departementer", ok: true },
-  { t: "Kommuner", ok: false },
   { t: "Direktorater", ok: true },
   { t: "Etater og tilsyn", ok: true },
   { t: "Statsforetak", ok: false },
