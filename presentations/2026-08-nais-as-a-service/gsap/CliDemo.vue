@@ -47,7 +47,7 @@ const STEPS = [
 ];
 
 const root = ref();
-// One command per click: typed out, then its output appears.
+// One command per click: typed out, then its output appears. Earlier ones dim.
 useSteps((tl) => {
   const q = gsap.utils.selector(root.value);
   const steps = q(".step");
@@ -57,6 +57,8 @@ useSteps((tl) => {
     const typed = st.querySelector(".typed");
     const full = typed.textContent;
     const t = { n: 0 };
+    // Earlier commands step back so the new one has the focus.
+    if (i) tl.to(steps.slice(0, i), { opacity: 0.4, duration: 0.25 });
     tl.set(st, { display: "block" })
       .fromTo(
         t,
