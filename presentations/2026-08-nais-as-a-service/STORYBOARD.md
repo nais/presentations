@@ -5,7 +5,7 @@ Beskriver decket slik det er nå (`slides.md`, komponenter i `gsap/`).
 - **Tese:** «Plattformen Nav bygde for seg selv er nå en tjeneste for det offentlige.»
 - **Målgruppe:** teknologiledere (primær), beslutningstakere (sekundær)
 - **Oppfordring:** book demo eller pilot (nais@nav.no, QR-kode på siste slide)
-- **Pris:** egen infrastruktur og forbruk til selvkost, pluss et administrativt gebyr på 200 000 kr i året. ≈ 150 årsverk (anslag) vises én gang, på Problemet; senere står «det Nav allerede bærer»
+- **Pris:** egen infrastruktur og forbruk til selvkost, pluss et administrativt gebyr på 200 000 kr i året. ≈ 150 årsverk (anslag) vises én gang, på Problemet; senere står «det Nav allerede bærer»
 - **Overganger:** `fade` som standard; `view-transition` der elementer flytter seg mellom slides. Slidev bruker overgangen til sliden man forlater, så den står på sliden før
 - **Kilder:** URL-er står i talernotatene
 
@@ -17,7 +17,7 @@ Beskriver decket slik det er nå (`slides.md`, komponenter i `gsap/`).
 | 2 | Problemet | 1 | fade | – | «Og den felles plattformen er ikke en idé. Den har vokst siden 2016. Se.» |
 | 3 | (klipp) | 0 | fade | – | «(Ingen overgang. La klippet gå, ikke snakk over det.)» |
 | 4 | Hva er Nais | 0 | fade | – | «Seks ting Nais skal gi dere. Jeg kommer tilbake til dem underveis. Først: brukes dette faktisk?» |
-| 5 | Tenants utenfor Nav kjører allerede 528 apper | 0 | fade | – | «Grunnen til at tallene er så store, kommer på neste slides.» |
+| 5 | Tenants utenfor Nav kjører allerede 528 apper | 0 | fade | – | «Grunnen til at tallene er så store, kommer på de neste slidene.» |
 | 6 | Hva Nais har betydd for Nav | 5 | fade | – | «Og hva er det utviklerne faktisk skriver? Dette.» |
 
 ## Akt 2: Åpne verktøykassa (slide 7–14)

@@ -77,7 +77,7 @@ user_token=eyJra...</code></pre>
     </div>
     <pre ref="yaml" class="yaml"><code>{{ YAML }}</code></pre>
     <p ref="contrast" class="contrast">
-      Det dere ellers bygger selv: OIDC-flyt, nøkkelrotasjon, token-utveksling,
+      Det dere slipper å bygge selv: OIDC-flyt, nøkkelrotasjon, token-utveksling,
       validering.
     </p>
   </div>
@@ -188,7 +188,7 @@ const WIRES = [
 const CAPTIONS = [
   "Wonderwall sender innbyggeren til ID-porten. min-app får forespørselen med token, uten egen OIDC-kode.",
   "Tokenet er laget for min-app. Det kan ikke brukes mot andre tjenester.",
-  "min-app ber Texas bytte tokenet med TokenX, med API-et som mottaker.",
+  "min-app ber Texas bytte tokenet via TokenX, med API-et som mottaker.",
   "Samme bruker, ny mottaker. Tokenet gjelder bare for dette ene API-et. Lekker det, kan det ikke brukes andre steder.",
   "API-ets Texas sjekker tokenet: riktig mottaker, riktig bruker.",
   "API-et validerer tokenet via Texas. accessPolicy slipper bare inn appen som har lov.",

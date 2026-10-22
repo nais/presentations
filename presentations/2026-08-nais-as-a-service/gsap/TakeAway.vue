@@ -41,8 +41,8 @@ const TECH = [
 const WHY = [
   "Utprøvd teknologi som utviklere kjenner",
   "Postgres og Docker topper Stack Overflow Developer Survey",
-  "Ingen problematisk binding til én leverandør",
-  "Gjør det mulig å flytte mellom leverandører",
+  "Ingen innlåsing hos én leverandør",
+  "Dere kan flytte mellom leverandører",
 ];
 // Logos orbit the platform; after the click they gather around the tenant.
 const slot = (i, cx = 30) => {

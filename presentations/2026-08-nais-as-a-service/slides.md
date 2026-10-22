@@ -44,7 +44,7 @@ Overgang: «Og den felles plattformen er ikke en idé. Den har vokst siden 2016.
 - Det krever ressurser og vilje over år. Plattform er et produkt, ikke et prosjekt
 - Kilde: Kubernetes Podcast #216 (jan. 2024), «the same government who is spending money in 40 different public agencies solving the same problem», https://kubernetespodcast.com/episode/216-nais/
 - Kilde: Stortinget 29.01.2026 (Dok. 3:14), Geir Pollestad: «det offentlege framleis er for oppdelt», https://www.stortinget.no/no/Saker-og-publikasjoner/Publikasjoner/Referater/Stortinget/2025-2026/refs-202526-01-29/8
-- Klikk 1: én felles plattform. ≈ 150 årsverk er Nav sitt eget anslag
+- Klikk 1: én felles plattform. ≈ 150 årsverk er Navs eget anslag
 -->
 
 ---
@@ -112,7 +112,7 @@ layout: default
 </div>
 
 <!--
-Overgang: «Grunnen til at tallene er så store, kommer på neste slides.»
+Overgang: «Grunnen til at tallene er så store, kommer på de neste slidene.»
 
 - 528 apper kjører hos SSB, Landbruksdirektoratet og Arbeidstilsynet. KS Digital og Novari er på vei inn
 - Apper per tenant: Grafana 21. oktober 2026 (72 + 164 + 292 = 528 utenfor Nav)
@@ -121,7 +121,7 @@ Overgang: «Grunnen til at tallene er så store, kommer på neste slides.»
 - Reserve: ukegrafen fra Mimir (11 uker, aug.–okt. 2026) ligger i DeployChart hvis noen spør
 - 2022: ≈1 500 deployer per uke og ≈1 300 apper (Ship It #78, nov. 2022, https://www.changelog.com/shipit/78). Nå: ≈21 500 per uke (alle miljøer) og 5 212 apper
 - Nais har vært i produksjon siden 2016
-- Årsgrafen er et anslag: formen følger Navs årlige snitt (2015 ≈10 … 2025 ≈2 700 deployer per uke), skalert slik at 2026 ender på dagens ≈21 500 i alle miljøer
+- Årsgrafen er et anslag: formen følger Navs årlige snitt (2015 ≈10 … 2025 ≈2 700 deployer per uke), skalert slik at 2026 ender på dagens ≈21 500 i alle miljøer
 -->
 
 ---
@@ -140,13 +140,13 @@ clicks: 5
   { icon: 'i-carbon-group', title: 'Ansatte', description: 'Fornøyde' },
   { icon: 'i-carbon-face-satisfied', title: 'Brukere', description: 'Fornøyde' },
 ]" />
-<div class="anim-item dora"><b>≈ 9 000</b> prodsettinger per uke · mange ganger daglig per team</div>
+<div class="anim-item dora"><b>≈ 9 000</b> prodsettinger per uke · mange ganger daglig per team</div>
 
 <!--
 Overgang: «Og hva er det utviklerne faktisk skriver? Dette.»
 
 - Ett klikk per steg, konfetti til slutt
-- ≈ 9 000 prodsettinger per uke (Mimir, alle tenants, Nav dominerer). Mange ganger daglig per team
+- ≈ 9 000 prodsettinger per uke (Mimir, alle tenants, Nav dominerer). Mange ganger daglig per team
 -->
 
 ---
@@ -191,7 +191,7 @@ Overgang: «Men hva skjer egentlig på plattformsiden?»
 - Alt går via GitHub: pull request, sjekker, review, merge
 - Klikk 1: sjekker (bygg, test, nais validate) og godkjenning. Klikk 2: merge, så bygger nais/docker-build-push med SBOM og signering, og nais apply deployer
 - Klikk 3: PR-en viser at den er deployet
-- PR-en er åpnet av Copilot-agenten på vegne av utvikleren. Kari Nordmann reviewer, Copilot kommenterer, og et menneske merger
+- Copilot-agenten åpner PR-en på vegne av utvikleren. Kari Nordmann reviewer, Copilot kommenterer, og et menneske merger
 -->
 
 ---
@@ -272,7 +272,7 @@ clicks: 3
 <!--
 Overgang: «Og fordi teamet ser kostnaden, gjør de noe med den.»
 
-- Illustrasjon bygd etter Console sin struktur, ingen ekte data
+- Illustrasjon bygd etter strukturen i Console, ingen ekte data
 - Klikk 1: kostnad per tjeneste. Klikk 2: markøren går til Applications. Klikk 3: teamet åpner én app med helse, deploy, persistens og kostnad
 -->
 
@@ -291,7 +291,7 @@ clicks: 3
 <!--
 Overgang: «Og for de som liker terminalen:»
 
-- Samme PR-kort som på pull request-sliden. Klikk 1: PR-en som gjør databasen større merges, og kostnaden stiger i Console
+- Samme PR-kort som på pull request-sliden. Klikk 1: teamet merger PR-en som gjør databasen større, og kostnaden stiger i Console
 - Klikk 2: teamet ser det og sender en ny PR. Klikk 3: riktig størrelse, og kostnaden legger seg under der den startet
 - Feltene er fra Application-spec (gcp.sqlInstances tier og diskSize). Kronebeløpene er illustrasjon
 - Knytter an til prisen: tenanten betaler forbruket sitt direkte til selvkost, så teamets valg slår rett ut på regningen
@@ -334,7 +334,7 @@ Overgang: «Og fordi containere deler maskiner, bruker de mindre enn virtuelle m
 - Lagene bygges nedenfra: infrastruktur fra skyleverandøren, Kubernetes, operatorene (hjertet i Nais) og appene
 - Klikk 1: pods for app A, B og C fordelt over tre soner i én region. Klikk 2: de skalerer ut
 - Klikk 3: datasenter-b faller ut, og podene startes i a og c. Appen merker det ikke
-- Klikk 4: laget nederst byttes (eget datasenter → Google Cloud), mens operatorene og appene står stille. Nais har flyttet før, og det er dette som gjør exit og flytting mulig
+- Klikk 4: laget nederst byttes (eget datasenter → Google Cloud), mens operatorene og appene blir stående. Nais har flyttet før, og det er dette som gjør exit og flytting mulig
 -->
 
 ---
@@ -413,7 +413,7 @@ Overgang: «Hvem var våkne? Disse femten.»
 
 - Vakt døgnet rundt er inkludert i NaaS: Nais-teamet, med Googles døgnåpne support ved behov. Google-supporten er inkludert i prisen
 - 99,88 % er målt i Mimir, Nav, siste 30 dager. Tallet inkluderer feil i appene selv. Ingen formell SLA
-- Natten i boksen er en typisk natt, en illustrasjon, ikke en bestemt hendelse
+- Natten i boksen er en illustrasjon av en typisk natt, ikke en bestemt hendelse
 -->
 
 ---
@@ -459,11 +459,11 @@ Overgang: «Så: hvor kjører dette, og hvem eier det? Nå snakker jeg til dere 
 - Klikk 1–4: ett ledd per klikk. SBOM og signering skjer automatisk i bygget. Husk manifestet og PR-en agenten laget tidligere: den koden gikk gjennom akkurat samme løp som all annen kode
 - Klikk 5: Console vokser ut av det siste leddet. Klikk 6–9: funnet åpnes, PR oppdaterer avhengigheten, bygg og deploy, ny skanning og løst
 - Console-delen er illustrasjon, ikke ekte data eller CVE-er
-- 5 608 workloads (apper og jobber) skannes for sårbarheter i Nav (Mimir, 21. oktober 2026). Tallet er tatt av sliden; nevn det muntlig
+- 5 608 workloads (apper og jobber) skannes for sårbarheter i Nav (Mimir, 21. oktober 2026). Tallet er tatt av sliden; nevn det muntlig
 - NSM anbefaler, loven krever ikke: Grunnprinsipper for IKT-sikkerhet 2.1.4 «Reduser risiko for målrettet manipulasjon av IKT-produkter i leverandørkjeden» (SBOM og signering) og 3.1.1 «Gjennomfør jevnlig sårbarhetskartlegging … ved hjelp av automatiserte verktøy» (skanning). https://nsm.no/grunnprinsipper-ikt
 - Digitalsikkerhetsforskriften § 14 (i kraft 1.10.2025) gjelder bare tilbydere av samfunnsviktige tjenester: https://lovdata.no/dokument/SF/forskrift/2025-06-20-1131. NSMs veileder: https://nsm.no/getfile.php/1314788-1759304646/NSM/Filer/Dokumenter/Veiledere/Veileder%20fra%20NSM%20i%20digitalsikkerhetsloven%20og%20-forskriften.pdf
 - NIS2 vurderes for EØS-avtalen, ingen norsk lov ennå: https://www.efta.int/eea-lex/32022L2555, https://www.regjeringen.no/no/sub/eos-notatbasen/notatene/2021/feb/nis2-direktivet/id2846097/
-- Nais gir dere dokumentasjonen som hjelper dere å følge opp leverandørkjeden. Det gjør dere ikke etterlevende alene; ansvaret ligger hos tenanten
+- Nais gir dere dokumentasjonen som hjelper dere å følge opp leverandørkjeden. Dokumentasjonen alene gjør dere ikke etterlevende; ansvaret ligger hos tenanten
 -->
 
 ---
@@ -507,7 +507,7 @@ Overgang: «Og slik henger nettverket sammen.»
 
 - Google Cloud: GKE, Cloud SQL, buckets, BigQuery. Aiven: Kafka, OpenSearch, Valkey
 - Nais drifter observability-stakken selv
-- Klikk 2: Cloud SQL og Cloud Storage erstattes over tid av Nais Postgres (CloudNativePG) og Nais Buckets. Begge er på vei, for kostnad og suverenitet. docs.nais.io sier i dag: ikke lag nye Postgres-databaser der ennå, bruk Cloud SQL
+- Klikk 2: Nais Postgres (CloudNativePG) og Nais Buckets erstatter over tid Cloud SQL og Cloud Storage. Begge er på vei, for kostnad og suverenitet. docs.nais.io sier i dag: ikke lag nye Postgres-databaser der ennå, bruk Cloud SQL
 - Dataene ligger i europe-north1 (Finland)
 - Nais startet i eget datasenter i 2016 og flyttet til Google Cloud
 -->
@@ -621,8 +621,8 @@ clicks: 4
 <!--
 Overgang: «Hvem bestemmer så hva som skjer med plattformen?»
 
-- GOV.UK PaaS ble lagt ned 2023 (60+ virksomheter, 3 200 apper). Egen kjøreplattform, og leverandøren hadde ikke selv behov for den. https://gds.blog.gov.uk/2022/07/12/why-weve-decided-to-decommission-gov-uk-paas-platform-as-a-service/ og https://cloud.service.gov.uk
-- Nais er Kubernetes, og Nav er den største tenanten (≈4 700 av 5 212 apper, Grafana 21. oktober 2026)
+- GOV.UK PaaS ble lagt ned i 2023 (over 60 virksomheter, 3 200 apper). Egen kjøreplattform, og leverandøren hadde ikke selv behov for den. https://gds.blog.gov.uk/2022/07/12/why-weve-decided-to-decommission-gov-uk-paas-platform-as-a-service/ og https://cloud.service.gov.uk
+- Nais er Kubernetes, og Nav er den største tenanten (≈4 700 av 5 212 apper, Grafana 21. oktober 2026)
 - Låsing: dere går ut med standarder. Avhengighet: vakt døgnet rundt med Googles support, 1–2 nye tenants per år
 - Ingen formell SLA: 99,88 % målt i Nav siste 30 dager, feil i appene inkludert
 -->
@@ -708,7 +708,7 @@ clicks: 1
 
 ::header::
 <h1 class="text-3xl font-bold">Hva koster det</h1>
-<p class="subtitle">Dere betaler for det dere bruker, pluss 200 000 kr i året</p>
+<p class="subtitle">Dere betaler for det dere bruker, pluss 200 000 kr i året</p>
 
 ::default::
 <PriceStack />
@@ -717,9 +717,9 @@ clicks: 1
 Overgang: «Hva betyr selvkost her?»
 
 - Tenanten betaler egen infrastruktur og fakturerbart forbruk til selvkost, uten påslag
-- Klikk 1: gebyret på 200 000 kr i året legges oppå forbruket
-- I tillegg et administrativt gebyr på 200 000 kr i året. Det dekker en liten del av Nais-teamet på 15, ekstra administrasjon og videre utvikling av Nais
-- Plattformen er allerede bygd og videreutvikles av Nav. Det tenantene ikke betaler for, er det Nav allerede bærer
+- Klikk 1: gebyret på 200 000 kr i året legges oppå forbruket
+- Gebyret dekker en liten del av Nais-teamet på 15, ekstra administrasjon og videre utvikling av Nais
+- Nav har bygd plattformen og utvikler den videre. Det tenantene ikke betaler for, bærer Nav allerede
 - Nav fakturerer hver tenant månedlig til selvkost. Nav eier faktureringskontoen
 -->
 
@@ -736,8 +736,8 @@ layout: default
 <!--
 Overgang: «Hvem kan så bli med?»
 
-- Det tenanten ser og betaler: egen infrastruktur og forbruk til selvkost, pluss 200 000 kr i året. Under vannflaten: det Nav allerede bærer, det meste av teamet og utviklingen
-- Størrelsene er illustrasjon, ikke tall
+- Det tenanten ser og betaler: egen infrastruktur og forbruk til selvkost, pluss 200 000 kr i året. Under vannflaten: det Nav allerede bærer, det meste av teamet og utviklingen
+- Størrelsene er illustrasjon, ikke målte tall
 -->
 
 ---
@@ -755,7 +755,7 @@ clicks: 1
 <!--
 Overgang: «Slik kommer dere i gang.»
 
-- Egenregi i staten: kommuner, statsforetak og private kan ikke bruke NaaS
+- Egenregi i staten: statsforetak og private kan ikke bruke NaaS
 - Kommunal sektor er med gjennom offentlig-offentlig samarbeid via KS Digital og Novari.
 - Klikk 1: kandidatene sorteres i «passer» og «passer ikke». Ikke for skjermingsverdig informasjon eller systemer som må kjøre i eget datasenter
 -->

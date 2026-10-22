@@ -36,14 +36,14 @@
         <div class="chips">
           <span>Schleswig-Holstein: ≈80 % LibreOffice, sparer >15 mill. euro i
             året</span>
-          <span>openDesk: 100 000 arbeidsplasser</span>
-          <span>La Suite: over 500 000 brukere (DINUM)</span>
+          <span>openDesk: 100&#160;000 arbeidsplasser</span>
+          <span>La Suite: over 500&#160;000 brukere (DINUM)</span>
         </div>
         <b>Europa flytter seg mot åpen kildekode og egen drift.</b>
       </div>
       <div class="card final" data-p="no">
         <header><span class="flag">🇳🇴</span> Nais</header>
-        <b>Vi har gjort det i ti år, og driver det for andre.</b>
+        <b>Vi har gjort det i ti år, og drifter det for andre.</b>
       </div>
     </div>
   </div>
@@ -62,8 +62,8 @@ const STOPS = [
     c: "GB",
     flag: "🇬🇧",
     title: "GOV.UK PaaS",
-    fact: "60+ virksomheter og 3 200 apper. Lagt ned fordi den egne plattformen vokste for lite.",
-    msg: "En delt plattform må vokse.",
+    fact: "Over 60 virksomheter og 3 200 apper. Lagt ned fordi den egenbygde plattformen vokste for lite.",
+    msg: "En felles plattform må vokse.",
   },
   {
     id: "nl",

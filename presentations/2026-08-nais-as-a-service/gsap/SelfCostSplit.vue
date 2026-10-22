@@ -3,7 +3,7 @@
     <div class="bar">
       <div class="seg pay">
         <b>Dere betaler</b>
-        <span>Egen infrastruktur og forbruk til selvkost, pluss 200 000 kr i
+        <span>Egen infrastruktur og forbruk til selvkost, pluss 200&#160;000 kr i
           året</span>
       </div>
       <div class="seg nav">
