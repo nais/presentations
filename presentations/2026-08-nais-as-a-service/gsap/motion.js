@@ -1,6 +1,6 @@
 // One motion language for the whole deck. Every GSAP animation imports these.
 import { onBeforeUnmount, onMounted, watch } from "vue";
-import { useIsSlideActive, useSlideContext } from "@slidev/client";
+import { useIsSlideActive, useNav, useSlideContext } from "@slidev/client";
 import gsap from "gsap";
 
 export const EASE = "power3.out";
@@ -34,10 +34,16 @@ export function useSteps(build, offset = 0) {
       tl.tweenTo(l, { duration: 0.5, ease: "power2.out" });
     else tl.tweenTo(l);
   };
+  const { isPrintMode } = useNav();
   onMounted(() => {
     tl = build(
       gsap.timeline({ paused: true, defaults: { ease: EASE, duration: DUR } }),
     );
+    // Print/PDF export: jump straight to the state for the current click.
+    if (isPrintMode.value) {
+      tl.seek(label(Math.max(0, $clicks.value - offset)));
+      return;
+    }
     watch(
       active,
       (on) => {
@@ -59,11 +65,13 @@ export function useSteps(build, offset = 0) {
 // Autoplay timeline: restarts on every slide enter.
 export function useEnter(build) {
   const active = useIsSlideActive();
+  const { isPrintMode } = useNav();
   let tl;
   onMounted(() => {
     tl = build(
       gsap.timeline({ paused: true, defaults: { ease: EASE, duration: DUR } }),
     );
+    if (isPrintMode.value) return tl.progress(1).pause();
     watch(
       active,
       (on) =>
@@ -79,6 +87,7 @@ export function useEnter(build) {
 // and corrected for Slidev's slide scaling.
 const offsetIn = (el, cursor) => {
   const parent = cursor.offsetParent;
+  if (!el || !parent) return { x: 0, y: 0 };
   const pr = parent.getBoundingClientRect();
   const scale = pr.width / parent.offsetWidth || 1;
   const r = el.getBoundingClientRect();
@@ -87,13 +96,16 @@ const offsetIn = (el, cursor) => {
     y: (r.top + r.height / 2 - pr.top) / scale,
   };
 };
+// target may be an element or a function returning one; it is resolved when
+// the tween starts, so it is safe to pass selectors for views not yet shown.
 export function cursorClick(tl, cursor, _root, target) {
   if (reducedMotion()) return tl;
+  const el = () => (typeof target === "function" ? target() : target);
   return tl
     .to(cursor, {
       autoAlpha: 1,
-      x: () => offsetIn(target, cursor).x,
-      y: () => offsetIn(target, cursor).y,
+      x: () => offsetIn(el(), cursor).x,
+      y: () => offsetIn(el(), cursor).y,
       duration: 0.7,
       ease: "power2.inOut",
     })

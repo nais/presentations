@@ -345,37 +345,28 @@ useSteps((tl) => {
     marks.push({ t: tl.duration(), s: { ...marks.at(-1).s, ...s } });
   tl.from(root.value, { autoAlpha: 0, duration: 0.4 }).addLabel("s0");
   if (props.story === "team") {
-    cursorClick(
-      tl,
-      cur.value.$el,
-      root.value.closest(".body"),
+    cursorClick(tl, cur.value.$el, root.value.closest(".body"), () =>
       navItem("Cost"),
     );
     mark({ view: "cost" });
     tl.from(q(".area"), { autoAlpha: 0, duration: 0.5 }).addLabel("s1");
   } else if (props.story === "tour") {
     // Team view -> cost -> Applications -> one app, in one continuous walk.
-    cursorClick(
-      tl,
-      cur.value.$el,
-      root.value.closest(".body"),
+    cursorClick(tl, cur.value.$el, root.value.closest(".body"), () =>
       navItem("Cost"),
     );
     mark({ view: "cost" });
     tl.from(q(".area"), { autoAlpha: 0, duration: 0.5 }).addLabel("s1");
-    cursorClick(
-      tl,
-      cur.value.$el,
-      root.value.closest(".body"),
+    cursorClick(tl, cur.value.$el, root.value.closest(".body"), () =>
       navItem("Applications"),
     );
     mark({ view: "apps" });
     tl.to({}, { duration: 0.4 }).addLabel("s2");
-    cursorClick(tl, cur.value.$el, root.value, q(".tr.target"));
+    cursorClick(tl, cur.value.$el, root.value, () => q(".tr.target"));
     mark({ view: "app" });
     tl.to({}, { duration: 0.4 }).addLabel("s3");
   } else if (props.story === "app") {
-    cursorClick(tl, cur.value.$el, root.value, q(".tr.target"));
+    cursorClick(tl, cur.value.$el, root.value, () => q(".tr.target"));
     mark({ view: "app" });
     tl.to({}, { duration: 0.4 }).addLabel("s1");
   } else {
@@ -384,15 +375,12 @@ useSteps((tl) => {
     const pipe = q(".pipe");
     gsap.set([pr, pipe], { autoAlpha: 0, x: 40 });
     gsap.set(pr.querySelector(".deployed"), { display: "none" });
-    cursorClick(
-      tl,
-      cur.value.$el,
-      root.value,
+    cursorClick(tl, cur.value.$el, root.value, () =>
       q('[data-tab="Vulnerabilities"]'),
     );
     mark({ view: "vulns" });
     tl.to({}, { duration: 0.3 });
-    cursorClick(tl, cur.value.$el, root.value, q(".finding") || q(".ke"));
+    cursorClick(tl, cur.value.$el, root.value, () => q(".finding") || q(".ke"));
     mark({ detail: true });
     tl.to({}, { duration: 0.3 }).addLabel("s1");
     tl.to(pr, { autoAlpha: 1, x: 0 })
@@ -420,10 +408,7 @@ useSteps((tl) => {
     tl.to({}, { duration: 0.8 });
     mark({ deploy: "success" });
     tl.to(pipe, { autoAlpha: 0, x: 40, duration: 0.3 }).addLabel("s3");
-    cursorClick(
-      tl,
-      cur.value.$el,
-      root.value,
+    cursorClick(tl, cur.value.$el, root.value, () =>
       q('[data-tab3="Vulnerabilities"]'),
     );
     mark({ view: "vulns", scanning: true });
