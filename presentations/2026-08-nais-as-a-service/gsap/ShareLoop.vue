@@ -109,7 +109,7 @@ useSteps((tl) => {
     .to(
       agencies,
       {
-        backgroundColor: "rgba(16,185,129,0.3)",
+        backgroundColor: "#0f3d30",
         borderColor: "#34d399",
         stagger: 0.05,
         duration: 0.3,
@@ -127,7 +127,7 @@ useSteps((tl) => {
   position: relative;
   width: 100%;
   max-width: 720px;
-  height: 270px;
+  height: 230px;
   margin: 0 auto;
 }
 
@@ -172,6 +172,7 @@ useSteps((tl) => {
 }
 
 .agency {
+  z-index: 2;
   padding: 0.5rem 0.9rem;
   border-radius: 12px;
   background: var(--nais-bg);
@@ -200,7 +201,7 @@ useSteps((tl) => {
   position: absolute;
   left: 0;
   right: 0;
-  bottom: -2.2rem;
+  top: calc(100% + 0.6rem);
   margin: 0;
   text-align: center;
   font-size: 1.15rem;

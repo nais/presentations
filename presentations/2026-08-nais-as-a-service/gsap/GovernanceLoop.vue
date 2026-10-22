@@ -13,10 +13,22 @@
     <div class="queue">
       <h3>1–2 nye tenants per år</h3>
       <div class="lane">
-        <div v-for="k in 5" :key="k" class="agency">
-          <span class="i-carbon-building" />
+        <div class="zone wait">
+          <small>Venter</small>
+          <div class="tiles">
+            <div v-for="k in 5" :key="k" class="agency">
+              <span class="i-carbon-building" />
+            </div>
+          </div>
         </div>
-        <div ref="gate" class="gate" />
+        <div class="gatewrap">
+          <div ref="gate" class="gate" />
+          <small>Inntak i år</small>
+        </div>
+        <div class="zone in">
+          <small>Tatt inn</small>
+          <div class="tiles slots"><i /><i /></div>
+        </div>
       </div>
       <p>Vi tar inn så mange som vi kan følge opp skikkelig</p>
     </div>
@@ -56,6 +68,7 @@ const gate = ref();
 useEnter((tl) => {
   const q = gsap.utils.selector(root.value);
   const agencies = q(".agency");
+  const slots = q(".slots i");
   tl.fromTo(
     ring.value,
     { drawSVG: "0%" },
@@ -100,7 +113,13 @@ useEnter((tl) => {
     .to(
       agencies.slice(-2),
       {
-        x: 120,
+        // Move each of the last two tiles onto its slot behind the gate.
+        x: (i, el) => {
+          const slot = slots[i].getBoundingClientRect();
+          const r = el.getBoundingClientRect();
+          const k = el.offsetWidth / r.width || 1;
+          return (slot.left - r.left) * k;
+        },
         backgroundColor: "rgba(16,185,129,0.3)",
         stagger: 0.25,
         duration: 0.6,
@@ -180,15 +199,46 @@ useEnter((tl) => {
 }
 
 .lane {
-  position: relative;
   display: flex;
-  gap: 0.5rem;
-  padding: 0.6rem 6rem 0.6rem 0.6rem;
+  align-items: stretch;
+  gap: 0.6rem;
+  padding: 0.6rem;
   border-radius: 14px;
   background: var(--nais-surface);
 }
 
+.zone small,
+.gatewrap small {
+  display: block;
+  margin-bottom: 0.35rem;
+  font-size: 0.75rem;
+  color: var(--nais-text-secondary);
+  white-space: nowrap;
+}
+
+.tiles {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.slots i {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  border: 1px dashed #34d399;
+}
+
+.gatewrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  flex-direction: column-reverse;
+}
+
 .agency {
+  position: relative;
+  z-index: 1;
   width: 44px;
   height: 44px;
   border-radius: 10px;
@@ -201,11 +251,8 @@ useEnter((tl) => {
 }
 
 .gate {
-  position: absolute;
-  right: 5rem;
-  top: 0;
-  bottom: 0;
   width: 5px;
+  height: 44px;
   border-radius: 3px;
   background: var(--nais-accent);
 }

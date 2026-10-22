@@ -612,18 +612,18 @@ clicks: 2
 
 ::header::
 <div class="pillar-tag" style="--pc: #ff5c6c"><span class="i-carbon-partnership" /> Et Nais-fellesskap</div>
-<h1 class="text-3xl font-bold">Bedre sammen</h1>
+<h1 class="text-3xl font-bold mt-4">Bedre sammen</h1>
 <p class="subtitle">Det én tenant trenger, får alle</p>
 
 ::default::
-<ShareLoop :agencies="['Nav', 'SSB', 'Landbruksdirektoratet', 'Arbeidstilsynet', 'KS Digital', 'Novari']" caption="Forbedringer kommer alle tenantene til gode" />
+<ShareLoop :agencies="['Nav', 'SSB', 'Landbruksdirektoratet', 'Arbeidstilsynet', 'KS Digital', 'Novari']" />
 <p class="evidence anim-item text-center mt-10">«Løse felles oppgaver én gang i fellesskap i stedet for hver for seg.» <span>KS, Altinget 10.06.2025</span></p>
-<p class="evidence anim-item text-center mt-2">«Vi tar nå i bruk NAV sin skybaserte applikasjonsplattform NAIS som er basert på Google cloud.» <span>Landbruksdirektoratet, stillingsannonse</span></p>
+<p class="evidence anim-item text-center mt-1">«Vi tar nå i bruk NAV sin skybaserte applikasjonsplattform NAIS som er basert på Google cloud.» <span>Landbruksdirektoratet, stillingsannonse</span></p>
 
 <!--
 Overgang: «Og dere står ikke alene.»
 
-- Forbedringer for én tenant kommer alle til gode
+- Forbedringer for én tenant kommer alle til gode (siste klikk: alle nodene blir grønne)
 - KS i Altinget 10.06.2025: «løse felles oppgaver én gang i fellesskap i stedet for hver for seg», https://www.altinget.no/artikkel/etterlysning-taktskifte-i-digitaliseringsarbeidet
 - Sitat fra Landbruksdirektoratets stillingsannonse: https://www.finn.no/451519458
 -->
