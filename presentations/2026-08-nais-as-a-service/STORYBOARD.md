@@ -50,7 +50,7 @@ Beskriver decket slik det er nå (`slides.md`, komponenter i `gsap/`).
 | 20 | Hva Europa gjør | 6 | fade | Suveren og autonom | «Og hvor kjører det i dag?» |
 | 21 | Hva kjører hvor | 2 | fade | Suveren og autonom | «Og plattformen snakker med verden rundt.» |
 | 22 | Sømløs integrasjon | 1 | fade | Automatisering | «Og slik ser én forespørsel ut.» |
-| 23 | Én forespørsel gjennom Nais | 5 | fade | Sikkerhet | «Og hvis dere vil flytte, er det deres valg.» |
+| 23 | Én forespørsel gjennom Nais | 8 | fade | Sikkerhet | «Og hvis dere vil flytte, er det deres valg.» |
 | 24 | Deres data, deres exit | 3 | fade | Suveren og autonom | «Og dette tar dere med dere.» |
 | 25 | Dette tar dere med dere | 1 | fade | Suveren og autonom | «Men dere lurer sikkert på noe.» |
 | 26 | Det dere lurer på | 4 | fade | Suveren og autonom | «Hvem bestemmer så hva som skjer med plattformen?» |
@@ -72,7 +72,7 @@ Beskriver decket slik det er nå (`slides.md`, komponenter i `gsap/`).
 
 ## Oppsummering
 
-- 36 slides, 87 klikk
+- 36 slides, 90 klikk
 
 ### Åpne plassholdere (0)
 

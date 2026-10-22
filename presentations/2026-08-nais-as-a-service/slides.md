@@ -499,7 +499,7 @@ Overgang: «Og slik ser én forespørsel ut.»
 
 ---
 layout: default
-clicks: 5
+clicks: 8
 ---
 
 ::header::
@@ -512,11 +512,14 @@ clicks: 5
 <!--
 Overgang: «Og hvis dere vil flytte, er det deres valg.»
 
-- Klikk 1: Wonderwall (innloggings-sidecar) sender innbyggeren til ID-porten. Appen får forespørselen med Authorization-header. Wonderwall validerer ikke tokenet; appen gjør det via Texas
-- Klikk 2: appen bytter tokenet via Texas (TokenX for innbyggere, Entra ID on-behalf-of for ansatte) og kaller et annet teams API
-- Klikk 3: API-et validerer via Texas-introspeksjon, og accessPolicy.inbound stopper en app som ikke har lov
-- Klikk 4: Maskinporten-token for et eksternt API, også via Texas
-- Klikk 5: manifestlinjene. Kilde: docs.nais.io (auth, ID-porten, TokenX, Entra ID, Maskinporten)
+- Klikk 1: Wonderwall (innloggings-sidecar) sender innbyggeren til ID-porten. min-app får forespørselen med Authorization-header. Wonderwall validerer ikke tokenet; appen gjør det via Texas
+- Klikk 2: tokenet har mottaker (aud) min-app. Et token er bare gyldig for mottakeren det er laget for
+- Klikk 3: min-app kaller Texas: POST til NAIS_TOKEN_EXCHANGE_ENDPOINT med identity_provider=tokenx, target=prod-gcp:team-b:api og user_token (docs.nais.io, TokenX)
+- Klikk 4: Texas bytter tokenet via TokenX. Samme bruker, ny mottaker: prod-gcp:team-b:api. Hvorfor: lekker tokenet, kan det ikke brukes mot andre tjenester, og hvert API ser hvem brukeren er
+- Klikk 5: API-ets Texas introspekterer tokenet (NAIS_TOKEN_INTROSPECTION_ENDPOINT): riktig mottaker, riktig bruker
+- Klikk 6: accessPolicy.inbound stopper en app som ikke har lov
+- Klikk 7: Maskinporten-token for et eksternt API, også via Texas
+- Klikk 8: manifestlinjene. Kilde: docs.nais.io (auth, ID-porten, TokenX, Entra ID, Maskinporten)
 -->
 ---
 layout: default

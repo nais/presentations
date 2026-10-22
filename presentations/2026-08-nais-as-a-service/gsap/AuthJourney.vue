@@ -57,6 +57,18 @@
       </div>
       <div ref="packet" class="packet" />
       <div ref="block" class="block">✕ ikke i accessPolicy</div>
+      <div ref="chip" class="chip">
+        <div class="chip-head"><span class="i-carbon-password" /> Token</div>
+        <code :class="{ add: swapped }"><i>{{ swapped ? "+" : " " }}</i>aud: {{ swapped ? "prod-gcp:team-b:api" : "min-app" }}</code>
+        <code v-if="swapped" class="del"><i>-</i>aud: min-app</code>
+        <code><i> </i>pid: (innbygger)</code>
+        <code><i> </i>idp: {{ swapped ? "TokenX" : "ID-porten" }}</code>
+      </div>
+      <pre ref="http" class="http"><code>POST ${NAIS_TOKEN_EXCHANGE_ENDPOINT}
+identity_provider=tokenx
+target=prod-gcp:team-b:api
+user_token=eyJra...</code></pre>
+      <div ref="ok" class="ok">✓ riktig mottaker, riktig bruker</div>
     </div>
     <div class="cap">
       <span v-for="(c, i) in CAPTIONS" :key="i" class="c">{{ c }}</span>
@@ -172,7 +184,10 @@ const WIRES = [
 ];
 const CAPTIONS = [
   "Wonderwall sender innbyggeren til ID-porten. Appen får forespørselen med token, uten egen OIDC-kode.",
-  "Appen ber Texas bytte tokenet (TokenX for innbyggere, Entra ID for ansatte) og kaller et annet teams API.",
+  "Tokenet er laget for min-app. Det kan ikke brukes mot andre tjenester.",
+  "min-app ber Texas bytte tokenet med TokenX, med API-et som mottaker.",
+  "Samme bruker, ny mottaker. Tokenet gjelder bare for dette ene API-et. Lekker det, kan det ikke brukes andre steder.",
+  "API-ets Texas sjekker tokenet: riktig mottaker, riktig bruker.",
   "API-et validerer tokenet via Texas. accessPolicy slipper bare inn appen som har lov.",
   "Maskin til maskin: Texas henter et Maskinporten-token for et eksternt API.",
   "Alt dette er noen få linjer i manifestet.",
@@ -194,9 +209,14 @@ const packet = ref();
 const block = ref();
 const yaml = ref();
 const contrast = ref();
+const chip = ref();
+const http = ref();
+const ok = ref();
+const swapped = ref(false);
 
-// s0: boundaries and nodes. s1-s4: one leg of the request per click, the packet
-// travels along the drawn wires. s5: the manifest lines.
+// s0: boundaries and nodes. s1: login. s2-s5: the TokenX exchange (token claims,
+// call to Texas, new audience, introspection at the API). s6: an app outside
+// accessPolicy is blocked. s7: Maskinporten. s8: the manifest lines.
 useSteps((tl) => {
   const q = gsap.utils.selector(root.value);
   const wire = (id) => root.value.querySelector(`[data-w="${id}"]`);
@@ -237,20 +257,51 @@ useSteps((tl) => {
       "-=0.3",
     )
     .addLabel("s0");
+  const at = (x, y) => ({ left: x / 10 + "%", top: (y / 320) * 100 + "%" });
+  gsap.set([chip.value, http.value, ok.value], { autoAlpha: 0 });
+  gsap.set(chip.value, at(400, 262));
   caption(0);
   travel([["user-ww"], ["ww-idp"], ["ww-idp", true], ["ww-a"]], "#ff3377");
   tl.to(q(".n-a"), { borderColor: "#34d399", duration: 0.3 }).addLabel("s1");
+  // TokenX exchange, step by step (NAIS_TOKEN_EXCHANGE_ENDPOINT, docs.nais.io).
   caption(1);
-  travel([["a-ta"], ["ta-b"], ["b-tb"]], "#5cb2da");
-  tl.to(q(".n-b"), { borderColor: "#34d399", duration: 0.3 }).addLabel("s2");
+  tl.to(chip.value, {
+    autoAlpha: 1,
+    scale: 1,
+    ease: POP,
+    duration: 0.5,
+  }).addLabel("s2");
   caption(2);
-  travel([["c-b"]], "#f87171");
-  tl.to(block.value, { autoAlpha: 1, ease: POP }).addLabel("s3");
+  tl.to(wire("a-ta"), { drawSVG: "100%", duration: 0.3 })
+    .to(chip.value, { ...at(490, 262), duration: 0.6, ease: "power2.inOut" })
+    .to(http.value, { autoAlpha: 1, y: 0, duration: 0.4 })
+    .addLabel("s3");
   caption(3);
+  // The chip flips at t0; its content switches to the exchanged token there.
+  const t0 = tl.duration() + 0.25;
+  tl.to(chip.value, { scaleX: 0, duration: 0.25, ease: "power2.in" })
+    .to(chip.value, { scaleX: 1, duration: 0.3, ease: "power2.out" })
+    .to(http.value, { autoAlpha: 0, duration: 0.3 }, "<")
+    .addLabel("s4");
+  caption(4);
+  tl.to(wire("ta-b"), { drawSVG: "100%", duration: 0.3 })
+    .to(chip.value, { ...at(700, 262), duration: 0.7, ease: "power2.inOut" })
+    .to(wire("b-tb"), { drawSVG: "100%", duration: 0.2 })
+    .to(q(".n-b"), { borderColor: "#34d399", duration: 0.3 })
+    .to(ok.value, { autoAlpha: 1, ease: POP })
+    .addLabel("s5");
+  tl.eventCallback("onUpdate", () => {
+    swapped.value = tl.time() >= t0;
+  });
+  caption(5);
+  tl.to([chip.value, ok.value], { autoAlpha: 0, duration: 0.3 }, "<");
+  travel([["c-b"]], "#f87171");
+  tl.to(block.value, { autoAlpha: 1, ease: POP }).addLabel("s6");
+  caption(6);
   tl.to(block.value, { autoAlpha: 0, duration: 0.2 }, "<");
   travel([["ta-mp"], ["ta-mp", true], ["ta-ext"]], "#fbbf24");
-  tl.addLabel("s4");
-  caption(4);
+  tl.addLabel("s7");
+  caption(7);
   // Final state: the manifest is the hero; the diagram stays readable, dimmed, on the left.
   tl.to(
     stage.value,
@@ -259,7 +310,7 @@ useSteps((tl) => {
   )
     .to(yaml.value, { autoAlpha: 1 })
     .to(contrast.value, { autoAlpha: 1 })
-    .addLabel("s5");
+    .addLabel("s8");
   return tl;
 });
 </script>
@@ -405,6 +456,90 @@ useSteps((tl) => {
   inset: 0;
   text-align: center;
   font-size: 0.9rem;
+}
+
+.chip {
+  position: absolute;
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  translate: -50% -50%;
+  min-width: 13rem;
+  padding: 0.2rem 0.45rem;
+  border-radius: 10px;
+  background: #0d1117;
+  border: 1px solid #30363d;
+  color: #e6edf3;
+}
+
+.chip-head {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  margin-bottom: 0.2rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #f2cc60;
+}
+
+.chip code {
+  display: block !important;
+  padding: 0 0.3rem;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.6rem;
+  line-height: 1.25;
+  white-space: pre;
+  background: transparent;
+  color: #c9d1d9;
+}
+
+.chip code i {
+  font-style: normal;
+  margin-right: 0.3rem;
+  color: #8b949e;
+}
+
+.chip code.add {
+  background: rgb(46 160 67 / 0.2);
+  color: #aff5b4;
+}
+
+.chip code.del {
+  background: rgb(248 81 73 / 0.2);
+  color: #ffdcd7;
+}
+
+.http {
+  position: absolute;
+  z-index: 4;
+  left: 63%;
+  top: 74%;
+  margin: 0;
+  padding: 0.4rem 0.6rem;
+  border-radius: 8px;
+  background: #0b1120;
+  border: 1px solid #263352;
+  color: #e2e8f0;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.64rem;
+  line-height: 1.45;
+  white-space: pre;
+}
+
+.ok {
+  position: absolute;
+  z-index: 4;
+  left: 74%;
+  top: 31%;
+  translate: -50% 0;
+  padding: 0.1rem 0.6rem;
+  border-radius: 999px;
+  background: rgb(52 211 153 / 0.2);
+  border: 1px solid #34d399;
+  color: #a7f3d0;
+  font-size: 0.72rem;
+  font-weight: 700;
+  white-space: nowrap;
 }
 
 .yaml {
