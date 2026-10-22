@@ -11,7 +11,7 @@
 
 <script setup>
 import { nextTick, onBeforeUnmount, ref, watch } from "vue";
-import { useIsSlideActive } from "@slidev/client";
+import { useIsSlideActive, useNav, useSlideContext } from "@slidev/client";
 import gsap from "gsap";
 import { DUR, EASE, STAGGER, reducedMotion } from "./motion.js";
 
@@ -47,6 +47,13 @@ const rows = [members.slice(0, half), members.slice(half)];
 
 const root = ref();
 const active = useIsSlideActive();
+const { currentSlideNo } = useNav();
+const { $page } = useSlideContext();
+// Set when we arrive from the slide before; its chain hexes become our start.
+let fromPrev = false;
+watch(currentSlideNo, (now, before) => {
+  fromPrev = now === $page.value && before === $page.value - 1;
+});
 let tl;
 
 // Built on each slide enter: positions can only be measured while the slide
@@ -111,22 +118,42 @@ function build() {
     });
   };
   const logo = place(LOGO);
+  // FLIP: the first avatars start on the previous slide's chain hexes.
+  const k = el.offsetWidth / el.getBoundingClientRect().width || 1;
+  const chain = fromPrev
+    ? [...el.ownerDocument.querySelectorAll(".chain .hex")].filter(
+        (h) => h.getBoundingClientRect().width,
+      )
+    : [];
+  const start = items.map((m, i) => {
+    const h = chain[i]?.getBoundingClientRect();
+    if (!h) return null;
+    const r = m.querySelector(".hex").getBoundingClientRect();
+    return {
+      x: (h.left + h.width / 2 - (r.left + r.width / 2)) * k,
+      y: (h.top + h.height / 2 - (r.top + r.height / 2)) * k,
+      scale: h.width / r.width,
+    };
+  });
   const heart = place(HEART);
   // Fly in, form the Nais logo, then a heart, then settle into the wall.
   tl = gsap
     .timeline({ paused: true, defaults: { ease: EASE, duration: DUR } })
     .set(names, { autoAlpha: 0 })
     .set(items, {
-      x: (i) => logo[i].x + gsap.utils.random(-900, 900),
-      y: (i) => logo[i].y + (i % 2 ? -1 : 1) * gsap.utils.random(400, 700),
-      rotation: () => gsap.utils.random(-60, 60),
-      scale: SHAPE_SCALE,
-      autoAlpha: 0,
+      x: (i) => start[i]?.x ?? logo[i].x + gsap.utils.random(-900, 900),
+      y: (i) =>
+        start[i]?.y ??
+        logo[i].y + (i % 2 ? -1 : 1) * gsap.utils.random(400, 700),
+      rotation: (i) => (start[i] ? 0 : gsap.utils.random(-60, 60)),
+      scale: (i) => start[i]?.scale ?? SHAPE_SCALE,
+      autoAlpha: (i) => (start[i] ? 1 : 0),
     })
     .to(items, {
       x: (i) => logo[i].x,
       y: (i) => logo[i].y,
       rotation: 0,
+      scale: SHAPE_SCALE,
       autoAlpha: 1,
       duration: 0.8,
       stagger: STAGGER / 3,
