@@ -526,9 +526,9 @@ Overgang: «Og hvem slipper inn? Innloggingen er bygd inn.»
 - Klikk 0: min-app i et Nais-cluster (VPC) i tenantens egen GCP-organisasjon
 - Klikk 1: nettverkspolicyer fra accessPolicy. Alt er stengt som standard; en app som ikke er nevnt, blir stoppet
 - Klikk 2: trafikk ut går bare til vertsnavn i accessPolicy.outbound.external, fra faste utgående IP-er per miljø (docs.nais.io, environments) som partnere kan åpne for
-- Klikk 3: Cloud SQL med privat IP, trafikken forlater ikke Google-nettverket. Aiven-tjenester (Kafka) krever TLS-klientsertifikat
+- Klikk 3: Cloud SQL med privat IP, trafikken forlater ikke Google-nettverket. Aiven (Kafka, OpenSearch, Valkey) nås over privat lenke / VPC-peering, i tillegg til TLS-klientsertifikat for Kafka
 - Klikk 4: tenantens eget datasenter via VPN eller Cloud Interconnect, satt opp per tenant
-- Klikk 5: brukere kommer inn via ingress med TLS. Interne ingresser nås bare via naisdevice
+- Klikk 5: to innganger. Innbyggere kommer fra internett via ekstern ingress med TLS. Ansatte når interne apper via naisdevice og intern ingress
 - Klikk 6: en annen tenant har sin egen organisasjon og sitt eget nettverk, ingenting er delt
 -->
 

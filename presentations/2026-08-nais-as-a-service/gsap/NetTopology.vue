@@ -55,8 +55,8 @@ gsap.registerPlugin(DrawSVGPlugin, MotionPathPlugin);
 // Checked against docs.nais.io, 2026-10-22: accessPolicy (deny by default,
 // outbound.external hosts), fixed outbound IPs per environment
 // (workloads/reference/environments), Cloud SQL with private IP
-// (persistence/cloudsql), Aiven Kafka with TLS client certificates, internet vs
-// internal ingress (naisdevice). VPN or Cloud Interconnect to the tenant's own
+// (persistence/cloudsql), Aiven over private link / VPC peering (confirmed by
+// the Nais team), internet vs internal ingress (naisdevice). VPN or Cloud Interconnect to the tenant's own
 // data centre is per tenant (confirmed by the Nais team).
 // Coordinates in a 1000 x 330 box.
 const NODES = [
@@ -115,11 +115,11 @@ const NODES = [
   {
     id: "aiven",
     label: "Aiven",
-    sub: "Kafka, TLS-sertifikat",
+    sub: "Kafka, OpenSearch, Valkey",
     icon: "i-carbon-flow-stream",
     x: 870,
     y: 160,
-    kind: "ext",
+    kind: "svc",
   },
   {
     id: "dc",
@@ -131,21 +131,39 @@ const NODES = [
     kind: "svc",
   },
   {
-    id: "user",
-    label: "Bruker",
+    id: "cit",
+    label: "Innbygger",
     sub: "internett",
     icon: "i-carbon-user",
-    x: 60,
-    y: 160,
+    x: 55,
+    y: 62,
     kind: "ext",
   },
   {
-    id: "ing",
-    label: "Ingress",
+    id: "ingx",
+    label: "Ekstern ingress",
     sub: "TLS",
     icon: "i-carbon-load-balancer-global",
-    x: 60,
-    y: 262,
+    x: 55,
+    y: 132,
+    kind: "gw",
+  },
+  {
+    id: "emp",
+    label: "Ansatt",
+    sub: "naisdevice",
+    icon: "i-carbon-laptop",
+    x: 55,
+    y: 205,
+    kind: "ext",
+  },
+  {
+    id: "ingi",
+    label: "Intern ingress",
+    sub: "bare via naisdevice",
+    icon: "i-carbon-load-balancer-local",
+    x: 55,
+    y: 275,
     kind: "gw",
   },
 ];
@@ -155,18 +173,20 @@ const WIRES = [
   { id: "app-ip", d: "M275 140 C300 92 400 92 455 92", kind: "out" },
   { id: "ip-partner", d: "M545 92 C680 92 760 60 820 60", kind: "out" },
   { id: "app-sql", d: "M290 175 C420 200 520 150 585 150", kind: "svc" },
-  { id: "app-aiven", d: "M290 170 C450 230 700 200 825 165", kind: "ext" },
-  { id: "app-dc", d: "M285 182 C380 300 520 262 585 262", kind: "svc" },
-  { id: "user-ing", d: "M60 182 L60 240", kind: "in" },
-  { id: "ing-app", d: "M95 262 C150 262 200 230 245 182", kind: "in" },
+  { id: "app-aiven", d: "M290 170 C450 230 700 200 825 165", kind: "svc" },
+  { id: "app-dc", d: "M278 182 C282 334 560 330 590 285", kind: "svc" },
+  { id: "cit-ingx", d: "M55 80 L55 112", kind: "in" },
+  { id: "ingx-app", d: "M100 132 C160 132 200 150 240 158", kind: "in" },
+  { id: "emp-ingi", d: "M55 223 L55 255", kind: "int" },
+  { id: "ingi-app", d: "M105 275 C170 275 210 210 248 180", kind: "int" },
 ];
 const CAPTIONS = [
   "min-app kjører i et Nais-cluster i deres egen GCP-organisasjon.",
   "Alt er stengt som standard. accessPolicy åpner bare for det appen har sagt ja til.",
   "Trafikk ut går bare til vertsnavn i manifestet, fra faste IP-er som partnere kan åpne for.",
-  "Databasen nås over privat IP. Aiven-tjenester krever TLS-sertifikat.",
+  "Databasen og Aiven-tjenestene nås over private forbindelser, ikke over internett.",
   "Eget datasenter kobles til med VPN eller Cloud Interconnect, per tenant.",
-  "Brukere kommer inn gjennom ingress med TLS. Interne apper nås bare via naisdevice.",
+  "Innbyggere kommer inn via ekstern ingress med TLS. Ansatte når interne apper via naisdevice.",
   "Hver tenant har sin egen organisasjon og sitt eget nettverk.",
 ];
 
@@ -240,9 +260,11 @@ useSteps((tl) => {
   send("app-dc", "#5cb2da");
   tl.addLabel("s4");
   caption(5);
-  show(["user", "ing"]);
-  send("user-ing", "#ff3377");
-  send("ing-app", "#ff3377");
+  show(["cit", "ingx", "emp", "ingi"]);
+  send("cit-ingx", "#ff3377");
+  send("ingx-app", "#ff3377");
+  send("emp-ingi", "#5cb2da");
+  send("ingi-app", "#5cb2da");
   tl.addLabel("s5");
   caption(6);
   tl.to(
@@ -329,6 +351,11 @@ svg {
 .w.ext {
   stroke: #9b6fd6;
   stroke-dasharray: 6 5;
+}
+
+.w.int {
+  stroke: #5cb2da;
+  stroke-dasharray: 6 4;
 }
 
 .w.in {
