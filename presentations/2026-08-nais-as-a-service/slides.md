@@ -168,6 +168,7 @@ Overgang: «Så skal vi se hva som skjer når de trykker på knappen.»
 -->
 
 ---
+transition: view-transition
 layout: default
 clicks: 3
 ---
@@ -271,6 +272,7 @@ Overgang: «Og fordi teamet ser kostnaden, gjør de noe med den.»
 -->
 
 ---
+transition: view-transition
 layout: default
 clicks: 3
 ---
@@ -458,6 +460,7 @@ Overgang: «Så: hvor kjører dette, og hvem eier det? Nå snakker jeg til dere 
 -->
 
 ---
+transition: view-transition
 layout: default
 clicks: 6
 ---
@@ -577,6 +580,7 @@ Overgang: «Og dette tar dere med dere.»
 -->
 
 ---
+transition: view-transition
 layout: default
 clicks: 1
 ---
@@ -723,6 +727,7 @@ Overgang: «Hva betyr selvkost her?»
 -->
 
 ---
+transition: view-transition
 layout: default
 ---
 

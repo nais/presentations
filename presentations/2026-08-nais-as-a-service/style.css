@@ -611,3 +611,26 @@ body,
   font-size: 2.4rem;
   color: var(--nais-accent);
 }
+
+/* View transitions (Chrome). Names apply only while a transition runs, so
+   the GSAP entrances still run on normal navigation and in other browsers. */
+:active-view-transition .slidev-layout h1 { view-transition-name: slide-title; }
+:active-view-transition .manifest .code,
+:active-view-transition .prflow .diff { view-transition-name: manifest-code; }
+:active-view-transition .prflow .step:has(.i-carbon-rocket),
+:active-view-transition .fan .node.app { view-transition-name: apply-chip; }
+:active-view-transition .browser:has(.mock) { view-transition-name: console-browser; }
+:active-view-transition .map .org:nth-child(3),
+:active-view-transition .take .card { view-transition-name: tenant-card; }
+:active-view-transition .price .price-card:first-child,
+:active-view-transition .split .seg.pay { view-transition-name: price-card; }
+
+::view-transition-group(*) { animation-duration: 0.6s; animation-timing-function: cubic-bezier(0.65, 0, 0.35, 1); }
+::view-transition-old(slide-title) { animation: vt-title-out 0.35s ease-in both; }
+::view-transition-new(slide-title) { animation: vt-title-in 0.45s 0.15s ease-out both; }
+/* The Console leaves on its own: it shrinks to the right and dims. */
+::view-transition-old(console-browser):only-child { animation: vt-console-out 0.5s ease-in both; }
+
+@keyframes vt-title-out { to { transform: translateY(-24px); opacity: 0; } }
+@keyframes vt-title-in { from { transform: translateY(24px); opacity: 0; } }
+@keyframes vt-console-out { to { transform: translateX(30%) scale(0.6); opacity: 0; filter: brightness(0.4); } }
