@@ -8,7 +8,7 @@ transition: fade
 
 ::default::
 <h1 class="text-5xl font-black">Nais as a Service</h1>
-<p class="subtitle text-xl mt-4">Gir fart og flyt på utviklingen av Norge</p>
+<p class="subtitle text-xl mt-4">Gir fart og flyt på utviklingen av det offentlige Norge</p>
 <p class="text-sm mt-6 opacity-70">Hans Kristian Flaatten · Nais-teamet i Nav</p>
 
 <!--
@@ -44,7 +44,7 @@ Overgang: «Og den felles plattformen er ikke en idé. Den har vokst siden 2016.
 - Det krever ressurser og vilje over år. Plattform er et produkt, ikke et prosjekt
 - Kilde: Kubernetes Podcast #216 (jan. 2024), «the same government who is spending money in 40 different public agencies solving the same problem», https://kubernetespodcast.com/episode/216-nais/
 - Kilde: Stortinget 29.01.2026 (Dok. 3:14), Geir Pollestad: «det offentlege framleis er for oppdelt», https://www.stortinget.no/no/Saker-og-publikasjoner/Publikasjoner/Referater/Stortinget/2025-2026/refs-202526-01-29/8
-- Klikk 1: én felles plattform. ≈ 150 årsverk er Navs eget anslag
+- Klikk 1: én felles plattform. ≈ 150 årsverk er Navs eget anslag
 -->
 
 ---
@@ -58,7 +58,7 @@ transition: fade
 Overgang: «(Ingen overgang. La klippet gå, ikke snakk over det.)»
 
 - 6 tenants, 5 212 apper (Grafana, 21. oktober 2026). KS Digital og Novari har signert, men har ikke apper i produksjon ennå
-- ≈21 500 deployer per uke er Nav, alle miljøer (Mimir)
+- ≈ 21 500 deployer per uke er Nav, alle miljøer (Mimir)
 - Fargene viser de mindre tenantene spredt i bikuben
 -->
 
@@ -116,12 +116,12 @@ Overgang: «Grunnen til at tallene er så store, kommer på de neste slidene.»
 
 - 528 apper kjører hos SSB, Landbruksdirektoratet og Arbeidstilsynet. KS Digital og Novari er på vei inn
 - Apper per tenant: Grafana 21. oktober 2026 (72 + 164 + 292 = 528 utenfor Nav)
-- ≈21 500 deployer per uke i Nav, alle miljøer. ≈9 000 i prod (Mimir)
+- ≈ 21 500 deployer per uke i Nav, alle miljøer. ≈ 9 000 i prod (Mimir)
 - 154 team har deployet siste 28 dager (Nav). Deployer per uke er Nav, alle miljøer
 - Reserve: ukegrafen fra Mimir (11 uker, aug.–okt. 2026) ligger i DeployChart hvis noen spør
-- 2022: ≈1 500 deployer per uke og ≈1 300 apper (Ship It #78, nov. 2022, https://www.changelog.com/shipit/78). Nå: ≈21 500 per uke (alle miljøer) og 5 212 apper
+- 2022: ≈ 1 500 deployer per uke og ≈ 1 300 apper (Ship It #78, nov. 2022, https://www.changelog.com/shipit/78). Nå: ≈ 21 500 per uke (alle miljøer) og 5 212 apper
 - Nais har vært i produksjon siden 2016
-- Årsgrafen er et anslag: formen følger Navs årlige snitt (2015 ≈10 … 2025 ≈2 700 deployer per uke), skalert slik at 2026 ender på dagens ≈21 500 i alle miljøer
+- Årsgrafen er et anslag: formen følger Navs årlige snitt (2015 ≈ 10 … 2025 ≈ 2 700 deployer per uke), skalert slik at 2026 ender på dagens ≈ 21 500 i alle miljøer
 -->
 
 ---
@@ -140,13 +140,13 @@ clicks: 5
   { icon: 'i-carbon-group', title: 'Ansatte', description: 'Fornøyde' },
   { icon: 'i-carbon-face-satisfied', title: 'Brukere', description: 'Fornøyde' },
 ]" />
-<div class="anim-item dora"><b>≈ 9 000</b> prodsettinger per uke · mange ganger daglig per team</div>
+<div class="anim-item dora"><b>≈ 9 000</b> prodsettinger per uke · mange ganger daglig per team</div>
 
 <!--
 Overgang: «Og hva er det utviklerne faktisk skriver? Dette.»
 
 - Ett klikk per steg, konfetti til slutt
-- ≈ 9 000 prodsettinger per uke (Mimir, alle tenants, Nav dominerer). Mange ganger daglig per team
+- ≈ 9 000 prodsettinger per uke (Mimir, alle tenants, Nav dominerer). Mange ganger daglig per team
 -->
 
 ---
@@ -485,7 +485,7 @@ Overgang: «Og hvor kjører det i dag?»
 - Klikk 2, Nederland: Haven. «Een app die op één HAVEN-omgeving draait, werkt op álle HAVEN-omgevingen» («En app som kjører i ett HAVEN-miljø, virker i alle HAVEN-miljøer»). Standard, ikke drift. https://vng.nl/projecten/haven
 - Klikk 3, Frankrike: Cloud π Native, «Plateforme DevSecOps du gouvernement français basée sur Kubernetes» («Den franske statens DevSecOps-plattform, bygd på Kubernetes»). Ingen offentlige tall. https://cloud-pi-native.fr/ og https://github.com/cloud-pi-native
 - Klikk 4, Sverige: SFS 2024:1005, «Denna förordning innehåller bestämmelser om ett samordnat statligt tjänsteutbud för it-drift» («Denne forskriften inneholder bestemmelser om et samordnet statlig tjenestetilbud for IT-drift»). https://lagen.nu/2024:1005
-- Klikk 5: Schleswig-Holstein (≈80 % LibreOffice, sparer over 15 millioner euro i året), openDesk (100 000 arbeidsplasser, Deutsche Rentenversicherung 21.07.2026), La Suite (over 500 000 ansatte i måneden, ifølge DINUM). Kilder: schleswig-holstein.de, deutsche-rentenversicherung.de, lasuite.numerique.gouv.fr
+- Klikk 5: Schleswig-Holstein (≈ 80 % LibreOffice, sparer over 15 millioner euro i året), openDesk (100 000 arbeidsplasser, Deutsche Rentenversicherung 21.07.2026), La Suite (over 500 000 ansatte i måneden, ifølge DINUM). Kilder: schleswig-holstein.de, deutsche-rentenversicherung.de, lasuite.numerique.gouv.fr
 - Klikk 6: Norge og Nais. cloud.gov (USA) er en annen felles plattform med kostnadsdekning: «100% of your investment goes directly to platform development», https://cloud.gov/pricing/
 -->
 
@@ -622,7 +622,7 @@ clicks: 4
 Overgang: «Hvem bestemmer så hva som skjer med plattformen?»
 
 - GOV.UK PaaS ble lagt ned i 2023 (over 60 virksomheter, 3 200 apper). Egen kjøreplattform, og leverandøren hadde ikke selv behov for den. https://gds.blog.gov.uk/2022/07/12/why-weve-decided-to-decommission-gov-uk-paas-platform-as-a-service/ og https://cloud.service.gov.uk
-- Nais er Kubernetes, og Nav er den største tenanten (≈4 700 av 5 212 apper, Grafana 21. oktober 2026)
+- Nais er Kubernetes, og Nav er den største tenanten (≈ 4 700 av 5 212 apper, Grafana 21. oktober 2026)
 - Låsing: dere går ut med standarder. Avhengighet: vakt døgnet rundt med Googles support, 1–2 nye tenants per år
 - Ingen formell SLA: 99,88 % målt i Nav siste 30 dager, feil i appene inkludert
 -->
@@ -663,7 +663,7 @@ clicks: 3
 <ShareLoop :agencies="['Nav', 'SSB', 'Landbruksdirektoratet', 'Arbeidstilsynet', 'KS Digital', 'Novari']" :support="[
   { icon: 'i-carbon-logo-slack', title: 'Slack', text: 'Direkte kontakt med Nais-teamet' },
   { icon: 'i-carbon-document', title: 'docs.nais.io', text: 'Dokumentasjon og veiledninger' },
-  { icon: 'i-carbon-badge', title: 'Champions', text: 'Champions i teamene' },
+  { icon: 'i-carbon-badge', title: 'Champions', text: 'Én Nais-kontakt i hvert team' },
   { icon: 'i-carbon-education', title: 'Arbeidsøkter', text: 'Praktiske økter med Nais-teamet' },
   { icon: 'i-carbon-group', title: 'Naisdag', text: 'Tenantene møtes og gir innspill' },
 ]" />
@@ -694,7 +694,7 @@ clicks: 2
 <!--
 Overgang: «Så hva koster det?»
 
-- Anslag: ~800 utviklere i Nav i dag; antatt ~40 % konsulenter med ~3 års oppdrag (~100 nye i året) og ~8 % turnover blant ansatte (~40 nye i året); ~9 år i produksjon → ~1 300 som har gått videre + ~800 i dag ≈ 2 000. Utviklere hos de andre tenantene er ikke med
+- Anslag: ≈ 800 utviklere i Nav i dag; antatt ≈ 40 % konsulenter med ≈ 3 års oppdrag (≈ 100 nye i året) og ≈ 8 % turnover blant ansatte (≈ 40 nye i året); ≈ 9 år i produksjon → ≈ 1 300 som har gått videre + ≈ 800 i dag ≈ 2 000. Utviklere hos de andre tenantene er ikke med
 - Rekruttering blir enklere, og opplæringen kortere
 - Konsulenter kjenner plattformen, og utviklere etterspør den
 - De fleste store konsulentselskapene har folk med Nais-erfaring

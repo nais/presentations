@@ -23,7 +23,7 @@ import { POP, useSteps } from "./motion.js";
 const ITEMS = [
   {
     q: "GOV.UK PaaS ble lagt ned. Hva om Nais også blir det?",
-    a: "Nais bygger på Kubernetes, ikke en egen kjøreplattform. Og Nav er selv den største tenanten, med ≈4 700 av 5 212 apper.",
+    a: "Nais bygger på Kubernetes, ikke en egen kjøreplattform. Og Nav er selv den største tenanten, med ≈\u00a04\u00a0700 av 5 212 apper.",
   },
   {
     q: "Blir vi låst inne?",

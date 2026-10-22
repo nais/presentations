@@ -40,7 +40,7 @@
       </div>
       <div ref="band" class="band">Drift og vakt døgnet rundt</div>
       <div ref="years" class="years">
-        ≈ <b ref="yearsN">0</b> årsverk <small>anslag</small>
+        ≈&#160;<b ref="yearsN">0</b> årsverk <small>anslag</small>
       </div>
       <div ref="naisTeam" class="nais-team">
         <span class="i-carbon-user-multiple" /> Nais-teamet

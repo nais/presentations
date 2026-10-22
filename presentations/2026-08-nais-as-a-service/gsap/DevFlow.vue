@@ -1,7 +1,8 @@
 <template>
   <div ref="root" class="devflow" data-motion-self>
     <div class="headline">
-      <b ref="count">≈ 0</b> utviklere har jobbet på Nais <small>Anslag</small>
+      <b ref="count">≈&#160;0</b> utviklere har jobbet på Nais
+      <small>Anslag</small>
       <span ref="year" class="year">2016</span>
     </div>
     <div class="stage">
@@ -131,7 +132,8 @@ useSteps((tl) => {
         ease: "none",
         onUpdate: () => {
           count.value.textContent =
-            "≈ " + Math.round(n.v).toLocaleString("nb-NO").replace(/\s/g, " ");
+            "≈\u00a0" +
+            Math.round(n.v).toLocaleString("nb-NO").replace(/\s/g, "\u00a0");
           year.value.textContent = Math.round(n.y);
         },
       },

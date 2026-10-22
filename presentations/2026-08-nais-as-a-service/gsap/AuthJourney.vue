@@ -77,8 +77,8 @@ user_token=eyJra...</code></pre>
     </div>
     <pre ref="yaml" class="yaml"><code>{{ YAML }}</code></pre>
     <p ref="contrast" class="contrast">
-      Det dere slipper å bygge selv: OIDC-flyt, nøkkelrotasjon, token-utveksling,
-      validering.
+      Det dere slipper å bygge selv: OIDC-flyt, nøkkelrotasjon,
+      token-utveksling, validering.
     </p>
   </div>
 </template>

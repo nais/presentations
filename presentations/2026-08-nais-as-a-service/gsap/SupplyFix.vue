@@ -6,7 +6,7 @@
         «Reduser risiko for målrettet manipulasjon av IKT-produkter i
         leverandørkjeden.»
         <span>NSM Grunnprinsipper for IKT-sikkerhet 2.1.4</span>
-        <small class="nis2">NIS2 er på vei inn i norsk rett.</small>
+        <small class="nis2">NIS2 vurderes for EØS-avtalen.</small>
       </p>
     </div>
     <div ref="consoleEl" class="console">

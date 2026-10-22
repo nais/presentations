@@ -1,6 +1,9 @@
 <template>
   <div class="count" data-motion-count>
-    <StatHighlight :number="prefix + display" :label="label" />
+    <StatHighlight
+      :number="(prefix === '≈' ? '≈\u00a0' : prefix) + display"
+      :label="label"
+    />
   </div>
 </template>
 
@@ -19,9 +22,9 @@ const props = defineProps({
 });
 
 const target = Number(props.number);
-// Narrow no-break space as thousands separator; reads tighter than nb-NO default.
+// No-break space as thousands separator, and after a «≈» prefix (deck style «≈ 21 500»).
 const fmt = (v) =>
-  Math.round(v).toLocaleString("nb-NO").replace(/\s/g, "\u202f");
+  Math.round(v).toLocaleString("nb-NO").replace(/\s/g, "\u00a0");
 const display = ref(fmt(target));
 const state = { v: target };
 const active = useIsSlideActive();

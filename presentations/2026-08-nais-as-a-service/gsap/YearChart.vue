@@ -68,7 +68,7 @@ const props = defineProps({
   metric: { type: String, default: "deploys" },
 });
 
-const fmt = (v) => v.toLocaleString("nb-NO").replace(/\s/g, " ");
+const fmt = (v) => v.toLocaleString("nb-NO").replace(/\s/g, "\u00a0");
 const rows = computed(() => {
   const d = METRICS[props.metric].data;
   const entries = Object.entries(d);
