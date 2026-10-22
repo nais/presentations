@@ -8,7 +8,7 @@
     </div>
     <div class="centre">
       <div ref="ring" class="ring" />
-      <div class="app">
+      <div class="app" data-anchor="hex">
         <span class="i-carbon-application" /><strong>min-app</strong>
       </div>
       <p ref="mine" class="mine">Tenanten: koden, dataene, produktet</p>

@@ -1,6 +1,6 @@
 <template>
   <div ref="root" class="take" data-motion-self>
-    <div class="platform">
+    <div class="platform" data-anchor="hex">
       <span class="hexi" />
       <b>Nais</b>
     </div>

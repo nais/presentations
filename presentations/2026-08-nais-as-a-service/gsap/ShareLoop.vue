@@ -15,7 +15,7 @@
         :y2="pos(i).y"
       />
     </svg>
-    <div class="core"><strong>Nais</strong></div>
+    <div class="core" data-anchor="hex"><strong>Nais</strong></div>
     <div
       v-for="(a, i) in list"
       :key="a"

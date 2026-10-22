@@ -16,7 +16,9 @@
         :class="n.kind"
       />
     </svg>
-    <div class="core"><b>min-app</b><small>på Nais</small></div>
+    <div class="core" data-anchor="hex">
+      <b>min-app</b><small>på Nais</small>
+    </div>
     <div
       v-for="n in NODES"
       :key="n.label"

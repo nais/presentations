@@ -32,7 +32,7 @@
           :data-step="r.step"
         />
       </svg>
-      <div class="app">
+      <div class="app" data-anchor="hex">
         <span class="i-carbon-application" /><strong>min-app</strong>
       </div>
       <div
