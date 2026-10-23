@@ -183,15 +183,7 @@ export default makeScene2D(function* (view) {
     ),
   );
 
-  // 3. Finish: pulse through the network
-  yield* all(
-    core().shadowBlur(160, 0.5).to(90, 0.8),
-    core().fill(ACCENT_DARK, 0.5).to(ACCENT, 0.8),
-    ...hexes.map((h, i) => delay(teams[i].ring * 0.03, all(h.stroke(ACCENT, 0.3).to(teams[i].tenant.stroke, 0.6), h.fill(FLASH, 0.3).to(teams[i].tenant.fill, 0.6)))),
-  );
-  // A second ripple from Oslo through the whole country.
-  yield* all(
-    ...hexes.map((h, i) => delay(teams[i].ring * 0.03, all(h.stroke(ACCENT, 0.3).to(teams[i].tenant.stroke, 0.6), h.fill(FLASH, 0.3).to(teams[i].tenant.fill, 0.6)))),
-  );
+  // 3. Finish: hold. The deck continues with a looping wave from the hub
+  // (ClipSlide.vue), so the clip itself ends calm.
   yield* waitFor(0.8);
 });

@@ -72,8 +72,9 @@ watch(
 
 /* Hub sits at 39.4 % / 66.1 % of the frame (see the Motion Canvas scene).
    A soft ring grows from the hub across the mask, fades, and the next one
-   follows: blood rushing out through every vein. The mask's cells are
-   only about 30 % bright, so the visible peak stays near 0.3. */
+   follows: blood rushing out through every vein. It continues the ripple
+   the clip used to end with (same accent, ring by ring from the hub). The
+   mask's cells are only about 30 % bright, so the visible peak stays faint. */
 @property --wave {
   syntax: "<percentage>";
   inherits: false;
@@ -86,24 +87,29 @@ watch(
   mix-blend-mode: screen;
   background: radial-gradient(
     circle at 39.4% 66.1%,
-    transparent calc(var(--wave) - 9%),
-    rgba(255, 70, 110, 0.9) calc(var(--wave) - 2%),
-    rgba(92, 178, 218, 0.7) var(--wave),
-    transparent calc(var(--wave) + 6%)
+    transparent calc(var(--wave) - 12%),
+    rgba(232, 56, 79, 0.9) calc(var(--wave) - 4%),
+    rgba(255, 110, 140, 1) var(--wave),
+    transparent calc(var(--wave) + 5%)
   );
   mask: var(--mask) center / cover no-repeat luminance;
-  animation: clip-wave 3.6s cubic-bezier(0.3, 0.1, 0.4, 1) infinite;
+  animation: clip-wave 3.4s linear infinite;
 }
 @keyframes clip-wave {
   0% {
     --wave: 0%;
     opacity: 0;
+    animation-timing-function: cubic-bezier(0.3, 0.1, 0.4, 1);
   }
-  10% {
-    opacity: 0.95;
+  6% {
+    opacity: 1;
   }
-  75% {
-    opacity: 0.7;
+  45% {
+    opacity: 0.85;
+  }
+  60% {
+    --wave: 62%;
+    opacity: 0;
   }
   100% {
     --wave: 62%;
