@@ -112,7 +112,7 @@ useSteps((tl) => {
     .set(arrow.value, { attr: { "marker-end": "url(#hm-head)" } })
     .to(
       q(".onprem"),
-      { opacity: 0.45, filter: "grayscale(1)", duration: 0.5 },
+      { opacity: 0.65, filter: "grayscale(1)", duration: 0.5 },
       "<",
     )
     .to(

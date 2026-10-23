@@ -421,7 +421,7 @@ pre,
   --nais-surface: #131d33;
   --nais-card: #111a2e;
   --nais-text: #e2e8f0;
-  --nais-text-secondary: #a3b1c6;
+  --nais-text-secondary: #b4c0d3;
   --nais-heading: #f8fafc;
   --nais-border: #263352;
   --nais-accent: #ff3377;
@@ -443,6 +443,12 @@ body,
 
 .subtitle {
   color: var(--nais-text-secondary) !important;
+}
+
+/* Something upstream dims subtitles to 50 %; keep them readable on weak
+   projectors (AA, 4.5:1 or better on the dark background). */
+html .slidev-layout .subtitle {
+  opacity: 1;
 }
 
 .who-chip {

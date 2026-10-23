@@ -59,7 +59,7 @@ useEnter((tl) => {
     const full = typed.textContent;
     const t = { n: 0 };
     // Earlier commands step back so the new one has the focus.
-    if (i) tl.to(steps.slice(0, i), { opacity: 0.4, duration: 0.25 });
+    if (i) tl.to(steps.slice(0, i), { opacity: 0.6, duration: 0.25 });
     tl.set(st, { display: "block" })
       .fromTo(
         t,
