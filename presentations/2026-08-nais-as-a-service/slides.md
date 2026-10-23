@@ -352,7 +352,7 @@ clicks: 2
 Overgang: «Og når noe likevel skjer om natta?»
 
 - Samme verktøykasse, dempet
-- Klikk 1: driften Nais tar: plattformen, oppgraderinger av plattformen og vakt for plattformen. Klikk 2: streken mellom teamenes del og Nais' del
+- Klikk 1: driften Nais tar. Nais drifter plattformen, oppgraderer den og har vakt for den. Klikk 2: streken mellom teamenes del og Nais' del
 - Teamene drifter sin egen app og holder den oppdatert: avhengigheter, base-image og kjøretidsversjon. Nais oppgraderer plattformen, ikke appene
 -->
 
@@ -539,11 +539,10 @@ clicks: 4
 <!--
 Overgang: «Og slik henger nettverket sammen.»
 
-- Lagene bygges nedenfra: infrastruktur fra skyleverandøren, Kubernetes, operatorene (hjertet i Nais) og appene
+- Lagene bygges nedenfra: infrastruktur fra skyleverandøren, Kubernetes, Nais (operatorene, hjertet i plattformen), Nais API (Console, Nais CLI og MCP-serveren bygger på det) og teamenes apper
 - Klikk 1: pods for app A, B og C fordelt over tre soner i én region. Klikk 2: de skalerer ut
 - Klikk 3: datasenter-b faller ut, og podene startes i a og c. Appen merker det ikke
-- Klikk 4: laget nederst byttes (eget datasenter → Google Cloud), mens operatorene og appene blir stående. Nais har flyttet før, og det er dette som gjør exit og flytting mulig
-- Lagene nedenfra: infrastruktur, Kubernetes, Nais (operatorene), Nais API (Console, Nais CLI og MCP-serveren bygger på det) og teamenes apper
+- Klikk 4: laget nederst byttes (eget datasenter → Google Cloud), mens Nais-lagene og appene blir stående. Nais har flyttet før, og det er dette som gjør exit og flytting mulig
 -->
 
 ---
@@ -651,7 +650,7 @@ clicks: 1
 Overgang: «Og det vi bygger for én tenant, får alle.»
 
 - Nais-teamet bestemmer veikartet, med innspill fra tenantene på Naisdag
-- Det betyr ikke at alt én tenant ønsker blir bygd. Men det som blir bygd, får alle
+- Det betyr ikke at alt én tenant ønsker, blir bygd. Men det som blir bygd, får alle
 - 1–2 nye tenants per år
 - På veikartet: Nais Postgres (CloudNativePG) og Nais Buckets
 -->
@@ -680,7 +679,7 @@ clicks: 3
 <!--
 Overgang: «Og dere får ikke bare hjelp fra oss. Utviklerne kan det allerede.»
 
-- Når Nais-teamet bygger noe én tenant trenger, får alle det (klikk 2: alle nodene blir grønne). Hva som bygges, bestemmes på veikartet
+- Når Nais-teamet bygger noe én tenant trenger, får alle det (klikk 2: alle nodene blir grønne). Hva som bygges, står på veikartet, og det bestemmer Nais-teamet
 - Klikk 3: dere står ikke alene. Slack, docs.nais.io, champions i teamene, arbeidsøkter og Naisdag
 - KS i Altinget 10.06.2025: «løse felles oppgaver én gang i fellesskap i stedet for hver for seg», https://www.altinget.no/artikkel/etterlysning-taktskifte-i-digitaliseringsarbeidet
 - Sitat fra Landbruksdirektoratets stillingsannonse: https://www.finn.no/451519458

@@ -12,7 +12,7 @@
         <span class="i-carbon-application" /><strong>min-app</strong>
       </div>
       <p ref="mine" class="mine">
-        Teamene: appen, dataene og oppdateringene av appen
+        Teamene: appen, dataene og oppdateringene av den
       </p>
     </div>
     <div class="col">
