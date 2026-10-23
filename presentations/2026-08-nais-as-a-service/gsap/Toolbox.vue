@@ -34,7 +34,7 @@ import { ref } from "vue";
 import gsap from "gsap";
 import { POP, STAGGER, useSteps } from "./motion.js";
 
-// mode "open": one row of drawers per click, then the caption (clicks: 5).
+// mode "open": one wave of drawers per click, then the caption (clicks: 4).
 // mode "ops": the same grid dimmed as a callback, then the ops layer and the
 // line between the agency's part and Nais' part (clicks: 2).
 const props = defineProps({
@@ -111,9 +111,13 @@ useSteps((tl) => {
     gsap.set(caption.value, { autoAlpha: 0, y: 12 });
     tl.from(drawers, { autoAlpha: 0, stagger: 0.05 }, "<").addLabel("s0");
     // Four waves: row by row, left and right drawer together.
-    const waves = [0, 1, 2, 3].map((r) =>
-      drawers.filter((_, i) => i % 4 === r),
-    );
+    // Three waves, row by row; the short left column's last drawer joins
+    // the third, so no click opens just one drawer.
+    const waves = [
+      [0, 4],
+      [1, 5],
+      [2, 6, 3],
+    ].map((ix) => ix.map((i) => drawers[i]).filter(Boolean));
     waves.forEach((wave, w) => {
       wave.forEach((d, j) => {
         const side = drawers.indexOf(d) < 4 ? 1 : -1;
@@ -127,7 +131,7 @@ useSteps((tl) => {
             duration: 0.4,
             ease: "power3.out",
           },
-          j ? "<0.1" : ">",
+          j ? "<0.1" : "+=0",
         ).to(
           d.querySelector("p"),
           { clipPath: "inset(0 0 0% 0)", autoAlpha: 1, duration: 0.5 },

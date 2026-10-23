@@ -216,7 +216,7 @@ Overgang: «Tusenvis av apper, og hver får den samme hylla. Her er den.»
 
 ---
 layout: default
-clicks: 5
+clicks: 4
 ---
 
 ::header::
@@ -230,7 +230,7 @@ clicks: 5
 <!--
 Overgang: «Hva skjer når noe feiler?»
 
-- Én rad skuffer per klikk (fire bølger), til slutt alt på en gang
+- Én bølge skuffer per klikk (tre bølger), til slutt alt på en gang
 - Gruppert etter inventaret over verktøykassa. Utfasede ting er utelatt
 - MCP for kodeagenter ligger i Verktøy-skuffen
 -->
