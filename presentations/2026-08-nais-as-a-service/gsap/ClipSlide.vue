@@ -17,7 +17,8 @@
       preload="auto"
       @ended="beating = true"
     />
-    <!-- After the clip: a pulse spreads from the hub, masked to the country's cells. -->
+    <!-- After the clip: waves roll out from the hub (the heart) through the
+         country's cells to the far north, masked to the cells. -->
     <div
       v-if="beating"
       class="clip-pulse"
@@ -69,7 +70,15 @@ watch(
   display: block;
 }
 
-/* Hub sits at 39.4 % / 66.1 % of the frame (see the Motion Canvas scene). */
+/* Hub sits at 39.4 % / 66.1 % of the frame (see the Motion Canvas scene).
+   A soft ring grows from the hub across the mask, fades, and the next one
+   follows: blood rushing out through every vein. The mask's cells are
+   only about 30 % bright, so the visible peak stays near 0.3. */
+@property --wave {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 0%;
+}
 .clip-pulse {
   position: absolute;
   inset: 0;
@@ -77,28 +86,28 @@ watch(
   mix-blend-mode: screen;
   background: radial-gradient(
     circle at 39.4% 66.1%,
-    rgba(255, 70, 110, 0.95) 0,
-    rgba(255, 70, 110, 0.55) 18%,
-    rgba(255, 70, 110, 0) 60%
+    transparent calc(var(--wave) - 9%),
+    rgba(255, 70, 110, 0.9) calc(var(--wave) - 2%),
+    rgba(92, 178, 218, 0.7) var(--wave),
+    transparent calc(var(--wave) + 6%)
   );
   mask: var(--mask) center / cover no-repeat luminance;
-  animation: clip-pulse 2.4s ease-in-out infinite;
-  opacity: 0;
+  animation: clip-wave 3.6s cubic-bezier(0.3, 0.1, 0.4, 1) infinite;
 }
-@keyframes clip-pulse {
-  0%,
-  45%,
-  100% {
+@keyframes clip-wave {
+  0% {
+    --wave: 0%;
     opacity: 0;
   }
-  14% {
-    opacity: 0.3;
+  10% {
+    opacity: 0.95;
   }
-  26% {
-    opacity: 0.08;
+  75% {
+    opacity: 0.7;
   }
-  34% {
-    opacity: 0.18;
+  100% {
+    --wave: 62%;
+    opacity: 0;
   }
 }
 @media (prefers-reduced-motion: reduce) {

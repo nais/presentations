@@ -8,7 +8,7 @@
       class="cell"
       :class="{ nav: i === NAV, you: i === YOU }"
       :data-anchor="i === YOU ? 'hex' : null"
-      :style="{ left: c.x + 'px', top: c.y + 'px' }"
+      :style="{ left: c.x + 'px', top: c.y + 'px', '--d': c.d }"
     />
     <span class="tag tnav" :style="tagAt(NAV)">Nav</span>
     <span class="tag tyou" :style="tagAt(YOU)">Dere</span>
@@ -40,6 +40,16 @@ const near = (x, y) =>
   );
 const NAV = near(0, 0); // Oslo
 const YOU = near(-SPACING, 0); // the neighbour cell to the west
+// Distance from Nav (0..1), so a wave can travel out from the hub.
+const DMAX = Math.max(
+  ...CELLS.map((c) => Math.hypot(c.x - CELLS[NAV].x, c.y - CELLS[NAV].y)),
+);
+CELLS.forEach(
+  (c) =>
+    (c.d = (Math.hypot(c.x - CELLS[NAV].x, c.y - CELLS[NAV].y) / DMAX).toFixed(
+      3,
+    )),
+);
 const tagAt = (i) => ({ left: CELLS[i].x + "px", top: CELLS[i].y + "px" });
 
 const root = ref();
@@ -116,24 +126,20 @@ useEnter((tl) => {
   color: #ff3377;
 }
 
-/* Very faint heartbeat on the cells only (opacity, no scaling). */
-.honey.beat .cell:not(.you) {
-  animation: honey-beat 2.4s ease-in-out infinite;
+/* Waves roll out from Nav through the cells to the far north: each cell
+   lights briefly, delayed by its distance from the hub. No scaling. */
+.honey.beat .cell:not(.you):not(.nav) {
+  animation: honey-wave 3.6s ease-in-out infinite;
+  animation-delay: calc(var(--d) * 2.6s);
 }
-@keyframes honey-beat {
+@keyframes honey-wave {
   0%,
-  45%,
+  22%,
   100% {
-    filter: brightness(1);
+    background: #334155;
   }
-  14% {
-    filter: brightness(1.3);
-  }
-  26% {
-    filter: brightness(1.05);
-  }
-  34% {
-    filter: brightness(1.18);
+  8% {
+    background: #7a3a5c;
   }
 }
 @media (prefers-reduced-motion: reduce) {
