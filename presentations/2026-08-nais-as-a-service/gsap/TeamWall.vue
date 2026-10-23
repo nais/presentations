@@ -151,7 +151,7 @@ function build() {
         ease: "power3.inOut",
         stagger: STAGGER / 5,
       },
-      "+=0.35",
+      "+=0.6",
     )
     .to(
       items,
@@ -163,7 +163,7 @@ function build() {
         ease: "power3.inOut",
         stagger: STAGGER / 5,
       },
-      "+=0.35",
+      "+=0.6",
     )
     .to(names, { autoAlpha: 1, stagger: STAGGER / 4, duration: 0.4 }, "-=0.3");
 

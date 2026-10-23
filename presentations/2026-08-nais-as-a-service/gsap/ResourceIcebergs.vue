@@ -40,7 +40,7 @@ useEnter((tl) => {
       scaleY: 0,
       transformOrigin: "50% 0%",
       stagger: 0.25,
-      duration: 0.6,
+      duration: 0.9,
     })
     .from(q(".mid"), { scale: 0.5, autoAlpha: 0, ease: POP }, 0.5)
     .from(

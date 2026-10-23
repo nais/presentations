@@ -241,7 +241,7 @@ useSteps((tl) => {
     if (i) tl.to(caps[i - 1], { autoAlpha: 0, duration: 0.2 });
     tl.to(caps[i], { autoAlpha: 1, duration: 0.3 }, i ? "<" : 0.3);
   };
-  tl.from(q(".b"), { drawSVG: "0%", duration: 0.5, stagger: 0.1 })
+  tl.from(q(".b"), { drawSVG: "0%", duration: 0.8, stagger: 0.2 })
     .from(q(".bl"), { autoAlpha: 0, stagger: 0.08, duration: 0.4 }, 0.15)
     .from(q(".n-app"), { scale: 0.5, autoAlpha: 0, ease: POP }, 0.25);
   caption(0);
