@@ -68,6 +68,18 @@ watch(
 </script>
 
 <style scoped>
+.count {
+  display: grid;
+}
+
+.count > * {
+  grid-area: 1 / 1;
+}
+
+.sizer {
+  visibility: hidden;
+}
+
 .count :deep(.stat-number) {
   font-family: "Poppins", sans-serif;
   font-variant-numeric: tabular-nums;
