@@ -18,10 +18,7 @@
 <script setup>
 import { ref } from "vue";
 import gsap from "gsap";
-import {
-  NORWAY,
-  SPACING,
-} from "../../../animations/naas-motion-canvas/src/norway.ts";
+import { NORWAY, SPACING } from "./norway.ts";
 import { POP, reducedMotion, useEnter } from "./motion.js";
 
 // Scale the lattice into a 328 x 380 box (Norway's bounding box, y down).
