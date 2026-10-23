@@ -32,7 +32,7 @@ const ITEMS = [
   },
   {
     q: "Blir vi avhengige av Nav?",
-    a: "Vakt døgnet rundt med Googles support i ryggen, og vi tar bare inn 1–2 nye tenants per år.",
+    a: "Vakt døgnet rundt for plattformen, med Googles support i ryggen, og vi tar bare inn 1–2 nye tenants per år.",
   },
   {
     q: "Dere har ingen formell SLA?",

@@ -384,22 +384,22 @@ clicks: 3
 
 ::header::
 <h1 class="text-3xl font-bold">Kl. 03.00</h1>
-<p class="subtitle">Samme varsel, samme Grafana. Forskjellen er hvem sin telefon som ringer.</p>
+<p class="subtitle">Nais har vakt for plattformen. Teamene eier appene sine.</p>
 
 ::default::
 <div class="flex flex-col gap-6 w-full">
   <FlowChain :nodes="[
-    { icon: 'i-carbon-notification', label: 'Varsel', sub: 'Noe feiler kl. 03.00' },
+    { icon: 'i-carbon-notification', label: 'Varsel', sub: 'En node i plattformen svikter kl. 03.00' },
     { icon: 'i-carbon-phone', label: 'Nais-vakt', sub: 'Vakthavende i Nais-teamet varsles' },
     { icon: 'i-carbon-cloud', label: 'Google', sub: 'Googles døgnåpne support ved behov' },
-    { icon: 'i-carbon-checkmark', label: 'Løst', sub: 'Dere sov gjennom det' },
+    { icon: 'i-carbon-checkmark', label: 'Løst', sub: 'Appene kjørte hele tiden' },
   ]" />
   <div class="grid grid-cols-2 gap-6 items-center max-w-4xl mx-auto w-full">
     <div class="anim-item night">
-      <p><b>03.02</b> Varsel i Slack</p>
-      <p><b>03.05</b> Tracen peker på databasekallet</p>
-      <p><b>03.08</b> Loggene viser at tilkoblingspoolen er full</p>
-      <p><b>03.14</b> Rollback, og alt er grønt igjen</p>
+      <p><b>03.02</b> Varsel: en node i én sone svarer ikke</p>
+      <p><b>03.03</b> Kubernetes flytter podene til friske noder</p>
+      <p><b>03.10</b> Nais-vakten bytter noden, sammen med Google</p>
+      <p><b>03.25</b> Alt er grønt. Appene merket det ikke</p>
     </div>
     <div class="anim-item text-center">
       <div class="text-5xl font-bold" style="font-family: Poppins; color: var(--nais-success)">99,88 %</div>
@@ -412,9 +412,11 @@ clicks: 3
 <!--
 Overgang: «Hvem var våkne? Disse femten.»
 
-- Vakt døgnet rundt er inkludert i NaaS: Nais-teamet, med Googles døgnåpne support ved behov. Google-supporten er inkludert i prisen
+- Nais har vakt døgnet rundt for plattformen, med Googles døgnåpne support ved behov. Google-supporten er inkludert i prisen
+- Skillet: Nais har vakt for plattformen. Teamene eier appene sine. Feiler en app på grunn av egen kode, for eksempel mot databasen, er det teamets jobb å rette, ikke Nais'
+- Få produktteam har egen vakt, og det trenger de ikke for plattformfeil
 - 99,88 % er målt i Mimir, Nav, siste 30 dager. Tallet inkluderer feil i appene selv. Ingen formell SLA
-- Natten i boksen er en illustrasjon av en typisk natt, ikke en bestemt hendelse
+- Natten i boksen er en illustrasjon av en plattformfeil (en node faller ut), ikke en bestemt hendelse
 -->
 
 ---
@@ -627,7 +629,7 @@ Overgang: «Hvem bestemmer så hva som skjer med plattformen?»
 
 - GOV.UK PaaS ble lagt ned i 2023 (over 60 virksomheter, 3 200 apper). Egen kjøreplattform, og leverandøren hadde ikke selv behov for den. https://gds.blog.gov.uk/2022/07/12/why-weve-decided-to-decommission-gov-uk-paas-platform-as-a-service/ og https://cloud.service.gov.uk
 - Nais er Kubernetes, og Nav er den største tenanten (≈ 4 700 av 5 212 apper, Grafana 21. oktober 2026)
-- Låsing: dere går ut med standarder. Avhengighet: vakt døgnet rundt med Googles support, 1–2 nye tenants per år
+- Låsing: dere går ut med standarder. Avhengighet: vakt døgnet rundt for plattformen, med Googles support, 1–2 nye tenants per år
 - Ingen formell SLA: 99,88 % målt i Nav siste 30 dager, feil i appene inkludert
 -->
 
