@@ -570,48 +570,6 @@ body,
   margin-right: 0.5rem;
 }
 
-.price {
-  display: flex;
-  align-items: stretch;
-  justify-content: center;
-  gap: 1.2rem;
-  max-width: 900px;
-  margin: 0 auto;
-}
-
-.price-card {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 0.3rem;
-  padding: 1rem 1.2rem;
-  border-radius: 16px;
-  background: var(--nais-card);
-  border: 1px solid var(--nais-border);
-}
-
-.price-card span {
-  font-size: 1.8rem;
-  color: var(--nais-accent);
-}
-
-.price-card b {
-  font-family: 'Poppins', sans-serif;
-  font-size: 1.4rem;
-}
-
-.price-card small {
-  font-size: 0.9rem;
-  color: var(--nais-text-secondary);
-}
-
-.plus {
-  align-self: center;
-  font-family: 'Poppins', sans-serif;
-  font-size: 2.4rem;
-  color: var(--nais-accent);
-}
-
 /* View transitions (Chrome). Names apply only while a transition runs, so
    the GSAP entrances still run on normal navigation and in other browsers. */
 :active-view-transition .slidev-layout h1 { view-transition-name: slide-title; }
@@ -624,8 +582,6 @@ body,
 :active-view-transition .cost .browser { view-transition-name: console-browser; }
 :active-view-transition .map .org:nth-child(3),
 :active-view-transition .take .card { view-transition-name: tenant-card; }
-:active-view-transition .price .price-card:first-child,
-:active-view-transition .split .seg.pay { view-transition-name: price-card; }
 
 ::view-transition-group(*) { animation-duration: 0.6s; animation-timing-function: cubic-bezier(0.65, 0, 0.35, 1); }
 /* The old title leaves before the new one arrives, so they never overlap. */

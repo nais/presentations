@@ -701,9 +701,7 @@ Overgang: «Så hva koster det?»
 -->
 
 ---
-transition: view-transition
 layout: default
-clicks: 1
 ---
 
 ::header::
@@ -711,32 +709,15 @@ clicks: 1
 <p class="subtitle">Dere betaler for det dere bruker, pluss 200 000 kr i året</p>
 
 ::default::
-<PriceStack />
-
-<!--
-Overgang: «Hva betyr selvkost her?»
-
-- Tenanten betaler egen infrastruktur og fakturerbart forbruk til selvkost, uten påslag
-- Klikk 1: gebyret på 200 000 kr i året legges oppå forbruket
-- Gebyret dekker en liten del av Nais-teamet på 15, ekstra administrasjon og videre utvikling av Nais
-- Nav har bygd plattformen og utvikler den videre. Det tenantene ikke betaler for, bærer Nav allerede
-- Nav fakturerer hver tenant månedlig til selvkost. Nav eier faktureringskontoen
--->
-
----
-layout: default
----
-
-::header::
-<h1 class="text-3xl font-bold">Hva selvkost betyr</h1>
-
-::default::
 <SelfCostSplit />
 
 <!--
 Overgang: «Hvem kan så bli med?»
 
-- Det tenanten ser og betaler: egen infrastruktur og forbruk til selvkost, pluss 200 000 kr i året. Under vannflaten: det Nav allerede bærer, det meste av teamet og utviklingen
+- Tenanten betaler egen infrastruktur og fakturerbart forbruk til selvkost, uten påslag. Teamene ser kostnaden i Console
+- I tillegg et administrativt gebyr på 200 000 kr i året. Det dekker en liten del av Nais-teamet på 15, ekstra administrasjon og videre utvikling av Nais
+- Under vannflaten: det Nav allerede bærer, det meste av teamet og utviklingen. Nav har bygd plattformen og utvikler den videre
+- Nav fakturerer hver tenant månedlig til selvkost. Nav eier faktureringskontoen
 - Størrelsene er illustrasjon, ikke målte tall
 -->
 

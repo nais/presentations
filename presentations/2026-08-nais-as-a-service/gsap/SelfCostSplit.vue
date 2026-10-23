@@ -3,8 +3,8 @@
     <div class="bar">
       <div class="seg pay">
         <b>Dere betaler</b>
-        <span>Egen infrastruktur og forbruk til selvkost, pluss 200&#160;000 kr i
-          året</span>
+        <span>Egen infrastruktur og forbruk til selvkost, uten påslag, pluss
+          200&#160;000 kr i året. Teamene ser kostnaden i Console.</span>
       </div>
       <div class="seg nav">
         <b>Nav bærer</b>
