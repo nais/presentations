@@ -1,34 +1,56 @@
 <template>
   <div ref="root" class="fan" data-motion-self>
     <div class="fan-body">
-      <div class="node app">
-        <span class="i-carbon-document" /> Application <small>nais.yaml</small>
+      <svg
+        class="wires"
+        viewBox="0 0 1000 330"
+        preserveAspectRatio="none"
+        aria-hidden="true"
+      >
+        <rect class="cluster" x="30" y="178" width="420" height="146" rx="14" />
+        <path
+          v-for="w in WIRES"
+          :key="w.id"
+          :d="w.d"
+          class="w"
+          :class="w.kind"
+          :data-w="w.id"
+        />
+      </svg>
+      <span class="clabel">Nais-cluster</span>
+      <!-- Clients: everything talks to Nais API. -->
+      <div
+        v-for="c in CLIENTS"
+        :key="c.id"
+        class="node client"
+        :class="['c-' + c.id, { deploy: c.id === 'deploy' }]"
+        :style="at(c)"
+      >
+        <span :class="c.icon" /> {{ c.label }}
+        <small v-if="c.sub">{{ c.sub }}</small>
       </div>
-      <div class="stem s1" />
-      <div class="node ctrl">
+      <div class="node api" :style="at(API)">
+        <span class="i-carbon-api" /> Nais API
+      </div>
+      <!-- App branch: nais deploy hands the manifest to Naiserator in the cluster. -->
+      <div class="node ctrl" :style="at(NAISERATOR)">
         <span class="i-carbon-settings-adjust" /> Naiserator
       </div>
-      <div class="stem s2" />
-      <div class="bus" />
-      <div class="groups">
-        <section class="group">
-          <div class="drop" />
-          <h4>Kubernetes-ressurser</h4>
-          <div class="grid k8s">
-            <div v-for="k in CORE" :key="k" class="chip">{{ k }}</div>
-          </div>
-        </section>
-        <section class="group">
-          <div class="drop" />
-          <h4>Via operatorer</h4>
-          <div class="grid ops">
-            <div v-for="k in OPS" :key="k.name" class="chip op">
-              <strong>{{ k.name }}</strong>
-              <small>{{ k.by }}</small>
-            </div>
-          </div>
-        </section>
+      <div
+        class="group g-k8s"
+        :style="{ left: '5%', top: '74%', width: '38%' }"
+      >
+        <div v-for="k in K8S" :key="k" class="chip">{{ k }}</div>
       </div>
+      <section
+        v-for="g in GROUPS"
+        :key="g.title"
+        class="group box"
+        :style="g.style"
+      >
+        <h4>{{ g.title }}</h4>
+        <div v-for="k in g.items" :key="k" class="chip">{{ k }}</div>
+      </section>
     </div>
     <div ref="galaxy" class="galaxy">
       <svg viewBox="0 0 1000 400" aria-hidden="true">
@@ -76,27 +98,65 @@
 <script setup>
 import { ref } from "vue";
 import gsap from "gsap";
+import { DrawSVGPlugin } from "gsap/DrawSVGPlugin";
 import { POP, STAGGER, useSteps } from "./motion.js";
 
-// Resource kinds Naiserator creates (nais/naiserator pkg/resourcecreator) and
-// the operators that act on what it hands over, 2026-10-21.
-const CORE = [
-  "Deployment",
-  "Service",
-  "Ingress",
-  "NetworkPolicy",
-  "ServiceAccount",
-  "HorizontalPodAutoscaler",
-  "PodDisruptionBudget",
-  "PodMonitor",
+// Simplified (see the notes): clients talk to Nais API; nais deploy hands
+// the manifest to Naiserator, which reconciles it into Kubernetes objects;
+// the api-reconcilers set up team resources and data services.
+// Coordinates in a 1000 x 330 box.
+const CLIENTS = [
+  {
+    id: "deploy",
+    label: "nais deploy",
+    sub: "GitHub Actions",
+    icon: "i-carbon-rocket",
+    x: 160,
+    y: 32,
+  },
+  {
+    id: "console",
+    label: "Console",
+    icon: "i-carbon-dashboard",
+    x: 390,
+    y: 32,
+  },
+  { id: "cli", label: "Nais CLI", icon: "i-carbon-terminal", x: 610, y: 32 },
+  {
+    id: "mcp",
+    label: "MCP for KI-agenter",
+    icon: "i-carbon-bot",
+    x: 840,
+    y: 32,
+  },
 ];
-const OPS = [
-  { name: "Cloud SQL og buckets", by: "Config Connector" },
-  { name: "Kafka-tilgang", by: "aivenator" },
-  { name: "Entra ID-app", by: "azurerator" },
-  { name: "ID-porten og Maskinporten", by: "digdirator" },
-  { name: "TokenX-klient", by: "jwker" },
+const API = { x: 600, y: 125 };
+const NAISERATOR = { x: 160, y: 222 };
+const K8S = ["Deployment", "Service", "NetworkPolicy", "Ingress", "Secrets"];
+const GROUPS = [
+  {
+    title: "Teamressurser",
+    items: ["GCP-prosjekt", "GitHub-team", "Entra ID-gruppe"],
+    style: { left: "50%", top: "56%", width: "22%" },
+  },
+  {
+    title: "Datatjenester",
+    items: ["Postgres", "Buckets", "Kafka", "Valkey", "OpenSearch"],
+    style: { left: "76%", top: "56%", width: "22%" },
+  },
 ];
+const WIRES = [
+  // s2: the clients connect to Nais API (one bus).
+  { id: "console", d: "M390 50 V82 H600 V108", kind: "c" },
+  { id: "cli", d: "M610 50 V82", kind: "c" },
+  { id: "mcp", d: "M840 50 V82 H600", kind: "c" },
+  { id: "deploy", d: "M160 56 V82 H600", kind: "c" },
+  // s3: the manifest goes to Naiserator; Nais API fans out.
+  { id: "manifest", d: "M160 56 V206", kind: "m" },
+  { id: "team", d: "M600 142 V164 H610 V185", kind: "f" },
+  { id: "data", d: "M600 142 V164 H870 V185", kind: "f" },
+];
+const at = (p) => ({ left: p.x / 10 + "%", top: (p.y / 330) * 100 + "%" });
 
 // Zoom-out constellation: many app clusters, three team colours, dev and prod.
 const TEAMS = ["#5cb2da", "#9b6fd6", "#34c27a"];
@@ -118,31 +178,55 @@ CLUSTERS.forEach((c, i) => {
   if (i % 5 === 0 && CLUSTERS[i + 16]) LINKS.push([c, CLUSTERS[i + 16]]);
 });
 
+gsap.registerPlugin(DrawSVGPlugin);
+
 const root = ref();
 const galaxy = ref();
-// s0: Application and Naiserator. s1: trunk, bus and drops draw, then both groups pop.
+// s0: Nais API, and the deploy chip arriving from the PR slide.
+// s1: the other clients. s2: they connect to Nais API. s3: nais deploy hands
+// the manifest to Naiserator in the cluster, and Nais API fans out.
+// s4: zoom out to thousands of apps.
 useSteps((tl) => {
   const q = gsap.utils.selector(root.value);
-  gsap.set(q(".s2, .drop"), { scaleY: 0, transformOrigin: "50% 0%" });
-  gsap.set(q(".bus"), { scaleX: 0 });
-  gsap.set(q(".group h4, .chip"), { autoAlpha: 0, y: 12 });
-  gsap.set(q(".group"), { borderColor: "transparent" });
-  // The Application node arrives through the view transition, so no entrance.
-  tl.to({}, { duration: 0.01 })
-    .from(q(".s1"), { scaleY: 0, transformOrigin: "50% 0%", duration: 0.3 })
-    .from(q(".ctrl"), { autoAlpha: 0, scale: 0.7, ease: POP })
+  const w = (id) => root.value.querySelector(`[data-w="${id}"]`);
+  gsap.set(q(".w"), { drawSVG: "0%" });
+  gsap.set(q(".client:not(.deploy), .ctrl, .cluster, .clabel, .group, .chip"), {
+    autoAlpha: 0,
+  });
+  // The deploy chip arrives through the view transition, so no entrance.
+  tl.from(q(".api"), { autoAlpha: 0, scale: 0.7, ease: POP })
     .addLabel("s0")
-    .to(q(".s2"), { scaleY: 1, duration: 0.25 })
-    .to(q(".bus"), { scaleX: 1, duration: 0.4, ease: "power2.inOut" })
-    .to(q(".drop"), { scaleY: 1, duration: 0.25 })
-    .to(q(".group"), { borderColor: "#263352", duration: 0.3 })
-    .to(q(".group h4"), { autoAlpha: 1, y: 0, stagger: 0.1 }, "<")
+    .to(q(".client:not(.deploy)"), {
+      autoAlpha: 1,
+      stagger: 0.12,
+      duration: 0.4,
+    })
+    .addLabel("s1")
+    .to(["console", "cli", "mcp", "deploy"].map(w), {
+      drawSVG: "100%",
+      duration: 0.6,
+      stagger: 0.12,
+    })
+    .to(q(".api"), {
+      boxShadow: "0 0 22px rgb(255 51 119 / 0.55)",
+      duration: 0.3,
+    })
+    .addLabel("s2")
+    .to(q(".cluster, .clabel"), { autoAlpha: 1, duration: 0.3 })
+    .to(w("manifest"), { drawSVG: "100%", duration: 0.5 })
+    .to(q(".ctrl"), { autoAlpha: 1, scale: 1, ease: POP })
+    .to(q(".g-k8s, .g-k8s .chip"), {
+      autoAlpha: 1,
+      stagger: STAGGER / 2,
+      ease: POP,
+    })
+    .to([w("team"), w("data")], { drawSVG: "100%", duration: 0.5 }, "<")
     .to(
-      q(".chip"),
-      { autoAlpha: 1, y: 0, stagger: STAGGER / 2, ease: POP },
-      "-=0.1",
+      q(".box, .box .chip"),
+      { autoAlpha: 1, stagger: STAGGER / 2, ease: POP },
+      "-=0.2",
     )
-    .addLabel("s1");
+    .addLabel("s3");
   // s2: zoom out from one app to the whole environment.
   const g = gsap.utils.selector(galaxy.value);
   gsap.set(galaxy.value, { autoAlpha: 0 });
@@ -167,7 +251,7 @@ useSteps((tl) => {
     .from(g(".link, .split, .env"), { autoAlpha: 0, duration: 0.5 }, "-=0.2")
     .to(g(".zoom-text"), { autoAlpha: 1, y: 0 })
     .to(g(".zoom-badge"), { autoAlpha: 1, y: 0, ease: POP }, "-=0.3")
-    .addLabel("s2");
+    .addLabel("s4");
   return tl;
 });
 </script>
@@ -178,39 +262,76 @@ useSteps((tl) => {
 }
 
 .fan-body {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  position: relative;
   width: 100%;
   max-width: 960px;
+  height: 340px;
   margin: 0 auto;
 }
 
+.wires {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.w {
+  fill: none;
+  stroke: var(--nais-accent);
+  stroke-width: 3;
+  vector-effect: non-scaling-stroke;
+}
+
+.w.m {
+  stroke: #34d399;
+}
+
+.cluster {
+  fill: none;
+  stroke: #475569;
+  stroke-width: 2;
+  vector-effect: non-scaling-stroke;
+}
+
+.clabel {
+  position: absolute;
+  left: 4%;
+  top: 55.5%;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.66rem;
+  color: var(--nais-text-secondary);
+}
+
 .node {
+  position: absolute;
+  translate: -50% -50%;
+  z-index: 2;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.4rem 1.1rem;
+  gap: 0.45rem;
+  padding: 0.35rem 0.9rem;
   border-radius: 12px;
   font-family: "Poppins", sans-serif;
   font-weight: 700;
-  font-size: 1.05rem;
+  font-size: 0.95rem;
   color: #fff;
+  white-space: nowrap;
 }
 
 .node small {
   font-family: "JetBrains Mono", monospace;
   font-weight: 400;
-  font-size: 0.75rem;
-  opacity: 0.8;
+  font-size: 0.7rem;
+  opacity: 0.85;
 }
 
-.app {
-  view-transition-name: app-hex;
+.client {
   background: #1e293b;
   border: 1px solid #334155;
 }
 
+.api,
 .ctrl {
   background: linear-gradient(
     135deg,
@@ -219,99 +340,43 @@ useSteps((tl) => {
   );
 }
 
-.stem {
-  width: 3px;
-  height: 14px;
-  background: var(--nais-accent);
-}
-
-.bus {
-  width: 50%;
-  height: 3px;
-  background: var(--nais-accent);
-}
-
-.groups {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1.5rem;
-  width: 100%;
+.api {
+  font-size: 1.15rem;
+  padding: 0.5rem 1.2rem;
 }
 
 .group {
-  position: relative;
-  padding: 0.6rem 0.7rem;
-  margin-top: 16px;
+  position: absolute;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.35rem;
+}
+
+.group.box {
+  padding: 0.5rem 0.6rem;
   border-radius: 14px;
   border: 2px solid #263352;
 }
 
-.drop {
-  position: absolute;
-  left: 50%;
-  top: -18px;
-  width: 3px;
-  height: 16px;
-  background: var(--nais-accent);
-}
-
 h4 {
-  margin: 0 0 0.5rem;
+  width: 100%;
+  margin: 0 0 0.2rem;
   font-family: "Poppins", sans-serif;
-  font-size: 1rem;
+  font-size: 0.95rem;
   text-align: center;
 }
 
-.grid {
-  display: grid;
-  gap: 0.4rem;
-}
-
-.k8s {
-  grid-template-columns: 1fr 1fr;
-}
-
-.ops {
-  grid-template-columns: 1fr 1fr;
-}
-
-.ops .chip:last-child {
-  grid-column: 1 / -1;
-}
-
 .chip {
-  padding: 0.3rem 0.5rem;
+  padding: 0.25rem 0.5rem;
   border-radius: 9px;
   font-family: "JetBrains Mono", monospace;
-  font-size: 0.78rem;
+  font-size: 0.75rem;
   text-align: center;
   background: var(--nais-accent-light);
   border: 1px solid rgb(255 51 119 / 0.4);
 }
 
-.chip.op {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0;
-  padding: 0.25rem 0.5rem;
-  text-align: center;
-  font-family: "Inter", sans-serif;
-  background: var(--nais-surface);
-  border-color: var(--nais-border);
-}
-
-.chip.op strong {
-  font-size: 0.82rem;
-  white-space: nowrap;
-}
-
-.chip.op small {
-  font-family: "JetBrains Mono", monospace;
-  font-size: 0.72rem;
-  color: var(--nais-text-secondary);
-  white-space: nowrap;
-}
 .galaxy {
   will-change: transform, opacity;
   position: absolute;

@@ -42,8 +42,12 @@ useEnter((tl) => {
       stagger: 0.25,
       duration: 0.9,
     })
-    .from(q(".mid"), { scale: 0.5, autoAlpha: 0, ease: POP })
-    .from(q(".col p"), { autoAlpha: 0, y: 10, stagger: 0.1 }, "<");
+    .from(q(".mid"), { scale: 0.5, autoAlpha: 0, ease: POP }, 0.5)
+    .from(
+      q(".col p"),
+      { autoAlpha: 0, y: 10, stagger: 0.1, duration: 0.4 },
+      0.3,
+    );
   return tl;
 });
 </script>

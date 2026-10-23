@@ -1,11 +1,11 @@
 <template>
   <div ref="root" class="net" data-motion-self>
     <div ref="stage" class="stage">
-      <svg viewBox="0 0 1000 330" preserveAspectRatio="none" aria-hidden="true">
+      <svg viewBox="0 0 1000 350" preserveAspectRatio="none" aria-hidden="true">
         <!-- Boundaries: tenant GCP organisation, cluster, team namespace. -->
-        <rect class="b org" x="150" y="20" width="560" height="300" rx="18" />
-        <rect class="b cl" x="170" y="62" width="380" height="244" rx="14" />
-        <rect class="b ns" x="190" y="95" width="250" height="105" rx="10" />
+        <rect class="b org" x="170" y="15" width="560" height="330" rx="18" />
+        <rect class="b cl" x="185" y="50" width="410" height="288" rx="14" />
+        <rect class="b ns" x="205" y="105" width="315" height="135" rx="10" />
         <path
           v-for="w in WIRES"
           :key="w.id"
@@ -15,11 +15,11 @@
           :data-w="w.id"
         />
       </svg>
-      <span class="bl" style="left: 16%; top: 9%"
+      <span class="bl" style="left: 18%; top: 6%"
         >GCP-organisasjon: din virksomhet</span
       >
-      <span class="bl" style="left: 26%; top: 86%">Nais-cluster (VPC)</span>
-      <span class="bl" style="left: 27%; top: 29.5%"
+      <span class="bl" style="left: 19.6%; top: 16%">Nais-cluster (VPC)</span>
+      <span class="bl ns-l" style="right: 48.6%; top: 32%"
         >namespace: team-eksempel</span
       >
       <div
@@ -27,7 +27,7 @@
         :key="n.id"
         class="n"
         :class="[n.kind, 'n-' + n.id]"
-        :style="{ left: n.x / 10 + '%', top: (n.y / 330) * 100 + '%' }"
+        :style="{ left: n.x / 10 + '%', top: (n.y / 350) * 100 + '%' }"
       >
         <span :class="n.icon" />
         <b>{{ n.label }}</b>
@@ -63,14 +63,15 @@ gsap.registerPlugin(DrawSVGPlugin, MotionPathPlugin);
 // (persistence/cloudsql), Aiven over private link / VPC peering (confirmed by
 // the Nais team), internet vs internal ingress (naisdevice). VPN or Cloud Interconnect to the tenant's own
 // data centre is per tenant (confirmed by the Nais team).
-// Coordinates in a 1000 x 330 box.
+// Coordinates in a 1000 x 350 box. Left column x 60, right column x 875;
+// both use one node width (class col).
 const NODES = [
   {
     id: "app",
     label: "min-app",
     icon: "i-carbon-application",
-    x: 250,
-    y: 160,
+    x: 290,
+    y: 180,
     kind: "app",
   },
   {
@@ -78,7 +79,7 @@ const NODES = [
     label: "api",
     sub: "tillatt",
     icon: "i-carbon-api",
-    x: 370,
+    x: 450,
     y: 160,
     kind: "app",
   },
@@ -87,16 +88,16 @@ const NODES = [
     label: "annen app",
     sub: "ikke tillatt",
     icon: "i-carbon-application",
-    x: 440,
-    y: 268,
+    x: 250,
+    y: 295,
     kind: "bad",
   },
   {
     id: "ip",
     label: "Fast utgående IP",
     icon: "i-carbon-ibm-cloud-direct-link-2-connect",
-    x: 520,
-    y: 66,
+    x: 595,
+    y: 85,
     kind: "gw",
   },
   {
@@ -104,17 +105,17 @@ const NODES = [
     label: "partner-api.no",
     sub: "outbound.external",
     icon: "i-carbon-globe",
-    x: 870,
-    y: 66,
-    kind: "ext",
+    x: 875,
+    y: 85,
+    kind: "ext colr",
   },
   {
     id: "sql",
     label: "Cloud SQL",
     sub: "privat IP",
     icon: "i-carbon-data-base",
-    x: 630,
-    y: 140,
+    x: 660,
+    y: 195,
     kind: "svc",
   },
   {
@@ -122,18 +123,18 @@ const NODES = [
     label: "Kafka",
     sub: "Aiven",
     icon: "i-carbon-flow-stream",
-    x: 870,
-    y: 170,
-    kind: "svc",
+    x: 875,
+    y: 190,
+    kind: "svc colr",
   },
   {
     id: "dc",
     label: "Eget datasenter",
     sub: "VPN eller Interconnect",
     icon: "i-carbon-data-center",
-    x: 630,
-    y: 268,
-    kind: "svc",
+    x: 875,
+    y: 295,
+    kind: "svc colr",
   },
   {
     id: "cit",
@@ -142,7 +143,7 @@ const NODES = [
     icon: "i-carbon-user",
     x: 60,
     y: 45,
-    kind: "ext",
+    kind: "ext col",
   },
   {
     id: "ingx",
@@ -150,8 +151,8 @@ const NODES = [
     sub: "TLS",
     icon: "i-carbon-load-balancer-global",
     x: 60,
-    y: 125,
-    kind: "gw",
+    y: 140,
+    kind: "gw col",
   },
   {
     id: "emp",
@@ -159,33 +160,36 @@ const NODES = [
     sub: "naisdevice",
     icon: "i-carbon-laptop",
     x: 60,
-    y: 205,
-    kind: "ext",
+    y: 230,
+    kind: "ext col",
   },
   {
     id: "ingi",
     label: "Intern ingress",
+    sub: "bare via naisdevice",
     icon: "i-carbon-load-balancer-local",
     x: 60,
-    y: 285,
-    kind: "gw",
+    y: 315,
+    kind: "gw col",
   },
 ];
 // Orthogonal routes between node centres (the opaque nodes hide the ends).
 // Each line leaves min-app at its own x, and no segment runs under another
 // node or a boundary label.
+// Ends sit on node edges (min-app is about ±36 x ±21 units, column
+// nodes ±35 x ±28). Every line has its own port on min-app.
 const WIRES = [
-  { id: "app-api", d: "M250 160 H370", kind: "ok" },
-  { id: "app-x", d: "M250 160 V268 H440", kind: "bad" },
-  { id: "app-ip", d: "M235 160 V66 H520", kind: "out" },
-  { id: "ip-partner", d: "M520 66 H870", kind: "out" },
-  { id: "app-sql", d: "M265 160 V122 H630 V140", kind: "svc" },
-  { id: "app-aiven", d: "M275 160 V212 H820 V170 H870", kind: "svc" },
-  { id: "app-dc", d: "M240 160 V312 H630 V268", kind: "svc" },
-  { id: "cit-ingx", d: "M60 45 V125", kind: "in" },
-  { id: "ingx-app", d: "M60 125 H185 V160 H250", kind: "in" },
-  { id: "emp-ingi", d: "M60 205 V285", kind: "int" },
-  { id: "ingi-app", d: "M60 285 H200 V172 H250", kind: "int" },
+  { id: "app-api", d: "M326 165 H430", kind: "ok" },
+  { id: "app-x", d: "M260 201 V267", kind: "bad" },
+  { id: "app-ip", d: "M272 159 V85 H535", kind: "out" },
+  { id: "ip-partner", d: "M655 85 H805", kind: "out" },
+  { id: "app-sql", d: "M326 195 H615", kind: "svc" },
+  { id: "app-aiven", d: "M318 201 V262 H780 V190 H805", kind: "svc" },
+  { id: "app-dc", d: "M300 201 V295 H805", kind: "svc" },
+  { id: "cit-ingx", d: "M60 73 V112", kind: "in" },
+  { id: "ingx-app", d: "M95 140 H128 V170 H254", kind: "in" },
+  { id: "emp-ingi", d: "M60 258 V287", kind: "int" },
+  { id: "ingi-app", d: "M95 315 H150 V192 H254", kind: "int" },
 ];
 const CAPTIONS = [
   "min-app kjører i et Nais-cluster i deres egen GCP-organisasjon.",
@@ -239,11 +243,11 @@ useSteps((tl) => {
     });
   const caption = (i) => {
     if (i) tl.to(caps[i - 1], { autoAlpha: 0, duration: 0.2 });
-    tl.to(caps[i], { autoAlpha: 1, duration: 0.3 }, i ? "<" : ">");
+    tl.to(caps[i], { autoAlpha: 1, duration: 0.3 }, i ? "<" : 0.3);
   };
   tl.from(q(".b"), { drawSVG: "0%", duration: 0.8, stagger: 0.2 })
-    .from(q(".bl"), { autoAlpha: 0, stagger: 0.15 }, "-=0.5")
-    .from(q(".n-app"), { scale: 0.5, autoAlpha: 0, ease: POP }, "-=0.3");
+    .from(q(".bl"), { autoAlpha: 0, stagger: 0.08, duration: 0.4 }, 0.15)
+    .from(q(".n-app"), { scale: 0.5, autoAlpha: 0, ease: POP }, 0.25);
   caption(0);
   tl.addLabel("s0");
   caption(1);
@@ -290,7 +294,7 @@ useSteps((tl) => {
   position: relative;
   width: 100%;
   max-width: 980px;
-  height: 360px;
+  height: 386px;
   margin: 0 auto;
 }
 
@@ -402,6 +406,18 @@ svg {
   color: var(--nais-text-secondary);
 }
 
+.n.col {
+  width: 8rem;
+}
+
+.n.colr {
+  width: 8rem;
+}
+
+.ns-l {
+  text-align: right;
+}
+
 .n.app {
   border-color: #34d399;
 }
@@ -427,8 +443,8 @@ svg {
 
 .block {
   z-index: 3;
-  left: 44%;
-  top: 69%;
+  left: 42%;
+  top: 91%;
   padding: 0.1rem 0.6rem;
   border-radius: 999px;
   background: #7f1d1d;

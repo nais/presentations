@@ -421,7 +421,7 @@ pre,
   --nais-surface: #131d33;
   --nais-card: #111a2e;
   --nais-text: #e2e8f0;
-  --nais-text-secondary: #a3b1c6;
+  --nais-text-secondary: #b4c0d3;
   --nais-heading: #f8fafc;
   --nais-border: #263352;
   --nais-accent: #ff3377;
@@ -443,6 +443,12 @@ body,
 
 .subtitle {
   color: var(--nais-text-secondary) !important;
+}
+
+/* Something upstream dims subtitles to 50 %; keep them readable on weak
+   projectors (AA, 4.5:1 or better on the dark background). */
+html .slidev-layout .subtitle {
+  opacity: 1;
 }
 
 .who-chip {
@@ -586,7 +592,7 @@ body,
   view-transition-name: manifest-code;
 }
 :active-view-transition .prflow .step:has(.i-carbon-rocket),
-:active-view-transition .fan .node.app {
+:active-view-transition .fan .node.deploy {
   view-transition-name: apply-chip;
 }
 :active-view-transition .browser:has(.mock),
@@ -650,33 +656,5 @@ body,
     transform: translateX(30%) scale(0.6);
     opacity: 0;
     filter: brightness(0.4);
-  }
-}
-
-/* Subtle heart-beat on a finished end state (clip and last slide). Added from
-   script only when motion is allowed and not in print. */
-.heartbeat {
-  animation: heartbeat 1.8s ease-in-out infinite;
-  transform-origin: 50% 50%;
-}
-@keyframes heartbeat {
-  0%,
-  40%,
-  100% {
-    transform: scale(1);
-  }
-  12% {
-    transform: scale(1.015);
-  }
-  24% {
-    transform: scale(1);
-  }
-  32% {
-    transform: scale(1.01);
-  }
-}
-@media (prefers-reduced-motion: reduce) {
-  .heartbeat {
-    animation: none;
   }
 }

@@ -1,14 +1,20 @@
 <template>
-  <div class="count" data-motion-count>
+  <!-- The final value (widest digits) sizes the box invisibly; the ticking
+       value sits on top, so neighbours never shift while it counts. Poppins
+       has no tabular digits, hence the sizer. -->
+  <div ref="root" class="count" data-motion-count>
     <StatHighlight
-      :number="(prefix === '≈' ? '≈\u00a0' : prefix) + display"
+      class="sizer"
+      :number="pre + fmt(target).replace(/\d/g, wide)"
       :label="label"
+      aria-hidden="true"
     />
+    <StatHighlight :number="pre + display" :label="label" />
   </div>
 </template>
 
 <script setup>
-import { ref, watch } from "vue";
+import { onMounted, ref, watch } from "vue";
 import { useIsSlideActive } from "@slidev/client";
 import gsap from "gsap";
 import StatHighlight from "../components/StatHighlight.vue";
@@ -25,6 +31,21 @@ const target = Number(props.number);
 // No-break space as thousands separator, and after a «≈» prefix (deck style «≈ 21 500»).
 const fmt = (v) =>
   Math.round(v).toLocaleString("nb-NO").replace(/\s/g, "\u00a0");
+// Widest digit in the counter's font, measured once, for the sizer.
+const root = ref();
+const wide = ref("0");
+onMounted(async () => {
+  // Measure with the real font, not the swap fallback.
+  await globalThis.document.fonts?.ready;
+  const el = root.value?.querySelector(".stat-number");
+  if (!el) return;
+  const ctx = globalThis.document.createElement("canvas").getContext("2d");
+  ctx.font = globalThis.getComputedStyle(el).font;
+  wide.value = [..."0123456789"].reduce((a, d) =>
+    ctx.measureText(d).width > ctx.measureText(a).width ? d : a,
+  );
+});
+const pre = props.prefix === "≈" ? "≈\u00a0" : props.prefix;
 const display = ref(fmt(target));
 const state = { v: target };
 const active = useIsSlideActive();
@@ -49,6 +70,18 @@ watch(
 </script>
 
 <style scoped>
+.count {
+  display: grid;
+}
+
+.count > * {
+  grid-area: 1 / 1;
+}
+
+.sizer {
+  visibility: hidden;
+}
+
 .count :deep(.stat-number) {
   font-family: "Poppins", sans-serif;
   font-variant-numeric: tabular-nums;

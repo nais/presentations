@@ -16,7 +16,9 @@
     >
       <div
         class="node"
-        :data-anchor="!burst && i === items.length - 1 ? 'hex' : null"
+        :data-anchor="
+          !burst && i === Math.min($clicks, items.length - 1) ? 'hex' : null
+        "
       >
         <i class="lit" /><span :class="it.icon" />
       </div>
@@ -65,6 +67,8 @@ const d = pts.reduce((acc, [x, y], i) => {
   return `${acc} C${px + h} ${py} ${x - h} ${y} ${x} ${y}`;
 }, "");
 
+// The hero hex anchor follows the path: the first node on arrival, then
+// the node reached on each click (template uses $clicks directly).
 const { $clicks } = useSlideContext();
 const active = useIsSlideActive();
 const root = ref();

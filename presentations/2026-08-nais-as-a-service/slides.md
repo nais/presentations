@@ -88,7 +88,7 @@ layout: default
 
 ::header::
 <h1 class="text-3xl font-bold">Tenants utenfor Nav kjører allerede 528 apper</h1>
-<p class="subtitle">Og Nav deployer rundt 21 500 ganger i uka, i alle miljøer</p>
+<p class="subtitle">Og Nav deployer stadig oftere</p>
 
 ::default::
 <div class="flex flex-col items-center gap-3 w-full">
@@ -98,8 +98,7 @@ layout: default
     <CountUp number="21500" prefix="≈" label="Deployer per uke" :delay="0.16" />
     <CountUp number="154" label="Team som deployer" :delay="0.24" />
   </div>
-  <p class="anim-item text-sm text-muted -mt-2">En tenant er en virksomhet som bruker Nais.</p>
-  <YearChart metric="deploys" />
+  <YearChart metric="deploys" :labels="false" />
   <div class="anim-item tenant-logos">
     <img src="./assets/logos/nav.svg" alt="Nav" class="h-7" />
     <img src="./assets/logos/ssb.svg" alt="SSB" class="h-7" />
@@ -113,6 +112,8 @@ layout: default
 <!--
 Overgang: «Grunnen til at tallene er så store, kommer på de neste slidene.»
 
+- En tenant er en virksomhet som bruker Nais
+- 21 500 vises én gang, på flisa. Årsgrafen viser bare formen
 - 528 apper kjører hos SSB, Landbruksdirektoratet og Arbeidstilsynet. KS Digital og Novari er på vei inn
 - Apper per tenant: Grafana 21. oktober 2026 (72 + 164 + 292 = 528 utenfor Nav)
 - ≈ 21 500 deployer per uke i Nav, alle miljøer. ≈ 9 000 i prod (Mimir)
@@ -121,31 +122,6 @@ Overgang: «Grunnen til at tallene er så store, kommer på de neste slidene.»
 - 2022: ≈ 1 500 deployer per uke og ≈ 1 300 apper (Ship It #78, nov. 2022, https://www.changelog.com/shipit/78). Nå: ≈ 21 500 per uke (alle miljøer) og 5 212 apper
 - Nais har vært i produksjon siden 2016
 - Årsgrafen er et anslag: formen følger Navs årlige snitt (2015 ≈ 10 … 2025 ≈ 2 700 deployer per uke), skalert slik at 2026 ender på dagens ≈ 21 500 i alle miljøer
--->
-
----
-layout: default
-clicks: 5
----
-
-::header::
-<h1 class="text-3xl font-bold">Hva Nais har betydd for Nav</h1>
-
-::default::
-<BenefitStory :items="[
-  { icon: 'i-carbon-building', title: 'Fundament', description: 'Autonome team' },
-  { icon: 'i-carbon-rocket', title: 'Fart og flyt', description: 'Kortere vei til prod' },
-  { icon: 'i-carbon-user-speaker', title: 'Utviklere', description: 'Fornøyde' },
-  { icon: 'i-carbon-group', title: 'Ansatte', description: 'Fornøyde' },
-  { icon: 'i-carbon-face-satisfied', title: 'Brukere', description: 'Fornøyde' },
-]" />
-<div class="anim-item dora"><b>≈ 9 000</b> prodsettinger per uke · mange ganger daglig per team</div>
-
-<!--
-Overgang: «Og hva er det utviklerne faktisk skriver? Dette.»
-
-- Ett klikk per steg, konfetti til slutt
-- ≈ 9 000 prodsettinger per uke (Mimir, alle tenants, Nav dominerer). Mange ganger daglig per team
 -->
 
 ---
@@ -185,7 +161,7 @@ clicks: 3
 <PrFlow />
 
 <!--
-Overgang: «Men hva skjer egentlig på plattformsiden?»
+Overgang: «nais apply leverer appen. Men hva skjer egentlig på plattformsiden?»
 
 - Alt går via GitHub: pull request, sjekker, review, merge
 - Klikk 1: sjekker (bygg, test, nais validate) og godkjenning. Klikk 2: merge, så bygger nais/docker-build-push med SBOM og signering, og nais apply deployer
@@ -195,13 +171,13 @@ Overgang: «Men hva skjer egentlig på plattformsiden?»
 
 ---
 layout: default
-clicks: 2
+clicks: 4
 ---
 
 ::header::
 <div class="pillar-tag" style="--pc: #9b6fd6"><span class="i-carbon-settings" /> Automatisering</div>
 <h1 class="text-3xl font-bold">Hva skjer på plattformsiden</h1>
-<p class="subtitle">Naiserator gjør manifestet om til ressurser</p>
+<p class="subtitle">Alt går gjennom Nais API</p>
 
 ::default::
 <AppFanout />
@@ -209,9 +185,11 @@ clicks: 2
 <!--
 Overgang: «Tusenvis av apper, og hver får den samme hylla. Her er den.»
 
-- Naiserator lager Kubernetes-ressursene: Deployment, Service, Ingress, NetworkPolicy og flere
-- Operatorer tar over resten: Config Connector, aivenator, azurerator, digdirator, jwker
-- Klikk 2: zoom ut fra én app til tusenvis av apper og ett plattformteam
+- Klikk 1: klientene: Nais CLI, Console, nais deploy fra GitHub Actions og MCP-serveren for KI-agenter
+- Klikk 2: alle snakker med Nais API
+- Klikk 3: nais deploy leverer manifestet inn i clusteret, der Naiserator gjør det om til Kubernetes-objekter (Deployment, Service, NetworkPolicy, ingress, secrets). Nais API setter opp teamressurser og datatjenester
+- Forenklet: deploy går gjennom nais deploy, Naiserator avstemmer appene, og api-reconcilers tar seg av teamressursene. Operatorer som Config Connector og aivenator gjør resten
+- Klikk 4: zoom ut fra én app til tusenvis av apper og ett plattformteam
 -->
 
 ---
@@ -228,11 +206,36 @@ clicks: 4
 <Toolbox mode="open" />
 
 <!--
-Overgang: «Hva skjer når noe feiler?»
+Overgang: «Og hva har alt dette betydd for Nav?»
 
 - Én bølge med skuffer per klikk (tre bølger), til slutt alt på en gang
 - Gruppert etter inventaret over verktøykassa. Utfasede ting er utelatt
 - MCP for kodeagenter ligger i Verktøy-skuffen
+-->
+
+---
+layout: default
+clicks: 5
+---
+
+::header::
+<h1 class="text-3xl font-bold">Hva Nais har betydd for Nav</h1>
+
+::default::
+<BenefitStory :items="[
+  { icon: 'i-carbon-building', title: 'Fundament', description: 'Autonome team' },
+  { icon: 'i-carbon-rocket', title: 'Fart og flyt', description: 'Kortere vei til prod' },
+  { icon: 'i-carbon-user-speaker', title: 'Utviklere', description: 'Fornøyde' },
+  { icon: 'i-carbon-group', title: 'Ansatte', description: 'Fornøyde' },
+  { icon: 'i-carbon-face-satisfied', title: 'Brukere', description: 'Fornøyde' },
+]" />
+<div class="anim-item dora"><b>≈ 9 000</b> prodsettinger per uke · mange ganger daglig per team</div>
+
+<!--
+Overgang: «Hva skjer når noe feiler?»
+
+- Ett klikk per steg, konfetti til slutt
+- ≈ 9 000 prodsettinger per uke (Mimir, alle tenants, Nav dominerer). Mange ganger daglig per team
 -->
 
 ---
@@ -288,12 +291,32 @@ clicks: 3
 <CostLoop />
 
 <!--
-Overgang: «Og for de som liker terminalen:»
+Overgang: «Og databasen er bare én post på regningen. Resten handler om at containere deler maskiner.»
 
 - Samme PR-kort som på pull request-sliden. Klikk 1: teamet merger PR-en som gjør databasen større, og kostnaden stiger i Console
 - Klikk 2: teamet ser det og sender en ny PR. Klikk 3: riktig størrelse, og kostnaden legger seg under der den startet
 - Feltene er fra Application-spec (gcp.sqlInstances tier og diskSize). Kronebeløpene er illustrasjon
 - Knytter an til prisen: tenanten betaler forbruket sitt direkte til selvkost, så teamets valg slår rett ut på regningen
+-->
+
+---
+layout: default
+---
+
+::header::
+<h1 class="text-3xl font-bold">Ressursutnyttelse</h1>
+<p class="subtitle">Containere deler maskiner. Virtuelle maskiner står ofte halvtomme.</p>
+
+::default::
+<ResourceIcebergs />
+
+<!--
+Overgang: «Og for de som liker terminalen:»
+
+- Containere deler maskiner, og derfor bruker de mindre enn virtuelle maskiner
+- 2–10x er et anslag: spennet fra den gamle Nav-presentasjonen. Det avhenger av hvor godt virtuelle maskiner ble dimensjonert før; containere deler maskiner og skalerer etter behov
+- For beslutningstakere: dere betaler for det appene bruker, ikke for tomme maskiner
+- Nais Postgres og Nais Buckets er på vei, blant annet for å få ned kostnaden
 -->
 
 ---
@@ -316,46 +339,6 @@ Overgang: «Det var utviklerens side. Nå snur vi bildet: alt som må stå for a
 
 ---
 layout: default
-clicks: 4
----
-
-::header::
-<div class="pillar-tag" style="--pc: #9b6fd6"><span class="i-carbon-settings" /> Automatisering</div>
-<h1 class="text-3xl font-bold">En plattform med flere lag</h1>
-
-::default::
-<IsoLayers />
-
-<!--
-Overgang: «Og fordi containere deler maskiner, bruker de mindre enn virtuelle maskiner.»
-
-- Lagene bygges nedenfra: infrastruktur fra skyleverandøren, Kubernetes, operatorene (hjertet i Nais) og appene
-- Klikk 1: pods for app A, B og C fordelt over tre soner i én region. Klikk 2: de skalerer ut
-- Klikk 3: datasenter-b faller ut, og podene startes i a og c. Appen merker det ikke
-- Klikk 4: laget nederst byttes (eget datasenter → Google Cloud), mens operatorene og appene blir stående. Nais har flyttet før, og det er dette som gjør exit og flytting mulig
--->
-
----
-layout: default
----
-
-::header::
-<h1 class="text-3xl font-bold">Ressursutnyttelse</h1>
-<p class="subtitle">Containere deler maskiner. Virtuelle maskiner står ofte halvtomme.</p>
-
-::default::
-<ResourceIcebergs />
-
-<!--
-Overgang: «Og alt dette må noen drifte.»
-
-- 2–10x er et anslag: spennet fra den gamle Nav-presentasjonen. Det avhenger av hvor godt virtuelle maskiner ble dimensjonert før; containere deler maskiner og skalerer etter behov
-- For beslutningstakere: dere betaler for det appene bruker, ikke for tomme maskiner
-- Nais Postgres og Nais Buckets er på vei, blant annet for å få ned kostnaden
--->
-
----
-layout: default
 clicks: 2
 ---
 
@@ -371,7 +354,8 @@ clicks: 2
 Overgang: «Og når noe likevel skjer om natta?»
 
 - Samme verktøykasse, dempet
-- Klikk 1: driften Nais tar. Klikk 2: streken mellom tenantens del og Nais' del
+- Klikk 1: driften Nais tar. Nais drifter plattformen, oppgraderer den og har vakt for den. Klikk 2: streken mellom teamenes del og Nais' del
+- Teamene drifter sin egen app og holder den oppdatert: avhengigheter, base-image og kjøretidsversjon. Nais oppgraderer plattformen, ikke appene
 -->
 
 ---
@@ -381,22 +365,22 @@ clicks: 3
 
 ::header::
 <h1 class="text-3xl font-bold">Kl. 03.00</h1>
-<p class="subtitle">Samme varsel, samme Grafana. Forskjellen er hvem sin telefon som ringer.</p>
+<p class="subtitle">Nais har vakt for plattformen. Teamene eier appene sine.</p>
 
 ::default::
 <div class="flex flex-col gap-6 w-full">
   <FlowChain :nodes="[
-    { icon: 'i-carbon-notification', label: 'Varsel', sub: 'Noe feiler kl. 03.00' },
+    { icon: 'i-carbon-notification', label: 'Varsel', sub: 'En node i plattformen svikter kl. 03.00' },
     { icon: 'i-carbon-phone', label: 'Nais-vakt', sub: 'Vakthavende i Nais-teamet varsles' },
     { icon: 'i-carbon-cloud', label: 'Google', sub: 'Googles døgnåpne support ved behov' },
-    { icon: 'i-carbon-checkmark', label: 'Løst', sub: 'Dere sov gjennom det' },
+    { icon: 'i-carbon-checkmark', label: 'Løst', sub: 'Appene kjørte hele tiden' },
   ]" />
   <div class="grid grid-cols-2 gap-6 items-center max-w-4xl mx-auto w-full">
     <div class="anim-item night">
-      <p><b>03.02</b> Varsel i Slack</p>
-      <p><b>03.05</b> Tracen peker på databasekallet</p>
-      <p><b>03.08</b> Loggene viser at tilkoblingspoolen er full</p>
-      <p><b>03.14</b> Rollback, og alt er grønt igjen</p>
+      <p><b>03.02</b> Varsel: en node i én sone svarer ikke</p>
+      <p><b>03.03</b> Kubernetes flytter podene til friske noder</p>
+      <p><b>03.10</b> Nais-vakten bytter noden, sammen med Google</p>
+      <p><b>03.25</b> Alt er grønt. Appene merket det ikke</p>
     </div>
     <div class="anim-item text-center">
       <div class="text-5xl font-bold" style="font-family: Poppins; color: var(--nais-success)">99,88 %</div>
@@ -409,9 +393,11 @@ clicks: 3
 <!--
 Overgang: «Hvem var våkne? Disse femten.»
 
-- Vakt døgnet rundt er inkludert i NaaS: Nais-teamet, med Googles døgnåpne support ved behov. Google-supporten er inkludert i prisen
+- Nais har vakt døgnet rundt for plattformen, med Googles døgnåpne support ved behov. Google-supporten er inkludert i prisen
+- Skillet: Nais har vakt for plattformen. Teamene eier appene sine. Feiler en app på grunn av egen kode, for eksempel mot databasen, er det teamets jobb å rette, ikke Nais'
+- Få produktteam har egen vakt, og det trenger de ikke for plattformfeil
 - 99,88 % er målt i Mimir, Nav, siste 30 dager. Tallet inkluderer feil i appene selv. Ingen formell SLA
-- Natten i boksen er en illustrasjon av en typisk natt, ikke en bestemt hendelse
+- Natten i boksen er en illustrasjon av en plattformfeil (en node faller ut), ikke en bestemt hendelse
 -->
 
 ---
@@ -452,7 +438,7 @@ clicks: 9
 ]" />
 
 <!--
-Overgang: «Så: hvor kjører dette, og hvem eier det? Nå snakker jeg til dere som skal signere.»
+Overgang: «Og sikkerheten gjelder ikke bare koden. Hvem slipper inn? Innloggingen er bygd inn.»
 
 - Klikk 1–4: ett ledd per klikk. SBOM og signering skjer automatisk i bygget. Husk manifestet og PR-en agenten laget tidligere: den koden gikk gjennom akkurat samme løp som all annen kode
 - Klikk 5: Console vokser ut av det siste leddet. Klikk 6–9: funnet åpnes, PR oppdaterer avhengigheten, bygg og deploy, ny skanning og løst
@@ -463,6 +449,34 @@ Overgang: «Så: hvor kjører dette, og hvem eier det? Nå snakker jeg til dere 
 - Digitalsikkerhetsforskriften § 14 (i kraft 1.10.2025) gjelder bare tilbydere av samfunnsviktige tjenester: https://lovdata.no/dokument/SF/forskrift/2025-06-20-1131. NSMs veileder: https://nsm.no/getfile.php/1314788-1759304646/NSM/Filer/Dokumenter/Veiledere/Veileder%20fra%20NSM%20i%20digitalsikkerhetsloven%20og%20-forskriften.pdf
 - NIS2 vurderes for EØS-avtalen, ingen norsk lov ennå: https://www.efta.int/eea-lex/32022L2555, https://www.regjeringen.no/no/sub/eos-notatbasen/notatene/2021/feb/nis2-direktivet/id2846097/
 - Nais gir dere dokumentasjonen som hjelper dere å følge opp leverandørkjeden. Dokumentasjonen alene gjør ikke at dere etterlever kravene. Ansvaret ligger hos tenanten
+-->
+
+---
+layout: default
+clicks: 9
+---
+
+::header::
+<div class="pillar-tag" style="--pc: #34c27a"><span class="i-carbon-certificate-check" /> Sikkerhet</div>
+<h1 class="text-2xl font-bold">Innlogging uten egen kode</h1>
+
+::default::
+<AuthJourney star />
+
+<!--
+Overgang: «Nå snakker jeg til dere som skal signere. Dere er ikke de første som spør om én felles plattform. Se på Europa.»
+
+- To sidecars gjør jobben: Wonderwall er en innloggings-sidecar foran appen (logger brukeren inn mot ID-porten eller Entra ID). Texas er en token-sidecar som appen spør for å validere, bytte og hente tokens
+- Klikk 0: ID-porten, Maskinporten, Entra ID og TokenX/Texas er innebygd
+- Klikk 1: oversikten viker for én forespørsel gjennom Nais, og grensene for cluster og pods tegnes
+- Klikk 2: Wonderwall (innloggings-sidecar) sender innbyggeren til ID-porten. min-app får forespørselen med Authorization-header. Wonderwall validerer ikke tokenet; appen gjør det via Texas
+- Klikk 3: tokenet har mottaker (aud) min-app. Et token er bare gyldig for mottakeren det er laget for
+- Klikk 4: min-app kaller Texas: POST til NAIS_TOKEN_EXCHANGE_ENDPOINT med identity_provider=tokenx, target=prod-gcp:team-b:api og user_token (docs.nais.io, TokenX)
+- Klikk 5: Texas bytter tokenet via TokenX. Samme bruker, ny mottaker: prod-gcp:team-b:api. Hvorfor: lekker tokenet, kan det ikke brukes mot andre tjenester, og hvert API ser hvem brukeren er
+- Klikk 6: API-ets Texas introspekterer tokenet (NAIS_TOKEN_INTROSPECTION_ENDPOINT): riktig mottaker, riktig bruker
+- Klikk 7: accessPolicy.inbound stopper en app som ikke har lov
+- Klikk 8: Maskinporten-token for et eksternt API, også via Texas
+- Klikk 9: manifestlinjene. Kilde: docs.nais.io (auth, ID-porten, TokenX, Entra ID, Maskinporten)
 -->
 
 ---
@@ -502,7 +516,7 @@ clicks: 2
 <HostingMap />
 
 <!--
-Overgang: «Og slik henger nettverket sammen.»
+Overgang: «Nais har flyttet før, fra eget datasenter til Google Cloud. Slik er lagene bygd.»
 
 - Google Cloud: GKE, Cloud SQL, buckets, BigQuery. Aiven: Kafka, OpenSearch, Valkey
 - Nais drifter observability-stakken selv
@@ -510,6 +524,27 @@ Overgang: «Og slik henger nettverket sammen.»
 - Dataene ligger i europe-north1 (Finland)
 - Nais startet i eget datasenter i 2016 og flyttet til Google Cloud
 - Nais drifter selv: Console og API, ingress, naisdevice og observability-stakken (Grafana, Mimir, Loki, Tempo)
+-->
+
+---
+layout: default
+clicks: 4
+---
+
+::header::
+<div class="pillar-tag" style="--pc: #4a9be8"><span class="i-carbon-migrate" /> Suveren og autonom</div>
+<h1 class="text-3xl font-bold">En plattform med flere lag</h1>
+
+::default::
+<IsoLayers />
+
+<!--
+Overgang: «Og slik henger nettverket sammen.»
+
+- Lagene bygges nedenfra: infrastruktur fra skyleverandøren, Kubernetes, Nais (operatorene, hjertet i plattformen) og teamenes apper
+- Klikk 1: pods for app A, B og C fordelt over tre soner i én region. Klikk 2: de skalerer ut
+- Klikk 3: datasenter-b faller ut, og podene startes i a og c. Appen merker det ikke
+- Klikk 4: laget nederst byttes (eget datasenter → Google Cloud), mens Nais og appene blir stående. Nais har flyttet før, og det er dette som gjør exit og flytting mulig
 -->
 
 ---
@@ -525,7 +560,7 @@ clicks: 6
 <NetTopology />
 
 <!--
-Overgang: «Og hvem slipper inn? Innloggingen er bygd inn.»
+Overgang: «Og hvis dere vil flytte, er det deres valg.»
 
 - Klikk 0: min-app i et Nais-cluster (VPC) i tenantens egen GCP-organisasjon
 - Klikk 1: nettverkspolicyer fra accessPolicy. Alt er stengt som standard; en app som ikke er nevnt, blir stoppet
@@ -534,33 +569,6 @@ Overgang: «Og hvem slipper inn? Innloggingen er bygd inn.»
 - Klikk 4: tenantens eget datasenter via VPN eller Cloud Interconnect, satt opp per tenant
 - Klikk 5: to innganger. Innbyggere kommer fra internett via ekstern ingress med TLS. Ansatte når interne apper via naisdevice og intern ingress
 - Klikk 6: en annen tenant har sin egen organisasjon og sitt eget nettverk, ingenting er delt
--->
-
----
-layout: default
-clicks: 9
----
-
-::header::
-<div class="pillar-tag" style="--pc: #34c27a"><span class="i-carbon-certificate-check" /> Sikkerhet</div>
-<h1 class="text-2xl font-bold">Innlogging uten egen kode</h1>
-
-::default::
-<AuthJourney star />
-
-<!--
-Overgang: «Og hvis dere vil flytte, er det deres valg.»
-
-- Klikk 0: ID-porten, Maskinporten, Entra ID og TokenX/Texas er innebygd
-- Klikk 1: nodene flyr inn i én forespørsel gjennom Nais, og grensene for cluster og pods tegnes
-- Klikk 2: Wonderwall (innloggings-sidecar) sender innbyggeren til ID-porten. min-app får forespørselen med Authorization-header. Wonderwall validerer ikke tokenet; appen gjør det via Texas
-- Klikk 3: tokenet har mottaker (aud) min-app. Et token er bare gyldig for mottakeren det er laget for
-- Klikk 4: min-app kaller Texas: POST til NAIS_TOKEN_EXCHANGE_ENDPOINT med identity_provider=tokenx, target=prod-gcp:team-b:api og user_token (docs.nais.io, TokenX)
-- Klikk 5: Texas bytter tokenet via TokenX. Samme bruker, ny mottaker: prod-gcp:team-b:api. Hvorfor: lekker tokenet, kan det ikke brukes mot andre tjenester, og hvert API ser hvem brukeren er
-- Klikk 6: API-ets Texas introspekterer tokenet (NAIS_TOKEN_INTROSPECTION_ENDPOINT): riktig mottaker, riktig bruker
-- Klikk 7: accessPolicy.inbound stopper en app som ikke har lov
-- Klikk 8: Maskinporten-token for et eksternt API, også via Texas
-- Klikk 9: manifestlinjene. Kilde: docs.nais.io (auth, ID-porten, TokenX, Entra ID, Maskinporten)
 -->
 
 ---
@@ -623,7 +631,7 @@ Overgang: «Hvem bestemmer så hva som skjer med plattformen?»
 
 - GOV.UK PaaS ble lagt ned i 2023 (over 60 virksomheter, 3 200 apper). Egen kjøreplattform, og leverandøren hadde ikke selv behov for den. https://gds.blog.gov.uk/2022/07/12/why-weve-decided-to-decommission-gov-uk-paas-platform-as-a-service/ og https://cloud.service.gov.uk
 - Nais er Kubernetes, og Nav er den største tenanten (≈ 4 700 av 5 212 apper, Grafana 21. oktober 2026)
-- Låsing: dere går ut med standarder. Avhengighet: vakt døgnet rundt med Googles support, 1–2 nye tenants per år
+- Låsing: dere går ut med standarder. Avhengighet: vakt døgnet rundt for plattformen, med Googles support, 1–2 nye tenants per år
 - Ingen formell SLA: 99,88 % målt i Nav siste 30 dager, feil i appene inkludert
 -->
 
@@ -635,16 +643,16 @@ clicks: 1
 ::header::
 <div class="pillar-tag" style="--pc: #ff5c6c"><span class="i-carbon-partnership" /> Et Nais-fellesskap</div>
 <h1 class="text-3xl font-bold">Hvem bestemmer</h1>
-<p class="subtitle">Nais-teamet bestemmer veikartet, tenantene gir innspill på Naisdag</p>
+<p class="subtitle">Nais-teamet bestemmer veikartet, med innspill fra tenantene på Naisdag</p>
 
 ::default::
 <GovernanceLoop />
 
 <!--
-Overgang: «Når vi sier ja til én tenant, sier vi ja til alle.»
+Overgang: «Og det vi bygger for én tenant, får alle.»
 
-- Nais-teamet bestemmer veikartet
-- Tenantene gir innspill på Naisdag
+- Nais-teamet bestemmer veikartet, med innspill fra tenantene på Naisdag
+- Det betyr ikke at alt én tenant ønsker, blir bygd. Men det som blir bygd, får alle
 - 1–2 nye tenants per år
 - På veikartet: Nais Postgres (CloudNativePG) og Nais Buckets
 -->
@@ -657,7 +665,7 @@ clicks: 3
 ::header::
 <div class="pillar-tag" style="--pc: #ff5c6c"><span class="i-carbon-partnership" /> Et Nais-fellesskap</div>
 <h1 class="text-3xl font-bold mt-4">Bedre sammen</h1>
-<p class="subtitle">Det én tenant trenger, får alle</p>
+<p class="subtitle">Det vi bygger for én tenant, får alle</p>
 
 ::default::
 <ShareLoop :agencies="['Nav', 'SSB', 'Landbruksdirektoratet', 'Arbeidstilsynet', 'KS Digital', 'Novari']" :support="[
@@ -673,7 +681,7 @@ clicks: 3
 <!--
 Overgang: «Og dere får ikke bare hjelp fra oss. Utviklerne kan det allerede.»
 
-- Forbedringer for én tenant kommer alle til gode (klikk 2: alle nodene blir grønne)
+- Når Nais-teamet bygger noe én tenant trenger, får alle det (klikk 2: alle nodene blir grønne). Hva som bygges, står på veikartet, og det bestemmer Nais-teamet
 - Klikk 3: dere står ikke alene. Slack, docs.nais.io, champions i teamene, arbeidsøkter og Naisdag
 - KS i Altinget 10.06.2025: «løse felles oppgaver én gang i fellesskap i stedet for hver for seg», https://www.altinget.no/artikkel/etterlysning-taktskifte-i-digitaliseringsarbeidet
 - Sitat fra Landbruksdirektoratets stillingsannonse: https://www.finn.no/451519458

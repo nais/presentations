@@ -154,11 +154,11 @@ useSteps((tl) => {
     const step = i + 1;
     if (i)
       tl.to(blocks[i - 1], {
-        color: "#64748b",
+        color: "#94a3b8",
         backgroundColor: "rgba(0,0,0,0)",
         duration: 0.3,
       });
-    else tl.to(q(".base"), { color: "#64748b", duration: 0.3 });
+    else tl.to(q(".base"), { color: "#94a3b8", duration: 0.3 });
     tl.to(
       b,
       {

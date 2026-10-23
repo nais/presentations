@@ -42,7 +42,7 @@
           >{{ t }}<small v-if="i >= STACKS.length">på vei inn</small></span
         >
       </div>
-      <div ref="band" class="band">Drift og vakt døgnet rundt</div>
+      <div ref="band" class="band">Drift og vakt for plattformen</div>
       <div ref="years" class="years">
         ≈&#160;<b ref="yearsN">0</b> årsverk <small>anslag</small>
       </div>

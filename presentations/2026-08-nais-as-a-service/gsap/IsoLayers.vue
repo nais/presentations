@@ -55,11 +55,7 @@ import { POP, STAGGER, useSteps } from "./motion.js";
 const LAYERS = [
   { name: "Infrastruktur", sub: "fra skyleverandøren", color: "#334155" },
   { name: "Kubernetes", sub: "kjører containerne", color: "#3b5b8c" },
-  {
-    name: "Operatorer",
-    sub: "hjertet i Nais, det utviklerne møter",
-    color: "#9b3b6a",
-  },
+  { name: "Nais", sub: "operatorene, hjertet i plattformen", color: "#9b3b6a" },
   { name: "Applikasjon", sub: "teamenes apper", color: "#e8384f" },
 ];
 const ZONES = ["datasenter-a", "datasenter-b", "datasenter-c"];
@@ -151,7 +147,7 @@ useSteps((tl) => {
     })
     .to(q(".infra .new"), { autoAlpha: 1, duration: 0.3 }, "<0.2")
     .to(
-      [layers[2], layers[3]].map((l) => l.querySelector(".plate")),
+      layers.slice(2).map((l) => l.querySelector(".plate")),
       { boxShadow: "0 0 26px 6px rgba(255,51,119,0.55)", duration: 0.5 },
       "<",
     )
