@@ -161,7 +161,7 @@ clicks: 3
 <PrFlow />
 
 <!--
-Overgang: «Men hva skjer egentlig på plattformsiden?»
+Overgang: «nais apply leverer appen. Men hva skjer egentlig på plattformsiden?»
 
 - Alt går via GitHub: pull request, sjekker, review, merge
 - Klikk 1: sjekker (bygg, test, nais validate) og godkjenning. Klikk 2: merge, så bygger nais/docker-build-push med SBOM og signering, og nais apply deployer
@@ -171,13 +171,13 @@ Overgang: «Men hva skjer egentlig på plattformsiden?»
 
 ---
 layout: default
-clicks: 2
+clicks: 4
 ---
 
 ::header::
 <div class="pillar-tag" style="--pc: #9b6fd6"><span class="i-carbon-settings" /> Automatisering</div>
 <h1 class="text-3xl font-bold">Hva skjer på plattformsiden</h1>
-<p class="subtitle">Naiserator gjør manifestet om til ressurser</p>
+<p class="subtitle">Alt går gjennom Nais API</p>
 
 ::default::
 <AppFanout />
@@ -185,9 +185,11 @@ clicks: 2
 <!--
 Overgang: «Tusenvis av apper, og hver får den samme hylla. Her er den.»
 
-- Naiserator lager Kubernetes-ressursene: Deployment, Service, Ingress, NetworkPolicy og flere
-- Operatorer tar over resten: Config Connector, aivenator, azurerator, digdirator, jwker
-- Klikk 2: zoom ut fra én app til tusenvis av apper og ett plattformteam
+- Klikk 1: klientene: Nais CLI, Console, nais deploy fra GitHub Actions og MCP-serveren for KI-agenter
+- Klikk 2: alle snakker med Nais API
+- Klikk 3: nais deploy leverer manifestet inn i clusteret, der Naiserator gjør det om til Kubernetes-objekter (Deployment, Service, NetworkPolicy, ingress, secrets). Nais API setter opp teamressurser og datatjenester
+- Forenklet: deploy går gjennom nais deploy, Naiserator avstemmer appene, og api-reconcilers tar seg av teamressursene. Operatorer som Config Connector og aivenator gjør resten
+- Klikk 4: zoom ut fra én app til tusenvis av apper og ett plattformteam
 -->
 
 ---

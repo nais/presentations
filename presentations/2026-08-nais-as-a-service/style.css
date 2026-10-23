@@ -592,7 +592,7 @@ html .slidev-layout .subtitle {
   view-transition-name: manifest-code;
 }
 :active-view-transition .prflow .step:has(.i-carbon-rocket),
-:active-view-transition .fan .node.app {
+:active-view-transition .fan .node.deploy {
   view-transition-name: apply-chip;
 }
 :active-view-transition .browser:has(.mock),
