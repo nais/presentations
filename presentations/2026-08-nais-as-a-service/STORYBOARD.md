@@ -96,3 +96,49 @@ Ingen. Anslag er merket «anslag» på sliden eller i notatene.
 - Nettverksslide (23) er sjekket mot docs.nais.io. Aiven nås over privat lenke / VPC-peering (avklart). Ekstern ingress for innbyggere og intern ingress via naisdevice for ansatte er egne innganger
 - Batch 9: forsiden setter sammen Nais-logoen av sekskanter, innvendingene snus som kort, prisen stables med teller, «Hvem kan bli med» sorteres i to baner, og siste slide har stort Norge-kart
 - Batch 11: prisen er én slide («Hva koster det», tidligere «Hva selvkost betyr»; prisstabelen er fjernet). Hjerteslag på klippet og siste slide. Terminalen spiller av seg selv. Nettverk og innlogging har rettvinklede linjer. «Dette tar dere med dere» flytter tenanten og teknologien som én pakke. «Hvem kan bli med» åpner med hva Nais passer for
+
+## Lesbarhet ved inngang
+
+Regel: tittel og hovedtekst skal kunne leses innen omtrent 0,6 s. Automatisk spilles bare kort etablerende bevegelse; det som forteller et steg i historien, ligger på klikk. Målt i nettleseren (Playwright), fra slidebytte til tittelen og 80 % av teksten er fullt synlig. «Ved inngang» betyr at sliden bare har grafikk ved klikk 0.
+
+| # | Tittel | Automatisk ved inngang | Per klikk | Tittel lesbar | Hovedtekst lesbar |
+|---|---|---|---|---|---|
+| 1 | Nais as a Service | Sekskanter setter sammen Nais-logoen | 0 klikk, ett steg i historien hvert | – | ved inngang |
+| 2 | Problemet | Fire stabler med smertepunkter | 1 klikk, ett steg i historien hvert | 0,3 s | 1,2 s |
+| 3 | (klipp) | Klippet spiller, så en bølge fra navet | 0 klikk, ett steg i historien hvert | 0,0 s | 0,0 s |
+| 4 | Hva er Nais | Søylene kommer inn | 0 klikk, ett steg i historien hvert | 0,3 s | 0,6 s |
+| 5 | Tenants utenfor Nav kjører allerede 528 apper | Tellerne teller, søylene vokser | 0 klikk, ett steg i historien hvert | 0,3 s | 0,4 s |
+| 6 | Hva Nais har betydd for Nav | Kurven tegnes | 5 klikk, ett steg i historien hvert | 0,3 s | ved inngang |
+| 7 | Ett manifest, ferdig oppsett | Agentchatten skrives | 6 klikk, ett steg i historien hvert | 0,4 s | 1,3 s |
+| 8 | Fra pull request til produksjon | PR-kortet og stegene kommer inn | 3 klikk, ett steg i historien hvert | 0,1 s | 0,5 s |
+| 9 | Hva skjer på plattformsiden | Application og Naiserator | 2 klikk, ett steg i historien hvert | 0,1 s | ved inngang |
+| 10 | Verktøykassa | Skuffene kommer inn dempet | 4 klikk, ett steg i historien hvert | 0,3 s | 0,7 s |
+| 11 | Fra feil til fiks | Feilraten og flyten tegnes | 5 klikk, ett steg i historien hvert | 0,3 s | 0,7 s |
+| 12 | Console: fra team til app | Console-teamsiden | 3 klikk, ett steg i historien hvert | 0,3 s | 0,3 s |
+| 13 | Teamet eier kostnaden | PR og kostnadskurve | 3 klikk, ett steg i historien hvert | 0,1 s | 0,3 s |
+| 14 | Og fra terminalen | Fem kommandoer skrives (≈ 5 s) | 0 klikk, ett steg i historien hvert | 0,3 s | ved inngang |
+| 15 | En plattform med flere lag | Lagene bygges nedenfra | 4 klikk, ett steg i historien hvert | 0,3 s | 1,1 s |
+| 16 | Ressursutnyttelse | Isfjellene og 2–10x | 0 klikk, ett steg i historien hvert | 0,3 s | 0,7 s |
+| 17 | Hva dere slipper å drifte | Verktøykassa dempet | 2 klikk, ett steg i historien hvert | 0,3 s | 0,7 s |
+| 18 | Kl. 03.00 | Kjeden lyser opp | 3 klikk, ett steg i historien hvert | 0,3 s | 0,6 s |
+| 19 | Nais-teamet | Teamet danner logo, hjerte, så vegg med navn (≈ 4 s) | 0 klikk, ett steg i historien hvert | 0,3 s | 3,8 s |
+| 20 | Sikkerhet i forsyningskjeden | Kjeden tegnes | 9 klikk, ett steg i historien hvert | 0,4 s | ved inngang |
+| 21 | Hva Europa gjør | Kartet tegnes | 6 klikk, ett steg i historien hvert | 0,1 s | ved inngang |
+| 22 | Hva kjører hvor | Boksene kommer inn | 2 klikk, ett steg i historien hvert | 0,3 s | 1,3 s |
+| 23 | Nettverket rundt min-app | Grensene tegnes, min-app | 6 klikk, ett steg i historien hvert | 0,3 s | 0,5 s |
+| 24 | Innlogging uten egen kode | Innloggingsstjerna | 9 klikk, ett steg i historien hvert | 0,3 s | 1,0 s |
+| 25 | Deres data, deres exit | Kartet over tenants | 3 klikk, ett steg i historien hvert | 0,3 s | 1,2 s |
+| 26 | Dette tar dere med dere | Tenanten koblet til Nais | 1 klikk, ett steg i historien hvert | 0,1 s | 1,4 s |
+| 27 | Det dere lurer på | Spørsmålskortene | 4 klikk, ett steg i historien hvert | 0,3 s | 0,5 s |
+| 28 | Hvem bestemmer | Ringen tegnes, køen kommer inn | 1 klikk, ett steg i historien hvert | 0,3 s | 1,0 s |
+| 29 | Bedre sammen | Navet og virksomhetene | 3 klikk, ett steg i historien hvert | 0,3 s | 1,1 s |
+| 30 | Utviklerne kan det allerede | Kunnskapen spres 2016–2026 | 2 klikk, ett steg i historien hvert | 0,3 s | 0,3 s |
+| 31 | Hva koster det | Søylene for hvem som betaler | 0 klikk, ett steg i historien hvert | 0,3 s | 0,6 s |
+| 32 | Hvem kan bli med | Åpningslinja og brikkene | 0 klikk, ett steg i historien hvert | 0,3 s | 1,1 s |
+| 33 | Veien inn | Veien tegnes | 4 klikk, ett steg i historien hvert | 0,3 s | ved inngang |
+| 34 | Book en demo eller pilot | Norge-kartet, så QR | 0 klikk, ett steg i historien hvert | 0,1 s | 1,4 s |
+
+Fortsatt over 1 s, med vilje (beholdt, brukeren avgjør):
+- 19 Nais-teamet: navnene kommer etter logo og hjerte (≈ 3,8 s). Alternativ: vise navnene med en gang
+- 14 Terminalen: kommandoene skrives automatisk (≈ 5 s), slik det ble bestemt i forrige runde
+- 2, 7, 22, 24–26, 28–29, 32, 34: hovedteksten er klar på 1,0–1,4 s fordi den kommer sammen med grafikken. Kan strammes mer hvis det fortsatt føles tregt
