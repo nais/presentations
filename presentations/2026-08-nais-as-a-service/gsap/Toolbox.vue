@@ -11,7 +11,9 @@
       <div class="app" data-anchor="hex">
         <span class="i-carbon-application" /><strong>min-app</strong>
       </div>
-      <p ref="mine" class="mine">Tenanten: koden, dataene, produktet</p>
+      <p ref="mine" class="mine">
+        Teamene: appen, dataene og oppdateringene av appen
+      </p>
     </div>
     <div class="col">
       <div v-for="g in GROUPS.slice(4)" :key="g.title" class="drawer">
@@ -83,13 +85,13 @@ const GROUPS = [
   },
 ];
 const OPS = [
-  "Oppgraderinger",
+  "Plattformoppgraderinger",
   "Sikkerhetsoppdateringer",
   "Sertifikater",
   "Kafka-cluster",
   "Grafana-stakken",
   "Nettverksregler",
-  "Vakt døgnet rundt",
+  "Vakt for plattformen",
 ];
 
 const root = ref();

@@ -373,7 +373,8 @@ clicks: 2
 Overgang: «Og når noe likevel skjer om natta?»
 
 - Samme verktøykasse, dempet
-- Klikk 1: driften Nais tar. Klikk 2: streken mellom tenantens del og Nais' del
+- Klikk 1: driften Nais tar: plattformen, oppgraderinger av plattformen og vakt for plattformen. Klikk 2: streken mellom teamenes del og Nais' del
+- Teamene drifter sin egen app og holder den oppdatert: avhengigheter, base-image og kjøretidsversjon. Nais oppgraderer plattformen, ikke appene
 -->
 
 ---
