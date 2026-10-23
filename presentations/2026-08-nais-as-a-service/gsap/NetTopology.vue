@@ -5,7 +5,7 @@
         <!-- Boundaries: tenant GCP organisation, cluster, team namespace. -->
         <rect class="b org" x="150" y="20" width="560" height="300" rx="18" />
         <rect class="b cl" x="170" y="62" width="380" height="244" rx="14" />
-        <rect class="b ns" x="190" y="112" width="230" height="110" rx="10" />
+        <rect class="b ns" x="190" y="95" width="250" height="105" rx="10" />
         <path
           v-for="w in WIRES"
           :key="w.id"
@@ -18,8 +18,8 @@
       <span class="bl" style="left: 16%; top: 9%"
         >GCP-organisasjon: din virksomhet</span
       >
-      <span class="bl" style="left: 18%; top: 22%">Nais-cluster (VPC)</span>
-      <span class="bl" style="left: 20%; top: 35.5%"
+      <span class="bl" style="left: 26%; top: 86%">Nais-cluster (VPC)</span>
+      <span class="bl" style="left: 27%; top: 29.5%"
         >namespace: team-eksempel</span
       >
       <div
@@ -69,7 +69,7 @@ const NODES = [
     id: "app",
     label: "min-app",
     icon: "i-carbon-application",
-    x: 260,
+    x: 250,
     y: 160,
     kind: "app",
   },
@@ -78,7 +78,7 @@ const NODES = [
     label: "api",
     sub: "tillatt",
     icon: "i-carbon-api",
-    x: 360,
+    x: 370,
     y: 160,
     kind: "app",
   },
@@ -87,16 +87,16 @@ const NODES = [
     label: "annen app",
     sub: "ikke tillatt",
     icon: "i-carbon-application",
-    x: 460,
-    y: 262,
+    x: 440,
+    y: 268,
     kind: "bad",
   },
   {
     id: "ip",
     label: "Fast utgående IP",
     icon: "i-carbon-ibm-cloud-direct-link-2-connect",
-    x: 500,
-    y: 92,
+    x: 520,
+    y: 66,
     kind: "gw",
   },
   {
@@ -105,7 +105,7 @@ const NODES = [
     sub: "outbound.external",
     icon: "i-carbon-globe",
     x: 870,
-    y: 60,
+    y: 66,
     kind: "ext",
   },
   {
@@ -114,16 +114,16 @@ const NODES = [
     sub: "privat IP",
     icon: "i-carbon-data-base",
     x: 630,
-    y: 150,
+    y: 140,
     kind: "svc",
   },
   {
     id: "aiven",
-    label: "Aiven",
-    sub: "Kafka, OpenSearch, Valkey",
+    label: "Kafka",
+    sub: "Aiven",
     icon: "i-carbon-flow-stream",
     x: 870,
-    y: 160,
+    y: 170,
     kind: "svc",
   },
   {
@@ -132,7 +132,7 @@ const NODES = [
     sub: "VPN eller Interconnect",
     icon: "i-carbon-data-center",
     x: 630,
-    y: 262,
+    y: 268,
     kind: "svc",
   },
   {
@@ -140,8 +140,8 @@ const NODES = [
     label: "Innbygger",
     sub: "internett",
     icon: "i-carbon-user",
-    x: 55,
-    y: 62,
+    x: 60,
+    y: 45,
     kind: "ext",
   },
   {
@@ -149,8 +149,8 @@ const NODES = [
     label: "Ekstern ingress",
     sub: "TLS",
     icon: "i-carbon-load-balancer-global",
-    x: 55,
-    y: 132,
+    x: 60,
+    y: 125,
     kind: "gw",
   },
   {
@@ -158,32 +158,34 @@ const NODES = [
     label: "Ansatt",
     sub: "naisdevice",
     icon: "i-carbon-laptop",
-    x: 55,
+    x: 60,
     y: 205,
     kind: "ext",
   },
   {
     id: "ingi",
     label: "Intern ingress",
-    sub: "bare via naisdevice",
     icon: "i-carbon-load-balancer-local",
-    x: 55,
-    y: 275,
+    x: 60,
+    y: 285,
     kind: "gw",
   },
 ];
+// Orthogonal routes between node centres (the opaque nodes hide the ends).
+// Each line leaves min-app at its own x, and no segment runs under another
+// node or a boundary label.
 const WIRES = [
-  { id: "app-api", d: "M290 160 L330 160", kind: "ok" },
-  { id: "app-x", d: "M270 182 C300 262 380 262 425 262", kind: "bad" },
-  { id: "app-ip", d: "M275 140 C300 92 400 92 455 92", kind: "out" },
-  { id: "ip-partner", d: "M545 92 C680 92 760 60 820 60", kind: "out" },
-  { id: "app-sql", d: "M290 175 C420 200 520 150 585 150", kind: "svc" },
-  { id: "app-aiven", d: "M290 170 C450 230 700 200 825 165", kind: "svc" },
-  { id: "app-dc", d: "M278 182 C282 334 560 330 590 285", kind: "svc" },
-  { id: "cit-ingx", d: "M55 80 L55 112", kind: "in" },
-  { id: "ingx-app", d: "M100 132 C160 132 200 150 240 158", kind: "in" },
-  { id: "emp-ingi", d: "M55 223 L55 255", kind: "int" },
-  { id: "ingi-app", d: "M105 275 C170 275 210 210 248 180", kind: "int" },
+  { id: "app-api", d: "M250 160 H370", kind: "ok" },
+  { id: "app-x", d: "M250 160 V268 H440", kind: "bad" },
+  { id: "app-ip", d: "M235 160 V66 H520", kind: "out" },
+  { id: "ip-partner", d: "M520 66 H870", kind: "out" },
+  { id: "app-sql", d: "M265 160 V122 H630 V140", kind: "svc" },
+  { id: "app-aiven", d: "M275 160 V212 H820 V170 H870", kind: "svc" },
+  { id: "app-dc", d: "M240 160 V312 H630 V268", kind: "svc" },
+  { id: "cit-ingx", d: "M60 45 V125", kind: "in" },
+  { id: "ingx-app", d: "M60 125 H185 V160 H250", kind: "in" },
+  { id: "emp-ingi", d: "M60 205 V285", kind: "int" },
+  { id: "ingi-app", d: "M60 285 H200 V172 H250", kind: "int" },
 ];
 const CAPTIONS = [
   "min-app kjører i et Nais-cluster i deres egen GCP-organisasjon.",
@@ -425,8 +427,8 @@ svg {
 
 .block {
   z-index: 3;
-  left: 46%;
-  top: 94%;
+  left: 44%;
+  top: 69%;
   padding: 0.1rem 0.6rem;
   border-radius: 999px;
   background: #7f1d1d;
