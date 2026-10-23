@@ -23,7 +23,12 @@ function animate(page) {
   const all = [...header, ...items].filter((el) => !morphs(el));
   header.splice(0, header.length, ...header.filter((el) => !morphs(el)));
   if (!all.length) return;
-  gsap.killTweensOf(all);
+  // Only stray entrance tweens: tweens inside a component's timeline (e.g.
+  // a later click that hides a quote) must survive.
+  gsap
+    .getTweensOf(all)
+    .filter((t) => t.parent === gsap.globalTimeline)
+    .forEach((t) => t.kill());
   const tl = gsap.timeline({
     defaults: { ease: EASE, duration: DUR },
     onComplete: () =>
