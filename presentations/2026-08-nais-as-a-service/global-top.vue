@@ -37,21 +37,23 @@ const box = (el) => {
   };
 };
 
-// Where the anchor ends up once its entrance is done: measure with the
-// inline transforms (GSAP entrances) on it and its ancestors switched off.
+// Where the anchor ends up once its entrance is done: measure with GSAP's
+// scale and rotation on it and its ancestors reset. x/y stay: GSAP folds
+// CSS translate centring into them, so resetting them would move the box.
+const ENTRANCE = ["scale", "rotation"];
 const finalBox = (el) => {
   const page = el.closest(".slidev-page");
   const saved = [];
   for (let e = el; e && e !== page; e = e.parentElement) {
-    saved.push([e, e.style.transform, e.style.translate, e.style.scale]);
-    e.style.transform = e.style.translate = e.style.scale = "none";
+    if (!e._gsap) continue;
+    saved.push([
+      e,
+      Object.fromEntries(ENTRANCE.map((k) => [k, gsap.getProperty(e, k)])),
+    ]);
+    gsap.set(e, { scale: 1, rotation: 0 });
   }
   const b = box(el);
-  for (const [e, t, tr, sc] of saved) {
-    e.style.transform = t;
-    e.style.translate = tr;
-    e.style.scale = sc;
-  }
+  for (const [e, v] of saved) gsap.set(e, v);
   return b;
 };
 
@@ -132,6 +134,10 @@ async function go(no, prev) {
   tween?.kill();
   breathe?.kill();
   reveal();
+  // Leaving an anchored slide: start from where its hex was on screen just
+  // before the change (captured synchronously; the old slide resets after).
+  if (leftBox) place(leftBox);
+  leftBox = null;
   // Hide the arriving slide's hex at once if we will fly into it, so it
   // never shows next to the parked hex during the fade.
   const early =
@@ -151,7 +157,6 @@ async function go(no, prev) {
   await new Promise((r) => globalThis.setTimeout(r, 60));
   if (no !== currentSlideNo.value) return;
   reveal();
-  gsap.set(hex.value, { scale: 1 });
   const page = stage.value.ownerDocument.querySelector(`.slidev-page-${no}`);
   const el = anchorOn(no);
   const adjacent = prev && Math.abs(no - prev) === 1;
@@ -172,23 +177,41 @@ async function go(no, prev) {
     shown = el;
     el.classList.add("hero-hidden");
     gsap.set(hex.value, { visibility: "inherit" });
-    tween = fly(end, 1, () => {
-      // Hand over once the slide's hex has grown to its final size (max
-      // 1.5 s), in one frame: no gap, no double hex.
-      const t0 = globalThis.performance.now();
-      const check = () => {
-        if (shown !== el) return gsap.ticker.remove(check);
-        if (
-          box(el).w >= end.w * 0.97 ||
-          globalThis.performance.now() - t0 > 1500
-        ) {
-          gsap.ticker.remove(check);
-          reveal();
-          gsap.set(hex.value, { autoAlpha: 0 });
-        }
-      };
-      gsap.ticker.add(check);
-    });
+    if (gsap.getProperty(hex.value, "opacity") === 0)
+      gsap.set(hex.value, { opacity: 1 });
+    // Wait until the slide's own hex has started its entrance, so the flight
+    // lands as it finishes growing (max 2 s); the hex waits where it is.
+    const w0 = globalThis.performance.now();
+    const wait = () => {
+      if (shown !== el) return gsap.ticker.remove(wait);
+      if (
+        box(el).w < end.w * 0.6 ||
+        (+globalThis.getComputedStyle(el).opacity < 0.3 &&
+          globalThis.performance.now() - w0 < 2000)
+      )
+        return;
+      gsap.ticker.remove(wait);
+      breathe?.kill();
+      gsap.set(hex.value, { scale: 1 });
+      tween = fly(end, 1, () => {
+        // Hand over once the slide's hex has grown to its final size (max
+        // 1.5 s), in one frame: no gap, no double hex.
+        const t0 = globalThis.performance.now();
+        const check = () => {
+          if (shown !== el) return gsap.ticker.remove(check);
+          if (
+            box(el).w >= end.w * 0.97 ||
+            globalThis.performance.now() - t0 > 1500
+          ) {
+            gsap.ticker.remove(check);
+            reveal();
+            gsap.set(hex.value, { autoAlpha: 0 });
+          }
+        };
+        gsap.ticker.add(check);
+      });
+    };
+    gsap.ticker.add(wait);
     return;
   }
   // No anchor: park. Fly there from the anchor just left, otherwise jump.
@@ -204,9 +227,28 @@ async function go(no, prev) {
 // Park and fly: between anchored slides the hex parks small at the bottom
 // left; it flies into each anchor on arrival and back out when leaving.
 // On arrival the slide's own hex takes over, so slide animations stay as is.
+// Where the current slide's hex sits on screen, sampled while it is shown,
+// so a flight out starts there even if the slide resets as it leaves.
+let leftBox = null;
+let seen = null;
+const sampler = globalThis.setInterval(() => {
+  const no = currentSlideNo.value;
+  const a = stage.value && !shown && anchorOn(no);
+  if (a && +globalThis.getComputedStyle(a).opacity > 0.9)
+    seen = { no, b: box(a) };
+}, 150);
+watch(
+  currentSlideNo,
+  (no, prev) => {
+    leftBox = seen && seen.no === prev ? seen.b : null;
+    seen = null;
+  },
+  { flush: "sync" },
+);
 watch(currentSlideNo, (no, prev) => go(no, prev), { flush: "post" });
 watch(stage, (s) => s && go(currentSlideNo.value));
 onBeforeUnmount(() => {
+  globalThis.clearInterval(sampler);
   tween?.kill();
   breathe?.kill();
   reveal();
