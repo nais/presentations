@@ -601,7 +601,7 @@ clicks: 1
 <!--
 Overgang: «Men dere lurer sikkert på noe.»
 
-- Klikk 1: tenanten går, og teknologien blir med: Kubernetes, containere, Postgres, Kafka, OpenSearch, Valkey, OpenTelemetry, Prometheus, Grafana, GitHub Actions
+- Klikk 1: koblingen til Nais brytes, og tenanten går med all teknologien i én pakke: Kubernetes, containere, Postgres, Kafka, OpenSearch, Valkey, OpenTelemetry, Prometheus, Grafana, GitHub Actions
 - Nais Postgres (CloudNativePG) og Nais Buckets er på vei, og gjør data mer flyttbare
 - Stack Overflow Developer Survey: Postgres er mest brukte database, Docker mest brukte verktøy
 -->

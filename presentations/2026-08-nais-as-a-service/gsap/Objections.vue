@@ -6,7 +6,8 @@
         <div class="a">
           <span class="i-carbon-checkmark-outline" />
           <p>
-            <small>{{ o.q }}</small>{{ o.a }}
+            <small>{{ o.q }}</small
+            >{{ o.a }}
           </p>
         </div>
       </div>

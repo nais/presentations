@@ -1,16 +1,21 @@
 <template>
   <div ref="root" class="take" data-motion-self>
-    <div class="platform" data-anchor="hex">
-      <span class="hexi" />
+    <div ref="platform" class="platform" data-anchor="hex">
       <b>Nais</b>
     </div>
-    <div ref="card" class="card">
-      <small>Tenant</small>
-      <b>Din virksomhet</b>
-    </div>
-    <div v-for="(t, i) in TECH" :key="t.name" class="tech" :style="slot(i)">
-      <span :class="t.icon" />
-      <small>{{ t.name }}</small>
+    <div ref="link" class="link"><i /></div>
+    <!-- The tenant and its technology are one bundle: they leave together. -->
+    <div ref="bundle" class="bundle">
+      <div ref="card" class="card">
+        <small>Tenant</small>
+        <b>Din virksomhet</b>
+      </div>
+      <div class="techs">
+        <div v-for="t in TECH" :key="t.name" class="tech">
+          <span :class="t.icon" />
+          <small>{{ t.name }}</small>
+        </div>
+      </div>
     </div>
     <ul class="why">
       <li v-for="w in WHY" :key="w">{{ w }}</li>
@@ -21,7 +26,7 @@
 <script setup>
 import { ref } from "vue";
 import gsap from "gsap";
-import { POP, STAGGER, useSteps } from "./motion.js";
+import { STAGGER, useSteps } from "./motion.js";
 
 // Open technologies a tenant keeps if it leaves. All are documented on
 // docs.nais.io. Postgres and buckets are moving to Nais-owned, portable
@@ -44,49 +49,45 @@ const WHY = [
   "Ingen innlåsing hos én leverandør",
   "Dere kan flytte mellom leverandører",
 ];
-// Logos orbit the platform; after the click they gather around the tenant.
-const slot = (i, cx = 30) => {
-  const a = (i / TECH.length) * Math.PI * 2 - Math.PI / 2;
-  return {
-    left: cx + 13 * Math.cos(a) + "%",
-    top: 44 + 34 * Math.sin(a) + "%",
-  };
-};
-
 const root = ref();
+const platform = ref();
+const link = ref();
+const bundle = ref();
 const card = ref();
-// s0: logos around Nais, tenant card below. s1: the tenant moves out to the
-// right and the logos keep orbiting it; the reasons appear on the left.
+// s0: the tenant runs on Nais (a live link), its technology stacked under it.
+// s1: the link breaks, Nais steps back, and the tenant leaves to the right
+// with all its technology in one piece; the reasons take Nais's place.
+// Nothing moves on its own: every move says «you leave, and this comes along».
 useSteps((tl) => {
   const q = gsap.utils.selector(root.value);
-  const techs = q(".tech");
-  gsap.set(q(".why li"), { autoAlpha: 0, x: 20 });
-  tl.from(q(".platform"), { scale: 0.6, autoAlpha: 0, ease: POP })
-    .from(card.value, { autoAlpha: 0, x: -20 }, "<0.2")
+  gsap.set(q(".why li"), { autoAlpha: 0, x: -16 });
+  tl.from(platform.value, { autoAlpha: 0, y: 16 })
+    .from(card.value, { autoAlpha: 0, y: 16 }, "<0.15")
     .from(
-      techs,
-      { scale: 0, autoAlpha: 0, stagger: STAGGER / 2, ease: POP },
-      "<0.2",
+      link.value,
+      { scaleX: 0, transformOrigin: "0 50%", duration: 0.4 },
+      "-=0.2",
+    )
+    .from(
+      q(".tech"),
+      { autoAlpha: 0, y: 10, stagger: 0.04, duration: 0.35 },
+      "-=0.1",
     )
     .addLabel("s0")
-    .to(q(".platform"), { autoAlpha: 0, x: -120, scale: 0.6, duration: 0.6 })
-    .to(
-      card.value,
-      { left: "72%", top: "44%", duration: 1, ease: "power2.inOut" },
-      "<",
-    )
-    .to(
-      techs,
-      {
-        left: (i) => slot(i, 72).left,
-        top: (i) => slot(i, 72).top,
-        duration: 1,
-        ease: "power2.inOut",
-        stagger: 0.04,
-      },
-      "<",
-    )
-    .to(q(".why li"), { autoAlpha: 1, x: 0, stagger: STAGGER * 2 })
+    // The link snaps at the middle, both halves fall away.
+    .to(q(".link i"), {
+      scaleX: 0,
+      transformOrigin: "50% 50%",
+      duration: 0.25,
+      ease: "power2.in",
+    })
+    .to(link.value, { autoAlpha: 0, duration: 0.2 })
+    .to(platform.value, { autoAlpha: 0.25, scale: 0.85, duration: 0.5 }, "<")
+    // Anticipation, then the bundle travels as one.
+    .to(bundle.value, { x: -10, duration: 0.15, ease: "power1.in" })
+    .to(bundle.value, { x: 190, duration: 0.9, ease: "power3.inOut" })
+    .to(platform.value, { autoAlpha: 0, duration: 0.3 }, "-=0.5")
+    .to(q(".why li"), { autoAlpha: 1, x: 0, stagger: STAGGER * 2 }, "-=0.2")
     .addLabel("s1");
   return tl;
 });
@@ -101,16 +102,10 @@ useSteps((tl) => {
   margin: 0 auto;
 }
 
-.platform,
-.card,
-.tech {
-  position: absolute;
-  translate: -50% -50%;
-}
-
 .platform {
-  left: 30%;
-  top: 44%;
+  position: absolute;
+  left: 8%;
+  top: 82px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -128,11 +123,37 @@ useSteps((tl) => {
   font-size: 1.2rem;
 }
 
+.link {
+  position: absolute;
+  left: calc(8% + 110px);
+  top: 144px;
+  width: calc(26% - 110px);
+  height: 3px;
+}
+
+.link i {
+  display: block;
+  height: 100%;
+  background: repeating-linear-gradient(
+    90deg,
+    #ff3377 0 8px,
+    transparent 8px 13px
+  );
+}
+
+.bundle {
+  position: absolute;
+  left: 34%;
+  top: 70px;
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.9rem;
+}
+
 .card {
-  z-index: 2;
-  left: 30%;
-  top: 92%;
-  padding: 0.4rem 1rem;
+  padding: 0.4rem 1.2rem;
   border-radius: 12px;
   border: 2px solid #34d399;
   background: var(--nais-surface);
@@ -146,36 +167,44 @@ useSteps((tl) => {
   color: var(--nais-text-secondary);
 }
 
+.techs {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0.7rem 0.4rem;
+  padding: 0.8rem;
+  border-radius: 14px;
+  border: 1px dashed rgb(52 211 153 / 0.5);
+}
+
 .tech {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 0.15rem;
-  width: 5.5rem;
+  width: 5.2rem;
 }
 
 .tech span {
-  font-size: 1.9rem;
+  font-size: 1.7rem;
 }
 
 .tech small {
-  font-size: 0.72rem;
+  font-size: 0.7rem;
   white-space: nowrap;
 }
 
 .why {
   position: absolute;
-  left: 6%;
-  width: 40%;
-  top: 30%;
+  left: 1%;
+  width: 46%;
+  top: 22%;
+  font-size: 0.95rem;
   margin: 0;
   padding-left: 1.2rem;
   list-style: disc;
 }
 
 .why li {
-  margin-bottom: 0.5rem;
-  font-size: 0.95rem;
-  white-space: normal;
+  margin-bottom: 0.35rem;
 }
 </style>

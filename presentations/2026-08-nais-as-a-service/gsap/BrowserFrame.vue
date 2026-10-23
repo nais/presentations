@@ -15,7 +15,8 @@
             v-for="n in g"
             :key="n.label"
             :class="{ on: n.label === active }"
-          ><i :class="n.icon" /> {{ n.label }}</span>
+            ><i :class="n.icon" /> {{ n.label }}</span
+          >
           <hr v-if="gi < NAV.length - 1" />
         </template>
       </nav>

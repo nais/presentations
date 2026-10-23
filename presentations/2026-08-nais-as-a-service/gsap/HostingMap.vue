@@ -30,7 +30,9 @@
             c
           }}</span>
           <template v-if="z.tone === 'self'">
-            <span v-for="c in COMING" :key="c" class="chip coming">{{ c }} <em>på vei</em></span>
+            <span v-for="c in COMING" :key="c" class="chip coming"
+              >{{ c }} <em>på vei</em></span
+            >
           </template>
         </div>
       </section>
