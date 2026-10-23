@@ -445,9 +445,9 @@ clicks: 9
 ::default::
 <SupplyFix :nodes="[
   { icon: 'i-carbon-build-tool', label: 'Bygg', sub: 'All kode, også fra KI-agenter' },
-  { icon: 'i-carbon-list-boxes', label: 'SBOM', sub: 'Lages automatisk (CycloneDX)', stat: 'NSM 2.1.4' },
-  { icon: 'i-carbon-certificate', label: 'Signering', sub: 'Signert og attestert', stat: 'NSM 2.1.4' },
-  { icon: 'i-carbon-scan', label: 'Sårbarheter', sub: 'Følges opp per workload', stat: 'NSM 3.1.1' },
+  { icon: 'i-carbon-list-boxes', label: 'SBOM', sub: 'Lages automatisk (CycloneDX)' },
+  { icon: 'i-carbon-certificate', label: 'Signering', sub: 'Signert og attestert' },
+  { icon: 'i-carbon-scan', label: 'Sårbarheter', sub: 'Følges opp per workload' },
   { icon: 'i-carbon-dashboard', label: 'Console', sub: 'Teamet ser status' },
 ]" />
 
@@ -458,6 +458,7 @@ Overgang: «Så: hvor kjører dette, og hvem eier det? Nå snakker jeg til dere 
 - Klikk 5: Console vokser ut av det siste leddet. Klikk 6–9: funnet åpnes, PR oppdaterer avhengigheten, bygg og deploy, ny skanning og løst
 - Console-delen er illustrasjon, ikke ekte data eller CVE-er
 - 5 608 workloads (apper og jobber) skannes for sårbarheter i Nav (Mimir, 21. oktober 2026). Tallet er tatt av sliden; nevn det muntlig
+- Kobling til NSM (tatt av sliden): SBOM og signering svarer til 2.1.4, sårbarhetsskanning til 3.1.1
 - NSM anbefaler, loven krever ikke: Grunnprinsipper for IKT-sikkerhet 2.1.4 «Reduser risiko for målrettet manipulasjon av IKT-produkter i leverandørkjeden» (SBOM og signering) og 3.1.1 «Gjennomfør jevnlig sårbarhetskartlegging … ved hjelp av automatiserte verktøy» (skanning). https://nsm.no/grunnprinsipper-ikt
 - Digitalsikkerhetsforskriften § 14 (i kraft 1.10.2025) gjelder bare tilbydere av samfunnsviktige tjenester: https://lovdata.no/dokument/SF/forskrift/2025-06-20-1131. NSMs veileder: https://nsm.no/getfile.php/1314788-1759304646/NSM/Filer/Dokumenter/Veiledere/Veileder%20fra%20NSM%20i%20digitalsikkerhetsloven%20og%20-forskriften.pdf
 - NIS2 vurderes for EØS-avtalen, ingen norsk lov ennå: https://www.efta.int/eea-lex/32022L2555, https://www.regjeringen.no/no/sub/eos-notatbasen/notatene/2021/feb/nis2-direktivet/id2846097/
