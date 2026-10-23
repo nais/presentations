@@ -18,8 +18,7 @@
             background: st.tone,
           }"
         >
-          <span class="nm">{{ l.name }}</span
-          ><span v-if="i === 0" class="sub">{{ l.sub }}</span>
+          <span class="nm">{{ l.name }}</span><span v-if="i === 0" class="sub">{{ l.sub }}</span>
           <span
             v-if="st.cracked === k"
             class="warn i-carbon-warning-alt-filled"
@@ -37,10 +36,7 @@
             : tileSlot(i)
         "
       >
-        <span class="generic">Tenant</span
-        ><span class="name"
-          >{{ t }}<small v-if="i >= STACKS.length">på vei inn</small></span
-        >
+        <span class="generic">Tenant</span><span class="name">{{ t }}<small v-if="i >= STACKS.length">på vei inn</small></span>
       </div>
       <div ref="band" class="band">Drift og vakt døgnet rundt</div>
       <div ref="years" class="years">

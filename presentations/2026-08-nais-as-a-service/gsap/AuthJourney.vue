@@ -18,25 +18,25 @@
           height="214"
           rx="16"
         />
-        <text class="blabel" x="204" y="116">Nais-cluster</text>
+        <text class="blabel" x="310" y="116">Nais-cluster</text>
         <rect
           class="bound pod"
           x="214"
           y="128"
           width="330"
-          height="96"
+          height="112"
           rx="12"
         />
-        <text class="blabel" x="226" y="146">pod: min-app</text>
+        <text class="blabel" x="226" y="233">pod: min-app</text>
         <rect
           class="bound pod"
           x="640"
           y="128"
           width="200"
-          height="96"
+          height="112"
           rx="12"
         />
-        <text class="blabel" x="652" y="146">pod: api</text>
+        <text class="blabel" x="772" y="233">pod: api</text>
         <path
           v-for="w in WIRES"
           :id="'aw-' + w.id"
@@ -61,10 +61,7 @@
       <div ref="block" class="block">✕ ikke i accessPolicy</div>
       <div ref="chip" class="chip">
         <div class="chip-head"><span class="i-carbon-password" /> Token</div>
-        <code :class="{ add: swapped }"
-          ><i>{{ swapped ? "+" : " " }}</i
-          >aud: {{ swapped ? "prod-gcp:team-b:api" : "min-app" }}</code
-        >
+        <code :class="{ add: swapped }"><i>{{ swapped ? "+" : " " }}</i>aud: {{ swapped ? "prod-gcp:team-b:api" : "min-app" }}</code>
         <code v-if="swapped" class="del"><i>-</i>aud: min-app</code>
         <code><i> </i>pid: (innbygger)</code>
         <code><i> </i>idp: {{ swapped ? "TokenX" : "ID-porten" }}</code>
@@ -108,7 +105,7 @@ const NODES = [
     label: "Innbygger",
     icon: "i-carbon-user",
     x: 80,
-    y: 176,
+    y: 190,
     kind: "ext",
   },
   {
@@ -177,16 +174,18 @@ const NODES = [
     kind: "ext",
   },
 ];
+// Orthogonal routes, attached at the middle of node sides; none crosses a
+// node or a label (pod labels sit at the bottom of each pod).
 const WIRES = [
-  { id: "user-ww", d: "M120 182 L250 190", kind: "a" },
-  { id: "ww-idp", d: "M290 172 L290 50", kind: "a" },
-  { id: "ww-a", d: "M330 190 L362 190", kind: "a" },
-  { id: "a-ta", d: "M438 190 L452 190", kind: "a" },
-  { id: "ta-b", d: "M528 190 L662 190", kind: "b" },
-  { id: "b-tb", d: "M738 190 L752 190", kind: "b" },
-  { id: "c-b", d: "M880 210 C840 270 760 270 720 212", kind: "c" },
-  { id: "ta-mp", d: "M490 172 L560 50", kind: "d" },
-  { id: "ta-ext", d: "M510 172 C620 110 760 70 840 48", kind: "d" },
+  { id: "user-ww", d: "M120 190 H250", kind: "a" },
+  { id: "ww-idp", d: "M290 172 V50", kind: "a" },
+  { id: "ww-a", d: "M330 190 H362", kind: "a" },
+  { id: "a-ta", d: "M438 190 H452", kind: "a" },
+  { id: "ta-b", d: "M528 190 H662", kind: "b" },
+  { id: "b-tb", d: "M738 190 H752", kind: "b" },
+  { id: "c-b", d: "M920 208 V268 H700 V208", kind: "c" },
+  { id: "ta-mp", d: "M490 172 V110 H560 V50", kind: "d" },
+  { id: "ta-ext", d: "M490 172 V110 H860 V50", kind: "d" },
 ];
 const CAPTIONS = [
   "Wonderwall sender innbyggeren til ID-porten. min-app får forespørselen med token, uten egen OIDC-kode.",
@@ -213,11 +212,6 @@ const props = defineProps({
   // Start with the login/token overview (1 click), then fly into the journey.
   star: { type: Boolean, default: false },
 });
-const STAR_OF = {
-  idp: "ID-porten",
-  mp: "Maskinporten",
-  ext: "Eksterne API-er",
-};
 const root = ref();
 const starEl = ref();
 const stage = ref();
@@ -266,42 +260,11 @@ useSteps(
       if (i) tl.to(caps[i - 1], { autoAlpha: 0, duration: 0.2 });
       tl.to(caps[i], { autoAlpha: 1, duration: 0.3 }, i ? "<" : ">");
     };
-    if (props.star) {
-      // FLIP: the shared nodes start where they sit in the star and fly into place.
-      const starNode = (id) =>
-        [...starEl.value.querySelectorAll(".node")].find((n) =>
-          n.textContent.includes(STAR_OF[id]),
-        );
-      const delta = (id, axis) => (_, el) => {
-        const from = starNode(id)?.getBoundingClientRect();
-        const to = el.getBoundingClientRect();
-        if (!from) return 0;
-        const k = el.offsetWidth / to.width || 1;
-        return axis === "x"
-          ? (from.left + from.width / 2 - (to.left + to.width / 2)) * k
-          : (from.top + from.height / 2 - (to.top + to.height / 2)) * k;
-      };
-      gsap.set(q(".n-idp, .n-mp"), { autoAlpha: 0 });
-      tl.to(starEl.value, { autoAlpha: 0, duration: 0.4 }).set(
-        q(".n-idp, .n-mp, .n-ext"),
-        { autoAlpha: 1 },
-        "<",
-      );
-      Object.keys(STAR_OF).forEach((id) =>
-        tl.fromTo(
-          q(`.n-${id}`),
-          { x: delta(id, "x"), y: delta(id, "y") },
-          {
-            x: 0,
-            y: 0,
-            duration: 0.8,
-            ease: "power3.inOut",
-            immediateRender: false,
-          },
-          "<",
-        ),
-      );
-    }
+    // ID-porten, Maskinporten and the external API stay hidden until their
+    // step. The star (if shown) fades out as the journey builds.
+    const late = q(".n-idp, .n-mp, .n-ext");
+    gsap.set(late, { autoAlpha: 0, y: -8 });
+    if (props.star) tl.to(starEl.value, { autoAlpha: 0, duration: 0.4 });
     tl.from(
       q(".bound"),
       { drawSVG: "0%", duration: 0.8, stagger: 0.15 },
@@ -309,8 +272,8 @@ useSteps(
     )
       .from(q(".blabel"), { autoAlpha: 0, stagger: 0.1 }, "-=0.4")
       .from(
-        q(props.star ? ".stage .node:not(.n-idp):not(.n-mp)" : ".node"),
-        { scale: 0.6, autoAlpha: 0, stagger: 0.04, ease: POP },
+        q(".stage .node:not(.n-idp):not(.n-mp):not(.n-ext)"),
+        { y: 12, autoAlpha: 0, stagger: 0.04 },
         "-=0.3",
       )
       .addLabel("s0");
@@ -318,6 +281,7 @@ useSteps(
     gsap.set([chip.value, http.value, ok.value], { autoAlpha: 0 });
     gsap.set(chip.value, at(400, 226));
     caption(0);
+    tl.to(q(".n-idp"), { autoAlpha: 1, y: 0, duration: 0.4 });
     travel([["user-ww"], ["ww-idp"], ["ww-idp", true], ["ww-a"]], "#ff3377");
     tl.to(q(".n-a"), { borderColor: "#34d399", duration: 0.3 }).addLabel("s1");
     // TokenX exchange, step by step (NAIS_TOKEN_EXCHANGE_ENDPOINT, docs.nais.io).
@@ -356,7 +320,10 @@ useSteps(
     travel([["c-b"]], "#f87171");
     tl.to(block.value, { autoAlpha: 1, ease: POP }).addLabel("s6");
     caption(6);
-    tl.to(block.value, { autoAlpha: 0, duration: 0.2 }, "<");
+    tl.to(block.value, { autoAlpha: 0, duration: 0.2 }, "<").to(
+      q(".n-mp, .n-ext"),
+      { autoAlpha: 1, y: 0, duration: 0.4, stagger: 0.1 },
+    );
     travel([["ta-mp"], ["ta-mp", true], ["ta-ext"]], "#fbbf24");
     tl.addLabel("s7");
     caption(7);

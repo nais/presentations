@@ -10,8 +10,7 @@
             <div class="tiles">
               <div class="tile ok"><b>0</b><small>Issues</small></div>
               <div class="tile" :class="ke ? 'bad' : 'ok'">
-                <b>{{ ke }}</b
-                ><small>Known exploited</small>
+                <b>{{ ke }}</b><small>Known exploited</small>
               </div>
               <div class="tile ok"><b>0</b><small>Alerts firing</small></div>
               <div class="tile warn">
@@ -26,8 +25,7 @@
               <div class="box"><b>Jobs 2</b><small>● 2 completed</small></div>
             </div>
             <div class="chips">
-              <span>Cloud SQL 2</span><span>Buckets 1</span><span>Valkey 1</span
-              ><span>Kafka Topics 3</span>
+              <span>Cloud SQL 2</span><span>Buckets 1</span><span>Valkey 1</span><span>Kafka Topics 3</span>
             </div>
           </div>
           <div>
@@ -68,9 +66,7 @@
           </text>
         </svg>
         <div class="legend">
-          <span v-for="s in COST" :key="s.name"
-            ><i :style="{ background: s.color }" />{{ s.name }}</span
-          >
+          <span v-for="s in COST" :key="s.name"><i :style="{ background: s.color }" />{{ s.name }}</span>
         </div>
       </section>
 
@@ -87,8 +83,7 @@
             class="tr"
             :class="{ target: a === 'min-app' }"
           >
-            <span class="mono">{{ a }}</span
-            ><span>prod</span><span class="green">● Running</span>
+            <span class="mono">{{ a }}</span><span>prod</span><span class="green">● Running</span>
           </div>
         </div>
       </section>
@@ -102,8 +97,7 @@
             :key="t"
             :class="{ on: t === 'Overview' }"
             :data-tab="t"
-            >{{ t }}</span
-          >
+          >{{ t }}</span>
         </div>
         <div class="cols">
           <div>
@@ -111,8 +105,7 @@
             <div class="tiles">
               <div class="tile ok"><b>0</b><small>Issues</small></div>
               <div class="tile" :class="ke ? 'bad' : 'ok'">
-                <b>{{ ke }}</b
-                ><small>Known exploited</small>
+                <b>{{ ke }}</b><small>Known exploited</small>
               </div>
               <div class="tile ok"><b>2/2</b><small>Instances</small></div>
               <div class="tile ok">
@@ -139,22 +132,19 @@
             v-for="t in TABS"
             :key="t"
             :class="{ on: t === 'Vulnerabilities' }"
-            >{{ t }}</span
-          >
+          >{{ t }}</span>
         </div>
         <div class="cols">
           <div>
             <h5>Priority</h5>
             <div class="ke" :class="{ bad: ke }">{{ ke }} Known exploited</div>
             <div class="prio">
-              <span>{{ ke }} High</span><span>0 Elevated</span
-              ><span>2 Monitor</span>
+              <span>{{ ke }} High</span><span>0 Elevated</span><span>2 Monitor</span>
             </div>
             <h5 v-if="!detail">CVSS severity</h5>
             <div v-if="!detail" class="tiles three">
               <div class="tile" :class="ke ? 'bad' : 'ok'">
-                <b>{{ ke }}</b
-                ><small>Critical</small>
+                <b>{{ ke }}</b><small>Critical</small>
               </div>
               <div class="tile ok"><b>0</b><small>High</small></div>
               <div class="tile ok"><b>2</b><small>Medium</small></div>
@@ -169,8 +159,7 @@
               </div>
               <div><small>Fix available</small><code>1.4.3</code></div>
               <div>
-                <span class="pill hi">Priority: High</span
-                ><span class="pill">Internet-facing</span>
+                <span class="pill hi">Priority: High</span><span class="pill">Internet-facing</span>
               </div>
             </div>
           </div>
@@ -195,8 +184,7 @@
             :key="t"
             :class="{ on: t === 'Deployments' }"
             :data-tab3="t"
-            >{{ t }}</span
-          >
+          >{{ t }}</span>
         </div>
         <div class="table">
           <div class="th">
@@ -210,8 +198,7 @@
             <span>just now</span>
           </div>
           <div class="tr">
-            <span class="mono">2026.10.14-a1b2c3</span
-            ><span class="green">● Success</span><span>7 days ago</span>
+            <span class="mono">2026.10.14-a1b2c3</span><span class="green">● Success</span><span>7 days ago</span>
           </div>
         </div>
       </section>
@@ -227,8 +214,7 @@
       <div v-if="story === 'vulns'" class="overlay pipe">
         <small class="ann">Utenfor Console · GitHub Actions</small>
         <div class="steps">
-          <span>Build</span><span>SBOM</span><span>Signering</span
-          ><span>Deploy</span>
+          <span>Build</span><span>SBOM</span><span>Signering</span><span>Deploy</span>
         </div>
       </div>
     </div>
