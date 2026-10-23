@@ -235,6 +235,9 @@ useSteps((tl) => {
 }
 
 .headline b {
+  display: inline-block;
+  min-width: 5.4ch;
+  text-align: right;
   color: var(--nais-accent);
   font-variant-numeric: tabular-nums;
 }
