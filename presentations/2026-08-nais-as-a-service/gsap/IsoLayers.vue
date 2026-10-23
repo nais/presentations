@@ -56,11 +56,6 @@ const LAYERS = [
   { name: "Infrastruktur", sub: "fra skyleverandøren", color: "#334155" },
   { name: "Kubernetes", sub: "kjører containerne", color: "#3b5b8c" },
   { name: "Nais", sub: "operatorene, hjertet i plattformen", color: "#9b3b6a" },
-  {
-    name: "Nais API",
-    sub: "Console, CLI og MCP bygger på det",
-    color: "#b8466f",
-  },
   { name: "Applikasjon", sub: "teamenes apper", color: "#e8384f" },
 ];
 const ZONES = ["datasenter-a", "datasenter-b", "datasenter-c"];
@@ -183,7 +178,7 @@ useSteps((tl) => {
   position: absolute;
   left: 0;
   right: 0;
-  bottom: calc(var(--i) * 50px);
+  bottom: calc(var(--i) * 62px);
   height: 120px;
 }
 

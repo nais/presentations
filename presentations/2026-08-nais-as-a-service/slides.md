@@ -539,10 +539,10 @@ clicks: 4
 <!--
 Overgang: «Og slik henger nettverket sammen.»
 
-- Lagene bygges nedenfra: infrastruktur fra skyleverandøren, Kubernetes, Nais (operatorene, hjertet i plattformen), Nais API (Console, Nais CLI og MCP-serveren bygger på det) og teamenes apper
+- Lagene bygges nedenfra: infrastruktur fra skyleverandøren, Kubernetes, Nais (operatorene, hjertet i plattformen) og teamenes apper
 - Klikk 1: pods for app A, B og C fordelt over tre soner i én region. Klikk 2: de skalerer ut
 - Klikk 3: datasenter-b faller ut, og podene startes i a og c. Appen merker det ikke
-- Klikk 4: laget nederst byttes (eget datasenter → Google Cloud), mens Nais-lagene og appene blir stående. Nais har flyttet før, og det er dette som gjør exit og flytting mulig
+- Klikk 4: laget nederst byttes (eget datasenter → Google Cloud), mens Nais og appene blir stående. Nais har flyttet før, og det er dette som gjør exit og flytting mulig
 -->
 
 ---
