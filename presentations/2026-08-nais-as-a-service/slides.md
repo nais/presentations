@@ -298,7 +298,6 @@ Overgang: «Og for de som liker terminalen:»
 
 ---
 layout: default
-clicks: 5
 ---
 
 ::header::
@@ -312,7 +311,7 @@ clicks: 5
 Overgang: «Det var utviklerens side. Nå snur vi bildet: alt som må stå for at dagen blir kjedelig.»
 
 - Kommandoene finnes i Nais CLI (binæren heter nais, sjekket mot nais -h). Utdata er illustrasjon
-- nais login, app status, app log, cloudsql proxy, vulnerability summary
+- Kommandoene spiller av seg selv når sliden åpnes: nais login, app status, app log, cloudsql proxy, vulnerability summary
 -->
 
 ---

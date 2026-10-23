@@ -22,7 +22,7 @@
 import { ref } from "vue";
 import gsap from "gsap";
 import TerminalFrame from "./TerminalFrame.vue";
-import { useSteps } from "./motion.js";
+import { useEnter } from "./motion.js";
 
 // Command names checked against github.com/nais/cli (internal/*/command), 2026-10-21.
 // Output is illustrative.
@@ -47,12 +47,12 @@ const STEPS = [
 ];
 
 const root = ref();
-// One command per click: typed out, then its output appears. Earlier ones dim.
-useSteps((tl) => {
+// Plays on slide enter: each command is typed, its output appears, earlier
+// ones dim. Reduced motion and print show the end state.
+useEnter((tl) => {
   const q = gsap.utils.selector(root.value);
   const steps = q(".step");
   gsap.set(steps, { display: "none" });
-  tl.addLabel("s0");
   steps.forEach((st, i) => {
     const typed = st.querySelector(".typed");
     const full = typed.textContent;
@@ -65,7 +65,7 @@ useSteps((tl) => {
         { n: 0 },
         {
           n: full.length,
-          duration: full.length * 0.035,
+          duration: full.length * 0.018,
           ease: "none",
           onUpdate: () => (typed.textContent = full.slice(0, Math.round(t.n))),
         },
@@ -76,7 +76,7 @@ useSteps((tl) => {
         stagger: 0.1,
         duration: 0.3,
       })
-      .addLabel(`s${i + 1}`);
+      .to({}, { duration: 0.25 });
   });
   return tl;
 });
