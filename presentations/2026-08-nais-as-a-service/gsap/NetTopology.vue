@@ -15,9 +15,13 @@
           :data-w="w.id"
         />
       </svg>
-      <span class="bl" style="left: 16%; top: 9%">GCP-organisasjon: din virksomhet</span>
+      <span class="bl" style="left: 16%; top: 9%"
+        >GCP-organisasjon: din virksomhet</span
+      >
       <span class="bl" style="left: 18%; top: 22%">Nais-cluster (VPC)</span>
-      <span class="bl" style="left: 20%; top: 35.5%">namespace: team-eksempel</span>
+      <span class="bl" style="left: 20%; top: 35.5%"
+        >namespace: team-eksempel</span
+      >
       <div
         v-for="n in NODES"
         :key="n.id"
@@ -34,7 +38,8 @@
     </div>
     <div ref="other" class="other">
       <div class="org2">
-        <small>GCP-organisasjon</small><b>Annen tenant</b><i>eget cluster, eget nettverk</i>
+        <small>GCP-organisasjon</small><b>Annen tenant</b
+        ><i>eget cluster, eget nettverk</i>
       </div>
     </div>
     <div class="cap">

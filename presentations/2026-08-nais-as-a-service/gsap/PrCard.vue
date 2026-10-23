@@ -4,8 +4,10 @@
       <span class="i-carbon-pull-request icon" />
       <div>
         <b>{{ title }}</b>
-        <small>{{ repo }} · #{{ number
-        }}<template v-if="author"> · {{ author }}</template></small>
+        <small
+          >{{ repo }} · #{{ number
+          }}<template v-if="author"> · {{ author }}</template></small
+        >
       </div>
       <span class="state open">Open</span>
       <span class="state merged">Merged</span>
@@ -16,7 +18,8 @@
         v-for="(d, i) in diff"
         :key="i"
         :class="d[0] === '+' ? 'add' : d[0] === '-' ? 'del' : ''"
-      >{{ d }}</code>
+        >{{ d }}</code
+      >
     </div>
     <div class="checks">
       <div v-for="c in rows" :key="c.name" class="check">
@@ -27,7 +30,9 @@
       </div>
     </div>
     <div v-if="copilot" class="review">
-      <span class="avatar copilot"><i class="i-simple-icons-githubcopilot" /></span>
+      <span class="avatar copilot"
+        ><i class="i-simple-icons-githubcopilot"
+      /></span>
       GitHub Copilot <b class="neutral">Reviewed</b>
     </div>
     <div v-if="reviewer" class="review">
