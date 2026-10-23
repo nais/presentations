@@ -652,31 +652,3 @@ body,
     filter: brightness(0.4);
   }
 }
-
-/* Subtle heart-beat on a finished end state (clip and last slide). Added from
-   script only when motion is allowed and not in print. */
-.heartbeat {
-  animation: heartbeat 1.8s ease-in-out infinite;
-  transform-origin: 50% 50%;
-}
-@keyframes heartbeat {
-  0%,
-  40%,
-  100% {
-    transform: scale(1);
-  }
-  12% {
-    transform: scale(1.015);
-  }
-  24% {
-    transform: scale(1);
-  }
-  32% {
-    transform: scale(1.01);
-  }
-}
-@media (prefers-reduced-motion: reduce) {
-  .heartbeat {
-    animation: none;
-  }
-}

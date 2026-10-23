@@ -7,8 +7,7 @@
           ID-porten
         </p>
         <p class="bot">
-          <b>KI-agent</b> <span class="tool">get_nais_context</span
-          ><span class="tool">nais://schema</span> Skriver nais.yaml …
+          <b>KI-agent</b> <span class="tool">get_nais_context</span><span class="tool">nais://schema</span> Skriver nais.yaml …
         </p>
       </div>
       <pre

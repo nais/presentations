@@ -6,9 +6,7 @@
           <div class="other" :style="{ flexGrow: w.all - w.prod }" />
           <div class="prod" :style="{ flexGrow: w.prod }" />
         </div>
-        <span class="x"
-          >{{ w.week.slice(8, 10) }}.{{ w.week.slice(5, 7) }}</span
-        >
+        <span class="x">{{ w.week.slice(8, 10) }}.{{ w.week.slice(5, 7) }}</span>
       </div>
     </div>
     <div class="legend">

@@ -3,17 +3,13 @@
     <div class="bar">
       <div class="seg pay">
         <b>Dere betaler</b>
-        <span
-          >Egen infrastruktur og forbruk til selvkost, uten påslag, pluss
-          200&#160;000 kr i året. Teamene ser kostnaden i Console.</span
-        >
+        <span>Egen infrastruktur og forbruk til selvkost, uten påslag, pluss
+          200&#160;000 kr i året. Teamene ser kostnaden i Console.</span>
       </div>
       <div class="seg nav">
         <b>Nav bærer</b>
-        <span
-          >Det Nav allerede bærer: utviklingen av plattformen og det meste av
-          Nais-teamet</span
-        >
+        <span>Det Nav allerede bærer: utviklingen av plattformen og det meste av
+          Nais-teamet</span>
       </div>
     </div>
     <p class="cap">

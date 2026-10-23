@@ -45,7 +45,7 @@ const tagAt = (i) => ({ left: CELLS[i].x + "px", top: CELLS[i].y + "px" });
 const root = ref();
 useEnter((tl) => {
   const q = gsap.utils.selector(root.value);
-  tl.call(() => root.value.classList.remove("heartbeat"));
+  tl.call(() => root.value.classList.remove("beat"));
   tl.from(q(".cell:not(.you)"), {
     scale: 0,
     autoAlpha: 0,
@@ -64,7 +64,7 @@ useEnter((tl) => {
     // Once everything is in, the map beats softly. Print jumps to the end with
     // events suppressed, so the beat never starts there.
     .call(() => {
-      if (!reducedMotion()) root.value.classList.add("heartbeat");
+      if (!reducedMotion()) root.value.classList.add("beat");
     });
   return tl;
 });
@@ -114,5 +114,31 @@ useEnter((tl) => {
 .tyou {
   translate: 16px 70%;
   color: #ff3377;
+}
+
+/* Very faint heartbeat on the cells only (opacity, no scaling). */
+.honey.beat .cell:not(.you) {
+  animation: honey-beat 2.4s ease-in-out infinite;
+}
+@keyframes honey-beat {
+  0%,
+  45%,
+  100% {
+    filter: brightness(1);
+  }
+  14% {
+    filter: brightness(1.3);
+  }
+  26% {
+    filter: brightness(1.05);
+  }
+  34% {
+    filter: brightness(1.18);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .honey.beat .cell {
+    animation: none;
+  }
 }
 </style>
