@@ -82,15 +82,27 @@ useSteps((tl) => {
   tl.from(q(".pr"), { y: 20, autoAlpha: 0 })
     .from(q(".pipe"), { autoAlpha: 0, x: 20 }, "<0.2")
     .addLabel("s0")
+    // Each check turns green with a small pop, then the reviews slide in.
     .to(q(".dotc"), {
       backgroundColor: "#3fb950",
+      scale: 1.8,
       stagger: 0.35,
-      duration: 0.3,
+      duration: 0.2,
     })
-    .to(q(".review"), { autoAlpha: 1, duration: 0.3 })
+    .to(
+      q(".dotc"),
+      { scale: 1, duration: 0.25, stagger: 0.35, ease: POP },
+      "<0.2",
+    )
+    .fromTo(
+      q(".review"),
+      { autoAlpha: 0, x: -16 },
+      { autoAlpha: 1, x: 0, duration: 0.35, stagger: 0.15 },
+    )
     .addLabel("s1")
-    .set(q(".state.open"), { display: "none" })
-    .set(q(".state.merged"), { display: "inline" })
+    // Merge belongs to click 2: keep it clear of the s1 label.
+    .set(q(".state.open"), { display: "none" }, "+=0.05")
+    .set(q(".state.merged"), { display: "inline" }, "<")
     .to(steps, {
       opacity: 1,
       borderColor: "#ff3377",

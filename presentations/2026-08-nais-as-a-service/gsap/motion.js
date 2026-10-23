@@ -1,6 +1,6 @@
 // One motion language for the whole deck. Every GSAP animation imports these.
-import { onBeforeUnmount, onMounted, watch } from "vue";
-import { useIsSlideActive, useNav, useSlideContext } from "@slidev/client";
+import { computed, onBeforeUnmount, onMounted, watch } from "vue";
+import { useNav, useSlideContext } from "@slidev/client";
 import gsap from "gsap";
 
 export const EASE = "power3.out";
@@ -9,6 +9,15 @@ export const STAGGER = 0.08;
 export const RISE = 24;
 // Accent ease for things that pop in (nodes, hexes, badges). Same everywhere.
 export const POP = "back.out(1.7)";
+
+// Is this component's slide the current one? Derived from the slide number,
+// not useIsSlideActive(): that stays false for a slide entered through a
+// view transition, so its intro never played.
+function useActive() {
+  const { $page } = useSlideContext();
+  const { currentSlideNo } = useNav();
+  return computed(() => currentSlideNo.value === $page.value);
+}
 
 export const reducedMotion = () =>
   globalThis.matchMedia?.("(prefers-reduced-motion: reduce)").matches ?? false;
@@ -19,7 +28,7 @@ export const reducedMotion = () =>
 // click-driven components can share one slide (the second starts later).
 export function useSteps(build, offset = 0) {
   const { $clicks } = useSlideContext();
-  const active = useIsSlideActive();
+  const active = useActive();
   let tl;
   const label = (c) => {
     for (let i = c; i > 0; i--) if (`s${i}` in tl.labels) return `s${i}`;
@@ -37,6 +46,9 @@ export function useSteps(build, offset = 0) {
     if (k < 0) return tl.pause(0);
     const l = label(k);
     if (reducedMotion()) return jump(l);
+    // A click must never replay the intro: if s0 has not been reached (the
+    // instance was mounted late, e.g. after a view transition), start there.
+    if (k > 0 && tl.time() < (tl.labels.s0 ?? 0)) jump("s0");
     if (tl.labels[l] < tl.time())
       tl.tweenTo(l, { duration: 0.5, ease: "power2.out" });
     else tl.tweenTo(l);
@@ -73,7 +85,7 @@ export function useSteps(build, offset = 0) {
 
 // Autoplay timeline: restarts on every slide enter.
 export function useEnter(build) {
-  const active = useIsSlideActive();
+  const active = useActive();
   const { isPrintMode } = useNav();
   let tl;
   onMounted(() => {
