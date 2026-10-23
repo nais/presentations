@@ -8,7 +8,7 @@ transition: fade
 
 ::default::
 <h1 class="text-5xl font-black">Nais as a Service</h1>
-<p class="subtitle text-xl mt-4">Gir fart og flyt på utviklingen av det offentlige Norge</p>
+<p class="subtitle text-xl mt-4">Gir fart og flyt til utviklingen av det offentlige Norge</p>
 <p class="text-sm mt-6 opacity-70">Hans Kristian Flaatten · Nais-teamet i Nav</p>
 
 <!--
@@ -230,7 +230,7 @@ clicks: 4
 <!--
 Overgang: «Hva skjer når noe feiler?»
 
-- Én bølge skuffer per klikk (tre bølger), til slutt alt på en gang
+- Én bølge med skuffer per klikk (tre bølger), til slutt alt på en gang
 - Gruppert etter inventaret over verktøykassa. Utfasede ting er utelatt
 - MCP for kodeagenter ligger i Verktøy-skuffen
 -->
@@ -462,7 +462,7 @@ Overgang: «Så: hvor kjører dette, og hvem eier det? Nå snakker jeg til dere 
 - NSM anbefaler, loven krever ikke: Grunnprinsipper for IKT-sikkerhet 2.1.4 «Reduser risiko for målrettet manipulasjon av IKT-produkter i leverandørkjeden» (SBOM og signering) og 3.1.1 «Gjennomfør jevnlig sårbarhetskartlegging … ved hjelp av automatiserte verktøy» (skanning). https://nsm.no/grunnprinsipper-ikt
 - Digitalsikkerhetsforskriften § 14 (i kraft 1.10.2025) gjelder bare tilbydere av samfunnsviktige tjenester: https://lovdata.no/dokument/SF/forskrift/2025-06-20-1131. NSMs veileder: https://nsm.no/getfile.php/1314788-1759304646/NSM/Filer/Dokumenter/Veiledere/Veileder%20fra%20NSM%20i%20digitalsikkerhetsloven%20og%20-forskriften.pdf
 - NIS2 vurderes for EØS-avtalen, ingen norsk lov ennå: https://www.efta.int/eea-lex/32022L2555, https://www.regjeringen.no/no/sub/eos-notatbasen/notatene/2021/feb/nis2-direktivet/id2846097/
-- Nais gir dere dokumentasjonen som hjelper dere å følge opp leverandørkjeden. Dokumentasjonen alene gjør dere ikke etterlevende; ansvaret ligger hos tenanten
+- Nais gir dere dokumentasjonen som hjelper dere å følge opp leverandørkjeden. Dokumentasjonen alene gjør ikke at dere etterlever kravene. Ansvaret ligger hos tenanten
 -->
 
 ---
@@ -509,7 +509,7 @@ Overgang: «Og slik henger nettverket sammen.»
 - Klikk 2: Nais Postgres (CloudNativePG) og Nais Buckets erstatter over tid Cloud SQL og Cloud Storage. Begge er på vei, for kostnad og suverenitet. docs.nais.io sier i dag: ikke lag nye Postgres-databaser der ennå, bruk Cloud SQL
 - Dataene ligger i europe-north1 (Finland)
 - Nais startet i eget datasenter i 2016 og flyttet til Google Cloud
-- Nais drifter selv: Console og API, ingress, naisdevice og observabilitetsstacken (Grafana, Mimir, Loki, Tempo)
+- Nais drifter selv: Console og API, ingress, naisdevice og observability-stakken (Grafana, Mimir, Loki, Tempo)
 -->
 
 ---
@@ -716,7 +716,7 @@ Overgang: «Hvem kan så bli med?»
 
 - Tenanten betaler egen infrastruktur og fakturerbart forbruk til selvkost, uten påslag. Teamene ser kostnaden i Console
 - I tillegg et administrativt gebyr på 200 000 kr i året. Det dekker en liten del av Nais-teamet på 15, ekstra administrasjon og videre utvikling av Nais
-- Under vannflaten: det Nav allerede bærer, det meste av teamet og utviklingen. Nav har bygd plattformen og utvikler den videre
+- Nav bærer resten: det meste av teamet og utviklingen. Nav har bygd plattformen og utvikler den videre
 - Nav fakturerer hver tenant månedlig til selvkost. Nav eier faktureringskontoen
 - Størrelsene er illustrasjon, ikke målte tall
 -->
@@ -736,7 +736,7 @@ layout: default
 Overgang: «Slik kommer dere i gang.»
 
 - Egenregi i staten: statsforetak og private kan ikke bruke NaaS
-- Kommunal sektor er med gjennom offentlig-offentlig samarbeid via KS Digital og Novari.
+- Kommunal sektor er med gjennom offentlig-offentlig samarbeid via KS Digital og Novari
 - Grønt passer, rødt passer ikke. Ikke for systemer som må kjøre i eget datasenter
 - Nais har tydelige meninger: én måte å bygge, deploye og drifte på. Det gir fart og selvstendige team, men passer ikke alle
 -->
