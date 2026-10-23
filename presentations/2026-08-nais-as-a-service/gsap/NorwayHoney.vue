@@ -59,8 +59,8 @@ useEnter((tl) => {
   tl.from(q(".cell:not(.you)"), {
     scale: 0,
     autoAlpha: 0,
-    duration: 0.4,
-    stagger: { each: 0.004, from: "end" },
+    duration: 0.3,
+    stagger: { each: 0.0025, from: "end" },
     ease: POP,
   })
     .from(q(".tnav"), { autoAlpha: 0, duration: 0.3 })

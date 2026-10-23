@@ -35,12 +35,16 @@ useEnter((tl) => {
   const q = gsap.utils.selector(root.value);
   tl.from(
     q(".pay"),
-    { scaleX: 0, transformOrigin: "0 50%", duration: 0.8 },
+    { scaleX: 0, transformOrigin: "0 50%", duration: 0.5 },
     0.3,
   )
-    .from(q(".nav"), { scaleX: 0, transformOrigin: "0 50%", duration: 1 })
-    .from(q(".seg > *"), { autoAlpha: 0, stagger: 0.1 }, "-=0.4")
-    .from(q(".cap"), { autoAlpha: 0, y: 12 });
+    .from(
+      q(".nav"),
+      { scaleX: 0, transformOrigin: "0 50%", duration: 0.6 },
+      "-=0.2",
+    )
+    .from(q(".seg > *"), { autoAlpha: 0, stagger: 0.06, duration: 0.4 }, 0.15)
+    .from(q(".cap"), { autoAlpha: 0, y: 12, duration: 0.4 }, 0.4);
   return tl;
 });
 </script>

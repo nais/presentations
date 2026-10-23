@@ -41,16 +41,16 @@ const CHIPS = [
 const root = ref();
 useEnter((tl) => {
   const q = gsap.utils.selector(root.value);
-  tl.from(q(".lead"), { autoAlpha: 0, y: 16 })
+  tl.from(q(".lead"), { autoAlpha: 0, y: 16, duration: 0.4 })
     .from(
       q(".chip.ok"),
-      { autoAlpha: 0, y: 12, stagger: 0.06, duration: 0.4 },
-      "-=0.2",
+      { autoAlpha: 0, y: 12, stagger: 0.04, duration: 0.3 },
+      0.15,
     )
     .from(
       q(".chip.nok"),
-      { autoAlpha: 0, y: 12, stagger: 0.06, duration: 0.4 },
-      "+=0.15",
+      { autoAlpha: 0, y: 12, stagger: 0.04, duration: 0.3 },
+      "+=0.1",
     );
   return tl;
 });
