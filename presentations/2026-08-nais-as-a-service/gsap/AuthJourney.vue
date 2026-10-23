@@ -61,10 +61,7 @@
       <div ref="block" class="block">✕ ikke i accessPolicy</div>
       <div ref="chip" class="chip">
         <div class="chip-head"><span class="i-carbon-password" /> Token</div>
-        <code :class="{ add: swapped }"
-          ><i>{{ swapped ? "+" : " " }}</i
-          >aud: {{ swapped ? "prod-gcp:team-b:api" : "min-app" }}</code
-        >
+        <code :class="{ add: swapped }"><i>{{ swapped ? "+" : " " }}</i>aud: {{ swapped ? "prod-gcp:team-b:api" : "min-app" }}</code>
         <code v-if="swapped" class="del"><i>-</i>aud: min-app</code>
         <code><i> </i>pid: (innbygger)</code>
         <code><i> </i>idp: {{ swapped ? "TokenX" : "ID-porten" }}</code>

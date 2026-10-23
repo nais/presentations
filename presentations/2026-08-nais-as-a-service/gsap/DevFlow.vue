@@ -36,7 +36,7 @@
         <img v-if="t.logo" :src="t.logo" :alt="t.name" />
         <span v-else>{{ t.name }}</span>
       </div>
-      <div ref="ok" class="ok" :style="pos({ x: NEW.x - 60, y: NEW.y + 38 })">
+      <div ref="ok" class="ok" :style="pos({ x: NEW.x, y: NEW.y + 30 })">
         ✓ Første deploy dag én
       </div>
       <i v-for="k in DOTS" :key="k" class="dot" />
@@ -66,9 +66,12 @@ const TENANTS = [
   { id: "atil", name: "Arbeidstilsynet", logo: atil, x: 830, y: 150 },
   { id: "ks", name: "KS Digital", logo: ks, x: 830, y: 210 },
   { id: "novari", name: "Novari", logo: novari, x: 830, y: 270 },
-  { id: "new", name: "Ny tenant", x: 620, y: 236, fresh: true },
+  { id: "new", name: "Ny tenant", x: 830, y: 262, fresh: true },
 ];
 const NEW = TENANTS.at(-1);
+// After the click the list reflows to make room for the new tenant last.
+const REFLOW = [22, 70, 118, 166, 214];
+const at = (t, i) => ({ ...t, y: REFLOW[i] ?? t.y });
 const NODES = [CLOUD, ...TENANTS];
 const BADGES = [
   { text: "docs.nais.io", icon: "i-carbon-document", x: 150, y: 14 },
@@ -152,7 +155,40 @@ useSteps((tl) => {
       "<0.2",
     )
     .addLabel("s0")
-    .to([q(".tenant.fresh"), q(".link.fresh")], { autoAlpha: 1, duration: 0.4 })
+    // The list moves up as one, and the new tenant slides into the free slot.
+    .to(q(".tenant:not(.fresh)"), {
+      top: (i) => pos(at(TENANTS[i], i)).top,
+      duration: 0.6,
+      ease: "power3.inOut",
+    })
+    .to(
+      q(".link:not(.fresh)"),
+      {
+        attr: {
+          d: (i) =>
+            i ? curve(NAV, at(TENANTS[i - 1], i - 1)) : curve(NAV, CLOUD),
+        },
+        duration: 0.6,
+        ease: "power3.inOut",
+      },
+      "<",
+    )
+    .to(
+      dots.slice(10, 20),
+      {
+        top: (i) => pos(at(TENANTS[i % 5], i % 5)).top,
+        duration: 0.6,
+        ease: "power3.inOut",
+      },
+      "<",
+    )
+    .fromTo(
+      q(".tenant.fresh"),
+      { autoAlpha: 0, x: 80 },
+      { autoAlpha: 1, x: 0, duration: 0.5, ease: "power3.out" },
+      "-=0.2",
+    )
+    .to(q(".link.fresh"), { autoAlpha: 1, duration: 0.4 }, "<")
     .to(dots.slice(20), { autoAlpha: 1, duration: 0.1 }, "<")
     .fromTo(
       dots.slice(20),
@@ -162,6 +198,7 @@ useSteps((tl) => {
       },
       {
         left: (i) => pos({ x: NEW.x - 104 - i * 14, y: NEW.y }).left,
+        // (lands beside the new tenant's slot)
         top: pos(NEW).top,
         duration: 0.9,
         ease: "power2.inOut",
@@ -323,7 +360,8 @@ useSteps((tl) => {
 
 .ok {
   z-index: 2;
-  font-size: 0.85rem;
+  translate: -50% -50%;
+  font-size: 0.72rem;
   font-weight: 700;
   color: #6ee7b7;
   white-space: nowrap;

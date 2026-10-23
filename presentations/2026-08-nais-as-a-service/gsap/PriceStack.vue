@@ -3,10 +3,8 @@
     <div class="price-card fee">
       <span class="i-carbon-receipt" />
       <b><i ref="kr">0</i> 000 kr i året</b>
-      <small
-        >Administrativt gebyr: en liten del av Nais-teamet, administrasjon og
-        videre utvikling</small
-      >
+      <small>Administrativt gebyr: en liten del av Nais-teamet, administrasjon og
+        videre utvikling</small>
     </div>
     <div class="plus">+</div>
     <div class="price-card use">

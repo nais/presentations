@@ -2,8 +2,7 @@
   <div ref="root" class="hunt" data-motion-self>
     <section class="panel chart">
       <header>
-        Feilrate <span ref="alert" class="badge bad">Varsel</span
-        ><span ref="ok" class="badge good">Fikset</span>
+        Feilrate <span ref="alert" class="badge bad">Varsel</span><span ref="ok" class="badge good">Fikset</span>
       </header>
       <svg viewBox="0 0 300 140" aria-hidden="true">
         <path class="axis" d="M10 125 H290" />
