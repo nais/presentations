@@ -509,6 +509,7 @@ Overgang: «Og slik henger nettverket sammen.»
 - Klikk 2: Nais Postgres (CloudNativePG) og Nais Buckets erstatter over tid Cloud SQL og Cloud Storage. Begge er på vei, for kostnad og suverenitet. docs.nais.io sier i dag: ikke lag nye Postgres-databaser der ennå, bruk Cloud SQL
 - Dataene ligger i europe-north1 (Finland)
 - Nais startet i eget datasenter i 2016 og flyttet til Google Cloud
+- Nais drifter selv: Console og API, ingress, naisdevice og observabilitetsstacken (Grafana, Mimir, Loki, Tempo)
 -->
 
 ---
