@@ -3,7 +3,8 @@
     <div ref="root" class="cli" data-motion-self>
       <div v-for="(c, i) in STEPS" :key="i" class="step">
         <div class="cmd">
-          <span class="ps">$</span> <span class="typed">{{ c.cmd }}</span><i class="caret" />
+          <span class="ps">$</span> <span class="typed">{{ c.cmd }}</span
+          ><i class="caret" />
         </div>
         <div
           v-for="o in c.out"

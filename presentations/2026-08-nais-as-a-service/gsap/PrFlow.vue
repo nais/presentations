@@ -26,7 +26,8 @@
         </div>
       </div>
       <div class="pods">
-        <i v-for="k in 4" :key="k">pod</i><small>Nye pods starter i Kubernetes</small>
+        <i v-for="k in 4" :key="k">pod</i
+        ><small>Nye pods starter i Kubernetes</small>
       </div>
     </div>
   </div>

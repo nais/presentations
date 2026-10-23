@@ -1,5 +1,5 @@
 /* nais.io Light Theme */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Poppins:wght@400;600;700;900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Poppins:wght@400;600;700;900&display=swap");
 
 :root {
   /* nais.io brand palette — light theme */
@@ -34,7 +34,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   font-weight: 700;
   color: var(--nais-heading);
 }
@@ -42,14 +42,14 @@ h6 {
 body,
 p,
 li {
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   color: var(--nais-text);
 }
 
 code,
 pre,
 .font-mono {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: "JetBrains Mono", monospace;
 }
 
 /* Slides are transparent; the background lives in global-bottom.vue so it
@@ -104,7 +104,7 @@ pre,
   font-size: 4rem;
   font-weight: 700;
   color: var(--nais-accent);
-  font-family: 'JetBrains Mono', monospace;
+  font-family: "JetBrains Mono", monospace;
   line-height: 1;
 }
 
@@ -275,14 +275,18 @@ pre,
   color: white;
   font-weight: 700;
   font-size: 0.9rem;
-  font-family: 'JetBrains Mono', monospace;
+  font-family: "JetBrains Mono", monospace;
   flex-shrink: 0;
 }
 
 /* Gradient header bar */
 .gradient-bar {
   height: 4px;
-  background: linear-gradient(90deg, var(--nais-gradient-from), var(--nais-gradient-to));
+  background: linear-gradient(
+    90deg,
+    var(--nais-gradient-from),
+    var(--nais-gradient-to)
+  );
   border-radius: 2px;
   margin: 0.5rem auto 0;
   width: 80px;
@@ -405,7 +409,7 @@ pre,
   border-radius: 999px;
   background: #f0fdf4;
   border: 2px solid #bbf7d0;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   font-size: 1.15rem;
   font-weight: 600;
   color: #166534;
@@ -436,7 +440,6 @@ body,
   background: var(--nais-bg);
   color: var(--nais-text);
 }
-
 
 .subtitle {
   color: var(--nais-text-secondary) !important;
@@ -547,7 +550,7 @@ body,
 }
 
 .dora b {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   font-size: 1.5rem;
   color: var(--nais-accent);
 }
@@ -565,49 +568,115 @@ body,
 }
 
 .night b {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: "JetBrains Mono", monospace;
   color: var(--nais-accent);
   margin-right: 0.5rem;
 }
 
 /* View transitions (Chrome). Names apply only while a transition runs, so
    the GSAP entrances still run on normal navigation and in other browsers. */
-:active-view-transition .slidev-layout h1 { view-transition-name: slide-title; }
-:active-view-transition .slidev-layout .subtitle { view-transition-name: slide-subtitle; }
+:active-view-transition .slidev-layout h1 {
+  view-transition-name: slide-title;
+}
+:active-view-transition .slidev-layout .subtitle {
+  view-transition-name: slide-subtitle;
+}
 :active-view-transition .manifest .code,
-:active-view-transition .prflow .diff { view-transition-name: manifest-code; }
+:active-view-transition .prflow .diff {
+  view-transition-name: manifest-code;
+}
 :active-view-transition .prflow .step:has(.i-carbon-rocket),
-:active-view-transition .fan .node.app { view-transition-name: apply-chip; }
+:active-view-transition .fan .node.app {
+  view-transition-name: apply-chip;
+}
 :active-view-transition .browser:has(.mock),
-:active-view-transition .cost .browser { view-transition-name: console-browser; }
+:active-view-transition .cost .browser {
+  view-transition-name: console-browser;
+}
 :active-view-transition .map .org:nth-child(3),
-:active-view-transition .take .card { view-transition-name: tenant-card; }
+:active-view-transition .take .card {
+  view-transition-name: tenant-card;
+}
 
-::view-transition-group(*) { animation-duration: 0.6s; animation-timing-function: cubic-bezier(0.65, 0, 0.35, 1); }
+::view-transition-group(*) {
+  animation-duration: 0.6s;
+  animation-timing-function: cubic-bezier(0.65, 0, 0.35, 1);
+}
 /* The old title leaves before the new one arrives, so they never overlap. */
 ::view-transition-old(slide-title),
-::view-transition-old(slide-subtitle) { animation: vt-title-out 0.3s ease-in both; }
+::view-transition-old(slide-subtitle) {
+  animation: vt-title-out 0.3s ease-in both;
+}
 ::view-transition-new(slide-title),
-::view-transition-new(slide-subtitle) { animation: vt-title-in 0.4s 0.3s ease-out both; }
+::view-transition-new(slide-subtitle) {
+  animation: vt-title-in 0.4s 0.3s ease-out both;
+}
 /* The Console leaves on its own: it shrinks to the right and dims. */
-::view-transition-old(console-browser):only-child { animation: vt-console-out 0.5s ease-in both; }
+::view-transition-old(console-browser):only-child {
+  animation: vt-console-out 0.5s ease-in both;
+}
 
 /* The whole old slide fades out before the new one fades in: no ghosting. */
-::view-transition-old(root) { animation: vt-fade-out 0.3s ease-in both; }
-::view-transition-new(root) { animation: vt-fade-in 0.4s 0.25s ease-out both; }
-@keyframes vt-fade-out { to { opacity: 0; } }
-@keyframes vt-fade-in { from { opacity: 0; } }
-@keyframes vt-title-out { to { transform: translateY(-24px); opacity: 0; } }
-@keyframes vt-title-in { from { transform: translateY(24px); opacity: 0; } }
-@keyframes vt-console-out { to { transform: translateX(30%) scale(0.6); opacity: 0; filter: brightness(0.4); } }
+::view-transition-old(root) {
+  animation: vt-fade-out 0.3s ease-in both;
+}
+::view-transition-new(root) {
+  animation: vt-fade-in 0.4s 0.25s ease-out both;
+}
+@keyframes vt-fade-out {
+  to {
+    opacity: 0;
+  }
+}
+@keyframes vt-fade-in {
+  from {
+    opacity: 0;
+  }
+}
+@keyframes vt-title-out {
+  to {
+    transform: translateY(-24px);
+    opacity: 0;
+  }
+}
+@keyframes vt-title-in {
+  from {
+    transform: translateY(24px);
+    opacity: 0;
+  }
+}
+@keyframes vt-console-out {
+  to {
+    transform: translateX(30%) scale(0.6);
+    opacity: 0;
+    filter: brightness(0.4);
+  }
+}
 
 /* Subtle heart-beat on a finished end state (clip and last slide). Added from
    script only when motion is allowed and not in print. */
-.heartbeat { animation: heartbeat 1.8s ease-in-out infinite; transform-origin: 50% 50%; }
-@keyframes heartbeat {
-  0%, 40%, 100% { transform: scale(1); }
-  12% { transform: scale(1.015); }
-  24% { transform: scale(1); }
-  32% { transform: scale(1.01); }
+.heartbeat {
+  animation: heartbeat 1.8s ease-in-out infinite;
+  transform-origin: 50% 50%;
 }
-@media (prefers-reduced-motion: reduce) { .heartbeat { animation: none; } }
+@keyframes heartbeat {
+  0%,
+  40%,
+  100% {
+    transform: scale(1);
+  }
+  12% {
+    transform: scale(1.015);
+  }
+  24% {
+    transform: scale(1);
+  }
+  32% {
+    transform: scale(1.01);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .heartbeat {
+    animation: none;
+  }
+}
