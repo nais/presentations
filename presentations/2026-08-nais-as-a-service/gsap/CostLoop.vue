@@ -9,6 +9,10 @@
         :checks="CHECKS"
         reviewer="Kari Nordmann"
       />
+      <div ref="shrink" class="shrink">
+        <b><i ref="disk">100</i> GB</b> disk<br />
+        <b><i ref="cpu">4</i> vCPU</b>
+      </div>
     </div>
     <BrowserFrame
       url="console.nais.io/team/team-eksempel/cost"
@@ -91,6 +95,9 @@ const line1 = ref();
 const line2 = ref();
 const line3 = ref();
 const take = ref();
+const shrink = ref();
+const disk = ref();
+const cpu = ref();
 const second = ref(false);
 // The same card stays put; only the title and the changed diff lines change.
 const pr = computed(() =>
@@ -112,6 +119,7 @@ useSteps((tl) => {
   };
   gsap.set([line2.value, line3.value], { drawSVG: "0%" });
   gsap.set(take.value, { autoAlpha: 0, y: 12 });
+  gsap.set(shrink.value, { autoAlpha: 0 });
   reset();
   const merge = () =>
     tl
@@ -161,6 +169,45 @@ useSteps((tl) => {
       },
       "+=0.05",
     )
+    // The size cut is the point: a badge ticks the numbers down, and the
+    // diskSize/tier lines flash green.
+    .fromTo(
+      shrink.value,
+      { autoAlpha: 0, y: 10 },
+      { autoAlpha: 1, y: 0, duration: 0.3 },
+    )
+    .to(disk.value, {
+      textContent: 20,
+      snap: { textContent: 1 },
+      duration: 0.9,
+      ease: "power2.out",
+    })
+    .to(
+      cpu.value,
+      {
+        textContent: 1,
+        snap: { textContent: 1 },
+        duration: 0.9,
+        ease: "power2.out",
+      },
+      "<",
+    )
+    .fromTo(
+      () => q(".diff code.add"),
+      { backgroundColor: "rgba(63,185,80,0.65)" },
+      { backgroundColor: "rgba(63,185,80,0.18)", duration: 0.8, stagger: 0.1 },
+      "<",
+    )
+    .to(
+      shrink.value,
+      {
+        boxShadow: "0 0 0 2px #3fb950, 0 0 18px rgb(63 185 80 / 0.5)",
+        duration: 0.3,
+        yoyo: true,
+        repeat: 1,
+      },
+      "-=0.3",
+    )
     .addLabel("s2");
   merge();
   tl.to(line3.value, { drawSVG: "100%", duration: 1, ease: "none" })
@@ -192,6 +239,28 @@ useSteps((tl) => {
 
 .frame {
   height: 300px !important;
+}
+
+.shrink {
+  position: absolute;
+  z-index: 2;
+  right: 0.7rem;
+  top: 5.6rem;
+  padding: 0.35rem 0.8rem;
+  border-radius: 10px;
+  background: #0f2a1a;
+  border: 1px solid rgb(63 185 80 / 0.6);
+  color: #d1fadf;
+  font-size: 0.85rem;
+}
+
+.shrink b {
+  color: #3fb950;
+}
+
+.shrink i {
+  font-style: normal;
+  font-variant-numeric: tabular-nums;
 }
 
 .chart h2 {

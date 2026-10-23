@@ -620,7 +620,8 @@ body,
 :active-view-transition .prflow .diff { view-transition-name: manifest-code; }
 :active-view-transition .prflow .step:has(.i-carbon-rocket),
 :active-view-transition .fan .node.app { view-transition-name: apply-chip; }
-:active-view-transition .browser:has(.mock) { view-transition-name: console-browser; }
+:active-view-transition .browser:has(.mock),
+:active-view-transition .cost .browser { view-transition-name: console-browser; }
 :active-view-transition .map .org:nth-child(3),
 :active-view-transition .take .card { view-transition-name: tenant-card; }
 :active-view-transition .price .price-card:first-child,
