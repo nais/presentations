@@ -27,11 +27,11 @@ Beskriver decket slik det er nå (`slides.md`, komponenter i `gsap/`).
 | 7 | Ett manifest, ferdig oppsett | 6 | view-transition | Utviklingsfart | «Så skal vi se hva som skjer når de trykker på knappen.» |
 | 8 | Fra pull request til produksjon | 3 | view-transition | Utviklingsfart | «Men hva skjer egentlig på plattformsiden?» |
 | 9 | Hva skjer på plattformsiden | 2 | fade | Automatisering | «Tusenvis av apper, og hver får den samme hylla. Her er den.» |
-| 10 | Verktøykassa | 5 | fade | Automatisering | «Hva skjer når noe feiler?» |
+| 10 | Verktøykassa | 4 | fade | Automatisering | «Hva skjer når noe feiler?» |
 | 11 | Fra feil til fiks | 5 | fade | Oversikt | «Og alt dette ser teamet også i Console.» |
 | 12 | Console: fra team til app | 3 | view-transition | Oversikt | «Og fordi teamet ser kostnaden, gjør de noe med den.» |
 | 13 | Teamet eier kostnaden | 3 | fade | Oversikt | «Og for de som liker terminalen:» |
-| 14 | Og fra terminalen | 5 | fade | Oversikt | «Det var utviklerens side. Nå snur vi bildet: alt som må stå for at dagen blir kjedelig.» |
+| 14 | Og fra terminalen | 0 | fade | Oversikt | «Det var utviklerens side. Nå snur vi bildet: alt som må stå for at dagen blir kjedelig.» |
 
 ## Akt 3: Og alt det slipper dere å drifte (slide 15–20)
 
@@ -59,19 +59,18 @@ Beskriver decket slik det er nå (`slides.md`, komponenter i `gsap/`).
 | 29 | Bedre sammen | 3 | fade | Et Nais-fellesskap | «Og dere får ikke bare hjelp fra oss. Utviklerne kan det allerede.» |
 | 30 | Utviklerne kan det allerede | 2 | fade | Et Nais-fellesskap | «Så hva koster det?» |
 
-## Akt 5: Avtalen (slide 31–35)
+## Akt 5: Avtalen (slide 31–34)
 
 | # | Tittel | Klikk | Overgang | Søyle | Overgangslinje |
 |---|---|---|---|---|---|
-| 31 | Hva koster det | 1 | view-transition | – | «Hva betyr selvkost her?» |
-| 32 | Hva selvkost betyr | 0 | fade | – | «Hvem kan så bli med?» |
-| 33 | Hvem kan bli med | 1 | fade | – | «Slik kommer dere i gang.» |
-| 34 | Veien inn | 4 | view-transition | – | «Og hvis det ikke passer: dere kan gå når som helst, med alt.» |
-| 35 | Book en demo eller pilot | 0 | fade | – | «Takk.» |
+| 31 | Hva koster det | 0 | fade | – | «Hvem kan så bli med?» |
+| 32 | Hvem kan bli med | 0 | fade | – | «Slik kommer dere i gang.» |
+| 33 | Veien inn | 4 | view-transition | – | «Og hvis det ikke passer: dere kan gå når som helst, med alt.» |
+| 34 | Book en demo eller pilot | 0 | fade | – | «Takk.» |
 
 ## Oppsummering
 
-- 35 slides, 99 klikk
+- 34 slides, 91 klikk
 
 ### Åpne plassholdere (0)
 
@@ -93,6 +92,7 @@ Ingen. Anslag er merket «anslag» på sliden eller i notatene.
 ### Bevegelse (batch 8)
 
 - En Nais-sekskant reiser mellom slidene (global-top.vue): manifestet (7), verktøykassa (10, 17), innloggingsstjerna (24), «Dette tar dere med dere» (26), «Bedre sammen» (29), «Veien inn» (34) og Norge-kartet på siste slide (35). Av i utskrift, hopper uten flyging ved redusert bevegelse
-- View transitions (Chrome) fra 7, 8, 12, 20, 25, 31 og 34 (står på sliden man forlater). Gammel slide toner ut før den nye toner inn, så titler ikke ligger oppå hverandre. Navnene settes bare under `:active-view-transition`, så andre nettlesere får vanlig fade
+- View transitions (Chrome) fra 7, 8, 12, 20, 25 og 33 (står på sliden man forlater). Gammel slide toner ut før den nye toner inn, så titler ikke ligger oppå hverandre. Navnene settes bare under `:active-view-transition`, så andre nettlesere får vanlig fade
 - Nettverksslide (23) er sjekket mot docs.nais.io. Aiven nås over privat lenke / VPC-peering (avklart). Ekstern ingress for innbyggere og intern ingress via naisdevice for ansatte er egne innganger
 - Batch 9: forsiden setter sammen Nais-logoen av sekskanter, innvendingene snus som kort, prisen stables med teller, «Hvem kan bli med» sorteres i to baner, og siste slide har stort Norge-kart
+- Batch 11: prisen er én slide («Hva koster det», tidligere «Hva selvkost betyr»; prisstabelen er fjernet). Hjerteslag på klippet og siste slide. Terminalen spiller av seg selv. Nettverk og innlogging har rettvinklede linjer. «Dette tar dere med dere» flytter tenanten og teknologien som én pakke. «Hvem kan bli med» åpner med hva Nais passer for
