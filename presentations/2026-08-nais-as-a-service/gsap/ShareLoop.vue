@@ -30,7 +30,8 @@
       class="agency sup"
       :style="{ left: pos(i).x + '%', top: pos(i).y + '%' }"
     >
-      <span :class="sp.icon" /> <b>{{ sp.title }}</b><small>{{ sp.text }}</small>
+      <span :class="sp.icon" /> <b>{{ sp.title }}</b
+      ><small>{{ sp.text }}</small>
     </div>
     <div ref="pulse" class="pulse" />
     <div

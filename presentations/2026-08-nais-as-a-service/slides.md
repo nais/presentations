@@ -88,7 +88,7 @@ layout: default
 
 ::header::
 <h1 class="text-3xl font-bold">Tenants utenfor Nav kjører allerede 528 apper</h1>
-<p class="subtitle">Og Nav deployer rundt 21 500 ganger i uka, i alle miljøer</p>
+<p class="subtitle">Og Nav deployer stadig oftere</p>
 
 ::default::
 <div class="flex flex-col items-center gap-3 w-full">
@@ -98,8 +98,7 @@ layout: default
     <CountUp number="21500" prefix="≈" label="Deployer per uke" :delay="0.16" />
     <CountUp number="154" label="Team som deployer" :delay="0.24" />
   </div>
-  <p class="anim-item text-sm text-muted -mt-2">En tenant er en virksomhet som bruker Nais.</p>
-  <YearChart metric="deploys" />
+  <YearChart metric="deploys" :labels="false" />
   <div class="anim-item tenant-logos">
     <img src="./assets/logos/nav.svg" alt="Nav" class="h-7" />
     <img src="./assets/logos/ssb.svg" alt="SSB" class="h-7" />
@@ -113,6 +112,8 @@ layout: default
 <!--
 Overgang: «Grunnen til at tallene er så store, kommer på de neste slidene.»
 
+- En tenant er en virksomhet som bruker Nais
+- 21 500 vises én gang, på flisa. Årsgrafen viser bare formen
 - 528 apper kjører hos SSB, Landbruksdirektoratet og Arbeidstilsynet. KS Digital og Novari er på vei inn
 - Apper per tenant: Grafana 21. oktober 2026 (72 + 164 + 292 = 528 utenfor Nav)
 - ≈ 21 500 deployer per uke i Nav, alle miljøer. ≈ 9 000 i prod (Mimir)

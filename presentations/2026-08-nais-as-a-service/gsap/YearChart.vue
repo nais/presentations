@@ -5,7 +5,9 @@
     </div>
     <div class="bars">
       <div v-for="y in rows" :key="y.year" class="col">
-        <span class="val">{{ y.value === null ? "" : fmt(y.value) }}</span>
+        <span class="val">{{
+          y.value === null || !labels ? "" : fmt(y.value)
+        }}</span>
         <div
           class="bar"
           :class="{ ghost: y.value === null }"
@@ -66,6 +68,8 @@ const METRICS = {
 
 const props = defineProps({
   metric: { type: String, default: "deploys" },
+  // Value labels on the bars. Off where the number is already shown nearby.
+  labels: { type: Boolean, default: true },
 });
 
 const fmt = (v) => v.toLocaleString("nb-NO").replace(/\s/g, "\u00a0");

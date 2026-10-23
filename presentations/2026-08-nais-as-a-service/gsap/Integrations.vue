@@ -28,7 +28,8 @@
     >
       <span :class="n.icon" />
       <div>
-        <b>{{ n.label }}</b><small>{{ n.sub }}</small>
+        <b>{{ n.label }}</b
+        ><small>{{ n.sub }}</small>
       </div>
     </div>
   </div>

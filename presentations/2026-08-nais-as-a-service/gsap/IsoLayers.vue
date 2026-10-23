@@ -9,8 +9,12 @@
       >
         <div class="plate" />
         <div class="label">
-          <b>{{ l.name }}</b><small>{{ i === 0 ? "" : l.sub }}</small>
-          <small v-if="i === 0" class="infra"><span class="old">eget datasenter</span><span class="new">Google Cloud</span></small>
+          <b>{{ l.name }}</b
+          ><small>{{ i === 0 ? "" : l.sub }}</small>
+          <small v-if="i === 0" class="infra"
+            ><span class="old">eget datasenter</span
+            ><span class="new">Google Cloud</span></small
+          >
         </div>
       </div>
     </div>
@@ -26,13 +30,17 @@
               class="pod"
               :class="{ extra: p.extra, moved: p.moved }"
               :style="{ background: p.color }"
-            >{{ p.app }}</i>
+              >{{ p.app }}</i
+            >
           </div>
         </div>
       </div>
       <p class="region">Én region, tre soner</p>
       <p ref="cap" class="cap">
-        <span class="c1">Et datasenter faller ut. Appen merker det ikke.</span><span class="c2">Vi bytter det som ligger under. Appen merker det ikke.</span>
+        <span class="c1">Et datasenter faller ut. Appen merker det ikke.</span
+        ><span class="c2"
+          >Vi bytter det som ligger under. Appen merker det ikke.</span
+        >
       </p>
     </div>
   </div>
