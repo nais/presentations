@@ -34,7 +34,9 @@ const fmt = (v) =>
 // Widest digit in the counter's font, measured once, for the sizer.
 const root = ref();
 const wide = ref("0");
-onMounted(() => {
+onMounted(async () => {
+  // Measure with the real font, not the swap fallback.
+  await globalThis.document.fonts?.ready;
   const el = root.value?.querySelector(".stat-number");
   if (!el) return;
   const ctx = globalThis.document.createElement("canvas").getContext("2d");

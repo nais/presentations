@@ -8,6 +8,9 @@ const ITEMS = "li, .card-row > *, .anim-item";
 // Elements that animate themselves (own component or Slidev v-click).
 const SELF = "[data-motion-self], .slidev-vclick-target";
 
+// The running entrance; a new slide kills it so its clearProps never fires late.
+let entrance;
+
 function animate(page) {
   const header = [...page.querySelectorAll(HEADER)].filter(
     (el) => !el.closest(SELF),
@@ -23,12 +26,9 @@ function animate(page) {
   const all = [...header, ...items].filter((el) => !morphs(el));
   header.splice(0, header.length, ...header.filter((el) => !morphs(el)));
   if (!all.length) return;
-  // Only stray entrance tweens: tweens inside a component's timeline (e.g.
-  // a later click that hides a quote) must survive.
-  gsap
-    .getTweensOf(all)
-    .filter((t) => t.parent === gsap.globalTimeline)
-    .forEach((t) => t.kill());
+  // Kill only the previous entrance, never component timelines (e.g. a
+  // later click that hides a quote).
+  entrance?.kill();
   const tl = gsap.timeline({
     defaults: { ease: EASE, duration: DUR },
     onComplete: () =>
@@ -42,6 +42,7 @@ function animate(page) {
       { y: RISE, autoAlpha: 0, stagger: STAGGER },
       header.length ? "-=0.45" : 0,
     );
+  entrance = tl;
 }
 
 // Every component in gsap/ is registered globally under its file name.
