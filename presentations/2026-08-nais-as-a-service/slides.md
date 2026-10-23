@@ -637,16 +637,16 @@ clicks: 1
 ::header::
 <div class="pillar-tag" style="--pc: #ff5c6c"><span class="i-carbon-partnership" /> Et Nais-fellesskap</div>
 <h1 class="text-3xl font-bold">Hvem bestemmer</h1>
-<p class="subtitle">Nais-teamet bestemmer veikartet, tenantene gir innspill på Naisdag</p>
+<p class="subtitle">Nais-teamet bestemmer veikartet, med innspill fra tenantene på Naisdag</p>
 
 ::default::
 <GovernanceLoop />
 
 <!--
-Overgang: «Når vi sier ja til én tenant, sier vi ja til alle.»
+Overgang: «Og det vi bygger for én tenant, får alle.»
 
-- Nais-teamet bestemmer veikartet
-- Tenantene gir innspill på Naisdag
+- Nais-teamet bestemmer veikartet, med innspill fra tenantene på Naisdag
+- Det betyr ikke at alt én tenant ønsker blir bygd. Men det som blir bygd, får alle
 - 1–2 nye tenants per år
 - På veikartet: Nais Postgres (CloudNativePG) og Nais Buckets
 -->
@@ -659,7 +659,7 @@ clicks: 3
 ::header::
 <div class="pillar-tag" style="--pc: #ff5c6c"><span class="i-carbon-partnership" /> Et Nais-fellesskap</div>
 <h1 class="text-3xl font-bold mt-4">Bedre sammen</h1>
-<p class="subtitle">Det én tenant trenger, får alle</p>
+<p class="subtitle">Det vi bygger for én tenant, får alle</p>
 
 ::default::
 <ShareLoop :agencies="['Nav', 'SSB', 'Landbruksdirektoratet', 'Arbeidstilsynet', 'KS Digital', 'Novari']" :support="[
@@ -675,7 +675,7 @@ clicks: 3
 <!--
 Overgang: «Og dere får ikke bare hjelp fra oss. Utviklerne kan det allerede.»
 
-- Forbedringer for én tenant kommer alle til gode (klikk 2: alle nodene blir grønne)
+- Når Nais-teamet bygger noe én tenant trenger, får alle det (klikk 2: alle nodene blir grønne). Hva som bygges, bestemmes på veikartet
 - Klikk 3: dere står ikke alene. Slack, docs.nais.io, champions i teamene, arbeidsøkter og Naisdag
 - KS i Altinget 10.06.2025: «løse felles oppgaver én gang i fellesskap i stedet for hver for seg», https://www.altinget.no/artikkel/etterlysning-taktskifte-i-digitaliseringsarbeidet
 - Sitat fra Landbruksdirektoratets stillingsannonse: https://www.finn.no/451519458
