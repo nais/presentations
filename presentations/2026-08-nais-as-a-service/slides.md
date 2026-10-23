@@ -553,8 +553,9 @@ clicks: 9
 <!--
 Overgang: «Og hvis dere vil flytte, er det deres valg.»
 
+- To sidecars gjør jobben: Wonderwall er en innloggings-sidecar foran appen (logger brukeren inn mot ID-porten eller Entra ID). Texas er en token-sidecar som appen spør for å validere, bytte og hente tokens
 - Klikk 0: ID-porten, Maskinporten, Entra ID og TokenX/Texas er innebygd
-- Klikk 1: nodene flyr inn i én forespørsel gjennom Nais, og grensene for cluster og pods tegnes
+- Klikk 1: oversikten viker for én forespørsel gjennom Nais, og grensene for cluster og pods tegnes
 - Klikk 2: Wonderwall (innloggings-sidecar) sender innbyggeren til ID-porten. min-app får forespørselen med Authorization-header. Wonderwall validerer ikke tokenet; appen gjør det via Texas
 - Klikk 3: tokenet har mottaker (aud) min-app. Et token er bare gyldig for mottakeren det er laget for
 - Klikk 4: min-app kaller Texas: POST til NAIS_TOKEN_EXCHANGE_ENDPOINT med identity_provider=tokenx, target=prod-gcp:team-b:api og user_token (docs.nais.io, TokenX)
