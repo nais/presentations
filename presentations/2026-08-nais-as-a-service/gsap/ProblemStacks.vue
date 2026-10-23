@@ -70,7 +70,7 @@ import gsap from "gsap";
 import { EASE, POP, STAGGER, useSteps } from "./motion.js";
 
 // Bottom to top, matching the toolbox groups. Each agency builds the same
-// stack a little differently; the merged platform shows the sub-lines.
+// stack a little differently. Sub-lines stay off the slide (too dense).
 const LAYERS = [
   { name: "Sky", sub: "Google Cloud og Aiven" },
   { name: "Kjøretid", sub: "Kubernetes, autoskalering" },
@@ -188,9 +188,7 @@ useSteps((tl) => {
     )
     .set(q(".tile .generic"), { display: "none" })
     .set(q(".tile .name"), { display: "inline" })
-    .set(q(".layer .sub"), { display: "inline" })
     .to(extra, { autoAlpha: 1, y: 0, stagger: 0.1 })
-    .to(q(".layer .sub"), { autoAlpha: 1, duration: 0.4 }, "<")
     .to(band.value, { autoAlpha: 1, x: 0 }, "<")
     .to(years.value, { autoAlpha: 1, scale: 1, ease: POP })
     // textContent tween (not onUpdate), so print-mode seeks show the number too.

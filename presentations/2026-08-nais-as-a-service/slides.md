@@ -32,8 +32,6 @@ clicks: 1
 <ProblemStacks />
 <div class="evidence anim-item">
   <p>«Staten bruker penger på at 40 ulike etater løser det samme problemet.» <span>Nav, Kubernetes Podcast #216 (2024)</span></p>
-  <p>«… det offentlege framleis er for oppdelt.» <span>Stortinget, 29.01.2026</span></p>
-  <p>Ofte blir resultatet en Azure landing zone og en wiki.</p>
 </div>
 
 <!--
@@ -45,6 +43,7 @@ Overgang: «Og den felles plattformen er ikke en idé. Den har vokst siden 2016.
 - Kilde: Kubernetes Podcast #216 (jan. 2024), «the same government who is spending money in 40 different public agencies solving the same problem», https://kubernetespodcast.com/episode/216-nais/
 - Kilde: Stortinget 29.01.2026 (Dok. 3:14), Geir Pollestad: «det offentlege framleis er for oppdelt», https://www.stortinget.no/no/Saker-og-publikasjoner/Publikasjoner/Referater/Stortinget/2025-2026/refs-202526-01-29/8
 - Klikk 1: én felles plattform. ≈ 150 årsverk er Navs eget anslag
+- Tatt av sliden for å gi luft, si det muntlig: Stortinget sier «det offentlege framleis er for oppdelt», og ofte blir resultatet en Azure landing zone og en wiki
 -->
 
 ---

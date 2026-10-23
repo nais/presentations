@@ -15,6 +15,7 @@
       muted
       playsinline
       preload="auto"
+      @ended="(e) => e.target.classList.add('heartbeat')"
     />
   </div>
 </template>
@@ -37,6 +38,7 @@ watch(
   [active, video],
   ([on, el]) => {
     if (!el) return;
+    el.classList.remove("heartbeat");
     if (!on) return el.pause();
     el.currentTime = 0;
     el.play().catch(() => {});

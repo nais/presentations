@@ -22,7 +22,7 @@ import {
   NORWAY,
   SPACING,
 } from "../../../animations/naas-motion-canvas/src/norway.ts";
-import { POP, useEnter } from "./motion.js";
+import { POP, reducedMotion, useEnter } from "./motion.js";
 
 // Scale the lattice into a 328 x 380 box (Norway's bounding box, y down).
 const xs = NORWAY.map((p) => p[0]);
@@ -48,6 +48,7 @@ const tagAt = (i) => ({ left: CELLS[i].x + "px", top: CELLS[i].y + "px" });
 const root = ref();
 useEnter((tl) => {
   const q = gsap.utils.selector(root.value);
+  tl.call(() => root.value.classList.remove("heartbeat"));
   tl.from(q(".cell:not(.you)"), {
     scale: 0,
     autoAlpha: 0,
@@ -62,7 +63,12 @@ useEnter((tl) => {
       { boxShadow: "0 0 16px 4px rgb(255 51 119 / 0.6)", duration: 0.4 },
       "+=0.2",
     )
-    .from(q(".tyou"), { autoAlpha: 0, duration: 0.3 }, "<");
+    .from(q(".tyou"), { autoAlpha: 0, duration: 0.3 }, "<")
+    // Once everything is in, the map beats softly. Print jumps to the end with
+    // events suppressed, so the beat never starts there.
+    .call(() => {
+      if (!reducedMotion()) root.value.classList.add("heartbeat");
+    });
   return tl;
 });
 </script>
