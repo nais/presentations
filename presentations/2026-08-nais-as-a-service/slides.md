@@ -723,7 +723,6 @@ Overgang: «Hvem kan så bli med?»
 
 ---
 layout: default
-clicks: 1
 ---
 
 ::header::
@@ -738,7 +737,8 @@ Overgang: «Slik kommer dere i gang.»
 
 - Egenregi i staten: statsforetak og private kan ikke bruke NaaS
 - Kommunal sektor er med gjennom offentlig-offentlig samarbeid via KS Digital og Novari.
-- Klikk 1: kandidatene sorteres i «passer» og «passer ikke». Ikke for skjermingsverdig informasjon eller systemer som må kjøre i eget datasenter
+- Grønt passer, rødt passer ikke. Ikke for systemer som må kjøre i eget datasenter
+- Nais har tydelige meninger: én måte å bygge, deploye og drifte på. Det gir fart og selvstendige team, men passer ikke alle
 -->
 
 ---
