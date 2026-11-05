@@ -14,40 +14,42 @@
       <pre
         class="code"
       ><code><span class="base">{{ BASE }}</span><span v-for="b in BLOCKS" :key="b.code" class="block">{{ b.code }}</span></code></pre>
-      <pre class="code pg" data-step="2"><code>{{ PG }}</code></pre>
     </div>
-    <div class="canvas">
-      <svg
-        class="wires"
-        viewBox="0 0 100 100"
-        preserveAspectRatio="none"
-        aria-hidden="true"
-      >
-        <line
+    <div class="right">
+      <div class="canvas">
+        <svg
+          class="wires"
+          viewBox="0 0 100 100"
+          preserveAspectRatio="none"
+          aria-hidden="true"
+        >
+          <line
+            v-for="r in DOCKS"
+            :key="r.label"
+            x1="50"
+            y1="50"
+            :x2="r.x"
+            :y2="r.y"
+            class="wire"
+            :data-step="r.step"
+          />
+        </svg>
+        <div class="app" data-anchor="hex">
+          <span class="i-carbon-application" /><strong>min-app</strong>
+        </div>
+        <div
           v-for="r in DOCKS"
           :key="r.label"
-          x1="50"
-          y1="50"
-          :x2="r.x"
-          :y2="r.y"
-          class="wire"
+          class="dock"
+          :class="[{ ext: r.ext }, 'a-' + r.a]"
           :data-step="r.step"
-        />
-      </svg>
-      <div class="app" data-anchor="hex">
-        <span class="i-carbon-application" /><strong>min-app</strong>
+          :style="{ left: r.x + '%', top: r.y + '%' }"
+        >
+          <span :class="r.icon" />
+          <strong>{{ r.label }}</strong>
+        </div>
       </div>
-      <div
-        v-for="r in DOCKS"
-        :key="r.label"
-        class="dock"
-        :class="[{ ext: r.ext }, 'a-' + r.a]"
-        :data-step="r.step"
-        :style="{ left: r.x + '%', top: r.y + '%' }"
-      >
-        <span :class="r.icon" />
-        <strong>{{ r.label }}</strong>
-      </div>
+      <pre class="code pg" data-step="2"><code>{{ PG }}</code></pre>
     </div>
   </div>
 </template>
@@ -96,10 +98,10 @@ const DOCKS = [
   },
   {
     step: 2,
-    x: 72,
+    x: 68,
     y: 28,
     a: "l",
-    label: "Nais Postgres (preview)",
+    label: "Postgres (preview)",
     icon: "i-carbon-data-base",
   },
   { step: 2, x: 77, y: 50, a: "l", label: "Bucket", icon: "i-carbon-box" },
@@ -150,7 +152,7 @@ useSteps((tl) => {
   gsap.set(blocks, { height: 0, autoAlpha: 0 });
   gsap.set(q(".dock"), { autoAlpha: 0, scale: 0.4 });
   gsap.set(q(".wire"), { opacity: 0 });
-  gsap.set(q(".pg"), { height: 0, autoAlpha: 0 });
+  gsap.set(q(".pg"), { autoAlpha: 0 });
   // The agent request comes first; the manifest is what the agent writes.
   tl.from(chat.value, { autoAlpha: 0, y: -12 })
     .from(q(".code"), { autoAlpha: 0, x: -24 }, "+=0.3")
@@ -180,11 +182,7 @@ useSteps((tl) => {
         { autoAlpha: 1, scale: 1, ease: POP, duration: 0.6, stagger: 0.1 },
         "-=0.1",
       )
-      .to(
-        q(`.pg[data-step="${step}"]`),
-        { height: "auto", autoAlpha: 1, duration: 0.4 },
-        "<",
-      )
+      .to(q(`.pg[data-step="${step}"]`), { autoAlpha: 1, duration: 0.4 }, "<")
       .to(
         q(`.wire[data-step="${step}"]`),
         { opacity: 0.6, duration: 0.3 },
@@ -251,13 +249,18 @@ useSteps((tl) => {
   color: #e2e8f0;
   font-family: "JetBrains Mono", monospace;
   font-size: 0.7rem;
-  line-height: 1.32;
+  line-height: 1.25;
   white-space: pre;
   overflow: hidden;
 }
 
+.right {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
 .pg {
-  margin-top: 0.3rem;
   border-color: var(--nais-accent);
 }
 
@@ -270,7 +273,7 @@ useSteps((tl) => {
 
 .canvas {
   position: relative;
-  height: 300px;
+  height: 270px;
 }
 
 .wires {
