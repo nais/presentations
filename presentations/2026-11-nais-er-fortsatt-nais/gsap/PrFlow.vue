@@ -56,7 +56,11 @@ const STEPS = [
     sub: "bygg, SBOM, signering",
     icon: "i-carbon-build-tool",
   },
-  { label: "nais apply", sub: "via nais deploy til prod", icon: "i-carbon-rocket" },
+  {
+    label: "nais apply",
+    sub: "via nais deploy til prod",
+    icon: "i-carbon-rocket",
+  },
   {
     label: "Kubernetes",
     sub: "nye pods starter",
