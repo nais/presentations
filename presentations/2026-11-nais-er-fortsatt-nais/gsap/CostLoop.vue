@@ -207,7 +207,7 @@ useSteps((tl) => {
         repeat: 1,
       },
       "-=0.3",
-    )
+    );
   merge();
   tl.to(line3.value, { drawSVG: "100%", duration: 1, ease: "none" })
     .to(take.value, { autoAlpha: 1, y: 0 })
