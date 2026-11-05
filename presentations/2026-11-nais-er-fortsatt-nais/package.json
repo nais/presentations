@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "description": "nais as a Service",
+  "description": "Nais er fortsatt Nais",
   "scripts": {
     "dev": "slidev --port 3032",
-    "build": "slidev build --base /2026-08-nais-as-a-service/",
+    "build": "slidev build --base /2026-11-nais-er-fortsatt-nais/",
     "export": "slidev export",
     "lint": "eslint . --ext .vue,.ts,.js",
     "lint:fix": "eslint . --ext .vue,.ts,.js --fix",

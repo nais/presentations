@@ -63,8 +63,7 @@ const reveal = () => {
 };
 
 // Slides where the hex stays out of the picture entirely.
-// The Europe map fills the bottom-left corner, so the park spot is taken there.
-const HIDE = ".cover-layout, .clip-slide, .eu";
+const HIDE = ".cover-layout, .clip-slide";
 // Park spot: bottom-left, clear of titles, pillar tags (top-right), the
 // centred footer and content. Small, dimmed, breathing slowly.
 const PARK_W = 34;

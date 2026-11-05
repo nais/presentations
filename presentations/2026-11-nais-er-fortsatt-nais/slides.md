@@ -7,43 +7,16 @@ transition: fade
 <CoverLogo />
 
 ::default::
-<h1 class="text-5xl font-black">Nais as a Service</h1>
-<p class="subtitle text-xl mt-4">Gir fart og flyt til utviklingen av det offentlige Norge</p>
+<h1 class="text-5xl font-black">Nais er fortsatt Nais</h1>
+<p class="subtitle text-xl mt-4">Samme løfte, bedre under panseret</p>
 <p class="text-sm mt-6 opacity-70">Hans Kristian Flaatten · Nais-teamet i Nav</p>
 
 <!--
-Overgang: «Hei, jeg heter Hans Kristian og jobber i Nais-teamet i Nav.»
+Overgang: «Hei, jeg heter Hans Kristian og jobber i Nais-teamet i Nav. Dere har kjørt på Nais en stund nå. I dag viser jeg hva som har skjedd under panseret.»
 
-- Målgruppe: teknologiledere, arkitekter og beslutningstakere
-- Tesen: Plattformen Nav bygde for seg selv er nå en tjeneste for det offentlige
+- Målgruppe: utviklere og tech leads i Arbeidstilsynet
+- Tesen: samme løfte, bedre under panseret. Det dere valgte, holder
 - Ingen demo i dag, bare animasjoner
--->
-
----
-layout: default
-clicks: 1
----
-
-::header::
-<h1 class="text-3xl font-bold">Problemet</h1>
-<p class="subtitle">Hver etat bygger sin egen plattform</p>
-
-::default::
-<ProblemStacks />
-<div class="evidence anim-item">
-  <p>«Staten bruker penger på at 40 ulike etater løser det samme problemet.» <span>Nav, Kubernetes Podcast #216 (2024)</span></p>
-</div>
-
-<!--
-Overgang: «Og den felles plattformen er ikke en idé. Den har vokst siden 2016. Se.»
-
-- Hver etat som bygger egen plattform, trenger knapp og dyr kompetanse
-- Få lykkes med å bygge og drifte en plattform utviklerne liker. Ofte ender det med en landingssone og en wiki, eller en halvferdig plattform.
-- Det krever ressurser og vilje over år. Plattform er et produkt, ikke et prosjekt
-- Kilde: Kubernetes Podcast #216 (jan. 2024), «the same government who is spending money in 40 different public agencies solving the same problem», https://kubernetespodcast.com/episode/216-nais/
-- Kilde: Stortinget 29.01.2026 (Dok. 3:14), Geir Pollestad: «det offentlege framleis er for oppdelt», https://www.stortinget.no/no/Saker-og-publikasjoner/Publikasjoner/Referater/Stortinget/2025-2026/refs-202526-01-29/8
-- Klikk 1: én felles plattform. ≈ 150 årsverk er Navs eget anslag
-- Tatt av sliden for å gi luft, si det muntlig: Stortinget sier «det offentlege framleis er for oppdelt», og ofte blir resultatet en Azure landing zone og en wiki
 -->
 
 ---
@@ -343,171 +316,6 @@ clicks: 2
 ---
 
 ::header::
-<div class="pillar-tag" style="--pc: #9b6fd6"><span class="i-carbon-settings" /> Automatisering</div>
-<h1 class="text-3xl font-bold">Hva dere slipper å drifte</h1>
-<p class="subtitle">Dere bruker verktøyene. Vi drifter alt under.</p>
-
-::default::
-<Toolbox mode="ops" />
-
-<!--
-Overgang: «Og når noe likevel skjer om natta?»
-
-- Samme verktøykasse, dempet
-- Klikk 1: driften Nais tar. Nais drifter plattformen, oppgraderer den og har vakt for den. Klikk 2: streken mellom teamenes del og Nais' del
-- Teamene drifter sin egen app og holder den oppdatert: avhengigheter, base-image og kjøretidsversjon. Nais oppgraderer plattformen, ikke appene
--->
-
----
-layout: default
-clicks: 3
----
-
-::header::
-<h1 class="text-3xl font-bold">Kl. 03.00</h1>
-<p class="subtitle">Nais har vakt for plattformen. Teamene eier appene sine.</p>
-
-::default::
-<div class="flex flex-col gap-6 w-full">
-  <FlowChain :nodes="[
-    { icon: 'i-carbon-notification', label: 'Varsel', sub: 'En node i plattformen svikter kl. 03.00' },
-    { icon: 'i-carbon-phone', label: 'Nais-vakt', sub: 'Vakthavende i Nais-teamet varsles' },
-    { icon: 'i-carbon-cloud', label: 'Google', sub: 'Googles døgnåpne support ved behov' },
-    { icon: 'i-carbon-checkmark', label: 'Løst', sub: 'Appene kjørte hele tiden' },
-  ]" />
-  <div class="grid grid-cols-2 gap-6 items-center max-w-4xl mx-auto w-full">
-    <div class="anim-item night">
-      <p><b>03.02</b> Varsel: en node i én sone svarer ikke</p>
-      <p><b>03.03</b> Kubernetes flytter podene til friske noder</p>
-      <p><b>03.10</b> Nais-vakten bytter noden, sammen med Google</p>
-      <p><b>03.25</b> Alt er grønt. Appene merket det ikke</p>
-    </div>
-    <div class="anim-item text-center">
-      <div class="text-5xl font-bold" style="font-family: Poppins; color: var(--nais-success)">99,88 %</div>
-      <p class="mt-1">ingress-svar uten 5xx i Nav, siste 30 dager</p>
-      <p class="opacity-70">Målt, ikke SLA. Inkluderer feil i appene selv.</p>
-    </div>
-  </div>
-</div>
-
-<!--
-Overgang: «Hvem var våkne? Disse femten.»
-
-- Nais har vakt døgnet rundt for plattformen, med Googles døgnåpne support ved behov. Google-supporten er inkludert i prisen
-- Skillet: Nais har vakt for plattformen. Teamene eier appene sine. Feiler en app på grunn av egen kode, for eksempel mot databasen, er det teamets jobb å rette, ikke Nais'
-- Få produktteam har egen vakt, og det trenger de ikke for plattformfeil
-- 99,88 % er målt i Mimir, Nav, siste 30 dager. Tallet inkluderer feil i appene selv. Ingen formell SLA
-- Natten i boksen er en illustrasjon av en plattformfeil (en node faller ut), ikke en bestemt hendelse
--->
-
----
-layout: default
----
-
-::header::
-<h1 class="text-3xl font-bold">Nais-teamet</h1>
-<p class="subtitle">15 personer i Nav. Drifter for seks tenants, fire i produksjon.</p>
-
-::default::
-<TeamWall />
-
-<!--
-Overgang: «Teamet bygger også sikkerheten inn i hver leveranse.»
-
-- Hele teamet: femten personer, alle ansatt i Nav, som drifter for seks tenants
-- Navn fra GitHub-teamet nais/nais
--->
-
----
-transition: view-transition
-layout: default
-clicks: 9
----
-
-::header::
-<div class="pillar-tag" style="--pc: #34c27a"><span class="i-carbon-certificate-check" /> Sikkerhet</div>
-<h1 class="text-xl font-bold">Sikkerhet i forsyningskjeden</h1>
-
-::default::
-<SupplyFix :nodes="[
-  { icon: 'i-carbon-build-tool', label: 'Bygg', sub: 'All kode, også fra KI-agenter' },
-  { icon: 'i-carbon-list-boxes', label: 'SBOM', sub: 'Lages automatisk (CycloneDX)' },
-  { icon: 'i-carbon-certificate', label: 'Signering', sub: 'Signert og attestert' },
-  { icon: 'i-carbon-scan', label: 'Sårbarheter', sub: 'Følges opp per workload' },
-  { icon: 'i-carbon-dashboard', label: 'Console', sub: 'Teamet ser status' },
-]" />
-
-<!--
-Overgang: «Og sikkerheten gjelder ikke bare koden. Hvem slipper inn? Innloggingen er bygd inn.»
-
-- Klikk 1–4: ett ledd per klikk. SBOM og signering skjer automatisk i bygget. Husk manifestet og PR-en agenten laget tidligere: den koden gikk gjennom akkurat samme løp som all annen kode
-- Klikk 5: Console vokser ut av det siste leddet. Klikk 6–9: funnet åpnes, PR oppdaterer avhengigheten, bygg og deploy, ny skanning og løst
-- Console-delen er illustrasjon, ikke ekte data eller CVE-er
-- 5 608 workloads (apper og jobber) skannes for sårbarheter i Nav (Mimir, 21. oktober 2026). Tallet er tatt av sliden; nevn det muntlig
-- Kobling til NSM (tatt av sliden): SBOM og signering svarer til 2.1.4, sårbarhetsskanning til 3.1.1
-- NSM anbefaler, loven krever ikke: Grunnprinsipper for IKT-sikkerhet 2.1.4 «Reduser risiko for målrettet manipulasjon av IKT-produkter i leverandørkjeden» (SBOM og signering) og 3.1.1 «Gjennomfør jevnlig sårbarhetskartlegging … ved hjelp av automatiserte verktøy» (skanning). https://nsm.no/grunnprinsipper-ikt
-- Digitalsikkerhetsforskriften § 14 (i kraft 1.10.2025) gjelder bare tilbydere av samfunnsviktige tjenester: https://lovdata.no/dokument/SF/forskrift/2025-06-20-1131. NSMs veileder: https://nsm.no/getfile.php/1314788-1759304646/NSM/Filer/Dokumenter/Veiledere/Veileder%20fra%20NSM%20i%20digitalsikkerhetsloven%20og%20-forskriften.pdf
-- NIS2 vurderes for EØS-avtalen, ingen norsk lov ennå: https://www.efta.int/eea-lex/32022L2555, https://www.regjeringen.no/no/sub/eos-notatbasen/notatene/2021/feb/nis2-direktivet/id2846097/
-- Nais gir dere dokumentasjonen som hjelper dere å følge opp leverandørkjeden. Dokumentasjonen alene gjør ikke at dere etterlever kravene. Ansvaret ligger hos tenanten
--->
-
----
-layout: default
-clicks: 9
----
-
-::header::
-<div class="pillar-tag" style="--pc: #34c27a"><span class="i-carbon-certificate-check" /> Sikkerhet</div>
-<h1 class="text-2xl font-bold">Innlogging uten egen kode</h1>
-
-::default::
-<AuthJourney star />
-
-<!--
-Overgang: «Nå snakker jeg til dere som skal signere. Dere er ikke de første som spør om én felles plattform. Se på Europa.»
-
-- To sidecars gjør jobben: Wonderwall er en innloggings-sidecar foran appen (logger brukeren inn mot ID-porten eller Entra ID). Texas er en token-sidecar som appen spør for å validere, bytte og hente tokens
-- Klikk 0: ID-porten, Maskinporten, Entra ID og TokenX/Texas er innebygd
-- Klikk 1: oversikten viker for én forespørsel gjennom Nais, og grensene for cluster og pods tegnes
-- Klikk 2: Wonderwall (innloggings-sidecar) sender innbyggeren til ID-porten. min-app får forespørselen med Authorization-header. Wonderwall validerer ikke tokenet; appen gjør det via Texas
-- Klikk 3: tokenet har mottaker (aud) min-app. Et token er bare gyldig for mottakeren det er laget for
-- Klikk 4: min-app kaller Texas: POST til NAIS_TOKEN_EXCHANGE_ENDPOINT med identity_provider=tokenx, target=prod-gcp:team-b:api og user_token (docs.nais.io, TokenX)
-- Klikk 5: Texas bytter tokenet via TokenX. Samme bruker, ny mottaker: prod-gcp:team-b:api. Hvorfor: lekker tokenet, kan det ikke brukes mot andre tjenester, og hvert API ser hvem brukeren er
-- Klikk 6: API-ets Texas introspekterer tokenet (NAIS_TOKEN_INTROSPECTION_ENDPOINT): riktig mottaker, riktig bruker
-- Klikk 7: accessPolicy.inbound stopper en app som ikke har lov
-- Klikk 8: Maskinporten-token for et eksternt API, også via Texas
-- Klikk 9: manifestlinjene. Kilde: docs.nais.io (auth, ID-porten, TokenX, Entra ID, Maskinporten)
--->
-
----
-layout: default
-clicks: 6
----
-
-::header::
-<div class="pillar-tag" style="--pc: #4a9be8"><span class="i-carbon-migrate" /> Suveren og autonom</div>
-<h1 class="text-3xl font-bold">Hva Europa gjør</h1>
-
-::default::
-<EuropeMap />
-
-<!--
-Overgang: «Og hvor kjører det i dag?»
-
-- Klikk 1, Storbritannia: GOV.UK PaaS for «more than 60 departments, agencies and local authorities», «3,200 applications». Lagt ned fordi den «has not seen the rapid and continued growth». https://gds.blog.gov.uk/2022/07/12/why-weve-decided-to-decommission-gov-uk-paas-platform-as-a-service/
-- Klikk 2, Nederland: Haven. «Een app die op één HAVEN-omgeving draait, werkt op álle HAVEN-omgevingen» («En app som kjører i ett HAVEN-miljø, virker i alle HAVEN-miljøer»). Standard, ikke drift. https://vng.nl/projecten/haven
-- Klikk 3, Frankrike: Cloud π Native, «Plateforme DevSecOps du gouvernement français basée sur Kubernetes» («Den franske statens DevSecOps-plattform, bygd på Kubernetes»). Ingen offentlige tall. https://cloud-pi-native.fr/ og https://github.com/cloud-pi-native
-- Klikk 4, Sverige: SFS 2024:1005, «Denna förordning innehåller bestämmelser om ett samordnat statligt tjänsteutbud för it-drift» («Denne forskriften inneholder bestemmelser om et samordnet statlig tjenestetilbud for IT-drift»). https://lagen.nu/2024:1005
-- Klikk 5: Schleswig-Holstein (≈ 80 % LibreOffice, sparer over 15 millioner euro i året), openDesk (100 000 arbeidsplasser, Deutsche Rentenversicherung 21.07.2026), La Suite (over 500 000 ansatte i måneden, ifølge DINUM). Kilder: schleswig-holstein.de, deutsche-rentenversicherung.de, lasuite.numerique.gouv.fr
-- Klikk 6: Norge og Nais. cloud.gov (USA) er en annen felles plattform med kostnadsdekning: «100% of your investment goes directly to platform development», https://cloud.gov/pricing/
--->
-
----
-layout: default
-clicks: 2
----
-
-::header::
 <div class="pillar-tag" style="--pc: #4a9be8"><span class="i-carbon-migrate" /> Suveren og autonom</div>
 <h1 class="text-3xl font-bold">Hva kjører hvor</h1>
 <p class="subtitle">Dette er avhengighetene</p>
@@ -574,65 +382,122 @@ Overgang: «Og hvis dere vil flytte, er det deres valg.»
 ---
 transition: view-transition
 layout: default
+clicks: 9
+---
+
+::header::
+<div class="pillar-tag" style="--pc: #34c27a"><span class="i-carbon-certificate-check" /> Sikkerhet</div>
+<h1 class="text-xl font-bold">Sikkerhet i forsyningskjeden</h1>
+
+::default::
+<SupplyFix :nodes="[
+  { icon: 'i-carbon-build-tool', label: 'Bygg', sub: 'All kode, også fra KI-agenter' },
+  { icon: 'i-carbon-list-boxes', label: 'SBOM', sub: 'Lages automatisk (CycloneDX)' },
+  { icon: 'i-carbon-certificate', label: 'Signering', sub: 'Signert og attestert' },
+  { icon: 'i-carbon-scan', label: 'Sårbarheter', sub: 'Følges opp per workload' },
+  { icon: 'i-carbon-dashboard', label: 'Console', sub: 'Teamet ser status' },
+]" />
+
+<!--
+Overgang: «Og sikkerheten gjelder ikke bare koden. Hvem slipper inn? Innloggingen er bygd inn.»
+
+- Klikk 1–4: ett ledd per klikk. SBOM og signering skjer automatisk i bygget. Husk manifestet og PR-en agenten laget tidligere: den koden gikk gjennom akkurat samme løp som all annen kode
+- Klikk 5: Console vokser ut av det siste leddet. Klikk 6–9: funnet åpnes, PR oppdaterer avhengigheten, bygg og deploy, ny skanning og løst
+- Console-delen er illustrasjon, ikke ekte data eller CVE-er
+- 5 608 workloads (apper og jobber) skannes for sårbarheter i Nav (Mimir, 21. oktober 2026). Tallet er tatt av sliden; nevn det muntlig
+- Kobling til NSM (tatt av sliden): SBOM og signering svarer til 2.1.4, sårbarhetsskanning til 3.1.1
+- NSM anbefaler, loven krever ikke: Grunnprinsipper for IKT-sikkerhet 2.1.4 «Reduser risiko for målrettet manipulasjon av IKT-produkter i leverandørkjeden» (SBOM og signering) og 3.1.1 «Gjennomfør jevnlig sårbarhetskartlegging … ved hjelp av automatiserte verktøy» (skanning). https://nsm.no/grunnprinsipper-ikt
+- Digitalsikkerhetsforskriften § 14 (i kraft 1.10.2025) gjelder bare tilbydere av samfunnsviktige tjenester: https://lovdata.no/dokument/SF/forskrift/2025-06-20-1131. NSMs veileder: https://nsm.no/getfile.php/1314788-1759304646/NSM/Filer/Dokumenter/Veiledere/Veileder%20fra%20NSM%20i%20digitalsikkerhetsloven%20og%20-forskriften.pdf
+- NIS2 vurderes for EØS-avtalen, ingen norsk lov ennå: https://www.efta.int/eea-lex/32022L2555, https://www.regjeringen.no/no/sub/eos-notatbasen/notatene/2021/feb/nis2-direktivet/id2846097/
+- Nais gir dere dokumentasjonen som hjelper dere å følge opp leverandørkjeden. Dokumentasjonen alene gjør ikke at dere etterlever kravene. Ansvaret ligger hos tenanten
+-->
+
+---
+layout: default
+clicks: 9
+---
+
+::header::
+<div class="pillar-tag" style="--pc: #34c27a"><span class="i-carbon-certificate-check" /> Sikkerhet</div>
+<h1 class="text-2xl font-bold">Innlogging uten egen kode</h1>
+
+::default::
+<AuthJourney star />
+
+<!--
+Overgang: «Nå snakker jeg til dere som skal signere. Dere er ikke de første som spør om én felles plattform. Se på Europa.»
+
+- To sidecars gjør jobben: Wonderwall er en innloggings-sidecar foran appen (logger brukeren inn mot ID-porten eller Entra ID). Texas er en token-sidecar som appen spør for å validere, bytte og hente tokens
+- Klikk 0: ID-porten, Maskinporten, Entra ID og TokenX/Texas er innebygd
+- Klikk 1: oversikten viker for én forespørsel gjennom Nais, og grensene for cluster og pods tegnes
+- Klikk 2: Wonderwall (innloggings-sidecar) sender innbyggeren til ID-porten. min-app får forespørselen med Authorization-header. Wonderwall validerer ikke tokenet; appen gjør det via Texas
+- Klikk 3: tokenet har mottaker (aud) min-app. Et token er bare gyldig for mottakeren det er laget for
+- Klikk 4: min-app kaller Texas: POST til NAIS_TOKEN_EXCHANGE_ENDPOINT med identity_provider=tokenx, target=prod-gcp:team-b:api og user_token (docs.nais.io, TokenX)
+- Klikk 5: Texas bytter tokenet via TokenX. Samme bruker, ny mottaker: prod-gcp:team-b:api. Hvorfor: lekker tokenet, kan det ikke brukes mot andre tjenester, og hvert API ser hvem brukeren er
+- Klikk 6: API-ets Texas introspekterer tokenet (NAIS_TOKEN_INTROSPECTION_ENDPOINT): riktig mottaker, riktig bruker
+- Klikk 7: accessPolicy.inbound stopper en app som ikke har lov
+- Klikk 8: Maskinporten-token for et eksternt API, også via Texas
+- Klikk 9: manifestlinjene. Kilde: docs.nais.io (auth, ID-porten, TokenX, Entra ID, Maskinporten)
+-->
+
+---
+layout: default
 clicks: 3
 ---
 
 ::header::
-<div class="pillar-tag" style="--pc: #4a9be8"><span class="i-carbon-migrate" /> Suveren og autonom</div>
-<h1 class="text-3xl font-bold">Deres data, deres exit</h1>
+<h1 class="text-3xl font-bold">Kl. 03.00</h1>
+<p class="subtitle">Nais har vakt for plattformen. Teamene eier appene sine.</p>
 
 ::default::
-<TenantMap :tenants="['Nav', 'SSB', 'Din virksomhet', 'Landbruksdirektoratet', 'Arbeidstilsynet', 'KS Digital', 'Novari']" :incoming="['KS Digital', 'Novari']" :detach="2" exit-text="Exit-planen er dokumentert. Ingen har trengt den." />
-<p class="evidence anim-item text-center mt-3">«Planlegg for å kunne bytte ut skyleverandør effektivt og med kjent ressursbruk og kostnad.» <span>NSM, Risiko 2026</span></p>
+<div class="flex flex-col gap-6 w-full">
+  <FlowChain :nodes="[
+    { icon: 'i-carbon-notification', label: 'Varsel', sub: 'En node i plattformen svikter kl. 03.00' },
+    { icon: 'i-carbon-phone', label: 'Nais-vakt', sub: 'Vakthavende i Nais-teamet varsles' },
+    { icon: 'i-carbon-cloud', label: 'Google', sub: 'Googles døgnåpne support ved behov' },
+    { icon: 'i-carbon-checkmark', label: 'Løst', sub: 'Appene kjørte hele tiden' },
+  ]" />
+  <div class="grid grid-cols-2 gap-6 items-center max-w-4xl mx-auto w-full">
+    <div class="anim-item night">
+      <p><b>03.02</b> Varsel: en node i én sone svarer ikke</p>
+      <p><b>03.03</b> Kubernetes flytter podene til friske noder</p>
+      <p><b>03.10</b> Nais-vakten bytter noden, sammen med Google</p>
+      <p><b>03.25</b> Alt er grønt. Appene merket det ikke</p>
+    </div>
+    <div class="anim-item text-center">
+      <div class="text-5xl font-bold" style="font-family: Poppins; color: var(--nais-success)">99,88 %</div>
+      <p class="mt-1">ingress-svar uten 5xx i Nav, siste 30 dager</p>
+      <p class="opacity-70">Målt, ikke SLA. Inkluderer feil i appene selv.</p>
+    </div>
+  </div>
+</div>
 
 <!--
-Overgang: «Og dette tar dere med dere.»
+Overgang: «Hvem var våkne? Disse femten.»
 
-- Hver tenant eier sin egen GCP-organisasjon. Nav eier faktureringskontoen
-- Klikk 2: en tenant kobler seg fra, og alt blir med. Det er bevisst kort nr. 2 («Din virksomhet») som kobler seg fra
-- NSM Risiko 2026, s. 36: «Planlegg for å kunne bytte ut skyleverandør effektivt og med kjent ressursbruk og kostnad dersom behovet skulle oppstå.» https://nsm.no/getfile.php/1314962-1770630853/NSM/Filer/Dokumenter/Rapporter/Risiko%202026.pdf
-- Exit-planen er dokumentert. Ingen har trengt den
+- Nais har vakt døgnet rundt for plattformen, med Googles døgnåpne support ved behov. Google-supporten er inkludert i prisen
+- Skillet: Nais har vakt for plattformen. Teamene eier appene sine. Feiler en app på grunn av egen kode, for eksempel mot databasen, er det teamets jobb å rette, ikke Nais'
+- Få produktteam har egen vakt, og det trenger de ikke for plattformfeil
+- 99,88 % er målt i Mimir, Nav, siste 30 dager. Tallet inkluderer feil i appene selv. Ingen formell SLA
+- Natten i boksen er en illustrasjon av en plattformfeil (en node faller ut), ikke en bestemt hendelse
 -->
 
 ---
 layout: default
-clicks: 1
 ---
 
 ::header::
-<div class="pillar-tag" style="--pc: #4a9be8"><span class="i-carbon-migrate" /> Suveren og autonom</div>
-<h1 class="text-3xl font-bold">Dette tar dere med dere</h1>
+<h1 class="text-3xl font-bold">Nais-teamet</h1>
+<p class="subtitle">15 personer i Nav. Drifter for seks tenants, fire i produksjon.</p>
 
 ::default::
-<TakeAway />
+<TeamWall />
 
 <!--
-Overgang: «Men dere lurer sikkert på noe.»
+Overgang: «Teamet bygger også sikkerheten inn i hver leveranse.»
 
-- Klikk 1: koblingen til Nais brytes, og tenanten går med all teknologien i én pakke: Kubernetes, containere, Postgres, Kafka, OpenSearch, Valkey, OpenTelemetry, Prometheus, Grafana, GitHub Actions
-- Nais Postgres (CloudNativePG) og Nais Buckets er på vei, og gjør data mer flyttbare
-- Stack Overflow Developer Survey: Postgres er mest brukte database, Docker mest brukte verktøy
--->
-
----
-layout: default
-clicks: 4
----
-
-::header::
-<div class="pillar-tag" style="--pc: #4a9be8"><span class="i-carbon-migrate" /> Suveren og autonom</div>
-<h1 class="text-3xl font-bold">Det dere lurer på</h1>
-
-::default::
-<Objections />
-
-<!--
-Overgang: «Hvem bestemmer så hva som skjer med plattformen?»
-
-- GOV.UK PaaS ble lagt ned i 2023 (over 60 virksomheter, 3 200 apper). Egen kjøreplattform, og leverandøren hadde ikke selv behov for den. https://gds.blog.gov.uk/2022/07/12/why-weve-decided-to-decommission-gov-uk-paas-platform-as-a-service/ og https://cloud.service.gov.uk
-- Nais er Kubernetes, og Nav er den største tenanten (≈ 4 700 av 5 212 apper, Grafana 21. oktober 2026)
-- Låsing: dere går ut med standarder. Avhengighet: vakt døgnet rundt for plattformen, med Googles support, 1–2 nye tenants per år
-- Ingen formell SLA: 99,88 % målt i Nav siste 30 dager, feil i appene inkludert
+- Hele teamet: femten personer, alle ansatt i Nav, som drifter for seks tenants
+- Navn fra GitHub-teamet nais/nais
 -->
 
 ---
@@ -659,145 +524,16 @@ Overgang: «Og det vi bygger for én tenant, får alle.»
 
 ---
 layout: default
-clicks: 3
 ---
 
 ::header::
 <div class="pillar-tag" style="--pc: #ff5c6c"><span class="i-carbon-partnership" /> Et Nais-fellesskap</div>
-<h1 class="text-3xl font-bold mt-4">Bedre sammen</h1>
-<p class="subtitle">Det vi bygger for én tenant, får alle</p>
+<h1 class="text-3xl font-bold">Hvordan påvirke</h1>
+<p class="subtitle">Naisdag, champions og #nais på Slack</p>
 
 ::default::
-<ShareLoop :agencies="['Nav', 'SSB', 'Landbruksdirektoratet', 'Arbeidstilsynet', 'KS Digital', 'Novari']" :support="[
-  { icon: 'i-carbon-logo-slack', title: 'Slack', text: 'Direkte kontakt med Nais-teamet' },
-  { icon: 'i-carbon-document', title: 'docs.nais.io', text: 'Dokumentasjon og veiledninger' },
-  { icon: 'i-carbon-badge', title: 'Champions', text: 'Én Nais-kontakt i hvert team' },
-  { icon: 'i-carbon-education', title: 'Arbeidsøkter', text: 'Praktiske økter med Nais-teamet' },
-  { icon: 'i-carbon-group', title: 'Naisdag', text: 'Tenantene møtes og gir innspill' },
-]" />
-<p class="evidence anim-item text-center mt-10">«Løse felles oppgaver én gang i fellesskap i stedet for hver for seg.» <span>KS, Altinget 10.06.2025</span></p>
-<p class="evidence anim-item text-center mt-1">«Vi tar nå i bruk NAV sin skybaserte applikasjonsplattform NAIS som er basert på Google cloud.» <span>Landbruksdirektoratet, stillingsannonse</span></p>
+<p class="anim-item text-center">Plassholder</p>
 
 <!--
-Overgang: «Og dere får ikke bare hjelp fra oss. Utviklerne kan det allerede.»
-
-- Når Nais-teamet bygger noe én tenant trenger, får alle det (klikk 2: alle nodene blir grønne). Hva som bygges, står på veikartet, og det bestemmer Nais-teamet
-- Klikk 3: dere står ikke alene. Slack, docs.nais.io, champions i teamene, arbeidsøkter og Naisdag
-- KS i Altinget 10.06.2025: «løse felles oppgaver én gang i fellesskap i stedet for hver for seg», https://www.altinget.no/artikkel/etterlysning-taktskifte-i-digitaliseringsarbeidet
-- Sitat fra Landbruksdirektoratets stillingsannonse: https://www.finn.no/451519458
--->
-
----
-layout: default
-clicks: 2
----
-
-::header::
-<div class="pillar-tag" style="--pc: #ff5c6c"><span class="i-carbon-partnership" /> Et Nais-fellesskap</div>
-<h1 class="text-3xl font-bold">Utviklerne kan det allerede</h1>
-
-::default::
-<DevFlow />
-
-<!--
-Overgang: «Så hva koster det?»
-
-- Anslag: ≈ 800 utviklere i Nav i dag; antatt ≈ 40 % konsulenter med ≈ 3 års oppdrag (≈ 100 nye i året) og ≈ 8 % turnover blant ansatte (≈ 40 nye i året); ≈ 9 år i produksjon → ≈ 1 300 som har gått videre + ≈ 800 i dag ≈ 2 000. Utviklere hos de andre tenantene er ikke med
-- Rekruttering blir enklere, og opplæringen kortere
-- Konsulenter kjenner plattformen, og utviklere etterspør den
-- De fleste store konsulentselskapene har folk med Nais-erfaring
--->
-
----
-layout: default
----
-
-::header::
-<h1 class="text-3xl font-bold">Hva koster det</h1>
-<p class="subtitle">Dere betaler for det dere bruker, pluss 200 000 kr i året</p>
-
-::default::
-<SelfCostSplit />
-
-<!--
-Overgang: «Hvem kan så bli med?»
-
-- Tenanten betaler egen infrastruktur og fakturerbart forbruk til selvkost, uten påslag. Teamene ser kostnaden i Console
-- I tillegg et administrativt gebyr på 200 000 kr i året. Det dekker en liten del av Nais-teamet på 15, ekstra administrasjon og videre utvikling av Nais
-- Nav bærer resten: det meste av teamet og utviklingen. Nav har bygd plattformen og utvikler den videre
-- Nav fakturerer hver tenant månedlig til selvkost. Nav eier faktureringskontoen
-- Størrelsene er illustrasjon, ikke målte tall
--->
-
----
-layout: default
----
-
-::header::
-<h1 class="text-3xl font-bold">Hvem kan bli med</h1>
-<p class="subtitle">Statlige virksomheter i egenregi</p>
-
-::default::
-<WhoLanes />
-
-<!--
-Overgang: «Slik kommer dere i gang.»
-
-- Egenregi i staten: statsforetak og private kan ikke bruke NaaS
-- Kommunal sektor er med gjennom offentlig-offentlig samarbeid via KS Digital og Novari
-- Grønt passer, rødt passer ikke. Ikke for systemer som må kjøre i eget datasenter
-- Nais har tydelige meninger: én måte å bygge, deploye og drifte på. Det gir fart og selvstendige team, men passer ikke alle
--->
-
----
-transition: view-transition
-layout: default
-clicks: 4
----
-
-::header::
-<h1 class="text-3xl font-bold">Veien inn</h1>
-
-::default::
-<JourneyPath :burst="false" :items="[
-  { icon: 'i-carbon-presentation-file', title: 'Demo', description: '1 time' },
-  { icon: 'i-carbon-chemistry', title: 'Pilot', description: '4–8 uker' },
-  { icon: 'i-carbon-migrate', title: 'Migrering', description: '3–12 måneder' },
-  { icon: 'i-carbon-checkmark-outline', title: 'Drift', description: 'Dere utvikler, vi drifter' },
-]" />
-<p class="anim-item text-center font-bold">Første app i prod: noen uker etter avtale</p>
-
-<!--
-Overgang: «Og hvis det ikke passer: dere kan gå når som helst, med alt.»
-
-- Demo, pilot, migrering, drift
-- Varighet er anslag: demo 1 time, pilot 4–8 uker, migrering 3–12 måneder. Første app i prod noen uker etter avtale (anslag)
--->
-
----
-layout: cta
----
-
-::header::
-<h1 class="text-3xl font-bold">Book en demo eller pilot</h1>
-<p class="subtitle">Dere kan gå når som helst, med alt</p>
-
-::default::
-<div class="flex items-center justify-center gap-20 w-full">
-  <NorwayHoney />
-  <div class="flex flex-col items-center gap-5">
-  <div class="anim-item qr-tile"><img src="./assets/kontakt-qr.svg" alt="QR-kode til e-post nais@nav.no" /></div>
-  <div class="anim-item text-center">
-    <p class="text-2xl font-bold" style="font-family: Poppins">Book demo eller pilot</p>
-    <p class="text-xl mt-3"><a href="mailto:nais@nav.no" class="text-accent font-bold">nais@nav.no</a> · <a href="https://nais.io" class="text-accent">nais.io</a></p>
-  </div>
-  </div>
-</div>
-
-<!--
-Overgang: «Takk.»
-
-- Utviklerne får fart fra dag én, tenanten beholder eierskapet og kan gå når som helst, og prisen er selvkost
-- QR-koden åpner e-post til nais@nav.no (som «Kontakt oss» på nais.io)
-- Den siste sekskanten fra «Drift» flyr inn i Norge-kartet, ved siden av Nav. Kartet er det samme som i åpningsklippet
+Plassholder: bygges i neste fase.
 -->
