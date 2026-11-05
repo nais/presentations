@@ -801,3 +801,9 @@ html .slidev-layout .subtitle {
   max-width: none;
   padding: 0.5rem 0.8rem;
 }
+
+.check-list .src {
+  display: block;
+  font-size: 0.7em;
+  opacity: 0.7;
+}

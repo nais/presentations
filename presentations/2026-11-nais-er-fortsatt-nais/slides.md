@@ -115,7 +115,7 @@ clicks: 6
 Overgang: «Så skal vi se hva som skjer når dere merger.»
 
 - Manifestet ser ut som før. Det nye: Postgres er en egen ressurs (.nais/postgres.yaml, version: v1, type: Postgres), og appen kobler seg til med uses.postgres
-- Nais Postgres kjører på CloudNativePG, i clusteret, i stedet for Cloud SQL
+- Nais Postgres kjører på CloudNativePG, i clusteret, i stedet for Cloud SQL. Si at det er i preview
 - Feltnavn fra Application-eksempelet i nais/doc og Postgres-veiledningen (docs.nais.io, persistence/postgres)
 - Hvert klikk skriver én blokk, og ressursen dukker opp rundt appen
 - Ingen Terraform, ingen egen infrastruktur
@@ -152,7 +152,7 @@ clicks: 3
 ::header::
 <div class="pillar-tag" style="--pc: #FF9100"><span class="i-carbon-rocket" /> Utviklingsfart</div>
 <h1 class="text-3xl font-bold">KI: MCP i Nais CLI</h1>
-<p class="subtitle">Kodeagenten spør Nais, ikke deg</p>
+<p class="subtitle">Kodeagenten spør Nais, ikke deg (alfa)</p>
 
 ::default::
 <div class="flex flex-col gap-6 w-full">
@@ -222,7 +222,7 @@ Overgang: «Hva har dette gitt i praksis? Nav har kjørt lengst.»
 - Én bølge med skuffer per klikk (tre bølger), til slutt alt på en gang
 - Gruppert etter inventaret over verktøykassa. Utfasede ting er utelatt
 - MCP for kodeagenter ligger i Verktøy-skuffen
-- Nytt siden i fjor: Nais Postgres (CloudNativePG), Valkey og OpenSearch er ute av alfa, og teamene endrer versjon og størrelse selv, Kafka-tilganger styres via API og CLI, og Unleash har selvbetjening med release-kanaler
+- Nytt siden i fjor: Valkey og OpenSearch er ute av alfa (Nais Postgres er i preview), og teamene endrer versjon og størrelse selv, Kafka-tilganger styres via API og CLI, og Unleash har selvbetjening med release-kanaler
 -->
 
 ---
@@ -406,7 +406,7 @@ Overgang: «Og slik henger nettverket sammen.»
 - Lagene bygges nedenfra: infrastruktur fra skyleverandøren, Kubernetes, Nais (operatorene, hjertet i plattformen) og teamenes apper
 - Klikk 1: pods for app A, B og C fordelt over tre soner i én region. Klikk 2: de skalerer ut
 - Klikk 3: datasenter-b faller ut, og podene startes i a og c. Appen merker det ikke
-- Klikk 4: laget nederst byttes (eget datasenter → Google Cloud), mens Nais og appene blir stående. Nais har flyttet før. Appene merket det ikke
+- Klikk 4: laget nederst byttes (eget datasenter → Google Cloud), mens Nais og appene blir stående. Nais startet i eget datasenter og kjører i dag i Google Cloud. Appene merket ikke flyttingen
 -->
 
 ---
@@ -461,7 +461,7 @@ Overgang: «Og sikkerheten gjelder ikke bare koden. Hvem slipper inn? Innlogging
 - Console-delen er illustrasjon, ikke ekte data eller CVE-er
 - Nytt: sårbarheter prioriteres etter risiko, ikke bare alvorlighet. EPSS (sannsynlighet for utnyttelse), KEV (kjent utnyttet) og om appen er eksponert mot internett teller med. Teamet kan undertrykke funn samlet
 - 5 608 workloads (apper og jobber) skannes for sårbarheter i Nav (Mimir, 21. oktober 2026). Tallet er tatt av sliden; nevn det muntlig
-- Kobling til NSM (tatt av sliden): SBOM og signering svarer til 2.1.4, sårbarhetsskanning til 3.1.1
+- Kobling til NSM (står på sliden, sammen med NIS2-linjen): SBOM og signering svarer til 2.1.4, sårbarhetsskanning til 3.1.1
 - NSM anbefaler, loven krever ikke: Grunnprinsipper for IKT-sikkerhet 2.1.4 «Reduser risiko for målrettet manipulasjon av IKT-produkter i leverandørkjeden» (SBOM og signering) og 3.1.1 «Gjennomfør jevnlig sårbarhetskartlegging … ved hjelp av automatiserte verktøy» (skanning). https://nsm.no/grunnprinsipper-ikt
 - Digitalsikkerhetsforskriften § 14 (i kraft 1.10.2025) gjelder bare tilbydere av samfunnsviktige tjenester: https://lovdata.no/dokument/SF/forskrift/2025-06-20-1131. NSMs veileder: https://nsm.no/getfile.php/1314788-1759304646/NSM/Filer/Dokumenter/Veiledere/Veileder%20fra%20NSM%20i%20digitalsikkerhetsloven%20og%20-forskriften.pdf
 - NIS2 vurderes for EØS-avtalen, ingen norsk lov ennå: https://www.efta.int/eea-lex/32022L2555, https://www.regjeringen.no/no/sub/eos-notatbasen/notatene/2021/feb/nis2-direktivet/id2846097/
@@ -488,8 +488,8 @@ Overgang: «Og når noe likevel går galt om natta?»
 - Klikk 1: oversikten viker for én forespørsel gjennom Nais, og grensene for cluster og pods tegnes
 - Klikk 2: Wonderwall (innloggings-sidecar) sender innbyggeren til ID-porten. min-app får forespørselen med Authorization-header. Wonderwall validerer ikke tokenet; appen gjør det via Texas
 - Klikk 3: tokenet har mottaker (aud) min-app. Et token er bare gyldig for mottakeren det er laget for
-- Klikk 4: min-app kaller Texas: POST til NAIS_TOKEN_EXCHANGE_ENDPOINT med identity_provider=tokenx, target=prod-gcp:team-b:api og user_token (docs.nais.io, TokenX)
-- Klikk 5: Texas bytter tokenet via TokenX. Samme bruker, ny mottaker: prod-gcp:team-b:api. Hvorfor: lekker tokenet, kan det ikke brukes mot andre tjenester, og hvert API ser hvem brukeren er
+- Klikk 4: min-app kaller Texas: POST til NAIS_TOKEN_EXCHANGE_ENDPOINT med identity_provider=tokenx, target=atil-prod:team-b:api og user_token (docs.nais.io, TokenX)
+- Klikk 5: Texas bytter tokenet via TokenX. Samme bruker, ny mottaker: atil-prod:team-b:api. Hvorfor: lekker tokenet, kan det ikke brukes mot andre tjenester, og hvert API ser hvem brukeren er
 - Klikk 6: API-ets Texas introspekterer tokenet (NAIS_TOKEN_INTROSPECTION_ENDPOINT): riktig mottaker, riktig bruker
 - Klikk 7: accessPolicy.inbound stopper en app som ikke har lov
 - Klikk 8: Maskinporten-token for et eksternt API, også via Texas
@@ -606,14 +606,14 @@ layout: default
     <div class="ms"><b>Jan. 2026</b><span class="i-carbon-chart-line" /><p>Metrikker i Mimir</p></div>
     <div class="ms"><b>Jan. 2026</b><span class="i-carbon-locked" /><p>Se hemmeligheter med begrunnelse</p></div>
     <div class="ms"><b>Vår 2026</b><span class="i-carbon-data-base" /><p>Valkey og OpenSearch ute av alfa</p></div>
-    <div class="ms"><b>Apr. 2026</b><span class="i-carbon-security" /><p>Sårbarheter prioritert etter risiko</p></div>
+    <div class="ms"><b>Aug. 2026</b><span class="i-carbon-security" /><p>Sårbarheter prioritert etter risiko</p></div>
     <div class="ms"><b>Apr.–jun. 2026</b><span class="i-carbon-network-3" /><p>HAProxy erstatter nginx</p></div>
-    <div class="ms"><b>Mai 2026</b><span class="i-carbon-terminal" /><p>nais apply og nais app set</p></div>
+    <div class="ms"><b>Mai–jun. 2026</b><span class="i-carbon-terminal" /><p>nais apply og nais app set</p></div>
     <div class="ms"><b>Okt. 2026</b><span class="i-carbon-data-base" /><p>Nais Postgres med branches</p></div>
     <div class="ms"><b>Nov. 2026</b><span class="i-carbon-search" /><p>Loki-utforsker i Console</p></div>
   </div>
   <div class="anim-item cleared">
-    <b>Ryddet bort:</b> secure logs · KrakenD · Elastic APM · <code>nais alpha postgres</code> og Cloud SQL-migreringskommandoene · <code>nais aiven</code>
+    <b>Ryddet bort:</b> secure logs · KrakenD (utfases) · Elastic APM · <code>nais alpha postgres</code> og Cloud SQL-migreringskommandoene · <code>nais aiven</code>
   </div>
 </div>
 
@@ -624,12 +624,12 @@ Overgang: «Én av dem fortjener egen plass: databasen.»
 - Des. 2025: MCP-serveren kom i Nais CLI (nais alpha mcp serve). Den så dere i Akt 2
 - Jan. 2026: Nais API byttet til Mimir for metrikker. Innsyn i hemmelige verdier krever begrunnelse og logges
 - Vår 2026: Valkey og OpenSearch ute av alfa, med selvbetjening for versjon og størrelse (mars–september)
-- Apr. 2026: sårbarheter prioriteres med EPSS, KEV og internetteksponering
+- Aug.–okt. 2026: sårbarheter prioriteres med EPSS, KEV og internetteksponering
 - Apr.–jun. 2026: ingress flyttet fra nginx til HAProxy
-- Apr.–mai 2026: nais apply ble en hovedkommando, nais app set for midlertidige endringer
+- Mai–jun. 2026: nais app set (mai), nais apply ble en hovedkommando (juni) for midlertidige endringer
 - Okt. 2026: Nais Postgres som nais.io/v1-ressurs, med branches
 - Nov. 2026: Loki-utforskeren erstatter de gamle loggvisningene i Console
-- Ryddet bort: secure logs (jan. 2026), KrakenD som funksjon (aug. 2026), Elastic APM. Gamle CLI-kommandoer: nais alpha postgres er nå nais postgres, Cloud SQL ligger under nais cloudsql, og migreringskommandoene er fjernet. nais aiven er erstattet av credentials-kommandoer
+- Ryddet bort: secure logs (jan. 2026), KrakenD utfases (varslet aug. 2026), Elastic APM. Gamle CLI-kommandoer: nais alpha postgres er nå nais postgres, Cloud SQL ligger under nais cloudsql, og migreringskommandoene er fjernet. nais aiven er erstattet av credentials-kommandoer
 - Bruker dere noe av dette, står det i dokumentasjonen hva dere skal gjøre
 -->
 
@@ -639,7 +639,7 @@ layout: default
 
 ::header::
 <div class="pillar-tag" style="--pc: #9b6fd6"><span class="i-carbon-settings" /> Automatisering</div>
-<h1 class="text-3xl font-bold">Nais Postgres <span class="new-badge">Nytt</span></h1>
+<h1 class="text-3xl font-bold">Nais Postgres <span class="new-badge">Preview</span></h1>
 <p class="subtitle">Postgres i clusteret, på CloudNativePG</p>
 
 ::default::
@@ -660,7 +660,7 @@ $ nais postgres psql min-db</code></pre>
 <!--
 Overgang: «Det var året som gikk. Nå: hvor vi er på vei.»
 
-- Nais Postgres er nytt. Dokumentasjonen merker det fortsatt som alfa, så si «nytt», ikke «i drift for alle»
+- Nais Postgres er nytt. Det er i preview (docs.nais.io), så si «preview», ikke «i drift for alle»
 - Ressursen ser slik ut: version: v1, type: Postgres i .nais/postgres.yaml, og appen kobler seg til med uses.postgres
 - Kjører på CloudNativePG (CNPG) i clusteret, i stedet for Cloud SQL. Det gir lavere kostnad og mindre avhengighet av Google
 - Branches: lag en inaktiv kopi fra et tidspunkt, og aktiver den ved behov. Det er også slik point-in-time recovery fungerer
@@ -735,19 +735,19 @@ layout: default
 ::header::
 <div class="pillar-tag" style="--pc: #4a9be8"><span class="i-carbon-migrate" /> Suveren og autonom</div>
 <h1 class="text-3xl font-bold">Handlingsrom</h1>
-<p class="subtitle">Målet er ikke å flytte. Målet er å kunne.</p>
+<p class="subtitle">Poenget er leverandøravhengighet, ikke Azure. Målet er ikke å flytte, men å kunne.</p>
 
 ::default::
 <div class="grid grid-cols-2 gap-10 w-full max-w-5xl mx-auto">
   <div class="card-row check-list">
-    <div><span class="i-carbon-cloud-offline" /><span><b>Kapasitet:</b> Microsoft har sagt til Digdir at Azure Norway East ikke lenger kan skalere for Altinn</span></div>
+    <div><span class="i-carbon-cloud-offline" /><span><b>Kapasitet:</b> Microsoft har sagt til Digdir at Azure Norway East ikke lenger kan skalere for Altinn <small class="src">Kilde: Digdir via digi.no, 4. nov. 2026</small></span></div>
     <div><span class="i-carbon-flash" /><span><b>Strøm og tomter</b> begrenser nye datasentre i Europa</span></div>
-    <div><span class="i-carbon-warning-alt" /><span><b>NSM:</b> «Planlegg for å kunne bytte ut skyleverandør»</span></div>
+    <div><span class="i-carbon-warning-alt" /><span><b>NSM:</b> «Planlegg for å kunne bytte ut skyleverandør …»</span></div>
     <div><span class="i-carbon-earth-europe-africa" /><span><b>EU</b> har foreslått nye krav til suveren sky i offentlige anskaffelser</span></div>
   </div>
   <div class="card-row check-list">
     <div><span class="i-carbon-checkmark-filled" style="color: var(--nais-success)" /><span><b>Samme manifest</b> uansett hva som ligger under</span></div>
-    <div><span class="i-carbon-checkmark-filled" style="color: var(--nais-success)" /><span><b>Nais har flyttet før:</b> fra eget datasenter til Google Cloud</span></div>
+    <div><span class="i-carbon-checkmark-filled" style="color: var(--nais-success)" /><span><b>Nais har flyttet før:</b> startet i eget datasenter, kjører i dag i Google Cloud</span></div>
     <div><span class="i-carbon-checkmark-filled" style="color: var(--nais-success)" /><span><b>Færre Google-tjenester:</b> Nais Postgres nå, Nais Buckets på vei</span></div>
     <div><span class="i-carbon-checkmark-filled" style="color: var(--nais-success)" /><span><b>Selvdriftet:</b> observability, ingress og Console</span></div>
   </div>
@@ -766,7 +766,7 @@ Overgang: «Hvem bestemmer egentlig hva som bygges?»
 - Strøm og tomter: CBRE European outlook 2026 https://www.cbre.com/insights/books/european-real-estate-market-outlook-2026/data-centres og JLL 2026 https://www.jll.com/en-de/newsroom/ai-boom-redraws-europes-data-centre-map-as-power-access
 - NSM Risiko 2026, side 35, «Omfattende bruk av et fåtall utenlandske skytjenester» (sjekket mot PDF-en 5. nov. 2026). Markedet er dominert av amerikanske selskaper som Amazon, Google og Microsoft. Anbefaling: «Planlegg for å kunne bytte ut skyleverandør effektivt og med kjent ressursbruk og kostnad dersom behovet skulle oppstå.» https://nsm.no/getfile.php/1314962-1770630853/NSM/Filer/Dokumenter/Rapporter/Risiko%202026.pdf
 - EU: forslag til Cloud and AI Development Act, COM(2026) 502, juni 2026. Bare et forslag. https://digital-strategy.ec.europa.eu/en/library/proposal-cloud-and-ai-development-act-cada
-- Høyre side: appene beskriver hva de trenger i manifestet, ikke hvilken sky de kjører i. Nais startet i eget datasenter i 2016 og flyttet til Google Cloud. Nais Postgres og Nais Buckets gjør oss mindre avhengige av Google-spesifikke tjenester
+- Høyre side: appene beskriver hva de trenger i manifestet, ikke hvilken sky de kjører i. Nais startet i eget datasenter i 2016 og kjører i dag i Google Cloud (Nav har fortsatt on-prem-clustre). Nais Postgres og Nais Buckets gjør oss mindre avhengige av Google-spesifikke tjenester
 - Exit-planen er dokumentert. Ingen har trengt den
 -->
 
@@ -825,8 +825,8 @@ layout: default
 
 ::default::
 <NaisPillars :news="[
-  'nais apply og MCP for KI-agenter',
-  'Nais Postgres, selvbetjent Valkey og OpenSearch',
+  'nais apply og MCP for KI-agenter (alfa)',
+  'Nais Postgres (preview), selvbetjent Valkey og OpenSearch',
   'Metrikker i Mimir, Loki-utforsker i Console',
   'Sårbarheter prioritert etter risiko',
   'HAProxy-ingress, Nais Buckets på vei',

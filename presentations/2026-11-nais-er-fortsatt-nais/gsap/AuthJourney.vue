@@ -63,7 +63,7 @@
         <div class="chip-head"><span class="i-carbon-password" /> Token</div>
         <code :class="{ add: swapped }"
           ><i>{{ swapped ? "+" : " " }}</i
-          >aud: {{ swapped ? "prod-gcp:team-b:api" : "min-app" }}</code
+          >aud: {{ swapped ? "atil-prod:team-b:api" : "min-app" }}</code
         >
         <code v-if="swapped" class="del"><i>-</i>aud: min-app</code>
         <code><i> </i>pid: (innbygger)</code>
@@ -71,7 +71,7 @@
       </div>
       <pre ref="http" class="http"><code>POST ${NAIS_TOKEN_EXCHANGE_ENDPOINT}
 identity_provider=tokenx
-target=prod-gcp:team-b:api
+target=atil-prod:team-b:api
 user_token=eyJra...</code></pre>
       <div ref="ok" class="ok">✓ riktig mottaker, riktig bruker</div>
     </div>

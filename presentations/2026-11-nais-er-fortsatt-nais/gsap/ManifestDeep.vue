@@ -70,7 +70,7 @@ const BLOCKS = [
   {
     code: "  uses:\n    postgres: [{ name: min-db }]\n  gcp:\n    buckets: [{ name: min-bucket }]\n",
   },
-  { code: "  kafka: { pool: nav-prod }\n" },
+  { code: "  kafka: { pool: atil-prod }\n" },
   {
     code: "  idporten: { enabled: true }\n  azure: { application: { enabled: true } }\n  tokenx: { enabled: true }\n  maskinporten: { enabled: true }\n",
   },
@@ -99,7 +99,7 @@ const DOCKS = [
     x: 72,
     y: 28,
     a: "l",
-    label: "Nais Postgres",
+    label: "Nais Postgres (preview)",
     icon: "i-carbon-data-base",
   },
   { step: 2, x: 77, y: 50, a: "l", label: "Bucket", icon: "i-carbon-box" },

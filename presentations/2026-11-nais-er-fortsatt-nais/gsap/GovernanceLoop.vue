@@ -195,6 +195,10 @@ useSteps((tl) => {
   font-size: 0.95rem;
 }
 
+/* Fortsatt-deck: no onboarding queue for an existing tenant. */
+.queue {
+  display: none;
+}
 .queue h3 {
   font-family: "Poppins", sans-serif;
   font-size: 1.5rem;
