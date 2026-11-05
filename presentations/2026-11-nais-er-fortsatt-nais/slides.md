@@ -601,13 +601,13 @@ layout: default
 <div class="flex flex-col gap-5 w-full max-w-5xl mx-auto">
   <div class="card-row year-grid">
     <div class="ms"><b>Des. 2025</b><span class="i-carbon-bot" /><p>MCP-server i Nais CLI</p></div>
-    <div class="ms"><b>Jan. 2026</b><span class="i-carbon-chart-line" /><p>Metrikker i Mimir</p></div>
+    <div class="ms"><b>Jan.–nov. 2026</b><span class="i-carbon-chart-line" /><p>Skalering av logger og metrikker</p></div>
     <div class="ms"><b>Jan. 2026</b><span class="i-carbon-locked" /><p>Se hemmeligheter med begrunnelse</p></div>
     <div class="ms"><b>Vår 2026</b><span class="i-carbon-data-base" /><p>Valkey og OpenSearch ute av alfa</p></div>
     <div class="ms"><b>Apr.–jun. 2026</b><span class="i-carbon-network-3" /><p>HAProxy erstatter nginx</p></div>
     <div class="ms"><b>Mai–jun. 2026</b><span class="i-carbon-terminal" /><p>nais apply og nais app set</p></div>
     <div class="ms"><b>Aug. 2026</b><span class="i-carbon-security" /><p>Sårbarheter prioritert etter risiko</p></div>
-    <div class="ms"><b>Okt. 2026</b><span class="i-carbon-data-base" /><p>Nais Postgres med branches</p></div>
+    <div class="ms"><b>Okt. 2026</b><span class="i-carbon-data-base" /><p>Nais Postgres med point‑in‑time recovery</p></div>
     <div class="ms"><b>Nov. 2026</b><span class="i-carbon-search" /><p>Loki-utforsker i Console</p></div>
   </div>
   <div class="anim-item cleared">
@@ -620,12 +620,13 @@ Overgang: «Én av dem fortjener egen plass: databasen.»
 
 - Datoene er fra når endringen kom i kildekoden (commits i nais/cli, api, console-frontend, system), ikke fra en lansering. Månedene er omtrentlige
 - Des. 2025: MCP-serveren kom i Nais CLI (nais alpha mcp serve). Den så dere i Akt 2
-- Jan. 2026: Nais API byttet til Mimir for metrikker. Innsyn i hemmelige verdier krever begrunnelse og logges
+- Jan.–nov. 2026: logger og metrikker skalerer bedre. Metrikkene flyttet til Mimir (jan.), og Loki-utforskeren kom i Console (nov.)
+- Jan. 2026: innsyn i hemmelige verdier krever begrunnelse og logges
 - Vår 2026: Valkey og OpenSearch ute av alfa, med selvbetjening for versjon og størrelse (mars–september)
 - Apr.–jun. 2026: ingress flyttet fra nginx til HAProxy
 - Mai–jun. 2026: nais app set for midlertidige endringer (mai), nais apply ble en hovedkommando (juni)
 - Aug.–okt. 2026: sårbarheter prioriteres med EPSS, KEV og internetteksponering
-- Okt. 2026: Nais Postgres som nais.io/v1-ressurs, med branches
+- Okt. 2026: Nais Postgres som nais.io/v1-ressurs, med point-in-time recovery: en branch er en kopi av databasen fra et tidspunkt (nais postgres branch create)
 - Nov. 2026: Loki-utforskeren erstatter de gamle loggvisningene i Console
 - Ryddet bort: secure logs (jan. 2026), KrakenD utfases (varslet aug. 2026), Elastic APM. Gamle CLI-kommandoer: nais alpha postgres er nå nais postgres, Cloud SQL ligger under nais cloudsql, og migreringskommandoene er fjernet. nais aiven er erstattet av credentials-kommandoer
 - Bruker dere noe av dette, står det i dokumentasjonen hva dere skal gjøre
