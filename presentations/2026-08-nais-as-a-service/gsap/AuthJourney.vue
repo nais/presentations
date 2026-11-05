@@ -232,6 +232,8 @@ const swapped = ref(false);
 // accessPolicy is blocked. s7: Maskinporten. s8: the manifest lines.
 useSteps(
   (tl) => {
+    // Mounted mid view-transition, the ref can be gone: build nothing.
+    if (!root.value) return tl;
     const q = gsap.utils.selector(root.value);
     const wire = (id) => root.value.querySelector(`[data-w="${id}"]`);
     const caps = q(".cap .c");
@@ -342,7 +344,7 @@ useSteps(
       .addLabel("s8");
     return tl;
   },
-  props.star ? 2 : 0,
+  props.star ? 1 : 0,
 );
 </script>
 

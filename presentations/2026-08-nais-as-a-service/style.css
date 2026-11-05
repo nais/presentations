@@ -495,16 +495,6 @@ html .slidev-layout .subtitle {
   height: 9rem;
 }
 
-/* Shared elements that morph between slides (Chrome View Transitions). */
-.default-header h1 {
-  view-transition-name: slide-title;
-}
-
-::view-transition-group(*) {
-  animation-duration: 0.45s;
-  animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
-}
-
 ::view-transition-old(root),
 ::view-transition-new(root) {
   animation-duration: 0.3s;

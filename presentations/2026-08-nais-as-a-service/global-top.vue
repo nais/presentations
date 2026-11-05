@@ -227,28 +227,23 @@ async function go(no, prev) {
 // Park and fly: between anchored slides the hex parks small at the bottom
 // left; it flies into each anchor on arrival and back out when leaving.
 // On arrival the slide's own hex takes over, so slide animations stay as is.
-// Where the current slide's hex sits on screen, sampled while it is shown,
-// so a flight out starts there even if the slide resets as it leaves.
+// Where the leaving slide's hex sits on screen. Measured once, synchronously
+// on the slide change (before the old slide resets), so a flight out starts
+// there. It used to be sampled every 150 ms, which forced style and layout
+// in the middle of every animation.
 let leftBox = null;
-let seen = null;
-const sampler = globalThis.setInterval(() => {
-  const no = currentSlideNo.value;
-  const a = stage.value && !shown && anchorOn(no);
-  if (a && +globalThis.getComputedStyle(a).opacity > 0.9)
-    seen = { no, b: box(a) };
-}, 150);
 watch(
   currentSlideNo,
   (no, prev) => {
-    leftBox = seen && seen.no === prev ? seen.b : null;
-    seen = null;
+    const a = stage.value && !shown && anchorOn(prev);
+    leftBox =
+      a && +globalThis.getComputedStyle(a).opacity > 0.9 ? box(a) : null;
   },
   { flush: "sync" },
 );
 watch(currentSlideNo, (no, prev) => go(no, prev), { flush: "post" });
 watch(stage, (s) => s && go(currentSlideNo.value));
 onBeforeUnmount(() => {
-  globalThis.clearInterval(sampler);
   tween?.kill();
   breathe?.kill();
   reveal();
