@@ -111,27 +111,27 @@ const CLIENTS = [
     label: "nais deploy",
     sub: "GitHub Actions",
     icon: "i-carbon-rocket",
-    x: 160,
+    x: 240,
     y: 32,
   },
   {
     id: "console",
     label: "Console",
     icon: "i-carbon-dashboard",
-    x: 390,
+    x: 460,
     y: 32,
   },
-  { id: "cli", label: "Nais CLI", icon: "i-carbon-terminal", x: 610, y: 32 },
+  { id: "cli", label: "Nais CLI", icon: "i-carbon-terminal", x: 650, y: 32 },
   {
     id: "mcp",
     label: "MCP for KI-agenter",
     icon: "i-carbon-bot",
-    x: 840,
+    x: 860,
     y: 32,
   },
 ];
-const API = { x: 600, y: 125 };
-const NAISERATOR = { x: 160, y: 222 };
+const API = { x: 650, y: 125 };
+const NAISERATOR = { x: 240, y: 222 };
 const K8S = ["Deployment", "Service", "NetworkPolicy", "Ingress", "Secrets"];
 const GROUPS = [
   {
@@ -147,14 +147,14 @@ const GROUPS = [
 ];
 const WIRES = [
   // s2: the clients connect to Nais API (one bus).
-  { id: "console", d: "M390 50 V82 H600 V108", kind: "c" },
-  { id: "cli", d: "M610 50 V82", kind: "c" },
-  { id: "mcp", d: "M840 50 V82 H600", kind: "c" },
-  { id: "deploy", d: "M160 56 V82 H600", kind: "c" },
+  { id: "console", d: "M460 50 V82 H650 V104", kind: "c" },
+  { id: "cli", d: "M650 50 V82", kind: "c" },
+  { id: "mcp", d: "M860 50 V82 H650", kind: "c" },
+  { id: "deploy", d: "M240 50 V82 H650", kind: "c" },
   // s3: the manifest goes to Naiserator; Nais API fans out.
-  { id: "manifest", d: "M160 56 V206", kind: "m" },
-  { id: "team", d: "M600 142 V164 H610 V185", kind: "f" },
-  { id: "data", d: "M600 142 V164 H870 V185", kind: "f" },
+  { id: "manifest", d: "M240 50 V204", kind: "m" },
+  { id: "team", d: "M650 146 V164 H610 V185", kind: "f" },
+  { id: "data", d: "M650 146 V164 H870 V185", kind: "f" },
 ];
 const at = (p) => ({ left: p.x / 10 + "%", top: (p.y / 330) * 100 + "%" });
 

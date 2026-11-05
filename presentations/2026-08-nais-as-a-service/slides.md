@@ -172,7 +172,7 @@ Overgang: «nais apply leverer appen. Men hva skjer egentlig på plattformsiden?
 
 ---
 layout: default
-clicks: 4
+clicks: 2
 ---
 
 ::header::
@@ -186,11 +186,9 @@ clicks: 4
 <!--
 Overgang: «Tusenvis av apper, og hver får den samme hylla. Her er den.»
 
-- Klikk 1: klientene: Nais CLI, Console, nais deploy fra GitHub Actions og MCP-serveren for KI-agenter
-- Klikk 2: alle snakker med Nais API
-- Klikk 3: nais deploy leverer manifestet inn i clusteret, der Naiserator gjør det om til Kubernetes-objekter (Deployment, Service, NetworkPolicy, ingress, secrets). Nais API setter opp teamressurser og datatjenester
+- Klikk 1 spiller alt i ett: klientene (Nais CLI, Console, nais deploy fra GitHub Actions og MCP-serveren for KI-agenter) kobler seg til Nais API, og nais deploy leverer manifestet inn i clusteret, der Naiserator gjør det om til Kubernetes-objekter (Deployment, Service, NetworkPolicy, ingress, secrets). Nais API setter opp teamressurser og datatjenester
 - Forenklet: deploy går gjennom nais deploy, Naiserator avstemmer appene, og api-reconcilers tar seg av teamressursene. Operatorer som Config Connector og aivenator gjør resten
-- Klikk 4: zoom ut fra én app til tusenvis av apper og ett plattformteam
+- Klikk 2: zoom ut fra én app til tusenvis av apper og ett plattformteam
 -->
 
 ---

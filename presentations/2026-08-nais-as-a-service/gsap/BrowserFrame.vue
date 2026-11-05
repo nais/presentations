@@ -5,19 +5,22 @@
       <span class="url"><span class="i-carbon-locked" /> {{ url }}</span>
     </div>
     <div class="topbar">
-      <strong><span class="logo" />Console</strong>
-      <span v-for="t in TOP" :key="t">{{ t }}</span>
+      <strong><span class="logo" />Nais Console</strong>
+      <span class="sep">/</span>
+      <span class="team">team-eksempel ▾</span>
+      <span v-for="t in TOP" :key="t" class="link">{{ t }}</span>
+      <span class="jump"><i class="i-carbon-search" /> Jump to</span>
     </div>
     <div class="body">
       <nav>
-        <template v-for="(g, gi) in NAV" :key="gi">
+        <template v-for="g in NAV" :key="g.title">
+          <small>{{ g.title }}</small>
           <span
-            v-for="n in g"
+            v-for="n in g.items"
             :key="n.label"
             :class="{ on: n.label === active }"
             ><i :class="n.icon" /> {{ n.label }}</span
           >
-          <hr v-if="gi < NAV.length - 1" />
         </template>
       </nav>
       <main>
@@ -40,21 +43,40 @@ defineProps({
   active: { type: String, default: "" },
   crumbs: { type: Array, default: () => [] },
 });
-const TOP = ["Cost", "Vulnerabilities"];
+const TOP = ["Vulnerabilities", "Cost", "Utilization", "Activity Log"];
 // Trimmed to what the stories need; the real Console has more items.
 const NAV = [
-  [{ label: "Team Overview", icon: "i-carbon-home" }],
-  [{ label: "Applications", icon: "i-carbon-cube" }],
-  [
-    { label: "Cloud SQL", icon: "i-carbon-data-base" },
-    { label: "Valkey", icon: "i-carbon-flash" },
-    { label: "Kafka Topics", icon: "i-carbon-flow-stream" },
-  ],
-  [
-    { label: "Cost", icon: "i-carbon-currency" },
-    { label: "Vulnerabilities", icon: "i-carbon-security" },
-  ],
-  [{ label: "Members", icon: "i-carbon-user-multiple" }],
+  {
+    title: "Workspace",
+    items: [{ label: "Team Overview", icon: "i-carbon-home" }],
+  },
+  {
+    title: "Workloads",
+    items: [
+      { label: "Applications", icon: "i-carbon-cube" },
+      { label: "Jobs", icon: "i-carbon-event-schedule" },
+    ],
+  },
+  {
+    title: "Data & Config",
+    items: [
+      { label: "Secrets", icon: "i-carbon-locked" },
+      { label: "Cloud SQL", icon: "i-carbon-data-base" },
+      { label: "Postgres", icon: "i-carbon-data-base-alt" },
+    ],
+  },
+  {
+    title: "Operations & Security",
+    items: [
+      { label: "Cost", icon: "i-carbon-wallet" },
+      { label: "Utilization", icon: "i-carbon-chart-line" },
+      { label: "Vulnerabilities", icon: "i-carbon-debug" },
+    ],
+  },
+  {
+    title: "Team Management",
+    items: [{ label: "Members", icon: "i-carbon-user-multiple" }],
+  },
 ];
 </script>
 
@@ -122,22 +144,25 @@ const NAV = [
 }
 
 .topbar {
+  container-type: inline-size;
+  white-space: nowrap;
+  overflow: hidden;
   display: flex;
   align-items: center;
   gap: 1rem;
   padding: 0.3rem 0.8rem;
-  background: #1e293b;
-  color: #e2e8f0;
-  font-size: 0.7rem;
+  background: #fff;
+  border-bottom: 1px solid var(--nais-border);
+  color: #334155;
+  font-size: 0.66rem;
 }
 
 .topbar strong {
   display: flex;
   align-items: center;
   gap: 0.35rem;
-  font-size: 0.85rem;
-  color: #fff;
-  margin-right: 0.4rem;
+  font-size: 0.8rem;
+  color: #0f172a;
 }
 
 .logo {
@@ -151,24 +176,64 @@ const NAV = [
   flex: 1;
   min-height: 0;
   display: grid;
-  grid-template-columns: 8.6rem 1fr;
+  grid-template-columns: 9rem 1fr;
+  background: #f8fafc;
 }
 
 nav {
+  overflow: hidden;
   display: flex;
   flex-direction: column;
-  padding: 0.6rem 0.45rem;
+  padding: 0.45rem 0.45rem;
   border-right: 1px solid var(--nais-border);
+}
+
+.topbar .sep {
+  margin: 0 -0.6rem;
+  color: #94a3b8;
+}
+
+.team {
+  padding: 0 0.4rem;
+  border: 1px solid var(--nais-border);
+  border-radius: 6px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.jump {
+  margin-left: auto;
+  padding: 0 0.5rem;
+  border: 1px solid var(--nais-border);
+  border-radius: 6px;
+  color: #64748b;
+}
+
+/* Narrow frames (side by side with a PR card): logo, team and search only. */
+@container (max-width: 560px) {
+  .link {
+    display: none;
+  }
+}
+
+nav small {
+  margin: 0.25rem 0 0.05rem 0.3rem;
+  font-size: 0.55rem;
+  color: #64748b;
+}
+
+nav small:first-child {
+  margin-top: 0;
 }
 
 nav span {
   display: flex;
   align-items: center;
   gap: 0.4rem;
-  padding: 0.2rem 0.5rem;
+  padding: 0.08rem 0.5rem;
   border-radius: 6px;
-  font-size: 0.72rem;
-  line-height: 1.4;
+  font-size: 0.66rem;
+  line-height: 1.35;
   color: #334155;
 }
 
@@ -178,20 +243,13 @@ nav span i {
 }
 
 nav span.on {
-  background: #dbeafe;
-  color: #1e3a8a;
+  background: #f1f5f9;
+  color: #0f172a;
   font-weight: 700;
 }
 
 nav span.on i {
-  color: #1e3a8a;
-}
-
-nav hr {
-  width: 100%;
-  margin: 0.35rem 0;
-  border: none;
-  border-top: 1px solid var(--nais-border);
+  color: #0f172a;
 }
 
 main {
@@ -202,8 +260,8 @@ main {
 }
 
 .crumbs {
-  font-size: 0.7rem;
-  color: #1d4ed8;
+  font-size: 0.66rem;
+  color: #64748b;
   margin-bottom: 0.2rem;
 }
 

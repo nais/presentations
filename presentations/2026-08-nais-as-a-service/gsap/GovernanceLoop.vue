@@ -70,6 +70,11 @@ useSteps((tl) => {
   const q = gsap.utils.selector(root.value);
   const agencies = q(".agency");
   const slots = q(".slots i");
+  const path = {
+    path: ring.value,
+    align: ring.value,
+    alignOrigin: [0.5, 0.5],
+  };
   tl.fromTo(
     ring.value,
     { drawSVG: "0%" },
@@ -86,17 +91,14 @@ useSteps((tl) => {
     )
     .from(agencies, { x: -40, autoAlpha: 0, stagger: STAGGER }, 0.8)
     .addLabel("s0")
+    // Park the dot on the ring's start before it shows; unplaced it sat at
+    // the SVG origin, above-left of the loop.
+    .set(dot.value, { motionPath: { ...path, end: 0 } }, 0)
     .from(dot.value, { autoAlpha: 0, duration: 0.2 }, "s0")
     .to(
       dot.value,
       {
-        motionPath: {
-          path: ring.value,
-          align: ring.value,
-          alignOrigin: [0.5, 0.5],
-          start: 0,
-          end: 1,
-        },
+        motionPath: { ...path, start: 0, end: 1 },
         duration: 3,
         ease: "none",
       },

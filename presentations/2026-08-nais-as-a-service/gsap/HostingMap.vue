@@ -6,21 +6,8 @@
       <small>Nais startet her i 2016</small>
     </div>
     <svg class="move" viewBox="0 0 120 60" aria-hidden="true">
-      <defs>
-        <marker
-          id="hm-head"
-          viewBox="0 0 10 10"
-          refX="5"
-          refY="5"
-          markerWidth="4"
-          markerHeight="4"
-          orient="auto"
-          overflow="visible"
-        >
-          <path d="M0 0 L10 5 L0 10 Z" class="tip" />
-        </marker>
-      </defs>
       <path ref="arrow" d="M5 34 C40 8 76 8 100 30" />
+      <path ref="head" class="tip" d="M104 34 L88.6 27.9 L96.8 19.1 Z" />
     </svg>
     <div class="zones">
       <section v-for="z in ZONES" :key="z.name" class="zone" :class="z.tone">
@@ -38,8 +25,9 @@
       </section>
     </div>
     <p ref="caption" class="caption">
-      Flyttet til Google Cloud. Plattformen har flyttet før. Eget datasenter
-      kobles til med VPN eller Cloud Interconnect.
+      Nais startet i eget datasenter og kjører i dag i Google Cloud. Nav har
+      fortsatt egne datasentre (FSS), koblet til med VPN eller Cloud
+      Interconnect.
     </p>
   </div>
 </template>
@@ -86,12 +74,14 @@ const ZONES = [
 
 const root = ref();
 const arrow = ref();
+const head = ref();
 const caption = ref();
 
 // s0: zones and chips appear. s1: the on-prem to cloud move is drawn.
 useSteps((tl) => {
   const q = gsap.utils.selector(root.value);
   gsap.set(arrow.value, { drawSVG: "0%" });
+  gsap.set(head.value, { autoAlpha: 0 });
   gsap.set(caption.value, { autoAlpha: 0, y: 12 });
   tl.from(q(".zone"), { scale: 0.9, autoAlpha: 0, stagger: STAGGER * 2 })
     .from(
@@ -109,7 +99,7 @@ useSteps((tl) => {
     .addLabel("s0")
     .to(arrow.value, { drawSVG: "100%", duration: 0.8, ease: "power2.inOut" })
     // Arrowhead only once the line has arrived, so it is never drawn half-way.
-    .set(arrow.value, { attr: { "marker-end": "url(#hm-head)" } })
+    .to(head.value, { autoAlpha: 1, duration: 0.15 })
     .to(
       q(".onprem"),
       { opacity: 0.65, filter: "grayscale(1)", duration: 0.5 },
@@ -185,7 +175,7 @@ useSteps((tl) => {
   stroke: none;
 }
 
-.move > path {
+.move > path:not(.tip) {
   fill: none;
   stroke: var(--nais-accent);
   stroke-width: 4;
