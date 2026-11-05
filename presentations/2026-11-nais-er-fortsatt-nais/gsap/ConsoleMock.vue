@@ -157,7 +157,7 @@
         </div>
         <div class="cols">
           <div>
-            <h5>Vulnerabilities · Priority</h5>
+            <h5>Priority</h5>
             <div class="ke" :class="{ bad: ke }">
               <i class="i-carbon-debug" /> {{ ke }} Known exploited
             </div>
@@ -490,12 +490,14 @@ h2 em {
   vertical-align: middle;
 }
 
-h5 {
+.mock h5 {
   margin: 0.45rem 0 0.25rem;
-  font-size: 0.66rem;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  color: #334155;
+  font-family: "Inter", sans-serif;
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: none;
+  color: #0f172a;
 }
 
 .cols {

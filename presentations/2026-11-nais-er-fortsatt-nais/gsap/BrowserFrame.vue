@@ -8,7 +8,7 @@
       <strong><span class="logo" />Nais Console</strong>
       <span class="sep">/</span>
       <span class="team">team-eksempel ▾</span>
-      <span v-for="t in TOP" :key="t">{{ t }}</span>
+      <span v-for="t in TOP" :key="t" class="link">{{ t }}</span>
       <span class="jump"><i class="i-carbon-search" /> Jump to</span>
     </div>
     <div class="body">
@@ -144,6 +144,9 @@ const NAV = [
 }
 
 .topbar {
+  container-type: inline-size;
+  white-space: nowrap;
+  overflow: hidden;
   display: flex;
   align-items: center;
   gap: 1rem;
@@ -178,6 +181,7 @@ const NAV = [
 }
 
 nav {
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   padding: 0.45rem 0.45rem;
@@ -203,6 +207,13 @@ nav {
   border: 1px solid var(--nais-border);
   border-radius: 6px;
   color: #64748b;
+}
+
+/* Narrow frames (side by side with a PR card): logo, team and search only. */
+@container (max-width: 560px) {
+  .link {
+    display: none;
+  }
 }
 
 nav small {
