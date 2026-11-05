@@ -146,12 +146,12 @@ const GROUPS = [
   },
 ];
 const WIRES = [
-  // s2: the clients connect to Nais API (one bus).
+  // The clients connect to Nais API (one bus).
   { id: "console", d: "M460 50 V82 H650 V104", kind: "c" },
   { id: "cli", d: "M650 50 V82", kind: "c" },
   { id: "mcp", d: "M860 50 V82 H650", kind: "c" },
   { id: "deploy", d: "M240 50 V82 H650", kind: "c" },
-  // s3: the manifest goes to Naiserator; Nais API fans out.
+  // Then the manifest goes to Naiserator; Nais API fans out.
   { id: "manifest", d: "M240 50 V204", kind: "m" },
   { id: "team", d: "M650 146 V164 H610 V185", kind: "f" },
   { id: "data", d: "M650 146 V164 H870 V185", kind: "f" },
@@ -183,9 +183,9 @@ gsap.registerPlugin(DrawSVGPlugin);
 const root = ref();
 const galaxy = ref();
 // s0: Nais API, and the deploy chip arriving from the PR slide.
-// s1: the other clients. s2: they connect to Nais API. s3: nais deploy hands
-// the manifest to Naiserator in the cluster, and Nais API fans out.
-// s4: zoom out to thousands of apps.
+// s1 (one click, one continuous run): the other clients, they connect to Nais
+// API, nais deploy hands the manifest to Naiserator, and Nais API fans out.
+// s2: zoom out to thousands of apps.
 useSteps((tl) => {
   const q = gsap.utils.selector(root.value);
   const w = (id) => root.value.querySelector(`[data-w="${id}"]`);
@@ -201,7 +201,6 @@ useSteps((tl) => {
       stagger: 0.12,
       duration: 0.4,
     })
-    .addLabel("s1")
     .to(["console", "cli", "mcp", "deploy"].map(w), {
       drawSVG: "100%",
       duration: 0.6,
@@ -211,7 +210,6 @@ useSteps((tl) => {
       boxShadow: "0 0 22px rgb(255 51 119 / 0.55)",
       duration: 0.3,
     })
-    .addLabel("s2")
     .to(q(".cluster, .clabel"), { autoAlpha: 1, duration: 0.3 })
     .to(w("manifest"), { drawSVG: "100%", duration: 0.5 })
     .to(q(".ctrl"), { autoAlpha: 1, scale: 1, ease: POP })
@@ -226,7 +224,7 @@ useSteps((tl) => {
       { autoAlpha: 1, stagger: STAGGER / 2, ease: POP },
       "-=0.2",
     )
-    .addLabel("s3");
+    .addLabel("s1");
   // s2: zoom out from one app to the whole environment.
   const g = gsap.utils.selector(galaxy.value);
   gsap.set(galaxy.value, { autoAlpha: 0 });
@@ -251,7 +249,7 @@ useSteps((tl) => {
     .from(g(".link, .split, .env"), { autoAlpha: 0, duration: 0.5 }, "-=0.2")
     .to(g(".zoom-text"), { autoAlpha: 1, y: 0 })
     .to(g(".zoom-badge"), { autoAlpha: 1, y: 0, ease: POP }, "-=0.3")
-    .addLabel("s4");
+    .addLabel("s2");
   return tl;
 });
 </script>
