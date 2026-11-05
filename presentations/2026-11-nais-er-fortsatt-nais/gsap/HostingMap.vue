@@ -17,8 +17,8 @@
             c
           }}</span>
           <template v-if="z.tone === 'self'">
-            <span v-for="c in COMING" :key="c" class="chip coming"
-              >{{ c }} <em>på vei</em></span
+            <span v-for="[c, tag] in COMING" :key="c" class="chip coming"
+              >{{ c }} <em>{{ tag }}</em></span
             >
           </template>
         </div>
@@ -40,9 +40,12 @@ import { STAGGER, useSteps, POP } from "./motion.js";
 
 gsap.registerPlugin(DrawSVGPlugin);
 
-// Work in progress: Nais Postgres (CloudNativePG) and Nais Buckets
-// bucket abstraction replace Cloud SQL and Cloud Storage over time.
-const COMING = ["Nais Postgres", "Nais Buckets"];
+// Nais Postgres (CloudNativePG) is in preview; a Nais Buckets abstraction
+// is being studied (utredes), not committed.
+const COMING = [
+  ["Nais Postgres", "preview"],
+  ["Nais Buckets", "utredes"],
+];
 const ZONES = [
   {
     name: "Google Cloud",

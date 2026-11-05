@@ -380,7 +380,7 @@ Overgang: «Slik er lagene bygd.»
 
 - Google Cloud: GKE, Cloud SQL, buckets, BigQuery. Aiven: Kafka, OpenSearch, Valkey
 - Nais drifter observability-stakken selv
-- Klikk 2: Nais Postgres (CloudNativePG) og Nais Buckets erstatter over tid Cloud SQL og Cloud Storage, for kostnad og suverenitet. Nais Postgres er nytt (merket alfa i docs.nais.io), Buckets utredes
+- Klikk 2: Nais Postgres (CloudNativePG, i preview) skal over tid erstatte Cloud SQL, for kostnad og suverenitet. Nais Buckets, som kan erstatte Cloud Storage, utredes
 - Dataene ligger i europe-north1 (Finland)
 - Nais startet i eget datasenter i 2016 og flyttet til Google Cloud
 - Nais drifter selv: Console og API, ingress, naisdevice og observability-stakken (Grafana, Mimir, Loki, Tempo)
