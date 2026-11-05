@@ -180,7 +180,7 @@ Overgang: «Agenten leser, nais apply leverer. Nå åpner vi panseret og ser hva
 
 ---
 layout: default
-clicks: 4
+clicks: 2
 ---
 
 ::header::
@@ -194,13 +194,11 @@ clicks: 4
 <!--
 Overgang: «Hver app får den samme hylla. Her er den, slik den ser ut nå.»
 
-- Klikk 1: klientene: Nais CLI, Console, nais deploy fra GitHub Actions og MCP-serveren for KI-agenter
-- Klikk 2: alle snakker med Nais API
-- Klikk 3: nais deploy leverer manifestet inn i clusteret, der Naiserator gjør det om til Kubernetes-objekter (Deployment, Service, NetworkPolicy, ingress, secrets). Nais API setter opp teamressurser og datatjenester
+- Klikk 1 spiller alt i ett: klientene (Nais CLI, Console, nais deploy fra GitHub Actions og MCP-serveren for KI-agenter) kobler seg til Nais API, og nais deploy leverer manifestet inn i clusteret, der Naiserator gjør det om til Kubernetes-objekter (Deployment, Service, NetworkPolicy, ingress, secrets). Nais API setter opp teamressurser og datatjenester
 - Under panseret: CRD-ene (Application, Naisjob, IdportenClient, MaskinportenClient, AzureAdApplication, Kafka-topics m.fl.) er definert i liberator. Naiserator leser Application og Naisjob og lager Kubernetes-objektene og CRD-er for de andre operatorene
 - api-reconcilers lager teamressursene: GCP-prosjekt, GitHub-team, Entra ID-gruppe. Operatorer som Config Connector og aivenator gjør resten
 - Nais Postgres-ressursen håndteres av en egen operator (pgrator)
-- Klikk 4: zoom ut fra én app til tusenvis av apper og ett plattformteam
+- Klikk 2: zoom ut fra én app til tusenvis av apper og ett plattformteam
 -->
 
 ---
