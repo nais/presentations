@@ -425,7 +425,7 @@ clicks: 6
 Overgang: «Nettverket er stengt som standard. Det samme gjelder koden som skal inn.»
 
 - Klikk 0: min-app i et Nais-cluster (VPC) i tenantens egen GCP-organisasjon
-- Klikk 1: nettverkspolicyer fra accessPolicy. Alt er stengt som standard; en app som ikke er nevnt, blir stoppet
+- Klikk 1: nettverkspolicyer fra accessPolicy. Alt er stengt som standard; en app i et annet namespace som ikke er nevnt, blir stoppet
 - Klikk 2: trafikk ut går bare til vertsnavn i accessPolicy.outbound.external, fra faste utgående IP-er per miljø (docs.nais.io, environments) som partnere kan åpne for
 - Klikk 3: Cloud SQL med privat IP, trafikken forlater ikke Google-nettverket. Aiven (Kafka, OpenSearch, Valkey) nås over privat lenke / VPC-peering, i tillegg til TLS-klientsertifikat for Kafka
 - Klikk 4: tenantens eget datasenter via VPN eller Cloud Interconnect, satt opp per tenant
