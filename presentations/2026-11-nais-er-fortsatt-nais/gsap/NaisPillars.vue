@@ -9,9 +9,7 @@
       <div class="icon"><span :class="p.icon" /></div>
       <div>
         <h3>{{ p.title }}</h3>
-        <p v-if="news">
-          <b class="nytt">Nytt:</b> {{ news[i] }}
-        </p>
+        <p v-if="news"><b class="nytt">Nytt:</b> {{ news[i] }}</p>
         <p v-else>{{ p.text }}</p>
       </div>
     </div>
