@@ -339,7 +339,7 @@ Overgang: «Og for dere som liker terminalen.»
 - Hver tenant har egne clustere (egen GCP-organisasjon, se nettverks-sliden). Innenfor dem deler alle teamene maskinene
 - Kubernetes pakker appene tett: det som ikke brukes av én app, kan brukes av en annen. Clusteret skalerer antall maskiner etter samlet behov
 - Felles drift: Nais-teamet drifter plattformen for alle tenants. Forbedringer kommer alle til gode uten ekstra kostnad per tenant
-- Nais Postgres i clusteret og Nais Buckets (på vei) er også valgt for å få ned kostnaden
+- Nais Postgres i clusteret og Nais Buckets (utredes) er også valgt for å få ned kostnaden
 - Reserve: den gamle Nav-presentasjonen anslo 2–10x bedre utnyttelse enn virtuelle maskiner. Bruk det bare hvis noen spør
 -->
 
@@ -380,7 +380,7 @@ Overgang: «Slik er lagene bygd.»
 
 - Google Cloud: GKE, Cloud SQL, buckets, BigQuery. Aiven: Kafka, OpenSearch, Valkey
 - Nais drifter observability-stakken selv
-- Klikk 2: Nais Postgres (CloudNativePG) og Nais Buckets erstatter over tid Cloud SQL og Cloud Storage, for kostnad og suverenitet. Nais Postgres er nytt (merket alfa i docs.nais.io), Buckets er på vei
+- Klikk 2: Nais Postgres (CloudNativePG) og Nais Buckets erstatter over tid Cloud SQL og Cloud Storage, for kostnad og suverenitet. Nais Postgres er nytt (merket alfa i docs.nais.io), Buckets utredes
 - Dataene ligger i europe-north1 (Finland)
 - Nais startet i eget datasenter i 2016 og flyttet til Google Cloud
 - Nais drifter selv: Console og API, ingress, naisdevice og observability-stakken (Grafana, Mimir, Loki, Tempo)
@@ -697,9 +697,9 @@ layout: default
 
 ::default::
 <div class="card-row year-grid w-full max-w-5xl mx-auto">
-  <div class="ms"><b>På vei</b><span class="i-carbon-box" /><p>Nais Buckets, lagring drevet av Nais</p></div>
+  <div class="ms"><b>Utredes</b><span class="i-carbon-box" /><p>Nais Buckets: lagring bak et S3-API, så den kan flyttes</p></div>
   <div class="ms"><b>Planlagt</b><span class="i-carbon-upgrade" /><p>CloudNativePG 1.30</p></div>
-  <div class="ms"><b>Planlagt</b><span class="i-carbon-document-tasks" /><p>pgaudit: logg over hvem som gjorde hva i databasen</p></div>
+  <div class="ms"><b>Planlagt</b><span class="i-carbon-document-tasks" /><p>pgaudit for Nais Postgres</p></div>
   <div class="ms"><b>Utredes</b><span class="i-carbon-data-volume" /><p>Kafka tiered storage: eldre data på billigere lagring</p></div>
   <div class="ms"><b>Pilot</b><span class="i-carbon-notification" /><p>Grafana-varsler per team</p></div>
   <div class="ms"><b>Utredes</b><span class="i-carbon-currency" /><p>Kafka-kostnad i Console</p></div>
@@ -709,9 +709,9 @@ layout: default
 Overgang: «Og så det store bildet. Mange spør om skyen.»
 
 - Merkelappene er ærlige: «Pilot» betyr at noen team tester det nå. «Planlagt» og «Utredes» betyr at det finnes et initiativ, ikke en dato
-- Nais Buckets: objektlagring som et alternativ til Cloud Storage, for kostnad og suverenitet. På vei
+- Nais Buckets: høyst uavklart. Tanken er et lag over S3-API-et, så lagringen kan flyttes mellom leverandører. Utredes
 - CNPG 1.30: neste versjon av operatoren bak Nais Postgres
-- pgaudit: revisjonslogg i Postgres. Nyttig for dere som må dokumentere tilgang til persondata
+- pgaudit: revisjonslogg i Nais Postgres. Cloud SQL har allerede revisjonslogging. Nyttig for dere som må dokumentere tilgang til persondata
 - Kafka tiered storage: eldre meldinger flyttes til billigere lagring, så topics kan beholde data lenger
 - Grafana-varsler per team: hvert team får egen mappe og egne varslingsregler i Grafana. Pilot nå (nais/api-reconcilers)
 - Kilde: initiativene under areas/persistence og areas/observability i nais/system
@@ -725,7 +725,7 @@ clicks: 2
 ::header::
 <div class="pillar-tag" style="--pc: #4a9be8"><span class="i-carbon-migrate" /> Suveren og autonom</div>
 <h1 class="text-3xl font-bold">Handlingsrom</h1>
-<p class="subtitle">Poenget er leverandøravhengighet, ikke Azure. Målet er ikke å flytte, men å kunne.</p>
+<p class="subtitle">Poenget er leverandøravhengighet. Målet er ikke å flytte, men å kunne.</p>
 
 ::default::
 <div class="hr-scale">
@@ -739,7 +739,7 @@ clicks: 2
   <div v-click="2" class="hr-col hr-room">
     <div><span class="i-carbon-checkmark-filled" /><span><b>Samme manifest</b> uansett hva som ligger under</span></div>
     <div><span class="i-carbon-checkmark-filled" /><span><b>Nais har flyttet før:</b> startet i eget datasenter, kjører i dag i Google Cloud</span></div>
-    <div><span class="i-carbon-checkmark-filled" /><span><b>Færre Google-tjenester:</b> Nais Postgres nå, Nais Buckets på vei</span></div>
+    <div><span class="i-carbon-checkmark-filled" /><span><b>Færre Google-tjenester:</b> Nais Postgres nå, Nais Buckets utredes</span></div>
     <div><span class="i-carbon-checkmark-filled" /><span><b>Selvdriftet:</b> observability, ingress og Console</span></div>
   </div>
 </div>
@@ -779,7 +779,7 @@ Overgang: «Så hvordan kan dere påvirke?»
 
 - Nais-teamet bestemmer veikartet, med innspill fra tenantene på Naisdag
 - Det betyr ikke at alt én tenant ønsker, blir bygd. Men det som blir bygd, får alle
-- På veikartet: Nais Buckets og mer Postgres
+- På veikartet: mer Postgres. Nais Buckets utredes
 -->
 
 ---
@@ -820,7 +820,7 @@ layout: default
   'Nais Postgres (preview), selvbetjent Valkey og OpenSearch',
   'Metrikker i Mimir, Loki-utforsker i Console',
   'Sårbarheter prioritert etter risiko',
-  'HAProxy-ingress, Nais Buckets på vei',
+  'HAProxy-ingress, Nais Buckets utredes',
   'Velkommen, KS Digital og Novari',
 ]" />
 <div class="flex items-center justify-center gap-6 mt-8">
