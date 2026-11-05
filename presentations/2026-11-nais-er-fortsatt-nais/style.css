@@ -646,15 +646,26 @@ html .slidev-layout .subtitle {
 }
 
 /* Small «Nytt» badge for things that changed since last year. */
+/* Small pill centred above the title: takes no layout space, so the title
+   stays centred and clear of the pillar tag in the top-right corner. */
+h1:has(.new-badge) {
+  position: relative;
+}
+
 .new-badge {
-  display: inline-block;
-  margin-left: 0.5rem;
-  padding: 0.05rem 0.5rem;
+  position: absolute;
+  left: 50%;
+  bottom: 100%;
+  translate: -50% -0.15rem;
+  padding: 0.05rem 0.55rem;
   border-radius: 999px;
-  vertical-align: middle;
   font-family: Inter, sans-serif;
-  font-size: 0.7rem;
+  font-size: 0.6rem;
   font-weight: 700;
+  line-height: 1.4;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
   color: #fff;
   background: var(--nais-accent);
 }
@@ -783,7 +794,7 @@ html .slidev-layout .subtitle {
 
 /* Keep long titles clear of the pillar tag in the top-right corner. */
 .default-header:has(.pillar-tag) h1 {
-  padding-right: 9rem;
+  padding-inline: 9rem;
 }
 
 .pg-list.pg-grid {
