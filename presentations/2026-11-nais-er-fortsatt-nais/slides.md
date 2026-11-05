@@ -227,27 +227,23 @@ Overgang: «Hva har dette gitt i praksis? Nav har kjørt lengst.»
 
 ---
 layout: default
-clicks: 5
 ---
 
 ::header::
-<h1 class="text-3xl font-bold">Hva Nais har betydd for Nav</h1>
+<h1 class="text-3xl font-bold">Hva Nais har gitt Nav</h1>
+<p class="subtitle">Nav har kjørt lengst på plattformen</p>
 
 ::default::
-<BenefitStory :items="[
-  { icon: 'i-carbon-building', title: 'Fundament', description: 'Autonome team' },
-  { icon: 'i-carbon-rocket', title: 'Fart og flyt', description: 'Kortere vei til prod' },
-  { icon: 'i-carbon-user-speaker', title: 'Utviklere', description: 'Fornøyde' },
-  { icon: 'i-carbon-group', title: 'Ansatte', description: 'Fornøyde' },
-  { icon: 'i-carbon-face-satisfied', title: 'Brukere', description: 'Fornøyde' },
-]" />
-<div class="anim-item dora"><b>≈ 9 000</b> prodsettinger per uke · mange ganger daglig per team</div>
+<div class="flex flex-col items-center gap-6 w-full">
+  <CountUp number="9000" prefix="≈" label="prodsettinger per uke i Nav" />
+  <p class="anim-item text-center max-w-3xl">Små endringer, ofte. Teamene setter i produksjon mange ganger om dagen, uten å vente på et driftsvindu.</p>
+</div>
 
 <!--
 Overgang: «Mange prodsettinger betyr at noe av og til feiler. Slik finner teamet feilen.»
 
-- Ett klikk per steg, konfetti til slutt
-- ≈ 9 000 prodsettinger per uke (Mimir, alle tenants, Nav dominerer). Mange ganger daglig per team
+- ≈ 9 000 prodsettinger per uke i Nav (Mimir). Samme tall som i notatene på slide 4: ≈ 21 500 i alle miljøer, ≈ 9 000 i prod
+- Poenget er ikke at Nav er fornøyd, men at plattformen tåler dette volumet. Den samme plattformen kjører appene deres
 -->
 
 ---
@@ -272,24 +268,34 @@ Overgang: «Og alt dette ser teamet også i Console.»
 -->
 
 ---
-transition: view-transition
 layout: default
-clicks: 3
 ---
 
 ::header::
 <div class="pillar-tag" style="--pc: #5cb2da"><span class="i-carbon-activity" /> Oversikt</div>
-<h1 class="text-3xl font-bold">Console: fra team til app <span class="new-badge">Nytt</span></h1>
+<h1 class="text-3xl font-bold">Nytt i Console <span class="new-badge">Nytt</span></h1>
+<p class="subtitle">Et utvalg siden i fjor</p>
 
 ::default::
-<ConsoleMock story="tour" />
+<div class="card-row pg-list pg-grid w-full max-w-5xl mx-auto">
+  <div><span class="i-carbon-data-base" /><b>Nais Postgres</b> opprett, endre, logger og innsikt i spørringer</div>
+  <div><span class="i-carbon-search" /><b>Loki-utforsker</b> erstatter de gamle loggvisningene</div>
+  <div><span class="i-carbon-settings-adjust" /><b>ConfigMaps</b> lag og endre konfigurasjon, også binære filer</div>
+  <div><span class="i-carbon-tag" /><b>Etiketter</b> på ressurser, med filtre</div>
+  <div><span class="i-carbon-locked" /><b>Hemmelige verdier</b> vises bare med begrunnelse, og det logges</div>
+  <div><span class="i-carbon-activity" /><b>Aktivitetslogg</b> endringer i Kubernetes-ressurser, med filtre</div>
+  <div><span class="i-carbon-security" /><b>Sårbarheter</b> prioritert etter risiko, kan undertrykkes samlet</div>
+  <div><span class="i-carbon-flag" /><b>Unleash</b> release-kanaler og selvbetjening</div>
+</div>
 
 <!--
-Overgang: «Og fordi teamet ser kostnaden, gjør de noe med den.»
+Overgang: «Console viser også hva appene koster. Og det teamet ser, gjør det noe med.»
 
-- Illustrasjon bygd etter strukturen i Console, ingen ekte data
-- Klikk 1: kostnad per tjeneste. Klikk 2: markøren går til Applications. Klikk 3: teamet åpner én app med helse, deploy, persistens og kostnad
-- Nytt i Console siden i fjor: Postgres-administrasjon, ConfigMaps, etiketter med filtre, ny aktivitetslogg, og innsyn i hemmelige verdier med begrunnelse (logges)
+- Kilde: RESEARCH.md, commits i console-frontend og api (nov. 2025–nov. 2026)
+- Postgres-administrasjon for Nais Postgres kom okt.–nov. 2026. Loki-utforskeren kom nov. 2026
+- ConfigMaps (mars–apr.), etiketter med filtre (jun.), aktivitetslogg (apr.–okt.), innsyn i hemmelige verdier med begrunnelse (jan.)
+- Sårbarheter: EPSS, KEV og internetteksponering (apr.–nov.). Unleash: release-kanaler (jan.–sep.)
+- Har dere ønsker for Console, si det i #nais
 -->
 
 ---
@@ -305,7 +311,7 @@ clicks: 3
 <CostLoop />
 
 <!--
-Overgang: «Databasen er bare én post. Resten handler om at containere deler maskiner.»
+Overgang: «Databasen er én post på regningen. Resten avgjøres av hvordan maskinene deles.»
 
 - Samme PR-kort som på pull request-sliden. Klikk 1: teamet merger PR-en som gjør databasen større, og kostnaden stiger i Console
 - Klikk 2: teamet ser det og sender en ny PR. Klikk 3: riktig størrelse, og kostnaden legger seg under der den startet
@@ -318,19 +324,25 @@ layout: default
 ---
 
 ::header::
-<h1 class="text-3xl font-bold">Ressursutnyttelse</h1>
-<p class="subtitle">Containere deler maskiner. Virtuelle maskiner står ofte halvtomme.</p>
+<div class="pillar-tag" style="--pc: #5cb2da"><span class="i-carbon-activity" /> Oversikt</div>
+<h1 class="text-3xl font-bold">Hvorfor kostnaden holdes nede</h1>
+<p class="subtitle">Appene deler maskiner i stedet for å ha hver sin</p>
 
 ::default::
-<ResourceIcebergs />
+<div class="card-row grid grid-cols-3 gap-6 w-full max-w-5xl mx-auto">
+  <IconCard icon="i-carbon-cloud-services" title="Delte clustere" description="Appene til alle teamene deres kjører på de samme maskinene. Ledig plass hos ett team brukes av et annet." />
+  <IconCard icon="i-carbon-chart-line" title="Skalerer etter behov" description="Appene ber om det de trenger og skalerer opp og ned. Dere betaler for det appene bruker, ikke for tomme maskiner." color="blue" />
+  <IconCard icon="i-carbon-group" title="Felles drift" description="Ett plattformteam og samme kode for seks tenants. Det dere ellers måtte bygd selv, deles." color="yellow" />
+</div>
 
 <!--
-Overgang: «Og for dere som liker terminalen:»
+Overgang: «Og for dere som liker terminalen.»
 
-- Containere deler maskiner, og derfor bruker de mindre enn virtuelle maskiner
-- 2–10x er et anslag: spennet fra den gamle Nav-presentasjonen. Det avhenger av hvor godt virtuelle maskiner ble dimensjonert før; containere deler maskiner og skalerer etter behov
-- Dere betaler for det appene bruker, ikke for tomme maskiner
-- Nais Postgres er nytt, og Nais Buckets er på vei, blant annet for å få ned kostnaden
+- Hver tenant har egne clustere (egen GCP-organisasjon, se nettverks-sliden). Innenfor dem deler alle teamene maskinene
+- Kubernetes pakker appene tett: det som ikke brukes av én app, kan brukes av en annen. Clusteret skalerer antall maskiner etter samlet behov
+- Felles drift: Nais-teamet drifter plattformen for alle tenants. Forbedringer kommer alle til gode uten ekstra kostnad per tenant
+- Nais Postgres i clusteret og Nais Buckets (på vei) er også valgt for å få ned kostnaden
+- Reserve: den gamle Nav-presentasjonen anslo 2–10x bedre utnyttelse enn virtuelle maskiner. Bruk det bare hvis noen spør
 -->
 
 ---

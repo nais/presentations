@@ -785,3 +785,14 @@ html .slidev-layout .subtitle {
 .default-header:has(.pillar-tag) h1 {
   padding-right: 9rem;
 }
+
+.pg-list.pg-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.9rem 2rem;
+}
+
+.pg-list.pg-grid > div {
+  max-width: none;
+  padding: 0.6rem 0.9rem;
+}
