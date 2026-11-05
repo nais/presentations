@@ -197,6 +197,12 @@ useSteps((tl) => {
   border-color: var(--nais-accent);
 }
 
+/* min-db shares the column with the wider DBA node; fill it so the branch line touches the box */
+.main,
+.me {
+  justify-self: stretch;
+}
+
 .branch {
   border-style: dashed;
 }
@@ -225,7 +231,7 @@ useSteps((tl) => {
 }
 
 .h .line {
-  inset: 50% 0.5rem auto;
+  inset: 50% 0 auto;
   height: 3px;
   transform-origin: 0 50%;
 }

@@ -876,3 +876,10 @@ h1:has(.new-badge) {
   font-size: 2.5rem;
   color: var(--nais-text-secondary);
 }
+
+/* Timeline «Ryddet bort» strip: code chips must stay muted on the dark theme */
+.cleared code {
+  background: transparent;
+  color: inherit;
+  padding: 0;
+}
