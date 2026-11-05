@@ -299,7 +299,7 @@ Overgang: «Console viser også hva appene koster. Og det teamet ser, gjør det 
 
 ---
 layout: default
-clicks: 3
+clicks: 1
 ---
 
 ::header::
@@ -312,8 +312,7 @@ clicks: 3
 <!--
 Overgang: «Databasen er én post på regningen. Resten avgjøres av hvordan maskinene deles.»
 
-- Samme PR-kort som på pull request-sliden. Klikk 1: teamet merger PR-en som gjør databasen større, og kostnaden stiger i Console
-- Klikk 2: teamet ser det og sender en ny PR. Klikk 3: riktig størrelse, og kostnaden legger seg under der den startet
+- Samme PR-kort som på pull request-sliden. Klikk 1 spiller hele løkka: teamet merger PR-en som gjør databasen større, og kostnaden stiger i Console. Teamet ser det og sender en ny PR med riktig størrelse, og kostnaden legger seg under der den startet
 - Feltene er fra Application-spec (gcp.sqlInstances tier og diskSize). Kronebeløpene er illustrasjon
 - Teamets valg slår rett ut på regningen, og teamet ser det selv i Console
 -->
