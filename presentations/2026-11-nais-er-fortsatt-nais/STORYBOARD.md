@@ -41,23 +41,25 @@ Utkast 3. Bygger på `2026-08-nais-as-a-service`. Kilder for «året som gikk» 
 | 19 | Kl. 03.00 | 17 | Beholdes |
 | 20 | Nais-teamet | 18 | Beholdes |
 
-## Akt 3: Året som gikk (slide 21–24)
+## Akt 3: Året som gikk (slide 22–25)
 
-Det som er nytt i Akt 2 får merket «Nytt» (5, 6, 8, 10, 11, 14, 16, 17, 18). Akt 3 tar bare det som trenger egen plass.
+Nummereringen er forskjøvet med én fordi slide 15 er delt i to («Hva kjører hvor» og «En plattform med flere lag»).
 
-| # | Tittel | Innhold |
+Det som er nytt i Akt 2 har merket «Nytt». Akt 3 tar bare det som trenger egen plass.
+
+| # | Tittel | Bygd som |
 |---|---|---|
-| 21 | Velkommen, KS Digital og Novari | Feiring: to nye tenants signert (offentlig-offentlig samarbeid), arbeidslaster på vei i 2027. Fellesskapet vokser; det vi bygger for én, får alle |
-| 22 | Tidslinje 2025–2026 | 8–10 milepæler (TimelineNode). Nederst en dempet stripe «Ryddet bort»: secure logs, KrakenD, gamle CLI-kommandoer (erstatter egen «Verdt å vite»-slide) |
-| 23 | Nais Postgres | CloudNativePG, branches, point-in-time recovery, personlig DBA-tilgang, Postgres i Console |
-| 24 | KI: MCP i CLI | Nais MCP-server, agenten skriver manifestet |
+| 22 | Velkommen, KS Digital og Novari | Logokort for de to nye, logorad for de fire i produksjon. Arbeidslaster ventes i 2027 |
+| 23 | Året som gikk | Rutenett med 9 milepæler (des. 2025–nov. 2026, datert etter commits) og dempet stripe «Ryddet bort»: secure logs, KrakenD, Elastic APM, gamle CLI-kommandoer |
+| 24 | Nais Postgres | Fem egenskaper (CNPG, branches, point-in-time recovery, personlig DBA-tilgang, Console) og `nais postgres branch`-kommandoer. Merket «Nytt», ikke GA |
+| 25 | KI: MCP i Nais CLI | FlowChain: utvikler → agent → `nais alpha mcp serve` → Nais API (bare lesing), med de ekte verktøynavnene |
 
-## Akt 4: Veien videre (slide 25–29)
+## Akt 4: Veien videre (slide 26–30)
 
-| # | Tittel | Innhold |
+| # | Tittel | Bygd som |
 |---|---|---|
-| 25 | Retning for Console | Helhetlig redesign, CLI/Console-paritet |
-| 26 | Data og drift videre | Nais Buckets, CNPG 1.30, pgaudit, Kafka tiered storage, Grafana-varsler per team (pilot) |
-| 27 | Handlingsrom | Høyt nivå: målet er ikke å flytte, men å kunne. Azure med kapasitetsmangel gjennom 2026 (Microsofts finansdirektør), strøm og tomter begrenser nye datasentre i Europa (CBRE, JLL), NSM Risiko 2026 om avhengighet av få amerikanske skyleverandører, forslag til EUs Cloud and AI Development Act. Ikke si «Norge er fullt». Kilder: `RESEARCH-CLOUD.md` |
-| 28 | Hvem bestemmer | Nais-teamet + innspill på Naisdag |
-| 29 | Hvordan påvirke | Naisdag, champions, Slack-kanalen #nais (felles for alle tenants). Spørsmål |
+| 26 | Retning for Console | Tre kort: én helhet, teamoversikt først, CLI/Console-paritet |
+| 27 | Data og drift videre | Seks fliser med status (På vei, Planlagt, Utredes, Pilot): Nais Buckets, CNPG 1.30, pgaudit, Kafka tiered storage, Grafana-varsler per team, Kafka-kostnad i Console |
+| 28 | Handlingsrom | To kolonner: verden rundt oss (Azure-kapasitet, strøm og tomter, NSM, EU CADA) og hva Nais gjør. Kilder i notatene. NSM må sjekkes mot PDF |
+| 29 | Hvem bestemmer | Uendret: Nais-teamet + innspill på Naisdag |
+| 30 | Hvordan påvirke | Tre kort: Naisdag, champions, #nais på Slack. Avslutter med tesen og «Spørsmål?» |

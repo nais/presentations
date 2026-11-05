@@ -660,6 +660,102 @@ Overgang: «Og KI-agentene har også fått en vei inn.»
 
 ---
 layout: default
+---
+
+::header::
+<div class="pillar-tag" style="--pc: #5cb2da"><span class="i-carbon-activity" /> Oversikt</div>
+<h1 class="text-3xl font-bold">Retning for Console</h1>
+<p class="subtitle">Arbeid som pågår, ikke et løfte om dato</p>
+
+::default::
+<div class="card-row grid grid-cols-3 gap-6 w-full max-w-5xl mx-auto">
+  <IconCard icon="i-carbon-dashboard" title="Én helhet" description="Forsiden, teamoversikten og app-sidene skal henge sammen og vise status og neste steg på samme måte." />
+  <IconCard icon="i-carbon-group" title="Teamoversikt først" description="Teamsiden blir en ekte inngang til status og prioriteringer, ikke bare en kostgraf." color="blue" />
+  <IconCard icon="i-carbon-terminal" title="Samme svar i terminalen" description="Nais CLI skal gi de vanligste oppslagene fra Console: oversikt, feilsøking og scripting." color="yellow" />
+</div>
+
+<!--
+Overgang: «Det var året som gikk. Nå: hvor vi er på vei.»
+
+- Alt i denne akten er retning. Noe er i gang, noe er på planleggingsstadiet. Ingen datoer
+- Console har vokst fram bit for bit. Målet er at den skal oppleves som ett produkt: mer oversiktlig, mer forutsigbar og tilpasset mobil
+- Teamoversikten er et naturlig sted å starte. Det bygges videre på Aksel, Navs designsystem
+- CLI/Console-paritet: CLI-en skal dekke de vanligste oppslagene (ressursoversikt, workloads). Grafer blir i Console
+- Kilde: initiativene «Helhetlig retning for Console» og «CLI/Console-paritet» i nais/system
+- Har dere meninger om Console? Si det i #nais. Teamet ber om akkurat den typen innspill
+-->
+
+---
+layout: default
+---
+
+::header::
+<div class="pillar-tag" style="--pc: #9b6fd6"><span class="i-carbon-settings" /> Automatisering</div>
+<h1 class="text-3xl font-bold">Data og drift videre</h1>
+<p class="subtitle">Retning, ikke løfter</p>
+
+::default::
+<div class="card-row year-grid w-full max-w-5xl mx-auto">
+  <div class="ms"><b>På vei</b><span class="i-carbon-box" /><p>Nais Buckets, lagring drevet av Nais</p></div>
+  <div class="ms"><b>Planlagt</b><span class="i-carbon-upgrade" /><p>CloudNativePG 1.30</p></div>
+  <div class="ms"><b>Planlagt</b><span class="i-carbon-document-tasks" /><p>pgaudit: logg over hvem som gjorde hva i databasen</p></div>
+  <div class="ms"><b>Utredes</b><span class="i-carbon-data-volume" /><p>Kafka tiered storage: eldre data på billigere lagring</p></div>
+  <div class="ms"><b>Pilot</b><span class="i-carbon-notification" /><p>Grafana-varsler per team</p></div>
+  <div class="ms"><b>Utredes</b><span class="i-carbon-currency" /><p>Kafka-kostnad i Console</p></div>
+</div>
+
+<!--
+Overgang: «Under Console skjer det også mye med data.»
+
+- Merkelappene er ærlige: «Pilot» betyr at noen team tester det nå. «Planlagt» og «Utredes» betyr at det finnes et initiativ, ikke en dato
+- Nais Buckets: objektlagring som et alternativ til Cloud Storage, for kostnad og suverenitet. På vei
+- CNPG 1.30: neste versjon av operatoren bak Nais Postgres
+- pgaudit: revisjonslogg i Postgres. Nyttig for dere som må dokumentere tilgang til persondata
+- Kafka tiered storage: eldre meldinger flyttes til billigere lagring, så topics kan beholde data lenger
+- Grafana-varsler per team: hvert team får egen mappe og egne varslingsregler i Grafana. Pilot nå (nais/api-reconcilers)
+- Kilde: initiativene under areas/persistence og areas/observability i nais/system
+-->
+
+---
+layout: default
+---
+
+::header::
+<div class="pillar-tag" style="--pc: #4a9be8"><span class="i-carbon-migrate" /> Suveren og autonom</div>
+<h1 class="text-3xl font-bold">Handlingsrom</h1>
+<p class="subtitle">Målet er ikke å flytte. Målet er å kunne.</p>
+
+::default::
+<div class="grid grid-cols-2 gap-10 w-full max-w-5xl mx-auto">
+  <div class="card-row check-list">
+    <div><span class="i-carbon-cloud-offline" /><span><b>Kapasitet:</b> Microsoft har sagt at Azure har kapasitetsmangel minst til sommeren 2026</span></div>
+    <div><span class="i-carbon-flash" /><span><b>Strøm og tomter</b> begrenser nye datasentre i Europa</span></div>
+    <div><span class="i-carbon-warning-alt" /><span><b>NSM:</b> Norge er avhengig av noen få amerikanske skyleverandører</span></div>
+    <div><span class="i-carbon-earth-europe-africa" /><span><b>EU</b> har foreslått nye krav til suveren sky i offentlige anskaffelser</span></div>
+  </div>
+  <div class="card-row check-list">
+    <div><span class="i-carbon-checkmark-filled" style="color: var(--nais-success)" /><span><b>Samme manifest</b> uansett hva som ligger under</span></div>
+    <div><span class="i-carbon-checkmark-filled" style="color: var(--nais-success)" /><span><b>Nais har flyttet før:</b> fra eget datasenter til Google Cloud</span></div>
+    <div><span class="i-carbon-checkmark-filled" style="color: var(--nais-success)" /><span><b>Færre Google-tjenester:</b> Nais Postgres nå, Nais Buckets på vei</span></div>
+    <div><span class="i-carbon-checkmark-filled" style="color: var(--nais-success)" /><span><b>Selvdriftet:</b> observability, ingress og Console</span></div>
+  </div>
+</div>
+
+<!--
+Overgang: «Og så det store bildet. Mange spør om skyen. Her er hvordan vi tenker.»
+
+- Dette er ikke en plan om å flytte. Det handler om å ha handlingsrom hvis vilkår, pris eller sikkerhetssituasjon endrer seg
+- Si aldri at Azure eller Norge er «fullt». Det finnes ingen kilde for det
+- Microsoft: Amy Hood (finansdirektør), okt. 2025: Azure har kapasitetsbegrensninger minst ut regnskapsåret (juni 2026). https://www.directionsonmicrosoft.com/microsoft-q1-fy26-earnings-cloud-supply-constraints-to-last-through-at-least-june-2026/ . I april 2026 ble det etter sigende forlenget til «minst gjennom 2026», men det er hentet fra et sammendrag og må sjekkes mot transkripsjonen: https://www.marketbeat.com/instant-alerts/microsoft-q3-earnings-call-highlights-2026-04-29/
+- Strøm og tomter: CBRE European outlook 2026 https://www.cbre.com/insights/books/european-real-estate-market-outlook-2026/data-centres og JLL 2026 https://www.jll.com/en-de/newsroom/ai-boom-redraws-europes-data-centre-map-as-power-access
+- NSM Risiko 2026 (feb. 2026): Norge er svært avhengig av noen få amerikanske skyleverandører, og NSM anbefaler reserveløsninger. Gjengitt via Altinget; MÅ sjekkes mot PDF-en før sitat: https://nsm.no/getfile.php/1314962-1770630853/NSM/Filer/Dokumenter/Rapporter/Risiko%25202026.pdf , https://www.altinget.no/digital/artikkel/nsm-anbefaler-reserveloesninger-for-skytjenester-altfor-hoey-risiko
+- EU: forslag til Cloud and AI Development Act, COM(2026) 502, juni 2026. Bare et forslag. https://digital-strategy.ec.europa.eu/en/library/proposal-cloud-and-ai-development-act-cada
+- Høyre side: appene beskriver hva de trenger i manifestet, ikke hvilken sky de kjører i. Nais startet i eget datasenter i 2016 og flyttet til Google Cloud. Nais Postgres og Nais Buckets gjør oss mindre avhengige av Google-spesifikke tjenester
+- Exit-planen er dokumentert. Ingen har trengt den
+-->
+
+---
+layout: default
 clicks: 1
 ---
 
@@ -689,8 +785,18 @@ layout: default
 <p class="subtitle">Naisdag, champions og #nais på Slack</p>
 
 ::default::
-<p class="anim-item text-center">Plassholder</p>
+<div class="card-row grid grid-cols-3 gap-6 w-full max-w-5xl mx-auto">
+  <IconCard icon="i-carbon-events" title="Naisdag" description="Møteplassen for alle tenants. Her får Nais-teamet innspill til veikartet." />
+  <IconCard icon="i-carbon-user-favorite" title="Champions" description="En eller flere i hvert team som holder seg oppdatert og deler videre." color="blue" />
+  <IconCard icon="i-carbon-logo-slack" title="#nais på Slack" description="Felles kanal for alle tenants. Spør, foreslå og meld fra om feil." color="yellow" />
+</div>
+<p class="anim-item text-center mt-8 text-xl">Samme løfte, bedre under panseret. Spørsmål?</p>
 
 <!--
-Plassholder: bygges i neste fase.
+Overgang: «Takk! Spørsmål?»
+
+- Naisdag: den faste samlingen for tenantene. Kom med det som skaver. Det er der veikartet får innspill
+- Champions: en person i teamet som følger med på Nais og tar med seg nyheter hjem. Arbeidstilsynet kan gjerne ha flere
+- #nais på Slack: felles kanal for alle tenants. Nais-teamet svarer der, og andre tenants svarer ofte også. Spørsmål om Nais Postgres, MCP eller Console hører hjemme der
+- Avslutt med tesen: det dere valgte, holder. Samme løfte, bedre under panseret
 -->
