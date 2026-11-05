@@ -5,7 +5,8 @@
         <!-- Boundaries: tenant GCP organisation, cluster, team namespace. -->
         <rect class="b org" x="170" y="15" width="560" height="330" rx="18" />
         <rect class="b cl" x="185" y="50" width="410" height="288" rx="14" />
-        <rect class="b ns" x="205" y="105" width="315" height="135" rx="10" />
+        <rect class="b ns" x="205" y="80" width="315" height="125" rx="10" />
+        <rect class="ns2" x="230" y="238" width="140" height="92" rx="10" />
         <path
           v-for="w in WIRES"
           :key="w.id"
@@ -19,8 +20,11 @@
         >GCP-organisasjon: deres virksomhet</span
       >
       <span class="bl" style="left: 19.6%; top: 16%">Nais-cluster (VPC)</span>
-      <span class="bl ns-l" style="right: 48.6%; top: 32%"
+      <span class="bl ns-l" style="right: 48.6%; top: 52%"
         >namespace: team-eksempel</span
+      >
+      <span class="ns2-l" style="left: 24.5%; top: 70.5%"
+        >namespace: annet-team</span
       >
       <div
         v-for="n in NODES"
@@ -34,12 +38,12 @@
         <small v-if="n.sub">{{ n.sub }}</small>
       </div>
       <div ref="packet" class="packet" />
-      <div ref="block" class="block">✕ ikke i accessPolicy</div>
+      <div ref="block" class="block">✕</div>
     </div>
     <div ref="other" class="other">
       <div class="org2">
         <small>GCP-organisasjon</small><b>Annen tenant</b
-        ><i>eget cluster, eget nettverk</i>
+        ><i>eget cluster, eget nettverk</i><em>✕ ingen forbindelse</em>
       </div>
     </div>
     <div class="cap">
@@ -70,8 +74,8 @@ const NODES = [
     id: "app",
     label: "min-app",
     icon: "i-carbon-application",
-    x: 290,
-    y: 180,
+    x: 300,
+    y: 165,
     kind: "app",
   },
   {
@@ -79,17 +83,17 @@ const NODES = [
     label: "api",
     sub: "tillatt",
     icon: "i-carbon-api",
-    x: 450,
-    y: 160,
+    x: 460,
+    y: 120,
     kind: "app",
   },
   {
     id: "x",
     label: "annen app",
-    sub: "ikke tillatt",
+    sub: "uten accessPolicy",
     icon: "i-carbon-application",
-    x: 250,
-    y: 295,
+    x: 300,
+    y: 293,
     kind: "bad",
   },
   {
@@ -115,7 +119,7 @@ const NODES = [
     sub: "privat IP",
     icon: "i-carbon-data-base",
     x: 660,
-    y: 195,
+    y: 158,
     kind: "svc",
   },
   {
@@ -124,7 +128,7 @@ const NODES = [
     sub: "Aiven",
     icon: "i-carbon-flow-stream",
     x: 875,
-    y: 190,
+    y: 230,
     kind: "svc colr",
   },
   {
@@ -133,7 +137,7 @@ const NODES = [
     sub: "VPN eller Interconnect",
     icon: "i-carbon-data-center",
     x: 875,
-    y: 295,
+    y: 300,
     kind: "svc colr",
   },
   {
@@ -142,7 +146,7 @@ const NODES = [
     sub: "internett",
     icon: "i-carbon-user",
     x: 60,
-    y: 45,
+    y: 50,
     kind: "ext col",
   },
   {
@@ -151,7 +155,7 @@ const NODES = [
     sub: "HAProxy, TLS",
     icon: "i-carbon-load-balancer-global",
     x: 60,
-    y: 140,
+    y: 155,
     kind: "gw col",
   },
   {
@@ -160,7 +164,7 @@ const NODES = [
     sub: "naisdevice",
     icon: "i-carbon-laptop",
     x: 60,
-    y: 230,
+    y: 315,
     kind: "ext col",
   },
   {
@@ -169,7 +173,7 @@ const NODES = [
     sub: "HAProxy, via naisdevice",
     icon: "i-carbon-load-balancer-local",
     x: 60,
-    y: 315,
+    y: 230,
     kind: "gw col",
   },
 ];
@@ -179,17 +183,17 @@ const NODES = [
 // Ends sit on node edges (min-app is about ±36 x ±21 units, column
 // nodes ±35 x ±28). Every line has its own port on min-app.
 const WIRES = [
-  { id: "app-api", d: "M326 165 H430", kind: "ok" },
-  { id: "app-x", d: "M260 201 V267", kind: "bad" },
-  { id: "app-ip", d: "M272 159 V85 H535", kind: "out" },
+  { id: "app-api", d: "M318 144 V120 H438", kind: "ok" },
+  { id: "app-x", d: "M300 186 V222", kind: "bad" },
+  { id: "app-ip", d: "M282 144 V85 H535", kind: "out" },
   { id: "ip-partner", d: "M655 85 H805", kind: "out" },
-  { id: "app-sql", d: "M326 195 H615", kind: "svc" },
-  { id: "app-aiven", d: "M318 201 V262 H780 V190 H805", kind: "svc" },
-  { id: "app-dc", d: "M300 201 V295 H805", kind: "svc" },
-  { id: "cit-ingx", d: "M60 73 V112", kind: "in" },
-  { id: "ingx-app", d: "M95 140 H128 V170 H254", kind: "in" },
-  { id: "emp-ingi", d: "M60 258 V287", kind: "int" },
-  { id: "ingi-app", d: "M95 315 H150 V192 H254", kind: "int" },
+  { id: "app-sql", d: "M336 156 H615", kind: "svc" },
+  { id: "app-aiven", d: "M336 169 H560 V230 H805", kind: "svc" },
+  { id: "app-dc", d: "M336 181 H540 V300 H805", kind: "svc" },
+  { id: "cit-ingx", d: "M60 78 V127", kind: "in" },
+  { id: "ingx-app", d: "M95 155 H264", kind: "in" },
+  { id: "emp-ingi", d: "M60 287 V258", kind: "int" },
+  { id: "ingi-app", d: "M95 230 H180 V176 H264", kind: "int" },
 ];
 const CAPTIONS = [
   "min-app kjører i et Nais-cluster i deres egen GCP-organisasjon.",
@@ -251,12 +255,12 @@ useSteps((tl) => {
   caption(0);
   tl.addLabel("s0");
   caption(1);
+  tl.from(q(".ns2, .ns2-l"), { autoAlpha: 0, duration: 0.3 });
   show(["api", "x"]);
   send("app-api", "#34d399");
   send("app-x", "#f87171");
   tl.to(block.value, { autoAlpha: 1, ease: POP }).addLabel("s1");
   caption(2);
-  tl.to(block.value, { autoAlpha: 0, duration: 0.2 }, "<");
   show(["ip", "partner"]);
   send("app-ip", "#fbbf24");
   send("ip-partner", "#fbbf24");
@@ -327,6 +331,19 @@ svg {
 
 .b.ns {
   stroke: #64748b;
+}
+
+.ns2 {
+  fill: none;
+  stroke-width: 2;
+  vector-effect: non-scaling-stroke;
+  stroke: #64748b;
+  stroke-dasharray: 6 5;
+}
+
+.n-x {
+  filter: saturate(0.4) brightness(0.8);
+  border-style: dashed;
 }
 
 .bl {
@@ -414,6 +431,13 @@ svg {
   width: 8rem;
 }
 
+.ns2-l {
+  position: absolute;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.66rem;
+  color: #a3b1c6;
+}
+
 .ns-l {
   text-align: right;
 }
@@ -443,9 +467,12 @@ svg {
 
 .block {
   z-index: 3;
-  left: 42%;
-  top: 91%;
-  padding: 0.1rem 0.6rem;
+  left: 30%;
+  top: 63.4%;
+  width: 1.4rem;
+  height: 1.4rem;
+  display: grid;
+  place-items: center;
   border-radius: 999px;
   background: #7f1d1d;
   color: #fecaca;
@@ -467,8 +494,9 @@ svg {
   gap: 0.2rem;
   padding: 1.2rem 1rem;
   border-radius: 16px;
-  border: 2px solid #4a9be8;
+  border: 2px dashed #64748b;
   text-align: center;
+  opacity: 0.85;
 }
 
 .org2 small {
@@ -480,6 +508,13 @@ svg {
 .org2 b {
   font-family: "Poppins", sans-serif;
   font-size: 1.1rem;
+}
+
+.org2 em {
+  font-style: normal;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #f87171;
 }
 
 .org2 i {
