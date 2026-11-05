@@ -19,6 +19,15 @@ function useActive() {
   return computed(() => currentSlideNo.value === $page.value);
 }
 
+// Slidev mounts the next slide while the current one animates in. Building
+// its timeline then (style reads, gsap.set on many nodes) cost 2-4 long
+// frames on every slide change. Build when the browser is idle instead, or
+// at once if the slide becomes active first.
+const whenIdle = (fn) =>
+  globalThis.requestIdleCallback
+    ? globalThis.requestIdleCallback(fn, { timeout: 1500 })
+    : globalThis.setTimeout(fn, 300);
+
 export const reducedMotion = () =>
   globalThis.matchMedia?.("(prefers-reduced-motion: reduce)").matches ?? false;
 
@@ -54,10 +63,20 @@ export function useSteps(build, offset = 0) {
     else tl.tweenTo(l);
   };
   const { isPrintMode } = useNav();
+  let dead = false;
+  const ensure = () => {
+    if (!tl && !dead)
+      tl = build(
+        gsap.timeline({
+          paused: true,
+          defaults: { ease: EASE, duration: DUR },
+        }),
+      );
+    return tl;
+  };
   onMounted(() => {
-    tl = build(
-      gsap.timeline({ paused: true, defaults: { ease: EASE, duration: DUR } }),
-    );
+    if (!active.value && !isPrintMode.value) whenIdle(ensure);
+    else ensure();
     // Print/PDF export: jump straight to the state for the current click.
     if (isPrintMode.value) {
       const k = $clicks.value - offset;
@@ -68,7 +87,7 @@ export function useSteps(build, offset = 0) {
     watch(
       active,
       (on) => {
-        if (!on) return;
+        if (!on || !ensure()) return;
         const k = $clicks.value - offset;
         if (k > 0) jump(label(k));
         else {
@@ -80,7 +99,10 @@ export function useSteps(build, offset = 0) {
     );
   });
   watch($clicks, (c) => tl && go(c));
-  onBeforeUnmount(() => tl?.kill());
+  onBeforeUnmount(() => {
+    dead = true;
+    tl?.kill();
+  });
 }
 
 // Autoplay timeline: restarts on every slide enter.
@@ -88,19 +110,34 @@ export function useEnter(build) {
   const active = useActive();
   const { isPrintMode } = useNav();
   let tl;
+  let dead = false;
+  const ensure = () => {
+    if (!tl && !dead)
+      tl = build(
+        gsap.timeline({
+          paused: true,
+          defaults: { ease: EASE, duration: DUR },
+        }),
+      );
+    return tl;
+  };
   onMounted(() => {
-    tl = build(
-      gsap.timeline({ paused: true, defaults: { ease: EASE, duration: DUR } }),
-    );
-    if (isPrintMode.value) return tl.progress(1).pause();
+    if (isPrintMode.value) return ensure().progress(1).pause();
+    if (!active.value) whenIdle(() => ensure()?.progress(1).pause());
     watch(
       active,
-      (on) =>
-        on && !reducedMotion() ? tl.restart(true) : tl.progress(1).pause(),
+      (on) => {
+        if ((!on && !tl) || !ensure()) return;
+        if (on && !reducedMotion()) tl.restart(true);
+        else tl.progress(1).pause();
+      },
       { immediate: true },
     );
   });
-  onBeforeUnmount(() => tl?.kill());
+  onBeforeUnmount(() => {
+    dead = true;
+    tl?.kill();
+  });
 }
 
 // Fake mouse for UI mocks: glide to an element, then click. Positions are

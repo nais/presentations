@@ -8,26 +8,36 @@
           <div>
             <h5>Team health</h5>
             <div class="tiles">
-              <div class="tile ok"><b>0</b><small>Issues</small></div>
-              <div class="tile" :class="ke ? 'bad' : 'ok'">
-                <b>{{ ke }}</b
-                ><small>Known exploited</small>
+              <div class="tile ok">
+                <small>Issues</small><b>0</b><small>No issues</small>
               </div>
-              <div class="tile ok"><b>0</b><small>Alerts firing</small></div>
-              <div class="tile warn">
-                <b>+4&#8239;%</b><small>Cost vs last month</small>
+              <div class="tile" :class="ke ? 'bad' : 'ok'">
+                <small>Vulnerabilities</small><b>{{ ke }}</b
+                ><small>Urgent issues</small>
+              </div>
+              <div class="tile ok">
+                <small>Alerts</small><b>0</b><small>Firing</small>
+              </div>
+              <div class="tile ok">
+                <small>Cost</small><b>-1&#8239;%</b><small>vs last month</small>
               </div>
             </div>
             <h5>Inventory</h5>
             <div class="inv">
               <div class="box">
-                <b>Applications 6</b><small>● 6 running</small>
+                <b>Applications <span>6</span></b
+                ><small>● 6 running</small>
               </div>
-              <div class="box"><b>Jobs 2</b><small>● 2 completed</small></div>
+              <div class="box">
+                <b>Jobs <span>2</span></b
+                ><small>● 2 completed</small>
+              </div>
             </div>
             <div class="chips">
-              <span>Cloud SQL 2</span><span>Buckets 1</span><span>Valkey 1</span
-              ><span>Kafka Topics 3</span>
+              <span>Cloud SQL <b>2</b></span
+              ><span>Buckets <b>1</b></span
+              ><span>BigQuery <b>1</b></span
+              ><span>Secrets <b>4</b></span>
             </div>
           </div>
           <div>
@@ -35,7 +45,9 @@
             <div v-for="a in ACTIVITY" :key="a.text" class="activity">
               <span class="i-carbon-cube" />
               <div>
-                <p>{{ a.text }}</p>
+                <p>
+                  Application <b>{{ a.app }}</b> updated in {{ a.env }}.
+                </p>
                 <small>{{ a.when }}</small>
               </div>
             </div>
@@ -46,6 +58,7 @@
       <!-- Team cost -->
       <section v-show="view === 'cost'" class="view">
         <h2>Cost</h2>
+        <h5>Cost by Service</h5>
         <svg viewBox="0 0 400 150" class="area" aria-hidden="true">
           <line
             v-for="y in [20, 60, 100, 140]"
@@ -145,7 +158,9 @@
         <div class="cols">
           <div>
             <h5>Priority</h5>
-            <div class="ke" :class="{ bad: ke }">{{ ke }} Known exploited</div>
+            <div class="ke" :class="{ bad: ke }">
+              <i class="i-carbon-debug" /> {{ ke }} Known exploited
+            </div>
             <div class="prio">
               <span>{{ ke }} High</span><span>0 Elevated</span
               ><span>2 Monitor</span>
@@ -158,6 +173,10 @@
               </div>
               <div class="tile ok"><b>0</b><small>High</small></div>
               <div class="tile ok"><b>2</b><small>Medium</small></div>
+              <div class="tile" :class="ke ? 'bad' : 'ok'">
+                <b>{{ ke ? 64 : 6 }}</b
+                ><small>Risk score</small>
+              </div>
             </div>
             <div v-if="ke" class="finding" data-finding>
               <span class="kev">Known exploited</span> CVE-2026-XXXXX ·
@@ -254,9 +273,9 @@ const props = defineProps({
 });
 
 const ACTIVITY = [
-  { text: "min-app updated in prod", when: "12 minutes ago" },
-  { text: "worker updated in dev", when: "1 hour ago" },
-  { text: "frontend updated in prod", when: "yesterday" },
+  { text: "1", app: "min-app", env: "prod", when: "12 minutes ago" },
+  { text: "2", app: "worker", env: "dev", when: "1 hour ago" },
+  { text: "3", app: "frontend", env: "prod", when: "yesterday" },
 ];
 const APPS = ["min-app", "frontend", "worker"];
 const TABS = [
@@ -268,6 +287,7 @@ const TABS = [
   "Utilization",
   "Network",
   "Logs",
+  "Activity Log",
 ];
 const COST = [
   {
@@ -470,12 +490,14 @@ h2 em {
   vertical-align: middle;
 }
 
-h5 {
+.mock h5 {
   margin: 0.45rem 0 0.25rem;
-  font-size: 0.66rem;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  color: #334155;
+  font-family: "Inter", sans-serif;
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: none;
+  color: #0f172a;
 }
 
 .cols {
@@ -491,7 +513,7 @@ h5 {
 }
 
 .tiles.three {
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
 }
 
 .tile {
@@ -500,6 +522,10 @@ h5 {
   padding: 0.28rem 0.6rem;
   border-radius: 8px;
   border: 1px solid #e2e8f0;
+}
+
+.tile small:first-child {
+  color: #0f172a;
 }
 
 .tile b {
@@ -535,14 +561,19 @@ h5 {
   gap: 0.8rem;
 }
 
+.box b {
+  display: flex;
+  justify-content: space-between;
+}
+
 .box {
   display: flex;
   flex-direction: column;
-  align-items: center;
   padding: 0.3rem;
   border-radius: 8px;
   border: 1px solid #e2e8f0;
-  border-bottom: 3px solid #16a34a;
+  background: #fff;
+  box-shadow: inset 0 -3px 0 #166534;
 }
 
 .box small {
@@ -618,8 +649,9 @@ h5 {
 }
 
 .tabs span.on {
-  color: #1d4ed8;
-  border-bottom: 2px solid #1d4ed8;
+  color: #0f172a;
+  font-weight: 700;
+  border-bottom: 2px solid #0f172a;
 }
 
 .area {
