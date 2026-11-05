@@ -17,8 +17,8 @@
             c
           }}</span>
           <template v-if="z.tone === 'self'">
-            <span v-for="c in COMING" :key="c" class="chip coming"
-              >{{ c }} <em>på vei</em></span
+            <span v-for="[c, st] in COMING" :key="c" class="chip coming"
+              >{{ c }} <em>{{ st }}</em></span
             >
           </template>
         </div>
@@ -42,7 +42,10 @@ gsap.registerPlugin(DrawSVGPlugin);
 
 // Work in progress: Nais Postgres (CloudNativePG) and Nais Buckets
 // bucket abstraction replace Cloud SQL and Cloud Storage over time.
-const COMING = ["Nais Postgres", "Nais Buckets"];
+const COMING = [
+  ["Nais Postgres", "preview"],
+  ["Nais Buckets", "utredes"],
+];
 const ZONES = [
   {
     name: "Google Cloud",

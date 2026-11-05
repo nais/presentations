@@ -315,7 +315,7 @@ Overgang: «Og for de som liker terminalen:»
 - Containere deler maskiner, og derfor bruker de mindre enn virtuelle maskiner
 - 2–10x er et anslag: spennet fra den gamle Nav-presentasjonen. Det avhenger av hvor godt virtuelle maskiner ble dimensjonert før; containere deler maskiner og skalerer etter behov
 - For beslutningstakere: dere betaler for det appene bruker, ikke for tomme maskiner
-- Nais Postgres og Nais Buckets er på vei, blant annet for å få ned kostnaden
+- Nais Postgres (preview) og Nais Buckets (utredes) er valgt blant annet for å få ned kostnaden
 -->
 
 ---
@@ -519,7 +519,7 @@ Overgang: «Nais har flyttet før, fra eget datasenter til Google Cloud. Slik er
 
 - Google Cloud: GKE, Cloud SQL, buckets, BigQuery. Aiven: Kafka, OpenSearch, Valkey
 - Nais drifter observability-stakken selv
-- Klikk 2: Nais Postgres (CloudNativePG) og Nais Buckets erstatter over tid Cloud SQL og Cloud Storage. Begge er på vei, for kostnad og suverenitet. docs.nais.io sier i dag: ikke lag nye Postgres-databaser der ennå, bruk Cloud SQL
+- Klikk 2: Nais Postgres (CloudNativePG) og Nais Buckets erstatter over tid Cloud SQL og Cloud Storage, for kostnad og suverenitet. Nais Postgres er i preview, Nais Buckets utredes. docs.nais.io sier i dag: ikke lag nye Postgres-databaser der ennå, bruk Cloud SQL
 - Dataene ligger i europe-north1 (Finland)
 - Nais startet i eget datasenter i 2016 og flyttet til Google Cloud
 - Nais drifter selv: Console og API, ingress, naisdevice og observability-stakken (Grafana, Mimir, Loki, Tempo)
@@ -609,7 +609,7 @@ clicks: 1
 Overgang: «Men dere lurer sikkert på noe.»
 
 - Klikk 1: koblingen til Nais brytes, og tenanten går med all teknologien i én pakke: Kubernetes, containere, Postgres, Kafka, OpenSearch, Valkey, OpenTelemetry, Prometheus, Grafana, GitHub Actions
-- Nais Postgres (CloudNativePG) og Nais Buckets er på vei, og gjør data mer flyttbare
+- Nais Postgres (CloudNativePG, preview) og Nais Buckets (utredes) skal gjøre data mer flyttbare
 - Stack Overflow Developer Survey: Postgres er mest brukte database, Docker mest brukte verktøy
 -->
 
@@ -653,7 +653,7 @@ Overgang: «Og det vi bygger for én tenant, får alle.»
 - Nais-teamet bestemmer veikartet, med innspill fra tenantene på Naisdag
 - Det betyr ikke at alt én tenant ønsker, blir bygd. Men det som blir bygd, får alle
 - 1–2 nye tenants per år
-- På veikartet: Nais Postgres (CloudNativePG) og Nais Buckets
+- På veikartet: Nais Postgres (CloudNativePG, preview). Nais Buckets utredes
 -->
 
 ---
