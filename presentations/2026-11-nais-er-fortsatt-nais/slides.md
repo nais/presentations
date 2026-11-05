@@ -635,6 +635,7 @@ Overgang: «Én av dem fortjener egen plass: databasen.»
 
 ---
 layout: default
+clicks: 3
 ---
 
 ::header::
@@ -643,23 +644,12 @@ layout: default
 <p class="subtitle">Postgres i clusteret, på CloudNativePG</p>
 
 ::default::
-<div class="grid grid-cols-2 gap-8 items-center w-full max-w-5xl mx-auto">
-  <div class="card-row pg-list">
-    <div><span class="i-carbon-data-base" /><b>CloudNativePG</b> kjører databasen i clusteret</div>
-    <div><span class="i-carbon-branch" /><b>Branches</b> en kopi av databasen fra et tidspunkt</div>
-    <div><span class="i-carbon-time" /><b>Point-in-time recovery</b> tilbake til et tidspunkt, som branch</div>
-    <div><span class="i-carbon-user-admin" /><b>Personlig DBA-tilgang</b> i eget navn, via proxy</div>
-    <div><span class="i-carbon-dashboard" /><b>Postgres i Console</b> opprett, endre, logger og innsikt i spørringer</div>
-  </div>
-  <pre class="anim-item pg-code"><code>$ nais postgres branch create min-db
-$ nais postgres branch list min-db
-$ nais postgres branch activate min-db test
-$ nais postgres psql min-db</code></pre>
-</div>
+<PgStory />
 
 <!--
 Overgang: «Det var året som gikk. Nå: hvor vi er på vei.»
 
+- Klikk 1: branch fra et tidspunkt. Klikk 2: personlig DBA-tilgang via proxy. Klikk 3: Postgres i Console
 - Nais Postgres er nytt. Det er i preview (docs.nais.io), så si «preview», ikke «i drift for alle»
 - Ressursen ser slik ut: version: v1, type: Postgres i .nais/postgres.yaml, og appen kobler seg til med uses.postgres
 - Kjører på CloudNativePG (CNPG) i clusteret, i stedet for Cloud SQL. Det gir lavere kostnad og mindre avhengighet av Google
@@ -730,6 +720,7 @@ Overgang: «Og så det store bildet. Mange spør om skyen.»
 
 ---
 layout: default
+clicks: 2
 ---
 
 ::header::
@@ -738,18 +729,19 @@ layout: default
 <p class="subtitle">Poenget er leverandøravhengighet, ikke Azure. Målet er ikke å flytte, men å kunne.</p>
 
 ::default::
-<div class="grid grid-cols-2 gap-10 w-full max-w-5xl mx-auto">
-  <div class="card-row check-list">
+<div class="hr-scale">
+  <div v-click="1" class="hr-col hr-press">
     <div><span class="i-carbon-cloud-offline" /><span><b>Kapasitet:</b> Microsoft har sagt til Digdir at Azure Norway East ikke lenger kan skalere for Altinn <small class="src">Kilde: Digdir via digi.no, 4. nov. 2026</small></span></div>
     <div><span class="i-carbon-flash" /><span><b>Strøm og tomter</b> begrenser nye datasentre i Europa</span></div>
     <div><span class="i-carbon-warning-alt" /><span><b>NSM:</b> «Planlegg for å kunne bytte ut skyleverandør …»</span></div>
     <div><span class="i-carbon-earth-europe-africa" /><span><b>EU</b> har foreslått nye krav til suveren sky i offentlige anskaffelser</span></div>
   </div>
-  <div class="card-row check-list">
-    <div><span class="i-carbon-checkmark-filled" style="color: var(--nais-success)" /><span><b>Samme manifest</b> uansett hva som ligger under</span></div>
-    <div><span class="i-carbon-checkmark-filled" style="color: var(--nais-success)" /><span><b>Nais har flyttet før:</b> startet i eget datasenter, kjører i dag i Google Cloud</span></div>
-    <div><span class="i-carbon-checkmark-filled" style="color: var(--nais-success)" /><span><b>Færre Google-tjenester:</b> Nais Postgres nå, Nais Buckets på vei</span></div>
-    <div><span class="i-carbon-checkmark-filled" style="color: var(--nais-success)" /><span><b>Selvdriftet:</b> observability, ingress og Console</span></div>
+  <div v-click="2" class="hr-mid"><span class="i-carbon-arrow-right" /></div>
+  <div v-click="2" class="hr-col hr-room">
+    <div><span class="i-carbon-checkmark-filled" /><span><b>Samme manifest</b> uansett hva som ligger under</span></div>
+    <div><span class="i-carbon-checkmark-filled" /><span><b>Nais har flyttet før:</b> startet i eget datasenter, kjører i dag i Google Cloud</span></div>
+    <div><span class="i-carbon-checkmark-filled" /><span><b>Færre Google-tjenester:</b> Nais Postgres nå, Nais Buckets på vei</span></div>
+    <div><span class="i-carbon-checkmark-filled" /><span><b>Selvdriftet:</b> observability, ingress og Console</span></div>
   </div>
 </div>
 
