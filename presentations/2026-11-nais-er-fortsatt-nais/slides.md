@@ -602,7 +602,7 @@ layout: default
     <div><span class="i-carbon-data-base" /><b>CloudNativePG</b> kjører databasen i clusteret</div>
     <div><span class="i-carbon-branch" /><b>Branches</b> en kopi av databasen fra et tidspunkt</div>
     <div><span class="i-carbon-time" /><b>Point-in-time recovery</b> tilbake til et tidspunkt, som branch</div>
-    <div><span class="i-carbon-user-admin" /><b>Personlig DBA-tilgang</b> med logget, tidsbegrenset tilgang</div>
+    <div><span class="i-carbon-user-admin" /><b>Personlig DBA-tilgang</b> i eget navn, via proxy</div>
     <div><span class="i-carbon-dashboard" /><b>Postgres i Console</b> opprett, endre, logger og innsikt i spørringer</div>
   </div>
   <pre class="anim-item pg-code"><code>$ nais postgres branch create min-db
