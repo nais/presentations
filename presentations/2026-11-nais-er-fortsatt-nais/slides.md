@@ -635,6 +635,7 @@ Overgang: «Én av dem fortjener egen plass: databasen.»
 
 ---
 layout: default
+clicks: 3
 ---
 
 ::header::
@@ -643,23 +644,12 @@ layout: default
 <p class="subtitle">Postgres i clusteret, på CloudNativePG</p>
 
 ::default::
-<div class="grid grid-cols-2 gap-8 items-center w-full max-w-5xl mx-auto">
-  <div class="card-row pg-list">
-    <div><span class="i-carbon-data-base" /><b>CloudNativePG</b> kjører databasen i clusteret</div>
-    <div><span class="i-carbon-branch" /><b>Branches</b> en kopi av databasen fra et tidspunkt</div>
-    <div><span class="i-carbon-time" /><b>Point-in-time recovery</b> tilbake til et tidspunkt, som branch</div>
-    <div><span class="i-carbon-user-admin" /><b>Personlig DBA-tilgang</b> i eget navn, via proxy</div>
-    <div><span class="i-carbon-dashboard" /><b>Postgres i Console</b> opprett, endre, logger og innsikt i spørringer</div>
-  </div>
-  <pre class="anim-item pg-code"><code>$ nais postgres branch create min-db
-$ nais postgres branch list min-db
-$ nais postgres branch activate min-db test
-$ nais postgres psql min-db</code></pre>
-</div>
+<PgStory />
 
 <!--
 Overgang: «Det var året som gikk. Nå: hvor vi er på vei.»
 
+- Klikk 1: branch fra et tidspunkt. Klikk 2: personlig DBA-tilgang via proxy. Klikk 3: Postgres i Console
 - Nais Postgres er nytt. Det er i preview (docs.nais.io), så si «preview», ikke «i drift for alle»
 - Ressursen ser slik ut: version: v1, type: Postgres i .nais/postgres.yaml, og appen kobler seg til med uses.postgres
 - Kjører på CloudNativePG (CNPG) i clusteret, i stedet for Cloud SQL. Det gir lavere kostnad og mindre avhengighet av Google
