@@ -720,6 +720,7 @@ Overgang: «Og så det store bildet. Mange spør om skyen.»
 
 ---
 layout: default
+clicks: 2
 ---
 
 ::header::
@@ -728,18 +729,19 @@ layout: default
 <p class="subtitle">Poenget er leverandøravhengighet, ikke Azure. Målet er ikke å flytte, men å kunne.</p>
 
 ::default::
-<div class="grid grid-cols-2 gap-10 w-full max-w-5xl mx-auto">
-  <div class="card-row check-list">
+<div class="hr-scale">
+  <div v-click="1" class="hr-col hr-press">
     <div><span class="i-carbon-cloud-offline" /><span><b>Kapasitet:</b> Microsoft har sagt til Digdir at Azure Norway East ikke lenger kan skalere for Altinn <small class="src">Kilde: Digdir via digi.no, 4. nov. 2026</small></span></div>
     <div><span class="i-carbon-flash" /><span><b>Strøm og tomter</b> begrenser nye datasentre i Europa</span></div>
     <div><span class="i-carbon-warning-alt" /><span><b>NSM:</b> «Planlegg for å kunne bytte ut skyleverandør …»</span></div>
     <div><span class="i-carbon-earth-europe-africa" /><span><b>EU</b> har foreslått nye krav til suveren sky i offentlige anskaffelser</span></div>
   </div>
-  <div class="card-row check-list">
-    <div><span class="i-carbon-checkmark-filled" style="color: var(--nais-success)" /><span><b>Samme manifest</b> uansett hva som ligger under</span></div>
-    <div><span class="i-carbon-checkmark-filled" style="color: var(--nais-success)" /><span><b>Nais har flyttet før:</b> startet i eget datasenter, kjører i dag i Google Cloud</span></div>
-    <div><span class="i-carbon-checkmark-filled" style="color: var(--nais-success)" /><span><b>Færre Google-tjenester:</b> Nais Postgres nå, Nais Buckets på vei</span></div>
-    <div><span class="i-carbon-checkmark-filled" style="color: var(--nais-success)" /><span><b>Selvdriftet:</b> observability, ingress og Console</span></div>
+  <div v-click="2" class="hr-mid"><span class="i-carbon-arrow-right" /></div>
+  <div v-click="2" class="hr-col hr-room">
+    <div><span class="i-carbon-checkmark-filled" /><span><b>Samme manifest</b> uansett hva som ligger under</span></div>
+    <div><span class="i-carbon-checkmark-filled" /><span><b>Nais har flyttet før:</b> startet i eget datasenter, kjører i dag i Google Cloud</span></div>
+    <div><span class="i-carbon-checkmark-filled" /><span><b>Færre Google-tjenester:</b> Nais Postgres nå, Nais Buckets på vei</span></div>
+    <div><span class="i-carbon-checkmark-filled" /><span><b>Selvdriftet:</b> observability, ingress og Console</span></div>
   </div>
 </div>
 
