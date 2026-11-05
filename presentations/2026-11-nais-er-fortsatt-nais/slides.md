@@ -525,13 +525,14 @@ layout: default
 <div class="flex flex-col items-center gap-8 w-full">
   <div class="card-row welcome-row">
     <div class="welcome-card"><img src="./assets/logos/ksdigital.png" alt="KS Digital" class="h-14" /><span>KS Digital</span></div>
+    <div class="anchor-hex" data-anchor="hex">Nais</div>
     <div class="welcome-card"><img src="./assets/logos/novari.svg" alt="Novari" class="h-12" /><span>Novari</span></div>
   </div>
   <div class="anim-item tenant-logos">
     <img src="./assets/logos/nav.svg" alt="Nav" class="h-6" />
     <img src="./assets/logos/ssb.svg" alt="SSB" class="h-6" />
     <img src="./assets/logos/ldir.svg" alt="Landbruksdirektoratet" class="h-7" />
-    <img src="./assets/logos/atil.svg" alt="Arbeidstilsynet" class="h-6 tenant-highlight" />
+    <img src="./assets/logos/atil.svg" alt="Arbeidstilsynet" class="h-10 tenant-highlight" />
   </div>
   <p class="anim-item text-center">Seks tenants på samme plattform. Det vi bygger for én, får alle.</p>
 </div>

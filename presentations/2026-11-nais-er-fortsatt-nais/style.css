@@ -495,16 +495,6 @@ html .slidev-layout .subtitle {
   height: 9rem;
 }
 
-/* Shared elements that morph between slides (Chrome View Transitions). */
-.default-header h1 {
-  view-transition-name: slide-title;
-}
-
-::view-transition-group(*) {
-  animation-duration: 0.45s;
-  animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
-}
-
 ::view-transition-old(root),
 ::view-transition-new(root) {
   animation-duration: 0.3s;
@@ -587,7 +577,7 @@ html .slidev-layout .subtitle {
 :active-view-transition .slidev-layout .subtitle {
   view-transition-name: slide-subtitle;
 }
-:active-view-transition .manifest .code,
+:active-view-transition .manifest .code:not(.pg),
 :active-view-transition .prflow .diff {
   view-transition-name: manifest-code;
 }
@@ -598,10 +588,6 @@ html .slidev-layout .subtitle {
 :active-view-transition .browser:has(.mock),
 :active-view-transition .cost .browser {
   view-transition-name: console-browser;
-}
-:active-view-transition .map .org:nth-child(3),
-:active-view-transition .take .card {
-  view-transition-name: tenant-card;
 }
 
 ::view-transition-group(*) {
@@ -773,4 +759,29 @@ html .slidev-layout .subtitle {
   flex-wrap: wrap;
   gap: 0.6rem;
   font-size: 0.8rem;
+}
+
+/* Small hex the travelling hero hex lands on (data-anchor="hex"). */
+.anchor-hex {
+  flex: none;
+  align-self: center;
+  width: 84px;
+  height: 96px;
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  background: linear-gradient(
+    135deg,
+    var(--nais-gradient-from),
+    var(--nais-gradient-to)
+  );
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+}
+
+/* Keep long titles clear of the pillar tag in the top-right corner. */
+.default-header:has(.pillar-tag) h1 {
+  padding-right: 9rem;
 }
