@@ -817,10 +817,10 @@ layout: default
 ::default::
 <NaisPillars :news="[
   'nais apply og MCP for KI-agenter (alfa)',
-  'Nais Postgres (preview), selvbetjent Valkey og OpenSearch',
-  'Metrikker i Mimir, Loki-utforsker i Console',
+  'point-in-time recovery, selvbetjent Valkey og OpenSearch',
+  'skalering av logger og metrikker, Loki-utforsker i Console',
   'Sårbarheter prioritert etter risiko',
-  'HAProxy-ingress, Nais Buckets utredes',
+  'Nais Postgres (preview), Nais Buckets utredes',
   'Velkommen, KS Digital og Novari',
 ]" />
 <div class="flex items-center justify-center gap-6 mt-8">
@@ -832,5 +832,6 @@ layout: default
 Overgang: «Takk! Spørsmål?»
 
 - Samme kart som på slide 3. Hver søyle har fått én ting som er nytt siden i fjor, alt sammen vist tidligere i foredraget
+- Automatisering: point-in-time recovery og selvbetjent Valkey og OpenSearch. Oversikt: skalering av logger og metrikker, Loki-utforsker. Suveren og autonom: Nais Postgres (preview), og Nais Buckets utredes
 - Avslutt med tesen: det dere valgte, holder. Samme løfte, bedre under panseret
 -->

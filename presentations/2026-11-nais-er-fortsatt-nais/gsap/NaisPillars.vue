@@ -89,7 +89,7 @@ useEnter((tl) => {
 .card {
   display: flex;
   gap: 0.8rem;
-  align-items: center;
+  align-items: flex-start;
   padding: 0.7rem 0.7rem;
   border-radius: 16px;
   background: var(--nais-card);
