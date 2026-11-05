@@ -1,7 +1,7 @@
 <template>
   <div ref="root" class="pillars6" data-motion-self>
     <div
-      v-for="p in PILLARS"
+      v-for="(p, i) in PILLARS"
       :key="p.title"
       class="card"
       :style="{ '--pc': p.color }"
@@ -9,7 +9,10 @@
       <div class="icon"><span :class="p.icon" /></div>
       <div>
         <h3>{{ p.title }}</h3>
-        <p>{{ p.text }}</p>
+        <p v-if="news">
+          <b class="nytt">Nytt:</b> {{ news[i] }}
+        </p>
+        <p v-else>{{ p.text }}</p>
       </div>
     </div>
   </div>
@@ -59,6 +62,9 @@ const PILLARS = [
     text: "Mange bruker og utvikler Nais sammen.",
   },
 ];
+
+// Optional: one short «Nytt» line per pillar (closing slide), in PILLARS order.
+defineProps({ news: { type: Array, default: null } });
 
 const root = ref();
 useEnter((tl) => {
@@ -119,5 +125,9 @@ useEnter((tl) => {
   font-size: 0.78rem;
   line-height: 1.35;
   color: var(--nais-text-secondary);
+}
+
+.nytt {
+  color: var(--pc);
 }
 </style>

@@ -48,7 +48,7 @@ transition: fade
 <p class="anim-item text-center mt-8">Vi mener at det skal være lett å gjøre rett.</p>
 
 <!--
-Overgang: «Seks ting Nais skal gi dere. De er de samme som da dere startet. Jeg bruker dem som kart resten av foredraget.»
+Overgang: «Seks ting Nais skal gi dere. De er de samme som da dere startet, og jeg bruker dem som kart resten av foredraget. Først: hvem dere deler plattformen med.»
 
 - Teksten og søylene er hentet fra nais.io
 - Vi mener at det skal være lett å gjøre rett
@@ -123,7 +123,6 @@ Overgang: «Så skal vi se hva som skjer når dere merger.»
 -->
 
 ---
-transition: view-transition
 layout: default
 clicks: 3
 ---
@@ -136,13 +135,47 @@ clicks: 3
 <PrFlow />
 
 <!--
-Overgang: «nais apply leverer manifestet. La oss åpne panseret og se hva som skjer på plattformsiden.»
+Overgang: «Hvem skrev manifestet og åpnet PR-en? En agent. Slik spør den Nais.»
 
 - Alt går via GitHub: pull request, sjekker, review, merge
 - Klikk 1: sjekker (bygg, test, nais validate) og godkjenning. Klikk 2: merge, så bygger nais/docker-build-push med SBOM og signering, og nais apply (via nais/setup) sender manifestet til nais deploy
 - Nytt: deploy-steget er Nais CLI. nais apply tar også egne manifester som Postgres og Config, med --set for å overstyre felt (for eksempel spec.image)
 - Klikk 3: PR-en viser at den er deployet
 - Copilot-agenten åpner PR-en på vegne av utvikleren. Kari Nordmann reviewer, Copilot kommenterer, og et menneske merger
+-->
+
+---
+layout: default
+clicks: 3
+---
+
+::header::
+<div class="pillar-tag" style="--pc: #FF9100"><span class="i-carbon-rocket" /> Utviklingsfart</div>
+<h1 class="text-3xl font-bold">KI: MCP i Nais CLI</h1>
+<p class="subtitle">Kodeagenten spør Nais, ikke deg</p>
+
+::default::
+<div class="flex flex-col gap-6 w-full">
+  <FlowChain :nodes="[
+    { icon: 'i-carbon-user', label: 'Utvikler', sub: 'Ber agenten om en app med Postgres' },
+    { icon: 'i-carbon-bot', label: 'Kodeagent', sub: 'Copilot, Claude eller en annen' },
+    { icon: 'i-carbon-terminal', label: 'nais alpha mcp serve', sub: 'Kjører lokalt, som deg' },
+    { icon: 'i-carbon-api', label: 'Nais API', sub: 'Bare lesing' },
+  ]" />
+  <div class="anim-item mcp-tools">
+    <code>get_nais_context</code><code>schema_search</code><code>schema_get_type</code><code>validate_graphql</code><code>execute_graphql</code>
+  </div>
+</div>
+
+<!--
+Overgang: «Agenten leser, nais apply leverer. La oss åpne panseret og se hva som skjer på plattformsiden.»
+
+- MCP (Model Context Protocol) er en åpen standard for å gi KI-agenter verktøy. Nais CLI har en innebygd MCP-server: nais alpha mcp serve
+- Den kjører lokalt, logger inn som deg og ser bare det du har tilgang til. Standard er stdio; HTTP lytter på 127.0.0.1
+- Verktøyene er bare lesing: get_nais_context (hvem du er, teamene dine), schema-verktøy (schema_search, schema_get_type m.fl.), validate_graphql og execute_graphql. Hemmelige verdier filtreres bort
+- Det er dette vi så på manifest-sliden: agenten slår opp teamet og skjemaet og skriver manifestet. Et menneske reviewer og merger, og koden går gjennom samme forsyningskjede som all annen kode
+- Fortsatt under alpha i CLI-en
+- Klikk 1–3: forespørselen går fra utvikleren via agenten og MCP-serveren til Nais API
 -->
 
 ---
@@ -184,7 +217,7 @@ clicks: 4
 <Toolbox mode="open" />
 
 <!--
-Overgang: «Hva har dette betydd for Nav, som har kjørt lengst?»
+Overgang: «Hva har dette gitt i praksis? Nav har kjørt lengst.»
 
 - Én bølge med skuffer per klikk (tre bølger), til slutt alt på en gang
 - Gruppert etter inventaret over verktøykassa. Utfasede ting er utelatt
@@ -211,7 +244,7 @@ clicks: 5
 <div class="anim-item dora"><b>≈ 9 000</b> prodsettinger per uke · mange ganger daglig per team</div>
 
 <!--
-Overgang: «Og når noe feiler?»
+Overgang: «Mange prodsettinger betyr at noe av og til feiler. Slik finner teamet feilen.»
 
 - Ett klikk per steg, konfetti til slutt
 - ≈ 9 000 prodsettinger per uke (Mimir, alle tenants, Nav dominerer). Mange ganger daglig per team
@@ -312,7 +345,7 @@ layout: default
 <CliDemo />
 
 <!--
-Overgang: «Det var utviklerens side. Nå snur vi bildet: lagene som gjør at dagen blir kjedelig.»
+Overgang: «Det var det dere ser. Nå det dere ikke skal trenge å tenke på.»
 
 - Kommandoene finnes i Nais CLI (binæren heter nais, sjekket mot nais -h). Utdata er illustrasjon
 - Kommandoene spiller av seg selv når sliden åpnes: nais login, apply, app set replicas, postgres proxy, vulnerability summary
@@ -506,7 +539,7 @@ layout: default
 <TeamWall />
 
 <!--
-Overgang: «Og hvem bestemmer hva de bygger?»
+Overgang: «Og de femten har fått flere å bygge for.»
 
 - Hele teamet: femten personer, alle ansatt i Nav, som drifter for seks tenants
 - Navn fra GitHub-teamet nais/nais
@@ -538,7 +571,7 @@ layout: default
 </div>
 
 <!--
-Overgang: «Før jeg viser hva som er nytt: vi har fått selskap.»
+Overgang: «Mye av det nye har dere sett på veien. Her er året samlet.»
 
 - KS Digital og Novari (for fylkeskommunene) har signert avtale om å bruke Nais, gjennom offentlig-offentlig samarbeid
 - De har ingen apper i produksjon ennå. Arbeidslastene ventes i 2027
@@ -573,10 +606,10 @@ layout: default
 </div>
 
 <!--
-Overgang: «Mye av dette har dere sett på veien. Her er året samlet.»
+Overgang: «Én av dem fortjener egen plass: databasen.»
 
 - Datoene er fra når endringen kom i kildekoden (commits i nais/cli, api, console-frontend, system), ikke fra en lansering. Månedene er omtrentlige
-- Des. 2025: MCP-serveren kom i Nais CLI (nais alpha mcp serve). Mer om den om litt
+- Des. 2025: MCP-serveren kom i Nais CLI (nais alpha mcp serve). Den så dere i Akt 2
 - Jan. 2026: Nais API byttet til Mimir for metrikker. Innsyn i hemmelige verdier krever begrunnelse og logges
 - Vår 2026: Valkey og OpenSearch ute av alfa, med selvbetjening for versjon og størrelse (mars–september)
 - Apr. 2026: sårbarheter prioriteres med EPSS, KEV og internetteksponering
@@ -613,7 +646,7 @@ $ nais postgres psql min-db</code></pre>
 </div>
 
 <!--
-Overgang: «Den største endringen under panseret er databasen.»
+Overgang: «Det var året som gikk. Nå: hvor vi er på vei.»
 
 - Nais Postgres er nytt. Dokumentasjonen merker det fortsatt som alfa, så si «nytt», ikke «i drift for alle»
 - Ressursen ser slik ut: version: v1, type: Postgres i .nais/postgres.yaml, og appen kobler seg til med uses.postgres
@@ -623,40 +656,6 @@ Overgang: «Den største endringen under panseret er databasen.»
 - Console: opprette og endre, etiketter, logger, innsikt i spørringer, utvidelser og konfigurasjon
 - Kommandoene er sjekket mot nais/cli. Navnene min-db og test er eksempler
 - Cloud SQL finnes fortsatt, under nais cloudsql
--->
-
----
-layout: default
-clicks: 3
----
-
-::header::
-<div class="pillar-tag" style="--pc: #FF9100"><span class="i-carbon-rocket" /> Utviklingsfart</div>
-<h1 class="text-3xl font-bold">KI: MCP i Nais CLI</h1>
-<p class="subtitle">Kodeagenten spør Nais, ikke deg</p>
-
-::default::
-<div class="flex flex-col gap-6 w-full">
-  <FlowChain :nodes="[
-    { icon: 'i-carbon-user', label: 'Utvikler', sub: 'Ber agenten om en app med Postgres' },
-    { icon: 'i-carbon-bot', label: 'Kodeagent', sub: 'Copilot, Claude eller en annen' },
-    { icon: 'i-carbon-terminal', label: 'nais alpha mcp serve', sub: 'Kjører lokalt, som deg' },
-    { icon: 'i-carbon-api', label: 'Nais API', sub: 'Bare lesing' },
-  ]" />
-  <div class="anim-item mcp-tools">
-    <code>get_nais_context</code><code>schema_search</code><code>schema_get_type</code><code>validate_graphql</code><code>execute_graphql</code>
-  </div>
-</div>
-
-<!--
-Overgang: «Og KI-agentene har også fått en vei inn.»
-
-- MCP (Model Context Protocol) er en åpen standard for å gi KI-agenter verktøy. Nais CLI har en innebygd MCP-server: nais alpha mcp serve
-- Den kjører lokalt, logger inn som deg og ser bare det du har tilgang til. Standard er stdio; HTTP lytter på 127.0.0.1
-- Verktøyene er bare lesing: get_nais_context (hvem du er, teamene dine), schema-verktøy (schema_search, schema_get_type m.fl.), validate_graphql og execute_graphql. Hemmelige verdier filtreres bort
-- Det er dette vi så på manifest-sliden: agenten slår opp teamet og skjemaet og skriver manifestet. Et menneske reviewer og merger, og koden går gjennom samme forsyningskjede som all annen kode
-- Fortsatt under alpha i CLI-en
-- Klikk 1–3: forespørselen går fra utvikleren via agenten og MCP-serveren til Nais API
 -->
 
 ---
@@ -676,7 +675,7 @@ layout: default
 </div>
 
 <!--
-Overgang: «Det var året som gikk. Nå: hvor vi er på vei.»
+Overgang: «Under Console skjer det også mye med data.»
 
 - Alt i denne akten er retning. Noe er i gang, noe er på planleggingsstadiet. Ingen datoer
 - Console har vokst fram bit for bit. Målet er at den skal oppleves som ett produkt: mer oversiktlig, mer forutsigbar og tilpasset mobil
@@ -706,7 +705,7 @@ layout: default
 </div>
 
 <!--
-Overgang: «Under Console skjer det også mye med data.»
+Overgang: «Og så det store bildet. Mange spør om skyen.»
 
 - Merkelappene er ærlige: «Pilot» betyr at noen team tester det nå. «Planlagt» og «Utredes» betyr at det finnes et initiativ, ikke en dato
 - Nais Buckets: objektlagring som et alternativ til Cloud Storage, for kostnad og suverenitet. På vei
@@ -743,7 +742,7 @@ layout: default
 </div>
 
 <!--
-Overgang: «Og så det store bildet. Mange spør om skyen. Her er hvordan vi tenker.»
+Overgang: «Hvem bestemmer egentlig hva som bygges?»
 
 - Dette er ikke en plan om å flytte. Det handler om å ha handlingsrom hvis vilkår, pris eller sikkerhetssituasjon endrer seg
 - Si aldri at Azure eller Norge er «fullt». Det finnes ingen kilde for det
@@ -791,13 +790,40 @@ layout: default
   <IconCard icon="i-carbon-user-favorite" title="Champions" description="En eller flere i hvert team som holder seg oppdatert og deler videre." color="blue" />
   <IconCard icon="i-carbon-logo-slack" title="#nais på Slack" description="Felles kanal for alle tenants. Spør, foreslå og meld fra om feil." color="yellow" />
 </div>
-<p class="anim-item text-center mt-8 text-xl">Samme løfte, bedre under panseret. Spørsmål?</p>
 
 <!--
-Overgang: «Takk! Spørsmål?»
+Overgang: «Til slutt samler jeg trådene: de seks søylene fra starten.»
 
 - Naisdag: den faste samlingen for tenantene. Kom med det som skaver. Det er der veikartet får innspill
 - Champions: en person i teamet som følger med på Nais og tar med seg nyheter hjem. Arbeidstilsynet kan gjerne ha flere
 - #nais på Slack: felles kanal for alle tenants. Nais-teamet svarer der, og andre tenants svarer ofte også. Spørsmål om Nais Postgres, MCP eller Console hører hjemme der
+-->
+
+---
+layout: default
+---
+
+::header::
+<h1 class="text-3xl font-bold">Samme løfte, bedre under panseret.</h1>
+<p class="subtitle">De seks søylene fra starten, med det som er nytt i år</p>
+
+::default::
+<NaisPillars :news="[
+  'nais apply og MCP for KI-agenter',
+  'Nais Postgres, selvbetjent Valkey og OpenSearch',
+  'Metrikker i Mimir, Loki-utforsker i Console',
+  'Sårbarheter prioritert etter risiko',
+  'HAProxy-ingress, Nais Buckets på vei',
+  'Velkommen, KS Digital og Novari',
+]" />
+<div class="flex items-center justify-center gap-6 mt-8">
+  <div class="anchor-hex" data-anchor="hex">Nais</div>
+  <p class="anim-item text-3xl font-bold" style="font-family: Poppins">Spørsmål?</p>
+</div>
+
+<!--
+Overgang: «Takk! Spørsmål?»
+
+- Samme kart som på slide 3. Hver søyle har fått én ting som er nytt siden i fjor, alt sammen vist tidligere i foredraget
 - Avslutt med tesen: det dere valgte, holder. Samme løfte, bedre under panseret
 -->
