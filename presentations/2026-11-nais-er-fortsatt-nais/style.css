@@ -658,3 +658,25 @@ html .slidev-layout .subtitle {
     filter: brightness(0.4);
   }
 }
+
+/* Small «Nytt» badge for things that changed since last year. */
+.new-badge {
+  display: inline-block;
+  margin-left: 0.5rem;
+  padding: 0.05rem 0.5rem;
+  border-radius: 999px;
+  vertical-align: middle;
+  font-family: Inter, sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #fff;
+  background: var(--nais-accent);
+}
+
+/* The host tenant, highlighted in the logo row. */
+.tenant-highlight {
+  padding: 0.35rem 0.7rem;
+  border: 2px solid var(--nais-accent);
+  border-radius: 10px;
+  transform: scale(1.25);
+}

@@ -48,7 +48,7 @@ transition: fade
 <p class="anim-item text-center mt-8">Vi mener at det skal være lett å gjøre rett.</p>
 
 <!--
-Overgang: «Seks ting Nais skal gi dere. Jeg kommer tilbake til dem underveis. Først: brukes dette faktisk?»
+Overgang: «Seks ting Nais skal gi dere. De er de samme som da dere startet. Jeg bruker dem som kart resten av foredraget.»
 
 - Teksten og søylene er hentet fra nais.io
 - Vi mener at det skal være lett å gjøre rett
@@ -60,8 +60,8 @@ layout: default
 ---
 
 ::header::
-<h1 class="text-3xl font-bold">Tenants utenfor Nav kjører allerede 528 apper</h1>
-<p class="subtitle">Og Nav deployer stadig oftere</p>
+<h1 class="text-3xl font-bold">Dere er ikke alene på plattformen</h1>
+<p class="subtitle">Tenants utenfor Nav kjører 528 apper, og Arbeidstilsynet er en av dem</p>
 
 ::default::
 <div class="flex flex-col items-center gap-3 w-full">
@@ -76,16 +76,17 @@ layout: default
     <img src="./assets/logos/nav.svg" alt="Nav" class="h-7" />
     <img src="./assets/logos/ssb.svg" alt="SSB" class="h-7" />
     <img src="./assets/logos/ldir.svg" alt="Landbruksdirektoratet" class="h-8" />
-    <img src="./assets/logos/atil.svg" alt="Arbeidstilsynet" class="h-7" />
+    <img src="./assets/logos/atil.svg" alt="Arbeidstilsynet" class="h-7 tenant-highlight" />
     <span class="incoming-logo"><img src="./assets/logos/ksdigital.png" alt="KS Digital" class="h-6" /><small>på vei inn</small></span>
     <span class="incoming-logo"><img src="./assets/logos/novari.svg" alt="Novari" class="h-5" /><small>på vei inn</small></span>
   </div>
 </div>
 
 <!--
-Overgang: «Grunnen til at tallene er så store, kommer på de neste slidene.»
+Overgang: «Dere deler plattform med mange. Det er derfor den blir bedre hvert år. Så: hva skjer egentlig når dere deployer?»
 
-- En tenant er en virksomhet som bruker Nais
+- En tenant er en virksomhet som bruker Nais. Arbeidstilsynet er uthevet: det er dere
+- TODO: sitat fra Arbeidstilsynet finnes ikke i NaaS-decket. Legg inn et klarert sitat eller dropp det
 - 21 500 vises én gang, på flisa. Årsgrafen viser bare formen
 - 528 apper kjører hos SSB, Landbruksdirektoratet og Arbeidstilsynet. KS Digital og Novari er på vei inn
 - Apper per tenant: Grafana 21. oktober 2026 (72 + 164 + 292 = 528 utenfor Nav)
@@ -105,16 +106,18 @@ clicks: 6
 
 ::header::
 <div class="pillar-tag" style="--pc: #FF9100"><span class="i-carbon-rocket" /> Utviklingsfart</div>
-<h1 class="text-3xl font-bold">Ett manifest, ferdig oppsett</h1>
+<h1 class="text-3xl font-bold">Ett manifest, ferdig oppsett <span class="new-badge">Nytt</span></h1>
 <p class="subtitle">Ingen Terraform, ingen egen infrastruktur</p>
 
 ::default::
 <ManifestDeep />
 
 <!--
-Overgang: «Så skal vi se hva som skjer når de trykker på knappen.»
+Overgang: «Så skal vi se hva som skjer når dere merger.»
 
-- Feltnavn fra Application-eksempelet i nais/doc
+- Manifestet ser ut som før. Det nye: Postgres er en egen ressurs (.nais/postgres.yaml, version: v1, type: Postgres), og appen kobler seg til med uses.postgres
+- Nais Postgres kjører på CloudNativePG, i clusteret, i stedet for Cloud SQL
+- Feltnavn fra Application-eksempelet i nais/doc og Postgres-veiledningen (docs.nais.io, persistence/postgres)
 - Hvert klikk skriver én blokk, og ressursen dukker opp rundt appen
 - Ingen Terraform, ingen egen infrastruktur
 - Utvikleren ber KI-agenten om en app med Postgres og ID-porten. Agenten bruker Nais MCP-serveren (nais/cli, read-only GraphQL: get_nais_context, schema og nais://schema) og den åpne dokumentasjonen, og skriver manifestet vi ser bygge seg opp
@@ -128,16 +131,17 @@ clicks: 3
 
 ::header::
 <div class="pillar-tag" style="--pc: #FF9100"><span class="i-carbon-rocket" /> Utviklingsfart</div>
-<h1 class="text-3xl font-bold">Fra pull request til produksjon</h1>
+<h1 class="text-3xl font-bold">Fra pull request til produksjon <span class="new-badge">Nytt</span></h1>
 
 ::default::
 <PrFlow />
 
 <!--
-Overgang: «nais apply leverer appen. Men hva skjer egentlig på plattformsiden?»
+Overgang: «nais apply leverer manifestet. La oss åpne panseret og se hva som skjer på plattformsiden.»
 
 - Alt går via GitHub: pull request, sjekker, review, merge
-- Klikk 1: sjekker (bygg, test, nais validate) og godkjenning. Klikk 2: merge, så bygger nais/docker-build-push med SBOM og signering, og nais apply deployer
+- Klikk 1: sjekker (bygg, test, nais validate) og godkjenning. Klikk 2: merge, så bygger nais/docker-build-push med SBOM og signering, og nais apply (via nais/setup) sender manifestet til nais deploy
+- Nytt: deploy-steget er Nais CLI. nais apply tar også egne manifester som Postgres og Config, med --set for å overstyre felt (for eksempel spec.image)
 - Klikk 3: PR-en viser at den er deployet
 - Copilot-agenten åpner PR-en på vegne av utvikleren. Kari Nordmann reviewer, Copilot kommenterer, og et menneske merger
 -->
@@ -150,18 +154,20 @@ clicks: 4
 ::header::
 <div class="pillar-tag" style="--pc: #9b6fd6"><span class="i-carbon-settings" /> Automatisering</div>
 <h1 class="text-3xl font-bold">Hva skjer på plattformsiden</h1>
-<p class="subtitle">Alt går gjennom Nais API</p>
+<p class="subtitle">Nais API, nais deploy, Naiserator og api-reconcilers</p>
 
 ::default::
 <AppFanout />
 
 <!--
-Overgang: «Tusenvis av apper, og hver får den samme hylla. Her er den.»
+Overgang: «Hver app får den samme hylla. Her er den, slik den ser ut nå.»
 
 - Klikk 1: klientene: Nais CLI, Console, nais deploy fra GitHub Actions og MCP-serveren for KI-agenter
 - Klikk 2: alle snakker med Nais API
 - Klikk 3: nais deploy leverer manifestet inn i clusteret, der Naiserator gjør det om til Kubernetes-objekter (Deployment, Service, NetworkPolicy, ingress, secrets). Nais API setter opp teamressurser og datatjenester
-- Forenklet: deploy går gjennom nais deploy, Naiserator avstemmer appene, og api-reconcilers tar seg av teamressursene. Operatorer som Config Connector og aivenator gjør resten
+- Under panseret: CRD-ene (Application, Naisjob, IdportenClient, MaskinportenClient, AzureAdApplication, Kafka-topics m.fl.) er definert i liberator. Naiserator leser Application og Naisjob og lager Kubernetes-objektene og CRD-er for de andre operatorene
+- api-reconcilers lager teamressursene: GCP-prosjekt, GitHub-team, Entra ID-gruppe. Operatorer som Config Connector og aivenator gjør resten
+- Nais Postgres-ressursen håndteres av en egen operator (pgrator)
 - Klikk 4: zoom ut fra én app til tusenvis av apper og ett plattformteam
 -->
 
@@ -172,18 +178,19 @@ clicks: 4
 
 ::header::
 <div class="pillar-tag" style="--pc: #9b6fd6"><span class="i-carbon-settings" /> Automatisering</div>
-<h1 class="text-3xl font-bold">Verktøykassa</h1>
+<h1 class="text-3xl font-bold">Verktøykassa <span class="new-badge">Nytt</span></h1>
 <p class="subtitle">Alt rundt appen, klart til bruk</p>
 
 ::default::
 <Toolbox mode="open" />
 
 <!--
-Overgang: «Og hva har alt dette betydd for Nav?»
+Overgang: «Hva har dette betydd for Nav, som har kjørt lengst?»
 
 - Én bølge med skuffer per klikk (tre bølger), til slutt alt på en gang
 - Gruppert etter inventaret over verktøykassa. Utfasede ting er utelatt
 - MCP for kodeagenter ligger i Verktøy-skuffen
+- Nytt siden i fjor: Nais Postgres (CloudNativePG), Valkey og OpenSearch er ute av alfa og kan endres selv (versjon, størrelse), Kafka-tilganger styres via API og CLI, og Unleash har selvbetjening med release-kanaler
 -->
 
 ---
@@ -205,7 +212,7 @@ clicks: 5
 <div class="anim-item dora"><b>≈ 9 000</b> prodsettinger per uke · mange ganger daglig per team</div>
 
 <!--
-Overgang: «Hva skjer når noe feiler?»
+Overgang: «Og når noe feiler?»
 
 - Ett klikk per steg, konfetti til slutt
 - ≈ 9 000 prodsettinger per uke (Mimir, alle tenants, Nav dominerer). Mange ganger daglig per team
@@ -218,7 +225,7 @@ clicks: 5
 
 ::header::
 <div class="pillar-tag" style="--pc: #5cb2da"><span class="i-carbon-activity" /> Oversikt</div>
-<h1 class="text-2xl font-bold">Fra feil til fiks</h1>
+<h1 class="text-2xl font-bold">Fra feil til fiks <span class="new-badge">Nytt</span></h1>
 
 ::default::
 <ObsHunt />
@@ -229,6 +236,7 @@ Overgang: «Og alt dette ser teamet også i Console.»
 - Klikk 0: logger fra stdout går via Fluent Bit til Loki uten oppsett. Traces og metrikker går via OpenTelemetry Collector til Tempo og Mimir, metrikker også via PodMonitor. Alt vises i Grafana
 - Klikk 1: diagrammet krymper, og jakten starter. Klikk 2–5: varsel, trace, logger for samme trace, fiks deployet
 - Illustrasjon, ikke ekte tall. Kilde for flyten: docs.nais.io, «How Nais APM works»
+- Nytt: metrikkene lagres i Mimir (tidligere Prometheus). I Console har en ny Loki-utforsker erstattet de gamle loggvisningene for apper, jobber og Postgres
 -->
 
 ---
@@ -239,7 +247,7 @@ clicks: 3
 
 ::header::
 <div class="pillar-tag" style="--pc: #5cb2da"><span class="i-carbon-activity" /> Oversikt</div>
-<h1 class="text-3xl font-bold">Console: fra team til app</h1>
+<h1 class="text-3xl font-bold">Console: fra team til app <span class="new-badge">Nytt</span></h1>
 
 ::default::
 <ConsoleMock story="tour" />
@@ -249,6 +257,7 @@ Overgang: «Og fordi teamet ser kostnaden, gjør de noe med den.»
 
 - Illustrasjon bygd etter strukturen i Console, ingen ekte data
 - Klikk 1: kostnad per tjeneste. Klikk 2: markøren går til Applications. Klikk 3: teamet åpner én app med helse, deploy, persistens og kostnad
+- Nytt i Console siden i fjor: Postgres-administrasjon, ConfigMaps, etiketter med filtre, ny aktivitetslogg, og innsyn i hemmelige verdier med begrunnelse (logges)
 -->
 
 ---
@@ -264,12 +273,12 @@ clicks: 3
 <CostLoop />
 
 <!--
-Overgang: «Og databasen er bare én post på regningen. Resten handler om at containere deler maskiner.»
+Overgang: «Databasen er bare én post. Resten handler om at containere deler maskiner.»
 
 - Samme PR-kort som på pull request-sliden. Klikk 1: teamet merger PR-en som gjør databasen større, og kostnaden stiger i Console
 - Klikk 2: teamet ser det og sender en ny PR. Klikk 3: riktig størrelse, og kostnaden legger seg under der den startet
 - Feltene er fra Application-spec (gcp.sqlInstances tier og diskSize). Kronebeløpene er illustrasjon
-- Knytter an til prisen: tenanten betaler forbruket sitt direkte til selvkost, så teamets valg slår rett ut på regningen
+- Teamets valg slår rett ut på regningen, og teamet ser det selv i Console
 -->
 
 ---
@@ -284,12 +293,12 @@ layout: default
 <ResourceIcebergs />
 
 <!--
-Overgang: «Og for de som liker terminalen:»
+Overgang: «Og for dere som liker terminalen:»
 
 - Containere deler maskiner, og derfor bruker de mindre enn virtuelle maskiner
 - 2–10x er et anslag: spennet fra den gamle Nav-presentasjonen. Det avhenger av hvor godt virtuelle maskiner ble dimensjonert før; containere deler maskiner og skalerer etter behov
-- For beslutningstakere: dere betaler for det appene bruker, ikke for tomme maskiner
-- Nais Postgres og Nais Buckets er på vei, blant annet for å få ned kostnaden
+- Dere betaler for det appene bruker, ikke for tomme maskiner
+- Nais Postgres er nytt, og Nais Buckets er på vei, blant annet for å få ned kostnaden
 -->
 
 ---
@@ -298,16 +307,17 @@ layout: default
 
 ::header::
 <div class="pillar-tag" style="--pc: #5cb2da"><span class="i-carbon-activity" /> Oversikt</div>
-<h1 class="text-2xl font-bold">Og fra terminalen</h1>
+<h1 class="text-2xl font-bold">Og fra terminalen <span class="new-badge">Nytt</span></h1>
 
 ::default::
 <CliDemo />
 
 <!--
-Overgang: «Det var utviklerens side. Nå snur vi bildet: alt som må stå for at dagen blir kjedelig.»
+Overgang: «Det var utviklerens side. Nå snur vi bildet: lagene som gjør at dagen blir kjedelig.»
 
 - Kommandoene finnes i Nais CLI (binæren heter nais, sjekket mot nais -h). Utdata er illustrasjon
-- Kommandoene spiller av seg selv når sliden åpnes: nais login, app status, app log, cloudsql proxy, vulnerability summary
+- Kommandoene spiller av seg selv når sliden åpnes: nais login, apply, app set replicas, postgres proxy, vulnerability summary
+- Nytt: nais apply deployer manifester fra egen maskin eller pipeline. nais app set (image, env, replicas) endrer en app midlertidig til neste deploy. nais postgres har egne kommandoer for Nais Postgres (proxy, psql, branch), og Cloud SQL ligger nå under nais cloudsql
 -->
 
 ---
@@ -324,11 +334,11 @@ clicks: 2
 <HostingMap />
 
 <!--
-Overgang: «Nais har flyttet før, fra eget datasenter til Google Cloud. Slik er lagene bygd.»
+Overgang: «Slik er lagene bygd.»
 
 - Google Cloud: GKE, Cloud SQL, buckets, BigQuery. Aiven: Kafka, OpenSearch, Valkey
 - Nais drifter observability-stakken selv
-- Klikk 2: Nais Postgres (CloudNativePG) og Nais Buckets erstatter over tid Cloud SQL og Cloud Storage. Begge er på vei, for kostnad og suverenitet. docs.nais.io sier i dag: ikke lag nye Postgres-databaser der ennå, bruk Cloud SQL
+- Klikk 2: Nais Postgres (CloudNativePG) og Nais Buckets erstatter over tid Cloud SQL og Cloud Storage, for kostnad og suverenitet. Nais Postgres er nytt (merket alfa i docs.nais.io), Buckets er på vei
 - Dataene ligger i europe-north1 (Finland)
 - Nais startet i eget datasenter i 2016 og flyttet til Google Cloud
 - Nais drifter selv: Console og API, ingress, naisdevice og observability-stakken (Grafana, Mimir, Loki, Tempo)
@@ -352,7 +362,7 @@ Overgang: «Og slik henger nettverket sammen.»
 - Lagene bygges nedenfra: infrastruktur fra skyleverandøren, Kubernetes, Nais (operatorene, hjertet i plattformen) og teamenes apper
 - Klikk 1: pods for app A, B og C fordelt over tre soner i én region. Klikk 2: de skalerer ut
 - Klikk 3: datasenter-b faller ut, og podene startes i a og c. Appen merker det ikke
-- Klikk 4: laget nederst byttes (eget datasenter → Google Cloud), mens Nais og appene blir stående. Nais har flyttet før, og det er dette som gjør exit og flytting mulig
+- Klikk 4: laget nederst byttes (eget datasenter → Google Cloud), mens Nais og appene blir stående. Nais har flyttet før. Appene merket det ikke
 -->
 
 ---
@@ -362,13 +372,13 @@ clicks: 6
 
 ::header::
 <div class="pillar-tag" style="--pc: #4a9be8"><span class="i-carbon-migrate" /> Suveren og autonom</div>
-<h1 class="text-2xl font-bold">Nettverket rundt min-app</h1>
+<h1 class="text-2xl font-bold">Nettverket rundt min-app <span class="new-badge">Nytt</span></h1>
 
 ::default::
 <NetTopology />
 
 <!--
-Overgang: «Og hvis dere vil flytte, er det deres valg.»
+Overgang: «Nettverket er stengt som standard. Det samme gjelder koden som skal inn.»
 
 - Klikk 0: min-app i et Nais-cluster (VPC) i tenantens egen GCP-organisasjon
 - Klikk 1: nettverkspolicyer fra accessPolicy. Alt er stengt som standard; en app som ikke er nevnt, blir stoppet
@@ -376,6 +386,7 @@ Overgang: «Og hvis dere vil flytte, er det deres valg.»
 - Klikk 3: Cloud SQL med privat IP, trafikken forlater ikke Google-nettverket. Aiven (Kafka, OpenSearch, Valkey) nås over privat lenke / VPC-peering, i tillegg til TLS-klientsertifikat for Kafka
 - Klikk 4: tenantens eget datasenter via VPN eller Cloud Interconnect, satt opp per tenant
 - Klikk 5: to innganger. Innbyggere kommer fra internett via ekstern ingress med TLS. Ansatte når interne apper via naisdevice og intern ingress
+- Nytt: ingress kjører på HAProxy i stedet for nginx. Migreringen ble gjort i 2026
 - Klikk 6: en annen tenant har sin egen organisasjon og sitt eget nettverk, ingenting er delt
 -->
 
@@ -387,14 +398,14 @@ clicks: 9
 
 ::header::
 <div class="pillar-tag" style="--pc: #34c27a"><span class="i-carbon-certificate-check" /> Sikkerhet</div>
-<h1 class="text-xl font-bold">Sikkerhet i forsyningskjeden</h1>
+<h1 class="text-xl font-bold">Sikkerhet i forsyningskjeden <span class="new-badge">Nytt</span></h1>
 
 ::default::
 <SupplyFix :nodes="[
   { icon: 'i-carbon-build-tool', label: 'Bygg', sub: 'All kode, også fra KI-agenter' },
   { icon: 'i-carbon-list-boxes', label: 'SBOM', sub: 'Lages automatisk (CycloneDX)' },
   { icon: 'i-carbon-certificate', label: 'Signering', sub: 'Signert og attestert' },
-  { icon: 'i-carbon-scan', label: 'Sårbarheter', sub: 'Følges opp per workload' },
+  { icon: 'i-carbon-scan', label: 'Sårbarheter', sub: 'Prioritert etter risiko' },
   { icon: 'i-carbon-dashboard', label: 'Console', sub: 'Teamet ser status' },
 ]" />
 
@@ -404,6 +415,7 @@ Overgang: «Og sikkerheten gjelder ikke bare koden. Hvem slipper inn? Innlogging
 - Klikk 1–4: ett ledd per klikk. SBOM og signering skjer automatisk i bygget. Husk manifestet og PR-en agenten laget tidligere: den koden gikk gjennom akkurat samme løp som all annen kode
 - Klikk 5: Console vokser ut av det siste leddet. Klikk 6–9: funnet åpnes, PR oppdaterer avhengigheten, bygg og deploy, ny skanning og løst
 - Console-delen er illustrasjon, ikke ekte data eller CVE-er
+- Nytt: sårbarheter prioriteres etter risiko, ikke bare alvorlighet. EPSS (sannsynlighet for utnyttelse), KEV (kjent utnyttet) og om appen er eksponert mot internett teller med. Funn kan undertrykkes samlet
 - 5 608 workloads (apper og jobber) skannes for sårbarheter i Nav (Mimir, 21. oktober 2026). Tallet er tatt av sliden; nevn det muntlig
 - Kobling til NSM (tatt av sliden): SBOM og signering svarer til 2.1.4, sårbarhetsskanning til 3.1.1
 - NSM anbefaler, loven krever ikke: Grunnprinsipper for IKT-sikkerhet 2.1.4 «Reduser risiko for målrettet manipulasjon av IKT-produkter i leverandørkjeden» (SBOM og signering) og 3.1.1 «Gjennomfør jevnlig sårbarhetskartlegging … ved hjelp av automatiserte verktøy» (skanning). https://nsm.no/grunnprinsipper-ikt
@@ -419,13 +431,13 @@ clicks: 9
 
 ::header::
 <div class="pillar-tag" style="--pc: #34c27a"><span class="i-carbon-certificate-check" /> Sikkerhet</div>
-<h1 class="text-2xl font-bold">Innlogging uten egen kode</h1>
+<h1 class="text-2xl font-bold">Innlogging uten egen kode <span class="new-badge">Nytt</span></h1>
 
 ::default::
 <AuthJourney star />
 
 <!--
-Overgang: «Nå snakker jeg til dere som skal signere. Dere er ikke de første som spør om én felles plattform. Se på Europa.»
+Overgang: «Og når noe likevel går galt om natta?»
 
 - To sidecars gjør jobben: Wonderwall er en innloggings-sidecar foran appen (logger brukeren inn mot ID-porten eller Entra ID). Texas er en token-sidecar som appen spør for å validere, bytte og hente tokens
 - Klikk 0: ID-porten, Maskinporten, Entra ID og TokenX/Texas er innebygd
@@ -438,6 +450,7 @@ Overgang: «Nå snakker jeg til dere som skal signere. Dere er ikke de første s
 - Klikk 7: accessPolicy.inbound stopper en app som ikke har lov
 - Klikk 8: Maskinporten-token for et eksternt API, også via Texas
 - Klikk 9: manifestlinjene. Kilde: docs.nais.io (auth, ID-porten, TokenX, Entra ID, Maskinporten)
+- Nytt i liberator: AnsattportenClient (innlogging for ansatte via Ansattporten) og federated credentials for Entra ID-applikasjoner
 -->
 
 ---
@@ -475,7 +488,7 @@ clicks: 3
 <!--
 Overgang: «Hvem var våkne? Disse femten.»
 
-- Nais har vakt døgnet rundt for plattformen, med Googles døgnåpne support ved behov. Google-supporten er inkludert i prisen
+- Nais har vakt døgnet rundt for plattformen, med Googles døgnåpne support ved behov. Det gjelder Arbeidstilsynet like mye som Nav
 - Skillet: Nais har vakt for plattformen. Teamene eier appene sine. Feiler en app på grunn av egen kode, for eksempel mot databasen, er det teamets jobb å rette, ikke Nais'
 - Få produktteam har egen vakt, og det trenger de ikke for plattformfeil
 - 99,88 % er målt i Mimir, Nav, siste 30 dager. Tallet inkluderer feil i appene selv. Ingen formell SLA
@@ -494,7 +507,7 @@ layout: default
 <TeamWall />
 
 <!--
-Overgang: «Teamet bygger også sikkerheten inn i hver leveranse.»
+Overgang: «Og hvem bestemmer hva de bygger?»
 
 - Hele teamet: femten personer, alle ansatt i Nav, som drifter for seks tenants
 - Navn fra GitHub-teamet nais/nais
@@ -514,12 +527,11 @@ clicks: 1
 <GovernanceLoop />
 
 <!--
-Overgang: «Og det vi bygger for én tenant, får alle.»
+Overgang: «Så hvordan kan dere påvirke?»
 
 - Nais-teamet bestemmer veikartet, med innspill fra tenantene på Naisdag
 - Det betyr ikke at alt én tenant ønsker, blir bygd. Men det som blir bygd, får alle
-- 1–2 nye tenants per år
-- På veikartet: Nais Postgres (CloudNativePG) og Nais Buckets
+- På veikartet: Nais Buckets og mer Postgres
 -->
 
 ---

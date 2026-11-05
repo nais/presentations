@@ -53,7 +53,7 @@ const GROUPS = [
   {
     title: "Data",
     icon: "i-carbon-data-base",
-    items: ["Postgres", "BigQuery", "Buckets", "OpenSearch", "Valkey"],
+    items: ["Nais Postgres", "BigQuery", "Buckets", "OpenSearch", "Valkey"],
   },
   { title: "Meldinger", icon: "i-carbon-flow-stream", items: ["Kafka"] },
   {

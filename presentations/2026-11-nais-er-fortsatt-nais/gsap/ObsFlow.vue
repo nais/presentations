@@ -88,7 +88,7 @@ const NODES = [
     y: 150,
     w: 150,
     label: "Grafana",
-    sub: "alt på ett sted",
+    sub: "og logger i Console",
     kind: "app",
   },
 ];

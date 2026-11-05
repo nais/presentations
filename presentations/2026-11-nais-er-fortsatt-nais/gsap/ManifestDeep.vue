@@ -14,6 +14,7 @@
       <pre
         class="code"
       ><code><span class="base">{{ BASE }}</span><span v-for="b in BLOCKS" :key="b.code" class="block">{{ b.code }}</span></code></pre>
+      <pre class="code pg" data-step="2"><code>{{ PG }}</code></pre>
     </div>
     <div class="canvas">
       <svg
@@ -58,12 +59,16 @@ import { POP, useSteps } from "./motion.js";
 
 // Field names checked against the Application example in nais/doc
 // (docs/workloads/application/reference/example.md), 2026-10-21.
+// Nais Postgres: own v1 manifest (nais/doc persistence/postgres/how-to/create.md)
+// and spec.uses.postgres in the workload (liberator nais.io/v1 Uses), 2026-11-05.
+const PG =
+  '# .nais/postgres.yaml\nversion: v1\ntype: Postgres\nname: min-db\nspec: { majorVersion: "18" }';
 const BASE =
   "apiVersion: nais.io/v1alpha1\nkind: Application\nmetadata: { name: min-app, namespace: team-eksempel }\nspec:\n  image: ghcr.io/team-eksempel/min-app:1.0.0\n  replicas: { min: 2, max: 4 }\n";
 const BLOCKS = [
   { code: "  ingresses: [https://min-app.eksempel.no]\n" },
   {
-    code: "  gcp:\n    sqlInstances: [{ type: POSTGRES_18 }]\n    buckets: [{ name: min-bucket }]\n",
+    code: "  uses:\n    postgres: [{ name: min-db }]\n  gcp:\n    buckets: [{ name: min-bucket }]\n",
   },
   { code: "  kafka: { pool: nav-prod }\n" },
   {
@@ -94,7 +99,7 @@ const DOCKS = [
     x: 72,
     y: 28,
     a: "l",
-    label: "Postgres",
+    label: "Nais Postgres",
     icon: "i-carbon-data-base",
   },
   { step: 2, x: 77, y: 50, a: "l", label: "Bucket", icon: "i-carbon-box" },
@@ -145,6 +150,7 @@ useSteps((tl) => {
   gsap.set(blocks, { height: 0, autoAlpha: 0 });
   gsap.set(q(".dock"), { autoAlpha: 0, scale: 0.4 });
   gsap.set(q(".wire"), { opacity: 0 });
+  gsap.set(q(".pg"), { height: 0, autoAlpha: 0 });
   // The agent request comes first; the manifest is what the agent writes.
   tl.from(chat.value, { autoAlpha: 0, y: -12 })
     .from(q(".code"), { autoAlpha: 0, x: -24 }, "+=0.3")
@@ -173,6 +179,11 @@ useSteps((tl) => {
         q(`.dock[data-step="${step}"]`),
         { autoAlpha: 1, scale: 1, ease: POP, duration: 0.6, stagger: 0.1 },
         "-=0.1",
+      )
+      .to(
+        q(`.pg[data-step="${step}"]`),
+        { height: "auto", autoAlpha: 1, duration: 0.4 },
+        "<",
       )
       .to(
         q(`.wire[data-step="${step}"]`),
@@ -243,6 +254,11 @@ useSteps((tl) => {
   line-height: 1.32;
   white-space: pre;
   overflow: hidden;
+}
+
+.pg {
+  margin-top: 0.3rem;
+  border-color: var(--nais-accent);
 }
 
 .base,

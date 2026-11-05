@@ -148,7 +148,7 @@ const NODES = [
   {
     id: "ingx",
     label: "Ekstern ingress",
-    sub: "TLS",
+    sub: "HAProxy, TLS",
     icon: "i-carbon-load-balancer-global",
     x: 60,
     y: 140,
@@ -166,7 +166,7 @@ const NODES = [
   {
     id: "ingi",
     label: "Intern ingress",
-    sub: "bare via naisdevice",
+    sub: "HAProxy, via naisdevice",
     icon: "i-carbon-load-balancer-local",
     x: 60,
     y: 315,

@@ -35,6 +35,7 @@
       <!-- App branch: nais deploy hands the manifest to Naiserator in the cluster. -->
       <div class="node ctrl" :style="at(NAISERATOR)">
         <span class="i-carbon-settings-adjust" /> Naiserator
+        <small>Application og Naisjob (liberator)</small>
       </div>
       <div
         class="group g-k8s"
@@ -135,13 +136,13 @@ const NAISERATOR = { x: 160, y: 222 };
 const K8S = ["Deployment", "Service", "NetworkPolicy", "Ingress", "Secrets"];
 const GROUPS = [
   {
-    title: "Teamressurser",
+    title: "api-reconcilers",
     items: ["GCP-prosjekt", "GitHub-team", "Entra ID-gruppe"],
     style: { left: "50%", top: "56%", width: "22%" },
   },
   {
     title: "Datatjenester",
-    items: ["Postgres", "Buckets", "Kafka", "Valkey", "OpenSearch"],
+    items: ["Nais Postgres", "Buckets", "Kafka", "Valkey", "OpenSearch"],
     style: { left: "76%", top: "56%", width: "22%" },
   },
 ];
