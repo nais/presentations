@@ -1,5 +1,11 @@
 // One motion language for the whole deck. Every GSAP animation imports these.
-import { computed, onBeforeUnmount, onMounted, watch } from "vue";
+import {
+  computed,
+  getCurrentInstance,
+  onBeforeUnmount,
+  onMounted,
+  watch,
+} from "vue";
 import { useNav, useSlideContext } from "@slidev/client";
 import gsap from "gsap";
 
@@ -27,6 +33,23 @@ const whenIdle = (fn) =>
   globalThis.requestIdleCallback
     ? globalThis.requestIdleCallback(fn, { timeout: 1500 })
     : globalThis.setTimeout(fn, 300);
+
+// An off-screen slide is display: none. A timeline built then measures zero
+// sizes: GSAP folds CSS translate centring into wrong px, and DrawSVG gets
+// wrong lengths for non-scaling strokes, so nodes sit off and lines never
+// draw, even after the slide is shown. Lay the page out (unpainted) for the
+// build; it is synchronous, so nothing is shown.
+const withLayout = (el, fn) => {
+  const page = el?.closest?.(".slidev-page");
+  if (!page || page.getClientRects().length) return fn();
+  const saved = page.style.display;
+  page.style.display = "block";
+  try {
+    return fn();
+  } finally {
+    page.style.display = saved;
+  }
+};
 
 export const reducedMotion = () =>
   globalThis.matchMedia?.("(prefers-reduced-motion: reduce)").matches ?? false;
@@ -64,13 +87,16 @@ export function useSteps(build, offset = 0) {
   };
   const { isPrintMode } = useNav();
   let dead = false;
+  const self = getCurrentInstance();
   const ensure = () => {
     if (!tl && !dead)
-      tl = build(
-        gsap.timeline({
-          paused: true,
-          defaults: { ease: EASE, duration: DUR },
-        }),
+      tl = withLayout(self?.proxy?.$el, () =>
+        build(
+          gsap.timeline({
+            paused: true,
+            defaults: { ease: EASE, duration: DUR },
+          }),
+        ),
       );
     return tl;
   };
@@ -111,19 +137,25 @@ export function useEnter(build) {
   const { isPrintMode } = useNav();
   let tl;
   let dead = false;
+  const self = getCurrentInstance();
   const ensure = () => {
     if (!tl && !dead)
-      tl = build(
-        gsap.timeline({
-          paused: true,
-          defaults: { ease: EASE, duration: DUR },
-        }),
+      tl = withLayout(self?.proxy?.$el, () =>
+        build(
+          gsap.timeline({
+            paused: true,
+            defaults: { ease: EASE, duration: DUR },
+          }),
+        ),
       );
     return tl;
   };
   onMounted(() => {
     if (isPrintMode.value) return ensure().progress(1).pause();
-    if (!active.value) whenIdle(() => ensure()?.progress(1).pause());
+    if (!active.value)
+      whenIdle(() =>
+        withLayout(self?.proxy?.$el, () => ensure()?.progress(1).pause()),
+      );
     watch(
       active,
       (on) => {
