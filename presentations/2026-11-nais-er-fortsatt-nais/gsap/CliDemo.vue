@@ -39,7 +39,7 @@ const STEPS = [
   },
   {
     cmd: "nais postgres proxy min-db",
-    out: ["✓ Proxy listening on localhost:5432"],
+    out: ["Postgres relay listening at 127.0.0.1:54321"],
   },
   {
     cmd: "nais vulnerability summary",
