@@ -106,8 +106,8 @@ const pr = computed(() =>
     : { title: "Større database", number: 61, diff: UP },
 );
 
-// s0: PR 1, steady cost. s1: merge, and the cost line spikes. s2: PR 2 in the
-// same card, only the changed lines flash. s3: merge, cost drops below the start.
+// s0: PR 1, steady cost. s1, one click: merge and the cost spikes, PR 2 in the
+// same card flashes its changed lines, merge, cost drops below the start.
 useSteps((tl) => {
   const card = () => root.value.querySelector(".pr");
   const q = (sel) => card().querySelectorAll(sel);
@@ -152,9 +152,9 @@ useSteps((tl) => {
     ease: "back.out(3)",
   });
   tl.to(line2.value, { drawSVG: "100%", duration: 1, ease: "none" }).addLabel(
-    "s1",
+    "spike",
   );
-  // Small gap so arriving at s1 never triggers the switch to the second PR.
+  // Small gap so the spike shows before the triggers the switch to the second PR.
   tl.to({}, { duration: 0.3 })
     .call(() => globalThis.requestAnimationFrame(reset))
     .to(
@@ -207,14 +207,13 @@ useSteps((tl) => {
         repeat: 1,
       },
       "-=0.3",
-    )
-    .addLabel("s2");
+    );
   merge();
   tl.to(line3.value, { drawSVG: "100%", duration: 1, ease: "none" })
     .to(take.value, { autoAlpha: 1, y: 0 })
-    .addLabel("s3");
+    .addLabel("s1");
   tl.eventCallback("onUpdate", () => {
-    second.value = tl.time() >= tl.labels.s1 + 0.2;
+    second.value = tl.time() >= tl.labels.spike + 0.2;
   });
   return tl;
 });

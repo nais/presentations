@@ -37,6 +37,9 @@ export default [
       "vue/singleline-html-element-content-newline": "off",
       "vue/html-self-closing": "off",
       "vue/attributes-order": "off",
+      // Prettier owns HTML layout; these two fight it (--fix breaks format:check).
+      "vue/html-closing-bracket-newline": "off",
+      "vue/html-indent": "off",
       "@typescript-eslint/no-explicit-any": "warn",
       "@typescript-eslint/no-unused-vars": [
         "warn",

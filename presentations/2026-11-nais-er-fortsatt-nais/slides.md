@@ -299,7 +299,7 @@ Overgang: «Console viser også hva appene koster. Og det teamet ser, gjør det 
 
 ---
 layout: default
-clicks: 3
+clicks: 1
 ---
 
 ::header::
@@ -312,8 +312,7 @@ clicks: 3
 <!--
 Overgang: «Databasen er én post på regningen. Resten avgjøres av hvordan maskinene deles.»
 
-- Samme PR-kort som på pull request-sliden. Klikk 1: teamet merger PR-en som gjør databasen større, og kostnaden stiger i Console
-- Klikk 2: teamet ser det og sender en ny PR. Klikk 3: riktig størrelse, og kostnaden legger seg under der den startet
+- Samme PR-kort som på pull request-sliden. Klikk 1 spiller hele løkka: teamet merger PR-en som gjør databasen større, og kostnaden stiger i Console. Teamet ser det og sender en ny PR med riktig størrelse, og kostnaden legger seg under der den startet
 - Feltene er fra Application-spec (gcp.sqlInstances tier og diskSize). Kronebeløpene er illustrasjon
 - Teamets valg slår rett ut på regningen, og teamet ser det selv i Console
 -->
@@ -381,7 +380,7 @@ Overgang: «Slik er lagene bygd.»
 
 - Google Cloud: GKE, Cloud SQL, buckets, BigQuery. Aiven: Kafka, OpenSearch, Valkey
 - Nais drifter observability-stakken selv
-- Klikk 2: Nais Postgres (CloudNativePG) og Nais Buckets erstatter over tid Cloud SQL og Cloud Storage, for kostnad og suverenitet. Nais Postgres er nytt (merket alfa i docs.nais.io), Buckets utredes
+- Klikk 2: Nais Postgres (CloudNativePG, i preview) skal over tid erstatte Cloud SQL, for kostnad og suverenitet. Nais Buckets, som kan erstatte Cloud Storage, utredes
 - Dataene ligger i europe-north1 (Finland)
 - Nais startet i eget datasenter i 2016 og flyttet til Google Cloud
 - Nais drifter selv: Console og API, ingress, naisdevice og observability-stakken (Grafana, Mimir, Loki, Tempo)

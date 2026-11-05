@@ -49,15 +49,16 @@ import gsap from "gsap";
 import TerminalFrame from "./TerminalFrame.vue";
 import { useSteps, POP } from "./motion.js";
 
-// Commands checked against github.com/nais/cli. Output is illustrative.
+// Output from nais/cli (internal/postgres/command/branch.go, access.go),
+// cut to the first sentence / the address. The proxy port is random.
 const CMDS = [
   {
-    cmd: "nais postgres branch create min-db",
-    out: "✓ Branch test laget fra min-db",
+    cmd: "nais postgres branch create min-db test",
+    out: 'Started creating branch "test".',
   },
   {
     cmd: "nais postgres proxy min-db",
-    out: "✓ Proxy lytter på localhost:5432",
+    out: "Postgres relay listening at 127.0.0.1:54321",
   },
 ];
 
