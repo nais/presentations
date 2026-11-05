@@ -606,9 +606,9 @@ layout: default
     <div class="ms"><b>Jan. 2026</b><span class="i-carbon-chart-line" /><p>Metrikker i Mimir</p></div>
     <div class="ms"><b>Jan. 2026</b><span class="i-carbon-locked" /><p>Se hemmeligheter med begrunnelse</p></div>
     <div class="ms"><b>Vår 2026</b><span class="i-carbon-data-base" /><p>Valkey og OpenSearch ute av alfa</p></div>
-    <div class="ms"><b>Aug. 2026</b><span class="i-carbon-security" /><p>Sårbarheter prioritert etter risiko</p></div>
     <div class="ms"><b>Apr.–jun. 2026</b><span class="i-carbon-network-3" /><p>HAProxy erstatter nginx</p></div>
     <div class="ms"><b>Mai–jun. 2026</b><span class="i-carbon-terminal" /><p>nais apply og nais app set</p></div>
+    <div class="ms"><b>Aug. 2026</b><span class="i-carbon-security" /><p>Sårbarheter prioritert etter risiko</p></div>
     <div class="ms"><b>Okt. 2026</b><span class="i-carbon-data-base" /><p>Nais Postgres med branches</p></div>
     <div class="ms"><b>Nov. 2026</b><span class="i-carbon-search" /><p>Loki-utforsker i Console</p></div>
   </div>
@@ -624,9 +624,9 @@ Overgang: «Én av dem fortjener egen plass: databasen.»
 - Des. 2025: MCP-serveren kom i Nais CLI (nais alpha mcp serve). Den så dere i Akt 2
 - Jan. 2026: Nais API byttet til Mimir for metrikker. Innsyn i hemmelige verdier krever begrunnelse og logges
 - Vår 2026: Valkey og OpenSearch ute av alfa, med selvbetjening for versjon og størrelse (mars–september)
-- Aug.–okt. 2026: sårbarheter prioriteres med EPSS, KEV og internetteksponering
 - Apr.–jun. 2026: ingress flyttet fra nginx til HAProxy
-- Mai–jun. 2026: nais app set (mai), nais apply ble en hovedkommando (juni) for midlertidige endringer
+- Mai–jun. 2026: nais app set for midlertidige endringer (mai), nais apply ble en hovedkommando (juni)
+- Aug.–okt. 2026: sårbarheter prioriteres med EPSS, KEV og internetteksponering
 - Okt. 2026: Nais Postgres som nais.io/v1-ressurs, med branches
 - Nov. 2026: Loki-utforskeren erstatter de gamle loggvisningene i Console
 - Ryddet bort: secure logs (jan. 2026), KrakenD utfases (varslet aug. 2026), Elastic APM. Gamle CLI-kommandoer: nais alpha postgres er nå nais postgres, Cloud SQL ligger under nais cloudsql, og migreringskommandoene er fjernet. nais aiven er erstattet av credentials-kommandoer

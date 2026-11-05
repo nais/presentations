@@ -137,7 +137,8 @@ useSteps((tl) => {
 <style scoped>
 .gov {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
+  justify-items: center;
   align-items: center;
   gap: 2rem;
   width: 100%;
