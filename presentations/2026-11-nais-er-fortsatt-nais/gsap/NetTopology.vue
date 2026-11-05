@@ -1,6 +1,6 @@
 <template>
   <div ref="root" class="net" data-motion-self>
-    <div ref="stage" class="stage">
+    <div class="stage">
       <svg viewBox="0 0 1000 350" preserveAspectRatio="none" aria-hidden="true">
         <!-- Boundaries: tenant GCP organisation, cluster, team namespace. -->
         <rect class="b org" x="170" y="15" width="560" height="330" rx="18" />
@@ -206,7 +206,6 @@ const CAPTIONS = [
 ];
 
 const root = ref();
-const stage = ref();
 const packet = ref();
 const block = ref();
 const other = ref();
@@ -282,13 +281,9 @@ useSteps((tl) => {
   send("ingi-app", "#5cb2da");
   tl.addLabel("s5");
   caption(6);
-  tl.to(
-    stage.value,
-    { scale: 0.6, x: "-18%", duration: 0.8, ease: "power2.inOut" },
-    "<",
-  )
-    .to(other.value, { autoAlpha: 1, x: 0, duration: 0.5 })
-    .addLabel("s6");
+  tl.to(other.value, { autoAlpha: 1, ease: POP, duration: 0.5 }, "<").addLabel(
+    "s6",
+  );
   return tl;
 });
 </script>
@@ -484,15 +479,16 @@ svg {
 .other {
   position: absolute;
   right: 0;
-  top: 22%;
-  width: 30%;
+  top: -9%;
+  width: 22%;
+  z-index: 3;
 }
 
 .org2 {
   display: flex;
   flex-direction: column;
-  gap: 0.2rem;
-  padding: 1.2rem 1rem;
+  gap: 0;
+  padding: 0.25rem 0.5rem;
   border-radius: 16px;
   border: 2px dashed #64748b;
   text-align: center;
@@ -507,19 +503,19 @@ svg {
 
 .org2 b {
   font-family: "Poppins", sans-serif;
-  font-size: 1.1rem;
+  font-size: 0.85rem;
 }
 
 .org2 em {
   font-style: normal;
-  font-size: 0.75rem;
+  font-size: 0.65rem;
   font-weight: 700;
   color: #f87171;
 }
 
 .org2 i {
   font-style: normal;
-  font-size: 0.8rem;
+  font-size: 0.6rem;
   color: var(--nais-text-secondary);
 }
 
