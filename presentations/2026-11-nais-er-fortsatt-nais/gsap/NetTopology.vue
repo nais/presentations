@@ -184,7 +184,7 @@ const NODES = [
 // nodes ±35 x ±28). Every line has its own port on min-app.
 const WIRES = [
   { id: "app-api", d: "M318 144 V120 H438", kind: "ok" },
-  { id: "app-x", d: "M300 186 V222", kind: "bad" },
+  { id: "app-x", d: "M300 186 V238", kind: "bad" },
   { id: "app-ip", d: "M282 144 V85 H535", kind: "out" },
   { id: "ip-partner", d: "M655 85 H805", kind: "out" },
   { id: "app-sql", d: "M336 156 H615", kind: "svc" },
@@ -219,6 +219,9 @@ useSteps((tl) => {
   const n = (ids) => ids.map((id) => q(`.n-${id}`)[0]);
   gsap.set(q(".w"), { drawSVG: "0%" });
   gsap.set([packet.value, block.value, other.value, ...caps], { autoAlpha: 0 });
+  // Centre nodes with xPercent/yPercent: GSAP folds a CSS translate into px
+  // once, measured at build time (often off-screen), which shifts nodes.
+  gsap.set(q(".n"), { xPercent: -50, yPercent: -50, x: 0, y: 0 });
   gsap.set(q(".n:not(.n-app)"), { autoAlpha: 0, scale: 0.7 });
   const send = (id, color, back) => {
     tl.to(w(id), { drawSVG: "100%", duration: 0.3 })
@@ -390,6 +393,10 @@ svg {
 .block {
   position: absolute;
   translate: -50% -50%;
+}
+
+.n {
+  translate: none;
 }
 
 .n {
