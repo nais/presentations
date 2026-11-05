@@ -168,11 +168,11 @@ clicks: 3
 </div>
 
 <!--
-Overgang: «Agenten leser, nais apply leverer. La oss åpne panseret og se hva som skjer på plattformsiden.»
+Overgang: «Agenten leser, nais apply leverer. Nå åpner vi panseret og ser hva som skjer på plattformsiden.»
 
 - MCP (Model Context Protocol) er en åpen standard for å gi KI-agenter verktøy. Nais CLI har en innebygd MCP-server: nais alpha mcp serve
 - Den kjører lokalt, logger inn som deg og ser bare det du har tilgang til. Standard er stdio; HTTP lytter på 127.0.0.1
-- Verktøyene er bare lesing: get_nais_context (hvem du er, teamene dine), schema-verktøy (schema_search, schema_get_type m.fl.), validate_graphql og execute_graphql. Hemmelige verdier filtreres bort
+- Verktøyene bare leser: get_nais_context (hvem du er, teamene dine), schema-verktøy (schema_search, schema_get_type m.fl.), validate_graphql og execute_graphql. Hemmelige verdier filtreres bort
 - Det er dette vi så på manifest-sliden: agenten slår opp teamet og skjemaet og skriver manifestet. Et menneske reviewer og merger, og koden går gjennom samme forsyningskjede som all annen kode
 - Fortsatt under alpha i CLI-en
 - Klikk 1–3: forespørselen går fra utvikleren via agenten og MCP-serveren til Nais API
@@ -222,7 +222,7 @@ Overgang: «Hva har dette gitt i praksis? Nav har kjørt lengst.»
 - Én bølge med skuffer per klikk (tre bølger), til slutt alt på en gang
 - Gruppert etter inventaret over verktøykassa. Utfasede ting er utelatt
 - MCP for kodeagenter ligger i Verktøy-skuffen
-- Nytt siden i fjor: Nais Postgres (CloudNativePG), Valkey og OpenSearch er ute av alfa og kan endres selv (versjon, størrelse), Kafka-tilganger styres via API og CLI, og Unleash har selvbetjening med release-kanaler
+- Nytt siden i fjor: Nais Postgres (CloudNativePG), Valkey og OpenSearch er ute av alfa, og teamene endrer versjon og størrelse selv, Kafka-tilganger styres via API og CLI, og Unleash har selvbetjening med release-kanaler
 -->
 
 ---
@@ -243,7 +243,7 @@ layout: default
 Overgang: «Mange prodsettinger betyr at noe av og til feiler. Slik finner teamet feilen.»
 
 - ≈ 9 000 prodsettinger per uke i Nav (Mimir). Samme tall som i notatene på slide 4: ≈ 21 500 i alle miljøer, ≈ 9 000 i prod
-- Poenget er ikke at Nav er fornøyd, men at plattformen tåler dette volumet. Den samme plattformen kjører appene deres
+- Poenget er at plattformen tåler dette volumet. Den samme plattformen kjører appene deres
 -->
 
 ---
@@ -430,7 +430,7 @@ Overgang: «Nettverket er stengt som standard. Det samme gjelder koden som skal 
 - Klikk 3: Cloud SQL med privat IP, trafikken forlater ikke Google-nettverket. Aiven (Kafka, OpenSearch, Valkey) nås over privat lenke / VPC-peering, i tillegg til TLS-klientsertifikat for Kafka
 - Klikk 4: tenantens eget datasenter via VPN eller Cloud Interconnect, satt opp per tenant
 - Klikk 5: to innganger. Innbyggere kommer fra internett via ekstern ingress med TLS. Ansatte når interne apper via naisdevice og intern ingress
-- Nytt: ingress kjører på HAProxy i stedet for nginx. Migreringen ble gjort i 2026
+- Nytt: ingress kjører på HAProxy i stedet for nginx. Migreringen skjedde i 2026
 - Klikk 6: en annen tenant har sin egen organisasjon og sitt eget nettverk, ingenting er delt
 -->
 
@@ -459,7 +459,7 @@ Overgang: «Og sikkerheten gjelder ikke bare koden. Hvem slipper inn? Innlogging
 - Klikk 1–4: ett ledd per klikk. SBOM og signering skjer automatisk i bygget. Husk manifestet og PR-en agenten laget tidligere: den koden gikk gjennom akkurat samme løp som all annen kode
 - Klikk 5: Console vokser ut av det siste leddet. Klikk 6–9: funnet åpnes, PR oppdaterer avhengigheten, bygg og deploy, ny skanning og løst
 - Console-delen er illustrasjon, ikke ekte data eller CVE-er
-- Nytt: sårbarheter prioriteres etter risiko, ikke bare alvorlighet. EPSS (sannsynlighet for utnyttelse), KEV (kjent utnyttet) og om appen er eksponert mot internett teller med. Funn kan undertrykkes samlet
+- Nytt: sårbarheter prioriteres etter risiko, ikke bare alvorlighet. EPSS (sannsynlighet for utnyttelse), KEV (kjent utnyttet) og om appen er eksponert mot internett teller med. Teamet kan undertrykke funn samlet
 - 5 608 workloads (apper og jobber) skannes for sårbarheter i Nav (Mimir, 21. oktober 2026). Tallet er tatt av sliden; nevn det muntlig
 - Kobling til NSM (tatt av sliden): SBOM og signering svarer til 2.1.4, sårbarhetsskanning til 3.1.1
 - NSM anbefaler, loven krever ikke: Grunnprinsipper for IKT-sikkerhet 2.1.4 «Reduser risiko for målrettet manipulasjon av IKT-produkter i leverandørkjeden» (SBOM og signering) og 3.1.1 «Gjennomfør jevnlig sårbarhetskartlegging … ved hjelp av automatiserte verktøy» (skanning). https://nsm.no/grunnprinsipper-ikt
@@ -564,7 +564,7 @@ layout: default
 ::header::
 <div class="pillar-tag" style="--pc: #ff5c6c"><span class="i-carbon-partnership" /> Et Nais-fellesskap</div>
 <h1 class="text-3xl font-bold">Velkommen, KS Digital og Novari</h1>
-<p class="subtitle">To nye tenants har signert. Arbeidslastene kommer i 2027.</p>
+<p class="subtitle">To nye tenants har signert. Appene kommer i 2027.</p>
 
 ::default::
 <div class="flex flex-col items-center gap-8 w-full">
@@ -586,7 +586,7 @@ layout: default
 Overgang: «Mye av det nye har dere sett på veien. Her er året samlet.»
 
 - KS Digital og Novari (for fylkeskommunene) har signert avtale om å bruke Nais, gjennom offentlig-offentlig samarbeid
-- De har ingen apper i produksjon ennå. Arbeidslastene ventes i 2027
+- De har ingen apper i produksjon ennå. Appene ventes i 2027
 - Hva betyr det for Arbeidstilsynet? Flere som bruker plattformen gir flere innspill og flere som finner feil. Det som bygges for én tenant, får alle
 - Nais-teamet er fortsatt de samme 15 i Nav
 -->
@@ -681,17 +681,17 @@ layout: default
 
 ::default::
 <div class="card-row grid grid-cols-3 gap-6 w-full max-w-5xl mx-auto">
-  <IconCard icon="i-carbon-dashboard" title="Én helhet" description="Forsiden, teamoversikten og app-sidene skal henge sammen og vise status og neste steg på samme måte." />
-  <IconCard icon="i-carbon-group" title="Teamoversikt først" description="Teamsiden blir en ekte inngang til status og prioriteringer, ikke bare en kostgraf." color="blue" />
+  <IconCard icon="i-carbon-dashboard" title="Ett produkt" description="Forsiden, teamoversikten og app-sidene skal henge sammen og vise status og neste steg på samme måte." />
+  <IconCard icon="i-carbon-group" title="Teamoversikt først" description="Teamsiden blir en inngang til status og prioriteringer, ikke bare en kostnadsgraf." color="blue" />
   <IconCard icon="i-carbon-terminal" title="Samme svar i terminalen" description="Nais CLI skal gi de vanligste oppslagene fra Console: oversikt, feilsøking og scripting." color="yellow" />
 </div>
 
 <!--
 Overgang: «Under Console skjer det også mye med data.»
 
-- Alt i denne akten er retning. Noe er i gang, noe er på planleggingsstadiet. Ingen datoer
+- Alt i denne akten er retning. Noe er i gang, noe er bare planlagt. Ingen datoer
 - Console har vokst fram bit for bit. Målet er at den skal oppleves som ett produkt: mer oversiktlig, mer forutsigbar og tilpasset mobil
-- Teamoversikten er et naturlig sted å starte. Det bygges videre på Aksel, Navs designsystem
+- Teamoversikten er et naturlig sted å starte. Vi bygger videre på Aksel, Navs designsystem
 - CLI/Console-paritet: CLI-en skal dekke de vanligste oppslagene (ressursoversikt, workloads). Grafer blir i Console
 - Kilde: initiativene «Helhetlig retning for Console» og «CLI/Console-paritet» i nais/system
 - Har dere meninger om Console? Si det i #nais. Teamet ber om akkurat den typen innspill
@@ -756,8 +756,8 @@ layout: default
 <!--
 Overgang: «Hvem bestemmer egentlig hva som bygges?»
 
-- Dette er ikke en plan om å flytte. Det handler om å ha handlingsrom hvis vilkår, pris eller sikkerhetssituasjon endrer seg
-- Hold det saklig. Poenget er ikke Microsoft, men hvorfor Nais vil kunne flytte
+- Dette er ikke en plan om å flytte. Vi vil ha handlingsrom hvis vilkår, pris eller sikkerhetssituasjonen endrer seg
+- Hold det saklig. Poenget er hvorfor Nais vil kunne flytte, ikke Microsoft
 - Norway East: digi.no, 4. nov. 2026, Martin Braathen Røise, «Microsoft sliter med kapasiteten: – Norway East er ikke skalerbart lenger» (betalingsmur): https://www.digi.no/it-bransjen/microsoft-sliter-med-kapasiteten-norway-east-er-ikke-skalerbart-lenger/7181584
   - Digdirs teknologidirektør Andreas Rafaelsen: «I praksis sier Microsoft til oss at Norway East ikke er et skalerbart datasenter lenger»
   - Altinn fikk ikke skalert opp når det trengtes, og måtte gjøre manuelle grep. Microsoft sa at de ikke kan dekke Altinns ressursbehov i Norge på kort sikt, og anbefalte å flytte til svenske datasentre. Avtalene garanterer ikke et bestemt datasenter eller en bestemt region. Microsoft lovet kapasitet i juni

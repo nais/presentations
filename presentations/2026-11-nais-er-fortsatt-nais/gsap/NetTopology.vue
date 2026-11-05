@@ -16,7 +16,7 @@
         />
       </svg>
       <span class="bl" style="left: 18%; top: 6%"
-        >GCP-organisasjon: din virksomhet</span
+        >GCP-organisasjon: deres virksomhet</span
       >
       <span class="bl" style="left: 19.6%; top: 16%">Nais-cluster (VPC)</span>
       <span class="bl ns-l" style="right: 48.6%; top: 32%"
