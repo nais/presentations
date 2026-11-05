@@ -515,11 +515,11 @@ clicks: 2
 <HostingMap />
 
 <!--
-Overgang: «Nais har flyttet før, fra eget datasenter til Google Cloud. Slik er lagene bygd.»
+Overgang: «Nais startet i eget datasenter og kjører i dag i Google Cloud. Slik er lagene bygd.»
 
 - Google Cloud: GKE, Cloud SQL, buckets, BigQuery. Aiven: Kafka, OpenSearch, Valkey
 - Nais drifter observability-stakken selv
-- Klikk 2: Nais Postgres (CloudNativePG) og Nais Buckets erstatter over tid Cloud SQL og Cloud Storage, for kostnad og suverenitet. Nais Postgres er i preview, Nais Buckets utredes. docs.nais.io sier i dag: ikke lag nye Postgres-databaser der ennå, bruk Cloud SQL
+- Klikk 2: Nais Postgres (CloudNativePG) og Nais Buckets kan over tid erstatte Cloud SQL og Cloud Storage, for kostnad og suverenitet. Nais Postgres er i preview, Nais Buckets utredes.
 - Dataene ligger i europe-north1 (Finland)
 - Nais startet i eget datasenter i 2016 og flyttet til Google Cloud
 - Nais drifter selv: Console og API, ingress, naisdevice og observability-stakken (Grafana, Mimir, Loki, Tempo)
@@ -543,7 +543,7 @@ Overgang: «Og slik henger nettverket sammen.»
 - Lagene bygges nedenfra: infrastruktur fra skyleverandøren, Kubernetes, Nais (operatorene, hjertet i plattformen) og teamenes apper
 - Klikk 1: pods for app A, B og C fordelt over tre soner i én region. Klikk 2: de skalerer ut
 - Klikk 3: datasenter-b faller ut, og podene startes i a og c. Appen merker det ikke
-- Klikk 4: laget nederst byttes (eget datasenter → Google Cloud), mens Nais og appene blir stående. Nais har flyttet før, og det er dette som gjør exit og flytting mulig
+- Klikk 4: laget nederst byttes (eget datasenter → Google Cloud), mens Nais og appene blir stående. Nais startet i eget datasenter, og det er dette som gjør exit og flytting mulig
 -->
 
 ---
