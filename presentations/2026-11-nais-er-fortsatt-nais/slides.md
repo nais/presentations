@@ -740,9 +740,9 @@ layout: default
 ::default::
 <div class="grid grid-cols-2 gap-10 w-full max-w-5xl mx-auto">
   <div class="card-row check-list">
-    <div><span class="i-carbon-cloud-offline" /><span><b>Kapasitet:</b> Microsoft har sagt at Azure har kapasitetsmangel minst til sommeren 2026</span></div>
+    <div><span class="i-carbon-cloud-offline" /><span><b>Kapasitet:</b> Microsoft har sagt til Digdir at Azure Norway East ikke lenger kan skalere for Altinn</span></div>
     <div><span class="i-carbon-flash" /><span><b>Strøm og tomter</b> begrenser nye datasentre i Europa</span></div>
-    <div><span class="i-carbon-warning-alt" /><span><b>NSM:</b> Norge er avhengig av noen få amerikanske skyleverandører</span></div>
+    <div><span class="i-carbon-warning-alt" /><span><b>NSM:</b> «Planlegg for å kunne bytte ut skyleverandør»</span></div>
     <div><span class="i-carbon-earth-europe-africa" /><span><b>EU</b> har foreslått nye krav til suveren sky i offentlige anskaffelser</span></div>
   </div>
   <div class="card-row check-list">
@@ -757,10 +757,14 @@ layout: default
 Overgang: «Hvem bestemmer egentlig hva som bygges?»
 
 - Dette er ikke en plan om å flytte. Det handler om å ha handlingsrom hvis vilkår, pris eller sikkerhetssituasjon endrer seg
-- Si aldri at Azure eller Norge er «fullt». Det finnes ingen kilde for det
-- Microsoft: Amy Hood (finansdirektør), okt. 2025: Azure har kapasitetsbegrensninger minst ut regnskapsåret (juni 2026). https://www.directionsonmicrosoft.com/microsoft-q1-fy26-earnings-cloud-supply-constraints-to-last-through-at-least-june-2026/ . I april 2026 ble det etter sigende forlenget til «minst gjennom 2026», men det er hentet fra et sammendrag og må sjekkes mot transkripsjonen: https://www.marketbeat.com/instant-alerts/microsoft-q3-earnings-call-highlights-2026-04-29/
+- Hold det saklig. Poenget er ikke Microsoft, men hvorfor Nais vil kunne flytte
+- Norway East: digi.no, 4. nov. 2026, Martin Braathen Røise, «Microsoft sliter med kapasiteten: – Norway East er ikke skalerbart lenger» (betalingsmur): https://www.digi.no/it-bransjen/microsoft-sliter-med-kapasiteten-norway-east-er-ikke-skalerbart-lenger/7181584
+  - Digdirs teknologidirektør Andreas Rafaelsen: «I praksis sier Microsoft til oss at Norway East ikke er et skalerbart datasenter lenger»
+  - Altinn fikk ikke skalert opp når det trengtes, og måtte gjøre manuelle grep. Microsoft sa at de ikke kan dekke Altinns ressursbehov i Norge på kort sikt, og anbefalte å flytte til svenske datasentre. Avtalene garanterer ikke et bestemt datasenter eller en bestemt region. Microsoft lovet kapasitet i juni
+  - Samme sak: i feb. 2026 kalte Skatteetaten norsk Azure «annenrangs» (lite GPU og språkmodeller, følte seg presset mot Sverige; «et A-lag og et B-lag»)
+- Microsoft generelt: Amy Hood (finansdirektør) sa i okt. 2025 at Azure har kapasitetsbegrensninger minst ut juni 2026: https://www.directionsonmicrosoft.com/microsoft-q1-fy26-earnings-cloud-supply-constraints-to-last-through-at-least-june-2026/ . «Minst gjennom 2026» (april 2026) finnes bare i sammendrag, ikke i en primærkilde jeg har funnet. Ikke si en dato
 - Strøm og tomter: CBRE European outlook 2026 https://www.cbre.com/insights/books/european-real-estate-market-outlook-2026/data-centres og JLL 2026 https://www.jll.com/en-de/newsroom/ai-boom-redraws-europes-data-centre-map-as-power-access
-- NSM Risiko 2026 (feb. 2026): Norge er svært avhengig av noen få amerikanske skyleverandører, og NSM anbefaler reserveløsninger. Gjengitt via Altinget; MÅ sjekkes mot PDF-en før sitat: https://nsm.no/getfile.php/1314962-1770630853/NSM/Filer/Dokumenter/Rapporter/Risiko%25202026.pdf , https://www.altinget.no/digital/artikkel/nsm-anbefaler-reserveloesninger-for-skytjenester-altfor-hoey-risiko
+- NSM Risiko 2026, side 35, «Omfattende bruk av et fåtall utenlandske skytjenester» (sjekket mot PDF-en 5. nov. 2026). Markedet er dominert av amerikanske selskaper som Amazon, Google og Microsoft. Anbefaling: «Planlegg for å kunne bytte ut skyleverandør effektivt og med kjent ressursbruk og kostnad dersom behovet skulle oppstå.» https://nsm.no/getfile.php/1314962-1770630853/NSM/Filer/Dokumenter/Rapporter/Risiko%202026.pdf
 - EU: forslag til Cloud and AI Development Act, COM(2026) 502, juni 2026. Bare et forslag. https://digital-strategy.ec.europa.eu/en/library/proposal-cloud-and-ai-development-act-cada
 - Høyre side: appene beskriver hva de trenger i manifestet, ikke hvilken sky de kjører i. Nais startet i eget datasenter i 2016 og flyttet til Google Cloud. Nais Postgres og Nais Buckets gjør oss mindre avhengige av Google-spesifikke tjenester
 - Exit-planen er dokumentert. Ingen har trengt den

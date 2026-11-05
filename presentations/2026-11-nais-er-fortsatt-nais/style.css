@@ -796,3 +796,8 @@ html .slidev-layout .subtitle {
   max-width: none;
   padding: 0.6rem 0.9rem;
 }
+
+.check-list > div {
+  max-width: none;
+  padding: 0.5rem 0.8rem;
+}
