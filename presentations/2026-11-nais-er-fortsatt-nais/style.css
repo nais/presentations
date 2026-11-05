@@ -680,3 +680,97 @@ html .slidev-layout .subtitle {
   border-radius: 10px;
   transform: scale(1.25);
 }
+
+/* Akt 3 and 4: plain HTML slides. */
+.welcome-row {
+  display: flex;
+  gap: 3rem;
+}
+
+.welcome-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 1.5rem 3rem;
+  border-radius: 16px;
+  background: var(--nais-card);
+  border: 1px solid var(--nais-border);
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+}
+
+.year-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.8rem;
+}
+
+.ms {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: 0.7rem;
+  align-items: center;
+  padding: 0.6rem 0.9rem;
+  border-radius: 12px;
+  background: var(--nais-card);
+  border: 1px solid var(--nais-border);
+}
+
+.ms b {
+  grid-column: 1 / -1;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.75rem;
+  color: var(--nais-highlight);
+}
+
+.ms span {
+  font-size: 1.4rem;
+}
+
+.ms p {
+  margin: 0;
+  font-size: 0.85rem;
+}
+
+.cleared {
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--nais-text-secondary);
+  opacity: 0.75;
+}
+
+.pg-list,
+.check-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.pg-list > div,
+.check-list > div {
+  display: flex;
+  gap: 0.7rem;
+  align-items: baseline;
+  font-size: 0.9rem;
+}
+
+.pg-list b,
+.check-list b {
+  white-space: nowrap;
+}
+
+.pg-code {
+  padding: 1rem 1.2rem;
+  border-radius: 12px;
+  background: var(--nais-surface);
+  font-size: 0.8rem;
+}
+
+.mcp-tools {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  font-size: 0.8rem;
+}

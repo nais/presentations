@@ -86,7 +86,6 @@ layout: default
 Overgang: «Dere deler plattform med mange. Det er derfor den blir bedre hvert år. Så: hva skjer egentlig når dere deployer?»
 
 - En tenant er en virksomhet som bruker Nais. Arbeidstilsynet er uthevet: det er dere
-- TODO: sitat fra Arbeidstilsynet finnes ikke i NaaS-decket. Legg inn et klarert sitat eller dropp det
 - 21 500 vises én gang, på flisa. Årsgrafen viser bare formen
 - 528 apper kjører hos SSB, Landbruksdirektoratet og Arbeidstilsynet. KS Digital og Novari er på vei inn
 - Apper per tenant: Grafana 21. oktober 2026 (72 + 164 + 292 = 528 utenfor Nav)
@@ -511,6 +510,152 @@ Overgang: «Og hvem bestemmer hva de bygger?»
 
 - Hele teamet: femten personer, alle ansatt i Nav, som drifter for seks tenants
 - Navn fra GitHub-teamet nais/nais
+-->
+
+---
+layout: default
+---
+
+::header::
+<div class="pillar-tag" style="--pc: #ff5c6c"><span class="i-carbon-partnership" /> Et Nais-fellesskap</div>
+<h1 class="text-3xl font-bold">Velkommen, KS Digital og Novari</h1>
+<p class="subtitle">To nye tenants har signert. Arbeidslastene kommer i 2027.</p>
+
+::default::
+<div class="flex flex-col items-center gap-8 w-full">
+  <div class="card-row welcome-row">
+    <div class="welcome-card"><img src="./assets/logos/ksdigital.png" alt="KS Digital" class="h-14" /><span>KS Digital</span></div>
+    <div class="welcome-card"><img src="./assets/logos/novari.svg" alt="Novari" class="h-12" /><span>Novari</span></div>
+  </div>
+  <div class="anim-item tenant-logos">
+    <img src="./assets/logos/nav.svg" alt="Nav" class="h-6" />
+    <img src="./assets/logos/ssb.svg" alt="SSB" class="h-6" />
+    <img src="./assets/logos/ldir.svg" alt="Landbruksdirektoratet" class="h-7" />
+    <img src="./assets/logos/atil.svg" alt="Arbeidstilsynet" class="h-6 tenant-highlight" />
+  </div>
+  <p class="anim-item text-center">Seks tenants på samme plattform. Det vi bygger for én, får alle.</p>
+</div>
+
+<!--
+Overgang: «Før jeg viser hva som er nytt: vi har fått selskap.»
+
+- KS Digital og Novari (for fylkeskommunene) har signert avtale om å bruke Nais, gjennom offentlig-offentlig samarbeid
+- De har ingen apper i produksjon ennå. Arbeidslastene ventes i 2027
+- Hva betyr det for Arbeidstilsynet? Flere som bruker plattformen gir flere innspill og flere som finner feil. Det som bygges for én tenant, får alle
+- Nais-teamet er fortsatt de samme 15 i Nav
+-->
+
+---
+layout: default
+---
+
+::header::
+<h1 class="text-3xl font-bold">Året som gikk</h1>
+<p class="subtitle">Et utvalg av det som kom fra november 2025 til november 2026</p>
+
+::default::
+<div class="flex flex-col gap-5 w-full max-w-5xl mx-auto">
+  <div class="card-row year-grid">
+    <div class="ms"><b>Des. 2025</b><span class="i-carbon-bot" /><p>MCP-server i Nais CLI</p></div>
+    <div class="ms"><b>Jan. 2026</b><span class="i-carbon-chart-line" /><p>Metrikker i Mimir</p></div>
+    <div class="ms"><b>Jan. 2026</b><span class="i-carbon-locked" /><p>Se hemmeligheter med begrunnelse</p></div>
+    <div class="ms"><b>Vår 2026</b><span class="i-carbon-data-base" /><p>Valkey og OpenSearch ute av alfa</p></div>
+    <div class="ms"><b>Apr. 2026</b><span class="i-carbon-security" /><p>Sårbarheter prioritert etter risiko</p></div>
+    <div class="ms"><b>Apr.–jun. 2026</b><span class="i-carbon-network-3" /><p>HAProxy erstatter nginx</p></div>
+    <div class="ms"><b>Mai 2026</b><span class="i-carbon-terminal" /><p>nais apply og nais app set</p></div>
+    <div class="ms"><b>Okt. 2026</b><span class="i-carbon-data-base" /><p>Nais Postgres med branches</p></div>
+    <div class="ms"><b>Nov. 2026</b><span class="i-carbon-search" /><p>Loki-utforsker i Console</p></div>
+  </div>
+  <div class="anim-item cleared">
+    <b>Ryddet bort:</b> secure logs · KrakenD · Elastic APM · <code>nais alpha postgres</code> og Cloud SQL-migreringskommandoene · <code>nais aiven</code>
+  </div>
+</div>
+
+<!--
+Overgang: «Mye av dette har dere sett på veien. Her er året samlet.»
+
+- Datoene er fra når endringen kom i kildekoden (commits i nais/cli, api, console-frontend, system), ikke fra en lansering. Månedene er omtrentlige
+- Des. 2025: MCP-serveren kom i Nais CLI (nais alpha mcp serve). Mer om den om litt
+- Jan. 2026: Nais API byttet til Mimir for metrikker. Innsyn i hemmelige verdier krever begrunnelse og logges
+- Vår 2026: Valkey og OpenSearch ute av alfa, med selvbetjening for versjon og størrelse (mars–september)
+- Apr. 2026: sårbarheter prioriteres med EPSS, KEV og internetteksponering
+- Apr.–jun. 2026: ingress flyttet fra nginx til HAProxy
+- Apr.–mai 2026: nais apply ble en hovedkommando, nais app set for midlertidige endringer
+- Okt. 2026: Nais Postgres som nais.io/v1-ressurs, med branches
+- Nov. 2026: Loki-utforskeren erstatter de gamle loggvisningene i Console
+- Ryddet bort: secure logs (jan. 2026), KrakenD som funksjon (aug. 2026), Elastic APM. Gamle CLI-kommandoer: nais alpha postgres er nå nais postgres, Cloud SQL ligger under nais cloudsql, og migreringskommandoene er fjernet. nais aiven er erstattet av credentials-kommandoer
+- Bruker dere noe av dette, står det i dokumentasjonen hva dere skal gjøre
+-->
+
+---
+layout: default
+---
+
+::header::
+<div class="pillar-tag" style="--pc: #9b6fd6"><span class="i-carbon-settings" /> Automatisering</div>
+<h1 class="text-3xl font-bold">Nais Postgres <span class="new-badge">Nytt</span></h1>
+<p class="subtitle">Postgres i clusteret, på CloudNativePG</p>
+
+::default::
+<div class="grid grid-cols-2 gap-8 items-center w-full max-w-5xl mx-auto">
+  <div class="card-row pg-list">
+    <div><span class="i-carbon-data-base" /><b>CloudNativePG</b> kjører databasen i clusteret</div>
+    <div><span class="i-carbon-branch" /><b>Branches</b> en kopi av databasen fra et tidspunkt</div>
+    <div><span class="i-carbon-time" /><b>Point-in-time recovery</b> tilbake til et tidspunkt, som branch</div>
+    <div><span class="i-carbon-user-admin" /><b>Personlig DBA-tilgang</b> med logget, tidsbegrenset tilgang</div>
+    <div><span class="i-carbon-dashboard" /><b>Postgres i Console</b> opprett, endre, logger og innsikt i spørringer</div>
+  </div>
+  <pre class="anim-item pg-code"><code>$ nais postgres branch create min-db
+$ nais postgres branch list min-db
+$ nais postgres branch activate min-db test
+$ nais postgres psql min-db</code></pre>
+</div>
+
+<!--
+Overgang: «Den største endringen under panseret er databasen.»
+
+- Nais Postgres er nytt. Dokumentasjonen merker det fortsatt som alfa, så si «nytt», ikke «i drift for alle»
+- Ressursen ser slik ut: version: v1, type: Postgres i .nais/postgres.yaml, og appen kobler seg til med uses.postgres
+- Kjører på CloudNativePG (CNPG) i clusteret, i stedet for Cloud SQL. Det gir lavere kostnad og mindre avhengighet av Google
+- Branches: lag en inaktiv kopi fra et tidspunkt, og aktiver den ved behov. Det er også slik point-in-time recovery fungerer
+- Personlig DBA-tilgang: utvikleren får tilgang i eget navn, via en relay/proxy (nais postgres proxy og psql)
+- Console: opprette og endre, etiketter, logger, innsikt i spørringer, utvidelser og konfigurasjon
+- Kommandoene er sjekket mot nais/cli. Navnene min-db og test er eksempler
+- Cloud SQL finnes fortsatt, under nais cloudsql
+-->
+
+---
+layout: default
+clicks: 3
+---
+
+::header::
+<div class="pillar-tag" style="--pc: #FF9100"><span class="i-carbon-rocket" /> Utviklingsfart</div>
+<h1 class="text-3xl font-bold">KI: MCP i Nais CLI</h1>
+<p class="subtitle">Kodeagenten spør Nais, ikke deg</p>
+
+::default::
+<div class="flex flex-col gap-6 w-full">
+  <FlowChain :nodes="[
+    { icon: 'i-carbon-user', label: 'Utvikler', sub: 'Ber agenten om en app med Postgres' },
+    { icon: 'i-carbon-bot', label: 'Kodeagent', sub: 'Copilot, Claude eller en annen' },
+    { icon: 'i-carbon-terminal', label: 'nais alpha mcp serve', sub: 'Kjører lokalt, som deg' },
+    { icon: 'i-carbon-api', label: 'Nais API', sub: 'Bare lesing' },
+  ]" />
+  <div class="anim-item mcp-tools">
+    <code>get_nais_context</code><code>schema_search</code><code>schema_get_type</code><code>validate_graphql</code><code>execute_graphql</code>
+  </div>
+</div>
+
+<!--
+Overgang: «Og KI-agentene har også fått en vei inn.»
+
+- MCP (Model Context Protocol) er en åpen standard for å gi KI-agenter verktøy. Nais CLI har en innebygd MCP-server: nais alpha mcp serve
+- Den kjører lokalt, logger inn som deg og ser bare det du har tilgang til. Standard er stdio; HTTP lytter på 127.0.0.1
+- Verktøyene er bare lesing: get_nais_context (hvem du er, teamene dine), schema-verktøy (schema_search, schema_get_type m.fl.), validate_graphql og execute_graphql. Hemmelige verdier filtreres bort
+- Det er dette vi så på manifest-sliden: agenten slår opp teamet og skjemaet og skriver manifestet. Et menneske reviewer og merger, og koden går gjennom samme forsyningskjede som all annen kode
+- Fortsatt under alpha i CLI-en
+- Klikk 1–3: forespørselen går fra utvikleren via agenten og MCP-serveren til Nais API
 -->
 
 ---
