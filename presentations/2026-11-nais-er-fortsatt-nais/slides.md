@@ -159,7 +159,7 @@ clicks: 3
   <FlowChain :nodes="[
     { icon: 'i-carbon-user', label: 'Utvikler', sub: 'Ber agenten om en app med Postgres' },
     { icon: 'i-carbon-bot', label: 'Kodeagent', sub: 'Copilot, Claude eller en annen' },
-    { icon: 'i-carbon-terminal', label: 'nais alpha mcp serve', sub: 'Kjører lokalt, som deg' },
+    { icon: 'i-carbon-terminal', label: 'nais mcp', sub: 'nais alpha mcp serve, lokalt som deg' },
     { icon: 'i-carbon-api', label: 'Nais API', sub: 'Bare lesing' },
   ]" />
   <div class="anim-item mcp-tools">
