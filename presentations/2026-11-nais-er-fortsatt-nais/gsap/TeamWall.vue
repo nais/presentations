@@ -32,7 +32,7 @@ const TEAM = [
   ["ybelMekk", "Youssef Bel Mekki"],
   ["sindrerh2", "Sindre Hansen"],
   ["thokra-nav", "Thomas Krampl"],
-  ["x10an14-nav", "Christian Chaves"],
+  ["x10an14-nav", "Christian Chavez"],
 ];
 const avatars = import.meta.glob("../assets/team/*.png", {
   eager: true,
