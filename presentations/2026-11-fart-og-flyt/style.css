@@ -1001,6 +1001,10 @@ h1:has(.new-badge) {
   font-size: 3rem;
 }
 
+.hr-col:has(.hr-head) {
+  grid-template-rows: auto repeat(4, 1fr);
+}
+
 .hr-head {
   margin: 0;
   font-family: "Poppins", sans-serif;
@@ -1011,4 +1015,12 @@ h1:has(.new-badge) {
 .auth-chips {
   align-items: center;
   font-size: 0.95rem;
+}
+
+.auth-chips code {
+  padding: 0.2rem 0.7rem;
+  border-radius: 999px;
+  border: 1px solid var(--nais-border);
+  background: var(--nais-card);
+  color: var(--nais-text);
 }

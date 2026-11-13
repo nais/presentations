@@ -50,9 +50,6 @@
         <p class="unit">kr per dag, team-eksempel</p>
       </div>
     </BrowserFrame>
-    <p ref="take" class="take">
-      Teamet eier kostnaden. De ser den, og de endrer den selv.
-    </p>
   </div>
 </template>
 
@@ -94,7 +91,6 @@ const root = ref();
 const line1 = ref();
 const line2 = ref();
 const line3 = ref();
-const take = ref();
 const shrink = ref();
 const disk = ref();
 const cpu = ref();
@@ -118,7 +114,6 @@ useSteps((tl) => {
     gsap.set(q(".state.merged"), { display: "none" });
   };
   gsap.set([line2.value, line3.value], { drawSVG: "0%" });
-  gsap.set(take.value, { autoAlpha: 0, y: 12 });
   gsap.set(shrink.value, { autoAlpha: 0 });
   reset();
   const merge = () =>
@@ -209,9 +204,9 @@ useSteps((tl) => {
       "-=0.3",
     );
   merge();
-  tl.to(line3.value, { drawSVG: "100%", duration: 1, ease: "none" })
-    .to(take.value, { autoAlpha: 1, y: 0 })
-    .addLabel("s1");
+  tl.to(line3.value, { drawSVG: "100%", duration: 1, ease: "none" }).addLabel(
+    "s1",
+  );
   tl.eventCallback("onUpdate", () => {
     second.value = tl.time() >= tl.labels.spike + 0.2;
   });
@@ -294,14 +289,5 @@ useSteps((tl) => {
   margin: 0.2rem 0 0;
   font-size: 0.65rem;
   color: #64748b;
-}
-
-.take {
-  grid-column: 1 / -1;
-  margin: 0.4rem 0 0;
-  text-align: center;
-  font-family: "Poppins", sans-serif;
-  font-weight: 700;
-  font-size: 1.15rem;
 }
 </style>

@@ -53,7 +53,7 @@ const GROUPS = [
   {
     title: "Data",
     icon: "i-carbon-data-base",
-    items: ["Nais Postgres", "BigQuery", "Buckets", "OpenSearch", "Valkey"],
+    items: ["Postgres", "BigQuery", "Buckets", "OpenSearch", "Valkey"],
   },
   { title: "Meldinger", icon: "i-carbon-flow-stream", items: ["Kafka"] },
   {
@@ -81,7 +81,14 @@ const GROUPS = [
   {
     title: "Verktøy",
     icon: "i-carbon-tool-box",
-    items: ["Console", "Nais CLI", "MCP for kodeagenter", "Kostnad per team"],
+    items: [
+      "Console",
+      "Nais CLI",
+      "MCP for kodeagenter",
+      "Kostnad per team",
+      "Dokumentasjon",
+      "Champions",
+    ],
   },
 ];
 const OPS = [

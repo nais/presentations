@@ -49,7 +49,6 @@
           <strong>{{ r.label }}</strong>
         </div>
       </div>
-      <pre class="code pg" data-step="2"><code>{{ PG }}</code></pre>
     </div>
   </div>
 </template>
@@ -61,23 +60,15 @@ import { POP, useSteps } from "./motion.js";
 
 // Field names checked against the Application example in nais/doc
 // (docs/workloads/application/reference/example.md), 2026-10-21.
-// Nais Postgres: own v1 manifest (nais/doc persistence/postgres/how-to/create.md)
-// and spec.uses.postgres in the workload (liberator nais.io/v1 Uses), 2026-11-05.
-const PG =
-  '# .nais/postgres.yaml\nversion: v1\ntype: Postgres\nname: min-db\nspec: { majorVersion: "18" }';
+// Database: spec.uses.postgres in the workload (liberator nais.io/v1 Uses), 2026-11-05.
 const BASE =
   "apiVersion: nais.io/v1alpha1\nkind: Application\nmetadata: { name: min-app, namespace: team-eksempel }\nspec:\n  image: ghcr.io/team-eksempel/min-app:1.0.0\n  replicas: { min: 2, max: 4 }\n";
 const BLOCKS = [
-  { code: "  ingresses: [https://min-app.eksempel.no]\n" },
   {
-    code: "  uses:\n    postgres: [{ name: min-db }]\n  gcp:\n    buckets: [{ name: min-bucket }]\n",
-  },
-  { code: "  kafka: { pool: atil-prod }\n" },
-  {
-    code: "  idporten: { enabled: true }\n  azure: { application: { enabled: true } }\n  tokenx: { enabled: true }\n  maskinporten: { enabled: true }\n",
+    code: "  ingresses: [https://min-app.eksempel.no]\n  idporten: { enabled: true }\n  accessPolicy:\n    inbound: { rules: [{ application: frontend }] }\n",
   },
   {
-    code: "  accessPolicy:\n    inbound: { rules: [{ application: frontend }] }\n",
+    code: "  uses:\n    postgres: [{ name: min-db }]\n  gcp:\n    buckets: [{ name: min-bucket }]\n  kafka: { pool: nav-prod }\n",
   },
   { code: "  observability:\n    autoInstrumentation: { enabled: true }\n" },
 ];
@@ -101,12 +92,12 @@ const DOCKS = [
     x: 68,
     y: 28,
     a: "l",
-    label: "Postgres (preview)",
+    label: "Database",
     icon: "i-carbon-data-base",
   },
   { step: 2, x: 77, y: 50, a: "l", label: "Bucket", icon: "i-carbon-box" },
   {
-    step: 3,
+    step: 2,
     x: 72,
     y: 72,
     a: "l",
@@ -114,7 +105,7 @@ const DOCKS = [
     icon: "i-carbon-flow-stream",
   },
   {
-    step: 4,
+    step: 1,
     x: 28,
     y: 72,
     a: "r",
@@ -122,7 +113,7 @@ const DOCKS = [
     icon: "i-carbon-password",
   },
   {
-    step: 5,
+    step: 1,
     x: 28,
     y: 28,
     a: "r",
@@ -131,7 +122,7 @@ const DOCKS = [
     ext: true,
   },
   {
-    step: 6,
+    step: 3,
     x: 50,
     y: 88,
     a: "c",
@@ -144,7 +135,7 @@ const root = ref();
 const chat = ref();
 const left = ref();
 
-// s0: minimal manifest and the app. s1..s6: one block is written and its
+// s0: minimal manifest and the app. s1..s3: one block is written and its
 // resources dock around the app; the previous block dims.
 useSteps((tl) => {
   const q = gsap.utils.selector(root.value);
@@ -152,7 +143,6 @@ useSteps((tl) => {
   gsap.set(blocks, { height: 0, autoAlpha: 0 });
   gsap.set(q(".dock"), { autoAlpha: 0, scale: 0.4 });
   gsap.set(q(".wire"), { opacity: 0 });
-  gsap.set(q(".pg"), { autoAlpha: 0 });
   // The agent request comes first; the manifest is what the agent writes.
   tl.from(chat.value, { autoAlpha: 0, y: -12 })
     .from(q(".code"), { autoAlpha: 0, x: -24 }, "+=0.3")
@@ -182,7 +172,6 @@ useSteps((tl) => {
         { autoAlpha: 1, scale: 1, ease: POP, duration: 0.6, stagger: 0.1 },
         "-=0.1",
       )
-      .to(q(`.pg[data-step="${step}"]`), { autoAlpha: 1, duration: 0.4 }, "<")
       .to(
         q(`.wire[data-step="${step}"]`),
         { opacity: 0.6, duration: 0.3 },
@@ -258,10 +247,6 @@ useSteps((tl) => {
   display: flex;
   flex-direction: column;
   gap: 0.4rem;
-}
-
-.pg {
-  border-color: var(--nais-accent);
 }
 
 .base,

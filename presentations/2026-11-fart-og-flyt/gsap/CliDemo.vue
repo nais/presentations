@@ -28,7 +28,7 @@ import { useEnter } from "./motion.js";
 // Command names checked against github.com/nais/cli (internal/*/command), 2026-11-05.
 // Output is illustrative.
 const STEPS = [
-  { cmd: "nais login", out: ["✓ Logged in as utvikler@direktorat.no"] },
+  { cmd: "nais login", out: ["✓ Logged in as utvikler@nav.no"] },
   {
     cmd: "nais apply .nais/app.yaml --environment dev",
     out: ["✓ Application min-app applied"],
@@ -36,10 +36,6 @@ const STEPS = [
   {
     cmd: "nais app set replicas min-app --min 3 --max 6 -e dev",
     out: ["✓ Replicas updated until next deploy"],
-  },
-  {
-    cmd: "nais postgres proxy min-db",
-    out: ["Postgres relay listening at 127.0.0.1:54321"],
   },
   {
     cmd: "nais vulnerability summary",

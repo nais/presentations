@@ -2,12 +2,12 @@
   <div ref="root" class="prflow" data-motion-self>
     <div class="left">
       <PrCard
-        title="Legg til søknadsstatus"
-        file=".nais/app.yaml"
-        :diff="DIFF"
+        :title="title"
+        :file="file"
+        :diff="diff"
         :checks="CHECKS"
         reviewer="Kari Nordmann"
-        author="opened by Copilot agent"
+        :author="author"
         copilot
       />
     </div>
@@ -41,14 +41,22 @@ import { POP, STAGGER, useSteps } from "./motion.js";
 
 // Workflow as in docs.nais.io «Build and deploy» (2026-10-21): nais/docker-build-push
 // builds, signs and pushes with an SBOM; nais/setup and «nais apply» deploy.
-const DIFF = [
-  "  replicas:",
-  "-   min: 2",
-  "+   min: 3",
-  "  env:",
-  "+   - name: STATUS_ENABLED",
-  '+     value: "true"',
-];
+defineProps({
+  title: { type: String, default: "Legg til søknadsstatus" },
+  file: { type: String, default: ".nais/app.yaml" },
+  diff: {
+    type: Array,
+    default: () => [
+      "  replicas:",
+      "-   min: 2",
+      "+   min: 3",
+      "  env:",
+      "+   - name: STATUS_ENABLED",
+      '+     value: "true"',
+    ],
+  },
+  author: { type: String, default: "opened by Copilot agent" },
+});
 const CHECKS = ["build", "test", "nais validate"];
 const STEPS = [
   {
