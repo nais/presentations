@@ -3,7 +3,12 @@
     <div class="head">
       <span class="metric">{{ METRICS[metric].label }}</span>
     </div>
-    <div class="bars">
+    <div class="bars" :style="{ height: height + 'px' }">
+      <div v-if="marker" class="col marker">
+        <span class="val">{{ marker.text }}</span>
+        <div class="bar" style="height: 2%" />
+        <span class="yr">{{ marker.year }}</span>
+      </div>
       <div v-for="y in rows" :key="y.year" class="col">
         <span class="val">{{
           y.value === null || !labels ? "" : fmt(y.value)
@@ -63,6 +68,24 @@ const METRICS = {
       2026: 5212,
     },
   },
+  // Anslag: the deploys shape scaled to production only, so 2026 lands on
+  // ≈9 000 per week (Mimir, Nav, prod, 2026-10).
+  prod: {
+    label: "Prodsettinger per uke i Nav (anslag)",
+    data: {
+      2016: 40,
+      2017: 130,
+      2018: 460,
+      2019: 1840,
+      2020: 3680,
+      2021: 3850,
+      2022: 5320,
+      2023: 6150,
+      2024: 7700,
+      2025: 8330,
+      2026: 9000,
+    },
+  },
   teams: { label: "Team", data: {} },
 };
 
@@ -70,6 +93,9 @@ const props = defineProps({
   metric: { type: String, default: "deploys" },
   // Value labels on the bars. Off where the number is already shown nearby.
   labels: { type: Boolean, default: true },
+  height: { type: Number, default: 84 },
+  // Optional first column with a text label, e.g. { year: "Før", text: "4 i året" }.
+  marker: { type: Object, default: null },
 });
 
 const fmt = (v) => v.toLocaleString("nb-NO").replace(/\s/g, "\u00a0");
@@ -135,7 +161,6 @@ useEnter((tl) => {
   display: flex;
   align-items: flex-end;
   gap: 10px;
-  height: 84px;
 }
 
 .col {
@@ -155,6 +180,15 @@ useEnter((tl) => {
     var(--nais-gradient-from),
     var(--nais-gradient-to)
   );
+}
+
+.marker .bar {
+  background: #64748b;
+}
+
+.marker .val {
+  white-space: nowrap;
+  color: #fbbf24;
 }
 
 .bar.ghost {

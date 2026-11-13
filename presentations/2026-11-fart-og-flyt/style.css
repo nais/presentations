@@ -531,6 +531,7 @@ html .slidev-layout .subtitle {
 }
 
 .incoming-logo small {
+  white-space: nowrap;
   font-size: 0.65rem;
   color: var(--nais-text-secondary);
 }

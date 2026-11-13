@@ -218,7 +218,7 @@ clicks: 3
     { icon: 'i-carbon-checkmark', label: 'Løst', sub: 'Appene kjørte hele tiden' },
   ]" />
   <div v-click="3" class="text-center">
-    <div class="text-5xl font-bold" style="font-family: Poppins; color: var(--nais-success)">99,88 %</div>
+    <div class="text-5xl font-bold" style="font-family: Poppins, sans-serif; color: var(--nais-success)">99,88 %</div>
     <p class="mt-1">ingress-svar uten 5xx i Nav, siste 30 dager. Målt, ikke SLA.</p>
   </div>
 </div>
@@ -275,16 +275,16 @@ clicks: 3
     '- Du må sende søknaden innen 14 dagar.',
     '+ Du må sende søknaden innen 14 dager.',
   ]" />
-  <div v-click="3" class="tally" style="font-size: 1.05rem; padding: 0.15rem 1rem">0 overleveringer · minutter</div>
+  <div v-click="3" class="flex justify-center items-center gap-4">
+    <span class="tally" style="margin: 0; font-size: 1.05rem; padding: 0.15rem 1rem">0 overleveringer · minutter</span>
+    <span class="lesson" style="--pc: #FF9100">Ingen venting</span>
+  </div>
 </div>
-
-::footer::
-<span v-click="3" class="lesson" style="--pc: #FF9100">Ingen venting</span>
 
 <!--
 Overgang: «Men uten port, hvordan holder vi sikkerheten?»
 
-- Samme rettelse som på slide 4. Speilet mot slide 3: null overleveringer, minutter i stedet for måneder
+- Samme endring som før: rettelsen fra slide 4. Speilet mot slide 3: null overleveringer, minutter i stedet for måneder
 - Klikk 1: sjekker og godkjenning. Klikk 2: merge, så bygger nais/docker-build-push med SBOM og signering, og nais apply sender manifestet til prod. Klikk 3: PR-en viser at den er deployet
 - Copilot-agenten åpner PR-en. Et menneske reviewer og merger
 - Kilde for flyten: docs.nais.io, «Build and deploy»
@@ -395,5 +395,117 @@ Overgang: «Hva har det gitt?»
 - Kildekoden ligger på github.com/nais, dokumentasjonen på docs.nais.io
 - #nais på Slack: utviklerne spør, Nais-teamet og andre team svarer
 - Åpenhet gjør at andre kan gjenbruke, og at feil blir funnet tidlig
+-->
+
+---
+layout: default
+---
+
+::header::
+<h1 class="text-3xl font-bold">Fra fire i året til ≈ 9 000 i uka</h1>
+<p class="subtitle">Prodsettinger per uke i Nav, år for år</p>
+
+::default::
+<YearChart metric="prod" :labels="false" :height="260" :marker="{ year: 'Før', text: '4 i året' }" />
+
+<!--
+Overgang: «Fart er også å rette feil fort.»
+
+- Kurven er et anslag: formen følger Navs årlige snitt av deployer, skalert slik at 2026 ender på dagens ≈ 9 000 i prod (Mimir, oktober 2026)
+- Si «anslag» høyt. Bare 2026 er målt
+- «Før»: fire store releaser i året, som på slide 3
+- Ukegrafen fra Mimir (11 uker, aug.–okt. 2026, prod 7 160–10 081) ligger i DeployChart hvis noen spør
+-->
+
+---
+layout: default
+clicks: 4
+---
+
+::header::
+<h1 class="text-3xl font-bold">Fra feil til fiks</h1>
+<p class="subtitle">Fra varsel til fiks på minutter</p>
+
+::default::
+<BugHunt />
+
+<!--
+Overgang: «Ikke alt har gått bra.»
+
+- Klikk 1: varsel. Klikk 2: trace. Klikk 3: logger for samme trace. Klikk 4: fiksen er deployet
+- Logger, metrikker og traces kommer uten oppsett og vises i Grafana (docs.nais.io, observability)
+- Illustrasjon, ikke ekte tall
+-->
+
+---
+layout: default
+---
+
+::header::
+<h1 class="text-3xl font-bold">Det som ikke gikk</h1>
+<p class="subtitle">Vi bygde, lærte og ryddet</p>
+
+::default::
+<div class="card-row grid grid-cols-3 gap-6 w-full max-w-5xl mx-auto">
+  <IconCard icon="i-carbon-network-3" title="Fra Istio til Linkerd" description="Service mesh ble for tungt å drifte. Vi byttet til noe enklere." />
+  <IconCard icon="i-carbon-renew" title="Tilgangsstyring, fire ganger" description="Vi bygde den fire ganger før den satt. De gamle er lagt ned." color="blue" />
+  <IconCard icon="i-carbon-warning-alt" title="En hemmelighet nesten i loggene" description="Vi fant feilen, meldte avvik og rettet den." color="yellow" />
+</div>
+
+<!--
+Overgang: «Og det har kostet.»
+
+- Istio til Linkerd: nais/blog, «Changing service mesh» (changing-service-mesh.md, 4. mai 2021)
+- Tilgangsstyring: bygd fire ganger, i repoene named, terje, tobac og rbac-sync. Alle er arkivert
+- Hemmeligheten: postmortem 13. nov. 2024. En hemmelighet holdt på å havne i loggene. Vi meldte avvik. Fortell det generisk, ikke nevn hvilken tjeneste
+- Poenget: plattformen er bygd av folk som tar feil, retter og forteller om det
+-->
+
+---
+layout: default
+---
+
+::header::
+<h1 class="text-3xl font-bold">Prisen</h1>
+<p class="subtitle">≈ 150 årsverk (anslag) over tid. 15 personer i Nais-teamet i dag.</p>
+
+::default::
+<TeamWall />
+
+<!--
+Overgang: «Må man være Nav? Nei.»
+
+- ≈ 150 årsverk er et anslag for hele perioden siden 2016. Si «anslag»
+- 15 personer i Nais-teamet i dag, alle ansatt i Nav. Navn fra GitHub-teamet nais/nais
+- Plattformen er ikke gratis. Den koster et team, hele tiden
+-->
+
+---
+layout: default
+---
+
+::header::
+<h1 class="text-3xl font-bold">Ikke bare Nav</h1>
+<p class="subtitle">Flere virksomheter bruker den samme plattformen</p>
+
+::default::
+<div class="flex flex-col items-center gap-10 w-full">
+  <div class="anim-item tenant-logos" style="gap: 1.8rem">
+    <img src="./assets/logos/nav.svg" alt="Nav" class="h-9" />
+    <img src="./assets/logos/ssb.svg" alt="SSB" class="h-9" />
+    <img src="./assets/logos/ldir.svg" alt="Landbruksdirektoratet" class="h-10" />
+    <img src="./assets/logos/atil.svg" alt="Arbeidstilsynet" class="h-9" />
+    <span class="incoming-logo"><img src="./assets/logos/ksdigital.png" alt="KS Digital" class="h-7" /><small>på vei inn</small></span>
+    <span class="incoming-logo"><img src="./assets/logos/novari.svg" alt="Novari" class="h-6" /><small>på vei inn</small></span>
+  </div>
+  <p class="anim-item text-center">Seks virksomheter. Det som bygges for én, får alle.</p>
+</div>
+
+<!--
+Overgang: «Hva kan dere ta med hjem?»
+
+- Nav, SSB, Landbruksdirektoratet og Arbeidstilsynet kjører apper på Nais i dag (Grafana, 21. oktober 2026)
+- KS Digital og Novari har signert, men har ikke apper i produksjon ennå
+- Poenget: man trenger ikke være Nav for å få dette
 -->
 
