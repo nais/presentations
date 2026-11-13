@@ -16,7 +16,7 @@
         <div
           class="bar"
           :class="{ ghost: y.value === null }"
-          :style="{ height: y.h + '%' }"
+          :style="{ height: `calc((100% - 2.6rem) * ${y.h / 100})` }"
         />
         <span class="yr">{{ y.year }}</span>
       </div>
@@ -174,6 +174,7 @@ useEnter((tl) => {
 
 .bar {
   width: 100%;
+  flex-shrink: 0; /* labels take fixed space; height is relative to the rest */
   border-radius: 6px 6px 0 0;
   background: linear-gradient(
     180deg,

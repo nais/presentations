@@ -931,3 +931,8 @@ html .slidev-layout .subtitle {
   background: var(--nais-card);
   color: var(--nais-text);
 }
+
+/* The lesson pill is taller than the footer's text line. */
+.default-footer:has(.lesson) {
+  padding-top: 0;
+}
