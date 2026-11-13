@@ -509,3 +509,45 @@ Overgang: «Hva kan dere ta med hjem?»
 - Poenget: man trenger ikke være Nav for å få dette
 -->
 
+---
+layout: default
+---
+
+::header::
+<h1 class="text-3xl font-bold">Fire lærdommer</h1>
+<p class="subtitle">Ting man kan gjøre uten å være Nav</p>
+
+::default::
+<NaisPillars :items="[
+  { title: 'Tillit og eierskap', color: '#ff5c6c', icon: 'i-carbon-user-favorite', text: 'Gi teamene ansvaret, og la dem se prisen og ta vakten for egne apper.' },
+  { title: 'Asfaltert vei', color: '#FF9100', icon: 'i-carbon-road', text: 'Gjør den trygge veien til den enkleste, med sikkerheten bygd inn.' },
+  { title: 'Plattform som produkt', color: '#9b6fd6', icon: 'i-carbon-tool-box', text: 'Behandle utviklerne som brukere: verktøy, dokumentasjon og champions.' },
+  { title: 'Åpenhet', color: '#5cb2da', icon: 'i-carbon-share', text: 'Del kode, dokumentasjon og feil åpent.' },
+]" />
+
+<!--
+Overgang: «Til slutt: tesen.»
+
+- Samler lærdomslinjene fra Akt 2 i de samme fire fargene
+- Tillit og eierskap: slide 6–8. Asfaltert vei: 9–11. Plattform som produkt: 12. Åpenhet: 13
+- Ingen av dem krever at man er like stor som Nav. Start med én
+-->
+
+---
+layout: cover
+---
+
+::logo::
+<CoverLogo />
+
+::default::
+<h1 class="text-5xl font-black">Lett å gjøre rett</h1>
+<p class="subtitle text-xl mt-4">nais.io</p>
+<p class="text-3xl font-bold mt-8" style="font-family: Poppins, sans-serif">Spørsmål?</p>
+
+<!--
+Overgang: «Takk!»
+
+- Tesen fra coveret: lett å gjøre rett
+- Dokumentasjon: docs.nais.io. Kildekode: github.com/nais
+-->

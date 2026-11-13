@@ -63,7 +63,7 @@ const reveal = () => {
 };
 
 // Slides where the hex stays out of the picture entirely.
-const HIDE = ".cover-layout, .clip-slide";
+const HIDE = ".cover-layout";
 // Park spot: bottom-left, clear of titles, pillar tags (top-right), the
 // centred footer and content. Small, dimmed, breathing slowly.
 const PARK_W = 34;

@@ -1,7 +1,7 @@
 <template>
-  <div ref="root" class="pillars6" data-motion-self>
+  <div ref="root" class="pillars6" :class="{ four: items }" data-motion-self>
     <div
-      v-for="(p, i) in PILLARS"
+      v-for="(p, i) in items || PILLARS"
       :key="p.title"
       class="card"
       :style="{ '--pc': p.color }"
@@ -62,7 +62,11 @@ const PILLARS = [
 ];
 
 // Optional: one short «Nytt» line per pillar (closing slide), in PILLARS order.
-defineProps({ news: { type: Array, default: null } });
+// items: own cards ({ title, color, icon, text }) instead of the six pillars.
+defineProps({
+  news: { type: Array, default: null },
+  items: { type: Array, default: null },
+});
 
 const root = ref();
 useEnter((tl) => {
@@ -84,6 +88,24 @@ useEnter((tl) => {
   width: 100%;
   max-width: 940px;
   margin: 0 auto;
+}
+
+.pillars6.four {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  max-width: 820px;
+  gap: 1.5rem 2rem;
+}
+
+.four .card {
+  padding: 1.1rem 1.2rem;
+}
+
+.pillars6.four .card h3 {
+  font-size: 1.15rem;
+}
+
+.pillars6.four .card p {
+  font-size: 0.95rem;
 }
 
 .card {

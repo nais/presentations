@@ -54,7 +54,6 @@ const components = import.meta.glob("../gsap/*.vue", {
 export default function setup({ app, router }) {
   for (const [path, component] of Object.entries(components))
     app.component(path.split("/").pop().replace(".vue", ""), component);
-  app.component("JourneyPath", components["../gsap/BenefitStory.vue"]);
 
   // Slides next to the current one are already mounted, so setting the start
   // state here (before Vue shows the slide) avoids a flash of the end state.

@@ -392,11 +392,6 @@ pre,
   text-align: center;
 }
 
-/* Full-bleed clip slide: the layout wrapper must fill the slide. */
-.slidev-page > div:has(> .clip-slide) {
-  height: 100%;
-}
-
 .pillars-items > .story {
   flex: 1;
 }
@@ -457,42 +452,12 @@ html .slidev-layout .subtitle {
   color: #a7f3d0 !important;
 }
 
-/* Small pillar tag in the slide corner (nais.io's six pillars). */
-.pillar-tag {
-  position: absolute;
-  top: 1.2rem;
-  right: 1.5rem;
-  z-index: 5;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
-  padding: 0.15rem 0.7rem;
-  border-radius: 999px;
-  font-size: 0.75rem;
-  font-weight: 700;
-  color: #fff;
-  background: color-mix(in srgb, var(--pc, #ff3377) 35%, transparent);
-  border: 1px solid color-mix(in srgb, var(--pc, #ff3377) 70%, transparent);
-}
-
 .tenant-logos {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 2.5rem;
   opacity: 0.9;
-}
-
-.qr-tile {
-  padding: 0.6rem;
-  border-radius: 14px;
-  background: #fff;
-}
-
-.qr-tile img {
-  display: block;
-  width: 9rem;
-  height: 9rem;
 }
 
 ::view-transition-old(root),
@@ -578,17 +543,9 @@ html .slidev-layout .subtitle {
 :active-view-transition .slidev-layout .subtitle {
   view-transition-name: slide-subtitle;
 }
-:active-view-transition .manifest .code:not(.pg),
+:active-view-transition .manifest .code,
 :active-view-transition .prflow .diff {
   view-transition-name: manifest-code;
-}
-:active-view-transition .prflow .step:has(.i-carbon-rocket),
-:active-view-transition .fan .node.deploy {
-  view-transition-name: apply-chip;
-}
-:active-view-transition .browser:has(.mock),
-:active-view-transition .cost .browser {
-  view-transition-name: console-browser;
 }
 
 ::view-transition-group(*) {
@@ -604,11 +561,6 @@ html .slidev-layout .subtitle {
 ::view-transition-new(slide-subtitle) {
   animation: vt-title-in 0.4s 0.3s ease-out both;
 }
-/* The Console leaves on its own: it shrinks to the right and dims. */
-::view-transition-old(console-browser):only-child {
-  animation: vt-console-out 0.5s ease-in both;
-}
-
 /* The whole old slide fades out before the new one fades in: no ghosting. */
 ::view-transition-old(root) {
   animation: vt-fade-out 0.3s ease-in both;
@@ -638,47 +590,6 @@ html .slidev-layout .subtitle {
     opacity: 0;
   }
 }
-@keyframes vt-console-out {
-  to {
-    transform: translateX(30%) scale(0.6);
-    opacity: 0;
-    filter: brightness(0.4);
-  }
-}
-
-/* Small «Nytt» badge for things that changed since last year. */
-/* Small pill centred above the title: takes no layout space, so the title
-   stays centred and clear of the pillar tag in the top-right corner. */
-h1:has(.new-badge) {
-  position: relative;
-}
-
-.new-badge {
-  position: absolute;
-  left: 50%;
-  bottom: 100%;
-  translate: -50% -0.15rem;
-  padding: 0.05rem 0.55rem;
-  border-radius: 999px;
-  font-family: Inter, sans-serif;
-  font-size: 0.6rem;
-  font-weight: 700;
-  line-height: 1.4;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  white-space: nowrap;
-  color: #fff;
-  background: var(--nais-accent);
-}
-
-/* The host tenant, highlighted in the logo row. */
-.tenant-highlight {
-  padding: 0.35rem 0.7rem;
-  border: 2px solid var(--nais-accent);
-  border-radius: 10px;
-  transform: scale(1.25);
-}
-
 /* Akt 3 and 4: plain HTML slides. */
 .welcome-row {
   display: flex;
@@ -796,11 +707,6 @@ h1:has(.new-badge) {
   justify-content: center;
   font-family: "Poppins", sans-serif;
   font-weight: 700;
-}
-
-/* Keep long titles clear of the pillar tag in the top-right corner. */
-.default-header:has(.pillar-tag) h1 {
-  padding-inline: 9rem;
 }
 
 .pg-list.pg-grid {
