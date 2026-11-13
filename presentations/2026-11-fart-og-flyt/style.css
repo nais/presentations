@@ -888,3 +888,127 @@ h1:has(.new-badge) {
   color: inherit;
   padding: 0;
 }
+
+/* Tally line under a chain: hand-offs and lead time (slide 3, mirrored on 10). */
+.tally {
+  margin: 0 auto;
+  padding: 0.4rem 1.2rem;
+  border-radius: 999px;
+  border: 1px solid var(--nais-border);
+  background: var(--nais-card);
+  font-family: "Poppins", sans-serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+/* Waiting bar that fills on click (slide 4). */
+.wait-bar {
+  position: relative;
+  height: 2.2rem;
+  border-radius: 999px;
+  background: var(--nais-card);
+  border: 1px solid var(--nais-border);
+  overflow: hidden;
+}
+
+.wait-bar span {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  padding-left: 1rem;
+  font-weight: 700;
+}
+
+.wait-fill {
+  height: 100%;
+  width: 100%;
+  transform-origin: 0 50%;
+  background: linear-gradient(90deg, #64748b, #fbbf24);
+}
+
+.wait-fill.slidev-vclick-target {
+  transition: transform 2s ease-in-out;
+}
+
+.wait-fill.slidev-vclick-hidden {
+  opacity: 1 !important;
+  transform: scaleX(0.02);
+}
+
+/* Before/after columns (slide 5). */
+.turn-col {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.turn-col h3 {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  min-height: 72px;
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  font-size: 1.3rem;
+}
+
+.turn-col > div {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0.7rem 1rem;
+  border-radius: 14px;
+  background: var(--nais-card);
+  border: 1px solid var(--nais-border);
+  border-left: 4px solid var(--nais-success);
+}
+
+.turn-col.muted {
+  opacity: 0.6;
+}
+
+.turn-col.muted > div {
+  border-left-color: #64748b;
+}
+
+.anchor-hex.small-hex {
+  width: 60px;
+  height: 69px;
+  font-size: 0.8rem;
+}
+
+/* Lesson line in the footer, shown on the slide's last click (slides 6-13). */
+.lesson {
+  display: inline-block;
+  padding: 0.2rem 1rem;
+  border-radius: 999px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  color: var(--pc, var(--nais-accent));
+  border: 1px solid
+    color-mix(in srgb, var(--pc, var(--nais-accent)) 50%, transparent);
+  background: color-mix(
+    in srgb,
+    var(--pc, var(--nais-accent)) 12%,
+    transparent
+  );
+}
+
+/* Static stat next to a CountUp: same number style. */
+.stat-static .stat-number {
+  font-family: "Poppins", sans-serif;
+  font-size: 3rem;
+}
+
+.hr-head {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  font-size: 1.1rem;
+  text-align: center;
+}
+
+.auth-chips {
+  align-items: center;
+  font-size: 0.95rem;
+}

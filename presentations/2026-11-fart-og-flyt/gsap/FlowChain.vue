@@ -1,5 +1,5 @@
 <template>
-  <div ref="root" class="chain" data-motion-self>
+  <div ref="root" class="chain" :class="tone" data-motion-self>
     <div class="track">
       <div ref="fill" class="fill" />
       <div ref="packet" class="packet" />
@@ -8,7 +8,7 @@
       v-for="(n, i) in nodes"
       :key="n.label"
       class="node"
-      :class="{ end: i === nodes.length - 1 }"
+      :class="{ end: i === nodes.length - 1 && tone !== 'before' }"
     >
       <div class="hex"><i class="lit" /><span :class="n.icon" /></div>
       <h3>{{ n.label }}</h3>
@@ -26,6 +26,8 @@ import { RISE, useSteps, POP } from "./motion.js";
 // Generic left-to-right chain. Click n lights node n and moves the packet there.
 const props = defineProps({
   nodes: { type: Array, required: true },
+  // "before": the old way; the last node is not lit green.
+  tone: { type: String, default: "" },
 });
 
 const root = ref();
@@ -143,6 +145,17 @@ useSteps((tl) => {
     var(--nais-gradient-from),
     var(--nais-gradient-to)
   );
+}
+
+.before .lit,
+.before .fill,
+.before .packet {
+  background: #64748b;
+  box-shadow: none;
+}
+
+.before .stat {
+  color: #fbbf24;
 }
 
 .node.end .lit {
