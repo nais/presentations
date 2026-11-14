@@ -206,7 +206,7 @@ clicks: 1
   <h3><span class="anchor-hex small-hex" data-anchor="hex">Team</span> Etter</h3>
   <div><span class="i-carbon-group" /> Egne team i Nav</div>
   <div><span class="i-carbon-flow" /> Teamet eier veien fra idé til produksjon</div>
-  <div><span class="i-carbon-time" /> Teamet bestemmer hva</div>
+  <div><span class="i-carbon-time" /> Teamet bestemmer hvordan</div>
 </div>
 
 <!--
