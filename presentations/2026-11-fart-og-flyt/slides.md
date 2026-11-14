@@ -71,7 +71,7 @@ clicks: 5
 ---
 
 ::header::
-<h1 class="text-3xl font-bold">Varden</h1>
+<h1 class="text-3xl font-bold">Varden (utenom jobb)</h1>
 <p class="subtitle">En KI-assistent som bor i familiens gruppechat</p>
 
 ::default::
