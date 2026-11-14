@@ -37,7 +37,11 @@ Kolonnen «Kilde» viser sliden eller komponenten som gjenbrukes. «Ut» er over
 | 11 | Sikkerheten er en del av veien | SupplyFix + AuthJourney (slått sammen) | Signering, SBOM, sårbarheter og innlogging bygd inn | Sikkerhet bygd inn, ikke en bom på veien | «Veien er et produkt, med brukere.» |
 | 12 | Plattform som produkt | Toolbox (12a) + ConsoleMock (12b) + CliDemo (12c) | Verktøykassa med Console, CLI og MCP, dokumentasjon, champions. Terminalen på egen slide | Plattform som produkt | «Og alt dette er åpent.» |
 | 12b | Console | ConsoleMock (tour, 3 klikk) | Teamoversikt for team-eksempel: helse, kostnad, apper med status, én app med sårbarheter | Ett sted å se alt | «Og for dem som liker terminalen.» |
-| 13 | Åpenhet | ny (IconCard) | Åpen kildekode, åpen dokumentasjon, #nais, nais.io | Del åpent | «Hva har det gitt?» |
+| 13 | Åpenhet | ny (IconCard) | Åpen kildekode, åpen dokumentasjon, #nais, nais.io | Del åpent | «Åpenhet handler også om hva vi bygger på.» |
+| 13a | Åpne standarder | ny (IconCard ×6) | Kubernetes, OpenTelemetry, OCI-images, SLSA/Sigstore, Postgres (CloudNativePG), Nais er åpen kildekode | Standarder framfor leverandører | «Men hvor kjører alt dette egentlig?» |
+| 13b | Hva kjører hvor | HostingMap (fortsatt-decket) | Google, Aiven (Kafka, OpenSearch, Valkey), selvdriftet (Grafana, Mimir, Loki, Tempo) | Vi vet hva som kjører hvor | «Slik er lagene bygd.» |
+| 13c | En plattform med flere lag | IsoLayers (fortsatt-decket) | Laget under byttes, appene merker det ikke | Lagene kan byttes | «Hvorfor bryr vi oss om dette?» |
+| 13d | Handlingsrom | fortsatt-decket, kortet ned | Norway East-kapasitet (digi.no), NSM Risiko 2026 s. 35. Målet er å kunne flytte, ikke å flytte | Handlingsrom, ikke flytteplan | «Hva har det gitt?» |
 
 ## Akt 3: Effekt og pris (≈ 9 min, slide 14–18)
 
@@ -53,11 +57,11 @@ Kolonnen «Kilde» viser sliden eller komponenten som gjenbrukes. «Ut» er over
 
 | # | Tittel | Kilde | Innhold | Ut |
 |---|---|---|---|---|
-| 19 | Fire lærdommer | NaisPillars (tilpasset) | Plattform som produkt, brolagt sti, tillit og eierskap, åpenhet. Formulert som noe man kan gjøre uten å være Nav | — |
+| 19 | Fem lærdommer | NaisPillars (tilpasset) | Plattform som produkt, brolagt sti, tillit og eierskap, åpenhet, åpne standarder. Formulert som noe man kan gjøre uten å være Nav | — |
 | 20 | Lett å gjøre rett | Avslutning | Tesen, «Slik slipper du utviklerne fri», «Spørsmål?» | «Takk!» |
 
 ## Ut av fortsatt-decket
 
-Klippet, Hva er Nais, Hva skjer på plattformsiden, Hvorfor kostnaden holdes nede, Hva kjører hvor, flere lag, Nettverket, Nais-teamet (blir prisen), KS Digital/Novari, Året som gikk, Nais Postgres, Retning for Console, Data og drift videre, Handlingsrom, Hvem bestemmer, Hvordan påvirke.
+Klippet, Hva er Nais, Hva skjer på plattformsiden, Hvorfor kostnaden holdes nede, Nettverket, Nais-teamet (blir prisen), KS Digital/Novari, Året som gikk, Nais Postgres, Retning for Console, Data og drift videre, Hvem bestemmer, Hvordan påvirke.
 
 Design, layout og animasjon per slide: se `DESIGN-PLAN.md`.

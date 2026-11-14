@@ -31,7 +31,7 @@ Fra Fables design-, layout- og animasjonsreview 2026-11-13, basert på kildekode
 
 - **Tre speilpar:** 2 og 14 (tallet), 3 og 10 (tellelinja), 4 og 10 (samme endring).
 - **Lærdomslinje:** én global `.lesson`-klasse i `::footer::` på slide 6–13. Den vises på slidens siste klikk og erstatter `.take`, `.caption`, `.contrast` og `.evidence`.
-- **Farger:** fire lærdomsfarger (`--pc`) erstatter de seks søyletaggene. 6–8 tillit, 9–11 brolagt sti, 12 produkt, 13 åpenhet. Slide 19 samler dem.
+- **Farger:** fem lærdomsfarger (`--pc`) erstatter de seks søyletaggene. 6–8 tillit, 9–11 brolagt sti, 12 produkt, 13 åpenhet, 13a–d åpne standarder (`#34c27a`). Slide 19 samler dem.
 - **Hero-hex** betyr teamet eller appen: 5, 9, 12, og eventuelt 18.
 - **Klikk:** ca. 30 totalt. Tung strekning er 8–12 (17 klikk). Rolige slides: 2, 4–5, 13, 16, 18, 20.
 - **FlowChain** brukes på 3, 8 og 11, ikke en fjerde gang.

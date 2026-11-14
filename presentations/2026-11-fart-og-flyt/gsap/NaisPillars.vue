@@ -1,5 +1,5 @@
 <template>
-  <div ref="root" class="pillars6" :class="{ four: items }" data-motion-self>
+  <div ref="root" class="pillars6" :class="{ four: items && items.length !== 5, five: items?.length === 5 }" data-motion-self>
     <div
       v-for="(p, i) in items || PILLARS"
       :key="p.title"
@@ -94,6 +94,29 @@ useEnter((tl) => {
   grid-template-columns: repeat(2, minmax(0, 1fr));
   max-width: 820px;
   gap: 1.5rem 2rem;
+}
+
+/* Five cards: 3 + 2, second row centred. */
+.pillars6.five {
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  max-width: 1040px;
+}
+
+.five .card {
+  grid-column: span 2;
+  padding: 1rem 1.1rem;
+}
+
+.five .card:nth-child(4) {
+  grid-column: 2 / span 2;
+}
+
+.pillars6.five .card h3 {
+  font-size: 1rem;
+}
+
+.pillars6.five .card p {
+  font-size: 0.9rem;
 }
 
 .four .card {

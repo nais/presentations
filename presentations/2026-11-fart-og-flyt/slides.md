@@ -116,7 +116,7 @@ layout: default
 Overgang: «Slik var det ikke alltid.»
 
 - ≈ 9 000 prodsettinger per uke i Nav, bare produksjon (Mimir, oktober 2026)
-- Eneste gang tallet teller opp. Det kommer tilbake på slide 18
+- Eneste gang tallet teller opp. Det kommer tilbake på slide 22
 - 150 utviklingsteam er et anslag. 154 team har prodsatt siste 28 dager (Mimir), men ikke alle er utviklingsteam
 -->
 
@@ -497,11 +497,135 @@ layout: default
 <span class="lesson" style="--pc: #5cb2da">Del åpent</span>
 
 <!--
-Overgang: «Hva har det gitt?»
+Overgang: «Åpenhet handler også om hva vi bygger på.»
 
 - Kildekoden ligger på github.com/nais, dokumentasjonen på docs.nais.io
 - #nais på Slack: utviklerne spør, Nais-teamet og andre team svarer
 - Åpenhet gjør at andre kan gjenbruke, og at feil blir funnet tidlig
+-->
+
+---
+layout: default
+---
+
+::header::
+<h1 class="text-3xl font-bold">Åpne standarder</h1>
+<p class="subtitle">Standarder framfor leverandører. Kompetanse og verktøy flytter med.</p>
+
+::default::
+<div class="std-grid card-row grid grid-cols-3 gap-4 w-full max-w-5xl mx-auto">
+  <IconCard icon="i-carbon-kubernetes" title="Kubernetes" description="Samme API i alle skyer og i eget datasenter." color="blue" />
+  <IconCard icon="i-carbon-activity" title="OpenTelemetry" description="Logger, metrikker og traces i et åpent format." color="go-blue" />
+  <IconCard icon="i-carbon-container-software" title="OCI-images" description="Bygges én gang, kjører hvor som helst." />
+  <IconCard icon="i-carbon-certificate-check" title="SLSA og Sigstore" description="Signering, attestering og SBOM etter åpne standarder." color="yellow" />
+  <IconCard icon="i-carbon-data-base" title="Postgres" description="Vanlig Postgres, driftet med CloudNativePG." color="blue" />
+  <IconCard icon="i-carbon-logo-github" title="Nais er åpen kildekode" description="Hele plattformen ligger på github.com/nais." color="go-blue" />
+</div>
+
+::footer::
+<span class="lesson" style="--pc: #34c27a">Standarder framfor leverandører</span>
+
+<style>
+.std-grid :deep(.icon-card) { padding: 0.9rem 1rem; }
+.std-grid :deep(.icon-card .icon-wrapper) { width: 44px; height: 44px; margin-bottom: 0.5rem; }
+.std-grid :deep(.icon-card .icon) { font-size: 1.4rem; }
+.std-grid :deep(.icon-card .card-title) { margin: 0 0 0.25rem; }
+.std-grid :deep(.icon-card .card-description) { margin: 0; }
+</style>
+
+<!--
+Overgang: «Men hvor kjører alt dette egentlig?»
+
+- Nais bygger på åpne standarder, ikke på én leverandørs egne tjenester
+- Kubernetes (CNCF), OpenTelemetry (CNCF), OCI-imagespesifikasjonen (opencontainers.org), SLSA (slsa.dev) og Sigstore (sigstore.dev)
+- Nais Postgres bruker CloudNativePG (cloudnative-pg.io), i preview
+- Bygget lager SBOM og signerer med nais/docker-build-push
+- Poenget for ledere: kompetansen og verktøyene er ikke låst til én leverandør
+-->
+
+---
+layout: default
+clicks: 2
+---
+
+::header::
+<h1 class="text-3xl font-bold">Hva kjører hvor</h1>
+<p class="subtitle">Vi vet hvilke leverandører vi er avhengige av</p>
+
+::default::
+<HostingMap />
+
+::footer::
+<span v-click="2" class="lesson" style="--pc: #34c27a">Vi vet hva som kjører hvor</span>
+
+<!--
+Overgang: «Slik er lagene bygd.»
+
+- Google Cloud: GKE, Cloud SQL, buckets, BigQuery. Aiven: Kafka, OpenSearch, Valkey
+- Nais drifter selv: Console og API, ingress, naisdevice og observability-stakken (Grafana, Mimir, Loki, Tempo)
+- Klikk 2: Nais Postgres (CloudNativePG, i preview) skal over tid erstatte Cloud SQL, for kostnad og suverenitet. Nais Buckets utredes
+- Dataene ligger i europe-north1 (Finland)
+- Vær ærlig: vi er avhengige av amerikanske skyleverandører. Poenget er at vi vet hvor
+-->
+
+---
+layout: default
+clicks: 4
+---
+
+::header::
+<h1 class="text-3xl font-bold">En plattform med flere lag</h1>
+<p class="subtitle">Laget under kan byttes uten at appene merker det</p>
+
+::default::
+<IsoLayers />
+
+::footer::
+<span v-click="4" class="lesson" style="--pc: #34c27a">Lagene kan byttes</span>
+
+<!--
+Overgang: «Hvorfor bryr vi oss om dette?»
+
+- Lagene bygges nedenfra: infrastruktur fra skyleverandøren, Kubernetes, Nais og teamenes apper
+- Klikk 1: pods fordelt over tre soner i én region. Klikk 2: de skalerer ut
+- Klikk 3: én sone faller ut, og podene startes i de andre. Appen merker det ikke
+- Klikk 4: laget nederst byttes (eget datasenter til Google Cloud). Nais startet i eget datasenter i 2016 og kjører i dag i Google Cloud. Appene merket ikke flyttingen
+-->
+
+---
+layout: default
+clicks: 2
+---
+
+::header::
+<h1 class="text-3xl font-bold">Handlingsrom</h1>
+<p class="subtitle">Målet er ikke å flytte, men å kunne.</p>
+
+::default::
+<div class="hr-scale">
+  <div v-click="1" class="hr-col hr-press">
+    <div><span class="i-carbon-cloud-offline" /><span><b>Kapasitet:</b> Microsoft har sagt til Digdir at Azure Norway East ikke lenger kan skalere for Altinn <small class="src">Kilde: Digdir via digi.no, 4. nov. 2026</small></span></div>
+    <div><span class="i-carbon-warning-alt" /><span><b>NSM:</b> «Planlegg for å kunne bytte ut skyleverandør …» <small class="src">Kilde: NSM Risiko 2026, s. 35</small></span></div>
+  </div>
+  <div v-click="2" class="hr-mid"><span class="i-carbon-arrow-right" /></div>
+  <div v-click="2" class="hr-col hr-room">
+    <div><span class="i-carbon-checkmark-filled" /><span><b>Samme manifest</b> uansett hva som ligger under</span></div>
+    <div><span class="i-carbon-checkmark-filled" /><span><b>Vi har flyttet før:</b> fra eget datasenter til Google Cloud</span></div>
+  </div>
+</div>
+
+::footer::
+<span v-click="2" class="lesson" style="--pc: #34c27a">Handlingsrom, ikke flytteplan</span>
+
+<!--
+Overgang: «Hva har det gitt?»
+
+- Dette er ikke en plan om å flytte. Vi vil ha handlingsrom hvis vilkår, pris eller sikkerhetssituasjonen endrer seg
+- Hold det saklig. Poenget er handlingsrom, ikke en bestemt leverandør
+- Norway East: digi.no, 4. nov. 2026, «Microsoft sliter med kapasiteten: – Norway East er ikke skalerbart lenger» (betalingsmur): https://www.digi.no/it-bransjen/microsoft-sliter-med-kapasiteten-norway-east-er-ikke-skalerbart-lenger/7181584
+  - Digdirs teknologidirektør Andreas Rafaelsen: «I praksis sier Microsoft til oss at Norway East ikke er et skalerbart datasenter lenger»
+- NSM Risiko 2026, side 35, «Omfattende bruk av et fåtall utenlandske skytjenester». Anbefaling: «Planlegg for å kunne bytte ut skyleverandør effektivt og med kjent ressursbruk og kostnad dersom behovet skulle oppstå.» https://nsm.no/getfile.php/1314962-1770630853/NSM/Filer/Dokumenter/Rapporter/Risiko%202026.pdf
+- Høyre side: appene beskriver hva de trenger i manifestet, ikke hvilken sky de kjører i. Nais startet i eget datasenter i 2016 og kjører i dag i Google Cloud
 -->
 
 ---
@@ -620,7 +744,7 @@ layout: default
 ---
 
 ::header::
-<h1 class="text-3xl font-bold">Fire lærdommer</h1>
+<h1 class="text-3xl font-bold">Fem lærdommer</h1>
 <p class="subtitle">Ting man kan gjøre uten å være Nav</p>
 
 ::default::
@@ -629,13 +753,14 @@ layout: default
   { title: 'Brolagt sti', color: '#FF9100', icon: 'i-carbon-road', text: 'Gjør den trygge stien til den enkleste, med sikkerheten bygd inn.' },
   { title: 'Plattform som produkt', color: '#9b6fd6', icon: 'i-carbon-tool-box', text: 'Behandle utviklerne som brukere: verktøy, dokumentasjon og champions.' },
   { title: 'Åpenhet', color: '#5cb2da', icon: 'i-carbon-share', text: 'Del kode, dokumentasjon og feil åpent.' },
+  { title: 'Åpne standarder', color: '#34c27a', icon: 'i-carbon-migrate', text: 'Bygg på standarder, ikke leverandører. Da kan man flytte om det trengs.' },
 ]" />
 
 <!--
 Overgang: «Til slutt: tesen.»
 
-- Samler lærdomslinjene fra Akt 2 i de samme fire fargene
-- Tillit og eierskap: slide 8–10. Brolagt sti: 11–13. Plattform som produkt: 14–16. Åpenhet: 17
+- Samler lærdomslinjene fra Akt 2 i de samme fem fargene
+- Tillit og eierskap: slide 8–10. Brolagt sti: 11–13. Plattform som produkt: 14–16. Åpenhet: 17. Åpne standarder: 18–21
 - Ingen av dem krever at man er like stor som Nav. Start med én
 -->
 
