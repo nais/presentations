@@ -56,7 +56,7 @@ import avatar from "./assets/team/Starefossen.png";
 </script>
 
 <!--
-Overgang: «Litt mer om Varden, for den sier noe om hvordan jeg tenker.»
+Overgang: «Litt mer om Varden.» (bytt til varden.flaatten.org i nettleseren; Varden-sliden er skjult)
 
 - Jobber i Nais-teamet i Nav. Innførte OpenTelemetry i Nav, snakker om Nais på konferanser og i podcaster, er kontakt for Nais as a Service og leder KI-satsingen i Nav
 - Utenfor jobb: Varden (varden.flaatten.org), en KI-assistent familien snakker med i iMessage. Bygd på OpenClaw og Gemini, kjører på en Mac mini og et Kubernetes-cluster hjemme
@@ -67,6 +67,7 @@ Overgang: «Litt mer om Varden, for den sier noe om hvordan jeg tenker.»
 
 ---
 layout: default
+hide: true
 clicks: 5
 ---
 
