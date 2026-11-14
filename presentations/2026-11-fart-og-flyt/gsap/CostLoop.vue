@@ -189,8 +189,13 @@ useSteps((tl) => {
     )
     .fromTo(
       q(".diff code.add"),
-      { backgroundColor: "rgba(63,185,80,0.65)" },
-      { backgroundColor: "rgba(63,185,80,0.18)", duration: 0.8, stagger: 0.1 },
+      // PrCard sets the line background with !important, so flash via an inset shadow.
+      { boxShadow: "inset 0 0 0 99px rgba(63,185,80,0.5)" },
+      {
+        boxShadow: "inset 0 0 0 99px rgba(63,185,80,0)",
+        duration: 0.8,
+        stagger: 0.1,
+      },
       "<",
     )
     .to(

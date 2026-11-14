@@ -187,6 +187,7 @@ useSteps((tl) => {
 <style scoped>
 .manifest {
   position: relative;
+  min-height: 416px; /* tallest step; stops re-centring between clicks */
   display: grid;
   grid-template-columns: 1.05fr 1fr;
   gap: 1.5rem;
