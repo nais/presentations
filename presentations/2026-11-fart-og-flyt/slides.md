@@ -271,7 +271,8 @@ clicks: 3
 
 ::default::
 <div class="flex flex-col gap-2 w-full">
-  <PrFlow title="Rett skrivefeil i søknadsteksten" file="src/tekster.ts" :diff="[
+  <!-- zoom shrinks layout height too, so tally and footer pill fit. -->
+  <PrFlow style="zoom: 0.9" title="Rett skrivefeil i søknadsteksten" file="src/tekster.ts" :diff="[
     '- Du må sende søknaden innen 14 dagr.',
     '+ Du må sende søknaden innen 14 dager.',
   ]" />
