@@ -82,6 +82,7 @@ useEnter((tl) => {
 <style scoped>
 .cli {
   min-height: 15rem;
+  font-size: 16px;
 }
 
 .step + .step {

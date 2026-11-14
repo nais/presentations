@@ -2,8 +2,8 @@
   <div ref="root" class="hunt" data-motion-self>
     <section class="panel chart">
       <header>
-        Feilrate <span ref="alert" class="badge bad">Varsel</span
-        ><span ref="ok" class="badge good">Rettet</span>
+        Feilrate <span ref="alert" class="badge bad">Varsel 10.02</span
+        ><span ref="ok" class="badge good">Rettet 10.14</span>
       </header>
       <svg viewBox="0 0 300 140" aria-hidden="true">
         <path class="axis" d="M10 125 H290" />
@@ -114,7 +114,9 @@ useSteps((tl) => {
     .addLabel("s3")
     .to(fix.value, { drawSVG: "100%", duration: 0.8, ease: "power2.out" })
     .to(alert.value, { autoAlpha: 0, scale: 0.6, duration: 0.3 }, "<")
-    .to(ok.value, { autoAlpha: 1, scale: 1, ease: POP }, "<0.3")
+    // Drop the faded badge from layout so «Rettet» isn't pushed right.
+    .set(alert.value, { display: "none" }, "<0.3")
+    .to(ok.value, { autoAlpha: 1, scale: 1, ease: POP }, "<")
     .addLabel("s4");
   return tl;
 }, props.offset);

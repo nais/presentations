@@ -1,8 +1,5 @@
 <template>
   <div ref="root" class="years" data-motion-self>
-    <div class="head">
-      <span class="metric">{{ METRICS[metric].label }}</span>
-    </div>
     <div class="bars" :style="{ height: height + 'px' }">
       <div v-if="marker" class="col marker">
         <span class="val">{{ marker.text }}</span>
@@ -11,7 +8,11 @@
       </div>
       <div v-for="y in rows" :key="y.year" class="col">
         <span class="val">{{
-          y.value === null || !labels ? "" : fmt(y.value)
+          y === rows.at(-1) && lastLabel
+            ? lastLabel
+            : y.value === null || !labels
+              ? ""
+              : fmt(y.value)
         }}</span>
         <div
           class="bar"
@@ -93,6 +94,8 @@ const props = defineProps({
   metric: { type: String, default: "deploys" },
   // Value labels on the bars. Off where the number is already shown nearby.
   labels: { type: Boolean, default: true },
+  // Text on the last bar, shown even when labels is false.
+  lastLabel: { type: String, default: "" },
   height: { type: Number, default: 84 },
   // Optional first column with a text label, e.g. { year: "Før", text: "4 i året" }.
   marker: { type: Object, default: null },
@@ -143,18 +146,6 @@ useEnter((tl) => {
   width: 100%;
   max-width: 760px;
   margin: 0 auto;
-}
-
-.head {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 0.4rem;
-}
-
-.metric {
-  font-weight: 700;
-  font-size: 0.9rem;
 }
 
 .bars {
