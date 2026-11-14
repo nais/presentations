@@ -530,7 +530,7 @@ layout: default
 </div>
 
 <!--
-Overgang: «Og det har kostet.»
+Overgang: «Hvem står bak?»
 
 - Istio til Linkerd: nais/blog, «Changing service mesh» (changing-service-mesh.md, 4. mai 2021)
 - Tilgangsstyring: bygd fire ganger, i repoene named, terje, tobac og rbac-sync. Alle er arkivert
@@ -543,7 +543,7 @@ layout: default
 ---
 
 ::header::
-<h1 class="text-3xl font-bold">Prisen</h1>
+<h1 class="text-3xl font-bold">Teamet bak</h1>
 <p class="subtitle">15 personer holder plattformen for ≈ 150 team. Totalt ≈ 150 årsverk (anslag) siden 2016.</p>
 
 ::default::
