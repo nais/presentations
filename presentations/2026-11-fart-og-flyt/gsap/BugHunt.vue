@@ -130,7 +130,7 @@ useSteps((tl) => {
   width: 100%;
   max-width: 960px;
   margin: 0 auto;
-  align-items: start;
+  align-items: stretch;
 }
 
 .panel {
@@ -155,6 +155,7 @@ header {
   border-radius: 999px;
   font-size: 0.8rem;
   color: #fff;
+  white-space: nowrap;
 }
 
 .badge.bad {
