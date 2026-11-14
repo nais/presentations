@@ -17,11 +17,52 @@ transition: fade
 <p class="text-sm mt-6 opacity-70">Hans Kristian Flaatten · Nais-teamet i Nav</p>
 
 <!--
-Overgang: «Jeg starter med et tall.»
+Overgang: «Først: hvem står her?»
 
 - Hei, jeg heter Hans Kristian og jobber i Nais-teamet i Nav
 - Tesen: lett å gjøre rett. Den kommer tilbake på slutten
 - Publikum er blandet: ledere og utviklere. Ingen demo, bare animasjoner
+-->
+
+---
+layout: default
+---
+
+::header::
+<h1 class="text-3xl font-bold">Hvem er jeg</h1>
+<p class="subtitle">Hans Kristian Flaatten, Nais-teamet i Nav</p>
+
+::default::
+<div class="about">
+  <div class="about-me anim-item">
+    <HexagonImage :src="avatar" alt="Hans Kristian Flaatten" size="8rem" />
+    <ul>
+      <li><span class="i-carbon-cloud-services" /> Bygger og drifter Nais</li>
+      <li><span class="i-carbon-chart-line" /> Innførte OpenTelemetry i Nais</li>
+      <li><span class="i-carbon-microphone" /> Foredrag på KubeCon og JavaZone</li>
+      <li><span class="i-carbon-partnership" /> Kontakt for Nais as a Service</li>
+      <li><span class="i-carbon-bot" /> Leder KI-satsingen i Nais</li>
+    </ul>
+  </div>
+  <div class="about-off anim-item">
+    <b>Utenfor jobb</b>
+    <div class="off-card"><span class="i-carbon-home" /><div><b>Varden</b><p>KI-assistent for familien i iMessage: morgenmelding, ukeplan og barneradioen Morgenrådet.</p></div></div>
+    <div class="off-card"><span class="i-carbon-calendar" /><div><b>NisseKomm</b><p>Adventskalender-app til barna, med video, radio og spill.</p></div></div>
+  </div>
+</div>
+
+<script setup>
+import avatar from "./assets/team/Starefossen.png";
+</script>
+
+<!--
+Overgang: «Jeg starter med et tall.»
+
+- Jobber i Nais-teamet i Nav. Innførte OpenTelemetry, snakker om Nais på KubeCon og JavaZone hvert år, er kontakt for Nais as a Service og leder KI-satsingen i Nais
+- Utenfor jobb: Varden (varden.flaatten.org), en KI-assistent familien snakker med i iMessage. Bygd på OpenClaw og Gemini, kjører på en Mac mini og et Kubernetes-cluster hjemme
+- NisseKomm: adventskalender-app jeg har laget til barna. Ikke vis innhold, figurer eller historie
+- Ikke nevn barnas navn, alder, skole eller klubber
+- TODO: skjermbilde av NisseKomm når Hans har godkjent det i NisseKomm-sesjonen
 -->
 
 ---
@@ -42,7 +83,7 @@ layout: default
 Overgang: «Slik var det ikke alltid.»
 
 - ≈ 9 000 prodsettinger per uke i Nav, bare produksjon (Mimir, oktober 2026)
-- Eneste gang tallet teller opp. Det kommer tilbake på slide 15
+- Eneste gang tallet teller opp. Det kommer tilbake på slide 16
 - 150 utviklingsteam er et anslag. 154 team har prodsatt siste 28 dager (Mimir), men ikke alle er utviklingsteam
 -->
 
@@ -288,7 +329,7 @@ clicks: 3
 <!--
 Overgang: «Men uten bom, hvordan ivaretar vi sikkerheten?»
 
-- Samme endring som før: rettelsen fra slide 4. Speilet mot slide 3: null overleveringer, minutter i stedet for måneder
+- Samme endring som før: rettelsen fra slide 5. Speilet mot slide 4: null overleveringer, minutter i stedet for måneder
 - Klikk 1: sjekker og godkjenning. Klikk 2: merge, så bygger nais/docker-build-push med SBOM og signering, og nais apply sender manifestet til prod. Klikk 3: PR-en viser at den er prodsatt
 - Copilot-agenten åpner PR-en. Et menneske godkjenner og merger
 - Kilde for flyten: docs.nais.io, «Build and deploy»
@@ -417,7 +458,7 @@ Overgang: «Fart er også å rette feil fort.»
 
 - Kurven er et anslag: formen følger Navs årlige snitt av prodsettinger, skalert slik at 2026 ender på dagens ≈ 9 000 i prod (Mimir, oktober 2026)
 - Si «anslag» høyt. Bare 2026 er målt
-- «Før»: fire store releaser i året, som på slide 3
+- «Før»: fire store releaser i året, som på slide 4
 -->
 
 ---
@@ -532,7 +573,7 @@ layout: default
 Overgang: «Til slutt: tesen.»
 
 - Samler lærdomslinjene fra Akt 2 i de samme fire fargene
-- Tillit og eierskap: slide 6–8. Asfaltert vei: 9–11. Plattform som produkt: 12–13. Åpenhet: 14
+- Tillit og eierskap: slide 7–9. Asfaltert vei: 10–12. Plattform som produkt: 13–14. Åpenhet: 15
 - Ingen av dem krever at man er like stor som Nav. Start med én
 -->
 
