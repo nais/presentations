@@ -1,0 +1,939 @@
+/* nais.io Light Theme */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Poppins:wght@400;600;700;900&display=swap");
+
+:root {
+  /* nais.io brand palette — light theme */
+  --nais-bg: #ffffff;
+  --nais-surface: #f1f5f9;
+  --nais-card: #f8fafc;
+  --nais-text: #0f172a;
+  --nais-text-secondary: #64748b;
+  --nais-heading: #0f172a;
+  --nais-accent: #e8384f;
+  --nais-accent-hover: #dc2626;
+  --nais-accent-light: #fef2f2;
+  --nais-border: #e2e8f0;
+  --nais-highlight: #e8384f;
+  --nais-gradient-from: #e8384f;
+  --nais-gradient-to: #dc2626;
+  --nais-code-bg: #f1f5f9;
+  --nais-success: #10b981;
+
+  --slidev-theme-primary: var(--nais-accent);
+}
+
+html {
+  background: var(--nais-bg);
+  color: var(--nais-text);
+}
+
+/* Typography */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  color: var(--nais-heading);
+}
+
+body,
+p,
+li {
+  font-family: "Inter", sans-serif;
+  color: var(--nais-text);
+}
+
+code,
+pre,
+.font-mono {
+  font-family: "JetBrains Mono", monospace;
+}
+
+/* Slides are transparent; the background lives in global-bottom.vue so it
+   stays put between slides. */
+.slidev-layout,
+.slidev-page > div {
+  background: transparent;
+  position: relative;
+}
+
+.slidev-layout::before,
+.slidev-page > div::before {
+  display: none;
+}
+
+/* Disable the second pseudo-element layer entirely */
+.slidev-layout::after,
+.slidev-page > div::after {
+  display: none;
+}
+
+/* Content above dot grid */
+.slidev-layout > *,
+.slidev-page > div > * {
+  position: relative;
+  z-index: 2;
+}
+
+/* Accent utilities */
+.text-accent {
+  color: var(--nais-accent);
+}
+
+.text-muted {
+  color: var(--nais-text-secondary);
+}
+
+.bg-surface {
+  background: var(--nais-surface);
+}
+
+.bg-card {
+  background: var(--nais-card);
+}
+
+.border-default {
+  border-color: var(--nais-border);
+}
+
+/* Stat emphasis */
+.stat-number {
+  font-size: 4rem;
+  font-weight: 700;
+  color: var(--nais-accent);
+  font-family: "JetBrains Mono", monospace;
+  line-height: 1;
+}
+
+/* Cards */
+.nais-card {
+  background: var(--nais-card);
+  border: 1px solid var(--nais-border);
+  border-radius: 1rem;
+  padding: 1.5rem;
+}
+
+.nais-card.accent {
+  border-color: var(--nais-accent);
+}
+
+/* Quote/callout styling */
+.callout {
+  background: var(--nais-surface);
+  border-left: 4px solid var(--nais-accent);
+  padding: 1.5rem;
+  margin: 1rem 0;
+  font-style: italic;
+  border-radius: 0 0.5rem 0.5rem 0;
+  color: var(--nais-text);
+}
+
+/* Benefits list */
+.benefits-list {
+  list-style: none;
+  padding: 0;
+}
+
+.benefits-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+  font-size: 0.95rem;
+}
+
+.benefits-list .check {
+  color: var(--nais-success);
+  flex-shrink: 0;
+}
+
+/* Subtitle */
+.subtitle {
+  color: var(--nais-text-secondary);
+  font-size: 1.2rem;
+  margin-top: -0.5rem;
+}
+
+/* Info card */
+.info-card {
+  background: var(--nais-surface);
+  border: 1px solid var(--nais-border);
+  border-radius: 0.75rem;
+  padding: 1rem 1.25rem;
+}
+
+/* Badge */
+.tool-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--nais-surface);
+  border: 1px solid var(--nais-border);
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+}
+
+/* Icon badge – colored circle behind icon */
+.icon-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 0.75rem;
+  flex-shrink: 0;
+}
+
+.icon-badge.accent {
+  background: var(--nais-accent-light);
+  color: var(--nais-accent);
+}
+
+.icon-badge.blue {
+  background: #eff6ff;
+  color: #3b82f6;
+}
+
+.icon-badge.green {
+  background: #ecfdf5;
+  color: #10b981;
+}
+
+.icon-badge.purple {
+  background: #f5f3ff;
+  color: #8b5cf6;
+}
+
+.icon-badge.amber {
+  background: #fffbeb;
+  color: #f59e0b;
+}
+
+/* Screenshot placeholder */
+.screenshot-placeholder {
+  background: linear-gradient(135deg, var(--nais-surface) 0%, #e2e8f0 100%);
+  border: 2px dashed var(--nais-border);
+  border-radius: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 0.5rem;
+  color: var(--nais-text-secondary);
+  font-size: 0.8rem;
+  min-height: 180px;
+  position: relative;
+  overflow: hidden;
+}
+
+.screenshot-placeholder img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 0.75rem;
+}
+
+/* Feature card with accent left border */
+.feature-card {
+  background: var(--nais-card);
+  border: 1px solid var(--nais-border);
+  border-left: 4px solid var(--nais-accent);
+  border-radius: 0 0.75rem 0.75rem 0;
+  padding: 1.25rem 1.5rem;
+  text-align: left;
+}
+
+.feature-card.blue {
+  border-left-color: #3b82f6;
+}
+
+.feature-card.green {
+  border-left-color: #10b981;
+}
+
+.feature-card.purple {
+  border-left-color: #8b5cf6;
+}
+
+.feature-card.amber {
+  border-left-color: #f59e0b;
+}
+
+/* Section number pill */
+.section-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background: var(--nais-accent);
+  color: white;
+  font-weight: 700;
+  font-size: 0.9rem;
+  font-family: "JetBrains Mono", monospace;
+  flex-shrink: 0;
+}
+
+/* Gradient header bar */
+.gradient-bar {
+  height: 4px;
+  background: linear-gradient(
+    90deg,
+    var(--nais-gradient-from),
+    var(--nais-gradient-to)
+  );
+  border-radius: 2px;
+  margin: 0.5rem auto 0;
+  width: 80px;
+}
+
+/* Tag / chip */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.chip.accent {
+  background: var(--nais-accent-light);
+  color: var(--nais-accent);
+}
+
+.chip.blue {
+  background: #eff6ff;
+  color: #3b82f6;
+}
+
+.chip.green {
+  background: #ecfdf5;
+  color: #10b981;
+}
+
+.chip.purple {
+  background: #f5f3ff;
+  color: #8b5cf6;
+}
+
+/* ---- Deck layout fixes (deck-local; shared layouts untouched) ---- */
+
+/* Centre content vertically and keep bullet lists in a centred column. */
+.default-content {
+  justify-content: center;
+}
+
+.default-content > ul,
+.cta-content > ul {
+  align-self: center;
+  width: auto;
+  max-width: 46rem;
+  margin: 0 auto !important;
+}
+
+/* Cards in one balanced row, whatever the count. */
+.card-row {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.card-row > * {
+  flex: 1 1 0;
+  max-width: 280px;
+  background: var(--nais-card);
+  border: 1px solid var(--nais-border);
+  border-radius: 16px;
+}
+
+/* Pillars layout: our HexRow draws its own connector. */
+.pillars-line-container {
+  display: none;
+}
+
+.pillars-items > .hex-row,
+.pillars-items > .card-row {
+  flex: 1;
+}
+
+/* Slidev v-click uses the same motion as the GSAP animations (power3.out). */
+.slidev-vclick-target {
+  transition:
+    opacity 0.7s cubic-bezier(0.165, 0.84, 0.44, 1),
+    transform 0.7s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.slidev-vclick-hidden {
+  transform: translateY(24px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .slidev-vclick-target {
+    transition: none;
+  }
+
+  .slidev-vclick-hidden {
+    transform: none;
+  }
+}
+
+.cta-header {
+  text-align: center;
+}
+
+.pillars-items > .story {
+  flex: 1;
+}
+
+.who-chip {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.7rem 1.2rem;
+  border-radius: 999px;
+  background: #f0fdf4;
+  border: 2px solid #bbf7d0;
+  font-family: "Poppins", sans-serif;
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: #166534;
+}
+
+/* ---- Dark theme inspired by nais.io (deck-local; shared files untouched) ---- */
+:root {
+  --nais-bg: #0b1120;
+  --nais-surface: #131d33;
+  --nais-card: #111a2e;
+  --nais-text: #e2e8f0;
+  --nais-text-secondary: #b4c0d3;
+  --nais-heading: #f8fafc;
+  --nais-border: #263352;
+  --nais-accent: #ff3377;
+  --nais-accent-hover: #ff5c93;
+  --nais-accent-light: rgb(255 51 119 / 0.14);
+  --nais-highlight: #ff3377;
+  --nais-gradient-from: #ff3377;
+  --nais-gradient-to: #e8384f;
+  --nais-code-bg: #0f172a;
+  --nais-success: #34d399;
+}
+
+html,
+body,
+#app {
+  background: var(--nais-bg);
+  color: var(--nais-text);
+}
+
+.subtitle {
+  color: var(--nais-text-secondary) !important;
+}
+
+/* Something upstream dims subtitles to 50 %; keep them readable on weak
+   projectors (AA, 4.5:1 or better on the dark background). */
+html .slidev-layout .subtitle {
+  opacity: 1;
+}
+
+.who-chip {
+  background: rgb(52 211 153 / 0.12) !important;
+  border-color: rgb(52 211 153 / 0.45) !important;
+  color: #a7f3d0 !important;
+}
+
+.tenant-logos {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2.5rem;
+  opacity: 0.9;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.3s;
+}
+
+/* Short sourced quotes on slides. */
+.evidence {
+  margin: 0.2rem auto 0;
+  max-width: 60rem;
+  font-size: 0.82rem;
+  line-height: 1.35;
+  color: var(--nais-text);
+}
+
+.evidence p {
+  margin: 0.15rem 0;
+  text-align: center;
+}
+
+.evidence span {
+  margin-left: 0.4rem;
+  font-size: 0.72rem;
+  color: var(--nais-text-secondary);
+}
+
+.incoming-logo {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.1rem;
+  padding: 0.2rem 0.5rem;
+  border: 1px dashed #64748b;
+  border-radius: 8px;
+}
+
+.incoming-logo small {
+  white-space: nowrap;
+  font-size: 0.65rem;
+  color: var(--nais-text-secondary);
+}
+
+.dora {
+  margin: 0.6rem auto 0;
+  padding: 0.5rem 1.2rem;
+  border-radius: 12px;
+  background: var(--nais-card);
+  border: 1px solid var(--nais-border);
+  text-align: center;
+  font-size: 1.05rem;
+}
+
+.dora b {
+  font-family: "Poppins", sans-serif;
+  font-size: 1.5rem;
+  color: var(--nais-accent);
+}
+
+.night {
+  padding: 0.6rem 0.9rem;
+  border-radius: 12px;
+  background: var(--nais-card);
+  border: 1px solid var(--nais-border);
+  font-size: 0.9rem;
+}
+
+.night p {
+  margin: 0.15rem 0;
+}
+
+/* Day 90 lands as the wait bar finishes filling. */
+.night p.slidev-vclick-target {
+  transition-delay: 1.3s;
+}
+
+.night b {
+  font-family: "JetBrains Mono", monospace;
+  color: var(--nais-accent);
+  margin-right: 0.5rem;
+}
+
+/* View transitions (Chrome). Names apply only while a transition runs, so
+   the GSAP entrances still run on normal navigation and in other browsers. */
+:active-view-transition .slidev-layout h1 {
+  view-transition-name: slide-title;
+}
+:active-view-transition .slidev-layout .subtitle {
+  view-transition-name: slide-subtitle;
+}
+
+::view-transition-group(*) {
+  animation-duration: 0.6s;
+  animation-timing-function: cubic-bezier(0.65, 0, 0.35, 1);
+}
+/* The old title leaves before the new one arrives, so they never overlap. */
+::view-transition-old(slide-title),
+::view-transition-old(slide-subtitle) {
+  animation: vt-title-out 0.3s ease-in both;
+}
+::view-transition-new(slide-title),
+::view-transition-new(slide-subtitle) {
+  animation: vt-title-in 0.4s 0.3s ease-out both;
+}
+/* The whole old slide fades out before the new one fades in: no ghosting. */
+::view-transition-old(root) {
+  animation: vt-fade-out 0.3s ease-in both;
+}
+::view-transition-new(root) {
+  animation: vt-fade-in 0.4s 0.25s ease-out both;
+}
+@keyframes vt-fade-out {
+  to {
+    opacity: 0;
+  }
+}
+@keyframes vt-fade-in {
+  from {
+    opacity: 0;
+  }
+}
+@keyframes vt-title-out {
+  to {
+    transform: translateY(-24px);
+    opacity: 0;
+  }
+}
+@keyframes vt-title-in {
+  from {
+    transform: translateY(24px);
+    opacity: 0;
+  }
+}
+/* Akt 3 and 4: plain HTML slides. */
+.welcome-row {
+  display: flex;
+  gap: 3rem;
+}
+
+.welcome-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 1.5rem 3rem;
+  border-radius: 16px;
+  background: var(--nais-card);
+  border: 1px solid var(--nais-border);
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+}
+
+.year-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.8rem;
+}
+
+.ms {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  /* Date on top, then a fixed two-line text row: every card lines up. */
+  grid-template-rows: auto calc(2 * 1.3 * 0.85rem);
+  align-content: start;
+  column-gap: 0.7rem;
+  row-gap: 0.3rem;
+  align-items: start;
+  padding: 0.6rem 0.9rem;
+  border-radius: 12px;
+  background: var(--nais-card);
+  border: 1px solid var(--nais-border);
+}
+
+.ms b {
+  grid-column: 1 / -1;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.75rem;
+  color: var(--nais-highlight);
+}
+
+.ms span {
+  font-size: 1.4rem;
+}
+
+.ms p {
+  margin: 0;
+  font-size: 0.85rem;
+  line-height: 1.3;
+}
+
+.cleared {
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--nais-text-secondary);
+  opacity: 0.75;
+}
+
+.pg-list,
+.check-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.pg-list > div,
+.check-list > div {
+  display: flex;
+  gap: 0.7rem;
+  align-items: baseline;
+  font-size: 0.9rem;
+}
+
+.pg-list b,
+.check-list b {
+  white-space: nowrap;
+}
+
+.pg-code {
+  padding: 1rem 1.2rem;
+  border-radius: 12px;
+  background: var(--nais-surface);
+  font-size: 0.8rem;
+}
+
+.mcp-tools {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  font-size: 0.8rem;
+}
+
+/* Small hex the travelling hero hex lands on (data-anchor="hex"). */
+.anchor-hex {
+  flex: none;
+  align-self: center;
+  width: 84px;
+  height: 96px;
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  background: linear-gradient(
+    135deg,
+    var(--nais-gradient-from),
+    var(--nais-gradient-to)
+  );
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+}
+
+.pg-list.pg-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.9rem 2rem;
+}
+
+.pg-list.pg-grid > div {
+  max-width: none;
+  padding: 0.6rem 0.9rem;
+}
+
+.check-list > div {
+  max-width: none;
+  padding: 0.5rem 0.8rem;
+}
+
+.check-list .src,
+.hr-col .src {
+  display: block;
+  font-size: 0.7em;
+  opacity: 0.7;
+}
+
+/* Handlingsrom: press on the left, room to act on the right. Equal rows. */
+.hr-scale {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 1.5rem;
+  align-items: stretch;
+  width: 100%;
+  max-width: 1040px;
+  margin: 0 auto;
+}
+
+.hr-col {
+  display: grid;
+  grid-template-rows: repeat(4, 1fr);
+  gap: 0.7rem;
+}
+
+.hr-col > div {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0.6rem 0.9rem;
+  border-radius: 14px;
+  background: var(--nais-card);
+  border: 1px solid var(--nais-border);
+  font-size: 0.88rem;
+}
+
+.hr-col > div > span:first-child {
+  flex: none;
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.hr-press > div {
+  border-left: 4px solid var(--nais-accent);
+}
+
+.hr-press > div > span:first-child {
+  color: var(--nais-accent);
+}
+
+.hr-room > div {
+  border-left: 4px solid var(--nais-success);
+}
+
+.hr-room > div > span:first-child {
+  color: var(--nais-success);
+}
+
+.hr-mid {
+  display: flex;
+  align-items: center;
+  font-size: 2.5rem;
+  color: var(--nais-text-secondary);
+}
+
+/* Timeline «Ryddet bort» strip: code chips must stay muted on the dark theme */
+.cleared code {
+  background: transparent;
+  color: inherit;
+  padding: 0;
+}
+
+/* Tally line under a chain: hand-offs and lead time (slide 3, mirrored on 10). */
+.tally {
+  margin: 0 auto;
+  padding: 0.4rem 1.2rem;
+  border-radius: 999px;
+  border: 1px solid var(--nais-border);
+  background: var(--nais-card);
+  font-family: "Poppins", sans-serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+/* Waiting bar that fills on click (slide 4). */
+.wait-bar {
+  position: relative;
+  height: 2.2rem;
+  border-radius: 999px;
+  background: var(--nais-card);
+  border: 1px solid var(--nais-border);
+  overflow: hidden;
+}
+
+.wait-bar span {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  padding-left: 1rem;
+  font-weight: 700;
+}
+
+.wait-fill {
+  height: 100%;
+  width: 100%;
+  transform-origin: 0 50%;
+  background: linear-gradient(90deg, #64748b, #fbbf24);
+}
+
+.wait-fill.slidev-vclick-target {
+  transition: transform 2s ease-in-out;
+}
+
+.wait-fill.slidev-vclick-hidden {
+  opacity: 1 !important;
+  transform: scaleX(0);
+}
+
+/* Before/after columns (slide 5). */
+.turn-col {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.turn-col h3 {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  min-height: 72px;
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  font-size: 1.3rem;
+}
+
+.turn-col > div {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0.7rem 1rem;
+  border-radius: 14px;
+  background: var(--nais-card);
+  border: 1px solid var(--nais-border);
+  border-left: 4px solid var(--nais-success);
+}
+
+.turn-col.muted {
+  opacity: 0.6;
+}
+
+.turn-col.muted > div {
+  border-left-color: #64748b;
+}
+
+.anchor-hex.small-hex {
+  width: 60px;
+  height: 69px;
+  font-size: 0.8rem;
+}
+
+/* Lesson line in the footer, shown on the slide's last click (slides 6-13). */
+.lesson {
+  display: inline-block;
+  padding: 0.2rem 1rem;
+  border-radius: 999px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  color: var(--pc, var(--nais-accent));
+  border: 1px solid
+    color-mix(in srgb, var(--pc, var(--nais-accent)) 50%, transparent);
+  background: color-mix(
+    in srgb,
+    var(--pc, var(--nais-accent)) 12%,
+    transparent
+  );
+}
+
+/* Static stat next to a CountUp: same number style. */
+.stat-static .stat-number {
+  font-family: "Poppins", sans-serif;
+  font-size: 3rem;
+}
+
+.hr-col:has(.hr-head) {
+  grid-template-rows: auto repeat(4, 1fr);
+}
+
+.hr-head {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  font-size: 1.1rem;
+  text-align: center;
+}
+
+.auth-chips {
+  align-items: center;
+  font-size: 0.95rem;
+}
+
+.slidev-layout .auth-chips code {
+  padding: 0.2rem 0.7rem;
+  border-radius: 999px;
+  border: 1px solid var(--nais-border);
+  background: var(--nais-card);
+  color: var(--nais-text);
+}
+
+/* The lesson pill is taller than the footer's text line. */
+.default-footer:has(.lesson) {
+  padding-top: 0;
+}

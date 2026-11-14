@@ -9,6 +9,7 @@
     "dev:brukerforum": "pnpm --filter @nais/2026-02-nais-brukerforum dev",
     "dev:naas": "pnpm --filter @nais/2026-08-nais-as-a-service dev",
     "dev:fortsatt": "pnpm --filter @nais/2026-11-nais-er-fortsatt-nais dev",
+    "dev:fart": "pnpm --filter @nais/2026-11-fart-og-flyt dev",
     "build": "pnpm -r build",
     "lint": "pnpm -r lint",
     "lint:fix": "pnpm -r lint:fix",
