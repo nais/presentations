@@ -1,5 +1,8 @@
 ---
 layout: cover
+title: Slipp utviklerne fri
+fonts:
+  provider: none
 routerMode: hash
 colorSchema: dark
 transition: fade
@@ -121,7 +124,7 @@ clicks: 1
   <h3>Før</h3>
   <div><span class="i-carbon-enterprise" /> Leverandøren bygger</div>
   <div><span class="i-carbon-ticket" /> Drift prodsetter</div>
-  <div><span class="i-carbon-calendar" /> Releasevinduet bestemmer når</div>
+  <div><span class="i-carbon-calendar" /> Kontrakten bestemmer hva</div>
 </div>
 
 ::right::
@@ -129,7 +132,7 @@ clicks: 1
   <h3><span class="anchor-hex small-hex" data-anchor="hex">Team</span> Etter</h3>
   <div><span class="i-carbon-group" /> Egne team i Nav</div>
   <div><span class="i-carbon-flow" /> Teamet eier veien fra idé til produksjon</div>
-  <div><span class="i-carbon-time" /> Teamet bestemmer når</div>
+  <div><span class="i-carbon-time" /> Teamet bestemmer hva</div>
 </div>
 
 <!--
@@ -191,7 +194,7 @@ clicks: 2
 <CostLoop />
 
 ::footer::
-<span v-click="2" class="lesson" style="--pc: #ff5c6c">Den som bestemmer, ser prisen</span>
+<span v-click="2" class="lesson" style="--pc: #ff5c6c; transition-delay: 3.5s">Den som bestemmer, ser prisen</span>
 
 <!--
 Overgang: «Og eierskap betyr natta.»
@@ -216,7 +219,7 @@ clicks: 4
     { icon: 'i-carbon-notification', label: 'Varsel', sub: 'En node i plattformen svikter' },
     { icon: 'i-carbon-phone', label: 'Nais-vakt', sub: 'Vakthavende i Nais-teamet varsles' },
     { icon: 'i-carbon-cloud', label: 'Google', sub: 'Døgnåpen støtte ved behov' },
-    { icon: 'i-carbon-checkmark', label: 'Løst', sub: 'Appene kjørte hele tiden' },
+    { icon: 'i-carbon-checkmark', label: 'Løst', sub: 'Appene kjørte videre' },
   ]" />
   <div v-click="4" class="text-center">
     <div class="text-5xl font-bold" style="font-family: Poppins, sans-serif; color: var(--nais-success)">99,88 %</div>
@@ -267,7 +270,7 @@ clicks: 3
 
 ::header::
 <h1 class="text-3xl font-bold">Fra pull request til produksjon</h1>
-<p class="subtitle">Samme endring som før</p>
+<p class="subtitle">Samme rettelse som ventet til dag 90</p>
 
 ::default::
 <div class="flex flex-col gap-2 w-full">
@@ -298,7 +301,7 @@ clicks: 4
 
 ::header::
 <h1 class="text-3xl font-bold">Sikkerheten er en del av veien</h1>
-<p class="subtitle">Bygd inn, ikke bestilt</p>
+<p class="subtitle">Det rette er også det letteste</p>
 
 ::default::
 <div class="flex flex-col gap-8 w-full">
@@ -309,7 +312,7 @@ clicks: 4
     { icon: 'i-carbon-scan', label: 'Sårbarheter', sub: 'Prioritert etter risiko' },
   ]" />
   <div v-click="4" class="mcp-tools auth-chips">
-    <span class="i-carbon-password" /><code>ID-porten</code><code>Maskinporten</code><code>Entra ID</code><code>TokenX</code>
+    <span class="i-carbon-password" /><span>Innlogging:</span><code>ID-porten</code><code>Maskinporten</code><code>Entra ID</code><code>TokenX</code>
   </div>
 </div>
 
@@ -407,7 +410,7 @@ layout: default
 <p class="subtitle">Prodsettinger per uke i Nav, år for år (anslag)</p>
 
 ::default::
-<YearChart metric="prod" :labels="false" :height="260" :marker="{ year: 'Før', text: '4 i året' }" />
+<YearChart metric="prod" :labels="false" last-label="≈ 9 000" :height="260" :marker="{ year: 'Før', text: '4 i året' }" />
 
 <!--
 Overgang: «Fart er også å rette feil fort.»
@@ -434,7 +437,7 @@ Overgang: «Ikke alt har gått bra.»
 
 - Klikk 1: varsel. Klikk 2: trace. Klikk 3: logger for samme trace. Klikk 4: rettelsen er prodsatt
 - Logger, metrikker og traces kommer uten oppsett og vises i Grafana (docs.nais.io, observability)
-- Illustrasjon, ikke ekte tall
+- Illustrasjon, ikke ekte tall. Klokkeslettene 10.02 og 10.14 er også illustrasjon
 -->
 
 ---
@@ -467,7 +470,7 @@ layout: default
 
 ::header::
 <h1 class="text-3xl font-bold">Prisen</h1>
-<p class="subtitle">≈ 150 årsverk (anslag) over tid. 15 personer i Nais-teamet i dag.</p>
+<p class="subtitle">15 personer holder plattformen for ≈ 150 team. Totalt ≈ 150 årsverk (anslag) siden 2016.</p>
 
 ::default::
 <TeamWall />
@@ -542,7 +545,7 @@ layout: cover
 
 ::default::
 <h1 class="text-5xl font-black">Lett å gjøre rett</h1>
-<p class="subtitle text-xl mt-4">nais.io</p>
+<p class="subtitle text-xl mt-4">Slik slipper du utviklerne fri</p>
 <p class="text-3xl font-bold mt-8" style="font-family: Poppins, sans-serif">Spørsmål?</p>
 
 <!--
