@@ -1058,3 +1058,27 @@ html .slidev-layout .subtitle {
   font-size: 0.85rem;
   color: var(--nais-text-secondary);
 }
+
+/* Varden (slide 3) */
+.varden-foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  max-width: 1050px;
+  margin: 0.75rem auto 0;
+  padding-left: 4rem; /* clear the parked hero hex */
+}
+.varden-stack {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.75rem;
+  color: var(--nais-text-secondary);
+}
+.varden-quote {
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-style: italic;
+  color: var(--nais-success);
+  white-space: nowrap;
+}

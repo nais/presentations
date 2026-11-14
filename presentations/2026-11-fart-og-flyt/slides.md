@@ -56,13 +56,46 @@ import avatar from "./assets/team/Starefossen.png";
 </script>
 
 <!--
-Overgang: «Jeg starter med et tall.»
+Overgang: «Litt mer om Varden, for den sier noe om hvordan jeg tenker.»
 
 - Jobber i Nais-teamet i Nav. Innførte OpenTelemetry, snakker om Nais på KubeCon og JavaZone hvert år, er kontakt for Nais as a Service og leder KI-satsingen i Nais
 - Utenfor jobb: Varden (varden.flaatten.org), en KI-assistent familien snakker med i iMessage. Bygd på OpenClaw og Gemini, kjører på en Mac mini og et Kubernetes-cluster hjemme
 - NisseKomm: adventskalender-app jeg har laget til barna. Ikke vis innhold, figurer eller historie
 - Ikke nevn barnas navn, alder, skole eller klubber
 - TODO: skjermbilde av NisseKomm når Hans har godkjent det i NisseKomm-sesjonen
+-->
+
+---
+layout: default
+clicks: 5
+---
+
+::header::
+<h1 class="text-3xl font-bold">Varden</h1>
+<p class="subtitle">En KI-assistent som bor i familiens gruppechat</p>
+
+::default::
+<VardenDay />
+<div class="varden-foot anim-item">
+  <span class="varden-stack">Mac mini · Kubernetes hjemme · MCP · varden.flaatten.org</span>
+  <span class="varden-quote">«Access control before intelligence.»</span>
+</div>
+
+<!--
+Overgang: «Jeg starter med et tall.»
+
+- 05:30: huset sover, Varden lager dagens Morgenrådet
+- 06:15: morgenmelding i familiechatten med vær, dagsplan og pakkeliste
+- 15:00: varsel til foreldrene når treningen flyttes
+- 17:00: skjermtid etter reglene foreldrene har satt, med pause mellom øktene
+- 20:00: påminnelse om det som trengs i morgen
+- 23:00: Varden skriver ned dagens hendelser og avgjørelser
+- Varden er oppkalt etter varden, steinrøysa som viser vei i tåka. Den bor i familiens gruppechat i iMessage (varden.flaatten.org/about)
+- Morgenrådet: radioepisode på 4–7 minutter, laget hver morgen. Første episode var 171 sekunder (varden.flaatten.org/how-i-learned-to-talk)
+- Mac-hjelp: osquery på barnas Mac-er, spørsmål med SQL, uten skjermbilder eller tastelogg (varden.flaatten.org/endpoint-observability)
+- Teknologi: Mac mini M4, Kubernetes-cluster hjemme med MCP-servere på Knative, Go-tjeneste for radio (varden.flaatten.org/hello-world)
+- «Access control before intelligence»: tilgang først, så intelligens. Samme tanke som i Nais: sikkerheten ligger i veien
+- Tallene er fra Varden-bloggen, ikke uavhengig sjekket. Ikke nevn barnas navn, alder, skole eller klubber
 -->
 
 ---
@@ -83,7 +116,7 @@ layout: default
 Overgang: «Slik var det ikke alltid.»
 
 - ≈ 9 000 prodsettinger per uke i Nav, bare produksjon (Mimir, oktober 2026)
-- Eneste gang tallet teller opp. Det kommer tilbake på slide 16
+- Eneste gang tallet teller opp. Det kommer tilbake på slide 17
 - 150 utviklingsteam er et anslag. 154 team har prodsatt siste 28 dager (Mimir), men ikke alle er utviklingsteam
 -->
 
@@ -329,7 +362,7 @@ clicks: 3
 <!--
 Overgang: «Men uten bom, hvordan ivaretar vi sikkerheten?»
 
-- Samme endring som før: rettelsen fra slide 5. Speilet mot slide 4: null overleveringer, minutter i stedet for måneder
+- Samme endring som før: rettelsen fra slide 6. Speilet mot slide 5: null overleveringer, minutter i stedet for måneder
 - Klikk 1: sjekker og godkjenning. Klikk 2: merge, så bygger nais/docker-build-push med SBOM og signering, og nais apply sender manifestet til prod. Klikk 3: PR-en viser at den er prodsatt
 - Copilot-agenten åpner PR-en. Et menneske godkjenner og merger
 - Kilde for flyten: docs.nais.io, «Build and deploy»
@@ -458,7 +491,7 @@ Overgang: «Fart er også å rette feil fort.»
 
 - Kurven er et anslag: formen følger Navs årlige snitt av prodsettinger, skalert slik at 2026 ender på dagens ≈ 9 000 i prod (Mimir, oktober 2026)
 - Si «anslag» høyt. Bare 2026 er målt
-- «Før»: fire store releaser i året, som på slide 4
+- «Før»: fire store releaser i året, som på slide 5
 -->
 
 ---
@@ -573,7 +606,7 @@ layout: default
 Overgang: «Til slutt: tesen.»
 
 - Samler lærdomslinjene fra Akt 2 i de samme fire fargene
-- Tillit og eierskap: slide 7–9. Asfaltert vei: 10–12. Plattform som produkt: 13–14. Åpenhet: 15
+- Tillit og eierskap: slide 8–10. Asfaltert vei: 11–13. Plattform som produkt: 14–15. Åpenhet: 16
 - Ingen av dem krever at man er like stor som Nav. Start med én
 -->
 

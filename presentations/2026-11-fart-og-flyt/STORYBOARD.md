@@ -18,7 +18,8 @@ Kolonnen «Kilde» viser sliden eller komponenten som gjenbrukes. «Ut» er over
 | # | Tittel | Kilde | Innhold | Ut |
 |---|---|---|---|---|
 | 1 | Slipp utviklerne fri | Cover (CoverLogo) | Tittel, undertittel, nais.io | «Jeg starter med et tall.» |
-| 1b | Hvem er jeg | ny (HexagonImage + kort) | Avatar, fem jobbpunkter, «Utenfor jobb»: Varden og NisseKomm. Ikke barnas navn, alder eller skole | «Jeg starter med et tall.» |
+| 1b | Hvem er jeg | ny (HexagonImage + kort) | Avatar, fem jobbpunkter, «Utenfor jobb»: Varden og NisseKomm. Ikke barnas navn, alder eller skole | «Litt mer om Varden …» |
+| 1c | Varden | ny (bilder fra varden.flaatten.org) | Fem evner, teknologi, sitatet «Access control before intelligence» | «Jeg starter med et tall.» |
 | 2 | ≈ 9 000 ganger i uka | CountUp (slide 4/10) | ≈ 9 000 prodsettinger per uke, 150 team. Eneste gang tallet teller opp | «Slik var det ikke alltid.» |
 | 3 | Veien til produksjon, før | FlowChain (ny bruk) | Én animert kjede: leverandør, bestilling, ticket til drift, CAB, releasevindu. Teller overleveringer og ventetid. Fire store releaser i året | «Hva betydde det for én liten endring?» |
 | 4 | En liten endring | ny | Generisk eksempel: en tekstrettelse som ventet måneder på neste releasevindu | «Så snudde Nav.» |
