@@ -44,7 +44,7 @@ Kolonnen «Kilde» viser sliden eller komponenten som gjenbrukes. «Ut» er over
 |---|---|---|---|---|
 | 14 | Fra fire i året til ≈ 9 000 i uka | YearChart (skaleres om til prod) | Kurven over år. Ingen ny CountUp | «Fart er også å rette feil fort.» |
 | 15 | Fra feil til rettet | ObsHunt | Fra varsel til rettelse på minutter | «Ikke alt har gått bra.» |
-| 16 | Det som ikke gikk | IconCard ×3 | Istio til Linkerd, tilgangsstyring bygd fire ganger, hemmelighet nesten i loggene (generisk). Vi bygde, lærte og ryddet | «Og det har kostet.» |
+| 16 | Vi lærer mens vi bygger | IconCard ×3 | Istio til Linkerd, tilgangsstyring bygd fire ganger, hemmelighet nesten i loggene (generisk). Vi bygde, lærte og ryddet | «Og det har kostet.» |
 | 17 | Prisen | TeamWall | 15 personer holder plattformen for ≈ 150 team, totalt ≈ 150 årsverk (anslag) siden 2016 | «Må man være Nav? Nei.» |
 | 18 | Ikke bare Nav | logoer (slide «Dere er ikke alene») | Seks tenants. Ingen pris, ingen CTA | «Hva kan dere ta med hjem?» |
 

@@ -519,7 +519,7 @@ layout: default
 ---
 
 ::header::
-<h1 class="text-3xl font-bold">Det som ikke gikk</h1>
+<h1 class="text-3xl font-bold">Vi lærer mens vi bygger</h1>
 <p class="subtitle">Vi bygde, lærte og ryddet</p>
 
 ::default::
