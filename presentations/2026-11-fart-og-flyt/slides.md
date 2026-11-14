@@ -38,10 +38,10 @@ layout: default
     <HexagonImage :src="avatar" alt="Hans Kristian Flaatten" size="8rem" />
     <ul>
       <li><span class="i-carbon-cloud-services" /> Bygger og drifter Nais</li>
-      <li><span class="i-carbon-chart-line" /> Innførte OpenTelemetry i Nais</li>
-      <li><span class="i-carbon-microphone" /> Foredrag på KubeCon og JavaZone</li>
+      <li><span class="i-carbon-chart-line" /> Innførte OpenTelemetry i Nav</li>
+      <li><span class="i-carbon-microphone" /> Foredrag, konferanser og podcaster</li>
       <li><span class="i-carbon-partnership" /> Kontakt for Nais as a Service</li>
-      <li><span class="i-carbon-bot" /> Leder KI-satsingen i Nais</li>
+      <li><span class="i-carbon-bot" /> Leder KI-satsingen i Nav</li>
     </ul>
   </div>
   <div class="about-off anim-item">
@@ -58,7 +58,7 @@ import avatar from "./assets/team/Starefossen.png";
 <!--
 Overgang: «Litt mer om Varden, for den sier noe om hvordan jeg tenker.»
 
-- Jobber i Nais-teamet i Nav. Innførte OpenTelemetry, snakker om Nais på KubeCon og JavaZone hvert år, er kontakt for Nais as a Service og leder KI-satsingen i Nais
+- Jobber i Nais-teamet i Nav. Innførte OpenTelemetry i Nav, snakker om Nais på konferanser og i podcaster, er kontakt for Nais as a Service og leder KI-satsingen i Nav
 - Utenfor jobb: Varden (varden.flaatten.org), en KI-assistent familien snakker med i iMessage. Bygd på OpenClaw og Gemini, kjører på en Mac mini og et Kubernetes-cluster hjemme
 - NisseKomm: adventskalender-app jeg har laget til barna. Ikke vis innhold, figurer eller historie
 - Ikke nevn barnas navn, alder, skole eller klubber
