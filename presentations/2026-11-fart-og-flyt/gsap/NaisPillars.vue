@@ -1,5 +1,10 @@
 <template>
-  <div ref="root" class="pillars6" :class="{ four: items && items.length !== 5, five: items?.length === 5 }" data-motion-self>
+  <div
+    ref="root"
+    class="pillars6"
+    :class="{ four: items && items.length !== 5, five: items?.length === 5 }"
+    data-motion-self
+  >
     <div
       v-for="(p, i) in items || PILLARS"
       :key="p.title"
