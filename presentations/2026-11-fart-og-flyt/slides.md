@@ -116,7 +116,7 @@ layout: default
 Overgang: «Slik var det ikke alltid.»
 
 - ≈ 9 000 prodsettinger per uke i Nav, bare produksjon (Mimir, oktober 2026)
-- Eneste gang tallet teller opp. Det kommer tilbake på slide 17
+- Eneste gang tallet teller opp. Det kommer tilbake på slide 18
 - 150 utviklingsteam er et anslag. 154 team har prodsatt siste 28 dager (Mimir), men ikke alle er utviklingsteam
 -->
 
@@ -418,12 +418,41 @@ clicks: 4
 <span v-click="4" class="lesson" style="--pc: #9b6fd6">Utviklerne er brukerne</span>
 
 <!--
-Overgang: «Og for dem som liker terminalen.»
+Overgang: «Alt teamet eier, ser det på ett sted.»
 
 - Én bølge med skuffer per klikk (tre bølger), så alt på en gang
 - Console, Nais CLI og MCP for KI-agenter ligger i Verktøy-skuffen, sammen med dokumentasjon og champions
 - Champions: en eller flere i hvert team som følger med på Nais og deler videre
 - Ingenting å bestille: alt står i manifestet eller i Console
+-->
+
+---
+layout: default
+clicks: 3
+---
+
+::header::
+<h1 class="text-3xl font-bold">Console</h1>
+<p class="subtitle">Teamets apper, kostnad og sårbarheter på ett sted</p>
+
+::default::
+<ConsoleMock story="tour" />
+
+<style>
+/* Fits the overview chips and cost legend inside the frame */
+:deep(.view .chips) { display: none; }
+:deep(.view .area) { max-height: 11rem; }
+</style>
+
+::footer::
+<span class="lesson" style="--pc: #9b6fd6">Ett sted å se alt</span>
+
+<!--
+Overgang: «Og for dem som liker terminalen.»
+
+- Start: teamoversikten for team-eksempel med helse, sårbarheter, varsler og kostnad. Klikk 1: kostnad per tjeneste. Klikk 2: Applications med status. Klikk 3: én app med helse, sårbarheter, deploy og persistens
+- Illustrasjon bygd etter strukturen i Console, ingen ekte data
+- Teamet trenger ingen tilgang til klyngen for å se dette: Console henter det fra plattformen
 -->
 
 ---
@@ -606,7 +635,7 @@ layout: default
 Overgang: «Til slutt: tesen.»
 
 - Samler lærdomslinjene fra Akt 2 i de samme fire fargene
-- Tillit og eierskap: slide 8–10. Brolagt sti: 11–13. Plattform som produkt: 14–15. Åpenhet: 16
+- Tillit og eierskap: slide 8–10. Brolagt sti: 11–13. Plattform som produkt: 14–16. Åpenhet: 17
 - Ingen av dem krever at man er like stor som Nav. Start med én
 -->
 

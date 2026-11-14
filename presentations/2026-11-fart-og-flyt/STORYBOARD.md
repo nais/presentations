@@ -35,7 +35,8 @@ Kolonnen «Kilde» viser sliden eller komponenten som gjenbrukes. «Ut» er over
 | 9 | Ett manifest, ferdig oppsett | ManifestDeep (færre klikk) | Rammet inn som kognitiv last: det utvikleren slipper å vite | Brolagt sti | «Og når teamet merger?» |
 | 10 | Fra pull request til produksjon | PrFlow | Speilet mot slide 3: null overleveringer | Ingen venting | «Men uten bom, hvordan ivaretar vi sikkerheten?» |
 | 11 | Sikkerheten er en del av veien | SupplyFix + AuthJourney (slått sammen) | Signering, SBOM, sårbarheter og innlogging bygd inn | Sikkerhet bygd inn, ikke en bom på veien | «Veien er et produkt, med brukere.» |
-| 12 | Plattform som produkt | Toolbox (12a) + CliDemo (12b) | Verktøykassa med Console, CLI og MCP, dokumentasjon, champions. Terminalen på egen slide | Plattform som produkt | «Og alt dette er åpent.» |
+| 12 | Plattform som produkt | Toolbox (12a) + ConsoleMock (12b) + CliDemo (12c) | Verktøykassa med Console, CLI og MCP, dokumentasjon, champions. Terminalen på egen slide | Plattform som produkt | «Og alt dette er åpent.» |
+| 12b | Console | ConsoleMock (tour, 3 klikk) | Teamoversikt for team-eksempel: helse, kostnad, apper med status, én app med sårbarheter | Ett sted å se alt | «Og for dem som liker terminalen.» |
 | 13 | Åpenhet | ny (IconCard) | Åpen kildekode, åpen dokumentasjon, #nais, nais.io | Del åpent | «Hva har det gitt?» |
 
 ## Akt 3: Effekt og pris (≈ 9 min, slide 14–18)
