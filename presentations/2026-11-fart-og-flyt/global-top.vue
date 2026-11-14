@@ -157,6 +157,11 @@ async function go(no, prev) {
   if (no !== currentSlideNo.value) return;
   reveal();
   const page = stage.value.ownerDocument.querySelector(`.slidev-page-${no}`);
+  // Cold load: the layout may not be mounted yet, so the HIDE test below
+  // would miss the cover. Wait for it (max 2 s).
+  for (let i = 0; page && !page.querySelector(".slidev-layout") && i < 40; i++)
+    await new Promise((r) => globalThis.setTimeout(r, 50));
+  if (no !== currentSlideNo.value) return;
   const el = anchorOn(no);
   const adjacent = prev && Math.abs(no - prev) === 1;
   if (!page || page.querySelector(HIDE)) {
@@ -183,6 +188,8 @@ async function go(no, prev) {
     const w0 = globalThis.performance.now();
     const wait = () => {
       if (shown !== el) return gsap.ticker.remove(wait);
+      // Behind a v-click not yet revealed: keep waiting; the click reveals it.
+      if (el.closest(".slidev-vclick-hidden")) return;
       if (
         box(el).w < end.w * 0.6 ||
         (+globalThis.getComputedStyle(el).opacity < 0.3 &&

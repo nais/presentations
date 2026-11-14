@@ -370,8 +370,8 @@ pre,
 /* Slidev v-click uses the same motion as the GSAP animations (power3.out). */
 .slidev-vclick-target {
   transition:
-    opacity 0.7s cubic-bezier(0.215, 0.61, 0.355, 1),
-    transform 0.7s cubic-bezier(0.215, 0.61, 0.355, 1);
+    opacity 0.7s cubic-bezier(0.165, 0.84, 0.44, 1),
+    transform 0.7s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
 .slidev-vclick-hidden {
@@ -529,6 +529,11 @@ html .slidev-layout .subtitle {
   margin: 0.15rem 0;
 }
 
+/* Day 90 lands as the wait bar finishes filling. */
+.night p.slidev-vclick-target {
+  transition-delay: 1.3s;
+}
+
 .night b {
   font-family: "JetBrains Mono", monospace;
   color: var(--nais-accent);
@@ -542,10 +547,6 @@ html .slidev-layout .subtitle {
 }
 :active-view-transition .slidev-layout .subtitle {
   view-transition-name: slide-subtitle;
-}
-:active-view-transition .manifest .code,
-:active-view-transition .prflow .diff {
-  view-transition-name: manifest-code;
 }
 
 ::view-transition-group(*) {
@@ -840,7 +841,7 @@ html .slidev-layout .subtitle {
 
 .wait-fill.slidev-vclick-hidden {
   opacity: 1 !important;
-  transform: scaleX(0.02);
+  transform: scaleX(0);
 }
 
 /* Before/after columns (slide 5). */
@@ -924,7 +925,7 @@ html .slidev-layout .subtitle {
   font-size: 0.95rem;
 }
 
-.auth-chips code {
+.slidev-layout .auth-chips code {
   padding: 0.2rem 0.7rem;
   border-radius: 999px;
   border: 1px solid var(--nais-border);

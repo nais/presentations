@@ -8,7 +8,7 @@
         </p>
         <p class="bot">
           <b>KI-agent</b> <span class="tool">get_nais_context</span
-          ><span class="tool">nais://schema</span> Skriver nais.yaml …
+          ><span class="tool">nais://schema</span> Skriver .nais/app.yaml …
         </p>
       </div>
       <pre
@@ -193,7 +193,7 @@ useSteps((tl) => {
   width: 100%;
   max-width: 960px;
   margin: 0 auto;
-  align-items: center;
+  align-items: start;
 }
 
 .chat {

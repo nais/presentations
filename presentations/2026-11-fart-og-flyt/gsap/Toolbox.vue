@@ -21,7 +21,7 @@
         <p>{{ g.items.join(" · ") }}</p>
       </div>
       <p v-if="mode === 'open'" ref="caption" class="caption">
-        Alt i nais.yaml eller Console. Ingenting å bestille.
+        Alt i manifestet eller Console. Ingenting å bestille.
       </p>
     </div>
     <div v-if="mode === 'ops'" ref="ops" class="ops">
@@ -84,7 +84,7 @@ const GROUPS = [
     items: [
       "Console",
       "Nais CLI",
-      "MCP for kodeagenter",
+      "MCP for KI-agenter",
       "Kostnad per team",
       "Dokumentasjon",
       "Champions",
@@ -129,12 +129,9 @@ useSteps((tl) => {
     ].map((ix) => ix.map((i) => drawers[i]).filter(Boolean));
     waves.forEach((wave, w) => {
       wave.forEach((d, j) => {
-        const side = drawers.indexOf(d) < 4 ? 1 : -1;
-        tl.fromTo(
+        tl.to(
           d,
-          { x: 40 * side },
           {
-            x: 0,
             opacity: 1,
             borderColor: "#e8384f",
             duration: 0.4,

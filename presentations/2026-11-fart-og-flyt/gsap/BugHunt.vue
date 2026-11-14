@@ -3,7 +3,7 @@
     <section class="panel chart">
       <header>
         Feilrate <span ref="alert" class="badge bad">Varsel</span
-        ><span ref="ok" class="badge good">Fikset</span>
+        ><span ref="ok" class="badge good">Rettet</span>
       </header>
       <svg viewBox="0 0 300 140" aria-hidden="true">
         <path class="axis" d="M10 125 H290" />

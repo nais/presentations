@@ -3,7 +3,7 @@ import { nextTick } from "vue";
 import { DUR, EASE, RISE, STAGGER, reducedMotion } from "../gsap/motion.js";
 
 const HEADER =
-  ".default-header > *, .pillars-header > *, .stats-header > *, .cta-header > *, .cover-text > *, .main-logo";
+  ".default-header > *, .pillars-header > *, .stats-header > *, .cta-header > *, .two-cols-header > *, .cover-text > *, .main-logo";
 const ITEMS = "li, .card-row > *, .anim-item";
 // Elements that animate themselves (own component or Slidev v-click).
 const SELF = "[data-motion-self], .slidev-vclick-target";

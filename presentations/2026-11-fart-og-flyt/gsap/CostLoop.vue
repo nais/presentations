@@ -59,7 +59,7 @@ import gsap from "gsap";
 import { DrawSVGPlugin } from "gsap/DrawSVGPlugin";
 import PrCard from "./PrCard.vue";
 import BrowserFrame from "./BrowserFrame.vue";
-import { useSteps } from "./motion.js";
+import { POP, useSteps } from "./motion.js";
 
 gsap.registerPlugin(DrawSVGPlugin);
 
@@ -102,7 +102,7 @@ const pr = computed(() =>
     : { title: "Større database", number: 61, diff: UP },
 );
 
-// s0: PR 1, steady cost. s1, one click: merge and the cost spikes, PR 2 in the
+// s0: PR 1, steady cost. s1: merge and the cost spikes. s2: PR 2 in the
 // same card flashes its changed lines, merge, cost drops below the start.
 useSteps((tl) => {
   const card = () => root.value.querySelector(".pr");
@@ -144,10 +144,10 @@ useSteps((tl) => {
   }).to(line1.value.ownerSVGElement, {
     scaleY: 1,
     duration: 0.25,
-    ease: "back.out(3)",
+    ease: POP,
   });
   tl.to(line2.value, { drawSVG: "100%", duration: 1, ease: "none" }).addLabel(
-    "spike",
+    "s1",
   );
   // Small gap so the spike shows before the triggers the switch to the second PR.
   tl.to({}, { duration: 0.3 })
@@ -188,7 +188,7 @@ useSteps((tl) => {
       "<",
     )
     .fromTo(
-      () => q(".diff code.add"),
+      q(".diff code.add"),
       { backgroundColor: "rgba(63,185,80,0.65)" },
       { backgroundColor: "rgba(63,185,80,0.18)", duration: 0.8, stagger: 0.1 },
       "<",
@@ -205,10 +205,10 @@ useSteps((tl) => {
     );
   merge();
   tl.to(line3.value, { drawSVG: "100%", duration: 1, ease: "none" }).addLabel(
-    "s1",
+    "s2",
   );
   tl.eventCallback("onUpdate", () => {
-    second.value = tl.time() >= tl.labels.spike + 0.2;
+    second.value = tl.time() >= tl.labels.s1 + 0.2;
   });
   return tl;
 });

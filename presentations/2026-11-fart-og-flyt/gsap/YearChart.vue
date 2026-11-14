@@ -199,13 +199,13 @@ useEnter((tl) => {
 }
 
 .val {
-  font-size: 0.72rem;
+  font-size: 0.9rem;
   font-weight: 700;
   margin-bottom: 0.15rem;
 }
 
 .yr {
-  font-size: 0.72rem;
+  font-size: 0.9rem;
   color: var(--nais-text-secondary);
   margin-top: 0.2rem;
 }
