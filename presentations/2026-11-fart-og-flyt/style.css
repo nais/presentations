@@ -997,13 +997,64 @@ html .slidev-layout .subtitle {
 }
 
 /* About me (slide 2) */
-.about { display: grid; grid-template-columns: 1.4fr 1fr; gap: 2.5rem; width: 100%; max-width: 1050px; margin: 0 auto; align-items: center; }
-.about-me { display: flex; gap: 2rem; align-items: center; }
-.about-me ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.7rem; font-size: 1.05rem; }
-.about-me li { display: flex; gap: 0.6rem; align-items: center; }
-.about-me li span { color: var(--nais-accent); font-size: 1.3rem; flex-shrink: 0; }
-.about-off { display: grid; gap: 0.8rem; }
-.about-off > b { font-family: "Poppins", sans-serif; color: var(--nais-text-secondary); text-transform: uppercase; font-size: 0.8rem; letter-spacing: 0.08em; }
-.off-card { display: flex; gap: 0.9rem; padding: 1rem 1.2rem; border-radius: 12px; background: var(--nais-card); border: 1px solid var(--nais-border); }
-.off-card > span { font-size: 1.6rem; color: var(--nais-success); flex-shrink: 0; }
-.off-card p { margin: 0.2rem 0 0; font-size: 0.85rem; color: var(--nais-text-secondary); }
+.about {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 2.5rem;
+  width: 100%;
+  max-width: 1050px;
+  margin: 0 auto;
+  align-items: center;
+}
+.about-me {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+.about-me ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 0.7rem;
+  font-size: 1.05rem;
+}
+.about-me li {
+  display: flex;
+  gap: 0.6rem;
+  align-items: center;
+}
+.about-me li span {
+  color: var(--nais-accent);
+  font-size: 1.3rem;
+  flex-shrink: 0;
+}
+.about-off {
+  display: grid;
+  gap: 0.8rem;
+}
+.about-off > b {
+  font-family: "Poppins", sans-serif;
+  color: var(--nais-text-secondary);
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+}
+.off-card {
+  display: flex;
+  gap: 0.9rem;
+  padding: 1rem 1.2rem;
+  border-radius: 12px;
+  background: var(--nais-card);
+  border: 1px solid var(--nais-border);
+}
+.off-card > span {
+  font-size: 1.6rem;
+  color: var(--nais-success);
+  flex-shrink: 0;
+}
+.off-card p {
+  margin: 0.2rem 0 0;
+  font-size: 0.85rem;
+  color: var(--nais-text-secondary);
+}
