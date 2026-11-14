@@ -31,8 +31,8 @@ Kolonnen «Kilde» viser sliden eller komponenten som gjenbrukes. «Ut» er over
 | 7 | Teamet eier kostnaden | CostLoop | Kostnad synlig per team i Console | Den som bestemmer, ser prisen | «Og eierskap betyr natta.» |
 | 8 | Kl. 03.00 | FlowChain + 99,88 % | Plattformen har vakt, teamet eier appen | Tydelig ansvarsdeling | «Hvordan holder et team alt dette i hodet? Det gjør det ikke.» |
 | 9 | Ett manifest, ferdig oppsett | ManifestDeep (færre klikk) | Rammet inn som kognitiv last: det utvikleren slipper å vite | Asfaltert vei | «Og når teamet merger?» |
-| 10 | Fra pull request til produksjon | PrFlow | Speilet mot slide 3: null overleveringer | Ingen venting | «Men uten port, hvordan holder vi sikkerheten?» |
-| 11 | Sikkerheten ligger i veien | SupplyFix + AuthJourney (slått sammen) | Signering, SBOM, sårbarheter og innlogging bygd inn | Sikkerhet i veien, ikke i en port | «Veien er et produkt, med brukere.» |
+| 10 | Fra pull request til produksjon | PrFlow | Speilet mot slide 3: null overleveringer | Ingen venting | «Men uten bom, hvordan ivaretar vi sikkerheten?» |
+| 11 | Sikkerheten er en del av veien | SupplyFix + AuthJourney (slått sammen) | Signering, SBOM, sårbarheter og innlogging bygd inn | Sikkerhet bygd inn, ikke en bom på veien | «Veien er et produkt, med brukere.» |
 | 12 | Plattform som produkt | Toolbox (12a) + CliDemo (12b) | Verktøykassa med Console, CLI og MCP, dokumentasjon, champions. Terminalen på egen slide | Plattform som produkt | «Og alt dette er åpent.» |
 | 13 | Åpenhet | ny (IconCard) | Åpen kildekode, åpen dokumentasjon, #nais, nais.io | Del åpent | «Hva har det gitt?» |
 
@@ -41,7 +41,7 @@ Kolonnen «Kilde» viser sliden eller komponenten som gjenbrukes. «Ut» er over
 | # | Tittel | Kilde | Innhold | Ut |
 |---|---|---|---|---|
 | 14 | Fra fire i året til ≈ 9 000 i uka | YearChart (skaleres om til prod) | Kurven over år. Ingen ny CountUp | «Fart er også å rette feil fort.» |
-| 15 | Fra feil til fiks | ObsHunt | Fra varsel til fiks på minutter | «Ikke alt har gått bra.» |
+| 15 | Fra feil til rettet | ObsHunt | Fra varsel til rettelse på minutter | «Ikke alt har gått bra.» |
 | 16 | Det som ikke gikk | IconCard ×3 | Istio til Linkerd, tilgangsstyring bygd fire ganger, hemmelighet nesten i loggene (generisk). Vi bygde, lærte og ryddet | «Og det har kostet.» |
 | 17 | Prisen | TeamWall | ≈ 150 årsverk (anslag) over tid, 15 personer i Nais-teamet i dag | «Må man være Nav? Nei.» |
 | 18 | Ikke bare Nav | logoer (slide «Dere er ikke alene») | Seks tenants. Ingen pris, ingen CTA | «Hva kan dere ta med hjem?» |

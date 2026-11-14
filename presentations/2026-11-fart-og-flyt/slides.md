@@ -1,6 +1,7 @@
 ---
 layout: cover
 routerMode: hash
+colorSchema: dark
 transition: fade
 ---
 
@@ -38,13 +39,13 @@ layout: default
 Overgang: «Slik var det ikke alltid.»
 
 - ≈ 9 000 prodsettinger per uke i Nav, bare produksjon (Mimir, oktober 2026)
-- Eneste gang tallet teller opp. Det kommer tilbake på slide 14
-- 150 utviklingsteam er et anslag. 154 team har deployet siste 28 dager (Mimir), men ikke alle er utviklingsteam
+- Eneste gang tallet teller opp. Det kommer tilbake på slide 15
+- 150 utviklingsteam er et anslag. 154 team har prodsatt siste 28 dager (Mimir), men ikke alle er utviklingsteam
 -->
 
 ---
 layout: default
-clicks: 4
+clicks: 5
 ---
 
 ::header::
@@ -56,18 +57,18 @@ clicks: 4
   <FlowChain tone="before" :nodes="[
     { icon: 'i-carbon-enterprise', label: 'Leverandør', sub: 'Bygger etter kontrakt', stat: 'uker' },
     { icon: 'i-carbon-document', label: 'Bestilling', sub: 'Skjema til forvaltning', stat: 'dager' },
-    { icon: 'i-carbon-ticket', label: 'Drift', sub: 'Ticket i køen', stat: 'uker' },
+    { icon: 'i-carbon-ticket', label: 'Drift', sub: 'Sak i køen', stat: 'uker' },
     { icon: 'i-carbon-events', label: 'CAB', sub: 'Godkjenning i neste møte', stat: 'neste møte' },
     { icon: 'i-carbon-calendar', label: 'Releasevindu', sub: 'Fire ganger i året', stat: 'måneder' },
   ]" />
-  <div v-click="4" class="tally">5 overleveringer · måneder</div>
+  <div v-click="5" class="tally">5 overleveringer · måneder</div>
 </div>
 
 <!--
 Overgang: «Hva betydde det for én liten endring?»
 
 - Generisk bilde av hvordan det var i Nav før omleggingen, ikke en bestemt sak
-- Klikk 1–4: endringen går fra ledd til ledd. Hvert ledd er en overlevering til noen andre
+- Klikk 1–4: endringen går fra ledd til ledd. Hvert ledd er en overlevering til noen andre. Klikk 5: summen
 - Ventetiden per ledd er omtrentlig. Poenget er at den summeres
 - Fire store releaser i året var normalen
 -->
@@ -84,7 +85,7 @@ clicks: 1
 ::default::
 <div class="grid grid-cols-2 gap-8 items-center w-full max-w-4xl mx-auto">
   <div class="anim-item pg-code">
-    <pre><span class="text-red-400">- Du må sende søknaden innen 14 dagar.</span>
+    <pre><span class="text-red-400">- Du må sende søknaden innen 14 dagr.</span>
 <span class="text-green-400">+ Du må sende søknaden innen 14 dager.</span></pre>
   </div>
   <div class="anim-item night">
@@ -134,47 +135,9 @@ clicks: 1
 <!--
 Overgang: «Det krevde at noen ga fra seg kontroll.»
 
-- Nav flyttet utviklingen fra leverandører til egne tverrfaglige team (insourcing, fra midten av 2010-tallet)
-- Nais har vært i produksjon siden 2016 og ble laget for at teamene skal eie veien selv
+- Nav flyttet utviklingen fra leverandører til egne tverrfaglige team (insourcing, fra midten av 2010-tallet) (muntlig, ikke kildebelagt)
+- Nais har vært i produksjon siden 2016 og ble laget for at teamene skal eie veien selv (muntlig, ikke kildebelagt)
 - Klikk 1: høyre side. Hexen er teamet, den følger oss videre
--->
-
----
-layout: default
-clicks: 2
----
-
-::header::
-<h1 class="text-3xl font-bold">Tillit og eierskap</h1>
-<p class="subtitle">Noen måtte gi fra seg kontroll, og noen måtte ta den</p>
-
-::default::
-<div class="hr-scale">
-  <div v-click="1" class="hr-col hr-press">
-    <h3 class="hr-head">Ledelsen ga fra seg</h3>
-    <div><span class="i-carbon-events" /><span><b>CAB</b> og godkjenningsmøter</span></div>
-    <div><span class="i-carbon-calendar" /><span><b>Releasevinduer</b></span></div>
-    <div><span class="i-carbon-ticket" /><span><b>Bestilling</b> via drift</span></div>
-    <div><span class="i-carbon-list-checked" /><span><b>Detaljstyring</b> av hvordan teamene jobber</span></div>
-  </div>
-  <div v-click="2" class="hr-mid"><span class="i-carbon-arrow-right" /></div>
-  <div v-click="2" class="hr-col hr-room">
-    <h3 class="hr-head">Teamene tok</h3>
-    <div><span class="i-carbon-rocket" /><span><b>Prodsetting</b> når de selv vil</span></div>
-    <div><span class="i-carbon-activity" /><span><b>Drift</b> av egne apper</span></div>
-    <div><span class="i-carbon-currency" /><span><b>Kostnad</b> for det de bruker</span></div>
-  </div>
-</div>
-
-::footer::
-<span v-click="2" class="lesson" style="--pc: #ff5c6c">Tillit framfor kontroll</span>
-
-<!--
-Overgang: «Eierskap betyr også regningen.»
-
-- Klikk 1: det ledelsen ga fra seg. Klikk 2: det teamene tok
-- Det er en lederbeslutning, ikke en teknisk. Plattformen gjør det mulig, men noen må slippe taket
-- Lærdom: tillit framfor kontroll
 -->
 
 ---
@@ -183,26 +146,64 @@ clicks: 1
 ---
 
 ::header::
+<h1 class="text-3xl font-bold">Tillit og eierskap</h1>
+<p class="subtitle">Noen måtte gi fra seg kontroll, og noen måtte ta den</p>
+
+::default::
+<div class="hr-scale">
+  <div class="hr-col hr-press">
+    <h3 class="hr-head">Ledelsen ga fra seg</h3>
+    <div><span class="i-carbon-events" /><span><b>CAB</b> og godkjenningsmøter</span></div>
+    <div><span class="i-carbon-calendar" /><span><b>Releasevinduer</b></span></div>
+    <div><span class="i-carbon-ticket" /><span><b>Bestilling</b> via drift</span></div>
+    <div><span class="i-carbon-list-checked" /><span><b>Detaljstyring</b> av hvordan teamene jobber</span></div>
+  </div>
+  <div v-click="1" class="hr-mid"><span class="i-carbon-arrow-right" /></div>
+  <div v-click="1" class="hr-col hr-room">
+    <h3 class="hr-head">Teamene tok</h3>
+    <div><span class="i-carbon-rocket" /><span><b>Prodsetting</b> når de selv vil</span></div>
+    <div><span class="i-carbon-activity" /><span><b>Drift</b> av egne apper</span></div>
+    <div><span class="i-carbon-currency" /><span><b>Kostnad</b> for det de bruker</span></div>
+  </div>
+</div>
+
+::footer::
+<span v-click="1" class="lesson" style="--pc: #ff5c6c">Tillit framfor kontroll</span>
+
+<!--
+Overgang: «Eierskap betyr også regningen.»
+
+- Det ledelsen ga fra seg vises først. Klikk 1: det teamene tok
+- Det er en lederbeslutning, ikke en teknisk. Plattformen gjør det mulig, men noen må slippe taket
+- Lærdom: tillit framfor kontroll
+-->
+
+---
+layout: default
+clicks: 2
+---
+
+::header::
 <h1 class="text-3xl font-bold">Teamet eier kostnaden</h1>
-<p class="subtitle">Teamet ser prisen i Console og endrer den selv</p>
+<p class="subtitle">Teamet ser prisen i Console og justerer forbruket selv</p>
 
 ::default::
 <CostLoop />
 
 ::footer::
-<span v-click="1" class="lesson" style="--pc: #ff5c6c">Den som bestemmer, ser prisen</span>
+<span v-click="2" class="lesson" style="--pc: #ff5c6c">Den som bestemmer, ser prisen</span>
 
 <!--
 Overgang: «Og eierskap betyr natta.»
 
-- Klikk 1 spiller hele løkka: teamet merger en PR som gjør databasen større, og kostnaden stiger i Console. Teamet ser det og sender en ny PR med riktig størrelse
+- Klikk 1: teamet merger en PR som gjør databasen større, og kostnaden stiger i Console. Klikk 2: teamet ser det og sender en ny PR med riktig størrelse
 - Feltene er fra Application-spec (gcp.sqlInstances tier og diskSize). Kronebeløpene er illustrasjon
 - Kostnad per team vises i Console (console.nais.io)
 -->
 
 ---
 layout: default
-clicks: 3
+clicks: 4
 ---
 
 ::header::
@@ -214,29 +215,28 @@ clicks: 3
   <FlowChain :nodes="[
     { icon: 'i-carbon-notification', label: 'Varsel', sub: 'En node i plattformen svikter' },
     { icon: 'i-carbon-phone', label: 'Nais-vakt', sub: 'Vakthavende i Nais-teamet varsles' },
-    { icon: 'i-carbon-cloud', label: 'Google', sub: 'Døgnåpen support ved behov' },
+    { icon: 'i-carbon-cloud', label: 'Google', sub: 'Døgnåpen støtte ved behov' },
     { icon: 'i-carbon-checkmark', label: 'Løst', sub: 'Appene kjørte hele tiden' },
   ]" />
-  <div v-click="3" class="text-center">
+  <div v-click="4" class="text-center">
     <div class="text-5xl font-bold" style="font-family: Poppins, sans-serif; color: var(--nais-success)">99,88 %</div>
-    <p class="mt-1">ingress-svar uten 5xx i Nav, siste 30 dager. Målt, ikke SLA.</p>
+    <p class="mt-1">av forespørslene besvart uten serverfeil. Nav, siste 30 dager. Målt, ikke SLA.</p>
   </div>
 </div>
 
 ::footer::
-<span v-click="3" class="lesson" style="--pc: #ff5c6c">Tydelig ansvarsdeling</span>
+<span v-click="4" class="lesson" style="--pc: #ff5c6c">Tydelig ansvarsdeling</span>
 
 <!--
 Overgang: «Hvordan holder et team alt dette i hodet? Det gjør det ikke.»
 
-- Nais har vakt døgnet rundt for plattformen, med Googles døgnåpne support ved behov
+- Nais har vakt døgnet rundt for plattformen, med Googles døgnåpne støtte ved behov
 - Skillet: feiler en app på grunn av egen kode, er det teamets jobb å rette
-- Klikk 1–3: varselet går fra plattformen via Nais-vakten til løst
+- Klikk 1–3: varselet går fra plattformen via Nais-vakten til løst. Klikk 4: tallet
 - 99,88 %: målt i Mimir, Nav, siste 30 dager. Inkluderer feil i appene selv. Ingen SLA
 -->
 
 ---
-transition: view-transition
 layout: default
 clicks: 3
 ---
@@ -272,21 +272,21 @@ clicks: 3
 ::default::
 <div class="flex flex-col gap-2 w-full">
   <PrFlow title="Rett skrivefeil i søknadsteksten" file="src/tekster.ts" :diff="[
-    '- Du må sende søknaden innen 14 dagar.',
+    '- Du må sende søknaden innen 14 dagr.',
     '+ Du må sende søknaden innen 14 dager.',
   ]" />
-  <div v-click="3" class="flex justify-center items-center gap-4">
-    <span class="tally" style="margin: 0; font-size: 1.05rem; padding: 0.15rem 1rem">0 overleveringer · minutter</span>
-    <span class="lesson" style="--pc: #FF9100">Ingen venting</span>
-  </div>
+  <div v-click="3" class="tally">0 overleveringer · minutter</div>
 </div>
 
+::footer::
+<span v-click="3" class="lesson" style="--pc: #FF9100">Ingen venting</span>
+
 <!--
-Overgang: «Men uten port, hvordan holder vi sikkerheten?»
+Overgang: «Men uten bom, hvordan ivaretar vi sikkerheten?»
 
 - Samme endring som før: rettelsen fra slide 4. Speilet mot slide 3: null overleveringer, minutter i stedet for måneder
-- Klikk 1: sjekker og godkjenning. Klikk 2: merge, så bygger nais/docker-build-push med SBOM og signering, og nais apply sender manifestet til prod. Klikk 3: PR-en viser at den er deployet
-- Copilot-agenten åpner PR-en. Et menneske reviewer og merger
+- Klikk 1: sjekker og godkjenning. Klikk 2: merge, så bygger nais/docker-build-push med SBOM og signering, og nais apply sender manifestet til prod. Klikk 3: PR-en viser at den er prodsatt
+- Copilot-agenten åpner PR-en. Et menneske godkjenner og merger
 - Kilde for flyten: docs.nais.io, «Build and deploy»
 -->
 
@@ -296,7 +296,7 @@ clicks: 4
 ---
 
 ::header::
-<h1 class="text-3xl font-bold">Sikkerheten ligger i veien</h1>
+<h1 class="text-3xl font-bold">Sikkerheten er en del av veien</h1>
 <p class="subtitle">Bygd inn, ikke bestilt</p>
 
 ::default::
@@ -313,7 +313,7 @@ clicks: 4
 </div>
 
 ::footer::
-<span v-click="4" class="lesson" style="--pc: #FF9100">Sikkerhet i veien, ikke i en port</span>
+<span v-click="4" class="lesson" style="--pc: #FF9100">Sikkerhet bygd inn, ikke en bom på veien</span>
 
 <!--
 Overgang: «Veien er et produkt, med brukere.»
@@ -337,13 +337,13 @@ clicks: 4
 <Toolbox mode="open" />
 
 ::footer::
-<span v-click="4" class="lesson" style="--pc: #9b6fd6">Plattform som produkt</span>
+<span v-click="4" class="lesson" style="--pc: #9b6fd6">Utviklerne er brukerne</span>
 
 <!--
 Overgang: «Og for dem som liker terminalen.»
 
 - Én bølge med skuffer per klikk (tre bølger), så alt på en gang
-- Console, Nais CLI og MCP for kodeagenter ligger i Verktøy-skuffen, sammen med dokumentasjon og champions
+- Console, Nais CLI og MCP for KI-agenter ligger i Verktøy-skuffen, sammen med dokumentasjon og champions
 - Champions: en eller flere i hvert team som følger med på Nais og deler videre
 - Ingenting å bestille: alt står i manifestet eller i Console
 -->
@@ -382,7 +382,7 @@ layout: default
 <div class="card-row grid grid-cols-4 gap-5 w-full max-w-5xl mx-auto">
   <IconCard icon="i-carbon-logo-github" title="Kildekode" description="Plattformen er åpen kildekode på github.com/nais." />
   <IconCard icon="i-carbon-document" title="Dokumentasjon" description="Åpen for alle på docs.nais.io." color="blue" />
-  <IconCard icon="i-carbon-logo-slack" title="#nais" description="Spørsmål og svar i åpen kanal, ikke i tickets." color="yellow" />
+  <IconCard icon="i-carbon-logo-slack" title="#nais" description="Spørsmål og svar i åpen kanal, ikke i en sakskø." color="yellow" />
   <IconCard icon="i-carbon-globe" title="nais.io" description="Hva Nais er, og hvordan andre kan bruke den." color="go-blue" />
 </div>
 
@@ -403,7 +403,7 @@ layout: default
 
 ::header::
 <h1 class="text-3xl font-bold">Fra fire i året til ≈ 9 000 i uka</h1>
-<p class="subtitle">Prodsettinger per uke i Nav, år for år</p>
+<p class="subtitle">Prodsettinger per uke i Nav, år for år (anslag)</p>
 
 ::default::
 <YearChart metric="prod" :labels="false" :height="260" :marker="{ year: 'Før', text: '4 i året' }" />
@@ -411,10 +411,9 @@ layout: default
 <!--
 Overgang: «Fart er også å rette feil fort.»
 
-- Kurven er et anslag: formen følger Navs årlige snitt av deployer, skalert slik at 2026 ender på dagens ≈ 9 000 i prod (Mimir, oktober 2026)
+- Kurven er et anslag: formen følger Navs årlige snitt av prodsettinger, skalert slik at 2026 ender på dagens ≈ 9 000 i prod (Mimir, oktober 2026)
 - Si «anslag» høyt. Bare 2026 er målt
 - «Før»: fire store releaser i året, som på slide 3
-- Ukegrafen fra Mimir (11 uker, aug.–okt. 2026, prod 7 160–10 081) ligger i DeployChart hvis noen spør
 -->
 
 ---
@@ -423,8 +422,8 @@ clicks: 4
 ---
 
 ::header::
-<h1 class="text-3xl font-bold">Fra feil til fiks</h1>
-<p class="subtitle">Fra varsel til fiks på minutter</p>
+<h1 class="text-3xl font-bold">Fra feil til rettet</h1>
+<p class="subtitle">Fra varsel til rettelse på minutter</p>
 
 ::default::
 <BugHunt />
@@ -432,7 +431,7 @@ clicks: 4
 <!--
 Overgang: «Ikke alt har gått bra.»
 
-- Klikk 1: varsel. Klikk 2: trace. Klikk 3: logger for samme trace. Klikk 4: fiksen er deployet
+- Klikk 1: varsel. Klikk 2: trace. Klikk 3: logger for samme trace. Klikk 4: rettelsen er prodsatt
 - Logger, metrikker og traces kommer uten oppsett og vises i Grafana (docs.nais.io, observability)
 - Illustrasjon, ikke ekte tall
 -->
@@ -448,8 +447,8 @@ layout: default
 ::default::
 <div class="card-row grid grid-cols-3 gap-6 w-full max-w-5xl mx-auto">
   <IconCard icon="i-carbon-network-3" title="Fra Istio til Linkerd" description="Service mesh ble for tungt å drifte. Vi byttet til noe enklere." />
-  <IconCard icon="i-carbon-renew" title="Tilgangsstyring, fire ganger" description="Vi bygde den fire ganger før den satt. De gamle er lagt ned." color="blue" />
-  <IconCard icon="i-carbon-warning-alt" title="En hemmelighet nesten i loggene" description="Vi fant feilen, meldte avvik og rettet den." color="yellow" />
+  <IconCard icon="i-carbon-renew" title="Tilgangsstyring ×4" description="Vi bygde den fire ganger før den satt. De gamle er lagt ned." color="blue" />
+  <IconCard icon="i-carbon-warning-alt" title="Nesten-lekkasje i loggene" description="Vi fant feilen, meldte avvik og rettet den." color="yellow" />
 </div>
 
 <!--
@@ -475,7 +474,7 @@ layout: default
 <!--
 Overgang: «Må man være Nav? Nei.»
 
-- ≈ 150 årsverk er et anslag for hele perioden siden 2016. Si «anslag»
+- ≈ 150 årsverk er et anslag for hele perioden siden 2016. Si «anslag» (muntlig, ikke kildebelagt)
 - 15 personer i Nais-teamet i dag, alle ansatt i Nav. Navn fra GitHub-teamet nais/nais
 - Plattformen er ikke gratis. Den koster et team, hele tiden
 -->
@@ -498,7 +497,7 @@ layout: default
     <span class="incoming-logo"><img src="./assets/logos/ksdigital.png" alt="KS Digital" class="h-7" /><small>på vei inn</small></span>
     <span class="incoming-logo"><img src="./assets/logos/novari.svg" alt="Novari" class="h-6" /><small>på vei inn</small></span>
   </div>
-  <p class="anim-item text-center">Seks virksomheter. Det som bygges for én, får alle.</p>
+  <p class="anim-item text-center">Fire virksomheter i dag, to på vei inn. Det som bygges for én, får alle.</p>
 </div>
 
 <!--
@@ -519,7 +518,7 @@ layout: default
 
 ::default::
 <NaisPillars :items="[
-  { title: 'Tillit og eierskap', color: '#ff5c6c', icon: 'i-carbon-user-favorite', text: 'Gi teamene ansvaret, og la dem se prisen og ta vakten for egne apper.' },
+  { title: 'Tillit og eierskap', color: '#ff5c6c', icon: 'i-carbon-user-favorite', text: 'Gi teamene ansvaret. La dem se prisen og følge opp egne apper.' },
   { title: 'Asfaltert vei', color: '#FF9100', icon: 'i-carbon-road', text: 'Gjør den trygge veien til den enkleste, med sikkerheten bygd inn.' },
   { title: 'Plattform som produkt', color: '#9b6fd6', icon: 'i-carbon-tool-box', text: 'Behandle utviklerne som brukere: verktøy, dokumentasjon og champions.' },
   { title: 'Åpenhet', color: '#5cb2da', icon: 'i-carbon-share', text: 'Del kode, dokumentasjon og feil åpent.' },
@@ -529,7 +528,7 @@ layout: default
 Overgang: «Til slutt: tesen.»
 
 - Samler lærdomslinjene fra Akt 2 i de samme fire fargene
-- Tillit og eierskap: slide 6–8. Asfaltert vei: 9–11. Plattform som produkt: 12. Åpenhet: 13
+- Tillit og eierskap: slide 6–8. Asfaltert vei: 9–11. Plattform som produkt: 12–13. Åpenhet: 14
 - Ingen av dem krever at man er like stor som Nav. Start med én
 -->
 
