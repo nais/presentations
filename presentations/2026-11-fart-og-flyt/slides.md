@@ -326,7 +326,7 @@ clicks: 3
 <ManifestDeep />
 
 ::footer::
-<span v-click="3" class="lesson" style="--pc: #FF9100">Asfaltert vei</span>
+<span v-click="3" class="lesson" style="--pc: #FF9100">Brolagt sti</span>
 
 <!--
 Overgang: «Og når teamet merger?»
@@ -597,7 +597,7 @@ layout: default
 ::default::
 <NaisPillars :items="[
   { title: 'Tillit og eierskap', color: '#ff5c6c', icon: 'i-carbon-user-favorite', text: 'Gi teamene ansvaret. La dem se prisen og følge opp egne apper.' },
-  { title: 'Asfaltert vei', color: '#FF9100', icon: 'i-carbon-road', text: 'Gjør den trygge veien til den enkleste, med sikkerheten bygd inn.' },
+  { title: 'Brolagt sti', color: '#FF9100', icon: 'i-carbon-road', text: 'Gjør den trygge stien til den enkleste, med sikkerheten bygd inn.' },
   { title: 'Plattform som produkt', color: '#9b6fd6', icon: 'i-carbon-tool-box', text: 'Behandle utviklerne som brukere: verktøy, dokumentasjon og champions.' },
   { title: 'Åpenhet', color: '#5cb2da', icon: 'i-carbon-share', text: 'Del kode, dokumentasjon og feil åpent.' },
 ]" />
@@ -606,7 +606,7 @@ layout: default
 Overgang: «Til slutt: tesen.»
 
 - Samler lærdomslinjene fra Akt 2 i de samme fire fargene
-- Tillit og eierskap: slide 8–10. Asfaltert vei: 11–13. Plattform som produkt: 14–15. Åpenhet: 16
+- Tillit og eierskap: slide 8–10. Brolagt sti: 11–13. Plattform som produkt: 14–15. Åpenhet: 16
 - Ingen av dem krever at man er like stor som Nav. Start med én
 -->
 

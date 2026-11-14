@@ -32,7 +32,7 @@ Kolonnen «Kilde» viser sliden eller komponenten som gjenbrukes. «Ut» er over
 | 6 | Tillit og eierskap | ny | Ledelsen ga fra seg: CAB, releasevinduer, bestilling via drift, detaljstyring. Teamene tok: drift, kostnad, prodsetting | Tillit framfor kontroll | «Eierskap betyr også regningen.» |
 | 7 | Teamet eier kostnaden | CostLoop | Kostnad synlig per team i Console | Den som bestemmer, ser prisen | «Og eierskap betyr natta.» |
 | 8 | Kl. 03.00 | FlowChain + 99,88 % | Plattformen har vakt, teamet eier appen | Tydelig ansvarsdeling | «Hvordan holder et team alt dette i hodet? Det gjør det ikke.» |
-| 9 | Ett manifest, ferdig oppsett | ManifestDeep (færre klikk) | Rammet inn som kognitiv last: det utvikleren slipper å vite | Asfaltert vei | «Og når teamet merger?» |
+| 9 | Ett manifest, ferdig oppsett | ManifestDeep (færre klikk) | Rammet inn som kognitiv last: det utvikleren slipper å vite | Brolagt sti | «Og når teamet merger?» |
 | 10 | Fra pull request til produksjon | PrFlow | Speilet mot slide 3: null overleveringer | Ingen venting | «Men uten bom, hvordan ivaretar vi sikkerheten?» |
 | 11 | Sikkerheten er en del av veien | SupplyFix + AuthJourney (slått sammen) | Signering, SBOM, sårbarheter og innlogging bygd inn | Sikkerhet bygd inn, ikke en bom på veien | «Veien er et produkt, med brukere.» |
 | 12 | Plattform som produkt | Toolbox (12a) + CliDemo (12b) | Verktøykassa med Console, CLI og MCP, dokumentasjon, champions. Terminalen på egen slide | Plattform som produkt | «Og alt dette er åpent.» |
@@ -52,7 +52,7 @@ Kolonnen «Kilde» viser sliden eller komponenten som gjenbrukes. «Ut» er over
 
 | # | Tittel | Kilde | Innhold | Ut |
 |---|---|---|---|---|
-| 19 | Fire lærdommer | NaisPillars (tilpasset) | Plattform som produkt, asfaltert vei, tillit og eierskap, åpenhet. Formulert som noe man kan gjøre uten å være Nav | — |
+| 19 | Fire lærdommer | NaisPillars (tilpasset) | Plattform som produkt, brolagt sti, tillit og eierskap, åpenhet. Formulert som noe man kan gjøre uten å være Nav | — |
 | 20 | Lett å gjøre rett | Avslutning | Tesen, «Slik slipper du utviklerne fri», «Spørsmål?» | «Takk!» |
 
 ## Ut av fortsatt-decket
