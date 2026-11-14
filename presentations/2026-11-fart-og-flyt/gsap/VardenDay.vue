@@ -7,11 +7,26 @@
         <span v-for="s in steps" :key="s.time">{{ s.time }}</span>
       </div>
     </div>
-    <div class="chat">
-      <div v-for="(s, i) in steps" :key="i" class="msgs">
-        <div v-for="(m, j) in s.msgs" :key="j" class="msg" :class="m.kind">
-          <small v-if="m.to">{{ m.to }}</small>
-          {{ m.text }}
+    <div class="phone">
+      <div class="island" />
+      <div class="head">
+        <span class="avatar">V</span>
+        <b>Familien</b>
+      </div>
+      <div ref="screen" class="screen">
+        <div ref="list" class="list">
+          <template v-for="(s, i) in steps" :key="i">
+            <div class="item stamp" :class="`s${i}`">{{ s.time }}</div>
+            <div
+              v-for="(m, j) in s.msgs"
+              :key="j"
+              class="item msg"
+              :class="[m.kind, `s${i}`]"
+            >
+              <small v-if="m.to && m.kind !== 'me'">{{ m.to }}</small>
+              <span>{{ m.text }}</span>
+            </div>
+          </template>
         </div>
       </div>
     </div>
@@ -39,7 +54,7 @@ const steps = [
     sky: ["#2b3552", "#e39a72", "#FFC48A"],
     msgs: [
       {
-        to: "Familiechat",
+        to: "Varden",
         text: "God morgen! ☀ 6–8 grader, overskyet. Dagsplan og pakkeliste.",
       },
     ],
@@ -49,7 +64,7 @@ const steps = [
     sky: ["#8fbde3", "#e6eef4", "#FFF4D6"],
     msgs: [
       {
-        to: "Til foreldrene",
+        to: "Varden",
         text: "Fotballen er flyttet fra 16:30 til 17:00 i dag.",
       },
     ],
@@ -70,7 +85,7 @@ const steps = [
     sky: ["#3b3f66", "#e08a5c", "#FF9E66"],
     msgs: [
       {
-        to: "Til foreldrene",
+        to: "Varden",
         text: "I morgen har barnet svømming, så husk håndkle.",
       },
     ],
@@ -97,11 +112,22 @@ const arc = (t) => {
 const root = ref();
 const sky = ref();
 const orb = ref();
+const screen = ref();
+const list = ref();
 
 useSteps((tl) => {
   const q = gsap.utils.selector(root.value);
   const clocks = q(".clock span");
-  const groups = q(".msgs");
+  const groups = steps.map((_, i) => q(`.s${i}`));
+  // Scroll so the last item of step i sits at the bottom of the screen.
+  const scrollFor = (i) => {
+    const last = groups[i].at(-1);
+    const pad = 10;
+    return -Math.max(
+      0,
+      last.offsetTop + last.offsetHeight + pad - screen.value.clientHeight,
+    );
+  };
   const paint = (s) => ({
     "--top": s.sky[0],
     "--bottom": s.sky[1],
@@ -117,20 +143,16 @@ useSteps((tl) => {
   gsap.set(sky.value, paint(steps[0]));
   gsap.set(orb.value, { ...orbStyle(steps[0]), xPercent: -50, yPercent: -50 });
   gsap.set(clocks, { autoAlpha: 0 });
-  gsap.set(groups, { display: "none" });
+  gsap.set(groups.flat(), { autoAlpha: 0 });
+  gsap.set(list.value, { y: scrollFor(0) });
 
   const show = (i) => {
     if (i > 0) {
       tl.to(sky.value, { ...paint(steps[i]), duration: 1 })
         .to(orb.value, { ...orbStyle(steps[i]), duration: 1 }, "<")
         .to(clocks[i - 1], { autoAlpha: 0, y: -10, duration: 0.3 }, "<")
-        // Older bubbles fade and shrink; the one before that leaves.
-        .to(groups[i - 1], { autoAlpha: 0.4, scale: 0.92, duration: 0.4 }, "<");
-      if (i > 1)
-        tl.to(groups[i - 2], { autoAlpha: 0, duration: 0.3 }, "<").set(
-          groups[i - 2],
-          { display: "none" },
-        );
+        // History stays; the thread scrolls up under the header.
+        .to(list.value, { y: scrollFor(i), duration: 0.6 }, "<");
     }
     tl.fromTo(
       clocks[i],
@@ -138,9 +160,8 @@ useSteps((tl) => {
       { autoAlpha: 1, y: 0, duration: 0.4 },
       i > 0 ? "<0.3" : 0,
     )
-      .set(groups[i], { display: "flex" }, "<")
       .fromTo(
-        groups[i].children,
+        groups[i],
         { autoAlpha: 0, y: RISE },
         { autoAlpha: 1, y: 0, stagger: 0.35 },
         "<",
@@ -198,49 +219,109 @@ useSteps((tl) => {
   left: 0;
   bottom: 0;
 }
-.chat {
+.phone {
+  position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
-  gap: 0.9rem;
+  width: 330px;
+  justify-self: center;
+  padding: 10px;
+  border-radius: 44px;
+  background: #000;
+  border: 3px solid #3a3f47;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+  overflow: hidden;
 }
-.msgs {
+.island {
+  position: absolute;
+  top: 16px;
+  left: 50%;
+  width: 84px;
+  height: 22px;
+  margin-left: -42px;
+  border-radius: 999px;
+  background: #000;
+  z-index: 3;
+}
+.head {
+  position: relative;
+  z-index: 2;
+  display: flex;
   flex-direction: column;
-  gap: 0.5rem;
-  transform-origin: 0 100%;
+  align-items: center;
+  gap: 2px;
+  padding: 34px 0 6px;
+  border-radius: 34px 34px 0 0;
+  background: rgba(28, 28, 30, 0.96);
+  border-bottom: 1px solid #2c2c2e;
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 600;
+}
+.avatar {
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: linear-gradient(#8e9aaf, #5b6577);
+  font-size: 0.75rem;
+}
+.screen {
+  position: relative;
+  flex: 1;
+  overflow: hidden;
+  border-radius: 0 0 34px 34px;
+  background: #000;
+}
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 8px 12px;
+}
+.stamp {
+  align-self: center;
+  margin-top: 6px;
+  font-size: 0.62rem;
+  font-weight: 600;
+  color: #8e8e93;
 }
 .msg {
-  max-width: 88%;
-  padding: 0.6rem 0.9rem;
-  border-radius: 16px 16px 16px 4px;
-  background: var(--nais-card);
-  border: 1px solid var(--nais-border);
-  color: var(--nais-text);
-  font-size: 0.95rem;
-  line-height: 1.35;
+  align-self: flex-start;
+  max-width: 80%;
+  color: #fff;
+  font-size: 0.8rem;
+  line-height: 1.3;
+}
+.msg span {
+  display: block;
+  padding: 0.4rem 0.7rem;
+  border-radius: 18px 18px 18px 6px;
+  background: #26252a;
 }
 .msg small {
   display: block;
-  font-size: 0.7rem;
-  font-weight: 600;
-  color: var(--nais-text-secondary);
+  margin: 0 0 2px 0.7rem;
+  font-size: 0.6rem;
+  color: #8e8e93;
 }
 .msg.me {
   align-self: flex-end;
-  border-radius: 16px 16px 4px 16px;
-  background: #2f7cf6;
-  border-color: #2f7cf6;
-  color: #fff;
 }
-.msg.me small {
-  color: rgba(255, 255, 255, 0.8);
+.msg.me span {
+  border-radius: 18px 18px 6px 18px;
+  background: #2f7cf6;
 }
 .msg.note {
   align-self: center;
-  border-radius: 999px;
-  font-style: italic;
-  color: var(--nais-text-secondary);
-  background: transparent;
-  border-style: dashed;
+  max-width: 90%;
+  text-align: center;
+}
+.msg.note span {
+  padding: 0;
+  background: none;
+  font-size: 0.65rem;
+  color: #8e8e93;
 }
 </style>
