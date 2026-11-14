@@ -135,7 +135,7 @@ clicks: 5
     { icon: 'i-carbon-enterprise', label: 'Leverandør', sub: 'Bygger etter kontrakt', stat: 'uker' },
     { icon: 'i-carbon-document', label: 'Bestilling', sub: 'Skjema til forvaltning', stat: 'dager' },
     { icon: 'i-carbon-ticket', label: 'Drift', sub: 'Sak i køen', stat: 'uker' },
-    { icon: 'i-carbon-events', label: 'CAB', sub: 'Godkjenning i neste møte', stat: 'neste møte' },
+    { icon: 'i-carbon-events', label: 'CAB', sub: 'Godkjenning i møte', stat: 'neste møte' },
     { icon: 'i-carbon-calendar', label: 'Releasevindu', sub: 'Fire ganger i året', stat: 'måneder' },
   ]" />
   <div v-click="5" class="tally">5 overleveringer · måneder</div>
