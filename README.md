@@ -7,7 +7,7 @@ Monorepo for nais presentation decks built with [Slidev](https://sli.dev/).
 | Name                                                                | Description                                | Port |
 | ------------------------------------------------------------------- | ------------------------------------------ | ---- |
 | [2026-02-nais-brukerforum](presentations/2026-02-nais-brukerforum/) | nais Brukerforum February 2026             | 3030 |
-| [2026-11-ki-plattform](presentations/2026-11-ki-plattform/)         | Én KI-plattform for agenter i Nav (utkast) | 3033 |
+| [2026-11-ki-plattform](presentations/2026-11-ki-plattform/)         | nav-fleet: plattform for agenter (utkast)  | 3033 |
 
 ## Structure
 

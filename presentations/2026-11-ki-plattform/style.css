@@ -1,21 +1,21 @@
-/* nais.io Light Theme */
+/* nav-fleet light theme. Variable names follow the shared --nais-* contract; the colours are not Nais brand colours. */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Poppins:wght@400;600;700;900&display=swap');
 
 :root {
-  /* nais.io brand palette — light theme */
+  /* Neutral blue palette: the platform is separate from Nais */
   --nais-bg: #ffffff;
   --nais-surface: #f1f5f9;
   --nais-card: #f8fafc;
   --nais-text: #0f172a;
   --nais-text-secondary: #64748b;
   --nais-heading: #0f172a;
-  --nais-accent: #e8384f;
-  --nais-accent-hover: #dc2626;
-  --nais-accent-light: #fef2f2;
+  --nais-accent: #0067c5;
+  --nais-accent-hover: #0056b4;
+  --nais-accent-light: #e6f1ff;
   --nais-border: #e2e8f0;
-  --nais-highlight: #e8384f;
-  --nais-gradient-from: #e8384f;
-  --nais-gradient-to: #dc2626;
+  --nais-highlight: #0067c5;
+  --nais-gradient-from: #0067c5;
+  --nais-gradient-to: #0056b4;
   --nais-code-bg: #f1f5f9;
   --nais-success: #10b981;
 
@@ -443,4 +443,142 @@ pre,
   text-align: center;
   font-size: 0.9rem;
   color: var(--nais-text-secondary);
+}
+
+.chip.amber {
+  background: #fffbeb;
+  color: #b45309;
+}
+
+.chip.slate {
+  background: var(--nais-surface);
+  color: #475569;
+  border: 1px solid var(--nais-border);
+}
+
+/* Cover mark: replaces the default logo of the shared cover layout */
+.cover-mark {
+  width: 96px;
+  height: 96px;
+  color: var(--nais-accent);
+}
+
+/* Big number inside a card on the "today" slide */
+.card-row .stat-number {
+  font-size: 2.6rem;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+/* Scenario cards: two per slide, each tagged with the platform blocks it uses */
+.scenario-row {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+  width: 100%;
+  margin-top: 0.5rem;
+}
+
+.scenario {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.scenario .kicker {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--nais-text-secondary);
+}
+
+.scenario h3 {
+  font-size: 1.15rem;
+  line-height: 1.3;
+  margin: 0;
+}
+
+.scenario p {
+  font-size: 0.9rem;
+  line-height: 1.45;
+  margin: 0;
+  color: var(--nais-text);
+}
+
+.scenario p b {
+  font-weight: 600;
+  color: var(--nais-heading);
+}
+
+.scenario p.caveat {
+  font-size: 0.8rem;
+  color: var(--nais-text-secondary);
+}
+
+.scenario .blocks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-top: auto;
+  padding-top: 0.4rem;
+}
+
+/* Legend line under diagrams */
+.legend {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.9rem;
+}
+
+/* The shared timeline node has a hardcoded red glow; match this deck's accent */
+.tl-marker {
+  box-shadow: 0 4px 20px rgba(0, 103, 197, 0.3) !important;
+}
+
+/* Before/after table on the "from experiments to production" slide */
+.shift {
+  display: grid;
+  grid-template-columns: 7rem 1fr 1fr;
+  width: 100%;
+  margin-top: 0.75rem;
+  font-size: 1rem;
+  text-align: left;
+}
+
+.shift > div {
+  padding: 0.6rem 1rem;
+  border-bottom: 1px solid var(--nais-border);
+  color: var(--nais-text-secondary);
+}
+
+.shift .shift-l {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  align-self: stretch;
+  display: flex;
+  align-items: center;
+}
+
+.shift .shift-h {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  color: var(--nais-heading);
+}
+
+.shift .now {
+  background: var(--nais-accent-light);
+  color: var(--nais-text);
+}
+
+.shift .shift-h.now {
+  color: var(--nais-accent);
+  border-radius: 0.5rem 0.5rem 0 0;
 }

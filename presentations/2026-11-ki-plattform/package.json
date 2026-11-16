@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "description": "Én KI-plattform for agenter i Nav",
+  "description": "nav-fleet: en felles plattform for KI-agenter i Nav",
   "scripts": {
     "dev": "slidev --port 3033",
     "build": "slidev build --base /2026-11-ki-plattform/",
