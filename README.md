@@ -4,9 +4,10 @@ Monorepo for nais presentation decks built with [Slidev](https://sli.dev/).
 
 ## Presentations
 
-| Name                                                                | Description                    | Port |
-| ------------------------------------------------------------------- | ------------------------------ | ---- |
-| [2026-02-nais-brukerforum](presentations/2026-02-nais-brukerforum/) | nais Brukerforum February 2026 | 3030 |
+| Name                                                                | Description                                | Port |
+| ------------------------------------------------------------------- | ------------------------------------------ | ---- |
+| [2026-02-nais-brukerforum](presentations/2026-02-nais-brukerforum/) | nais Brukerforum February 2026             | 3030 |
+| [2026-11-ki-plattform](presentations/2026-11-ki-plattform/)         | Én KI-plattform for agenter i Nav (utkast) | 3033 |
 
 ## Structure
 
@@ -31,6 +32,7 @@ pnpm install
 ```bash
 pnpm dev              # All presentations
 pnpm dev:brukerforum  # Brukerforum presentation (port 3030)
+pnpm dev:ki           # KI-plattform presentation (port 3033)
 ```
 
 ## Code Quality
