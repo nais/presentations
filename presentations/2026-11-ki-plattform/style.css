@@ -510,14 +510,6 @@ pre,
   font-weight: 500;
 }
 
-.sky-ships {
-  fill: none;
-  stroke: var(--nais-accent);
-  stroke-width: 5.5;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
 .sky-trails {
   fill: none;
   stroke: url(#sky-fade);
@@ -602,14 +594,153 @@ pre,
   }
 }
 
+/* Entrance utilities for the other slides. Slidev hides inactive slides with v-show, and a CSS animation
+   restarts when its element is displayed again, so these start when the slide is shown.
+   Same rule as the sky: the base state is the end state. Tune with --d (delay), --t (duration), --dy (distance) */
+.a-fade,
+.a-rise,
+.a-draw,
+.a-grow,
+.a-head,
+.a-trails .fleet-dash {
+  animation-duration: var(--t, 0.8s);
+  animation-delay: var(--d, 0s);
+  animation-timing-function: cubic-bezier(0.2, 0.7, 0.3, 1);
+  animation-fill-mode: backwards;
+}
+
+.a-fade {
+  animation-name: a-fade;
+}
+
+.a-rise {
+  animation-name: a-rise;
+}
+
+/* Draws a stroke from its start. The element needs pathLength="1". A marker would show before the line
+   reaches it, so the arrowhead is a separate .a-head that fades in as the line arrives */
+.a-draw {
+  animation-name: a-draw;
+}
+
+.a-head {
+  animation-name: a-fade;
+  animation-duration: 0.3s;
+  animation-delay: calc(var(--d, 0s) + 0.45s);
+}
+
+/* Wipes an element down from its top edge */
+.a-grow {
+  animation-name: a-grow;
+  transform-box: fill-box;
+  transform-origin: top;
+}
+
+/* Trails of the ships inside draw in, dash by dash, once the group has arrived */
+.a-trails .fleet-dash {
+  animation-name: a-fade;
+  animation-duration: 0.4s;
+  animation-delay: calc(var(--t, 0.8s) + var(--i) * 0.1s);
+}
+
+/* Lights up the text inside for a moment, then returns it to normal */
+.a-pass text {
+  animation: a-pass 0.9s var(--d, 0s) ease-in-out;
+}
+
+@keyframes a-fade {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes a-rise {
+  from {
+    opacity: 0;
+    transform: translateY(var(--dy, 12px));
+  }
+}
+
+@keyframes a-draw {
+  from {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+  }
+
+  to {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes a-grow {
+  from {
+    transform: scaleY(0);
+  }
+}
+
+@keyframes a-pass {
+  50% {
+    fill: var(--nais-accent);
+  }
+}
+
+/* Identity slide: the token stops under each box on its way to the tool, in step with .a-pass */
+.dg .token {
+  fill: var(--nais-accent);
+  stroke: #ffffff;
+  stroke-width: 2;
+  animation: token 3.6s 0.4s ease-in-out backwards;
+}
+
+@keyframes token {
+  from {
+    transform: translateX(-752px);
+  }
+
+  25% {
+    transform: translateX(-564px);
+  }
+
+  50% {
+    transform: translateX(-376px);
+  }
+
+  75% {
+    transform: translateX(-188px);
+  }
+}
+
+/* Closing slide: the formation climbs along its course and fades at both ends, so the loop has no visible jump */
+.fly .climb {
+  animation: climb 28s linear infinite;
+}
+
+@keyframes climb {
+  from {
+    opacity: 0;
+    transform: translate(-50px, 50px);
+  }
+
+  12%,
+  88% {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+    transform: translate(50px, -50px);
+  }
+}
+
 /* No motion on request, and none in Slidev's export, which captures a single frame */
 @media (prefers-reduced-motion: reduce), print {
-  .sky * {
+  .slidev-layout * {
     animation: none !important;
   }
 }
 
-#print-container .sky * {
+#print-container .slidev-layout * {
   animation: none !important;
 }
 
@@ -932,12 +1063,12 @@ pre,
   color: var(--nais-accent);
 }
 
-/* Vision slide: jets in formation (and the hidden radar fallback) above a three-field ground */
+/* Vision slide: ships in formation (and the hidden radar fallback) above a three-field ground */
 .fly {
   max-height: 300px;
 }
 
-.fly .jet,
+.fly .hub,
 .fly .pill {
   fill: var(--nais-accent);
 }
@@ -949,7 +1080,7 @@ pre,
   fill: #ffffff;
 }
 
-/* Course marker: thin and dashed so it never reads as part of the lead jet */
+/* Course marker: thin and dashed so it never reads as part of the lead ship */
 .fly .course {
   fill: none;
   stroke: var(--nais-accent);

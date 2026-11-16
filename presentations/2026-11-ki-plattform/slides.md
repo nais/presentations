@@ -20,7 +20,6 @@ fonts:
     <pattern id="sky-dots" width="24" height="24" patternUnits="userSpaceOnUse"><circle cx="12" cy="12" r=".75" fill="#cbd5e1"/></pattern>
     <linearGradient id="sky-fade" gradientUnits="userSpaceOnUse" x1="0" y1="10" x2="0" y2="130"><stop offset="0" stop-color="#0067c5" stop-opacity=".75"/><stop offset="1" stop-color="#0067c5" stop-opacity="0"/></linearGradient>
     <line id="sky-trail" x1="0" y1="10" x2="0" y2="130"/>
-    <path id="sky-ship" d="M-9 8l9-16 9 16"/>
     <filter id="sky-soft" x="-5%" y="-30%" width="110%" height="160%"><feGaussianBlur stdDeviation="5"/></filter>
     <mask id="sky-reveal" maskUnits="userSpaceOnUse" x="-90" y="0" width="180" height="320">
       <g stroke="#ffffff" stroke-width="8">
@@ -47,14 +46,14 @@ fonts:
       <use href="#sky-trail" x="-66" y="174"/>
       <use href="#sky-trail" x="66" y="174"/>
     </g>
-    <g class="sky-ships">
-      <use href="#sky-ship" transform="translate(0 0) scale(1.2)"/>
-      <use href="#sky-ship" transform="translate(-22 58) scale(1.2)"/>
-      <use href="#sky-ship" transform="translate(22 58) scale(1.2)"/>
-      <use href="#sky-ship" transform="translate(-44 116) scale(1.2)"/>
-      <use href="#sky-ship" transform="translate(44 116) scale(1.2)"/>
-      <use href="#sky-ship" transform="translate(-66 174) scale(1.2)"/>
-      <use href="#sky-ship" transform="translate(66 174) scale(1.2)"/>
+    <g>
+      <FleetShip x="0" y="0" scale="1.2"/>
+      <FleetShip x="-22" y="58" scale="1.2"/>
+      <FleetShip x="22" y="58" scale="1.2"/>
+      <FleetShip x="-44" y="116" scale="1.2"/>
+      <FleetShip x="44" y="116" scale="1.2"/>
+      <FleetShip x="-66" y="174" scale="1.2"/>
+      <FleetShip x="66" y="174" scale="1.2"/>
     </g>
   </g></g></g></g></g>
   <g class="sky-cloud mid" fill="#f0f4fa" filter="url(#sky-soft)"><ellipse cx="-40" cy="522" rx="130" ry="34"/><ellipse cx="190" cy="514" rx="120" ry="38"/><ellipse cx="400" cy="526" rx="140" ry="32"/><ellipse cx="620" cy="512" rx="130" ry="40"/><ellipse cx="830" cy="526" rx="120" ry="32"/><ellipse cx="1030" cy="516" rx="130" ry="38"/><rect x="-160" y="524" width="1300" height="76"/></g>
@@ -175,29 +174,29 @@ layout: default
     <div class="km-top">
       <strong>KI-produktutvikling</strong>
       <span>Kom i gang</span>
-      <span>nav-pilot <b class="pin">3</b></span>
+      <span>nav-pilot <b class="pin a-fade" style="--d: 1.1s">3</b></span>
       <span class="on">Tilpasning</span>
-      <span>Praksis og regler <b class="pin">2</b></span>
+      <span>Praksis og regler <b class="pin a-fade" style="--d: 0.7s">2</b></span>
       <span>Innsikt</span>
       <span class="km-login">Logg inn</span>
     </div>
     <div class="km-main">
-      <h2>Verktøykatalog <b class="pin">1</b></h2>
+      <h2>Verktøykatalog <b class="pin a-fade" style="--d: 0.3s">1</b></h2>
       <p>Agenter, instruksjoner, skills og MCP-servere som gjør Copilot smartere for Navs stack.</p>
       <div class="km-filter"><span>Agent</span><span>Instruksjon</span><span>Prompt</span><span>Skill</span><span>MCP Server</span><em>80 av 80 tilpasninger</em></div>
       <div class="km-cards">
         <div><small>Agent · Generelt</small><strong>@nav-pilot</strong><p>Planlegging og bygging av Nav-apper.</p><u>Installer</u></div>
         <div><small>Skill · Sikkerhet</small><strong>nav-auth</strong><p>Entra ID, TokenX, ID-porten og Maskinporten.</p><u>Mer info</u></div>
-        <div><small>MCP Server · Plattform <b class="pin">4</b></small><strong>nais-mcp</strong><p>Nais-kontekst via Nais CLI.</p><u>Mer info</u></div>
+        <div><small>MCP Server · Plattform <b class="pin a-fade" style="--d: 1.5s">4</b></small><strong>nais-mcp</strong><p>Nais-kontekst via Nais CLI.</p><u>Mer info</u></div>
       </div>
     </div>
   </BrowserWindow>
   <ol class="today-list">
-    <li><b class="pin">1</b><div><strong>Verktøykatalogen</strong>80 agenter, skills, instruksjoner og MCP-servere for Navs stack.</div></li>
-    <li><b class="pin">2</b><div><strong>God praksis</strong>Guider for å skrive kode, teste og sette opp agenter.</div></li>
-    <li><b class="pin">3</b><div><strong>nav-pilot</strong><code>nav-pilot install</code> legger agentpakker i repoet.</div></li>
-    <li><b class="pin">4</b><div><strong>MCP-registeret</strong>12 godkjente servere. Ukjente servere blokkeres.</div></li>
-    <li class="side"><span class="i-carbon-laptop" /><div><strong>Lokale agenter</strong>Copilot CLI kjører agentene på utviklerens egen maskin.</div></li>
+    <li class="a-rise" style="--d: 0.3s"><b class="pin">1</b><div><strong>Verktøykatalogen</strong>80 agenter, skills, instruksjoner og MCP-servere for Navs stack.</div></li>
+    <li class="a-rise" style="--d: 0.7s"><b class="pin">2</b><div><strong>God praksis</strong>Guider for å skrive kode, teste og sette opp agenter.</div></li>
+    <li class="a-rise" style="--d: 1.1s"><b class="pin">3</b><div><strong>nav-pilot</strong><code>nav-pilot install</code> legger agentpakker i repoet.</div></li>
+    <li class="a-rise" style="--d: 1.5s"><b class="pin">4</b><div><strong>MCP-registeret</strong>12 godkjente servere. Ukjente servere blokkeres.</div></li>
+    <li class="side a-rise" style="--d: 1.9s"><span class="i-carbon-laptop" /><div><strong>Lokale agenter</strong>Copilot CLI kjører agentene på utviklerens egen maskin.</div></li>
   </ol>
 </div>
 <p class="footnote tight">Fleet bygger videre på dette: katalog, veiledning og onboarding finnes allerede for utviklere.</p>
@@ -230,42 +229,33 @@ layout: default
 <p class="subtitle">Fire egenskaper som flyr sammen. Ingenting her er planlagt eller vedtatt <span class="chip amber align-middle ml-2">Visjon</span></p>
 
 ::default::
-<svg class="dg fly" viewBox="0 0 880 328" role="img" aria-label="Fem fly i V-formasjon med kondensstriper. Foran formasjonen viser en stiplet linje felles kurs. Det fremste flyet er nav-fleet. De fire andre er selvbetjent, regler som kode, fritt modellvalg og full oversikt. Underlaget har tre felt: egen infrastruktur for agentsandkassene, egne modellvalg der vi velger hvor inferens kjører, og Nais der det passer, for apper, identitet og nettverk.">
-  <defs>
-    <path id="fl-jet" d="M0,-52 C6,-46 8,-34 8,-20 L8,-6 L58,18 L58,30 L8,18 L6,40 L22,52 L22,60 L0,54 L-22,60 L-22,52 L-6,40 L-8,18 L-58,30 L-58,18 L-8,-6 L-8,-20 C-8,-34 -6,-46 0,-52 Z"/>
-    <linearGradient id="fl-trail" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0067c5" stop-opacity=".28"/><stop offset="1" stop-color="#0067c5" stop-opacity="0"/></linearGradient>
-  </defs>
-  <path d="M440 46V14" class="course"/>
-  <path d="M432 19l8-9 8 9" class="courseh"/>
-  <text x="456" y="30" class="courset">felles kurs</text>
-  <g fill="url(#fl-trail)">
-    <rect x="433" y="122" width="14" height="96" rx="7"/>
-    <rect x="283" y="152" width="14" height="96" rx="7"/>
-    <rect x="583" y="152" width="14" height="96" rx="7"/>
-    <rect x="98" y="198" width="14" height="76" rx="7"/>
-    <rect x="768" y="198" width="14" height="76" rx="7"/>
+<svg class="dg fly" viewBox="0 0 880 328" role="img" aria-label="Fem piler i V-formasjon med stiplede spor. Foran formasjonen viser en stiplet linje felles kurs. Den fremste pilen er nav-fleet. De fire andre er selvbetjent, regler som kode, fritt modellvalg og full oversikt. Underlaget har tre felt: egen infrastruktur for agentsandkassene, egne modellvalg der vi velger hvor inferens kjører, og Nais der det passer, for apper, identitet og nettverk.">
+  <g class="a-fade" style="--d: 1.9s">
+    <path d="M440 46V14" class="course"/>
+    <path d="M432 19l8-9 8 9" class="courseh"/>
+    <text x="456" y="30" class="courset">felles kurs</text>
   </g>
-  <g class="jet">
-    <use href="#fl-jet" transform="translate(440 98) scale(.62)"/>
-    <use href="#fl-jet" transform="translate(290 130) scale(.55)"/>
-    <use href="#fl-jet" transform="translate(590 130) scale(.55)"/>
-    <use href="#fl-jet" transform="translate(105 176) scale(.55)"/>
-    <use href="#fl-jet" transform="translate(775 176) scale(.55)"/>
+  <g class="a-rise a-trails" style="--dy: 48px; --t: 1.2s">
+    <FleetShip x="440" y="80" scale="2" trail="5"/>
+    <FleetShip x="290" y="114" scale="1.7" trail="3"/>
+    <FleetShip x="590" y="114" scale="1.7" trail="3"/>
+    <FleetShip x="105" y="160" scale="1.7" trail="3"/>
+    <FleetShip x="775" y="160" scale="1.7" trail="3"/>
+    <rect x="388" y="142" width="104" height="26" rx="13" class="pill"/>
+    <text x="440" y="160" text-anchor="middle" class="pillt">nav-fleet</text>
+    <rect x="195" y="172" width="190" height="44" rx="8" class="card"/>
+    <text x="290" y="191" text-anchor="middle" class="t">Selvbetjent</text>
+    <text x="290" y="208" text-anchor="middle" class="s">Teamet beskriver behovet</text>
+    <rect x="495" y="172" width="190" height="44" rx="8" class="card"/>
+    <text x="590" y="191" text-anchor="middle" class="t">Regler som kode</text>
+    <text x="590" y="208" text-anchor="middle" class="s">Tilgang og logging ett sted</text>
+    <rect x="10" y="222" width="190" height="44" rx="8" class="card"/>
+    <text x="105" y="241" text-anchor="middle" class="t">Fritt modellvalg</text>
+    <text x="105" y="258" text-anchor="middle" class="s">Bytt modell uten kodeendring</text>
+    <rect x="680" y="222" width="190" height="44" rx="8" class="card"/>
+    <text x="775" y="241" text-anchor="middle" class="t">Full oversikt</text>
+    <text x="775" y="258" text-anchor="middle" class="s">Sporing og kostnad per team</text>
   </g>
-  <rect x="388" y="142" width="104" height="26" rx="13" class="pill"/>
-  <text x="440" y="160" text-anchor="middle" class="pillt">nav-fleet</text>
-  <rect x="195" y="172" width="190" height="44" rx="8" class="card"/>
-  <text x="290" y="191" text-anchor="middle" class="t">Selvbetjent</text>
-  <text x="290" y="208" text-anchor="middle" class="s">Teamet beskriver behovet</text>
-  <rect x="495" y="172" width="190" height="44" rx="8" class="card"/>
-  <text x="590" y="191" text-anchor="middle" class="t">Regler som kode</text>
-  <text x="590" y="208" text-anchor="middle" class="s">Tilgang og logging ett sted</text>
-  <rect x="10" y="222" width="190" height="44" rx="8" class="card"/>
-  <text x="105" y="241" text-anchor="middle" class="t">Fritt modellvalg</text>
-  <text x="105" y="258" text-anchor="middle" class="s">Bytt modell uten kodeendring</text>
-  <rect x="680" y="222" width="190" height="44" rx="8" class="card"/>
-  <text x="775" y="241" text-anchor="middle" class="t">Full oversikt</text>
-  <text x="775" y="258" text-anchor="middle" class="s">Sporing og kostnad per team</text>
   <rect x="0" y="276" width="880" height="52" rx="8" class="n"/>
   <line x1="293" y1="285" x2="293" y2="319" class="div"/>
   <line x1="587" y1="285" x2="587" y2="319" class="div"/>
@@ -291,7 +281,7 @@ Overgang: «Hvor hører Fleet hjemme blant det vi har?»
 - Regler som kode: sikkerhet og etterlevelse settes ett sted. Tilgang og logging er grunnlaget i første versjon. Maskering av personopplysninger og risikoklassifisering etter KI-forordningen er forslag. Hva forordningen krever av Nav, må en jurist sjekke
 - Fritt modellvalg: i dag går modellkallene gjennom GitHub Copilot. Flere skyleverandører og egne GPU-er er visjon, ikke noe vi har
 - Full oversikt: sporing uten innholdet i promptene er allerede praksis (aksel-studio docs/beslutninger/011-ki-kjoretid.md). Evalueringer og karbonregnskap er visjon
-- Figuren: fem fly i formasjon. nav-fleet leder, og de fire egenskapene flyr sammen på felles kurs
+- Figuren: fem piler i formasjon, samme tegn som i logoen. nav-fleet leder, og de fire egenskapene flyr sammen på felles kurs
 - Underlaget har tre felt. Fleet kjører ikke bare på Nais: agentsandkassene trenger egen infrastruktur, vi velger selv hvor inferens kjører, og resten kjører på Nais der det passer (apper, identitet og nettverk). Forslag
 - Mennesket avgjør: se identitetslysbildet og kortet med saksbehandleren
 - Navs oppdrag er utgangspunktet: Arbeids- og velferdsforvaltningen skal «møte det enkelte mennesket med respekt, bidra til sosial og økonomisk trygghet og fremme overgang til arbeid og aktiv virksomhet» (Nav-loven § 1 andre ledd, https://lovdata.no/lov/2006-06-16-20/§1). Ordrett sitat, sjekket mot Lovdata 16. november 2026
@@ -307,7 +297,7 @@ hide: true
 <p class="subtitle">Hele flåten på én skjerm. Ingenting her er planlagt eller vedtatt <span class="chip amber align-middle ml-2">Visjon</span></p>
 
 ::default::
-<svg class="dg fly" viewBox="0 0 880 328" role="img" aria-label="En radarskjerm med fleet i midten og agenter som prikker i fire sektorer: selvbetjent, regler som kode, fritt modellvalg og full oversikt. Underlaget har tre felt: egen infrastruktur for agentsandkassene, egne modellvalg der vi velger hvor inferens kjører, og Nais der det passer, for apper, identitet og nettverk.">
+<svg class="dg fly" viewBox="0 0 880 328" role="img" aria-label="En radarskjerm med fleet i midten og agenter som små piler i fire sektorer: selvbetjent, regler som kode, fritt modellvalg og full oversikt. Underlaget har tre felt: egen infrastruktur for agentsandkassene, egne modellvalg der vi velger hvor inferens kjører, og Nais der det passer, for apper, identitet og nettverk.">
   <defs>
     <radialGradient id="rd-bg" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#e6f1ff"/><stop offset="1" stop-color="#cfe2f7"/></radialGradient>
     <linearGradient id="rd-sweep" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#0067c5" stop-opacity="0"/><stop offset="1" stop-color="#0067c5" stop-opacity=".35"/></linearGradient>
@@ -318,12 +308,15 @@ hide: true
     <circle r="43" class="ring"/>
     <path d="M-128 0H128M0-128V128" class="ring"/>
     <path d="M0 0L128 0A128 128 0 0 0 90.5-90.5z" fill="url(#rd-sweep)"/>
-    <g class="jet">
-      <circle cx="-66" cy="-53" r="4.5"/><circle cx="-40" cy="-92" r="3.5"/><circle cx="53" cy="-40" r="4.5"/>
-      <circle cx="92" cy="-70" r="3.5"/><circle cx="-79" cy="48" r="4.5"/><circle cx="-26" cy="84" r="3.5"/>
-      <circle cx="62" cy="66" r="4.5"/><circle cx="26" cy="101" r="3.5"/>
-      <circle r="24"/>
-    </g>
+    <FleetShip x="-66" y="-53" scale=".75" rotate="60" trail="2"/>
+    <FleetShip x="-40" y="-92" scale=".6" rotate="80" trail="2"/>
+    <FleetShip x="53" y="-40" scale=".75" rotate="150" trail="2"/>
+    <FleetShip x="92" y="-70" scale=".6" rotate="170" trail="2"/>
+    <FleetShip x="-79" y="48" scale=".75" rotate="-30" trail="2"/>
+    <FleetShip x="-26" y="84" scale=".6" rotate="-10" trail="2"/>
+    <FleetShip x="62" y="66" scale=".75" rotate="-120" trail="2"/>
+    <FleetShip x="26" y="101" scale=".6" rotate="-100" trail="2"/>
+    <circle r="24" class="hub"/>
     <text y="5" text-anchor="middle" class="pillt">fleet</text>
   </g>
   <text x="272" y="78" text-anchor="end" class="t">Selvbetjent</text>
@@ -385,16 +378,28 @@ layout: default
   <text x="785" y="112" text-anchor="middle" class="h">Nada</text>
   <text x="785" y="140" text-anchor="middle" class="s">data og domenekunnskap:</text>
   <text x="785" y="158" text-anchor="middle" class="s">konteksten agentene trenger</text>
-  <text x="267" y="104" text-anchor="middle" class="s">bruker Nais</text>
-  <line x1="343" y1="112" x2="194" y2="112" class="a" marker-end="url(#ar1)"/>
-  <text x="267" y="130" text-anchor="middle" class="s">der det passer</text>
-  <line x1="192" y1="160" x2="341" y2="160" class="a" marker-end="url(#ar1)"/>
-  <text x="267" y="178" text-anchor="middle" class="s">bruker Fleet</text>
-  <text x="612" y="104" text-anchor="middle" class="s">henter data og kontekst</text>
-  <line x1="537" y1="112" x2="686" y2="112" class="a" marker-end="url(#ar1)"/>
-  <text x="612" y="130" text-anchor="middle" class="s">med tilgangsstyring</text>
-  <line x1="688" y1="160" x2="539" y2="160" class="a" marker-end="url(#ar1)"/>
-  <text x="612" y="178" text-anchor="middle" class="s">bruker Fleet</text>
+  <g style="--d: 0.3s">
+    <text x="267" y="104" text-anchor="middle" class="s a-fade">bruker Nais</text>
+    <line x1="343" y1="112" x2="194" y2="112" class="a a-draw" pathLength="1"/>
+    <path d="M206.6 105L192.6 112L206.6 119z" class="ah a-head"/>
+    <text x="267" y="130" text-anchor="middle" class="s a-fade">der det passer</text>
+  </g>
+  <g style="--d: 1s">
+    <line x1="192" y1="160" x2="341" y2="160" class="a a-draw" pathLength="1"/>
+    <path d="M328.4 153L342.4 160L328.4 167z" class="ah a-head"/>
+    <text x="267" y="178" text-anchor="middle" class="s a-fade">bruker Fleet</text>
+  </g>
+  <g style="--d: 1.7s">
+    <text x="612" y="104" text-anchor="middle" class="s a-fade">henter data og kontekst</text>
+    <line x1="537" y1="112" x2="686" y2="112" class="a a-draw" pathLength="1"/>
+    <path d="M673.4 105L687.4 112L673.4 119z" class="ah a-head"/>
+    <text x="612" y="130" text-anchor="middle" class="s a-fade">med tilgangsstyring</text>
+  </g>
+  <g style="--d: 2.4s">
+    <line x1="688" y1="160" x2="539" y2="160" class="a a-draw" pathLength="1"/>
+    <path d="M551.6 153L537.6 160L551.6 167z" class="ah a-head"/>
+    <text x="612" y="178" text-anchor="middle" class="s a-fade">bruker Fleet</text>
+  </g>
   <line x1="440" y1="198" x2="440" y2="228" class="a" marker-end="url(#ar1)"/>
   <text x="452" y="217" class="s">kaller modellene og kjører sandkassene</text>
   <rect x="0" y="230" width="880" height="64" rx="8" class="b"/>
@@ -438,54 +443,72 @@ layout: default
 ::default::
 <svg class="dg" viewBox="0 0 880 364" role="img" aria-label="Øverst fire som kan bruke Fleet: produktteam, utviklerverktøy, Nais og Nada. I midten nav-fleet med modulene fleet-gateway, fleet-control, fleet-runtime, fleet-orchestrator og fleet-radar, og under dem fleet-sdk og identitet. Underlaget har tre felt: egen infrastruktur for agentsandkassene, egne modellvalg der vi velger hvor inferens kjører, og Nais der det passer, for apper, identitet og nettverk.">
   <defs><marker id="ar2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" class="ah"/></marker></defs>
-  <rect x="0" y="2" width="205" height="50" rx="8" class="b"/>
-  <text x="102" y="23" class="t" text-anchor="middle">Produktteam</text>
-  <text x="102" y="42" class="s" text-anchor="middle">aksel-studio er først</text>
-  <line x1="102" y1="52" x2="102" y2="68" class="a" marker-end="url(#ar2)"/>
-  <rect x="225" y="2" width="205" height="50" rx="8" class="b"/>
-  <text x="327" y="23" class="t" text-anchor="middle">Utviklerverktøy</text>
-  <text x="327" y="42" class="s" text-anchor="middle">my-copilot</text>
-  <line x1="327" y1="52" x2="327" y2="68" class="a" marker-end="url(#ar2)"/>
-  <rect x="450" y="2" width="205" height="50" rx="8" class="q"/>
-  <text x="552" y="23" class="t" text-anchor="middle">Nais</text>
-  <text x="552" y="42" class="s" text-anchor="middle">feilsøkingsagent (hypotese)</text>
-  <line x1="552" y1="52" x2="552" y2="68" class="a" marker-end="url(#ar2)"/>
-  <rect x="675" y="2" width="205" height="50" rx="8" class="q"/>
-  <text x="777" y="23" class="t" text-anchor="middle">Nada</text>
-  <text x="777" y="42" class="s" text-anchor="middle">dataprodukter (hypotese)</text>
-  <line x1="777" y1="52" x2="777" y2="68" class="a" marker-end="url(#ar2)"/>
+  <g class="a-rise" style="--d: 1.30s; --dy: -12px">
+    <rect x="0" y="2" width="205" height="50" rx="8" class="b"/>
+    <text x="102" y="23" class="t" text-anchor="middle">Produktteam</text>
+    <text x="102" y="42" class="s" text-anchor="middle">aksel-studio er først</text>
+    <line x1="102" y1="52" x2="102" y2="68" class="a" marker-end="url(#ar2)"/>
+  </g>
+  <g class="a-rise" style="--d: 1.45s; --dy: -12px">
+    <rect x="225" y="2" width="205" height="50" rx="8" class="b"/>
+    <text x="327" y="23" class="t" text-anchor="middle">Utviklerverktøy</text>
+    <text x="327" y="42" class="s" text-anchor="middle">my-copilot</text>
+    <line x1="327" y1="52" x2="327" y2="68" class="a" marker-end="url(#ar2)"/>
+  </g>
+  <g class="a-rise" style="--d: 1.60s; --dy: -12px">
+    <rect x="450" y="2" width="205" height="50" rx="8" class="q"/>
+    <text x="552" y="23" class="t" text-anchor="middle">Nais</text>
+    <text x="552" y="42" class="s" text-anchor="middle">feilsøkingsagent (hypotese)</text>
+    <line x1="552" y1="52" x2="552" y2="68" class="a" marker-end="url(#ar2)"/>
+  </g>
+  <g class="a-rise" style="--d: 1.75s; --dy: -12px">
+    <rect x="675" y="2" width="205" height="50" rx="8" class="q"/>
+    <text x="777" y="23" class="t" text-anchor="middle">Nada</text>
+    <text x="777" y="42" class="s" text-anchor="middle">dataprodukter (hypotese)</text>
+    <line x1="777" y1="52" x2="777" y2="68" class="a" marker-end="url(#ar2)"/>
+  </g>
   <rect x="0" y="70" width="880" height="222" rx="10" class="p"/>
   <text x="20" y="93" class="h">nav-fleet</text>
-  <rect x="16" y="104" width="162" height="114" rx="8" class="b"/>
-  <text x="97" y="128" class="t" text-anchor="middle">fleet-gateway</text>
-  <text x="97" y="150" class="s" text-anchor="middle" style="font-size: 11.8px">MCP- og modelltilgang</text>
-  <text x="97" y="168" class="s" text-anchor="middle" style="font-size: 11.8px">token exchange og logging</text>
-  <text x="97" y="186" class="s" text-anchor="middle" style="font-size: 11.8px">kvoter og rate limiting</text>
-  <text x="97" y="204" class="s" text-anchor="middle" style="font-size: 11.8px">PII-vask (forslag)</text>
-  <rect x="187.5" y="104" width="162" height="114" rx="8" class="b"/>
-  <text x="268.5" y="128" class="t" text-anchor="middle">fleet-control</text>
-  <text x="268.5" y="150" class="s" text-anchor="middle" style="font-size: 11.8px">modell- og verktøykatalog</text>
-  <text x="268.5" y="168" class="s" text-anchor="middle" style="font-size: 11.8px">tilgang og policy</text>
-  <text x="268.5" y="186" class="s" text-anchor="middle" style="font-size: 11.8px">risikodokumentasjon</text>
-  <text x="268.5" y="204" class="s" text-anchor="middle" style="font-size: 11.8px">felt i nais.yaml (forslag)</text>
-  <rect x="359" y="104" width="162" height="114" rx="8" class="b"/>
-  <text x="440" y="128" class="t" text-anchor="middle">fleet-runtime</text>
-  <text x="440" y="150" class="s" text-anchor="middle" style="font-size: 11.8px">sandkasse per bruker</text>
-  <text x="440" y="168" class="s" text-anchor="middle" style="font-size: 11.8px">start, pause og stopp</text>
-  <text x="440" y="186" class="s" text-anchor="middle" style="font-size: 11.8px">shell og filer bare der</text>
-  <text x="440" y="204" class="s" text-anchor="middle" style="font-size: 11.8px">ressurser og egress</text>
-  <rect x="530.5" y="104" width="162" height="114" rx="8" class="b"/>
-  <text x="611.5" y="128" class="t" text-anchor="middle">fleet-orchestrator</text>
-  <text x="611.5" y="150" class="s" text-anchor="middle" style="font-size: 11.8px">MCP-hub</text>
-  <text x="611.5" y="168" class="s" text-anchor="middle" style="font-size: 11.8px">RAG mot Nada</text>
-  <text x="611.5" y="186" class="s" text-anchor="middle" style="font-size: 11.8px">tilgang på dokumentnivå</text>
-  <text x="611.5" y="204" class="s" text-anchor="middle" style="font-size: 11.8px">regler for godkjenning</text>
-  <rect x="702" y="104" width="162" height="114" rx="8" class="b"/>
-  <text x="783" y="128" class="t" text-anchor="middle">fleet-radar</text>
-  <text x="783" y="150" class="s" text-anchor="middle" style="font-size: 11.8px">sporing av agentkjeder</text>
-  <text x="783" y="168" class="s" text-anchor="middle" style="font-size: 11.8px">evals før og etter endring</text>
-  <text x="783" y="186" class="s" text-anchor="middle" style="font-size: 11.8px">kostnad per team</text>
-  <text x="783" y="204" class="s" text-anchor="middle" style="font-size: 11.8px">karbonregnskap (visjon)</text>
+  <g class="a-rise" style="--d: 0.20s">
+    <rect x="16" y="104" width="162" height="114" rx="8" class="b"/>
+    <text x="97" y="128" class="t" text-anchor="middle">fleet-gateway</text>
+    <text x="97" y="150" class="s" text-anchor="middle" style="font-size: 11.8px">MCP- og modelltilgang</text>
+    <text x="97" y="168" class="s" text-anchor="middle" style="font-size: 11.8px">token exchange og logging</text>
+    <text x="97" y="186" class="s" text-anchor="middle" style="font-size: 11.8px">kvoter og rate limiting</text>
+    <text x="97" y="204" class="s" text-anchor="middle" style="font-size: 11.8px">PII-vask (forslag)</text>
+  </g>
+  <g class="a-rise" style="--d: 0.35s">
+    <rect x="187.5" y="104" width="162" height="114" rx="8" class="b"/>
+    <text x="268.5" y="128" class="t" text-anchor="middle">fleet-control</text>
+    <text x="268.5" y="150" class="s" text-anchor="middle" style="font-size: 11.8px">modell- og verktøykatalog</text>
+    <text x="268.5" y="168" class="s" text-anchor="middle" style="font-size: 11.8px">tilgang og policy</text>
+    <text x="268.5" y="186" class="s" text-anchor="middle" style="font-size: 11.8px">risikodokumentasjon</text>
+    <text x="268.5" y="204" class="s" text-anchor="middle" style="font-size: 11.8px">felt i nais.yaml (forslag)</text>
+  </g>
+  <g class="a-rise" style="--d: 0.50s">
+    <rect x="359" y="104" width="162" height="114" rx="8" class="b"/>
+    <text x="440" y="128" class="t" text-anchor="middle">fleet-runtime</text>
+    <text x="440" y="150" class="s" text-anchor="middle" style="font-size: 11.8px">sandkasse per bruker</text>
+    <text x="440" y="168" class="s" text-anchor="middle" style="font-size: 11.8px">start, pause og stopp</text>
+    <text x="440" y="186" class="s" text-anchor="middle" style="font-size: 11.8px">shell og filer bare der</text>
+    <text x="440" y="204" class="s" text-anchor="middle" style="font-size: 11.8px">ressurser og egress</text>
+  </g>
+  <g class="a-rise" style="--d: 0.65s">
+    <rect x="530.5" y="104" width="162" height="114" rx="8" class="b"/>
+    <text x="611.5" y="128" class="t" text-anchor="middle">fleet-orchestrator</text>
+    <text x="611.5" y="150" class="s" text-anchor="middle" style="font-size: 11.8px">MCP-hub</text>
+    <text x="611.5" y="168" class="s" text-anchor="middle" style="font-size: 11.8px">RAG mot Nada</text>
+    <text x="611.5" y="186" class="s" text-anchor="middle" style="font-size: 11.8px">tilgang på dokumentnivå</text>
+    <text x="611.5" y="204" class="s" text-anchor="middle" style="font-size: 11.8px">regler for godkjenning</text>
+  </g>
+  <g class="a-rise" style="--d: 0.80s">
+    <rect x="702" y="104" width="162" height="114" rx="8" class="b"/>
+    <text x="783" y="128" class="t" text-anchor="middle">fleet-radar</text>
+    <text x="783" y="150" class="s" text-anchor="middle" style="font-size: 11.8px">sporing av agentkjeder</text>
+    <text x="783" y="168" class="s" text-anchor="middle" style="font-size: 11.8px">evals før og etter endring</text>
+    <text x="783" y="186" class="s" text-anchor="middle" style="font-size: 11.8px">kostnad per team</text>
+    <text x="783" y="204" class="s" text-anchor="middle" style="font-size: 11.8px">karbonregnskap (visjon)</text>
+  </g>
   <text x="20" y="244" class="t">fleet-sdk og CLI</text>
   <text x="170" y="244">Mal og deklarativ konfigurasjon ved siden av nais.yaml. Agenten kjører i fleet-runtime.</text>
   <text x="20" y="272" class="t">Identitet</text>
@@ -557,7 +580,7 @@ layout: default
 <p class="subtitle">Først på vegne av brukeren. Agentens egen identitet venter til noen trenger bakgrunnsjobber</p>
 
 ::default::
-<svg class="dg" viewBox="0 0 880 338" role="img" aria-label="Identitetsflyt i fire steg: brukeren logger inn i appen, appen bytter til et OBO-token, agenten i fleet-runtime kaller verktøy gjennom fleet-gateway, og gatewayen sjekker og logger før verktøyet kjører. Under står tre punkter fra MCP-gatewayen i navikt/copilot#2083: egen OAuth 2.1-server foran Entra, ett token per rute og egen samtykkeside.">
+<svg class="dg" viewBox="0 0 880 338" role="img" aria-label="Identitetsflyt i fire steg: brukeren logger inn i appen, appen bytter til et OBO-token, agenten i fleet-runtime kaller verktøy gjennom fleet-gateway, og gatewayen sjekker og logger før verktøyet kjører. Under står tre punkter fra MCP-gatewayen i navikt/copilot#2083: egen OAuth 2.1-server foran Entra, ett token per rute og egen samtykkeside. En prikk under boksene viser tokenet som følger flyten fram til verktøyet.">
   <defs><marker id="ar3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" class="ah"/></marker></defs>
   <rect x="0" y="8" width="128" height="56" rx="8" class="b"/>
   <text x="64" y="41" class="t" text-anchor="middle">Bruker</text>
@@ -575,18 +598,28 @@ layout: default
   <line x1="316" y1="36" x2="374" y2="36" class="a" marker-end="url(#ar3)"/>
   <line x1="504" y1="36" x2="562" y2="36" class="a" marker-end="url(#ar3)"/>
   <line x1="692" y1="36" x2="750" y2="36" class="a" marker-end="url(#ar3)"/>
-  <text x="158" y="98" class="t" text-anchor="middle">Logger inn</text>
-  <text x="158" y="118" class="s" text-anchor="middle">Entra ID</text>
-  <text x="158" y="135" class="s" text-anchor="middle">via Wonderwall</text>
-  <text x="346" y="98" class="t" text-anchor="middle">Bytter token</text>
-  <text x="346" y="118" class="s" text-anchor="middle">OBO via Texas,</text>
-  <text x="346" y="135" class="s" text-anchor="middle">aud = gateway</text>
-  <text x="534" y="98" class="t" text-anchor="middle">Kaller verktøy</text>
-  <text x="534" y="118" class="s" text-anchor="middle">kortlivet token,</text>
-  <text x="534" y="135" class="s" text-anchor="middle">smalt omfang</text>
-  <text x="722" y="98" class="t" text-anchor="middle">Sjekker og logger</text>
-  <text x="722" y="118" class="s" text-anchor="middle">sub = bruker,</text>
-  <text x="722" y="135" class="s" text-anchor="middle">azp = agent</text>
+  <g class="a-pass" style="--d: 0.4s">
+    <text x="158" y="98" class="t" text-anchor="middle">Logger inn</text>
+    <text x="158" y="118" class="s" text-anchor="middle">Entra ID</text>
+    <text x="158" y="135" class="s" text-anchor="middle">via Wonderwall</text>
+  </g>
+  <g class="a-pass" style="--d: 1.3s">
+    <text x="346" y="98" class="t" text-anchor="middle">Bytter token</text>
+    <text x="346" y="118" class="s" text-anchor="middle">OBO via Texas,</text>
+    <text x="346" y="135" class="s" text-anchor="middle">aud = gateway</text>
+  </g>
+  <g class="a-pass" style="--d: 2.2s">
+    <text x="534" y="98" class="t" text-anchor="middle">Kaller verktøy</text>
+    <text x="534" y="118" class="s" text-anchor="middle">kortlivet token,</text>
+    <text x="534" y="135" class="s" text-anchor="middle">smalt omfang</text>
+  </g>
+  <g class="a-pass" style="--d: 3.1s">
+    <text x="722" y="98" class="t" text-anchor="middle">Sjekker og logger</text>
+    <text x="722" y="118" class="s" text-anchor="middle">sub = bruker,</text>
+    <text x="722" y="135" class="s" text-anchor="middle">azp = agent</text>
+  </g>
+  <line x1="64" y1="75" x2="816" y2="75" class="div"/>
+  <circle cx="816" cy="75" r="5" class="token"/>
   <rect x="0" y="152" width="880" height="184" rx="10" class="n"/>
   <text x="24" y="176" class="t">Rettigheter</text>
   <text x="160" y="176">Snittet av det brukeren og agenten har lov til.</text>
@@ -830,40 +863,42 @@ layout: default
   <line x1="90" y1="288" x2="90" y2="306" class="a" marker-end="url(#ar4)"/>
   <rect x="0" y="308" width="180" height="38" rx="8" class="n"/>
   <text x="90" y="332" text-anchor="middle">Copilot API</text>
-  <line x1="443" y1="0" x2="443" y2="350" style="stroke: var(--nais-border); stroke-width: 1.5"/>
-  <text x="460" y="16" class="h">Med Fleet</text>
-  <rect x="460" y="30" width="120" height="40" rx="8" class="b"/>
-  <text x="520" y="55" text-anchor="middle">nettleser</text>
-  <line x1="520" y1="70" x2="520" y2="94" class="a" marker-end="url(#ar4)"/>
-  <rect x="460" y="96" width="160" height="96" rx="8" class="b"/>
-  <text x="540" y="122" class="t" text-anchor="middle">studio-api</text>
-  <text x="540" y="146" class="s" text-anchor="middle">forslagsflyten,</text>
-  <text x="540" y="164" class="s" text-anchor="middle">verktøy som MCP-server</text>
-  <rect x="692" y="30" width="188" height="258" rx="10" class="p"/>
-  <text x="786" y="54" class="t" text-anchor="middle">nav-fleet</text>
-  <rect x="706" y="68" width="160" height="50" rx="8" class="b"/>
-  <text x="786" y="90" text-anchor="middle">fleet-runtime</text>
-  <text x="786" y="108" class="s" text-anchor="middle">sandkasse per bruker</text>
-  <rect x="706" y="140" width="160" height="56" rx="8" class="b"/>
-  <text x="786" y="163" text-anchor="middle">fleet-gateway</text>
-  <text x="786" y="182" class="s" text-anchor="middle">MCP, policy, logging</text>
-  <rect x="706" y="218" width="160" height="50" rx="8" class="b"/>
-  <text x="786" y="248" text-anchor="middle">token exchange</text>
-  <line x1="620" y1="108" x2="704" y2="108" class="a" marker-end="url(#ar4)"/>
-  <text x="656" y="100" class="s" text-anchor="middle">OBO</text>
-  <line x1="706" y1="172" x2="622" y2="172" class="a" marker-end="url(#ar4)"/>
-  <text x="656" y="164" class="s" text-anchor="middle">verktøy</text>
-  <line x1="786" y1="118" x2="786" y2="138" class="a" marker-end="url(#ar4)"/>
-  <line x1="786" y1="196" x2="786" y2="216" class="a" marker-end="url(#ar4)"/>
-  <line x1="786" y1="268" x2="786" y2="306" class="a" marker-end="url(#ar4)"/>
-  <rect x="706" y="308" width="160" height="38" rx="8" class="n"/>
-  <text x="786" y="332" text-anchor="middle">Copilot API</text>
-  <text x="460" y="226" class="t">Først i fleet-runtime</text>
-  <text x="460" y="244" class="s">studio-ki får sandkasse per bruker</text>
-  <text x="460" y="274" class="t">Borte fra Studio</text>
-  <text x="460" y="292" class="s">egen runtime, tokenlagring og kvote</text>
-  <text x="460" y="322" class="t">Grensesnittene er på main</text>
-  <text x="460" y="340" class="s">Tool, Runtime og TokenProvider</text>
+  <line x1="443" y1="0" x2="443" y2="350" class="a-grow" style="stroke: var(--nais-border); stroke-width: 1.5; --d: 0.5s"/>
+  <g class="a-fade" style="--d: 1.2s">
+    <text x="460" y="16" class="h">Med Fleet</text>
+    <rect x="460" y="30" width="120" height="40" rx="8" class="b"/>
+    <text x="520" y="55" text-anchor="middle">nettleser</text>
+    <line x1="520" y1="70" x2="520" y2="94" class="a" marker-end="url(#ar4)"/>
+    <rect x="460" y="96" width="160" height="96" rx="8" class="b"/>
+    <text x="540" y="122" class="t" text-anchor="middle">studio-api</text>
+    <text x="540" y="146" class="s" text-anchor="middle">forslagsflyten,</text>
+    <text x="540" y="164" class="s" text-anchor="middle">verktøy som MCP-server</text>
+    <rect x="692" y="30" width="188" height="258" rx="10" class="p"/>
+    <text x="786" y="54" class="t" text-anchor="middle">nav-fleet</text>
+    <rect x="706" y="68" width="160" height="50" rx="8" class="b"/>
+    <text x="786" y="90" text-anchor="middle">fleet-runtime</text>
+    <text x="786" y="108" class="s" text-anchor="middle">sandkasse per bruker</text>
+    <rect x="706" y="140" width="160" height="56" rx="8" class="b"/>
+    <text x="786" y="163" text-anchor="middle">fleet-gateway</text>
+    <text x="786" y="182" class="s" text-anchor="middle">MCP, policy, logging</text>
+    <rect x="706" y="218" width="160" height="50" rx="8" class="b"/>
+    <text x="786" y="248" text-anchor="middle">token exchange</text>
+    <line x1="620" y1="108" x2="704" y2="108" class="a" marker-end="url(#ar4)"/>
+    <text x="656" y="100" class="s" text-anchor="middle">OBO</text>
+    <line x1="706" y1="172" x2="622" y2="172" class="a" marker-end="url(#ar4)"/>
+    <text x="656" y="164" class="s" text-anchor="middle">verktøy</text>
+    <line x1="786" y1="118" x2="786" y2="138" class="a" marker-end="url(#ar4)"/>
+    <line x1="786" y1="196" x2="786" y2="216" class="a" marker-end="url(#ar4)"/>
+    <line x1="786" y1="268" x2="786" y2="306" class="a" marker-end="url(#ar4)"/>
+    <rect x="706" y="308" width="160" height="38" rx="8" class="n"/>
+    <text x="786" y="332" text-anchor="middle">Copilot API</text>
+    <text x="460" y="226" class="t">Først i fleet-runtime</text>
+    <text x="460" y="244" class="s">studio-ki får sandkasse per bruker</text>
+    <text x="460" y="274" class="t">Borte fra Studio</text>
+    <text x="460" y="292" class="s">egen runtime, tokenlagring og kvote</text>
+    <text x="460" y="322" class="t">Grensesnittene er på main</text>
+    <text x="460" y="340" class="s">Tool, Runtime og TokenProvider</text>
+  </g>
 </svg>
 
 ::footer::
@@ -988,28 +1023,16 @@ layout: default
 <p class="tagline mt-2">nav-fleet gir agentene vinger. Mennesket holder kursen.</p>
 
 ::default::
-<svg class="dg fly sky" viewBox="0 0 880 340" role="img" aria-label="Fem fly i V-formasjon stiger mot øvre høyre hjørne i en åpen himmel. En stiplet linje foran det fremste flyet viser kursen.">
-  <defs>
-    <!-- Same jet and trail as the vision slide. Own ids: that slide's defs are not always in the DOM -->
-    <path id="sky-jet" d="M0,-52 C6,-46 8,-34 8,-20 L8,-6 L58,18 L58,30 L8,18 L6,40 L22,52 L22,60 L0,54 L-22,60 L-22,52 L-6,40 L-8,18 L-58,30 L-58,18 L-8,-6 L-8,-20 C-8,-34 -6,-46 0,-52 Z"/>
-    <linearGradient id="sky-trail" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0067c5" stop-opacity=".28"/><stop offset="1" stop-color="#0067c5" stop-opacity="0"/></linearGradient>
-  </defs>
-  <path d="M522 108L600 30" class="course"/>
-  <path d="M587 28h15v15" class="courseh"/>
-  <g transform="translate(500 130) rotate(45) scale(.5) translate(-440 -98)">
-    <g fill="url(#sky-trail)">
-      <rect x="433" y="122" width="14" height="120" rx="7"/>
-      <rect x="283" y="152" width="14" height="120" rx="7"/>
-      <rect x="583" y="152" width="14" height="120" rx="7"/>
-      <rect x="98" y="198" width="14" height="120" rx="7"/>
-      <rect x="768" y="198" width="14" height="120" rx="7"/>
-    </g>
-    <g class="jet">
-      <use href="#sky-jet" transform="translate(440 98) scale(.62)"/>
-      <use href="#sky-jet" transform="translate(290 130) scale(.55)"/>
-      <use href="#sky-jet" transform="translate(590 130) scale(.55)"/>
-      <use href="#sky-jet" transform="translate(105 176) scale(.55)"/>
-      <use href="#sky-jet" transform="translate(775 176) scale(.55)"/>
+<svg class="dg fly" viewBox="0 0 880 340" role="img" aria-label="Fem piler i V-formasjon stiger mot øvre høyre hjørne i en åpen himmel. En stiplet linje foran den fremste pilen viser kursen.">
+  <g class="climb">
+    <path d="M572 98L620 50" class="course"/>
+    <path d="M607 48h15v15" class="courseh"/>
+    <g transform="translate(540 130) rotate(45)">
+      <FleetShip x="0" y="0" scale="2" trail="6"/>
+      <FleetShip x="-48" y="62" scale="1.7" trail="6"/>
+      <FleetShip x="48" y="62" scale="1.7" trail="6"/>
+      <FleetShip x="-96" y="124" scale="1.7" trail="6"/>
+      <FleetShip x="96" y="124" scale="1.7" trail="6"/>
     </g>
   </g>
 </svg>
@@ -1020,5 +1043,5 @@ layout: default
 <!--
 - Slagordet: «Himmelen er grensen. Mennesket har kursen.»
 - Engelsk variant: «Sky is the limit. Safety is the default.»
-- Figuren: samme formasjon som på visjonslysbildet, nå på vei opp i åpen himmel
+- Figuren: de samme pilene som på forsiden og visjonslysbildet, nå på vei opp i åpen himmel
 -->
