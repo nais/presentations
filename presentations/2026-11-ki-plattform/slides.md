@@ -843,7 +843,7 @@ layout: timeline
 Overgang: «Det er ting vi ikke vet ennå.»
 
 - Rekkefølgen er vår anbefaling. Fasene har ingen datoer. Vi har ikke estimert noe, og ingen har forpliktet seg
-- Nå: vi skriver ADR-en «Agenter som tjenester på Nais» i navikt/copilot-intern. Stedet er vårt forslag. Den dekker eier, isolasjonskrav, token per økt og loggfelt. Jurist og GitHub avklarer token på server og brukere uten lisens
+- Nå: vi skriver ADR-en «Agenter som tjenester i Nav» i navikt/copilot-intern. Stedet er vårt forslag. Den dekker eier, isolasjonskrav, token per økt og loggfelt. Jurist og GitHub avklarer token på server og brukere uten lisens
 - Fase 1: fleet-gateway og fleet-control. Fleet samler modell- og verktøykall ett sted og knytter dem til identiteten appen har på Nais. Da blir kostnaden synlig. aksel-studio er først ut, med token exchange på vegne av brukeren. Grensesnittene i aksel-studio er allerede på main
 - Fase 2: fleet-runtime, fleet-sdk med deklarativ konfigurasjon ved siden av nais.yaml, og fleet-radar. studio-ki flytter inn i fleet-runtime som første bruker, med én sandkasse per bruker. PII-vask i gatewayen er et forslag som må utredes. Skriveverktøy forutsetter at kategori 3 er risikovurdert (navikt/copilot-intern/retningslinjer.md § 3)
 - Fase 3: fleet-orchestrator. Dataprodukter fra Nada i RAG og agenter, og felles regler for menneskelig godkjenning sammen med Aksel. Agentens egen identitet kommer når noen trenger bakgrunnsjobber
@@ -908,7 +908,7 @@ Avslutning: «Hva mener dere? Hva mangler, og hvem bør være med?»
 
 Hva vi ber om, hvis noen spør:
 - En eier. Styringsmodellen har ingen rolle for agenter som tjenester. Vi foreslår ingen
-- Et ja til ADR-en «Agenter som tjenester på Nais». Den dekker eier, isolasjonskrav, token per økt og loggfelt, og bør skrives sammen med forfatterne av målbildet
+- Et ja til ADR-en «Agenter som tjenester i Nav». Den dekker eier, isolasjonskrav, token per økt og loggfelt, og bør skrives sammen med forfatterne av målbildet
 - Navngitte folk til å utrede: én fra KI i produktutvikling, Nais, Nada, sikkerhet og identitet, og en jurist
 - Vi ber ikke om budsjett, et team eller et ja til hele visjonen
 -->
