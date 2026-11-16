@@ -3,7 +3,6 @@ theme: default
 title: 'nav-fleet: en felles plattform for KI-agenter i Nav'
 htmlAttrs:
   lang: 'no'
-class: text-center
 transition: slide-left
 mdc: true
 layout: cover
@@ -15,17 +14,58 @@ fonts:
 ---
 
 ::logo::
-<svg class="cover-mark" viewBox="0 0 96 96" role="img" aria-label="nav-fleet">
-  <g fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M39 30l9-16 9 16M21 56l9-16 9 16M57 56l9-16 9 16M3 82l9-16 9 16M75 82l9-16 9 16"/>
-  </g>
+<svg class="sky" viewBox="0 0 980 552" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+  <defs>
+    <linearGradient id="sky-bg" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#fffdf9"/><stop offset=".4" stop-color="#fbfbf9"/><stop offset="1" stop-color="#d9eafb"/></linearGradient>
+    <pattern id="sky-dots" width="24" height="24" patternUnits="userSpaceOnUse"><circle cx="12" cy="12" r=".75" fill="#cbd5e1"/></pattern>
+    <linearGradient id="sky-fade" gradientUnits="userSpaceOnUse" x1="0" y1="10" x2="0" y2="130"><stop offset="0" stop-color="#0067c5" stop-opacity=".75"/><stop offset="1" stop-color="#0067c5" stop-opacity="0"/></linearGradient>
+    <line id="sky-trail" x1="0" y1="10" x2="0" y2="130"/>
+    <path id="sky-ship" d="M-9 8l9-16 9 16"/>
+    <filter id="sky-soft" x="-5%" y="-30%" width="110%" height="160%"><feGaussianBlur stdDeviation="5"/></filter>
+    <mask id="sky-reveal" maskUnits="userSpaceOnUse" x="-90" y="0" width="180" height="320">
+      <g stroke="#ffffff" stroke-width="8">
+        <line class="sky-draw" x1="0" y1="10" x2="0" y2="130" pathLength="1"/>
+        <line class="sky-draw" x1="-22" y1="68" x2="-22" y2="188" pathLength="1"/>
+        <line class="sky-draw" x1="22" y1="68" x2="22" y2="188" pathLength="1"/>
+        <line class="sky-draw" x1="-44" y1="126" x2="-44" y2="246" pathLength="1"/>
+        <line class="sky-draw" x1="44" y1="126" x2="44" y2="246" pathLength="1"/>
+        <line class="sky-draw" x1="-66" y1="184" x2="-66" y2="304" pathLength="1"/>
+        <line class="sky-draw" x1="66" y1="184" x2="66" y2="304" pathLength="1"/>
+      </g>
+    </mask>
+  </defs>
+  <rect width="980" height="552" fill="url(#sky-bg)"/>
+  <rect width="980" height="552" fill="url(#sky-dots)" opacity=".5"/>
+  <g class="sky-cloud back" fill="#e3ebf5" filter="url(#sky-soft)"><ellipse cx="-90" cy="500" rx="120" ry="38"/><ellipse cx="110" cy="488" rx="140" ry="44"/><ellipse cx="330" cy="500" rx="120" ry="36"/><ellipse cx="520" cy="484" rx="150" ry="48"/><ellipse cx="740" cy="498" rx="130" ry="38"/><ellipse cx="930" cy="480" rx="150" ry="50"/><ellipse cx="1100" cy="500" rx="110" ry="36"/><rect x="-160" y="500" width="1300" height="100"/></g>
+  <g class="sky-x"><g class="sky-y"><g class="sky-bob"><g transform="translate(860 95)"><g class="sky-turn" transform="rotate(45)">
+    <g class="sky-trails" mask="url(#sky-reveal)">
+      <use href="#sky-trail" x="0" y="0"/>
+      <use href="#sky-trail" x="-22" y="58"/>
+      <use href="#sky-trail" x="22" y="58"/>
+      <use href="#sky-trail" x="-44" y="116"/>
+      <use href="#sky-trail" x="44" y="116"/>
+      <use href="#sky-trail" x="-66" y="174"/>
+      <use href="#sky-trail" x="66" y="174"/>
+    </g>
+    <g class="sky-ships">
+      <use href="#sky-ship" transform="translate(0 0) scale(1.2)"/>
+      <use href="#sky-ship" transform="translate(-22 58) scale(1.2)"/>
+      <use href="#sky-ship" transform="translate(22 58) scale(1.2)"/>
+      <use href="#sky-ship" transform="translate(-44 116) scale(1.2)"/>
+      <use href="#sky-ship" transform="translate(44 116) scale(1.2)"/>
+      <use href="#sky-ship" transform="translate(-66 174) scale(1.2)"/>
+      <use href="#sky-ship" transform="translate(66 174) scale(1.2)"/>
+    </g>
+  </g></g></g></g></g>
+  <g class="sky-cloud mid" fill="#f0f4fa" filter="url(#sky-soft)"><ellipse cx="-40" cy="522" rx="130" ry="34"/><ellipse cx="190" cy="514" rx="120" ry="38"/><ellipse cx="400" cy="526" rx="140" ry="32"/><ellipse cx="620" cy="512" rx="130" ry="40"/><ellipse cx="830" cy="526" rx="120" ry="32"/><ellipse cx="1030" cy="516" rx="130" ry="38"/><rect x="-160" y="524" width="1300" height="76"/></g>
+  <g class="sky-cloud front" fill="#ffffff" filter="url(#sky-soft)"><ellipse cx="-100" cy="548" rx="120" ry="26"/><ellipse cx="90" cy="542" rx="130" ry="30"/><ellipse cx="300" cy="550" rx="120" ry="24"/><ellipse cx="500" cy="540" rx="140" ry="32"/><ellipse cx="720" cy="550" rx="120" ry="26"/><ellipse cx="910" cy="542" rx="130" ry="30"/><ellipse cx="1090" cy="550" rx="110" ry="26"/><rect x="-160" y="548" width="1300" height="52"/></g>
 </svg>
 
 ::default::
-<p class="text-sm font-mono" style="color: var(--nais-accent)">PLAN OG VISJON · UTKAST TIL DISKUSJON</p>
-<h1 class="text-5xl font-black mt-4">nav-fleet</h1>
-<p class="text-2xl mt-3" style="font-family: 'Poppins', sans-serif; font-weight: 600">En felles plattform for KI-agenter i produksjon</p>
-<p class="text-lg mt-4" style="color: var(--nais-text-secondary)">Til daglig «Fleet». Fra én pilot til en hel flåte, der et menneske fortsatt avgjør.</p>
+<p class="cover-kicker font-mono">PLAN OG VISJON · UTKAST TIL DISKUSJON</p>
+<h1 class="cover-title">nav-fleet</h1>
+<p class="cover-tagline">Himmelen er grensen.<br>Mennesket har kursen.</p>
+<p class="cover-sub">En felles plattform for KI-agenter i produksjon</p>
 
 ::footer::
 <span class="font-mono text-sm opacity-70">nav-fleet · utkast til diskusjon · ikke vedtatt</span>
@@ -492,7 +532,16 @@ Overgang: «Den vanskeligste delen er identitet.»
   - Texas og OBO: my-copilot ber Texas om et OBO-token for copilot-api, og copilot-api validerer det på nytt (navikt/copilot/ARCHITECTURE.md)
   - Nais: hosting, OTel og accessPolicy
 - Ingen av de fire kontrollerer eller logger et verktøykall mens agenten kjører. Det er hullet fleet-gateway fyller (vår vurdering)
-- Ta i bruk framfor å bygge: fleet-gateway kan være en utvidelse av mcp-registry eller en åpen gateway
+- fleet-gateway bygger på MCP-gatewayen i navikt/copilot#2083. Den er delvis bestemt, og planen står i navikt/copilot docs/mcp-gateway-plan.md (status 2. november 2026). Ingenting er i drift ennå
+- Bestemt for gatewayen:
+  - Vi bygger, eier og drifter den (#2088)
+  - Refresh-tokener lagres kryptert i gatewayen, i høyst 10 timer. Personvern skal godkjenne det før fase 2 (#2090)
+  - Revisjonslogg: én linje per verktøykall med NAVident, lagret i 90 dager. Hvert team ser linjene for sin egen MCP-server (#2092)
+  - Registrering: team registrerer MCP-serveren i selvbetjeningen på ki-utvikling, og vi godkjenner den i /admin (#2096, #2099). Skjemaet er ikke bygget ennå. Eksterne servere går fortsatt som PR mot allowlist.json (#2093)
+- Verktøy festes med hash: registeret lagrer en hash av navn, beskrivelse og inputSchema for hvert verktøy. Endrer et verktøy seg, skjules det og logges til registeret er oppdatert. Serverens egne annotations er ikke til å stole på. toolRisk i registeret er fasiten (#2083, «Tool pinning»)
+- På klientsiden holder cplt-brokeren tokenene på vertsmaskinen, utenfor agentens sandkasse. For cplt er gatewayen en vanlig MCP-server med OAuth (navikt/cplt#912, #947)
+- Risiko: kjedet OBO gjennom Texas er ikke verifisert. Faller forsøket i #2084, faller hele gateway-tilnærmingen
+- #2083 gjelder team-MCP-servere og utviklerklienter. Modellgateway og agenter som kjører i fleet-runtime er ikke en del av #2083. Det er vårt forslag
 - Første versjon er fleet-gateway med MCP, token exchange på vegne av brukeren og logging med felles feltnavn: user, tool, outcome, credits og trace-ID, uten innhold (vår anbefaling)
 - Venter: modellgateway, agentens egen identitet, evalueringer og minne
 - Modellgatewayen venter så lenge Copilot-lisensen bærer kostnaden. Den trengs når noen bruker modeller utenfor Copilot, eller når brukere uten lisens skal med. Kubernetes-prosjektet Gateway API Inference Extension har en egen ressurs for dette, InferencePool. https://gateway-api-inference-extension.sigs.k8s.io/
@@ -508,43 +557,51 @@ layout: default
 <p class="subtitle">Først på vegne av brukeren. Agentens egen identitet venter til noen trenger bakgrunnsjobber</p>
 
 ::default::
-<svg class="dg" viewBox="0 0 880 340" role="img" aria-label="Identitetsflyt i fire steg: brukeren logger inn i appen, appen bytter til et OBO-token, agenten i fleet-runtime kaller verktøy gjennom fleet-gateway, og gatewayen sjekker og logger før verktøyet kjører.">
+<svg class="dg" viewBox="0 0 880 338" role="img" aria-label="Identitetsflyt i fire steg: brukeren logger inn i appen, appen bytter til et OBO-token, agenten i fleet-runtime kaller verktøy gjennom fleet-gateway, og gatewayen sjekker og logger før verktøyet kjører. Under står tre punkter fra MCP-gatewayen i navikt/copilot#2083: egen OAuth 2.1-server foran Entra, ett token per rute og egen samtykkeside.">
   <defs><marker id="ar3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" class="ah"/></marker></defs>
-  <rect x="0" y="20" width="128" height="72" rx="8" class="b"/>
-  <text x="64" y="61" class="t" text-anchor="middle">Bruker</text>
-  <rect x="188" y="20" width="128" height="72" rx="8" class="b"/>
-  <text x="252" y="52" class="t" text-anchor="middle">App</text>
-  <text x="252" y="72" class="s" text-anchor="middle">studio-api</text>
-  <rect x="376" y="20" width="128" height="72" rx="8" class="p"/>
-  <text x="440" y="52" class="t" text-anchor="middle">Agent</text>
-  <text x="440" y="72" class="s" text-anchor="middle">fleet-runtime</text>
-  <rect x="564" y="20" width="128" height="72" rx="8" class="p"/>
-  <text x="628" y="61" class="t" text-anchor="middle" style="font-size: 14px">fleet-gateway</text>
-  <rect x="752" y="20" width="128" height="72" rx="8" class="b"/>
-  <text x="816" y="61" class="t" text-anchor="middle">Verktøy</text>
-  <line x1="128" y1="56" x2="186" y2="56" class="a" marker-end="url(#ar3)"/>
-  <line x1="316" y1="56" x2="374" y2="56" class="a" marker-end="url(#ar3)"/>
-  <line x1="504" y1="56" x2="562" y2="56" class="a" marker-end="url(#ar3)"/>
-  <line x1="692" y1="56" x2="750" y2="56" class="a" marker-end="url(#ar3)"/>
-  <text x="158" y="132" class="t" text-anchor="middle">Logger inn</text>
-  <text x="158" y="154" class="s" text-anchor="middle">Entra ID</text>
-  <text x="158" y="172" class="s" text-anchor="middle">via Wonderwall</text>
-  <text x="346" y="132" class="t" text-anchor="middle">Bytter token</text>
-  <text x="346" y="154" class="s" text-anchor="middle">OBO via Texas,</text>
-  <text x="346" y="172" class="s" text-anchor="middle">aud = gateway</text>
-  <text x="534" y="132" class="t" text-anchor="middle">Kaller verktøy</text>
-  <text x="534" y="154" class="s" text-anchor="middle">kortlivet token,</text>
-  <text x="534" y="172" class="s" text-anchor="middle">smalt omfang</text>
-  <text x="722" y="132" class="t" text-anchor="middle">Sjekker og logger</text>
-  <text x="722" y="154" class="s" text-anchor="middle">sub = bruker,</text>
-  <text x="722" y="172" class="s" text-anchor="middle">azp = agent</text>
-  <rect x="0" y="214" width="880" height="110" rx="10" class="n"/>
-  <text x="24" y="246" class="t">Rettigheter</text>
-  <text x="160" y="246">Snittet av det brukeren og agenten har lov til.</text>
-  <text x="24" y="276" class="t">Tokener</text>
-  <text x="160" y="276">Token exchange i fleet-gateway. Kortlivet token, bare i brukerens egen sandkasse. Modellen ser det aldri.</text>
-  <text x="24" y="306" class="t">Logging</text>
-  <text x="160" y="306">Hvem, hvilket verktøy, hvilken ressurs og utfallet. Aldri innholdet i prompten.</text>
+  <rect x="0" y="8" width="128" height="56" rx="8" class="b"/>
+  <text x="64" y="41" class="t" text-anchor="middle">Bruker</text>
+  <rect x="188" y="8" width="128" height="56" rx="8" class="b"/>
+  <text x="252" y="32" class="t" text-anchor="middle">App</text>
+  <text x="252" y="50" class="s" text-anchor="middle">studio-api</text>
+  <rect x="376" y="8" width="128" height="56" rx="8" class="p"/>
+  <text x="440" y="32" class="t" text-anchor="middle">Agent</text>
+  <text x="440" y="50" class="s" text-anchor="middle">fleet-runtime</text>
+  <rect x="564" y="8" width="128" height="56" rx="8" class="p"/>
+  <text x="628" y="41" class="t" text-anchor="middle" style="font-size: 14px">fleet-gateway</text>
+  <rect x="752" y="8" width="128" height="56" rx="8" class="b"/>
+  <text x="816" y="41" class="t" text-anchor="middle">Verktøy</text>
+  <line x1="128" y1="36" x2="186" y2="36" class="a" marker-end="url(#ar3)"/>
+  <line x1="316" y1="36" x2="374" y2="36" class="a" marker-end="url(#ar3)"/>
+  <line x1="504" y1="36" x2="562" y2="36" class="a" marker-end="url(#ar3)"/>
+  <line x1="692" y1="36" x2="750" y2="36" class="a" marker-end="url(#ar3)"/>
+  <text x="158" y="98" class="t" text-anchor="middle">Logger inn</text>
+  <text x="158" y="118" class="s" text-anchor="middle">Entra ID</text>
+  <text x="158" y="135" class="s" text-anchor="middle">via Wonderwall</text>
+  <text x="346" y="98" class="t" text-anchor="middle">Bytter token</text>
+  <text x="346" y="118" class="s" text-anchor="middle">OBO via Texas,</text>
+  <text x="346" y="135" class="s" text-anchor="middle">aud = gateway</text>
+  <text x="534" y="98" class="t" text-anchor="middle">Kaller verktøy</text>
+  <text x="534" y="118" class="s" text-anchor="middle">kortlivet token,</text>
+  <text x="534" y="135" class="s" text-anchor="middle">smalt omfang</text>
+  <text x="722" y="98" class="t" text-anchor="middle">Sjekker og logger</text>
+  <text x="722" y="118" class="s" text-anchor="middle">sub = bruker,</text>
+  <text x="722" y="135" class="s" text-anchor="middle">azp = agent</text>
+  <rect x="0" y="152" width="880" height="184" rx="10" class="n"/>
+  <text x="24" y="176" class="t">Rettigheter</text>
+  <text x="160" y="176">Snittet av det brukeren og agenten har lov til.</text>
+  <text x="24" y="200" class="t">Tokener</text>
+  <text x="160" y="200">Token exchange i fleet-gateway. Kortlivet token, bare i brukerens egen sandkasse. Modellen ser det aldri.</text>
+  <text x="24" y="224" class="t">Logging</text>
+  <text x="160" y="224">Hvem, hvilket verktøy, hvilken ressurs og utfallet. Aldri innholdet i prompten.</text>
+  <line x1="24" y1="236" x2="856" y2="236" class="div"/>
+  <text x="24" y="254" class="s">MCP-gatewayen i navikt/copilot#2083, delvis bestemt:</text>
+  <text x="24" y="276" class="t">Innlogging</text>
+  <text x="160" y="276">Egen OAuth 2.1-server foran Entra. CLI, cplt og VS Code får ikke Entra-token til en Nais-app.</text>
+  <text x="24" y="300" class="t">Mottaker (aud)</text>
+  <text x="160" y="300">Ett token per rute (RFC 8707). Et stjålet token er verdt én server og én bruker.</text>
+  <text x="24" y="324" class="t">Samtykke</text>
+  <text x="160" y="324">Egen samtykkeside. Bare lesing først. Skriving er et scope brukeren gir i nettleseren.</text>
 </svg>
 
 ::footer::
@@ -561,6 +618,14 @@ Overgang: «Det finnes allerede et målbilde for KI-grunnmuren. Hvordan passer F
 - I dag går brukerens ghu_-token helt inn i runtimen hos aksel-studio (011, 019)
 - Logging uten promptinnhold er allerede praksis: 011 logger forbruk uten innholdet i promptene, og copilot-api logger aktør ved endringer (navikt/copilot/SECURITY.md, «Audit logging»)
 - Målbildet stiller samme krav: gatewayen skal ikke skjule manglende brukerautorisasjon med egne brede backend-rettigheter, og ressurseier avgjør tilgangen (målbildet, «Gateway(er), integrasjoner og kontekst»)
+- De tre nederste linjene kommer fra MCP-gatewayen i navikt/copilot#2083, som fleet-gateway bygger på:
+  - Innlogging: Nais-dokumentasjonen beskriver ingen måte en klient utenfor Nais (CLI, cplt-brokeren, VS Code) kan få et Entra-token til en Nais-app. Entra støtter heller ikke dynamisk klientregistrering. Derfor er gatewayen en egen OAuth 2.1-autorisasjonsserver foran Entra, med autorisasjonskode og PKCE. Entra-tokener forlater aldri Nais. Bestemt i #2089. Direkte mot Entra vurderes på nytt før fase 3
+  - Mottaker: tokenet er utstedt til rute-URL-en, https://<gateway>/<server-id>/mcp (RFC 8707), og avvises på andre ruter. Et stjålet token er verdt én server og én bruker til det utløper
+  - Samtykke: Nais-apper i Entra er forhåndsgodkjent av administrator, så brukeren ser ingen samtykkeside hos Entra. Gatewayen viser sin egen side per klient, med klient, server og lesing eller lesing og skriving. Uten den kan en ondsinnet klient bruke brukerens Entra-økt i det stille
+  - Skriving: bare lesing først. Skriving kommer senere som et scope brukeren gir i nettleseren, bundet inn i tokenet (#2091). Klientens konfigurasjon er ikke til å stole på, for agenten kan skrive til den
+  - Gatewayen kaller teamets MCP-server med OBO via Texas, og serveren gjør en ny OBO videre. Slik kjedet OBO er ikke verifisert. #2084 skal vise om det virker. Gjør det ikke det, faller gateway-tilnærmingen
+  - Refresh-tokener ligger kryptert i gatewayen i høyst 10 timer (#2090). Hvis Entra nekter offline_access, må det vurderes på nytt
+- Figuren øverst viser en app på Nais som bytter til et OBO-token for gatewayen. Den veien inn er vårt forslag og står ikke i #2083, som beskriver klienter utenfor Nais
 - Agenten kjører i fleet-runtime, i en sandkasse som bare tilhører denne brukeren
 - Tokenet ligger bare i brukerens egen sandkasse i fleet-runtime. Det er kortlivet og har smalt omfang. Modellen ser det aldri
 - Derfor kan agenten klone fra GitHub i sandkassen (aksel-studio #145) uten at tokenet deles med andre brukere
@@ -905,10 +970,55 @@ Avslutning: «Hva mener dere? Hva mangler, og hvem bør være med?»
 - Fritt modellvalg er en bærebjelke i visjonen, ikke noe vi har i dag
 - Navnet nav-fleet er valgt. Modulnavnene og fleet.nav.no er forslag
 - «Ingen av dem stopper en ADR» er vår vurdering
+- Et sjuende spørsmål står ikke på lysbildet: virker kjedet OBO gjennom Texas? fleet-gateway bygger på MCP-gatewayen i navikt/copilot#2083, og den forutsetter det. Forsøket i #2084 avgjør. Feiler det, faller gateway-tilnærmingen
 
 Hva vi ber om, hvis noen spør:
 - En eier. Styringsmodellen har ingen rolle for agenter som tjenester. Vi foreslår ingen
 - Et ja til ADR-en «Agenter som tjenester i Nav». Den dekker eier, isolasjonskrav, token per økt og loggfelt, og bør skrives sammen med forfatterne av målbildet
 - Navngitte folk til å utrede: én fra KI i produktutvikling, Nais, Nada, sikkerhet og identitet, og en jurist
 - Vi ber ikke om budsjett, et team eller et ja til hele visjonen
+-->
+
+---
+layout: default
+---
+
+::header::
+<h1 class="text-4xl font-black">Himmelen er grensen</h1>
+<p class="tagline mt-2">nav-fleet gir agentene vinger. Mennesket holder kursen.</p>
+
+::default::
+<svg class="dg fly sky" viewBox="0 0 880 340" role="img" aria-label="Fem fly i V-formasjon stiger mot øvre høyre hjørne i en åpen himmel. En stiplet linje foran det fremste flyet viser kursen.">
+  <defs>
+    <!-- Same jet and trail as the vision slide. Own ids: that slide's defs are not always in the DOM -->
+    <path id="sky-jet" d="M0,-52 C6,-46 8,-34 8,-20 L8,-6 L58,18 L58,30 L8,18 L6,40 L22,52 L22,60 L0,54 L-22,60 L-22,52 L-6,40 L-8,18 L-58,30 L-58,18 L-8,-6 L-8,-20 C-8,-34 -6,-46 0,-52 Z"/>
+    <linearGradient id="sky-trail" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0067c5" stop-opacity=".28"/><stop offset="1" stop-color="#0067c5" stop-opacity="0"/></linearGradient>
+  </defs>
+  <path d="M522 108L600 30" class="course"/>
+  <path d="M587 28h15v15" class="courseh"/>
+  <g transform="translate(500 130) rotate(45) scale(.5) translate(-440 -98)">
+    <g fill="url(#sky-trail)">
+      <rect x="433" y="122" width="14" height="120" rx="7"/>
+      <rect x="283" y="152" width="14" height="120" rx="7"/>
+      <rect x="583" y="152" width="14" height="120" rx="7"/>
+      <rect x="98" y="198" width="14" height="120" rx="7"/>
+      <rect x="768" y="198" width="14" height="120" rx="7"/>
+    </g>
+    <g class="jet">
+      <use href="#sky-jet" transform="translate(440 98) scale(.62)"/>
+      <use href="#sky-jet" transform="translate(290 130) scale(.55)"/>
+      <use href="#sky-jet" transform="translate(590 130) scale(.55)"/>
+      <use href="#sky-jet" transform="translate(105 176) scale(.55)"/>
+      <use href="#sky-jet" transform="translate(775 176) scale(.55)"/>
+    </g>
+  </g>
+</svg>
+
+::footer::
+<span class="font-mono text-sm opacity-70">nav-fleet · utkast til diskusjon · ikke vedtatt</span>
+
+<!--
+- Slagordet: «Himmelen er grensen. Mennesket har kursen.»
+- Engelsk variant: «Sky is the limit. Safety is the default.»
+- Figuren: samme formasjon som på visjonslysbildet, nå på vei opp i åpen himmel
 -->

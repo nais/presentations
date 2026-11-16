@@ -456,11 +456,174 @@ pre,
   border: 1px solid var(--nais-border);
 }
 
-/* Cover mark: replaces the default logo of the shared cover layout */
-.cover-mark {
-  width: 96px;
-  height: 96px;
+/* Cover: text to the left over an animated sky. The sky SVG sits in the logo slot of the shared cover layout */
+.cover-layout .cover-content {
+  position: static;
+  align-items: flex-start;
+  align-self: stretch;
+}
+
+.cover-layout .logo-container {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.sky {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.cover-layout .cover-text {
+  position: relative;
+  z-index: 1;
+  padding-left: 1.5rem;
+  text-align: left;
+}
+
+.cover-layout .cover-kicker {
+  font-size: 0.875rem;
   color: var(--nais-accent);
+}
+
+.cover-layout .cover-title {
+  margin: 0.75rem 0 1rem -0.3rem;
+  font-size: 5.5rem;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.cover-layout .cover-tagline {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 2rem;
+  line-height: 1.25;
+  color: var(--nais-text-secondary);
+  opacity: 1; /* the theme fades a paragraph that follows a heading */
+}
+
+.cover-layout .cover-sub {
+  margin-top: 1.25rem;
+  font-size: 1.15rem;
+  font-weight: 500;
+}
+
+.sky-ships {
+  fill: none;
+  stroke: var(--nais-accent);
+  stroke-width: 5.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.sky-trails {
+  fill: none;
+  stroke: url(#sky-fade);
+  stroke-width: 1.5;
+  stroke-dasharray: 5 6;
+}
+
+/* The base state is the end state: every entrance runs from an offset, so a frame without animation is complete */
+.sky-draw {
+  stroke-dasharray: 1;
+  animation: sky-draw 2.8s 0.4s ease-out backwards;
+}
+
+.sky-x {
+  animation: sky-x 4s cubic-bezier(0.2, 0.7, 0.3, 1) backwards;
+}
+
+.sky-y {
+  animation: sky-y 4s cubic-bezier(0.45, 0.05, 0.3, 1) backwards;
+}
+
+.sky-turn {
+  animation: sky-turn 4s ease-out backwards;
+}
+
+.sky-bob {
+  animation: sky-bob 7s ease-in-out infinite alternate;
+}
+
+.sky-cloud.back {
+  animation: sky-drift 26s ease-in-out infinite alternate;
+  --sky-drift: -14px;
+}
+
+.sky-cloud.mid {
+  animation: sky-drift 20s ease-in-out infinite alternate;
+  --sky-drift: 18px;
+}
+
+.sky-cloud.front {
+  animation: sky-drift 16s ease-in-out infinite alternate;
+  --sky-drift: -26px;
+}
+
+@keyframes sky-draw {
+  from {
+    stroke-dashoffset: 1;
+  }
+}
+
+@keyframes sky-x {
+  from {
+    transform: translateX(-640px);
+  }
+}
+
+@keyframes sky-y {
+  from {
+    transform: translateY(400px);
+  }
+}
+
+@keyframes sky-turn {
+  from {
+    transform: rotate(51deg);
+  }
+
+  to {
+    transform: rotate(45deg);
+  }
+}
+
+@keyframes sky-bob {
+  to {
+    transform: translate(5px, -7px);
+  }
+}
+
+@keyframes sky-drift {
+  to {
+    transform: translateX(var(--sky-drift));
+  }
+}
+
+/* No motion on request, and none in Slidev's export, which captures a single frame */
+@media (prefers-reduced-motion: reduce), print {
+  .sky * {
+    animation: none !important;
+  }
+}
+
+#print-container .sky * {
+  animation: none !important;
+}
+
+/* Tagline on the closing slide */
+.tagline {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 1.35rem;
+  color: var(--nais-accent);
+}
+
+/* The theme fades a paragraph that follows a heading */
+.slidev-layout .tagline {
+  opacity: 1;
 }
 
 /* Big number inside a card on the "today" slide */
