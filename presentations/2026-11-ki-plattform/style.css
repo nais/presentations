@@ -582,3 +582,209 @@ pre,
   color: var(--nais-accent);
   border-radius: 0.5rem 0.5rem 0 0;
 }
+
+.footnote.tight {
+  margin-top: 0.6rem;
+}
+
+/* "Works today" slide: browser mock of ki-utvikling.nav.no with numbered callouts */
+.today {
+  display: grid;
+  grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr);
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.today-win {
+  height: 300px;
+}
+
+.today-badge {
+  position: absolute;
+  top: 2.4rem;
+  right: 0.6rem;
+  z-index: 2;
+  border: 1px solid #10b981;
+}
+
+.pin {
+  display: inline-grid;
+  place-items: center;
+  flex: none;
+  width: 1.15rem;
+  height: 1.15rem;
+  border-radius: 50%;
+  background: var(--nais-accent);
+  color: #fff;
+  font:
+    700 0.68rem 'Inter',
+    sans-serif;
+  vertical-align: middle;
+  box-shadow: 0 0 0 3px var(--nais-accent-light);
+}
+
+.km-top {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 0.8rem;
+  border-bottom: 1px solid var(--nais-border);
+  font-size: 0.58rem;
+  color: #334155;
+  white-space: nowrap;
+}
+
+.km-top strong {
+  font-size: 0.72rem;
+  margin-right: 0.3rem;
+}
+
+.km-top .on {
+  font-weight: 700;
+  border-bottom: 2px solid #0f172a;
+}
+
+.km-login {
+  margin-left: auto;
+  padding: 0.05rem 0.5rem;
+  border-radius: 6px;
+  background: #0f172a;
+  color: #fff;
+}
+
+.km-main {
+  padding: 0.7rem 0.9rem;
+  background: #f8fafc;
+  height: 100%;
+}
+
+.km-main h2 {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.km-main p {
+  margin: 0.15rem 0 0;
+  font-size: 0.66rem;
+  line-height: 1.4;
+  color: #475569;
+}
+
+.km-filter {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin: 0.6rem 0;
+  font-size: 0.6rem;
+}
+
+.km-filter span {
+  padding: 0.05rem 0.5rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 999px;
+  background: #fff;
+}
+
+.km-filter em {
+  margin-left: auto;
+  font-style: normal;
+  color: #64748b;
+}
+
+.km-cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.6rem;
+}
+
+.km-cards > div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  padding: 0.5rem 0.6rem;
+  border: 1px solid var(--nais-border);
+  border-radius: 8px;
+  background: #fff;
+}
+
+.km-cards small {
+  font-size: 0.56rem;
+  color: #64748b;
+}
+
+.km-cards strong {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+}
+
+.km-cards u {
+  align-self: flex-start;
+  margin-top: 0.3rem;
+  padding: 0.05rem 0.5rem;
+  border: 1px solid var(--nais-accent);
+  border-radius: 6px;
+  font-size: 0.6rem;
+  color: var(--nais-accent);
+  text-decoration: none;
+}
+
+.today-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.today-list li {
+  display: flex;
+  gap: 0.6rem;
+  margin: 0;
+  font-size: 0.8rem;
+  line-height: 1.4;
+  color: var(--nais-text-secondary);
+}
+
+.today-list .pin,
+.today-list .side > span {
+  margin-top: 0.15rem;
+}
+
+.today-list strong {
+  display: block;
+  font-family: 'Poppins', sans-serif;
+  color: var(--nais-heading);
+}
+
+.today-list .side {
+  padding-top: 0.6rem;
+  border-top: 1px dashed var(--nais-border);
+}
+
+.today-list .side > span {
+  flex: none;
+  width: 1.15rem;
+  font-size: 1.1rem;
+  color: var(--nais-accent);
+}
+
+/* Vision slide: temple with roof, four pillars and foundation */
+.temple {
+  max-height: 300px;
+}
+
+.temple .roof {
+  fill: var(--nais-accent);
+}
+
+.temple .rooft {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  font-size: 17px;
+  fill: #ffffff;
+}
+
+.temple .cap {
+  fill: var(--nais-accent);
+}

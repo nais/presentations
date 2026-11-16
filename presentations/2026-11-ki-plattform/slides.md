@@ -129,13 +129,38 @@ layout: default
 <p class="subtitle">Verktøykatalogen og god praksis kan bli inngangen til Fleet <span class="chip amber align-middle ml-2">Forslag</span></p>
 
 ::default::
-<div class="grid grid-cols-4 gap-4">
-  <IconCard icon="i-carbon-catalog" title="ki‑utvikling.nav.no" description="Abonnement, verktøykatalog og god praksis på ett sted." />
-  <IconCard icon="i-carbon-terminal" title="nav-pilot" description="Kommandolinjeverktøy som gir Copilot Navs egen kunnskap." />
-  <IconCard icon="i-carbon-laptop" title="Lokale agenter" description="Copilot CLI kjører agenter på utviklerens egen maskin." />
-  <IconCard icon="i-carbon-list-checked" title="MCP-registeret" description="12 godkjente servere. Ukjente servere blokkeres." />
+<div class="today">
+  <BrowserWindow url="ki-utvikling.nav.no/verktoy" class="today-win" role="img" aria-label="Skisse av verktøykatalogen på ki-utvikling.nav.no. Fire nummererte punkter: verktøykatalogen, god praksis, nav-pilot og MCP-registeret.">
+    <span class="chip green today-badge">I dag</span>
+    <div class="km-top">
+      <strong>KI-produktutvikling</strong>
+      <span>Kom i gang</span>
+      <span>nav-pilot <b class="pin">3</b></span>
+      <span class="on">Tilpasning</span>
+      <span>Praksis og regler <b class="pin">2</b></span>
+      <span>Innsikt</span>
+      <span class="km-login">Logg inn</span>
+    </div>
+    <div class="km-main">
+      <h2>Verktøykatalog <b class="pin">1</b></h2>
+      <p>Agenter, instruksjoner, skills og MCP-servere som gjør Copilot smartere for Navs stack.</p>
+      <div class="km-filter"><span>Agent</span><span>Instruksjon</span><span>Prompt</span><span>Skill</span><span>MCP Server</span><em>80 av 80 tilpasninger</em></div>
+      <div class="km-cards">
+        <div><small>Agent · Generelt</small><strong>@nav-pilot</strong><p>Planlegging og bygging av Nav-apper.</p><u>Installer</u></div>
+        <div><small>Skill · Sikkerhet</small><strong>nav-auth</strong><p>Entra ID, TokenX, ID-porten og Maskinporten.</p><u>Mer info</u></div>
+        <div><small>MCP Server · Plattform <b class="pin">4</b></small><strong>nais-mcp</strong><p>Nais-kontekst via Nais CLI.</p><u>Mer info</u></div>
+      </div>
+    </div>
+  </BrowserWindow>
+  <ol class="today-list">
+    <li><b class="pin">1</b><div><strong>Verktøykatalogen</strong>80 agenter, skills, instruksjoner og MCP-servere for Navs stack.</div></li>
+    <li><b class="pin">2</b><div><strong>God praksis</strong>Guider for å skrive kode, teste og sette opp agenter.</div></li>
+    <li><b class="pin">3</b><div><strong>nav-pilot</strong><code>nav-pilot install</code> legger agentpakker i repoet.</div></li>
+    <li><b class="pin">4</b><div><strong>MCP-registeret</strong>12 godkjente servere. Ukjente servere blokkeres.</div></li>
+    <li class="side"><span class="i-carbon-laptop" /><div><strong>Lokale agenter</strong>Copilot CLI kjører agentene på utviklerens egen maskin.</div></li>
+  </ol>
 </div>
-<p class="footnote">Fleet bygger videre på dette: katalog, veiledning og onboarding finnes allerede for utviklere.</p>
+<p class="footnote tight">Fleet bygger videre på dette: katalog, veiledning og onboarding finnes allerede for utviklere.</p>
 
 ::footer::
 <span class="font-mono text-sm opacity-70">nav-fleet · utkast til diskusjon · ikke vedtatt</span>
@@ -149,6 +174,7 @@ Overgang: «Hva vil vi i stedet?»
   - Verktøykatalogen: src/app/(nb)/(nav-pilot)/verktoy/page.tsx. «Agenter, instruksjoner, skills og MCP-servere som gjør GitHub Copilot smartere for Navs stack»
   - God praksis og guider: src/app/(nb)/praksis/page.tsx
   - Forsiden viste 10 agenter, 36 skills, 17 instruksjoner og 12 MCP-servere 16. november 2026. /verktoy og /praksis er åpne uten innlogging
+  - Skissen følger /verktoy slik siden så ut 16. november 2026: menyen, ingressen, filtrene og «80 av 80 tilpasninger». Den viser tre av kortene og ingen brukerdata
 - nav-pilot: «nav-pilot gir GitHub Copilot Navs institusjonelle kunnskap, fra Nais-manifester til TokenX» (src/app/(nb)/nav-pilot/page.tsx)
 - Lokale agenter: Copilot CLI på utviklerens maskin. Klientene er beskrevet i src/app/(nb)/(nav-pilot)/nav-pilot/klienter/page.tsx
 - MCP-registeret: navikt/copilot/apps/mcp-registry, med 12 servere i allowlist.json. Offentlig på mcp-registry.nav.no (README.md)
@@ -160,17 +186,43 @@ layout: default
 ---
 
 ::header::
-<h1 class="text-3xl font-bold">Visjonen: enkelt, trygt og raskt å bygge og drifte KI i produksjon</h1>
-<p class="subtitle">Fire bærebjelker. Ingenting her er planlagt eller vedtatt <span class="chip amber align-middle ml-2">Visjon</span></p>
+<h1 class="text-3xl font-bold">Visjonen: enkel, trygg og rask KI i produksjon</h1>
+<p class="subtitle">Fire søyler. Ingenting her er planlagt eller vedtatt <span class="chip amber align-middle ml-2">Visjon</span></p>
 
 ::default::
-<div class="grid grid-cols-4 gap-4">
-  <IconCard icon="i-carbon-code" title="Selvbetjent" description="Teamet beskriver hva agenten trenger, slik de gjør for en app på Nais." />
-  <IconCard icon="i-carbon-security" title="Regler som kode" description="Tilgang, logging og risikoklasse settes ett sted, ikke i hver app." />
-  <IconCard icon="i-carbon-arrows-horizontal" title="Fritt modellvalg" description="Teamet bytter modell eller leverandør uten å endre koden." />
-  <IconCard icon="i-carbon-chart-line" title="Full oversikt" description="Sporing, kostnad per team og evalueringer før og etter endringer." />
-</div>
-<p class="footnote">Fra lokale agenter på én maskin til skyagenter for ulike formål, kjørt på Fleet. Agenten gjør forarbeidet med rettighetene til et menneske, og mennesket avgjør.</p>
+<svg class="dg temple" viewBox="0 0 880 300" role="img" aria-label="Et tempel. Taket er nav-fleet: enkelt, trygt og raskt. Fire søyler bærer taket: selvbetjent, regler som kode, fritt modellvalg og full oversikt. Fundamentet er Nais.">
+  <path d="M440 4L800 78H80z" class="roof"/>
+  <text x="440" y="60" text-anchor="middle" class="rooft">nav-fleet: enkelt, trygt og raskt</text>
+  <rect x="60" y="78" width="760" height="16" rx="3" class="roof"/>
+  <rect x="67" y="94" width="176" height="12" rx="2" class="cap"/>
+  <rect x="75" y="106" width="160" height="130" class="p"/>
+  <rect x="67" y="236" width="176" height="12" rx="2" class="cap"/>
+  <text x="155" y="150" text-anchor="middle" class="t">Selvbetjent</text>
+  <text x="155" y="178" text-anchor="middle" class="s">Teamet beskriver behovet</text>
+  <text x="155" y="196" text-anchor="middle" class="s">og Fleet gjør resten</text>
+  <rect x="257" y="94" width="176" height="12" rx="2" class="cap"/>
+  <rect x="265" y="106" width="160" height="130" class="p"/>
+  <rect x="257" y="236" width="176" height="12" rx="2" class="cap"/>
+  <text x="345" y="150" text-anchor="middle" class="t">Regler som kode</text>
+  <text x="345" y="178" text-anchor="middle" class="s">Tilgang og logging</text>
+  <text x="345" y="196" text-anchor="middle" class="s">settes ett sted</text>
+  <rect x="447" y="94" width="176" height="12" rx="2" class="cap"/>
+  <rect x="455" y="106" width="160" height="130" class="p"/>
+  <rect x="447" y="236" width="176" height="12" rx="2" class="cap"/>
+  <text x="535" y="150" text-anchor="middle" class="t">Fritt modellvalg</text>
+  <text x="535" y="178" text-anchor="middle" class="s">Bytt modell uten</text>
+  <text x="535" y="196" text-anchor="middle" class="s">å endre koden</text>
+  <rect x="637" y="94" width="176" height="12" rx="2" class="cap"/>
+  <rect x="645" y="106" width="160" height="130" class="p"/>
+  <rect x="637" y="236" width="176" height="12" rx="2" class="cap"/>
+  <text x="725" y="150" text-anchor="middle" class="t">Full oversikt</text>
+  <text x="725" y="178" text-anchor="middle" class="s">Sporing og kostnad</text>
+  <text x="725" y="196" text-anchor="middle" class="s">per team</text>
+  <rect x="40" y="248" width="800" height="22" rx="3" class="n"/>
+  <rect x="10" y="270" width="860" height="28" rx="3" class="n"/>
+  <text x="440" y="289" text-anchor="middle" class="t">kjører på Nais</text>
+</svg>
+<p class="footnote tight">Fra lokale agenter på én maskin til skyagenter for ulike formål, kjørt på Fleet. Agenten gjør forarbeidet med rettighetene til et menneske, og mennesket avgjør.</p>
 
 ::footer::
 <span class="font-mono text-sm opacity-70">nav-fleet · utkast til diskusjon · ikke vedtatt</span>
@@ -198,48 +250,43 @@ layout: default
 <p class="subtitle">nav-fleet erstatter ingen plattform. Rollene er vår beskrivelse</p>
 
 ::default::
-<svg class="dg" viewBox="0 0 880 376" role="img" aria-label="Økosystemet i fem lag. Øverst Aksel for brukerflater. Under ligger Nais med apper, infrastruktur, nettverk og innlogging. Under Nais ligger nav-fleet med fem moduler, ved siden av Nada med dataprodukter. Nederst ligger modeller og infrastruktur. nav-pilot er lokalt i dag og kjører på nav-fleet i visjonen. Verktøykatalogen og god praksis på ki-utvikling.nav.no kan bli inngangen til Fleet.">
+<svg class="dg" viewBox="0 0 880 312" role="img" aria-label="Tre plattformer side om side: Nais, nav-fleet og Nada. Fleet kjører på Nais og henter data og kontekst fra Nada, med tilgangsstyring. Nais og Nada bruker også Fleet. Over står nav-pilot, fagsystemer og andre team, som bygger på Fleet. Under står modellene, som Fleet kaller. Verktøykatalogen og god praksis på ki-utvikling.nav.no kan bli inngangen til Fleet.">
   <defs><marker id="ar1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" class="ah"/></marker></defs>
-  <rect x="0" y="2" width="880" height="54" rx="8" class="b"/>
-  <text x="20" y="35" class="t">Aksel</text>
-  <text x="130" y="35" class="s">designsystem og mønstre for samspill mellom menneske og KI: kilder, usikkerhet og godkjenning</text>
-  <line x1="440" y1="56" x2="440" y2="72" class="a" marker-end="url(#ar1)"/>
-  <rect x="0" y="74" width="880" height="54" rx="8" class="n"/>
-  <text x="20" y="107" class="t">Nais</text>
-  <text x="130" y="107" class="s">apper, infrastruktur, nettverk og innlogging (Entra ID, TokenX, Maskinporten). Fleet kjører i clusterne</text>
-  <line x1="300" y1="128" x2="300" y2="144" class="a" marker-end="url(#ar1)"/>
-  <line x1="790" y1="128" x2="790" y2="144" class="a" marker-end="url(#ar1)"/>
-  <rect x="0" y="146" width="664" height="112" rx="10" class="p"/>
-  <text x="20" y="172" class="h">nav-fleet</text>
-  <text x="118" y="172" class="s">kjøring, styring, ruting og orkestrering for KI i produksjon</text>
-  <text x="648" y="172" class="s" text-anchor="end">fleet.nav.no (forslag)</text>
-  <rect x="16" y="188" width="112" height="54" rx="8" class="b"/>
-  <text x="72" y="220" text-anchor="middle" style="font-size: 13px">fleet-gateway</text>
-  <rect x="136" y="188" width="112" height="54" rx="8" class="b"/>
-  <text x="192" y="220" text-anchor="middle" style="font-size: 13px">fleet-control</text>
-  <rect x="256" y="188" width="112" height="54" rx="8" class="b"/>
-  <text x="312" y="220" text-anchor="middle" style="font-size: 13px">fleet-runtime</text>
-  <rect x="376" y="188" width="144" height="54" rx="8" class="b"/>
-  <text x="448" y="220" text-anchor="middle" style="font-size: 13px">fleet-orchestrator</text>
-  <rect x="528" y="188" width="120" height="54" rx="8" class="b"/>
-  <text x="588" y="220" text-anchor="middle" style="font-size: 13px">fleet-radar</text>
-  <line x1="666" y1="202" x2="698" y2="202" class="a" marker-end="url(#ar1)"/>
-  <rect x="700" y="146" width="180" height="112" rx="10" class="b"/>
-  <text x="790" y="172" class="t" text-anchor="middle">Nada</text>
-  <text x="790" y="193" class="s" text-anchor="middle">dataprodukter, katalog</text>
-  <text x="790" y="209" class="s" text-anchor="middle">og tilgang</text>
-  <text x="790" y="230" class="s" text-anchor="middle">domenekunnskap</text>
-  <text x="790" y="246" class="s" text-anchor="middle">til agentene</text>
-  <line x1="300" y1="258" x2="300" y2="274" class="a" marker-end="url(#ar1)"/>
-  <rect x="0" y="276" width="880" height="48" rx="8" class="n"/>
-  <text x="20" y="305" class="t">Modeller og infrastruktur</text>
-  <text x="260" y="305" class="s">skymodeller, i dag gjennom GitHub Copilot</text>
-  <rect x="696" y="287" width="168" height="26" rx="13" class="q"/>
-  <text x="780" y="304" class="s" text-anchor="middle">egne GPU-er (visjon)</text>
-  <text x="0" y="348" class="t">nav-pilot</text>
-  <text x="170" y="348" class="s">i dag lokalt, i morgen på nav-fleet: samme verktøy, men agentene kjører i fleet-runtime (visjon)</text>
-  <text x="0" y="370" class="t">ki-utvikling.nav.no</text>
-  <text x="170" y="370" class="s">verktøykatalogen og god praksis kan bli katalogen og inngangen til Fleet (forslag)</text>
+  <rect x="200" y="2" width="480" height="40" rx="8" class="b"/>
+  <text x="440" y="27" text-anchor="middle" class="t">nav-pilot · fagsystemer · andre team</text>
+  <line x1="440" y1="42" x2="440" y2="72" class="a" marker-end="url(#ar1)"/>
+  <text x="452" y="61" class="s">bygger på Fleet</text>
+  <rect x="0" y="74" width="190" height="124" rx="10" class="n"/>
+  <text x="95" y="112" text-anchor="middle" class="h">Nais</text>
+  <text x="95" y="140" text-anchor="middle" class="s">kjøre apper</text>
+  <text x="95" y="158" text-anchor="middle" class="s">og infrastruktur</text>
+  <rect x="345" y="74" width="190" height="124" rx="10" class="p"/>
+  <text x="440" y="112" text-anchor="middle" class="h">nav-fleet</text>
+  <text x="440" y="140" text-anchor="middle" class="s">KI og agenter</text>
+  <text x="440" y="158" text-anchor="middle" class="s">i produksjon</text>
+  <text x="440" y="184" text-anchor="middle" class="s x">fleet.nav.no (forslag)</text>
+  <rect x="690" y="74" width="190" height="124" rx="10" class="n"/>
+  <text x="785" y="112" text-anchor="middle" class="h">Nada</text>
+  <text x="785" y="140" text-anchor="middle" class="s">data og domenekunnskap:</text>
+  <text x="785" y="158" text-anchor="middle" class="s">konteksten agentene trenger</text>
+  <text x="267" y="104" text-anchor="middle" class="s">kjører på</text>
+  <line x1="343" y1="112" x2="194" y2="112" class="a" marker-end="url(#ar1)"/>
+  <line x1="192" y1="160" x2="341" y2="160" class="a" marker-end="url(#ar1)"/>
+  <text x="267" y="178" text-anchor="middle" class="s">bruker Fleet</text>
+  <text x="612" y="104" text-anchor="middle" class="s">henter data og kontekst</text>
+  <line x1="537" y1="112" x2="686" y2="112" class="a" marker-end="url(#ar1)"/>
+  <text x="612" y="130" text-anchor="middle" class="s">med tilgangsstyring</text>
+  <line x1="688" y1="160" x2="539" y2="160" class="a" marker-end="url(#ar1)"/>
+  <text x="612" y="178" text-anchor="middle" class="s">bruker Fleet</text>
+  <line x1="440" y1="198" x2="440" y2="228" class="a" marker-end="url(#ar1)"/>
+  <text x="452" y="217" class="s">kaller modellene</text>
+  <rect x="0" y="230" width="880" height="46" rx="8" class="b"/>
+  <text x="20" y="258" class="t">Modeller og infrastruktur</text>
+  <text x="260" y="258" class="s">skymodeller, i dag gjennom GitHub Copilot</text>
+  <rect x="696" y="240" width="168" height="26" rx="13" class="q"/>
+  <text x="780" y="257" class="s" text-anchor="middle">egne GPU-er (visjon)</text>
+  <text x="0" y="304" class="t">ki-utvikling.nav.no</text>
+  <text x="170" y="304" class="s">verktøykatalogen og god praksis kan bli katalogen og inngangen til Fleet (forslag)</text>
 </svg>
 
 ::footer::
@@ -248,14 +295,15 @@ layout: default
 <!--
 Overgang: «Hva består Fleet av?»
 
-- Fleet erstatter ingen plattform. Den legger seg mellom appene på Nais og modellene, ved siden av Nada
-- Rollene er vår beskrivelse. Vi har ikke avklart dem med Nais, Nada eller Aksel
-- Aksel: designsystemet. Mønstre for samspill mellom menneske og KI, som å vise kilder, vise usikkerhet og be om godkjenning, er et forslag til rolle. Aksel har ikke tatt den på seg
-- Nais: apper, infrastruktur, nettverk og hosting. Innlogging og tokener finnes i dag, med Entra ID, TokenX og Maskinporten gjennom Texas
-- Agentenes runtime ligger i Fleet, ikke i Nais. fleet-runtime kjører i Nais-clusterne, men Fleet eier den (forslag)
-- Nada: dataprodukter, katalog og tilgang. Domenekunnskap til agentene er en hypotese. Vi har ikke snakket med Nada
+- Tre plattformer som jobber sammen, hver med sin oppgave. Fleet erstatter ingen av dem
+- Nais kjører apper og infrastruktur. Nada har data og domenekunnskap, altså konteksten agentene trenger. nav-fleet er KI og agenter i produksjon
+- Rollene er vår beskrivelse. Vi har ikke avklart dem med Nais eller Nada
+- Fleet kjører på Nais: i Nais-clusterne, med nettverk og innlogging derfra (Entra ID, TokenX og Maskinporten gjennom Texas). Agentenes runtime ligger i Fleet, ikke i Nais. fleet-runtime kjører i clusterne, men Fleet eier den (forslag)
+- Fleet henter data og kontekst fra Nada, med tilgangsstyring. Agenten ser bare det brukeren selv har tilgang til. Hypotese. Vi har ikke snakket med Nada
+- Nais og Nada bruker også Fleet, for eksempel til feilsøkingsagenter og analyseagenter. Nais er altså både plattformen under og en av brukerne
+- nav-pilot, fagsystemer og andre team bygger på Fleet. nav-pilot er lokalt i dag. At det kjører på nav-fleet, er visjon og ikke planlagt
+- Detaljene står på de neste lysbildene: modulene og hvem som bruker dem på neste, de seks typene agenter senere
 - Modeller: i dag går modellkallene gjennom GitHub Copilot. Flere skyleverandører og egne GPU-er er visjon
-- nav-pilot: i dag lokalt, i morgen på nav-fleet. I dag er det et kommandolinjeverktøy som logger inn mot GitHub med device flow. Visjon: nav-pilot kjører på nav-fleet, med samme verktøy som inngang og agentene i fleet-runtime. Det er ikke planlagt
 - ki-utvikling.nav.no: verktøykatalogen og god praksis kan bli katalogen og inngangen til Fleet. Katalogen hører da til fleet-control. Forslag
 - fleet.nav.no er et forslag til adresse. Den finnes ikke
 -->
@@ -631,8 +679,7 @@ layout: default
   <line x1="90" y1="288" x2="90" y2="306" class="a" marker-end="url(#ar4)"/>
   <rect x="0" y="308" width="180" height="38" rx="8" class="n"/>
   <text x="90" y="332" text-anchor="middle">Copilot API</text>
-  <polygon points="252,50 396,50 396,38 434,62 396,86 396,74 252,74" style="fill: var(--nais-accent)"/>
-  <text x="326" y="67" text-anchor="middle" style="fill: #fff; font-weight: 700">neste steg</text>
+  <line x1="443" y1="0" x2="443" y2="350" style="stroke: var(--nais-border); stroke-width: 1.5"/>
   <text x="460" y="16" class="h">Med Fleet</text>
   <rect x="460" y="30" width="120" height="40" rx="8" class="b"/>
   <text x="520" y="55" text-anchor="middle">nettleser</text>
