@@ -769,22 +769,71 @@ pre,
   color: var(--nais-accent);
 }
 
-/* Vision slide: temple with roof, four pillars and foundation */
-.temple {
+/* Vision slide: jets in formation (and the hidden radar fallback) above a three-field ground */
+.fly {
   max-height: 300px;
 }
 
-.temple .roof {
+.fly .jet,
+.fly .pill {
   fill: var(--nais-accent);
 }
 
-.temple .rooft {
+.fly .pillt {
   font-family: 'Poppins', sans-serif;
   font-weight: 700;
-  font-size: 17px;
+  font-size: 14px;
   fill: #ffffff;
 }
 
-.temple .cap {
+/* Course marker: thin and dashed so it never reads as part of the lead jet */
+.fly .course {
+  fill: none;
+  stroke: var(--nais-accent);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 5 5;
+}
+
+.fly .courseh {
+  fill: none;
+  stroke: var(--nais-accent);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.fly .courset {
+  font-weight: 600;
+  font-size: 12.5px;
   fill: var(--nais-accent);
+}
+
+.fly .card {
+  fill: #ffffff;
+  stroke: #cbd5e1;
+  stroke-width: 1.5;
+}
+
+.dg .div,
+.fly .lead {
+  stroke: #cbd5e1;
+  stroke-width: 1.5;
+}
+
+.fly .lead {
+  stroke: #94a3b8;
+}
+
+.fly .ring0 {
+  stroke: var(--nais-accent);
+  stroke-width: 2;
+}
+
+.fly .ring {
+  fill: none;
+  stroke: var(--nais-accent);
+  stroke-opacity: 0.4;
+  stroke-width: 1;
 }
