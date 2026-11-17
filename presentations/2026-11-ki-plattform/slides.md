@@ -581,15 +581,15 @@ layout: default
 
 ::default::
 <div class="fleet-icons top">
-  <figure class="fleet-icon a-rise" style="--d: 0.10s"><img src="/icons/fleet/nav-pilot.svg?v=5" alt="" /><figcaption><strong>nav-pilot</strong><span>der vi startet</span></figcaption></figure>
-  <figure class="fleet-icon a-rise" style="--d: 0.25s"><img src="/icons/fleet/nav-fleet.svg?v=5" alt="" /><figcaption><strong>nav-fleet</strong><span>plattformen</span></figcaption></figure>
+  <figure class="fleet-icon a-rise" style="--d: 0.10s"><img src="/icons/fleet/nav-pilot.svg?v=6" alt="" /><figcaption><strong>nav-pilot</strong><span>der vi startet</span></figcaption></figure>
+  <figure class="fleet-icon a-rise" style="--d: 0.25s"><img src="/icons/fleet/nav-fleet.svg?v=6" alt="" /><figcaption><strong>nav-fleet</strong><span>plattformen</span></figcaption></figure>
 </div>
 <div class="fleet-icons">
-  <figure class="fleet-icon a-rise" style="--d: 0.50s"><img src="/icons/fleet/fleet-gateway.svg?v=5" alt="" /><figcaption><strong>fleet-gateway</strong><span>inngangen</span></figcaption></figure>
-  <figure class="fleet-icon a-rise" style="--d: 0.65s"><img src="/icons/fleet/fleet-control.svg?v=5" alt="" /><figcaption><strong>fleet-control</strong><span>kursen</span></figcaption></figure>
-  <figure class="fleet-icon a-rise" style="--d: 0.80s"><img src="/icons/fleet/fleet-runtime.svg?v=5" alt="" /><figcaption><strong>fleet-runtime</strong><span>sandkassen</span></figcaption></figure>
-  <figure class="fleet-icon a-rise" style="--d: 0.95s"><img src="/icons/fleet/fleet-orchestrator.svg?v=5" alt="" /><figcaption><strong>fleet-orchestrator</strong><span>samspillet</span></figcaption></figure>
-  <figure class="fleet-icon a-rise" style="--d: 1.10s"><img src="/icons/fleet/fleet-radar.svg?v=5" alt="" /><figcaption><strong>fleet-radar</strong><span>oversikten</span></figcaption></figure>
+  <figure class="fleet-icon a-rise" style="--d: 0.50s"><img src="/icons/fleet/fleet-gateway.svg?v=6" alt="" /><figcaption><strong>fleet-gateway</strong><span>inngangen</span></figcaption></figure>
+  <figure class="fleet-icon a-rise" style="--d: 0.65s"><img src="/icons/fleet/fleet-control.svg?v=6" alt="" /><figcaption><strong>fleet-control</strong><span>kursen</span></figcaption></figure>
+  <figure class="fleet-icon a-rise" style="--d: 0.80s"><img src="/icons/fleet/fleet-runtime.svg?v=6" alt="" /><figcaption><strong>fleet-runtime</strong><span>sandkassen</span></figcaption></figure>
+  <figure class="fleet-icon a-rise" style="--d: 0.95s"><img src="/icons/fleet/fleet-orchestrator.svg?v=6" alt="" /><figcaption><strong>fleet-orchestrator</strong><span>samspillet</span></figcaption></figure>
+  <figure class="fleet-icon a-rise" style="--d: 1.10s"><img src="/icons/fleet/fleet-radar.svg?v=6" alt="" /><figcaption><strong>fleet-radar</strong><span>oversikten</span></figcaption></figure>
 </div>
 
 ::footer::
