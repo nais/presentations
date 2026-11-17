@@ -24,12 +24,11 @@ fonts:
     <mask id="sky-reveal" maskUnits="userSpaceOnUse" x="-90" y="0" width="180" height="320">
       <g stroke="#ffffff" stroke-width="8">
         <line class="sky-draw" x1="0" y1="10" x2="0" y2="130" pathLength="1"/>
-        <line class="sky-draw" x1="-22" y1="68" x2="-22" y2="188" pathLength="1"/>
-        <line class="sky-draw" x1="22" y1="68" x2="22" y2="188" pathLength="1"/>
-        <line class="sky-draw" x1="-44" y1="126" x2="-44" y2="246" pathLength="1"/>
-        <line class="sky-draw" x1="44" y1="126" x2="44" y2="246" pathLength="1"/>
-        <line class="sky-draw" x1="-66" y1="184" x2="-66" y2="304" pathLength="1"/>
-        <line class="sky-draw" x1="66" y1="184" x2="66" y2="304" pathLength="1"/>
+        <line class="sky-draw" x1="-31" y1="64" x2="-31" y2="184" pathLength="1"/>
+        <line class="sky-draw" x1="31" y1="64" x2="31" y2="184" pathLength="1"/>
+        <line class="sky-draw" x1="-62" y1="117" x2="-62" y2="237" pathLength="1"/>
+        <line class="sky-draw" x1="0" y1="117" x2="0" y2="237" pathLength="1"/>
+        <line class="sky-draw" x1="62" y1="117" x2="62" y2="237" pathLength="1"/>
       </g>
     </mask>
   </defs>
@@ -39,21 +38,19 @@ fonts:
   <g class="sky-x"><g class="sky-y"><g class="sky-bob"><g transform="translate(860 95)"><g class="sky-turn" transform="rotate(45)">
     <g class="sky-trails" mask="url(#sky-reveal)">
       <use href="#sky-trail" x="0" y="0"/>
-      <use href="#sky-trail" x="-22" y="58"/>
-      <use href="#sky-trail" x="22" y="58"/>
-      <use href="#sky-trail" x="-44" y="116"/>
-      <use href="#sky-trail" x="44" y="116"/>
-      <use href="#sky-trail" x="-66" y="174"/>
-      <use href="#sky-trail" x="66" y="174"/>
+      <use href="#sky-trail" x="-31" y="54"/>
+      <use href="#sky-trail" x="31" y="54"/>
+      <use href="#sky-trail" x="-62" y="107"/>
+      <use href="#sky-trail" x="0" y="107"/>
+      <use href="#sky-trail" x="62" y="107"/>
     </g>
     <g>
-      <FleetShip x="0" y="0" scale="1.2"/>
-      <FleetShip x="-22" y="58" scale="1.2"/>
-      <FleetShip x="22" y="58" scale="1.2"/>
-      <FleetShip x="-44" y="116" scale="1.2"/>
-      <FleetShip x="44" y="116" scale="1.2"/>
-      <FleetShip x="-66" y="174" scale="1.2"/>
-      <FleetShip x="66" y="174" scale="1.2"/>
+      <FleetShip x="0" y="0" scale="1.2" class="lead"/>
+      <FleetShip x="-31" y="54" scale="1.2"/>
+      <FleetShip x="31" y="54" scale="1.2"/>
+      <FleetShip x="-62" y="107" scale="1.2"/>
+      <FleetShip x="0" y="107" scale="1.2"/>
+      <FleetShip x="62" y="107" scale="1.2"/>
     </g>
   </g></g></g></g></g>
   <g class="sky-cloud mid" fill="#f0f4fa" filter="url(#sky-soft)"><ellipse cx="-40" cy="522" rx="130" ry="34"/><ellipse cx="190" cy="514" rx="120" ry="38"/><ellipse cx="400" cy="526" rx="140" ry="32"/><ellipse cx="620" cy="512" rx="130" ry="40"/><ellipse cx="830" cy="526" rx="120" ry="32"/><ellipse cx="1030" cy="516" rx="130" ry="38"/><rect x="-160" y="524" width="1300" height="76"/></g>
@@ -62,6 +59,7 @@ fonts:
 
 ::default::
 <p class="cover-kicker font-mono">PLAN OG VISJON · UTKAST TIL DISKUSJON</p>
+<img src="/icons/fleet/nav-fleet.svg?v=8" alt="" class="cover-mark" />
 <h1 class="cover-title">nav-fleet</h1>
 <p class="cover-tagline">Himmelen er grensen.<br>Mennesket har kursen.</p>
 <p class="cover-sub">En felles plattform for KI-agenter i produksjon</p>
@@ -1052,16 +1050,17 @@ layout: default
 <p class="tagline mt-2">nav-fleet gir agentene vinger. Mennesket holder kursen.</p>
 
 ::default::
-<svg class="dg fly" viewBox="0 0 880 340" role="img" aria-label="Fem piler i V-formasjon stiger mot øvre høyre hjørne i en åpen himmel. En stiplet linje foran den fremste pilen viser kursen.">
+<svg class="dg fly" viewBox="0 0 880 340" role="img" aria-label="Seks piler i trekantformasjon stiger mot øvre høyre hjørne i en åpen himmel. En stiplet linje foran den fremste pilen viser kursen.">
   <g class="climb">
     <path d="M572 98L620 50" class="course"/>
     <path d="M607 48h15v15" class="courseh"/>
     <g transform="translate(540 130) rotate(45)">
-      <FleetShip x="0" y="0" scale="2" trail="6"/>
-      <FleetShip x="-48" y="62" scale="1.7" trail="6"/>
-      <FleetShip x="48" y="62" scale="1.7" trail="6"/>
-      <FleetShip x="-96" y="124" scale="1.7" trail="6"/>
-      <FleetShip x="96" y="124" scale="1.7" trail="6"/>
+      <FleetShip x="0" y="0" scale="2" trail="6" class="lead"/>
+      <FleetShip x="-29" y="50" scale="1.7" trail="6"/>
+      <FleetShip x="29" y="50" scale="1.7" trail="6"/>
+      <FleetShip x="-58" y="100" scale="1.7" trail="6"/>
+      <FleetShip x="0" y="100" scale="1.7" trail="6"/>
+      <FleetShip x="58" y="100" scale="1.7" trail="6"/>
     </g>
   </g>
 </svg>

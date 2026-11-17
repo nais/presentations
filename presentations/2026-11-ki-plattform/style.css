@@ -1170,3 +1170,14 @@ pre,
 .fleet-icon span {
   color: var(--nais-text-secondary);
 }
+
+/* The lead bird is the human: dark on the light sky, like the white bird on the dark icons */
+.fleet-ship.lead {
+  stroke: #0b1528;
+}
+
+.cover-mark {
+  width: 4.5rem;
+  height: 4.5rem;
+  margin-bottom: 0.75rem;
+}
