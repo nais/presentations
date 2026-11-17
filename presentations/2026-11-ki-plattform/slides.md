@@ -121,12 +121,12 @@ layout: default
       <ol>
         <li class="a-rise" style="--d: 0.9s"><b class="pin">1</b><span>Handler på vegne av Kari</span><code>fleet-gateway</code></li>
         <li class="a-rise" style="--d: 1.2s"><b class="pin">2</b><span>Bare verktøy agenten har lov til</span><code>fleet-control</code></li>
-        <li class="a-rise" style="--d: 1.5s"><b class="pin">3</b><span>Egen sandkasse per bruker</span><code>fleet-runtime</code></li>
+        <li class="a-rise" style="--d: 1.5s"><b class="pin">3</b><span>Én isolert sandkasse per bruker</span><code>fleet-runtime</code></li>
         <li class="a-rise" style="--d: 1.8s"><b class="pin">4</b><span>Ingen brev uten at Kari sier ja</span><code>fleet-orchestrator</code></li>
-        <li class="a-rise" style="--d: 2.1s"><b class="pin">5</b><span>Logg, sporing og kostnad</span><code>fleet-radar</code></li>
+        <li class="a-rise" style="--d: 2.1s"><b class="pin">5</b><span>Logg og kostnad for hvert steg</span><code>fleet-radar</code></li>
       </ol>
     </div>
-    <div class="tip-base a-fade" style="--d: 2.4s">Modeller · verktøy og data i Nav · Nais</div>
+    <div class="tip-base a-fade" style="--d: 2.4s">KI-modeller · verktøy og data i Nav · Nais</div>
   </div>
 </div>
 <p class="footnote tight a-fade" style="--d: 2.6s">Uten Fleet bygger hvert team alt under vannlinjen selv. Med Fleet bygger teamet chatten og agenten sin. Resten er felles.</p>
@@ -151,15 +151,15 @@ layout: default
 ---
 
 ::header::
-<h1 class="text-3xl font-bold">Under vannlinjen: ett spørsmål, fem steg</h1>
-<p class="subtitle">Det som skjer fra Kari spør til brevet er sendt <span class="chip amber align-middle ml-2">Visjon etter fase 3</span></p>
+<h1 class="text-3xl font-bold">Fleet passer på hvert steg</h1>
+<p class="subtitle">Ett spørsmål, fem steg under vannlinjen <span class="chip amber align-middle ml-2">Visjon etter fase 3</span></p>
 
 ::default::
 <svg class="dg seq" viewBox="0 0 880 340" role="img" aria-label="Sekvensdiagram i fem steg. 1: Kari spør i appen, og agenten i fleet-runtime får spørsmålet og et kortlivet token for Kari i Karis sandkasse. 2: Agenten spør modellen gjennom fleet-gateway, som står for modelltilgang og kvote senere. 3: Agenten henter dokumenter gjennom fleet-gateway, og fleet-control sjekker at agenten har lov. 4: Agenten foreslår å sende brev, og Kari sier ja gjennom fleet-orchestrator. 5: Agenten sender brevet gjennom fleet-gateway, som sjekker godkjenningen, og sandkassen stoppes. Nederst viser fleet-radar én logglinje per steg.">
   <defs><marker id="ar9" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" class="ah"/></marker></defs>
-  <rect x="15.0" y="0" width="110" height="44" rx="8" class="b"/><text x="70" y="19" class="t" text-anchor="middle">Kari i appen</text><text x="70" y="36" class="s" text-anchor="middle">saksbehandling</text><line x1="70" y1="44" x2="70" y2="284" class="life"/><rect x="215.0" y="0" width="150" height="44" rx="8" class="p"/><text x="290" y="19" class="t" text-anchor="middle">Agent</text><text x="290" y="36" class="s" text-anchor="middle">fleet-runtime</text><line x1="290" y1="44" x2="290" y2="284" class="life"/><rect x="425.0" y="0" width="150" height="44" rx="8" class="p"/><text x="500" y="19" class="t" text-anchor="middle">fleet-gateway</text><text x="500" y="36" class="s" text-anchor="middle">MCP, modeller, token</text><line x1="500" y1="44" x2="500" y2="284" class="life"/><rect x="635.0" y="0" width="110" height="44" rx="8" class="b"/><text x="690" y="27" class="t" text-anchor="middle">Modell</text><line x1="690" y1="44" x2="690" y2="284" class="life"/><rect x="760.0" y="0" width="110" height="44" rx="8" class="b"/><text x="815" y="19" class="t" text-anchor="middle">Verktøy</text><text x="815" y="36" class="s" text-anchor="middle">saksarkivet</text><line x1="815" y1="44" x2="815" y2="284" class="life"/>
+  <rect x="15.0" y="0" width="110" height="44" rx="8" class="b"/><text x="70" y="19" class="t" text-anchor="middle">Kari i appen</text><text x="70" y="36" class="s" text-anchor="middle">saksbehandling</text><line x1="70" y1="44" x2="70" y2="284" class="life"/><rect x="215.0" y="0" width="150" height="44" rx="8" class="p"/><text x="290" y="19" class="t" text-anchor="middle">Agent</text><text x="290" y="36" class="s" text-anchor="middle">fleet-runtime</text><line x1="290" y1="44" x2="290" y2="284" class="life"/><rect x="425.0" y="0" width="150" height="44" rx="8" class="p"/><text x="500" y="19" class="t" text-anchor="middle">fleet-gateway</text><text x="500" y="36" class="s" text-anchor="middle">sjekker alle kall</text><line x1="500" y1="44" x2="500" y2="284" class="life"/><rect x="635.0" y="0" width="110" height="44" rx="8" class="b"/><text x="690" y="27" class="t" text-anchor="middle">Modell</text><line x1="690" y1="44" x2="690" y2="284" class="life"/><rect x="760.0" y="0" width="110" height="44" rx="8" class="b"/><text x="815" y="19" class="t" text-anchor="middle">Verktøy</text><text x="815" y="36" class="s" text-anchor="middle">saksarkivet</text><line x1="815" y1="44" x2="815" y2="284" class="life"/>
   <rect x="0" y="292" width="880" height="46" rx="8" class="n"/><text x="10" y="302" class="s rad">fleet-radar</text>
-  <g v-click><line x1="70" y1="74" x2="282" y2="74" class="a" marker-end="url(#ar9)"/><text x="190" y="68" class="s" text-anchor="middle">Spørsmål og token for Kari</text><rect x="47" y="59" width="18" height="18" rx="4" class="pn"/><text x="56" y="71.5" class="pnt" text-anchor="middle">1</text><rect x="282" y="64" width="16" height="200" rx="3" class="sbx"/><text x="276" y="100" class="s sbt" text-anchor="end">sandkasse for Kari</text><g><g class="lg"><rect x="18" y="306" width="132" height="24" rx="5"/><text x="84" y="322" text-anchor="middle">1 · Kari · start</text></g></g></g>
+  <g v-click><line x1="70" y1="74" x2="282" y2="74" class="a" marker-end="url(#ar9)"/><text x="190" y="68" class="s" text-anchor="middle">Spørsmål og kortlivet tilgang</text><rect x="47" y="59" width="18" height="18" rx="4" class="pn"/><text x="56" y="71.5" class="pnt" text-anchor="middle">1</text><rect x="282" y="64" width="16" height="200" rx="3" class="sbx"/><text x="276" y="100" class="s sbt" text-anchor="end">sandkasse for Kari</text><g><g class="lg"><rect x="18" y="306" width="132" height="24" rx="5"/><text x="84" y="322" text-anchor="middle">1 · Kari · start</text></g></g></g>
   <g v-click><line x1="298" y1="112" x2="690" y2="112" class="a" marker-end="url(#ar9)"/><circle cx="500" cy="112" r="4.5" class="gwd"/><text x="400" y="106" class="s" text-anchor="middle">Hva står i saken?</text><rect x="307" y="87" width="18" height="18" rx="4" class="pn"/><text x="316" y="99.5" class="pnt" text-anchor="middle">2</text><text x="500" y="126" class="s gwt" text-anchor="middle">modelltilgang og kvote (senere)</text><line x1="690" y1="140" x2="300" y2="140" class="a ret" marker-end="url(#ar9)"/><g class="lg"><rect x="162" y="306" width="132" height="24" rx="5"/><text x="228" y="322" text-anchor="middle">2 · modell · ok</text></g></g>
   <g v-click><line x1="298" y1="168" x2="815" y2="168" class="a" marker-end="url(#ar9)"/><circle cx="500" cy="168" r="4.5" class="gwd"/><text x="400" y="162" class="s" text-anchor="middle">Hent dokumentene</text><rect x="307" y="143" width="18" height="18" rx="4" class="pn"/><text x="316" y="155.5" class="pnt" text-anchor="middle">3</text><g class="chk"><rect x="410" y="174" width="180" height="20" rx="10"/><text x="500" y="188" text-anchor="middle">fleet-control: agenten har lov ✓</text></g><line x1="815" y1="206" x2="300" y2="206" class="a ret" marker-end="url(#ar9)"/><text x="720" y="200" class="s" text-anchor="middle">7 dokumenter</text><g class="lg"><rect x="306" y="306" width="132" height="24" rx="5"/><text x="372" y="322" text-anchor="middle">3 · verktøy · ok</text></g></g>
   <g v-click><line x1="282" y1="232" x2="70" y2="232" class="a ret" marker-end="url(#ar9)"/><text x="180" y="226" class="s" text-anchor="middle">Forslag: send brev?</text><rect x="77" y="207" width="18" height="18" rx="4" class="pn"/><text x="86" y="219.5" class="pnt" text-anchor="middle">4</text><g class="chk"><rect x="20" y="240" width="200" height="20" rx="10"/><text x="120" y="254" text-anchor="middle">fleet-orchestrator: Kari sier ja ✓</text></g><g class="lg"><rect x="450" y="306" width="132" height="24" rx="5"/><text x="516" y="322" text-anchor="middle">4 · godkjent</text></g></g>
@@ -187,7 +187,7 @@ layout: default
 
 ::header::
 <h1 class="text-3xl font-bold">Mange team trenger det samme, men bygger det hver for seg</h1>
-<p class="subtitle">Fra forsøk til produksjon: uten en felles plattform løser hvert team dette alene</p>
+<p class="subtitle">Det gir dobbeltarbeid når KI skal fra forsøk til produksjon</p>
 
 ::default::
 <div class="shift">
@@ -196,13 +196,13 @@ layout: default
   <div class="shift-h now">Med Fleet: produksjon</div>
   <div class="shift-l">Formål</div>
   <div>Teste hva KI kan brukes til</div>
-  <div class="now">Stabil drift av KI i tjenester</div>
+  <div class="now">Drifte KI stabilt i tjenester</div>
   <div class="shift-l">Styring</div>
   <div>Hvert team finner sin egen løsning</div>
-  <div class="now">Felles regler som håndheves ett sted</div>
+  <div class="now">Plattformen håndhever felles regler ett sted</div>
   <div class="shift-l">Tilgang</div>
-  <div>Egen tokenkode i hver app</div>
-  <div class="now">Knyttet til identiteten til appen og brukeren</div>
+  <div>Hver app løser tilgang med egen kode</div>
+  <div class="now">Knyttet til hvem appen og brukeren er</div>
   <div class="shift-l">Kostnad</div>
   <div>Ingen samlet oversikt</div>
   <div class="now">Synlig per team</div>
@@ -263,7 +263,7 @@ layout: default
 ---
 
 ::header::
-<h1 class="text-3xl font-bold">Det som virker i dag, virker for utviklere lokalt</h1>
+<h1 class="text-3xl font-bold">I dag virker det for utviklere på egen maskin</h1>
 <p class="subtitle">Verktøykatalogen og god praksis kan bli inngangen til Fleet <span class="chip amber align-middle ml-2">Forslag</span></p>
 
 ::default::
@@ -291,14 +291,14 @@ layout: default
     </div>
   </BrowserWindow>
   <ol class="today-list">
-    <li class="a-rise" style="--d: 0.3s"><b class="pin">1</b><div><strong>Verktøykatalogen</strong>80 agenter, skills, instruksjoner og MCP-servere for Navs stack.</div></li>
+    <li class="a-rise" style="--d: 0.3s"><b class="pin">1</b><div><strong>Verktøykatalogen</strong>80 agenter, skills, instruksjoner og MCP-servere tilpasset Nav.</div></li>
     <li class="a-rise" style="--d: 0.7s"><b class="pin">2</b><div><strong>God praksis</strong>Guider for å skrive kode, teste og sette opp agenter.</div></li>
     <li class="a-rise" style="--d: 1.1s"><b class="pin">3</b><div><strong>nav-pilot</strong><code>nav-pilot install</code> legger agentpakker i repoet.</div></li>
-    <li class="a-rise" style="--d: 1.5s"><b class="pin">4</b><div><strong>MCP-registeret</strong>12 godkjente servere. Ukjente servere blokkeres.</div></li>
+    <li class="a-rise" style="--d: 1.5s"><b class="pin">4</b><div><strong>MCP-registeret</strong>12 godkjente servere som gir agentene verktøy. Ukjente blokkeres.</div></li>
     <li class="side a-rise" style="--d: 1.9s"><span class="i-carbon-laptop" /><div><strong>Lokale agenter</strong>Copilot CLI kjører agentene på utviklerens egen maskin.</div></li>
   </ol>
 </div>
-<p class="footnote tight">Fleet bygger videre på dette: katalog, veiledning og onboarding finnes allerede for utviklere.</p>
+<p class="footnote tight">Fleet bygger videre på dette: katalog, veiledning og hjelp til å komme i gang finnes allerede for utviklere.</p>
 
 ::footer::
 <span class="font-mono text-sm opacity-70">nav-fleet · utkast til diskusjon · ikke vedtatt</span>
@@ -324,11 +324,11 @@ layout: default
 ---
 
 ::header::
-<h1 class="text-3xl font-bold">Visjonen: enkel, trygg og rask KI i produksjon</h1>
-<p class="subtitle">Fire egenskaper som flyr sammen. Ingenting her er planlagt eller vedtatt <span class="chip amber align-middle ml-2">Visjon</span></p>
+<h1 class="text-3xl font-bold">Visjonen: KI i produksjon, enkelt, trygt og raskt</h1>
+<p class="subtitle">Fire egenskaper plattformen skal ha. Ingenting her er planlagt eller vedtatt <span class="chip amber align-middle ml-2">Visjon</span></p>
 
 ::default::
-<svg class="dg fly" viewBox="0 0 880 328" role="img" aria-label="Fem piler i V-formasjon med stiplede spor. Foran formasjonen viser en stiplet linje felles kurs. Den fremste pilen er nav-fleet. De fire andre er selvbetjent, regler som kode, fritt modellvalg og full oversikt. Underlaget har tre felt: egen infrastruktur for agentsandkassene, egne modellvalg der vi velger hvor inferens kjører, og Nais der det passer, for apper, identitet og nettverk.">
+<svg class="dg fly" viewBox="0 0 880 328" role="img" aria-label="Fem piler i V-formasjon med stiplede spor. Foran formasjonen viser en stiplet linje felles kurs. Den fremste pilen er nav-fleet. De fire andre er selvbetjent, innebygde regler, fritt modellvalg og full oversikt. Underlaget har tre felt: egen infrastruktur for agentsandkassene, egne modellvalg der vi velger hvor inferens kjører, og Nais der det passer, for apper, identitet og nettverk.">
   <g class="a-fade" style="--d: 1.9s">
     <path d="M440 46V14" class="course"/>
     <path d="M432 19l8-9 8 9" class="courseh"/>
@@ -346,7 +346,7 @@ layout: default
     <text x="290" y="191" text-anchor="middle" class="t">Selvbetjent</text>
     <text x="290" y="208" text-anchor="middle" class="s">Teamet beskriver behovet</text>
     <rect x="495" y="172" width="190" height="44" rx="8" class="card"/>
-    <text x="590" y="191" text-anchor="middle" class="t">Regler som kode</text>
+    <text x="590" y="191" text-anchor="middle" class="t">Innebygde regler</text>
     <text x="590" y="208" text-anchor="middle" class="s">Tilgang og logging ett sted</text>
     <rect x="10" y="222" width="190" height="44" rx="8" class="card"/>
     <text x="105" y="241" text-anchor="middle" class="t">Fritt modellvalg</text>
@@ -361,7 +361,7 @@ layout: default
   <text x="146" y="299" text-anchor="middle" class="t">Egen infrastruktur</text>
   <text x="146" y="317" text-anchor="middle" class="s">for agentsandkassene</text>
   <text x="440" y="299" text-anchor="middle" class="t">Egne modellvalg</text>
-  <text x="440" y="317" text-anchor="middle" class="s">vi velger hvor inferens kjører</text>
+  <text x="440" y="317" text-anchor="middle" class="s">vi velger hvor modellene kjører</text>
   <text x="733" y="299" text-anchor="middle" class="t">Nais der det passer</text>
   <text x="733" y="317" text-anchor="middle" class="s">apper, identitet og nettverk</text>
 </svg>
@@ -377,7 +377,7 @@ Overgang: «Hvor hører Fleet hjemme blant det vi har?»
 - Retningen: fra lokale agenter på én utviklermaskin til skyagenter for ulike formål, kjørt på Fleet. Lysbildet med seks typer agenter viser eksemplene
 - Visjonen i én setning: det skal være enkelt, trygt og raskt for produktteam å bygge, drifte og videreutvikle KI i produksjon, med etterlevelse innebygd, full oversikt og uten dobbeltarbeid
 - Selvbetjent: samme tanke som Nais. Teamet beskriver behovet, og plattformen gjør resten. Et eget felt i nais.yaml er et forslag
-- Regler som kode: sikkerhet og etterlevelse settes ett sted. Tilgang og logging er grunnlaget i første versjon. Maskering av personopplysninger og risikoklassifisering etter KI-forordningen er forslag. Hva forordningen krever av Nav, må en jurist sjekke
+- Innebygde regler (regler som kode): sikkerhet og etterlevelse settes ett sted. Tilgang og logging er grunnlaget i første versjon. Maskering av personopplysninger og risikoklassifisering etter KI-forordningen er forslag. Hva forordningen krever av Nav, må en jurist sjekke
 - Fritt modellvalg: i dag går modellkallene gjennom GitHub Copilot. Flere skyleverandører og egne GPU-er er visjon, ikke noe vi har
 - Full oversikt: sporing uten innholdet i promptene er allerede praksis (aksel-studio docs/beslutninger/011-ki-kjoretid.md). Evalueringer og karbonregnskap er visjon
 - Figuren: fem piler i formasjon, samme tegn som i logoen. nav-fleet leder, og de fire egenskapene flyr sammen på felles kurs
@@ -392,7 +392,7 @@ hide: true
 ---
 
 ::header::
-<h1 class="text-3xl font-bold">Visjonen: enkel, trygg og rask KI i produksjon</h1>
+<h1 class="text-3xl font-bold">Visjonen: KI i produksjon, enkelt, trygt og raskt</h1>
 <p class="subtitle">Hele flåten på én skjerm. Ingenting her er planlagt eller vedtatt <span class="chip amber align-middle ml-2">Visjon</span></p>
 
 ::default::
@@ -421,7 +421,7 @@ hide: true
   <text x="272" y="78" text-anchor="end" class="t">Selvbetjent</text>
   <text x="272" y="96" text-anchor="end" class="s">Teamet beskriver behovet</text>
   <line x1="280" y1="80" x2="364" y2="90" class="lead"/>
-  <text x="608" y="78" class="t">Regler som kode</text>
+  <text x="608" y="78" class="t">Innebygde regler</text>
   <text x="608" y="96" class="s">Tilgang og logging ett sted</text>
   <line x1="600" y1="80" x2="516" y2="90" class="lead"/>
   <text x="272" y="206" text-anchor="end" class="t">Fritt modellvalg</text>
@@ -455,7 +455,7 @@ layout: default
 
 ::header::
 <h1 class="text-3xl font-bold">Fleet fyller laget mellom appene og modellene</h1>
-<p class="subtitle">nav-fleet erstatter ingen plattform. Rollene er vår beskrivelse</p>
+<p class="subtitle">nav-fleet erstatter ingen plattform. Rollene er vår beskrivelse og ikke avklart med Nais eller Nada</p>
 
 ::default::
 <svg class="dg" viewBox="0 0 880 330" role="img" aria-label="Tre plattformer side om side: Nais, nav-fleet og Nada. Fleet bruker Nais der det passer og henter data og kontekst fra Nada, med tilgangsstyring. Nais og Nada bruker også Fleet. Over står nav-pilot, fagsystemer og andre team, som bygger på Fleet. Under står modellene, som Fleet kaller, og egen infrastruktur for agentsandkassene. Verktøykatalogen og god praksis på ki-utvikling.nav.no kan bli inngangen til Fleet.">
@@ -500,10 +500,10 @@ layout: default
     <text x="612" y="178" text-anchor="middle" class="s a-fade">bruker Fleet</text>
   </g>
   <line x1="440" y1="198" x2="440" y2="228" class="a" marker-end="url(#ar1)"/>
-  <text x="452" y="217" class="s">kaller modellene og kjører sandkassene</text>
+  <text x="452" y="217" class="s">bruker modellene og kjører sandkassene</text>
   <rect x="0" y="230" width="880" height="64" rx="8" class="b"/>
   <text x="20" y="255" class="t">Modeller</text>
-  <text x="200" y="255" class="s">skymodeller, i dag gjennom GitHub Copilot. Vi velger hvor inferens kjører</text>
+  <text x="200" y="255" class="s">skymodeller, i dag gjennom GitHub Copilot. Vi velger hvor modellene kjører</text>
   <rect x="696" y="238" width="168" height="24" rx="12" class="q"/>
   <text x="780" y="254" class="s" text-anchor="middle">egne GPU-er (visjon)</text>
   <text x="20" y="281" class="t">Egen infrastruktur</text>
@@ -537,7 +537,7 @@ layout: default
 
 ::header::
 <h1 class="text-3xl font-bold">Fem moduler dekker det alle agenter trenger</h1>
-<p class="subtitle">Modulnavnene er forslag. Nais der det passer, egen infrastruktur for sandkassene</p>
+<p class="subtitle">Modulnavnene er forslag. Fleet bruker Nais der det passer</p>
 
 ::default::
 <svg class="dg" viewBox="0 0 880 364" role="img" aria-label="Øverst fire som kan bruke Fleet: produktteam, utviklerverktøy, Nais og Nada. I midten nav-fleet med modulene fleet-gateway, fleet-control, fleet-runtime, fleet-orchestrator og fleet-radar, og under dem fleet-sdk og identitet. Underlaget har tre felt: egen infrastruktur for agentsandkassene, egne modellvalg der vi velger hvor inferens kjører, og Nais der det passer, for apper, identitet og nettverk.">
@@ -572,15 +572,15 @@ layout: default
     <rect x="16" y="104" width="162" height="114" rx="8" class="b"/>
     <text x="97" y="128" class="t" text-anchor="middle">fleet-gateway</text>
     <text x="97" y="150" class="s" text-anchor="middle" style="font-size: 11.8px">MCP- og modelltilgang</text>
-    <text x="97" y="168" class="s" text-anchor="middle" style="font-size: 11.8px">token exchange og logging</text>
+    <text x="97" y="168" class="s" text-anchor="middle" style="font-size: 11.8px">tokenbytte og logging</text>
     <text x="97" y="186" class="s" text-anchor="middle" style="font-size: 11.8px">kvoter og rate limiting</text>
-    <text x="97" y="204" class="s" text-anchor="middle" style="font-size: 11.8px">PII-vask (forslag)</text>
+    <text x="97" y="204" class="s" text-anchor="middle" style="font-size: 11.8px">persondatavask (forslag)</text>
   </g>
   <g class="a-rise" style="--d: 0.35s">
     <rect x="187.5" y="104" width="162" height="114" rx="8" class="b"/>
     <text x="268.5" y="128" class="t" text-anchor="middle">fleet-control</text>
     <text x="268.5" y="150" class="s" text-anchor="middle" style="font-size: 11.8px">modell- og verktøykatalog</text>
-    <text x="268.5" y="168" class="s" text-anchor="middle" style="font-size: 11.8px">tilgang og policy</text>
+    <text x="268.5" y="168" class="s" text-anchor="middle" style="font-size: 11.8px">tilgang og regler</text>
     <text x="268.5" y="186" class="s" text-anchor="middle" style="font-size: 11.8px">risikodokumentasjon</text>
     <text x="268.5" y="204" class="s" text-anchor="middle" style="font-size: 11.8px">felt i nais.yaml (forslag)</text>
   </g>
@@ -590,13 +590,13 @@ layout: default
     <text x="440" y="150" class="s" text-anchor="middle" style="font-size: 11.8px">sandkasse per bruker</text>
     <text x="440" y="168" class="s" text-anchor="middle" style="font-size: 11.8px">start, pause og stopp</text>
     <text x="440" y="186" class="s" text-anchor="middle" style="font-size: 11.8px">shell og filer bare der</text>
-    <text x="440" y="204" class="s" text-anchor="middle" style="font-size: 11.8px">ressurser og egress</text>
+    <text x="440" y="204" class="s" text-anchor="middle" style="font-size: 11.8px">ressurs- og nettgrenser</text>
   </g>
   <g class="a-rise" style="--d: 0.65s">
     <rect x="530.5" y="104" width="162" height="114" rx="8" class="b"/>
     <text x="611.5" y="128" class="t" text-anchor="middle">fleet-orchestrator</text>
     <text x="611.5" y="150" class="s" text-anchor="middle" style="font-size: 11.8px">MCP-hub</text>
-    <text x="611.5" y="168" class="s" text-anchor="middle" style="font-size: 11.8px">RAG mot Nada</text>
+    <text x="611.5" y="168" class="s" text-anchor="middle" style="font-size: 11.8px">søk i data fra Nada (RAG)</text>
     <text x="611.5" y="186" class="s" text-anchor="middle" style="font-size: 11.8px">tilgang på dokumentnivå</text>
     <text x="611.5" y="204" class="s" text-anchor="middle" style="font-size: 11.8px">regler for godkjenning</text>
   </g>
@@ -604,12 +604,12 @@ layout: default
     <rect x="702" y="104" width="162" height="114" rx="8" class="b"/>
     <text x="783" y="128" class="t" text-anchor="middle">fleet-radar</text>
     <text x="783" y="150" class="s" text-anchor="middle" style="font-size: 11.8px">sporing av agentkjeder</text>
-    <text x="783" y="168" class="s" text-anchor="middle" style="font-size: 11.8px">evals før og etter endring</text>
+    <text x="783" y="168" class="s" text-anchor="middle" style="font-size: 11.8px">test før og etter endring</text>
     <text x="783" y="186" class="s" text-anchor="middle" style="font-size: 11.8px">kostnad per team</text>
     <text x="783" y="204" class="s" text-anchor="middle" style="font-size: 11.8px">karbonregnskap (visjon)</text>
   </g>
   <text x="20" y="244" class="t">fleet-sdk og CLI</text>
-  <text x="170" y="244">Mal og deklarativ konfigurasjon ved siden av nais.yaml. Agenten kjører i fleet-runtime.</text>
+  <text x="170" y="244">Mal og fil der teamet beskriver agenten, ved siden av nais.yaml. fleet-runtime kjører den.</text>
   <text x="20" y="272" class="t">Identitet</text>
   <text x="170" y="272">Texas utsteder tokenene. fleet-control gir tilgang, og fleet-gateway håndhever den.</text>
   <line x1="440" y1="292" x2="440" y2="308" class="a" marker-end="url(#ar2)"/>
@@ -619,7 +619,7 @@ layout: default
   <text x="146" y="333" text-anchor="middle" class="t">Egen infrastruktur</text>
   <text x="146" y="351" text-anchor="middle" class="s">for agentsandkassene</text>
   <text x="440" y="333" text-anchor="middle" class="t">Egne modellvalg</text>
-  <text x="440" y="351" text-anchor="middle" class="s">vi velger hvor inferens kjører</text>
+  <text x="440" y="351" text-anchor="middle" class="s">vi velger hvor modellene kjører</text>
   <text x="733" y="333" text-anchor="middle" class="t">Nais der det passer</text>
   <text x="733" y="351" text-anchor="middle" class="s">apper, identitet og nettverk</text>
 </svg>
@@ -676,7 +676,7 @@ layout: default
 
 ::header::
 <h1 class="text-3xl font-bold">Én flåte, fem moduler</h1>
-<p class="subtitle">Samme piler i alle ikonene. Hvit pil: mennesket har kursen <span class="chip amber align-middle ml-2">Forslag</span></p>
+<p class="subtitle">Ikonene har samme formasjon. Den hvite pilen foran er mennesket <span class="chip amber align-middle ml-2">Forslag</span></p>
 
 ::default::
 <div class="fleet-icons top">
@@ -685,7 +685,7 @@ layout: default
 </div>
 <div class="fleet-icons">
   <figure class="fleet-icon a-rise" style="--d: 0.50s"><img src="/icons/fleet/fleet-gateway.svg?v=8" alt="" /><figcaption><strong>fleet-gateway</strong><span>inngangen</span></figcaption></figure>
-  <figure class="fleet-icon a-rise" style="--d: 0.65s"><img src="/icons/fleet/fleet-control.svg?v=8" alt="" /><figcaption><strong>fleet-control</strong><span>kursen</span></figcaption></figure>
+  <figure class="fleet-icon a-rise" style="--d: 0.65s"><img src="/icons/fleet/fleet-control.svg?v=8" alt="" /><figcaption><strong>fleet-control</strong><span>reglene</span></figcaption></figure>
   <figure class="fleet-icon a-rise" style="--d: 0.80s"><img src="/icons/fleet/fleet-runtime.svg?v=8" alt="" /><figcaption><strong>fleet-runtime</strong><span>sandkassen</span></figcaption></figure>
   <figure class="fleet-icon a-rise" style="--d: 0.95s"><img src="/icons/fleet/fleet-orchestrator.svg?v=8" alt="" /><figcaption><strong>fleet-orchestrator</strong><span>samspillet</span></figcaption></figure>
   <figure class="fleet-icon a-rise" style="--d: 1.10s"><img src="/icons/fleet/fleet-radar.svg?v=8" alt="" /><figcaption><strong>fleet-radar</strong><span>oversikten</span></figcaption></figure>
@@ -706,7 +706,7 @@ layout: default
 
 ::header::
 <h1 class="text-3xl font-bold">Agenten låner brukerens rettigheter, men modellen ser aldri tokenet</h1>
-<p class="subtitle">Først på vegne av brukeren. Agentens egen identitet venter til noen trenger bakgrunnsjobber</p>
+<p class="subtitle">Tokenet er brukerens midlertidige adgangsbevis. Agentens egen identitet venter til noen trenger bakgrunnsjobber</p>
 
 ::default::
 <svg class="dg" viewBox="0 0 880 246" role="img" aria-label="Identitetsflyt i fire steg: brukeren logger inn i appen, appen bytter til et OBO-token, agenten i fleet-runtime kaller verktøy gjennom fleet-gateway, og gatewayen sjekker og logger før verktøyet kjører. Under står hvordan rettigheter, tokener og logging håndteres. En prikk under boksene viser tokenet som følger flyten fram til verktøyet.">
@@ -734,26 +734,26 @@ layout: default
   </g>
   <g class="a-pass" style="--d: 1.3s">
     <text x="346" y="98" class="t" text-anchor="middle">Bytter token</text>
-    <text x="346" y="118" class="s" text-anchor="middle">OBO via Texas,</text>
-    <text x="346" y="135" class="s" text-anchor="middle">aud = gateway</text>
+    <text x="346" y="118" class="s" text-anchor="middle">via Texas (OBO),</text>
+    <text x="346" y="135" class="s" text-anchor="middle">gjelder bare gatewayen</text>
   </g>
   <g class="a-pass" style="--d: 2.2s">
     <text x="534" y="98" class="t" text-anchor="middle">Kaller verktøy</text>
     <text x="534" y="118" class="s" text-anchor="middle">kortlivet token,</text>
-    <text x="534" y="135" class="s" text-anchor="middle">smalt omfang</text>
+    <text x="534" y="135" class="s" text-anchor="middle">få rettigheter</text>
   </g>
   <g class="a-pass" style="--d: 3.1s">
     <text x="722" y="98" class="t" text-anchor="middle">Sjekker og logger</text>
-    <text x="722" y="118" class="s" text-anchor="middle">sub = bruker,</text>
-    <text x="722" y="135" class="s" text-anchor="middle">azp = agent</text>
+    <text x="722" y="118" class="s" text-anchor="middle">brukeren (sub) og</text>
+    <text x="722" y="135" class="s" text-anchor="middle">agenten (azp)</text>
   </g>
   <line x1="64" y1="75" x2="816" y2="75" class="div"/>
   <circle cx="816" cy="75" r="5" class="token"/>
   <rect x="0" y="152" width="880" height="90" rx="10" class="n"/>
   <text x="24" y="176" class="t">Rettigheter</text>
-  <text x="160" y="176">Snittet av det brukeren og agenten har lov til.</text>
+  <text x="160" y="176">Bare det både brukeren og agenten har lov til.</text>
   <text x="24" y="200" class="t">Tokener</text>
-  <text x="160" y="200">Token exchange i fleet-gateway. Kortlivet token, bare i brukerens egen sandkasse. Modellen ser det aldri.</text>
+  <text x="160" y="200">fleet-gateway bytter token. Kortlivet token, bare i brukerens egen sandkasse. Modellen ser det aldri.</text>
   <text x="24" y="224" class="t">Logging</text>
   <text x="160" y="224">Hvem, hvilket verktøy, hvilken ressurs og utfallet. Aldri innholdet i prompten.</text>
   </svg>
@@ -793,7 +793,7 @@ layout: default
 
 ::header::
 <h1 class="text-3xl font-bold">Fleet passer inn i KI-grunnmuren</h1>
-<p class="subtitle">Målbildet fra 6. november setter kravene. Fleet er et bidrag for agenter som kjører som tjenester</p>
+<p class="subtitle">Målbildet fra 6. november setter kravene. Fleet er vårt forslag for agenter som kjører som tjenester</p>
 
 ::default::
 <svg class="dg" viewBox="0 0 880 352" role="img" aria-label="Delene i målbildet Digital KI-grunnmur til venstre og delene i Fleet til høyre. Identitet, kontroll, agent-runtime, modellgateway og MCP-gateway har en motpart i Fleet. Oppdrag og arbeidsflyter og integrasjoner ligger utenfor Fleet.">
@@ -864,8 +864,8 @@ layout: default
 ---
 
 ::header::
-<h1 class="text-3xl font-bold">Fra én maskin til skyagenter for ulike formål</h1>
-<p class="subtitle">Seks typer agenter på Fleet. Alle er eksempler, hypoteser eller visjon</p>
+<h1 class="text-3xl font-bold">Samme plattform kan bære seks typer agenter</h1>
+<p class="subtitle">Fra utvikling til saksbehandling. Alle er eksempler, hypoteser eller visjon</p>
 
 ::default::
 <div class="scenario-row">
@@ -885,7 +885,7 @@ layout: default
     <h3>Saksbehandleren får et utkast med kilder</h3>
     <p><b>Agenten</b> er bygget inn i systemene vi lager. Den henter fram saken og regelverket og skriver utkast.</p>
     <p><b>Mennesket</b> godkjenner alltid og står for vedtaket.</p>
-    <p class="caveat">Krever jurist, risikovurdering og en modellvei for personopplysninger.</p>
+    <p class="caveat">Krever jurist, risikovurdering og en modell med avklart behandling av personopplysninger.</p>
     <div class="blocks">
       <span class="chip slate"><span class="i-carbon-gateway"></span>fleet-gateway</span>
       <span class="chip slate"><span class="i-carbon-rule"></span>fleet-control</span>
@@ -972,15 +972,15 @@ layout: default
   <text x="90" y="164" class="s" text-anchor="middle">kvote og tokenlagring</text>
   <rect x="236" y="112" width="164" height="64" rx="8" class="b"/>
   <text x="318" y="138" class="t" text-anchor="middle">Postgres</text>
-  <text x="318" y="158" class="s" text-anchor="middle">ghu_ per bruker</text>
+  <text x="318" y="158" class="s" text-anchor="middle">GitHub-token per bruker</text>
   <line x1="236" y1="144" x2="182" y2="144" class="a" marker-end="url(#ar4)"/>
   <line x1="90" y1="192" x2="90" y2="226" class="a" marker-end="url(#ar4)"/>
-  <text x="104" y="214" class="s">ghu_ per økt, ukryptert TCP</text>
+  <text x="104" y="214" class="s">GitHub-token per økt, ukryptert</text>
   <rect x="0" y="228" width="180" height="60" rx="8" class="w"/>
   <text x="90" y="252" class="t" text-anchor="middle">studio-ki</text>
   <text x="90" y="272" class="s" text-anchor="middle">shell og aktive tokener</text>
   <text x="196" y="252" class="x">Største lokale risiko</text>
-  <text x="196" y="272" class="s">én delt pod, ingen prober</text>
+  <text x="196" y="272" class="s">én delt pod, ingen helsesjekker</text>
   <line x1="90" y1="288" x2="90" y2="306" class="a" marker-end="url(#ar4)"/>
   <rect x="0" y="308" width="180" height="38" rx="8" class="n"/>
   <text x="90" y="332" text-anchor="middle">Copilot API</text>
@@ -1001,9 +1001,9 @@ layout: default
     <text x="786" y="108" class="s" text-anchor="middle">sandkasse per bruker</text>
     <rect x="706" y="140" width="160" height="56" rx="8" class="b"/>
     <text x="786" y="163" text-anchor="middle">fleet-gateway</text>
-    <text x="786" y="182" class="s" text-anchor="middle">MCP, policy, logging</text>
+    <text x="786" y="182" class="s" text-anchor="middle">MCP, regler, logging</text>
     <rect x="706" y="218" width="160" height="50" rx="8" class="b"/>
-    <text x="786" y="248" text-anchor="middle">token exchange</text>
+    <text x="786" y="248" text-anchor="middle">tokenbytte</text>
     <line x1="620" y1="108" x2="704" y2="108" class="a" marker-end="url(#ar4)"/>
     <text x="656" y="100" class="s" text-anchor="middle">OBO</text>
     <line x1="706" y1="172" x2="622" y2="172" class="a" marker-end="url(#ar4)"/>
@@ -1015,9 +1015,9 @@ layout: default
     <text x="786" y="332" text-anchor="middle">Copilot API</text>
     <text x="460" y="226" class="t">Først i fleet-runtime</text>
     <text x="460" y="244" class="s">studio-ki får sandkasse per bruker</text>
-    <text x="460" y="274" class="t">Borte fra Studio</text>
+    <text x="460" y="274" class="t">Studio slipper</text>
     <text x="460" y="292" class="s">egen runtime, tokenlagring og kvote</text>
-    <text x="460" y="322" class="t">Grensesnittene er på main</text>
+    <text x="460" y="322" class="t">Grensesnittene er i koden</text>
     <text x="460" y="340" class="s">Tool, Runtime og TokenProvider</text>
   </g>
 </svg>
@@ -1052,10 +1052,10 @@ layout: timeline
 <p class="subtitle">Tre faser uten datoer. Ingenting er estimert eller vedtatt</p>
 
 ::default::
-<TimelineNode version="Nå" year="styring" title="Beslutt" description="ADR og eier. Jurist avklarer token og lisens." icon="i-carbon-document" />
-<TimelineNode version="Fase 1" year="ett team" title="Gateway og control" description="Modell- og verktøykall samles. aksel-studio er først." icon="i-carbon-gateway" />
+<TimelineNode version="Nå" year="styring" title="Beslutt" description="Beslutningsnotat (ADR) og eier. Jurist avklarer token og lisens." icon="i-carbon-document" />
+<TimelineNode version="Fase 1" year="ett team" title="Gateway og control" description="Samler modell- og verktøykall ett sted. aksel-studio er først." icon="i-carbon-gateway" />
 <TimelineNode version="Fase 2" year="flere team" title="Runtime og radar" description="Sandkasse per bruker og selvbetjent innsikt." icon="i-carbon-radar" />
-<TimelineNode version="Fase 3" year="data og regler" title="Orchestrator" description="Dataprodukter fra Nada og regler for godkjenning." icon="i-carbon-flow" />
+<TimelineNode version="Fase 3" year="data og regler" title="Orchestrator" description="Dataprodukter fra Nada og regler for menneskelig godkjenning." icon="i-carbon-flow" />
 
 ::footer::
 <span class="font-mono text-sm opacity-70">nav-fleet · utkast til diskusjon · ikke vedtatt</span>
@@ -1079,7 +1079,7 @@ layout: default
 
 ::header::
 <h1 class="text-3xl font-bold">Seks spørsmål vi må avklare underveis</h1>
-<p class="subtitle">Ingen av dem stopper en ADR</p>
+<p class="subtitle">Ingen av dem hindrer et beslutningsnotat (ADR)</p>
 
 ::default::
 <div class="card-row">
@@ -1103,7 +1103,7 @@ layout: default
   </div>
   <div class="feature-card green">
     <h3>Drift</h3>
-    <p>Ingen prober for studio-ki. GitHubs grenser er ukjente.</p>
+    <p>Ingen helsesjekker for studio-ki. Vi kjenner ikke GitHubs grenser per bruker.</p>
   </div>
   <div class="feature-card">
     <h3>Leverandørbinding</h3>
@@ -1141,7 +1141,7 @@ layout: default
 
 ::header::
 <h1 class="text-4xl font-black">Himmelen er grensen</h1>
-<p class="tagline mt-2">nav-fleet gir agentene vinger. Mennesket holder kursen.</p>
+<p class="tagline mt-2">nav-fleet gir agentene vinger. Mennesket har kursen.</p>
 
 ::default::
 <svg class="dg fly" viewBox="0 0 880 340" role="img" aria-label="Seks piler i trekantformasjon stiger mot øvre høyre hjørne i en åpen himmel. En stiplet linje foran den fremste pilen viser kursen.">
