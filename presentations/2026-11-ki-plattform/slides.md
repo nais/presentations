@@ -86,7 +86,7 @@ layout: default
 
 ::header::
 <h1 class="text-3xl font-bold">Chatten er bare toppen av isfjellet</h1>
-<p class="subtitle">En tenkt app med KI-assistent. Fleet tar seg av det som ligger under vannlinjen <span class="chip amber align-middle ml-2">Skisse</span></p>
+<p class="subtitle">En tenkt app med KI-assistent. Fleet tar seg av det som ligger under vannlinjen <span class="chip amber align-middle ml-2">Visjon etter fase 3</span></p>
 
 ::default::
 <div class="tip">
@@ -140,6 +140,7 @@ layout: default
 - Punkt 2: fleet-control vet hva agenten har lov til. At agenten bare ser Karis saker, følger av Karis token og tilgangsstyringen i saksarkivet. Rettighetene er snittet av det Kari og agenten har lov til
 - Punkt 4: fleet-orchestrator med felles regler for godkjenning kommer i fase 3. Til da håndhever fleet-gateway at skriving krever godkjenning
 - Overgang: «Hva skjer egentlig under vannlinjen når Kari trykker enter?»
+- Saksbehandling er visjon etter fase 3. Det krever egen modellvei, risikovurdering og juridisk avklaring, se veikartet. Vi bruker eksemplet fordi det er her Navs oppdrag ligger
 - Appen, saken og navnet Kari er oppdiktet. Det virkelige første eksempelet er aksel-studio, se lysbildet «Første steg»
 - Modulene til høyre er forslag. Ingenting av Fleet finnes ennå
 - Punkt 1 og 2 henger sammen: fleet-control bestemmer hva agenten har lov til, fleet-gateway håndhever det og gjør token exchange
@@ -151,7 +152,7 @@ layout: default
 
 ::header::
 <h1 class="text-3xl font-bold">Under vannlinjen: ett spørsmål, fem steg</h1>
-<p class="subtitle">Det som skjer fra Kari spør til brevet er sendt <span class="chip amber align-middle ml-2">Skisse</span></p>
+<p class="subtitle">Det som skjer fra Kari spør til brevet er sendt <span class="chip amber align-middle ml-2">Visjon etter fase 3</span></p>
 
 ::default::
 <svg class="dg seq" viewBox="0 0 880 340" role="img" aria-label="Sekvensdiagram i fem steg. 1: Kari spør i appen, og agenten i fleet-runtime får spørsmålet og et kortlivet token for Kari i Karis sandkasse. 2: Agenten spør modellen gjennom fleet-gateway, som står for modelltilgang og kvote senere. 3: Agenten henter dokumenter gjennom fleet-gateway, og fleet-control sjekker at agenten har lov. 4: Agenten foreslår å sende brev, og Kari sier ja gjennom fleet-orchestrator. 5: Agenten sender brevet gjennom fleet-gateway, som sjekker godkjenningen, og sandkassen stoppes. Nederst viser fleet-radar én logglinje per steg.">
@@ -708,7 +709,7 @@ layout: default
 <p class="subtitle">Først på vegne av brukeren. Agentens egen identitet venter til noen trenger bakgrunnsjobber</p>
 
 ::default::
-<svg class="dg" viewBox="0 0 880 338" role="img" aria-label="Identitetsflyt i fire steg: brukeren logger inn i appen, appen bytter til et OBO-token, agenten i fleet-runtime kaller verktøy gjennom fleet-gateway, og gatewayen sjekker og logger før verktøyet kjører. Under står tre punkter fra MCP-gatewayen i navikt/copilot#2083: egen OAuth 2.1-server foran Entra, ett token per rute og egen samtykkeside. En prikk under boksene viser tokenet som følger flyten fram til verktøyet.">
+<svg class="dg" viewBox="0 0 880 246" role="img" aria-label="Identitetsflyt i fire steg: brukeren logger inn i appen, appen bytter til et OBO-token, agenten i fleet-runtime kaller verktøy gjennom fleet-gateway, og gatewayen sjekker og logger før verktøyet kjører. Under står hvordan rettigheter, tokener og logging håndteres. En prikk under boksene viser tokenet som følger flyten fram til verktøyet.">
   <defs><marker id="ar3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" class="ah"/></marker></defs>
   <rect x="0" y="8" width="128" height="56" rx="8" class="b"/>
   <text x="64" y="41" class="t" text-anchor="middle">Bruker</text>
@@ -748,22 +749,14 @@ layout: default
   </g>
   <line x1="64" y1="75" x2="816" y2="75" class="div"/>
   <circle cx="816" cy="75" r="5" class="token"/>
-  <rect x="0" y="152" width="880" height="184" rx="10" class="n"/>
+  <rect x="0" y="152" width="880" height="90" rx="10" class="n"/>
   <text x="24" y="176" class="t">Rettigheter</text>
   <text x="160" y="176">Snittet av det brukeren og agenten har lov til.</text>
   <text x="24" y="200" class="t">Tokener</text>
   <text x="160" y="200">Token exchange i fleet-gateway. Kortlivet token, bare i brukerens egen sandkasse. Modellen ser det aldri.</text>
   <text x="24" y="224" class="t">Logging</text>
   <text x="160" y="224">Hvem, hvilket verktøy, hvilken ressurs og utfallet. Aldri innholdet i prompten.</text>
-  <line x1="24" y1="236" x2="856" y2="236" class="div"/>
-  <text x="24" y="254" class="s">MCP-gatewayen i navikt/copilot#2083, delvis bestemt:</text>
-  <text x="24" y="276" class="t">Innlogging</text>
-  <text x="160" y="276">Egen OAuth 2.1-server foran Entra. CLI, cplt og VS Code får ikke Entra-token til en Nais-app.</text>
-  <text x="24" y="300" class="t">Mottaker (aud)</text>
-  <text x="160" y="300">Ett token per rute (RFC 8707). Et stjålet token er verdt én server og én bruker.</text>
-  <text x="24" y="324" class="t">Samtykke</text>
-  <text x="160" y="324">Egen samtykkeside. Bare lesing først. Skriving er et scope brukeren gir i nettleseren.</text>
-</svg>
+  </svg>
 
 ::footer::
 <span class="font-mono text-sm opacity-70">nav-fleet · utkast til diskusjon · ikke vedtatt</span>
@@ -779,7 +772,7 @@ Overgang: «Det finnes allerede et målbilde for KI-grunnmuren. Hvordan passer F
 - I dag går brukerens ghu_-token helt inn i runtimen hos aksel-studio (011, 019)
 - Logging uten promptinnhold er allerede praksis: 011 logger forbruk uten innholdet i promptene, og copilot-api logger aktør ved endringer (navikt/copilot/SECURITY.md, «Audit logging»)
 - Målbildet stiller samme krav: gatewayen skal ikke skjule manglende brukerautorisasjon med egne brede backend-rettigheter, og ressurseier avgjør tilgangen (målbildet, «Gateway(er), integrasjoner og kontekst»)
-- De tre nederste linjene kommer fra MCP-gatewayen i navikt/copilot#2083, som fleet-gateway bygger på:
+- MCP-gatewayen i navikt/copilot#2083, som fleet-gateway bygger på, har tre delvis bestemte punkter (tatt ut av lysbildet, si dem muntlig ved behov):
   - Innlogging: Nais-dokumentasjonen beskriver ingen måte en klient utenfor Nais (CLI, cplt-brokeren, VS Code) kan få et Entra-token til en Nais-app. Entra støtter heller ikke dynamisk klientregistrering. Derfor er gatewayen en egen OAuth 2.1-autorisasjonsserver foran Entra, med autorisasjonskode og PKCE. Entra-tokener forlater aldri Nais. Bestemt i #2089. Direkte mot Entra vurderes på nytt før fase 3
   - Mottaker: tokenet er utstedt til rute-URL-en, https://<gateway>/<server-id>/mcp (RFC 8707), og avvises på andre ruter. Et stjålet token er verdt én server og én bruker til det utløper
   - Samtykke: Nais-apper i Entra er forhåndsgodkjent av administrator, så brukeren ser ingen samtykkeside hos Entra. Gatewayen viser sin egen side per klient, med klient, server og lesing eller lesing og skriving. Uten den kan en ondsinnet klient bruke brukerens Entra-økt i det stille
