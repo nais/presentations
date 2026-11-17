@@ -147,6 +147,40 @@ layout: default
 ---
 
 ::header::
+<h1 class="text-3xl font-bold">Under vannlinjen: ett spørsmål, fem steg</h1>
+<p class="subtitle">Det som skjer fra Kari spør til brevet er sendt <span class="chip amber align-middle ml-2">Skisse</span></p>
+
+::default::
+<svg class="dg seq" viewBox="0 0 880 340" role="img" aria-label="Sekvensdiagram i fem steg. 1: Kari spør i appen, og agenten får en ny sandkasse i fleet-runtime. 2: Agenten spør modellen gjennom fleet-gateway. 3: Agenten henter dokumenter gjennom fleet-gateway, og fleet-control sjekker at det bare er Karis saker. 4: Agenten foreslår å sende brev, og Kari godkjenner. 5: Agenten sender brevet gjennom fleet-gateway, og sandkassen slettes. Nederst skriver fleet-radar én logglinje per steg.">
+  <defs><marker id="ar9" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" class="ah"/></marker></defs>
+  <rect x="15.0" y="0" width="110" height="44" rx="8" class="b"/><text x="70" y="19" class="t" text-anchor="middle">Kari i appen</text><text x="70" y="36" class="s" text-anchor="middle">saksbehandling</text><line x1="70" y1="44" x2="70" y2="284" class="life"/><rect x="215.0" y="0" width="150" height="44" rx="8" class="p"/><text x="290" y="19" class="t" text-anchor="middle">Agent</text><text x="290" y="36" class="s" text-anchor="middle">fleet-runtime</text><line x1="290" y1="44" x2="290" y2="284" class="life"/><rect x="425.0" y="0" width="150" height="44" rx="8" class="p"/><text x="500" y="19" class="t" text-anchor="middle">fleet-gateway</text><text x="500" y="36" class="s" text-anchor="middle">MCP, modeller, token</text><line x1="500" y1="44" x2="500" y2="284" class="life"/><rect x="635.0" y="0" width="110" height="44" rx="8" class="b"/><text x="690" y="27" class="t" text-anchor="middle">Modell</text><line x1="690" y1="44" x2="690" y2="284" class="life"/><rect x="760.0" y="0" width="110" height="44" rx="8" class="b"/><text x="815" y="19" class="t" text-anchor="middle">Verktøy</text><text x="815" y="36" class="s" text-anchor="middle">saksarkivet</text><line x1="815" y1="44" x2="815" y2="284" class="life"/>
+  <rect x="0" y="292" width="880" height="46" rx="8" class="n"/><text x="10" y="302" class="s rad">fleet-radar</text>
+  <g v-click><line x1="70" y1="74" x2="282" y2="74" class="a" marker-end="url(#ar9)"/><text x="180" y="68" class="s" text-anchor="middle">Spørsmål og Karis token</text><circle cx="86" cy="58" r="9" class="pn"/><text x="86" y="61.5" class="pnt" text-anchor="middle">1</text><rect x="282" y="64" width="16" height="200" rx="3" class="sbx"/><text x="276" y="100" class="s sbt" text-anchor="end">ny sandkasse</text><g><g class="lg"><rect x="18" y="306" width="132" height="24" rx="5"/><text x="84" y="322" text-anchor="middle">1 · Kari · start</text></g></g></g>
+  <g v-click><line x1="298" y1="112" x2="690" y2="112" class="a" marker-end="url(#ar9)"/><circle cx="500" cy="112" r="4.5" class="gwd"/><text x="400" y="106" class="s" text-anchor="middle">Hva står i saken?</text><circle cx="316" cy="96" r="9" class="pn"/><text x="316" y="99.5" class="pnt" text-anchor="middle">2</text><text x="500" y="126" class="s gwt" text-anchor="middle">modelltilgang og kvote</text><line x1="690" y1="140" x2="300" y2="140" class="a ret" marker-end="url(#ar9)"/><g class="lg"><rect x="162" y="306" width="132" height="24" rx="5"/><text x="228" y="322" text-anchor="middle">2 · modell · ok</text></g></g>
+  <g v-click><line x1="298" y1="168" x2="815" y2="168" class="a" marker-end="url(#ar9)"/><circle cx="500" cy="168" r="4.5" class="gwd"/><text x="400" y="162" class="s" text-anchor="middle">Hent dokumentene</text><circle cx="316" cy="152" r="9" class="pn"/><text x="316" y="155.5" class="pnt" text-anchor="middle">3</text><g class="chk"><rect x="410" y="174" width="180" height="20" rx="10"/><text x="500" y="188" text-anchor="middle">fleet-control: bare Karis saker ✓</text></g><line x1="815" y1="206" x2="300" y2="206" class="a ret" marker-end="url(#ar9)"/><text x="720" y="200" class="s" text-anchor="middle">7 dokumenter</text><g class="lg"><rect x="306" y="306" width="132" height="24" rx="5"/><text x="372" y="322" text-anchor="middle">3 · verktøy · ok</text></g></g>
+  <g v-click><line x1="282" y1="232" x2="70" y2="232" class="a ret" marker-end="url(#ar9)"/><text x="180" y="226" class="s" text-anchor="middle">Forslag: sende brev?</text><circle cx="86" cy="216" r="9" class="pn"/><text x="86" y="219.5" class="pnt" text-anchor="middle">4</text><g class="chk"><rect x="20" y="240" width="200" height="20" rx="10"/><text x="120" y="254" text-anchor="middle">fleet-orchestrator: Kari sier ja ✓</text></g><g class="lg"><rect x="450" y="306" width="132" height="24" rx="5"/><text x="516" y="322" text-anchor="middle">4 · godkjent</text></g></g>
+  <g v-click><line x1="298" y1="258" x2="815" y2="258" class="a" marker-end="url(#ar9)"/><circle cx="500" cy="258" r="4.5" class="gwd"/><text x="560" y="252" class="s" text-anchor="middle">Send brevet</text><circle cx="316" cy="242" r="9" class="pn"/><text x="316" y="245.5" class="pnt" text-anchor="middle">5</text><text x="290" y="280" class="s" text-anchor="middle">sandkassen slettes</text><g class="lg"><rect x="594" y="306" width="132" height="24" rx="5"/><text x="660" y="322" text-anchor="middle">5 · brev · ok</text></g></g>
+</svg>
+
+::footer::
+<span class="font-mono text-sm opacity-70">nav-fleet · utkast til diskusjon · ikke vedtatt</span>
+
+<!--
+- Samme tenkte app som forrige lysbilde. Klikk gjennom stegene
+- 1: Appen sender spørsmålet med Karis token. fleet-runtime starter en sandkasse som bare tilhører Kari
+- 2: Agenten spør modellen. Alle modellkall går gjennom fleet-gateway, som håndhever kvoter. Modellgatewayen kommer senere
+- 3: Agenten henter dokumenter. fleet-gateway bytter token, og fleet-control sjekker at agenten bare når saker Kari selv har tilgang til
+- 4: Agenten vil skrive. Det krever et ja fra Kari. Reglene for godkjenning hører til fleet-orchestrator
+- 5: Brevet sendes gjennom fleet-gateway. Sandkassen slettes, og tokenet forsvinner med den
+- fleet-radar: én logglinje per steg med bruker, verktøy, utfall, kostnad og trace-ID. Aldri innholdet i prompten
+- Teamet har bare skrevet appen og chatten. Alt annet på lysbildet er Fleet. Alt er forslag
+-->
+
+---
+layout: default
+---
+
+::header::
 <h1 class="text-3xl font-bold">Mange team trenger det samme, men bygger det hver for seg</h1>
 <p class="subtitle">Fra forsøk til produksjon: uten en felles plattform løser hvert team dette alene</p>
 

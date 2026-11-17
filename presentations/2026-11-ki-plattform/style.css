@@ -1470,3 +1470,66 @@ pre,
 .tip-win .km-login .pin {
   margin-left: 0.3rem;
 }
+
+/* Sequence slide: one question through Fleet */
+.seq .life {
+  stroke: var(--nais-border);
+  stroke-dasharray: 3 4;
+}
+
+.seq .ret {
+  stroke-dasharray: 5 4;
+}
+
+.seq .pn {
+  fill: var(--nais-accent);
+}
+
+.seq .pnt {
+  fill: #fff;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.seq .sbx {
+  fill: var(--nais-accent-light);
+  stroke: var(--nais-accent);
+  stroke-dasharray: 3 2;
+}
+
+.seq .sbt {
+  fill: var(--nais-accent);
+}
+
+.seq .gwd {
+  fill: #0b1528;
+}
+
+.seq .gwt {
+  font-size: 10.5px;
+}
+
+.seq .chk rect {
+  fill: #ecfdf5;
+  stroke: #10b981;
+}
+
+.seq .chk text {
+  font-size: 10.5px;
+  fill: #047857;
+}
+
+.seq .lg rect {
+  fill: #0b1528;
+}
+
+.seq .lg text {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10.5px;
+  fill: #cbd5e1;
+}
+
+.seq .rad {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+}
