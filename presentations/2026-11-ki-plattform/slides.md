@@ -576,6 +576,35 @@ layout: default
 ---
 
 ::header::
+<h1 class="text-3xl font-bold">Én flåte, fem moduler</h1>
+<p class="subtitle">Samme formasjon i alle ikonene. Hvit pil foran: mennesket har kursen <span class="chip amber align-middle ml-2">Forslag</span></p>
+
+::default::
+<div class="fleet-icons top">
+  <figure class="fleet-icon a-rise" style="--d: 0.10s"><img src="/icons/fleet/nav-pilot.svg" alt="" /><figcaption><strong>nav-pilot</strong><span>der vi startet</span></figcaption></figure>
+  <figure class="fleet-icon a-rise" style="--d: 0.25s"><img src="/icons/fleet/nav-fleet.svg" alt="" /><figcaption><strong>nav-fleet</strong><span>plattformen</span></figcaption></figure>
+</div>
+<div class="fleet-icons">
+  <figure class="fleet-icon a-rise" style="--d: 0.50s"><img src="/icons/fleet/fleet-gateway.svg" alt="" /><figcaption><strong>fleet-gateway</strong><span>inngangen</span></figcaption></figure>
+  <figure class="fleet-icon a-rise" style="--d: 0.65s"><img src="/icons/fleet/fleet-control.svg" alt="" /><figcaption><strong>fleet-control</strong><span>kursen</span></figcaption></figure>
+  <figure class="fleet-icon a-rise" style="--d: 0.80s"><img src="/icons/fleet/fleet-runtime.svg" alt="" /><figcaption><strong>fleet-runtime</strong><span>sandkassen</span></figcaption></figure>
+  <figure class="fleet-icon a-rise" style="--d: 0.95s"><img src="/icons/fleet/fleet-orchestrator.svg" alt="" /><figcaption><strong>fleet-orchestrator</strong><span>samspillet</span></figcaption></figure>
+  <figure class="fleet-icon a-rise" style="--d: 1.10s"><img src="/icons/fleet/fleet-radar.svg" alt="" /><figcaption><strong>fleet-radar</strong><span>oversikten</span></figcaption></figure>
+</div>
+
+::footer::
+<span class="font-mono text-sm opacity-70">nav-fleet · utkast til diskusjon · ikke vedtatt</span>
+
+<!--
+- Ikonene er utkast. Formasjonen er den samme i alle, og rammen rundt viser hva modulen gjør: port, kompass, sandkasse, nettverk og radar
+- Hvit pil foran er mennesket som har kursen. Blå piler er agentene
+-->
+
+---
+layout: default
+---
+
+::header::
 <h1 class="text-3xl font-bold">Agenten låner brukerens rettigheter, men modellen ser aldri tokenet</h1>
 <p class="subtitle">Først på vegne av brukeren. Agentens egen identitet venter til noen trenger bakgrunnsjobber</p>
 
