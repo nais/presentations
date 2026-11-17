@@ -71,7 +71,7 @@ fonts:
 Overgang: «Hvorfor trenger vi dette?»
 
 - Dette er en plan og en visjon. Ingenting er vedtatt
-- Rekkefølgen: behovet, det som virker i dag, visjonen, økosystemet, modulene, identitet, KI-grunnmuren, seks typer agenter, første steg, veikartet og åpne spørsmål
+- Rekkefølgen: chatten som toppen av isfjellet, ett spørsmål gjennom Fleet, behovet, det som virker i dag, visjonen, økosystemet, modulene, identitet, KI-grunnmuren, seks typer agenter, første steg, veikartet og åpne spørsmål
 - Navnet: nav-fleet, til daglig Fleet, på linje med Nais, Nada og Aksel. nav-pilot var én pilot og de første forsøkene. Fleet er en flåte i produksjon, og plattformen er flåtestyringen. Navnet fungerer på norsk og engelsk
 - Fleet er en egen plattform. Den bruker Nais der det passer og har egen infrastruktur for agentsandkassene. Nais er én av flere som kan bruke den. Derfor har presentasjonen ingen Nais-profil
 - Modulnavnene (fleet-gateway, fleet-control, fleet-runtime, fleet-orchestrator, fleet-radar og fleet-sdk) og adressen fleet.nav.no er forslag
@@ -86,11 +86,11 @@ layout: default
 
 ::header::
 <h1 class="text-3xl font-bold">Chatten er bare toppen av isfjellet</h1>
-<p class="subtitle">Tenkt app med KI-assistent. Under vannlinjen ligger det Fleet tar seg av <span class="chip amber align-middle ml-2">Skisse</span></p>
+<p class="subtitle">En tenkt app med KI-assistent. Fleet tar seg av det som ligger under vannlinjen <span class="chip amber align-middle ml-2">Skisse</span></p>
 
 ::default::
 <div class="tip">
-  <BrowserWindow url="saksbehandling.intern.nav.no/sak/4711" class="tip-win" role="img" aria-label="Skisse av en tenkt saksbehandlingsapp med en KI-assistent i et sidepanel. Fem nummererte punkter i chatten svarer til fem byggeklosser i Fleet: token på vegne av brukeren, bare brukerens egne saker, egen sandkasse, godkjenning før agenten skriver, og logg og kostnad.">
+  <BrowserWindow url="saksbehandling.intern.nav.no/sak/4711" class="tip-win" role="img" aria-label="Skisse av en tenkt saksbehandlingsapp med en KI-assistent i et sidepanel. Fem nummererte punkter i chatten svarer til fem byggeklosser i Fleet: fleet-gateway handler på vegne av Kari, fleet-control slipper bare til verktøy agenten har lov til, fleet-runtime gir egen sandkasse per bruker, fleet-orchestrator stopper brev uten at Kari sier ja, og fleet-radar viser logg, sporing og kostnad.">
     <div class="km-top">
       <strong>Saksbehandling</strong>
       <span class="on">Sak 4711</span>
@@ -108,7 +108,7 @@ layout: default
         <p class="ch-user a-rise" style="--d: 0.2s">Oppsummer saken og foreslå neste steg.</p>
         <p class="ch-tool a-fade" style="--d: 0.45s"><span class="i-carbon-document-multiple-01" /> Leser 7 dokumenter <b class="pin a-fade" style="--d: 1.2s">2</b></p>
         <p class="ch-bot a-rise" style="--d: 0.6s">Søknaden mangler legeerklæring. Jeg foreslår å be om den.</p>
-        <div class="ch-approve a-rise" style="--d: 0.75s"><span>Sende brev til bruker?</span><u>Godkjenn</u><i>Avvis</i><b class="pin a-fade" style="--d: 1.8s">4</b></div>
+        <div class="ch-approve a-rise" style="--d: 0.75s"><span>Sende brev til søkeren?</span><u>Godkjenn</u><i>Avvis</i><b class="pin a-fade" style="--d: 1.8s">4</b></div>
         <p class="ch-foot">KI kan ta feil · samtalen logges <b class="pin a-fade" style="--d: 2.1s">5</b></p>
       </div>
     </div>
@@ -119,17 +119,17 @@ layout: default
     <div class="tip-fleet a-rise" style="--d: 0.9s">
       <div class="tip-fleet-head"><img src="/icons/fleet/nav-fleet.svg?v=8" alt="" /><strong>nav-fleet</strong><em>felles for alle team</em></div>
       <ol>
-        <li class="a-rise" style="--d: 0.9s"><b class="pin">1</b><span>Token på vegne av Kari</span><code>fleet-gateway</code></li>
-        <li class="a-rise" style="--d: 1.2s"><b class="pin">2</b><span>Bare Karis egne saker</span><code>fleet-control</code></li>
+        <li class="a-rise" style="--d: 0.9s"><b class="pin">1</b><span>Handler på vegne av Kari</span><code>fleet-gateway</code></li>
+        <li class="a-rise" style="--d: 1.2s"><b class="pin">2</b><span>Bare verktøy agenten har lov til</span><code>fleet-control</code></li>
         <li class="a-rise" style="--d: 1.5s"><b class="pin">3</b><span>Egen sandkasse per bruker</span><code>fleet-runtime</code></li>
-        <li class="a-rise" style="--d: 1.8s"><b class="pin">4</b><span>Ingen brev uten et ja</span><code>fleet-orchestrator</code></li>
+        <li class="a-rise" style="--d: 1.8s"><b class="pin">4</b><span>Ingen brev uten at Kari sier ja</span><code>fleet-orchestrator</code></li>
         <li class="a-rise" style="--d: 2.1s"><b class="pin">5</b><span>Logg, sporing og kostnad</span><code>fleet-radar</code></li>
       </ol>
     </div>
     <div class="tip-base a-fade" style="--d: 2.4s">Modeller · verktøy og data i Nav · Nais</div>
   </div>
 </div>
-<p class="footnote tight a-fade" style="--d: 2.6s">Uten Fleet bygger hvert team alt under vannlinjen selv. Med Fleet bygger teamet bare chatten.</p>
+<p class="footnote tight a-fade" style="--d: 2.6s">Uten Fleet bygger hvert team alt under vannlinjen selv. Med Fleet bygger teamet chatten og agenten sin. Resten er felles.</p>
 
 ::footer::
 <span class="font-mono text-sm opacity-70">nav-fleet · utkast til diskusjon · ikke vedtatt</span>
@@ -137,6 +137,9 @@ layout: default
 <!--
 - Svar på spørsmålet «er ikke dette bare en chat på en side?». Chatvinduet er enkelt. Det som gjør det trygt å sette i produksjon, ligger under vannlinjen
 - Gå gjennom punktene i rekkefølge: hvert nummer i chatten svarer til en byggekloss i Fleet
+- Punkt 2: fleet-control vet hva agenten har lov til. At agenten bare ser Karis saker, følger av Karis token og tilgangsstyringen i saksarkivet. Rettighetene er snittet av det Kari og agenten har lov til
+- Punkt 4: fleet-orchestrator med felles regler for godkjenning kommer i fase 3. Til da håndhever fleet-gateway at skriving krever godkjenning
+- Overgang: «Hva skjer egentlig under vannlinjen når Kari trykker enter?»
 - Appen, saken og navnet Kari er oppdiktet. Det virkelige første eksempelet er aksel-studio, se lysbildet «Første steg»
 - Modulene til høyre er forslag. Ingenting av Fleet finnes ennå
 - Punkt 1 og 2 henger sammen: fleet-control bestemmer hva agenten har lov til, fleet-gateway håndhever det og gjør token exchange
@@ -151,15 +154,15 @@ layout: default
 <p class="subtitle">Det som skjer fra Kari spør til brevet er sendt <span class="chip amber align-middle ml-2">Skisse</span></p>
 
 ::default::
-<svg class="dg seq" viewBox="0 0 880 340" role="img" aria-label="Sekvensdiagram i fem steg. 1: Kari spør i appen, og agenten får en ny sandkasse i fleet-runtime. 2: Agenten spør modellen gjennom fleet-gateway. 3: Agenten henter dokumenter gjennom fleet-gateway, og fleet-control sjekker at det bare er Karis saker. 4: Agenten foreslår å sende brev, og Kari godkjenner. 5: Agenten sender brevet gjennom fleet-gateway, og sandkassen slettes. Nederst skriver fleet-radar én logglinje per steg.">
+<svg class="dg seq" viewBox="0 0 880 340" role="img" aria-label="Sekvensdiagram i fem steg. 1: Kari spør i appen, og agenten i fleet-runtime får spørsmålet og et kortlivet token for Kari i Karis sandkasse. 2: Agenten spør modellen gjennom fleet-gateway, som står for modelltilgang og kvote senere. 3: Agenten henter dokumenter gjennom fleet-gateway, og fleet-control sjekker at agenten har lov. 4: Agenten foreslår å sende brev, og Kari sier ja gjennom fleet-orchestrator. 5: Agenten sender brevet gjennom fleet-gateway, som sjekker godkjenningen, og sandkassen stoppes. Nederst viser fleet-radar én logglinje per steg.">
   <defs><marker id="ar9" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" class="ah"/></marker></defs>
   <rect x="15.0" y="0" width="110" height="44" rx="8" class="b"/><text x="70" y="19" class="t" text-anchor="middle">Kari i appen</text><text x="70" y="36" class="s" text-anchor="middle">saksbehandling</text><line x1="70" y1="44" x2="70" y2="284" class="life"/><rect x="215.0" y="0" width="150" height="44" rx="8" class="p"/><text x="290" y="19" class="t" text-anchor="middle">Agent</text><text x="290" y="36" class="s" text-anchor="middle">fleet-runtime</text><line x1="290" y1="44" x2="290" y2="284" class="life"/><rect x="425.0" y="0" width="150" height="44" rx="8" class="p"/><text x="500" y="19" class="t" text-anchor="middle">fleet-gateway</text><text x="500" y="36" class="s" text-anchor="middle">MCP, modeller, token</text><line x1="500" y1="44" x2="500" y2="284" class="life"/><rect x="635.0" y="0" width="110" height="44" rx="8" class="b"/><text x="690" y="27" class="t" text-anchor="middle">Modell</text><line x1="690" y1="44" x2="690" y2="284" class="life"/><rect x="760.0" y="0" width="110" height="44" rx="8" class="b"/><text x="815" y="19" class="t" text-anchor="middle">Verktøy</text><text x="815" y="36" class="s" text-anchor="middle">saksarkivet</text><line x1="815" y1="44" x2="815" y2="284" class="life"/>
   <rect x="0" y="292" width="880" height="46" rx="8" class="n"/><text x="10" y="302" class="s rad">fleet-radar</text>
-  <g v-click><line x1="70" y1="74" x2="282" y2="74" class="a" marker-end="url(#ar9)"/><text x="180" y="68" class="s" text-anchor="middle">Spørsmål og Karis token</text><circle cx="86" cy="58" r="9" class="pn"/><text x="86" y="61.5" class="pnt" text-anchor="middle">1</text><rect x="282" y="64" width="16" height="200" rx="3" class="sbx"/><text x="276" y="100" class="s sbt" text-anchor="end">ny sandkasse</text><g><g class="lg"><rect x="18" y="306" width="132" height="24" rx="5"/><text x="84" y="322" text-anchor="middle">1 · Kari · start</text></g></g></g>
-  <g v-click><line x1="298" y1="112" x2="690" y2="112" class="a" marker-end="url(#ar9)"/><circle cx="500" cy="112" r="4.5" class="gwd"/><text x="400" y="106" class="s" text-anchor="middle">Hva står i saken?</text><circle cx="316" cy="96" r="9" class="pn"/><text x="316" y="99.5" class="pnt" text-anchor="middle">2</text><text x="500" y="126" class="s gwt" text-anchor="middle">modelltilgang og kvote</text><line x1="690" y1="140" x2="300" y2="140" class="a ret" marker-end="url(#ar9)"/><g class="lg"><rect x="162" y="306" width="132" height="24" rx="5"/><text x="228" y="322" text-anchor="middle">2 · modell · ok</text></g></g>
-  <g v-click><line x1="298" y1="168" x2="815" y2="168" class="a" marker-end="url(#ar9)"/><circle cx="500" cy="168" r="4.5" class="gwd"/><text x="400" y="162" class="s" text-anchor="middle">Hent dokumentene</text><circle cx="316" cy="152" r="9" class="pn"/><text x="316" y="155.5" class="pnt" text-anchor="middle">3</text><g class="chk"><rect x="410" y="174" width="180" height="20" rx="10"/><text x="500" y="188" text-anchor="middle">fleet-control: bare Karis saker ✓</text></g><line x1="815" y1="206" x2="300" y2="206" class="a ret" marker-end="url(#ar9)"/><text x="720" y="200" class="s" text-anchor="middle">7 dokumenter</text><g class="lg"><rect x="306" y="306" width="132" height="24" rx="5"/><text x="372" y="322" text-anchor="middle">3 · verktøy · ok</text></g></g>
-  <g v-click><line x1="282" y1="232" x2="70" y2="232" class="a ret" marker-end="url(#ar9)"/><text x="180" y="226" class="s" text-anchor="middle">Forslag: sende brev?</text><circle cx="86" cy="216" r="9" class="pn"/><text x="86" y="219.5" class="pnt" text-anchor="middle">4</text><g class="chk"><rect x="20" y="240" width="200" height="20" rx="10"/><text x="120" y="254" text-anchor="middle">fleet-orchestrator: Kari sier ja ✓</text></g><g class="lg"><rect x="450" y="306" width="132" height="24" rx="5"/><text x="516" y="322" text-anchor="middle">4 · godkjent</text></g></g>
-  <g v-click><line x1="298" y1="258" x2="815" y2="258" class="a" marker-end="url(#ar9)"/><circle cx="500" cy="258" r="4.5" class="gwd"/><text x="560" y="252" class="s" text-anchor="middle">Send brevet</text><circle cx="316" cy="242" r="9" class="pn"/><text x="316" y="245.5" class="pnt" text-anchor="middle">5</text><text x="290" y="280" class="s" text-anchor="middle">sandkassen slettes</text><g class="lg"><rect x="594" y="306" width="132" height="24" rx="5"/><text x="660" y="322" text-anchor="middle">5 · brev · ok</text></g></g>
+  <g v-click><line x1="70" y1="74" x2="282" y2="74" class="a" marker-end="url(#ar9)"/><text x="190" y="68" class="s" text-anchor="middle">Spørsmål og token for Kari</text><rect x="47" y="59" width="18" height="18" rx="4" class="pn"/><text x="56" y="71.5" class="pnt" text-anchor="middle">1</text><rect x="282" y="64" width="16" height="200" rx="3" class="sbx"/><text x="276" y="100" class="s sbt" text-anchor="end">sandkasse for Kari</text><g><g class="lg"><rect x="18" y="306" width="132" height="24" rx="5"/><text x="84" y="322" text-anchor="middle">1 · Kari · start</text></g></g></g>
+  <g v-click><line x1="298" y1="112" x2="690" y2="112" class="a" marker-end="url(#ar9)"/><circle cx="500" cy="112" r="4.5" class="gwd"/><text x="400" y="106" class="s" text-anchor="middle">Hva står i saken?</text><rect x="307" y="87" width="18" height="18" rx="4" class="pn"/><text x="316" y="99.5" class="pnt" text-anchor="middle">2</text><text x="500" y="126" class="s gwt" text-anchor="middle">modelltilgang og kvote (senere)</text><line x1="690" y1="140" x2="300" y2="140" class="a ret" marker-end="url(#ar9)"/><g class="lg"><rect x="162" y="306" width="132" height="24" rx="5"/><text x="228" y="322" text-anchor="middle">2 · modell · ok</text></g></g>
+  <g v-click><line x1="298" y1="168" x2="815" y2="168" class="a" marker-end="url(#ar9)"/><circle cx="500" cy="168" r="4.5" class="gwd"/><text x="400" y="162" class="s" text-anchor="middle">Hent dokumentene</text><rect x="307" y="143" width="18" height="18" rx="4" class="pn"/><text x="316" y="155.5" class="pnt" text-anchor="middle">3</text><g class="chk"><rect x="410" y="174" width="180" height="20" rx="10"/><text x="500" y="188" text-anchor="middle">fleet-control: agenten har lov ✓</text></g><line x1="815" y1="206" x2="300" y2="206" class="a ret" marker-end="url(#ar9)"/><text x="720" y="200" class="s" text-anchor="middle">7 dokumenter</text><g class="lg"><rect x="306" y="306" width="132" height="24" rx="5"/><text x="372" y="322" text-anchor="middle">3 · verktøy · ok</text></g></g>
+  <g v-click><line x1="282" y1="232" x2="70" y2="232" class="a ret" marker-end="url(#ar9)"/><text x="180" y="226" class="s" text-anchor="middle">Forslag: send brev?</text><rect x="77" y="207" width="18" height="18" rx="4" class="pn"/><text x="86" y="219.5" class="pnt" text-anchor="middle">4</text><g class="chk"><rect x="20" y="240" width="200" height="20" rx="10"/><text x="120" y="254" text-anchor="middle">fleet-orchestrator: Kari sier ja ✓</text></g><g class="lg"><rect x="450" y="306" width="132" height="24" rx="5"/><text x="516" y="322" text-anchor="middle">4 · godkjent</text></g></g>
+  <g v-click><line x1="298" y1="258" x2="815" y2="258" class="a" marker-end="url(#ar9)"/><circle cx="500" cy="258" r="4.5" class="gwd"/><text x="560" y="252" class="s" text-anchor="middle">Send brevet</text><rect x="307" y="233" width="18" height="18" rx="4" class="pn"/><text x="316" y="245.5" class="pnt" text-anchor="middle">5</text><text x="290" y="280" class="s" text-anchor="middle">sandkassen stoppes</text><g class="chk"><rect x="420" y="264" width="160" height="20" rx="10"/><text x="500" y="278" text-anchor="middle">fleet-gateway: godkjent ✓</text></g><g class="lg"><rect x="594" y="306" width="132" height="24" rx="5"/><text x="660" y="322" text-anchor="middle">5 · brev · ok</text></g></g>
 </svg>
 
 ::footer::
@@ -167,13 +170,14 @@ layout: default
 
 <!--
 - Samme tenkte app som forrige lysbilde. Klikk gjennom stegene
-- 1: Appen sender spørsmålet med Karis token. fleet-runtime starter en sandkasse som bare tilhører Kari
+- 1: Appen sender spørsmålet. Agenten får et kortlivet OBO-token for Kari, ikke Karis eget token. Det ligger bare i Karis sandkasse i fleet-runtime
 - 2: Agenten spør modellen. Alle modellkall går gjennom fleet-gateway, som håndhever kvoter. Modellgatewayen kommer senere
-- 3: Agenten henter dokumenter. fleet-gateway bytter token, og fleet-control sjekker at agenten bare når saker Kari selv har tilgang til
-- 4: Agenten vil skrive. Det krever et ja fra Kari. Reglene for godkjenning hører til fleet-orchestrator
-- 5: Brevet sendes gjennom fleet-gateway. Sandkassen slettes, og tokenet forsvinner med den
-- fleet-radar: én logglinje per steg med bruker, verktøy, utfall, kostnad og trace-ID. Aldri innholdet i prompten
-- Teamet har bare skrevet appen og chatten. Alt annet på lysbildet er Fleet. Alt er forslag
+- 3: Agenten henter dokumenter. fleet-gateway bytter token, og fleet-control sjekker at agenten har lov til verktøyet. Saksarkivet avgjør selv hvilke saker Kari ser
+- 4: Agenten vil skrive. Det krever et ja fra Kari. Felles regler for godkjenning hører til fleet-orchestrator, som kommer i fase 3
+- 5: Brevet sendes gjennom fleet-gateway, som sjekker at godkjenningen finnes. Sandkassen stoppes når økten er over, og tokenet forsvinner med den
+- fleet-radar: fleet-gateway skriver loggen, og fleet-radar viser den. Én logglinje per steg med bruker, verktøy, utfall, kostnad og trace-ID. Aldri innholdet i prompten
+- Teamet har skrevet appen, chatten og agenten. Alt annet på lysbildet er Fleet. Alt er forslag
+- Overgang: «Hvorfor skal ikke hvert team bygge dette selv?»
 -->
 
 ---
@@ -633,7 +637,7 @@ Overgang: «Den vanskeligste delen er identitet.»
   - Agent-runtime: fleet-runtime, en isolert sandkasse per bruker eller oppgave. Fleet eier og drifter den, på egen infrastruktur for sandkassene
   - fleet-runtime har en livssyklus: start, pause, fortsett og stopp. Filsystem, shell og verktøy finnes bare inne i sandkassen. Brukerens token finnes bare i brukerens egen sandkasse. Sandkassen har ressursgrenser og kontroll på utgående trafikk
   - Det løser risikoen med den delte studio-ki-poden, og det gjør det mulig å klone fra GitHub (aksel-studio #145)
-  - Kubernetes Agent Sandbox er en kandidat til fleet-runtime. Vi har ikke prøvd den (lenke i notatene til lysbilde 2)
+  - Kubernetes Agent Sandbox er en kandidat til fleet-runtime. Vi har ikke prøvd den (lenke i notatene til lysbildet «Mange team trenger det samme»)
   - fleet-sdk: mal og deklarativ konfigurasjon. Teamet beskriver agenten, og fleet-runtime kjører den
   - Identitet: Entra ID og Texas på Nais utsteder tokenene. fleet-control bestemmer hva en agent har lov til. fleet-gateway håndhever det og gjør token exchange. fleet-runtime holder tokenet inne i brukerens egen sandkasse
   - Nytt: fleet-orchestrator, med RAG mot Nada, MCP-hub og regler for når et menneske må godkjenne
@@ -671,7 +675,7 @@ layout: default
 
 ::header::
 <h1 class="text-3xl font-bold">Én flåte, fem moduler</h1>
-<p class="subtitle">Samme formasjon i alle ikonene. Hvit pil foran: mennesket har kursen <span class="chip amber align-middle ml-2">Forslag</span></p>
+<p class="subtitle">Samme piler i alle ikonene. Hvit pil: mennesket har kursen <span class="chip amber align-middle ml-2">Forslag</span></p>
 
 ::default::
 <div class="fleet-icons top">
@@ -690,8 +694,9 @@ layout: default
 <span class="font-mono text-sm opacity-70">nav-fleet · utkast til diskusjon · ikke vedtatt</span>
 
 <!--
-- Ikonene er utkast. Formasjonen er den samme i alle, og rammen rundt viser hva modulen gjør: port, kompass, sandkasse, nettverk og radar
+- Ikonene er utkast. Formasjonen er den samme i alle, og rammen rundt viser hva modulen gjør: port, skjold, sandkasse, nettverk og radar. fleet-runtime viser én agent i sin sandkasse
 - Hvit pil foran er mennesket som har kursen. Blå piler er agentene
+- Overgang: «Hvordan henger modulene sammen med identiteten til brukeren?»
 -->
 
 ---
@@ -786,7 +791,7 @@ Overgang: «Det finnes allerede et målbilde for KI-grunnmuren. Hvordan passer F
 - Tokenet ligger bare i brukerens egen sandkasse i fleet-runtime. Det er kortlivet og har smalt omfang. Modellen ser det aldri
 - Derfor kan agenten klone fra GitHub i sandkassen (aksel-studio #145) uten at tokenet deles med andre brukere
 - Agentens egen identitet trengs først ved bakgrunnsjobber. aksel-studio trenger det ikke nå (011, «Konsekvenser»)
-- SPIFFE og WIMSE er underlaget IETF bygger agentidentitet på, men arbeidet er utkast (IETF-oversikten 31. mai 2026, lenke i notatene til lysbilde 2). Vi foreslår ikke å vente på dem
+- SPIFFE og WIMSE er underlaget IETF bygger agentidentitet på, men arbeidet er utkast (IETF-oversikten 31. mai 2026, lenke i notatene til lysbildet «Mange team trenger det samme»). Vi foreslår ikke å vente på dem
 -->
 
 ---
@@ -1167,5 +1172,5 @@ layout: default
 <!--
 - Slagordet: «Himmelen er grensen. Mennesket har kursen.»
 - Engelsk variant: «Sky is the limit. Safety is the default.»
-- Figuren: de samme pilene som på forsiden og visjonslysbildet, nå på vei opp i åpen himmel
+- Figuren: de samme pilene som på forsiden, nå på vei opp i åpen himmel
 -->
