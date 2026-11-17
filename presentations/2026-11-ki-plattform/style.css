@@ -1306,3 +1306,167 @@ pre,
   color: #94a3b8;
   font-size: 0.54rem;
 }
+
+/* «Toppen av isfjellet»: app mockup left, what sits under the waterline right */
+.tip {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.tip-win {
+  height: 318px;
+}
+
+.tip-win .ch {
+  font-size: 0.66rem;
+}
+
+.tip-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  font-size: 0.74rem;
+}
+
+.tip-see {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--nais-border);
+  border-radius: 8px;
+  background: var(--nais-card);
+}
+
+.tip-see > span {
+  font-size: 1.2rem;
+  color: var(--nais-text-secondary);
+}
+
+.tip-see div {
+  flex: 1;
+  color: var(--nais-text-secondary);
+}
+
+.tip-see strong {
+  display: block;
+  color: var(--nais-text);
+}
+
+.tip-see em,
+.tip-fleet-head em {
+  font-style: normal;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.6rem;
+  color: var(--nais-text-secondary);
+}
+
+.tip-water {
+  position: relative;
+  height: 1rem;
+  border-bottom: 2px dashed #7fb2e5;
+}
+
+.tip-water span {
+  position: absolute;
+  right: 0;
+  bottom: 0.15rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.58rem;
+  color: #3b82c4;
+}
+
+.tip-fleet {
+  padding: 0.6rem 0.75rem 0.7rem;
+  border-radius: 10px;
+  background: #0b1528;
+  color: #e2e8f0;
+}
+
+.tip-fleet-head {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.45rem;
+}
+
+.tip-fleet-head img {
+  width: 1.6rem;
+  height: 1.6rem;
+}
+
+.tip-fleet-head strong {
+  flex: 1;
+  font-family: Poppins, sans-serif;
+  font-size: 0.9rem;
+  color: #fff;
+}
+
+.tip-fleet-head em {
+  color: #8fa3bf;
+}
+
+.tip-fleet ol {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tip-fleet li {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.tip-fleet li span {
+  flex: 1;
+}
+
+.tip-fleet .pin {
+  box-shadow: none;
+}
+
+.tip-fleet code {
+  padding: 0;
+  background: none;
+  font-size: 0.62rem;
+  color: #8fa3bf;
+}
+
+.tip-base {
+  padding: 0.4rem 0.75rem;
+  border-radius: 8px;
+  background: var(--nais-surface);
+  color: var(--nais-text-secondary);
+  text-align: center;
+  font-size: 0.68rem;
+}
+
+.tip-fleet li span {
+  color: #e2e8f0;
+}
+
+.tip-fleet li code {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: #8fa3bf;
+}
+
+.tip-win .ch-chat {
+  gap: 0.3rem;
+}
+
+.tip-win .ch-chat p,
+.tip-win .ch-approve {
+  line-height: 1.35;
+}
+
+.tip-win .km-login .pin {
+  margin-left: 0.3rem;
+}

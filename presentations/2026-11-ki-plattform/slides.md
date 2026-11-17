@@ -85,51 +85,58 @@ layout: default
 ---
 
 ::header::
-<h1 class="text-3xl font-bold">Det ser ut som en chat. Bak den trenger appen fem byggeklosser</h1>
-<p class="subtitle">Tenkt eksempel: et team gir saksbehandlerne en KI-assistent i sin egen app <span class="chip amber align-middle ml-2">Skisse</span></p>
+<h1 class="text-3xl font-bold">Chatten er bare toppen av isfjellet</h1>
+<p class="subtitle">Tenkt app med KI-assistent. Under vannlinjen ligger det Fleet tar seg av <span class="chip amber align-middle ml-2">Skisse</span></p>
 
 ::default::
-<div class="today">
-  <BrowserWindow url="saksbehandling.intern.nav.no/sak/4711" class="today-win" role="img" aria-label="Skisse av en tenkt saksbehandlingsapp med en KI-assistent i et sidepanel. Fem nummererte punkter viser hva chatten trenger bak seg: innlogging på vegne av brukeren, verktøy med brukerens rettigheter, en sandkasse der agenten kjører, godkjenning før agenten skriver, og logg og kostnad.">
-    <span class="chip blue today-badge">Tenkt app</span>
+<div class="tip">
+  <BrowserWindow url="saksbehandling.intern.nav.no/sak/4711" class="tip-win" role="img" aria-label="Skisse av en tenkt saksbehandlingsapp med en KI-assistent i et sidepanel. Fem nummererte punkter i chatten svarer til fem byggeklosser i Fleet: token på vegne av brukeren, bare brukerens egne saker, egen sandkasse, godkjenning før agenten skriver, og logg og kostnad.">
     <div class="km-top">
       <strong>Saksbehandling</strong>
       <span class="on">Sak 4711</span>
       <span>Dokumenter</span>
-      <span>Historikk</span>
-      <span class="km-login">Kari N. <b class="pin a-fade" style="--d: 0.3s">1</b></span>
+      <span class="km-login">Kari N. <b class="pin a-fade" style="--d: 0.9s">1</b></span>
     </div>
     <div class="ch">
       <div class="ch-case">
         <h2>Sak 4711</h2>
         <dl><dt>Status</dt><dd>Under behandling</dd><dt>Mottatt</dt><dd>3. november</dd><dt>Dokumenter</dt><dd>7</dd></dl>
-        <div class="ch-doc"></div><div class="ch-doc short"></div><div class="ch-doc"></div>
+        <div class="ch-doc"></div><div class="ch-doc short"></div><div class="ch-doc"></div><div class="ch-doc short"></div>
       </div>
       <div class="ch-chat">
-        <div class="ch-head"><span class="i-carbon-chat-bot" /> Assistent <b class="pin a-fade" style="--d: 1.1s">3</b></div>
-        <p class="ch-user">Oppsummer saken og foreslå neste steg.</p>
-        <p class="ch-tool"><span class="i-carbon-tool-kit" /> Leser 7 dokumenter i saken <b class="pin a-fade" style="--d: 0.7s">2</b></p>
-        <p class="ch-bot">Søknaden mangler legeerklæring. Jeg foreslår å be om den.</p>
-        <div class="ch-approve"><span>Sende brev til bruker?</span><u>Godkjenn</u><i>Avvis</i> <b class="pin a-fade" style="--d: 1.5s">4</b></div>
-        <p class="ch-foot">KI kan ta feil · samtalen logges <b class="pin a-fade" style="--d: 1.9s">5</b></p>
+        <div class="ch-head"><span class="i-carbon-chat-bot" /> Assistent <b class="pin a-fade" style="--d: 1.5s">3</b></div>
+        <p class="ch-user a-rise" style="--d: 0.2s">Oppsummer saken og foreslå neste steg.</p>
+        <p class="ch-tool a-fade" style="--d: 0.45s"><span class="i-carbon-document-multiple-01" /> Leser 7 dokumenter <b class="pin a-fade" style="--d: 1.2s">2</b></p>
+        <p class="ch-bot a-rise" style="--d: 0.6s">Søknaden mangler legeerklæring. Jeg foreslår å be om den.</p>
+        <div class="ch-approve a-rise" style="--d: 0.75s"><span>Sende brev til bruker?</span><u>Godkjenn</u><i>Avvis</i><b class="pin a-fade" style="--d: 1.8s">4</b></div>
+        <p class="ch-foot">KI kan ta feil · samtalen logges <b class="pin a-fade" style="--d: 2.1s">5</b></p>
       </div>
     </div>
   </BrowserWindow>
-  <ol class="today-list">
-    <li class="a-rise" style="--d: 0.3s"><b class="pin">1</b><div><strong>På vegne av brukeren</strong>Agenten får et kortlivet token for Kari, ikke en tjenestebruker. <code>fleet-gateway</code></div></li>
-    <li class="a-rise" style="--d: 0.7s"><b class="pin">2</b><div><strong>Verktøy med brukerens rettigheter</strong>Bare saker Kari selv har tilgang til. Policy styrer hvilke verktøy. <code>fleet-control</code></div></li>
-    <li class="a-rise" style="--d: 1.1s"><b class="pin">3</b><div><strong>En sandkasse per bruker</strong>Agenten kjører isolert, med grenser for ressurser og nettverk. <code>fleet-runtime</code></div></li>
-    <li class="a-rise" style="--d: 1.5s"><b class="pin">4</b><div><strong>Mennesket godkjenner</strong>Agenten foreslår. Den skriver ikke uten et ja. <code>fleet-orchestrator</code></div></li>
-    <li class="a-rise" style="--d: 1.9s"><b class="pin">5</b><div><strong>Logg, sporing og kostnad</strong>Hvem spurte, hvilke verktøy ble brukt, hva kostet det. <code>fleet-radar</code></div></li>
-  </ol>
+  <div class="tip-stack">
+    <div class="tip-see"><span class="i-carbon-user-avatar" /><div><strong>Det brukeren ser</strong>Chatten i teamets egen app</div><em>teamet bygger</em></div>
+    <div class="tip-water"><span>vannlinjen</span></div>
+    <div class="tip-fleet a-rise" style="--d: 0.9s">
+      <div class="tip-fleet-head"><img src="/icons/fleet/nav-fleet.svg?v=8" alt="" /><strong>nav-fleet</strong><em>felles for alle team</em></div>
+      <ol>
+        <li class="a-rise" style="--d: 0.9s"><b class="pin">1</b><span>Token på vegne av Kari</span><code>fleet-gateway</code></li>
+        <li class="a-rise" style="--d: 1.2s"><b class="pin">2</b><span>Bare Karis egne saker</span><code>fleet-control</code></li>
+        <li class="a-rise" style="--d: 1.5s"><b class="pin">3</b><span>Egen sandkasse per bruker</span><code>fleet-runtime</code></li>
+        <li class="a-rise" style="--d: 1.8s"><b class="pin">4</b><span>Ingen brev uten et ja</span><code>fleet-orchestrator</code></li>
+        <li class="a-rise" style="--d: 2.1s"><b class="pin">5</b><span>Logg, sporing og kostnad</span><code>fleet-radar</code></li>
+      </ol>
+    </div>
+    <div class="tip-base a-fade" style="--d: 2.4s">Modeller · verktøy og data i Nav · Nais</div>
+  </div>
 </div>
-<p class="footnote tight">Uten Fleet må hvert team bygge alle fem selv. Chatten er den enkle delen.</p>
+<p class="footnote tight a-fade" style="--d: 2.6s">Uten Fleet bygger hvert team alt under vannlinjen selv. Med Fleet bygger teamet bare chatten.</p>
 
 ::footer::
 <span class="font-mono text-sm opacity-70">nav-fleet · utkast til diskusjon · ikke vedtatt</span>
 
 <!--
-- Svar på spørsmålet «er ikke dette bare en chat på en side?». Chatvinduet er enkelt. Det som gjør det trygt å sette i produksjon, ligger bak
+- Svar på spørsmålet «er ikke dette bare en chat på en side?». Chatvinduet er enkelt. Det som gjør det trygt å sette i produksjon, ligger under vannlinjen
+- Gå gjennom punktene i rekkefølge: hvert nummer i chatten svarer til en byggekloss i Fleet
 - Appen, saken og navnet Kari er oppdiktet. Det virkelige første eksempelet er aksel-studio, se lysbildet «Første steg»
 - Modulene til høyre er forslag. Ingenting av Fleet finnes ennå
 - Punkt 1 og 2 henger sammen: fleet-control bestemmer hva agenten har lov til, fleet-gateway håndhever det og gjør token exchange
