@@ -235,18 +235,17 @@ Underlag, bare hvis noen spør:
   - M2M-token pluss HTTP-hodet X-On-Behalf-Of, copilot-cli til copilot-api, bare GET fra forhåndsgodkjent azp (samme fil)
   - brukerens ghu_-token kryptert i Postgres, aksel-studio (aksel-studio docs/beslutninger/011-ki-kjoretid.md)
   - brukerens GitHub-token i minnet bak et eget token, mcp-onboarding (navikt/copilot/apps/mcp-onboarding/README.md, «Flow»)
-- Ingen vei inn for skriveverktøy: MCP-kategori 3, «begrenset tilgang til sensitive data eller skriving»: «Ikke besluttet, avslås inntil ny risikovurdering». Kategori 4 er ikke tillatt (navikt/copilot-intern/retningslinjer.md § 3)
+- Ingen vei inn for skriveverktøy: MCP-kategori 3, «begrenset tilgang til sensitive data eller skriving»: «Ikke besluttet, avslås inntil ny risikovurdering». Kategori 4 er ikke tillatt
 - aksel-studio har ni verktøy utenfor registeret. De kjører i studio-api over SDK-ens JSON-RPC (aksel-studio docs/beslutninger/019-ki-chat-per-konsept.md). Ingen av de 12 serverne i navikt/copilot/apps/mcp-registry/allowlist.json er aksel-studio. Presisering: 019 velger egne verktøy av sikkerhetsgrunner og oppgir ikke kategori 3 som grunn
-- Én delt pod: «Appen har skallverktøy og tokenet til alle aktive brukere» (aksel-studio docs/oppsett/studio-ki.md). Ingen prober, og trafikken til studio-ki er ukryptert inntil kravet før prod er løst (studio-ki.md, 019, aksel-studio #141)
-- Tom modus virker: i den lokale testen kunne modellen ikke lese filer eller kjøre kommandoer (aksel-studio docs/ki-spike-lokal.md, 15. november 2026). Risikoen ligger i poden, ikke i modellen
+- Tom modus virker: i den lokale testen kunne modellen ikke lese filer eller kjøre kommandoer (aksel-studio docs/ki-spike-lokal.md, 15. november 2026).
 - At neste team kopierer dette mønsteret, er en hypotese. Vi kjenner ikke til et konkret neste team
-- Ingen eier: styringsmodellen dekker utviklerflater og har ingen rolle for agenter som tjenester (navikt/copilot-intern/styringsmodell.md, «Roller og ansvar»)
-- Ingen normative dokumenter: styringsmodell.md, risikovurdering.md, retningslinjer.md, godkjente-agenter.md, overvaaking.md og modellstyring.md i navikt/copilot-intern handler om kodeagenter på utviklermaskiner og i sky. Ingen beskriver agenter som kjører som tjenester på Nais. Dette er vår lesing og et søk i filene, ikke en juridisk gjennomgang
+- Ingen eier: styringsmodellen dekker utviklerflater og har ingen rolle for agenter som tjenester
+- Ingen normative dokumenter: styringsmodell.md, risikovurdering.md, retningslinjer.md, godkjente-agenter.md, overvaaking.md og modellstyring.md handler om kodeagenter på utviklermaskiner og i sky. Ingen beskriver agenter som kjører som tjenester på Nais. Dette er vår lesing og et søk i filene, ikke en juridisk gjennomgang
 - Snarveiene tar også slutt: «navikt har nådd grensen for antall GitHub Apps. Studio gjenbruker derfor den eksisterende appen Nav Copilot (nav-pilot)» (011, merknad november 2026)
 - Tallene gjelder repoene vi har lest. Andre team i Nav kan ha egne agenter vi ikke kjenner til
 
 Derfor nå:
-- studio-ki: egen Nais-app med Copilot CLI som headless server. Secreten ble opprettet 16. november 2026 (aksel-studio docs/oppsett/studio-ki.md og .nais/ki.yaml). Tilkoblingen mellom pods er ikke testet ennå (aksel-studio #132)
+- studio-ki: egen Nais-app med Copilot CLI som headless server. Secreten ble opprettet 16. november 2026 (aksel-studio docs/oppsett/studio-ki.md og .nais/ki.yaml).
 - MCP, spesifikasjon 2025-11-25: «The MCP server MUST NOT pass through the token it received from the MCP client», og serveren skal avvise tokener som ikke er utstedt til den. https://modelcontextprotocol.io/specification/2025-11-25/basic/authorization
 - Entra Agent ID, On-Behalf-Of-flyt for agenter. Siden er datert 4. november 2025 og oppdatert 10. august 2026. https://learn.microsoft.com/en-us/entra/agent-id/agent-on-behalf-of-oauth-flow
 - Kubernetes Agent Sandbox under SIG Apps, med gVisor og Kata Containers. Blogg 20. mars 2026. https://kubernetes.io/blog/2026/03/20/running-agents-on-kubernetes-with-agent-sandbox/
@@ -637,7 +636,7 @@ Overgang: «Den vanskeligste delen er identitet.»
   - Logging, sporing, evalueringer og kostnad: fleet-gateway skriver loggen, og fleet-radar viser den
   - Agent-runtime: fleet-runtime, en isolert sandkasse per bruker eller oppgave. Fleet eier og drifter den, på egen infrastruktur for sandkassene
   - fleet-runtime har en livssyklus: start, pause, fortsett og stopp. Filsystem, shell og verktøy finnes bare inne i sandkassen. Brukerens token finnes bare i brukerens egen sandkasse. Sandkassen har ressursgrenser og kontroll på utgående trafikk
-  - Det løser risikoen med den delte studio-ki-poden, og det gjør det mulig å klone fra GitHub (aksel-studio #145)
+  - Det gjør det mulig å klone fra GitHub (aksel-studio #145)
   - Kubernetes Agent Sandbox er en kandidat til fleet-runtime. Vi har ikke prøvd den (lenke i notatene til lysbildet «Mange team trenger det samme»)
   - fleet-sdk: mal og deklarativ konfigurasjon. Teamet beskriver agenten, og fleet-runtime kjører den
   - Identitet: Entra ID og Texas på Nais utsteder tokenene. fleet-control bestemmer hva en agent har lov til. fleet-gateway håndhever det og gjør token exchange. fleet-runtime holder tokenet inne i brukerens egen sandkasse
@@ -649,8 +648,8 @@ Overgang: «Den vanskeligste delen er identitet.»
 - Plassering: Fleet er ikke en del av Nais og kjører ikke bare på Nais. Underlaget har tre felt: egen infrastruktur for agentsandkassene, egne modellvalg (vi velger hvor inferens kjører) og Nais der det passer (apper, identitet, nettverk, OTel og Texas). Teamene beholder domenet. Nais står to steder i figuren: øverst som en som kan bruke Fleet, og nederst som en del av underlaget
 - Stiplet ramme betyr hypotese. Nais og Nada øverst er hypoteser. Vi har ikke snakket med Nada, og ingen av dem har bedt om dette
 - Vi starter ikke fra null. Fire byggeklosser er i drift:
-  - MCP Registry: 12 servere i navikt/copilot/apps/mcp-registry/allowlist.json. Hard kontroll som blokkerer ukjente servere (navikt/copilot-intern/styringsmodell.md, «Kontroller»). Registeret er en liste, ikke en proxy. Det gir ikke kontroll eller revisjon per kall (vår vurdering)
-  - Modellpolicy: ZDR, ingen trening, innholdsfiltre. Sannhetskilden er NAV_DISABLED_MODELS i navikt/copilot/apps/my-copilot/src/lib/model-policy.ts (navikt/copilot-intern/modellstyring.md, versjon 1.1, 11. oktober 2026). aksel-studio leser den ikke
+  - MCP Registry: 12 servere i navikt/copilot/apps/mcp-registry/allowlist.json. Hard kontroll som blokkerer ukjente servere. Registeret er en liste, ikke en proxy. Det gir ikke kontroll eller revisjon per kall (vår vurdering)
+  - Modellpolicy: ZDR, ingen trening, innholdsfiltre. Sannhetskilden er NAV_DISABLED_MODELS i navikt/copilot/apps/my-copilot/src/lib/model-policy.ts. aksel-studio leser den ikke
   - Texas og OBO: my-copilot ber Texas om et OBO-token for copilot-api, og copilot-api validerer det på nytt (navikt/copilot/ARCHITECTURE.md)
   - Nais: hosting, OTel og accessPolicy
 - Ingen av de fire kontrollerer eller logger et verktøykall mens agenten kjører. Det er hullet fleet-gateway fyller (vår vurdering)
@@ -769,7 +768,6 @@ Overgang: «Det finnes allerede et målbilde for KI-grunnmuren. Hvordan passer F
 - Steg 1 og 2 finnes i dag for my-copilot: Wonderwall, så Texas med OBO til copilot-api (navikt/copilot/ARCHITECTURE.md)
 - Entra beskriver samme mønster for agenter: brukeren står i oid, og brukertokenet må være utstedt til agentens blueprint (aud). Kravene sub og azp i figuren er vårt forslag, ikke hentet fra Entra. https://learn.microsoft.com/en-us/entra/agent-id/agent-on-behalf-of-oauth-flow (oppdatert 10. august 2026)
 - MCP krever at tokenet er utstedt til serveren som mottar det, og forbyr å sende det videre. Derfor trengs token exchange i et betrodd ledd. https://modelcontextprotocol.io/specification/2025-11-25/basic/authorization
-- I dag går brukerens ghu_-token helt inn i runtimen hos aksel-studio (011, 019)
 - Logging uten promptinnhold er allerede praksis: 011 logger forbruk uten innholdet i promptene, og copilot-api logger aktør ved endringer (navikt/copilot/SECURITY.md, «Audit logging»)
 - Målbildet stiller samme krav: gatewayen skal ikke skjule manglende brukerautorisasjon med egne brede backend-rettigheter, og ressurseier avgjør tilgangen (målbildet, «Gateway(er), integrasjoner og kontekst»)
 - MCP-gatewayen i navikt/copilot#2083, som fleet-gateway bygger på, har tre delvis bestemte punkter (tatt ut av lysbildet, si dem muntlig ved behov):
@@ -845,7 +843,7 @@ layout: default
 <!--
 Overgang: «Hva kan dette brukes til? Seks typer agenter.»
 
-- Målbildet: «Digital KI-grunnmur for produktteam i Nav», status «Diskusjonsutkast, 6. november 2026» (navikt/copilot-intern/underlag/agentisk-ki-produktutvikling-maalbilde.md). Det er heller ikke vedtatt
+- Målbildet: «Digital KI-grunnmur for produktteam i Nav», status «Diskusjonsutkast, 6. november 2026». Det er heller ikke vedtatt
 - Venstre side følger figuren og tabellen «Byggesteiner og kontrakter» i målbildet. Koblingene til høyre er vår lesing. Forfatterne av målbildet har ikke sett dem
 - Fleet konkurrerer ikke med målbildet. Målbildet beskriver hele grunnmuren for produktutvikling. Fleet er et forslag til hvordan delene i kjøreplanet, pluss identitet og kontroll, kan bygges for agenter som kjører som tjenester
 - fleet-orchestrator har ingen egen motpart i figuren. Den ligger nærmest agent-runtime og MCP-gateway(er). Oppdraget eies fortsatt utenfor Fleet
@@ -918,7 +916,7 @@ Utvikleragenten, nav-pilot på nav-fleet:
 - Målbildet vil at også designer, produkteier og fagperson skal kunne starte et slikt løp. Da trengs en runtime som ikke er utviklerens egen maskin. Det er fleet-runtime
 - Hva Fleet tilfører: token exchange i fleet-gateway gir agenten et kortlivet token for akkurat de repoene brukeren har. I dag finnes dette løpet hos leverandøren (Copilot cloud agent) eller lokalt med cplt. Målbildet sier at verken nav-pilot eller cplt gir sentral kontroll over de flatene
 - Krav fra målbildet som gjelder her: ingen direkte push til standardgrenen, og ingen produksjonshemmeligheter (målbildet, «Krav før piloten får skriverettigheter»)
-- Skriving gjennom MCP er kategori 3 og avslås i dag (navikt/copilot-intern/retningslinjer.md § 3). Eksemplet forutsetter en ny risikovurdering
+- Skriving gjennom MCP er kategori 3 og avslås i dag. Eksemplet forutsetter en ny risikovurdering
 
 Feilsøkingsagenten, som svarer på «hvorfor feiler appen min?»:
 - Agenten leser dokumentasjon og status for appene til teamet som spør, og foreslår neste steg. Mennesket gjør endringene selv. Agenten har bare lesetilgang
@@ -934,7 +932,7 @@ Saksbehandleren, agenter i systemene vi lager og tilbyr saksbehandlere:
 - Kilden er ikke primær: EUR-Lex svarte ikke på automatisk henting 16. november 2026. Ordlyden er sjekket mot gjengivelsen på https://artificialintelligenceact.eu/annex/3/ og https://artificialintelligenceact.eu/article/14/, ikke mot endringene fra 2026. Sjekk mot EUR-Lex før lysbildene deles
 - Om et utkastverktøy faller inn under vedlegg III, må en jurist sjekke
 - Personvernforordningen artikkel 22 gir rett til ikke å være gjenstand for avgjørelser som utelukkende bygger på automatisert behandling, med unntak blant annet når nasjonal rett tillater det og fastsetter egnede vernetiltak (nr. 2 bokstav b, https://lovdata.no/dokument/NL/lov/2018-06-15-38/gdpr/ARTIKKEL_22, lest 16. november 2026). Vi velger utkast, ikke vedtak. Om artikkelen krever det her, må en jurist sjekke
-- Modellvei: Copilot kan bare brukes i repoer uten personopplysninger eller skjermingsverdig informasjon (navikt/copilot-intern/retningslinjer.md § 1). Saksbehandling trenger en annen modell med avklart databehandling. Modellgatewayen i fleet-gateway skal gjøre det mulig. fleet-orchestrator står her for reglene om menneskelig godkjenning
+- Modellvei: Copilot kan bare brukes i repoer uten personopplysninger eller skjermingsverdig informasjon. Saksbehandling trenger en annen modell med avklart databehandling. Modellgatewayen i fleet-gateway skal gjøre det mulig. fleet-orchestrator står her for reglene om menneskelig godkjenning
 - Nav behandler allerede søknader automatisk på enkelte områder, blant annet barnetrygd, dagpenger, alderspensjon, foreldrepenger og sykepenger. En regelmotor sjekker vilkårene, og søkeren har rett til å få en saksbehandler til å vurdere søknaden. Siden nevner ikke KI (https://www.nav.no/automatisk-behandling, lest 16. november 2026). Eksemplet her handler om utkast til et menneske, ikke om flere automatiske vedtak
 - Hvorfor ta det med: det er her Navs oppdrag ligger. Plattformen bør bygges slik at den kan bære dette senere, selv om første versjon ikke gjør det (vår vurdering)
 
@@ -944,7 +942,7 @@ Analyseagenter for Nada:
 - fleet-orchestrator står her for RAG mot dataproduktene med tilgang på dokumentnivå. Det er et forslag
 - Poenget er policy og logging rundt verktøykallet: hvem spurte, hvilket dataprodukt, og ble det tillatt. Tilgangen er analytikerens egen, så agenten ser aldri mer enn analytikeren
 - Målbildet sier det samme: ressurseier avgjør tilgangen, og et samlet verktøyendepunkt gir ikke samlet tilgang til alle kilder (målbildet, «Byggesteiner og kontrakter»)
-- Dataprodukter med personopplysninger er kategori 3 eller 4 for MCP og er ikke tillatt i dag (navikt/copilot-intern/retningslinjer.md § 3). En første versjon må holde seg til åpne eller ikke-sensitive dataprodukter
+- Dataprodukter med personopplysninger er kategori 3 eller 4 for MCP og er ikke tillatt i dag. En første versjon må holde seg til åpne eller ikke-sensitive dataprodukter
 - Svaret går til en modell. Dataminimering må skje i et betrodd ledd før modellkallet (målbildet, «Driftsinnsikt og datagrenser»)
 
 Teamhjerne og sikkerhetsagenter:
@@ -960,7 +958,7 @@ layout: default
 <p class="subtitle">Designere skal lage prototyper med KI. Studio beholder domenet, og grensesnittene er på plass</p>
 
 ::default::
-<svg class="dg" viewBox="0 0 880 350" role="img" aria-label="I dag henter studio-api brukerens token fra Postgres og sender det til studio-ki, som har shell-tilgang og alle aktive tokener. Med Fleet sender studio-api et OBO-token til fleet-runtime, der hver bruker har sin egen sandkasse, og fleet-gateway kaller verktøyene i studio-api og gjør token exchange.">
+<svg class="dg" viewBox="0 0 880 350" role="img" aria-label="I dag henter studio-api brukerens token fra Postgres og sender det til studio-ki,. Med Fleet sender studio-api et OBO-token til fleet-runtime, der hver bruker har sin egen sandkasse, og fleet-gateway kaller verktøyene i studio-api og gjør token exchange.">
   <defs><marker id="ar4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" class="ah"/></marker></defs>
   <text x="0" y="16" class="h">I dag</text>
   <rect x="0" y="30" width="120" height="40" rx="8" class="b"/>
@@ -975,12 +973,8 @@ layout: default
   <text x="318" y="158" class="s" text-anchor="middle">GitHub-token per bruker</text>
   <line x1="236" y1="144" x2="182" y2="144" class="a" marker-end="url(#ar4)"/>
   <line x1="90" y1="192" x2="90" y2="226" class="a" marker-end="url(#ar4)"/>
-  <text x="104" y="214" class="s">GitHub-token per økt, ukryptert</text>
   <rect x="0" y="228" width="180" height="60" rx="8" class="w"/>
   <text x="90" y="252" class="t" text-anchor="middle">studio-ki</text>
-  <text x="90" y="272" class="s" text-anchor="middle">shell og aktive tokener</text>
-  <text x="196" y="252" class="x">Største lokale risiko</text>
-  <text x="196" y="272" class="s">én delt pod, ingen helsesjekker</text>
   <line x1="90" y1="288" x2="90" y2="306" class="a" marker-end="url(#ar4)"/>
   <rect x="0" y="308" width="180" height="38" rx="8" class="n"/>
   <text x="90" y="332" text-anchor="middle">Copilot API</text>
@@ -1030,11 +1024,9 @@ Overgang: «Hvordan kommer vi fra dette til visjonen?»
 
 - Dette er det ene tilfellet vi kjenner i detalj. KI-chatten i aksel-studio skal la designere lage forslag i et konsept (019). Den er på vei til dev og ikke i bruk ennå. Målbildet nevner Aksel Studio som mulig arbeidsflate for designere
 - I dag: studio-api åpner en økt i studio-ki med brukerens ghu_-token og verktøyene. Verktøyene kjører i studio-api (019, «Slik går et verktøykall»)
-- Tilkoblingen er JSON-RPC over ren TCP uten TLS. SDK-en avviser https (aksel-studio docs/oppsett/studio-ki.md, 019)
-- studio-ki har shell-tilgang og tokenet til alle aktive brukere, og ingen prober (studio-ki.md). «Største lokale risiko» er vår vurdering
 - Studio gjør mye riktig: tom modus, tilgangssjekk i hvert verktøy, og bare forslag som brukeren må godta (011, 019). Det er «mennesket avgjør» i liten skala
 - Høyre side er et forslag. Ingenting av Fleet finnes ennå. Hvem som erstatter hva, er vår vurdering
-- studio-ki blir den første brukeren av fleet-runtime. Hver bruker får sin egen sandkasse, og tokenet finnes bare der. Da forsvinner risikoen med den delte poden, og kloning fra GitHub blir mulig (aksel-studio #145)
+- studio-ki blir den første brukeren av fleet-runtime. Hver bruker får sin egen sandkasse, og tokenet finnes bare der. Da blir kloning fra GitHub blir mulig (aksel-studio #145)
 - Forslagsflyten med godta, forkast og If-Match er domenelogikk og blir i Studio (019, «Godta og forkaste»). Domenegrensene blir også: 3 minutter, 20 forslag, 8000 tegn, 3 bilder (019, «Grenser per melding»)
 - Grensesnittene: «Tre små grensesnitt i backend/internal/chat gjør det mulig å bytte KI-plattform senere uten å skrive om resten» (019, «Første versjon i studio-api»). Koden ligger på main i backend/internal/chat/chat.go, med Tool (linje 35), TokenProvider (linje 49) og Runtime (linje 97). Copilot SDK mot studio-ki er én implementasjon, og testene bruker en falsk
   - Tool: verktøy med samme form som i MCP. Bruker og konsept kommer fra serveren, aldri fra modellen
@@ -1064,9 +1056,9 @@ layout: timeline
 Overgang: «Det er ting vi ikke vet ennå.»
 
 - Rekkefølgen er vår anbefaling. Fasene har ingen datoer. Vi har ikke estimert noe, og ingen har forpliktet seg
-- Nå: vi skriver ADR-en «Agenter som tjenester i Nav» i navikt/copilot-intern. Stedet er vårt forslag. Den dekker eier, isolasjonskrav, token per økt og loggfelt. Jurist og GitHub avklarer token på server og brukere uten lisens
+- Nå: vi skriver ADR-en «Agenter som tjenester i Nav». Den dekker eier, isolasjonskrav, token per økt og loggfelt. Jurist og GitHub avklarer token på server og brukere uten lisens
 - Fase 1: fleet-gateway og fleet-control. Fleet samler modell- og verktøykall ett sted og knytter dem til identiteten appen har på Nais. Da blir kostnaden synlig. aksel-studio er først ut, med token exchange på vegne av brukeren. Grensesnittene i aksel-studio er allerede på main
-- Fase 2: fleet-runtime, fleet-sdk med deklarativ konfigurasjon ved siden av nais.yaml, og fleet-radar. studio-ki flytter inn i fleet-runtime som første bruker, med én sandkasse per bruker. PII-vask i gatewayen er et forslag som må utredes. Skriveverktøy forutsetter at kategori 3 er risikovurdert (navikt/copilot-intern/retningslinjer.md § 3)
+- Fase 2: fleet-runtime, fleet-sdk med deklarativ konfigurasjon ved siden av nais.yaml, og fleet-radar. studio-ki flytter inn i fleet-runtime som første bruker, med én sandkasse per bruker. PII-vask i gatewayen er et forslag som må utredes. Skriveverktøy forutsetter at kategori 3 er risikovurdert
 - Fase 3: fleet-orchestrator. Dataprodukter fra Nada i RAG og agenter, og felles regler for menneskelig godkjenning sammen med Aksel. Agentens egen identitet kommer når noen trenger bakgrunnsjobber
 - Etter fase 3: saksbehandling i fagsystemer er visjon. Det krever egen modellvei, risikovurdering og juridisk avklaring
 - Ytre datoer vi kjenner: statsråden vil fremme KI-loven for Stortinget våren 2027, og de første reglene for høyrisiko-KI i EU gjelder fra 2. desember 2027. https://www.regjeringen.no/no/aktuelt/id3169693/
@@ -1103,7 +1095,7 @@ layout: default
   </div>
   <div class="feature-card green">
     <h3>Drift</h3>
-    <p>Ingen helsesjekker for studio-ki. Vi kjenner ikke GitHubs grenser per bruker.</p>
+    <p>Vi kjenner ikke GitHubs grenser per bruker.</p>
   </div>
   <div class="feature-card">
     <h3>Leverandørbinding</h3>
@@ -1118,10 +1110,10 @@ layout: default
 Avslutning: «Hva mener dere? Hva mangler, og hvem bør være med?»
 
 - Lisens: lisens per bruker gir enkel kostnadsfordeling, men brukere uten Copilot mister funksjonen (011). Om vilkårene tillater at en tjeneste bruker brukerens token, er åpent (vår vurdering). Copilot CLI har egen lisens, ikke MIT. Den tillater å kjøre uendret programvare som del av en tjeneste, og jus og sikkerhet skal bekrefte det (011, «Oppfølging»)
-- Personvern: Copilot kan brukes i alle repoer uten personopplysninger eller skjermingsverdig informasjon (navikt/copilot-intern/retningslinjer.md § 1). Bilder i chat øker risikoen (019, «Bilder»)
+- Personvern: Copilot kan brukes i alle repoer uten personopplysninger eller skjermingsverdig informasjon. Bilder i chat øker risikoen (019, «Bilder»)
 - KI-loven: vi har ikke vurdert om noen Nav-agent blir høyrisiko etter KI-forordningen. Eksemplet med saksbehandleren er det som ligger nærmest (vedlegg III nr. 5 bokstav a). Det må en jurist sjekke
-- Eierskap: styringsmodellen dekker utviklerflater og har ingen rolle for agenter som tjenester (navikt/copilot-intern/styringsmodell.md, «Roller og ansvar»). Målbildet sier at KI i produktutvikling kan eie deler av grunnmuren midlertidig, og at tjenesten ikke kan bli eierløs
-- Drift: ingen prober for TCP-serveren (aksel-studio docs/oppsett/studio-ki.md). GitHubs grenser per bruker er ikke oppgitt med tall (011, «Uavklart»)
+- Eierskap: styringsmodellen dekker utviklerflater og har ingen rolle for agenter som tjenester. Målbildet sier at KI i produktutvikling kan eie deler av grunnmuren midlertidig, og at tjenesten ikke kan bli eierløs
+- Drift: GitHubs grenser per bruker er ikke oppgitt med tall (011, «Uavklart»)
 - Leverandørbinding: bindingen ligger i runtimen, ikke i domenet (vår vurdering)
 - Fritt modellvalg er en bærebjelke i visjonen, ikke noe vi har i dag
 - Navnet nav-fleet er valgt. Modulnavnene og fleet.nav.no er forslag
