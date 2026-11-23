@@ -164,7 +164,7 @@ clicks: 4
     </div>
   </div>
   </div>
-  <ol class="five-blocks" :key="$clicks">
+  <ol class="five-blocks">
     <li :class="{ used: true }" style="--d: 0.25s"><b class="pin">1</b><strong>Identitet</strong><span>på vegne av brukeren</span><code>fleet-gateway</code></li>
     <li :class="{ used: true }" style="--d: 0.45s"><b class="pin">2</b><strong>Verktøyregler</strong><span>bare det agenten har lov til</span><code>fleet-control</code></li>
     <li :class="{ used: $clicks === 0 || $clicks === 3 }" style="--d: 0.65s"><b class="pin">3</b><strong>Sandkasse</strong><span>bygger isolert, uten nøkler</span><code>fleet-runtime</code></li>

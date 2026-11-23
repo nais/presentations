@@ -2846,10 +2846,25 @@ pre,
   align-items: end;
 }
 
-.five-blocks {
+.five .five-blocks {
   height: 345px;
   margin: 0;
+  padding: 0;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  gap: 0;
+}
+
+/* No entry animation: only the used/dimmed colouring changes */
+.five .five-blocks li {
+  animation: none;
+  transform: none;
+  transition: opacity 0.4s ease, background-color 0.4s ease, border-color 0.4s ease;
+}
+
+/* Cross-fade between mockups, no movement */
+.app,
+.app.on {
+  transform: none;
 }
