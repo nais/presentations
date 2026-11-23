@@ -1,14 +1,23 @@
 <!-- Adapted from agent-substrate/substrate site demo (site/layouts/_shortcodes/home.html), Apache-2.0 -->
 <script setup>
-  import { onMounted, onUnmounted, reactive, ref } from 'vue'
+  import { onScopeDispose, reactive, ref } from 'vue'
   import './fleet-live.css'
+  import { useLiveTicker } from './fleet-live.js'
 
   const DOTS = 84
   const TEAMS = {
-    'aksel-studio': { color: '#a78bfa', glow: 'rgba(167, 139, 250, 0.5)', job: 'proto' },
+    'aksel-studio': {
+      color: '#a78bfa',
+      glow: 'rgba(167, 139, 250, 0.5)',
+      job: 'proto',
+    },
     dolly: { color: '#61d76b', glow: 'rgba(97, 215, 107, 0.5)', job: 'testdata' },
     nais: { color: '#64b9de', glow: 'rgba(100, 185, 222, 0.5)', job: 'forklar' },
-    'titt-pa-ting': { color: '#e77cb2', glow: 'rgba(231, 124, 178, 0.5)', job: 'triage' },
+    'titt-pa-ting': {
+      color: '#e77cb2',
+      glow: 'rgba(231, 124, 178, 0.5)',
+      job: 'triage',
+    },
   }
   const TEAM_NAMES = Object.keys(TEAMS)
   // Same cycle lengths and phase splits as the original demo
@@ -20,14 +29,44 @@
     10000: { resume: 1700, run: 6800, suspend: 1500 },
   }
   const start = [
-    { dot: 8, team: 'aksel-studio', state: 'running', width: 68, cycle: 5000, stagger: 600 },
-    { dot: 23, team: 'dolly', state: 'running', width: 82, cycle: 6000, stagger: 1800 },
-    { dot: 41, team: 'nais', state: 'resuming', width: 100, cycle: 7500, stagger: 1100 },
-        { dot: 72, team: 'aksel-studio', state: 'suspending', width: 0, cycle: 6000, stagger: 900 },
+    {
+      dot: 8,
+      team: 'aksel-studio',
+      state: 'running',
+      width: 68,
+      cycle: 5000,
+      stagger: 600,
+    },
+    {
+      dot: 23,
+      team: 'dolly',
+      state: 'running',
+      width: 82,
+      cycle: 6000,
+      stagger: 1800,
+    },
+    {
+      dot: 41,
+      team: 'nais',
+      state: 'resuming',
+      width: 100,
+      cycle: 7500,
+      stagger: 1100,
+    },
+    {
+      dot: 72,
+      team: 'aksel-studio',
+      state: 'suspending',
+      width: 0,
+      cycle: 6000,
+      stagger: 900,
+    },
   ]
 
   // Dot state: '' (suspended), 'snap' (suspended with snapshot), or { state, team }
-  const dots = reactive(Array.from({ length: DOTS }, (_, i) => (i % 7 === 0 || i % 11 === 0 ? 'snap' : '')))
+  const dots = reactive(
+    Array.from({ length: DOTS }, (_, i) => (i % 7 === 0 || i % 11 === 0 ? 'snap' : ''))
+  )
   const workers = reactive(
     start.map((w, i) => ({
       id: 'worker-' + (i + 1),
@@ -40,7 +79,7 @@
       ...phase(w.cycle),
       next: 0,
       stagger: w.stagger,
-    })),
+    }))
   )
   workers.forEach((w) => (dots[w.dot] = { state: w.state, team: w.team }))
   const routing = ref('')
@@ -77,7 +116,6 @@
     return pool[Math.floor(Math.random() * pool.length)]
   }
 
-  let timer = null
   let routeTimer = null
 
   function tick() {
@@ -117,20 +155,17 @@
     }
   }
 
-  onMounted(() => {
-    // Reduced motion: keep the static first frame
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+  // Reduced motion keeps the static first frame. Each visit restarts the stagger so the pods do not all switch at once
+  useLiveTicker(tick, 150, () => {
     const now = performance.now()
     workers.forEach((w) => (w.next = now + w.stagger))
-    timer = setInterval(tick, 150)
   })
+  onScopeDispose(() => clearTimeout(routeTimer))
 
-  onUnmounted(() => {
-    clearInterval(timer)
-    clearTimeout(routeTimer)
+  const teamStyle = (team) => ({
+    '--c': TEAMS[team].color,
+    '--g': TEAMS[team].glow,
   })
-
-  const teamStyle = (team) => ({ '--c': TEAMS[team].color, '--g': TEAMS[team].glow })
 </script>
 
 <template>
@@ -138,7 +173,11 @@
     <div class="fl-top"><span class="fl-live" /> eget GKE-cluster · fleet-runtime</div>
     <div class="frd-head">
       <span class="fl-label">AGENTJOBBER</span>
-      <span class="frd-meta">{{ DOTS }} jobber · <b class="fl-num r">{{ count('running') }}</b> kjører · <b class="fl-num w">{{ count('resuming') }}</b> våkner · <b class="fl-num s">{{ count('suspending') }}</b> pauses</span>
+      <span class="frd-meta"
+        >{{ DOTS }} jobber · <b class="fl-num r">{{ count('running') }}</b> kjører ·
+        <b class="fl-num w">{{ count('resuming') }}</b> våkner ·
+        <b class="fl-num s">{{ count('suspending') }}</b> pauses</span
+      >
     </div>
     <div class="frd-dots">
       <span
@@ -150,24 +189,46 @@
       />
     </div>
     <div class="frd-router">
-      <i /><span class="frd-pill" :class="{ on: routing }" :style="routing ? teamStyle(routing) : null">henter kommandoer fra fleet-control</span><i />
+      <i /><span
+        class="frd-pill"
+        :class="{ on: routing }"
+        :style="routing ? teamStyle(routing) : null"
+        >henter kommandoer fra fleet-control</span
+      ><i />
     </div>
-    <div class="frd-head"><span class="fl-label">KLARE WORKER-PODER</span><span class="frd-meta">{{ workers.length }} poder · én jobb hver</span></div>
+    <div class="frd-head">
+      <span class="fl-label">KLARE WORKER-PODER</span
+      ><span class="frd-meta">{{ workers.length }} poder · én jobb hver</span>
+    </div>
     <div class="frd-pods">
-      <div v-for="w in workers" :key="w.id" class="frd-pod" :class="w.state" :style="teamStyle(w.team)">
-        <div class="frd-pod-top"><span class="fl-ellipsis">{{ w.id }}</span><i /></div>
+      <div
+        v-for="w in workers"
+        :key="w.id"
+        class="frd-pod"
+        :class="w.state"
+        :style="teamStyle(w.team)"
+      >
+        <div class="frd-pod-top">
+          <span class="fl-ellipsis">{{ w.id }}</span><i />
+        </div>
         <b class="fl-ellipsis">{{ w.name }}</b>
         <small class="fl-ellipsis">{{ sub(w) }}</small>
-        <div class="frd-track"><div :style="{ width: w.width + '%' }" /></div>
+        <div class="frd-track">
+          <div :style="{ transform: `scaleX(${w.width / 100})` }" />
+        </div>
       </div>
     </div>
     <div class="frd-legend">
-      <span v-for="(t, name) in TEAMS" :key="name"><i :style="{ background: t.color }" />{{ name }}</span>
+      <span v-for="(t, name) in TEAMS" :key="name"
+        ><i :style="{ background: t.color }" />{{ name }}</span
+      >
     </div>
   </div>
 </template>
 
 <style>
+  /* Fixed sizes: state changes never move anything */
+
   .frd {
     display: flex;
     flex-direction: column;
@@ -178,20 +239,20 @@
     overflow: hidden;
   }
 
-
-
   .frd-head {
     display: flex;
     gap: 12px;
     white-space: nowrap;
     justify-content: space-between;
     align-items: baseline;
+    height: 13px;
+    overflow: hidden;
   }
-
 
   .frd-meta {
     color: #9aa89f;
     font-variant-numeric: tabular-nums;
+    flex: none;
   }
 
   .frd-meta b {
@@ -225,6 +286,7 @@
       background-color 0.35s ease,
       box-shadow 0.35s ease,
       transform 0.35s ease;
+    border: 1px solid transparent;
   }
 
   .frd-dot.snap {
@@ -252,6 +314,7 @@
     display: flex;
     align-items: center;
     gap: 8px;
+    height: 20px;
   }
 
   .frd-router i {
@@ -268,6 +331,11 @@
     transition:
       border-color 0.3s ease,
       box-shadow 0.3s ease;
+    width: 230px;
+    height: 18px;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
   }
 
   .frd-pill.on {
@@ -292,6 +360,9 @@
     transition:
       background-color 0.35s ease,
       border-color 0.35s ease;
+    height: 56px;
+    overflow: hidden;
+    border-width: 1px;
   }
 
   .frd-pod b {
@@ -329,6 +400,7 @@
     align-items: center;
     color: #6e7d73;
     font-size: 7px;
+    height: 10px;
   }
 
   .frd-pod-top i {
@@ -336,6 +408,8 @@
     height: 5px;
     border-radius: 50%;
     background: var(--c);
+    flex: none;
+    border: 1px solid transparent;
   }
 
   .frd-pod.suspending .frd-pod-top i {
@@ -353,14 +427,17 @@
   .frd-track div {
     height: 100%;
     background: var(--c);
-    transition: width 0.9s ease;
+    transform-origin: left;
+    transition: transform 0.9s ease;
   }
 
   .frd-legend {
     display: flex;
-    flex-wrap: wrap;
     gap: 10px;
     color: #9aa89f;
+    height: 12px;
+    flex-wrap: nowrap;
+    overflow: hidden;
   }
 
   .frd-legend i {
@@ -371,64 +448,9 @@
     border-radius: 2px;
   }
 
-  @media (prefers-reduced-motion: reduce) {
-    .frd * {
-      transition: none !important;
-    }
-  }
-</style>
-
-<style>
-  /* Fixed sizes so state changes never move anything */
-  .frd-head {
-    height: 13px;
-    overflow: hidden;
-  }
-
-  .frd-meta {
-    flex: none;
-  }
-
-  .frd-router {
-    height: 20px;
-  }
-
-  .frd-pill {
-    width: 230px;
-    height: 18px;
-    text-align: center;
-    white-space: nowrap;
-    overflow: hidden;
-  }
-
-  .frd-pod {
-    height: 56px;
-    overflow: hidden;
-    border-width: 1px;
-  }
-
-  .frd-pod-top {
-    height: 10px;
-  }
-
   .frd-pod b,
   .frd-pod small {
     display: block;
     height: 11px;
-  }
-
-  .frd-pod-top i {
-    flex: none;
-    border: 1px solid transparent;
-  }
-
-  .frd-dot {
-    border: 1px solid transparent;
-  }
-
-  .frd-legend {
-    height: 12px;
-    flex-wrap: nowrap;
-    overflow: hidden;
   }
 </style>

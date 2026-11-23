@@ -1,7 +1,8 @@
 <!-- Live fleet-radar trace for one agent job. Same look as FleetRuntimeDemo (fleet-live.css). Sketch only: made-up data. -->
 <script setup>
-  import { onMounted, onUnmounted, ref } from 'vue'
+  import { ref } from 'vue'
   import './fleet-live.css'
+  import { useLiveTicker } from './fleet-live.js'
 
   const TRACES = [
     {
@@ -39,8 +40,6 @@
   const shown = ref(SLOTS)
   const traceId = ref('4bf92f35')
   const t0 = ref(11)
-  let timer = null
-
   function tick() {
     if (shown.value < SLOTS + 3) {
       shown.value++ // the three extra ticks hold the finished trace on screen
@@ -54,14 +53,14 @@
     shown.value = 1
   }
 
-  const time = (i) => '10:' + String(t0.value + Math.floor(i * 0.6)).padStart(2, '0') + ':' + String((i * 7 + 11) % 60).padStart(2, '0')
+  const time = (i) =>
+    '10:' +
+    String(t0.value + Math.floor(i * 0.6)).padStart(2, '0') +
+    ':' +
+    String((i * 7 + 11) % 60).padStart(2, '0')
 
-  onMounted(() => {
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
-    shown.value = 1
-    timer = setInterval(tick, 1300)
-  })
-  onUnmounted(() => clearInterval(timer))
+  // Each visit to the slide replays the trace from its first row
+  useLiveTicker(tick, 1300, () => (shown.value = 1))
 </script>
 
 <template>
