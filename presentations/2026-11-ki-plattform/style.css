@@ -1954,7 +1954,7 @@ pre,
 }
 
 .app u,
-.app i {
+.app .bw-body i {
   font-style: normal;
   text-decoration: none;
   padding: 0.05rem 0.4rem;
