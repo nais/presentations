@@ -2683,3 +2683,31 @@ pre,
   grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
   width: 900px;
 }
+
+/* Contrast, deck-wide: inline code is always dark text on a light chip, and chip text is dark enough to read */
+.slidev-layout :not(pre) > code {
+  padding: 0.05rem 0.35rem;
+  border-radius: 4px;
+  background: #f1f5f9;
+  color: #0f172a;
+}
+
+.tip-fleet li code,
+.tip-fleet code {
+  padding: 0;
+  background: none;
+  color: #cbd5e1;
+}
+
+.five .five-blocks li code {
+  background: #e6f0ff;
+  color: #0b1528;
+}
+
+.chip.green {
+  color: #047857;
+}
+
+.chip.blue {
+  color: #1d4ed8;
+}
