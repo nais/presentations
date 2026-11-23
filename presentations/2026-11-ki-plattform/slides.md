@@ -61,7 +61,7 @@ fonts:
 <p class="cover-kicker font-mono">PLAN · GJELDENDE RETNING, IKKE LÅST</p>
 <img src="/icons/fleet/nav-fleet.svg?v=8" alt="" class="cover-mark" />
 <h1 class="cover-title">nav-fleet</h1>
-<p class="cover-tagline">Himmelen er grensen.<br>Mennesket har kursen.</p>
+<p class="cover-tagline">Agentene gjør jobben.<br>Mennesket har kursen.</p>
 <p class="cover-sub">Trygge KI-agenter i Nav, som byggeklosser</p>
 
 ::footer::
@@ -74,7 +74,7 @@ Overgang: «La oss se på fem agenter.»
 - Merkelappene: «besluttet» er bestemt av eieren, «forslag» er vår anbefaling, «visjon» er retningen uten plan, «hypotese» er noe vi tror, men ikke har avtalt med noen
 - Rekkefølgen: fem agenter med samme byggeklosser, isfjellet, ett spørsmål gjennom Fleet, innsyn, ansvar, behovet, det som virker i dag, formål og grenser, visjonen, modulene, kjøretiden, identitet, styring, kostnad, status, veikartet og åpne spørsmål
 - Navnet: nav-fleet, til daglig Fleet, på linje med Nais, Nada og Aksel. nav-pilot var én pilot. Fleet er en flåte i produksjon, og plattformen er flåtestyringen
-- Modulene er tre: fleet-gateway, fleet-control og fleet-runtime. I tillegg kommer et offentlig register og MCP-servere som teamene eier
+- Modulene er fire: fleet-gateway, fleet-control, fleet-runtime og fleet-radar for innsyn og revisjon. I tillegg kommer et offentlig register og MCP-servere som teamene eier
 - Kjente navn utenfor Nav: Rancher Fleet, Fleet (enhetsstyring) og JetBrains Fleet. Vi har ikke sjekket varemerker
 -->
 
@@ -139,7 +139,7 @@ clicks: 4
     <li style="--d: 0.45s"><b class="pin">2</b><strong>Verktøyregler</strong><span>bare det agenten har lov til</span><code>fleet-control</code></li>
     <li style="--d: 0.65s"><b class="pin">3</b><strong>Sandkasse</strong><span>isolert, uten nøkler</span><code>fleet-runtime</code></li>
     <li style="--d: 0.85s"><b class="pin">4</b><strong>Godkjenning</strong><span>mennesket sier ja</span><code>appen</code></li>
-    <li style="--d: 1.05s"><b class="pin">5</b><strong>Revisjon</strong><span>og kostnad per steg</span><code>fleet-control</code></li>
+    <li style="--d: 1.05s"><b class="pin">5</b><strong>Revisjon</strong><span>og kostnad per steg</span><code>fleet-radar</code></li>
   </ol>
 </div>
 
@@ -168,7 +168,7 @@ layout: default
 
 ::default::
 <div class="tip">
-  <BrowserWindow url="aksel-studio · konsept: søknadsskjema (skisse)" class="tip-win" role="img" aria-label="Skisse av Aksel Studio med en KI-assistent i et sidepanel. Fem nummererte punkter i chatten svarer til fem byggeklosser: fleet-gateway handler på vegne av designeren, fleet-control slipper bare til verktøy agenten har lov til, fleet-runtime bygger isolert uten nøkler i sandkassen, appen ber designeren si ja før en bestilling, og fleet-control reviderer hvert steg med kostnad.">
+  <BrowserWindow url="aksel-studio · konsept: søknadsskjema (skisse)" class="tip-win" role="img" aria-label="Skisse av Aksel Studio med en KI-assistent i et sidepanel. Fem nummererte punkter i chatten svarer til fem byggeklosser: fleet-gateway handler på vegne av designeren, fleet-control slipper bare til verktøy agenten har lov til, fleet-runtime bygger isolert uten nøkler i sandkassen, appen ber designeren si ja før en bestilling, og fleet-radar viser revisjon og kostnad for hvert steg.">
     <div class="km-top">
       <strong>Aksel Studio</strong>
       <span class="on">Søknadsskjema</span>
@@ -201,7 +201,7 @@ layout: default
         <li class="a-rise" style="--d: 1.2s"><b class="pin">2</b><span>Bare verktøy agenten har lov til</span><code>fleet-control</code></li>
         <li class="a-rise" style="--d: 1.5s"><b class="pin">3</b><span>Bygger isolert, uten nøkler</span><code>fleet-runtime</code></li>
         <li class="a-rise" style="--d: 1.8s"><b class="pin">4</b><span>Ingen bestilling uten ja fra Ola</span><code>appen</code></li>
-        <li class="a-rise" style="--d: 2.1s"><b class="pin">5</b><span>Revisjon og kostnad per steg</span><code>fleet-control</code></li>
+        <li class="a-rise" style="--d: 2.1s"><b class="pin">5</b><span>Revisjon og kostnad per steg</span><code>fleet-radar</code></li>
       </ol>
     </div>
     <div class="tip-base a-fade" style="--d: 2.4s">Teamets egen modell · MCP-servere fra teamene · Nais</div>
@@ -220,7 +220,7 @@ layout: default
 - Punkt 2: fleet-control har agentprofilen. Den sier hvilke verktøy agenten får bruke. Rettighetene er snittet av det brukeren, ruten og agenten har lov til
 - Punkt 3: bygget kjører i fleet-runtime. Sandkassen er stengt for trafikk ut, og modellnøkler legges på utenfor sandkassen
 - Punkt 4: å bestille i Dolly er skriving. Appen spør brukeren, og jobben venter på svaret. At jobben kan pause og spørre, kommer etter fase 1
-- Punkt 5: hvert kall revideres med bruker og agent, og bruken telles per team og agent
+- Punkt 5: fleet-radar viser revisjonen av hvert kall med bruker og agent, og bruken per team og agent
 - Data: bare åpne og interne data og syntetiske testdata går gjennom modellene i piloten
 - Overgang: «Hva skjer egentlig under vannlinjen når Ola trykker enter?»
 -->
@@ -234,10 +234,10 @@ layout: default
 <p class="subtitle">Ett spørsmål, fem steg under vannlinjen <span class="chip amber align-middle ml-2">Eksempel · forslag</span></p>
 
 ::default::
-<svg class="dg seq" viewBox="0 0 880 340" role="img" aria-label="Sekvensdiagram i fem steg. 1: Ola spør i Aksel Studio, og appen starter en jobb i fleet-runtime. 2: Agenten spør teamets egen modell, og nøkkelen legges på utenfor sandkassen. 3: Agenten søker etter testpersoner i Dolly gjennom fleet-gateway, og fleet-control sjekker at agenten har lov. 4: Agenten foreslår å bestille en testperson, og Ola sier ja i appen. 5: Agenten bestiller gjennom fleet-gateway, som sjekker godkjenningen, og jobben avsluttes med et artefakt. Nederst viser revisjonen i fleet-control én linje per steg.">
+<svg class="dg seq" viewBox="0 0 880 340" role="img" aria-label="Sekvensdiagram i fem steg. 1: Ola spør i Aksel Studio, og appen starter en jobb i fleet-runtime. 2: Agenten spør teamets egen modell, og nøkkelen legges på utenfor sandkassen. 3: Agenten søker etter testpersoner i Dolly gjennom fleet-gateway, og fleet-control sjekker at agenten har lov. 4: Agenten foreslår å bestille en testperson, og Ola sier ja i appen. 5: Agenten bestiller gjennom fleet-gateway, som sjekker godkjenningen, og jobben avsluttes med et artefakt. Nederst viser fleet-radar én revisjonslinje per steg.">
   <defs><marker id="ar9" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" class="ah"/></marker></defs>
   <rect x="15.0" y="0" width="110" height="44" rx="8" class="b"/><text x="70" y="19" class="t" text-anchor="middle">Ola i appen</text><text x="70" y="36" class="s" text-anchor="middle">Aksel Studio</text><line x1="70" y1="44" x2="70" y2="284" class="life"/><rect x="215.0" y="0" width="150" height="44" rx="8" class="p"/><text x="290" y="19" class="t" text-anchor="middle">Agent</text><text x="290" y="36" class="s" text-anchor="middle">fleet-runtime</text><line x1="290" y1="44" x2="290" y2="284" class="life"/><rect x="425.0" y="0" width="150" height="44" rx="8" class="p"/><text x="500" y="19" class="t" text-anchor="middle">fleet-gateway</text><text x="500" y="36" class="s" text-anchor="middle">sjekker verktøykall</text><line x1="500" y1="44" x2="500" y2="284" class="life"/><rect x="635.0" y="0" width="110" height="44" rx="8" class="b"/><text x="690" y="19" class="t" text-anchor="middle">Modell</text><text x="690" y="36" class="s" text-anchor="middle">teamets egen</text><line x1="690" y1="44" x2="690" y2="284" class="life"/><rect x="760.0" y="0" width="110" height="44" rx="8" class="b"/><text x="815" y="19" class="t" text-anchor="middle">Verktøy</text><text x="815" y="36" class="s" text-anchor="middle">Dolly</text><line x1="815" y1="44" x2="815" y2="284" class="life"/>
-  <rect x="0" y="292" width="880" height="46" rx="8" class="n"/><text x="10" y="302" class="s rad">revisjon i fleet-control</text>
+  <rect x="0" y="292" width="880" height="46" rx="8" class="n"/><text x="10" y="302" class="s rad">revisjon i fleet-radar</text>
   <g v-click><line x1="70" y1="74" x2="282" y2="74" class="a" marker-end="url(#ar9)"/><text x="190" y="68" class="s" text-anchor="middle">Start jobb (jobb-API)</text><rect x="47" y="59" width="18" height="18" rx="4" class="pn"/><text x="56" y="71.5" class="pnt" text-anchor="middle">1</text><rect x="282" y="64" width="16" height="200" rx="3" class="sbx"/><text x="276" y="100" class="s sbt" text-anchor="end">sandkasse for jobben</text><g><g class="lg"><rect x="18" y="306" width="132" height="24" rx="5"/><text x="84" y="322" text-anchor="middle">1 · Ola · start</text></g></g></g>
   <g v-click><line x1="298" y1="112" x2="690" y2="112" class="a" marker-end="url(#ar9)"/><text x="400" y="106" class="s" text-anchor="middle">Lag skjemaet</text><rect x="307" y="87" width="18" height="18" rx="4" class="pn"/><text x="316" y="99.5" class="pnt" text-anchor="middle">2</text><text x="560" y="126" class="s gwt" text-anchor="middle">nøkkelen legges på utenfor sandkassen</text><line x1="690" y1="140" x2="300" y2="140" class="a ret" marker-end="url(#ar9)"/><g class="lg"><rect x="162" y="306" width="132" height="24" rx="5"/><text x="228" y="322" text-anchor="middle">2 · modell · ok</text></g></g>
   <g v-click><line x1="298" y1="168" x2="815" y2="168" class="a" marker-end="url(#ar9)"/><circle cx="500" cy="168" r="4.5" class="gwd"/><text x="400" y="162" class="s" text-anchor="middle">Finn testpersoner</text><rect x="307" y="143" width="18" height="18" rx="4" class="pn"/><text x="316" y="155.5" class="pnt" text-anchor="middle">3</text><g class="chk"><rect x="410" y="174" width="180" height="20" rx="10"/><text x="500" y="188" text-anchor="middle">fleet-control: agenten har lov ✓</text></g><line x1="815" y1="206" x2="300" y2="206" class="a ret" marker-end="url(#ar9)"/><text x="720" y="200" class="s" text-anchor="middle">ingen passer</text><g class="lg"><rect x="306" y="306" width="132" height="24" rx="5"/><text x="372" y="322" text-anchor="middle">3 · lesing · ok</text></g></g>
@@ -255,7 +255,7 @@ layout: default
 - 3: Agenten søker i Dolly gjennom fleet-gateway. fleet-control sier hva agentprofilen har lov til. Dolly lager bare syntetiske testpersoner
 - 4: Å bestille er skriving. Appen spør Ola, og jobben venter. At jobben kan pause og spørre via appen, er utenfor fase 1
 - 5: Bestillingen går gjennom fleet-gateway, som sjekker godkjenningen. Jobben avsluttes, og resultatet kommer som et artefakt
-- Nederst: én revisjonslinje per steg, med bruker, agent, verktøy, utfall og trace-ID
+- Nederst: fleet-radar viser én revisjonslinje per steg, med bruker, agent, verktøy, utfall og trace-ID
 - Teamet har skrevet appen, chatten og agenten. Resten er Fleet
 - Overgang: «Kan vi i ettertid se hva agenten gjorde?»
 -->
@@ -270,7 +270,7 @@ layout: default
 
 ::default::
 <div class="trace">
-  <BrowserWindow url="fleet-control · innsyn · jobb 7f3a (skisse)" class="trace-win" role="img" aria-label="Skisse av en tidslinje for én agentjobb: start, regelsjekk, modellkall, verktøykall, en regelsjekk som krever godkjenning, godkjenningen, skrivekallet og slutten. Øverst står agent, team, hvem som startet jobben og trace-ID.">
+  <BrowserWindow url="fleet-radar · jobb 7f3a (skisse)" class="trace-win" role="img" aria-label="Skisse av en tidslinje for én agentjobb: start, regelsjekk, modellkall, verktøykall, en regelsjekk som krever godkjenning, godkjenningen, skrivekallet og slutten. Øverst står agent, team, hvem som startet jobben og trace-ID.">
     <div class="trace-meta"><span><b>Agent</b> studio-prototype</span><span><b>Team</b> Aksel Studio</span><span><b>Startet av</b> Ola N.</span><span><b>Trace-ID</b> 4bf92f35…</span></div>
     <ol class="trace-list">
       <li class="a-rise" style="--d: 0.2s"><time>10:02:11</time><span class="k start">start</span><span>Ola N. starter jobben fra Aksel Studio</span><em>ok</em></li>
@@ -302,7 +302,7 @@ layout: default
 
 <!--
 - Den som skal godkjenne en KI-tjeneste, spør først: kan vi se hva den gjorde? Dette er svaret vårt
-- Skissen viser samme jobb som forrige lysbilde. Tidslinjen er et forslag til hvordan innsynet kan se ut. Den er ikke bygget
+- Skissen viser fleet-radar, modulen for innsyn og revisjon, for samme jobb som forrige lysbilde. Tidslinjen er et forslag til hvordan innsynet kan se ut. Den er ikke bygget
 - Det som finnes i dag: fleet-gateway reviderer hvert verktøykall med bruker og klient. Revisjon av hver jobb i fleet-runtime er et krav før kjøretiden går i pilot
 - Hvem ser hva: teamet ser sine egne agenter. Eiere og revisorer over teamet (ledelsen, sikkerhet, personvernombudet og internrevisjonen) ser revisjonen for teamene de har ansvar for
 - Vi lover ikke mer enn det som står her. Om innholdet i prompter og svar, eller agentens begrunnelse, skal lagres, er et åpent designvalg. Det avhenger av formål, grunnlag og lagringstid
@@ -590,8 +590,8 @@ layout: default
   <text x="95" y="158" text-anchor="middle" class="s">og infrastruktur</text>
   <rect x="345" y="74" width="190" height="124" rx="10" class="p"/>
   <text x="440" y="112" text-anchor="middle" class="h">nav-fleet</text>
-  <text x="440" y="140" text-anchor="middle" class="s">trygge KI-agenter</text>
-  <text x="440" y="158" text-anchor="middle" class="s">som byggeklosser</text>
+  <text x="440" y="140" text-anchor="middle" class="s">gateway, control,</text>
+  <text x="440" y="158" text-anchor="middle" class="s">runtime og radar</text>
   <text x="440" y="184" text-anchor="middle" class="s x">fleet.nav.no (forslag)</text>
   <rect x="690" y="74" width="190" height="124" rx="10" class="n"/>
   <text x="785" y="112" text-anchor="middle" class="h">Nada</text>
@@ -650,11 +650,11 @@ layout: default
 ---
 
 ::header::
-<h1 class="text-3xl font-bold">Tre moduler og MCP-servere fra teamene</h1>
+<h1 class="text-3xl font-bold">Fire moduler og MCP-servere fra teamene</h1>
 <p class="subtitle">Appene kjører på Nais. Agentene kjører i fleet-runtime. Registeret viser hva som finnes</p>
 
 ::default::
-<svg class="dg mod" viewBox="0 0 880 352" role="img" aria-label="Øverst Nais-apper som starter agentjobber, og utviklerverktøy som kaller verktøy. I midten nav-fleet med tre moduler: fleet-control med regler og jobb-API, fleet-runtime med sandkasser på egen GKE-klynge, og fleet-gateway som håndhever hvert verktøykall. Appene starter jobber i fleet-control, som sender dem til fleet-runtime. Agentene kaller verktøy gjennom fleet-gateway. Nederst registeret som er en offentlig lesekopi av fleet-control, teamets egen modell, og MCP-servere som teamene eier.">
+<svg class="dg mod" viewBox="0 0 880 352" role="img" aria-label="Øverst Nais-apper som starter agentjobber, og utviklerverktøy som kaller verktøy. I midten nav-fleet med fire moduler: fleet-control med regler og jobb-API, fleet-runtime med sandkasser på egen GKE-klynge, fleet-gateway som håndhever hvert verktøykall, og under dem fleet-radar med innsyn og revisjon. Appene starter jobber i fleet-control, som sender dem til fleet-runtime. Agentene kaller verktøy gjennom fleet-gateway. Nederst registeret som er en offentlig lesekopi av fleet-control, teamets egen modell, og MCP-servere som teamene eier.">
   <defs><marker id="ar2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" class="ah"/></marker></defs>
   <g class="a-rise" style="--d: 0.1s; --dy: -12px">
     <rect x="0" y="2" width="300" height="48" rx="8" class="b"/>
@@ -673,37 +673,40 @@ layout: default
   <rect x="0" y="64" width="880" height="214" rx="10" class="p" style="fill-opacity: .55"/>
   <text x="440" y="86" class="h" text-anchor="middle">nav-fleet</text>
   <g class="a-rise" style="--d: 0.4s">
-    <rect x="16" y="110" width="262" height="152" rx="8" class="b"/>
+    <rect x="16" y="110" width="262" height="124" rx="8" class="b"/>
     <text x="147" y="134" class="t" text-anchor="middle">fleet-control</text>
     <text x="147" y="156" class="s" text-anchor="middle">servere, ruter, verktøy, agentprofiler</text>
     <text x="147" y="176" class="s" text-anchor="middle">jobb-API: jobb-ID inn, artefakt ut</text>
-    <text x="147" y="196" class="s" text-anchor="middle">godkjenning, budsjett og innsyn</text>
-    <text x="147" y="216" class="s" text-anchor="middle">revisjon av hver endring</text>
-    <text x="147" y="248" class="s x" text-anchor="middle">lese-API bygget</text>
+    <text x="147" y="196" class="s" text-anchor="middle">godkjenning og budsjett</text>
+    <text x="147" y="220" class="s x" text-anchor="middle">lese-API bygget</text>
   </g>
   <g class="a-rise" style="--d: 0.55s">
-    <rect x="309" y="110" width="262" height="152" rx="8" class="b"/>
+    <rect x="309" y="110" width="262" height="124" rx="8" class="b"/>
     <text x="440" y="134" class="t" text-anchor="middle">fleet-runtime</text>
     <text x="440" y="156" class="s" text-anchor="middle">sandkasse per jobb, egen GKE</text>
     <text x="440" y="176" class="s" text-anchor="middle">stengt for trafikk ut</text>
     <text x="440" y="196" class="s" text-anchor="middle">nøkler legges på utenfor</text>
-    <text x="440" y="216" class="s" text-anchor="middle">teamets harness eller image</text>
-    <text x="440" y="248" class="s x" text-anchor="middle">ikke bygget, spike først</text>
+    <text x="440" y="220" class="s x" text-anchor="middle">ikke bygget, spike først</text>
   </g>
   <g class="a-rise" style="--d: 0.7s">
-    <rect x="602" y="110" width="262" height="152" rx="8" class="b"/>
+    <rect x="602" y="110" width="262" height="124" rx="8" class="b"/>
     <text x="733" y="134" class="t" text-anchor="middle">fleet-gateway</text>
     <text x="733" y="156" class="s" text-anchor="middle">inngangen for alle verktøykall</text>
     <text x="733" y="176" class="s" text-anchor="middle">token per rute (OBO)</text>
     <text x="733" y="196" class="s" text-anchor="middle">verktøyliste, kvote og nødbryter</text>
-    <text x="733" y="216" class="s" text-anchor="middle">revisjon av hvert kall</text>
-    <text x="733" y="248" class="s x" text-anchor="middle">pilot i prod</text>
+    <text x="733" y="220" class="s x" text-anchor="middle">pilot i prod</text>
   </g>
   <line x1="278" y1="170" x2="307" y2="170" class="a" marker-end="url(#ar2)"/>
   <line x1="571" y1="170" x2="600" y2="170" class="a" marker-end="url(#ar2)"/>
-  <line x1="147" y1="262" x2="147" y2="298" class="a" marker-end="url(#ar2)"/>
-  <line x1="440" y1="262" x2="440" y2="298" class="a" marker-end="url(#ar2)"/>
-  <line x1="733" y1="262" x2="733" y2="298" class="a" marker-end="url(#ar2)"/>
+  <g class="a-rise" style="--d: 0.85s">
+    <rect x="16" y="242" width="848" height="28" rx="8" class="b"/>
+    <image href="/icons/fleet/fleet-radar.svg?v=8" x="26" y="245" width="22" height="22"/>
+    <text x="56" y="261" class="t" style="font-size: 13.5px">fleet-radar</text>
+    <text x="150" y="261" class="s">innsyn og revisjon: hver jobb, hvert kall og hver endring, for teamet, eierne og revisorene</text>
+  </g>
+  <line x1="147" y1="278" x2="147" y2="298" class="a" marker-end="url(#ar2)"/>
+  <line x1="440" y1="278" x2="440" y2="298" class="a" marker-end="url(#ar2)"/>
+  <line x1="733" y1="278" x2="733" y2="298" class="a" marker-end="url(#ar2)"/>
   <rect x="0" y="300" width="290" height="50" rx="8" class="n"/>
   <text x="145" y="321" class="t" text-anchor="middle">Registeret</text>
   <text x="145" y="339" class="s" text-anchor="middle">offentlig lesekopi av fleet-control</text>
@@ -724,6 +727,7 @@ Overgang: «Hvorfor kjører agentene ikke på Nais?»
 - fleet-control er eneste kilde for servere, ruter, verktøy og agentprofiler. Appen starter en agentkjøring gjennom et asynkront jobb-API og får en jobb-ID. Resultatet kommer som et artefakt. fleet-runtime bare utfører
 - fleet-runtime er en sandkasse for agentkjøringer på egen GKE-klynge. Team tar med enten konfigurasjon for en standard agentharness eller sitt eget containerimage. Profilen avgjør om kjøringen er kort og uten tilstand eller en lang økt
 - fleet-gateway håndhever per kall: token per rute, verktøyliste, hash-låsing av verktøy, kvote og nødbryter, og reviderer hvert kall
+- fleet-radar er innsyn og revisjon: hver jobb, hvert verktøykall og hver endring i fleet-control, samlet med trace-ID. Teamet, eierne og revisorene ser det samme. Ikonet er radaren
 - Registeret er en offentlig lesekopi av fleet-control
 - MCP-servere: teamene eier verktøyene, dataene og risikoen bak dem
 - Det enkle tilfellet er også med: en Nais-app med et standard MCP-SDK kaller ett eller to verktøy gjennom fleet-gateway, uten fleet-runtime
@@ -1018,7 +1022,7 @@ Overgang: «Det er ting vi ikke vet ennå.»
 
 - Hver fase har krav som må være oppfylt før neste regnes som startet for alvor, også krav til etterlevelse
 - Fase 1: gatewayen kjører allerede. Det som gjenstår, er kvote som tåler omstart, en felles hendelsesrutine og at eiere og revisorer kan lese revisjonen
-- Fase 2: fleet-control med selvbetjening, godkjenning, automatiske rekkverk, jobb-API, innsyn for eiere og revisorer, og budsjett
+- Fase 2: fleet-control med selvbetjening, godkjenning, automatiske rekkverk, jobb-API og budsjett, og fleet-radar med innsyn for eiere og revisorer
 - Fase 3: identitet gjøres riktig, uten frist. Første agent er studio-api fra Aksel Studio med lesetilgang til Dolly
 - Fase 4: spiken for fleet-runtime går parallelt med fase 2. Så go eller no-go fra produkteieren. Piloten bruker teamets egen modell og bare testdata
 - Fase 5: før plattformen åpnes bredere trengs uavhengig sikkerhetstest, oppdatert ROS og gjennomgang med sikkerhet og internrevisjonen
@@ -1089,11 +1093,11 @@ layout: default
 ---
 
 ::header::
-<h1 class="text-4xl font-black">Himmelen er grensen</h1>
-<p class="tagline mt-2">nav-fleet gir agentene vinger. Mennesket har kursen.</p>
+<h1 class="text-4xl font-black">Felles byggeklosser, trygge agenter</h1>
+<p class="tagline mt-2">Teamene eier agentene. Fleet gjør det trygt å sette dem i produksjon.</p>
 
 ::default::
-<svg class="dg fly" viewBox="0 0 880 340" role="img" aria-label="Seks piler i trekantformasjon stiger mot øvre høyre hjørne i en åpen himmel. En stiplet linje foran den fremste pilen viser kursen.">
+<svg class="dg fly" viewBox="0 0 880 340" role="img" aria-label="Seks piler i trekantformasjon stiger mot øvre høyre hjørne. En stiplet linje foran den fremste pilen viser kursen.">
   <g class="climb">
     <path d="M572 98L620 50" class="course"/>
     <path d="M607 48h15v15" class="courseh"/>
@@ -1112,8 +1116,7 @@ layout: default
 <span class="font-mono text-sm opacity-70">nav-fleet · gjeldende retning · ikke låst</span>
 
 <!--
-- Slagordet: «Himmelen er grensen. Mennesket har kursen.»
-- Engelsk variant: «Sky is the limit. Safety is the default.»
-- Figuren: de samme pilene som på forsiden, nå på vei opp i åpen himmel
+- Avslutningen i én setning: teamene eier agentene, og Fleet gjør det trygt å sette dem i produksjon
+- Figuren: de samme pilene som på forsiden, i formasjon på felles kurs
 -->
 
