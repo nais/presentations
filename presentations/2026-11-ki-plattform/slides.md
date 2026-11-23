@@ -61,7 +61,7 @@ fonts:
 <p class="cover-kicker font-mono">PLAN · GJELDENDE RETNING, IKKE LÅST</p>
 <img src="/icons/fleet/nav-fleet.svg?v=8" alt="" class="cover-mark" />
 <h1 class="cover-title">nav-fleet</h1>
-<p class="cover-tagline">Agentene gjør jobben.<br>Mennesket har kursen.</p>
+<p class="cover-tagline">Agentene gjør forarbeidet.<br>Mennesket avgjør.</p>
 <p class="cover-sub">Trygge KI-agenter i Nav, som byggeklosser</p>
 
 ::footer::
@@ -562,7 +562,7 @@ Overgang: «Hvor hører Fleet hjemme blant det vi har?»
 - Visjonen i én setning: det skal være enkelt, trygt og raskt for produktteam å bygge, drifte og videreutvikle KI i produksjon, med etterlevelse innebygd og uten dobbeltarbeid
 - Selvbetjent: som i Nais. Teamet godkjenner egne endringer med to personer. Team copilot godkjenner ikke hver endring
 - Automatiske rekkverk: plattformen håndhever kvote, nødbryter, utestenging og revisjon, og sjekker i CI
-- Egen modelltilgang: hvert team tar med sin egen modelltilgang og betaler selv. Plattformen koster bare infrastruktur
+- Egen modelltilgang: hvert team tar med sin egen modelltilgang og betaler selv. Plattformen koster infrastruktur og folk til drift
 - Fullt innsyn: ikke bare for teamet, men for dem som eier og reviderer teamet
 - Underlaget: agentsandkassene kjører i en egen GKE-klynge utenfor Nais. Modellene følger samme regler som for Copilot. Resten kjører på Nais der det passer
 - Figuren: fem piler i formasjon, samme tegn som i logoen
@@ -803,10 +803,10 @@ layout: default
 
 ::header::
 <h1 class="text-3xl font-bold">Agenten låner brukerens rettigheter, men modellen ser aldri tokenet</h1>
-<p class="subtitle">I dag bytter gatewayen token per rute. Nais STS og egen agentidentitet kommer senere</p>
+<p class="subtitle">I dag bytter gatewayen token per rute. Nais STS og egen agentidentitet vurderes</p>
 
 ::default::
-<svg class="dg" viewBox="0 0 880 280" role="img" aria-label="Identitetsflyt i fire steg: brukeren logger inn i appen, appen får et token til gatewayen via Texas, agenten i fleet-runtime kaller verktøy gjennom fleet-gateway, og gatewayen sjekker, bytter token per rute og logger før verktøyet kjører. Under står hvordan rettigheter, tokener og logging håndteres i dag, og hva som kommer senere: Nais STS og egen agentidentitet.">
+<svg class="dg" viewBox="0 0 880 280" role="img" aria-label="Identitetsflyt i fire steg: brukeren logger inn i appen, appen får et token til gatewayen via Texas, agenten i fleet-runtime kaller verktøy gjennom fleet-gateway, og gatewayen sjekker, bytter token per rute og logger før verktøyet kjører. Under står hvordan rettigheter, tokener og logging håndteres i dag, og hva som vurderes: Nais STS og egen agentidentitet.">
   <defs><marker id="ar3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" class="ah"/></marker></defs>
   <rect x="0" y="8" width="128" height="56" rx="8" class="b"/>
   <text x="64" y="41" class="t" text-anchor="middle">Bruker</text>
@@ -854,8 +854,8 @@ layout: default
   <text x="24" y="224" class="t">Logging</text>
   <text x="160" y="224">Hvem, hvilken agent, hvilket verktøy og utfallet.</text>
   <rect x="0" y="242" width="880" height="36" rx="10" class="q"/>
-  <text x="24" y="265" class="t" style="fill: #b45309">Senere</text>
-  <text x="160" y="265">Nais STS som utsteder, og egen agentidentitet for agenter uten bruker. Ikke i fase 1.</text>
+  <text x="24" y="265" class="t" style="fill: #b45309">Vurderes</text>
+  <text x="160" y="265">Nais STS som utsteder, og egen agentidentitet for agenter uten bruker. Ikke bestemt, ikke i fase 1.</text>
 </svg>
 
 ::footer::
@@ -923,7 +923,7 @@ layout: default
 ---
 
 ::header::
-<h1 class="text-3xl font-bold">Plattformen koster bare infrastruktur. Teamene tar med egen modell</h1>
+<h1 class="text-3xl font-bold">Plattformen koster infrastruktur og drift. Teamene tar med egen modell</h1>
 <p class="subtitle">Ingen felles modellpott <span class="chip green align-middle ml-2">Besluttet</span></p>
 
 ::default::
@@ -1056,7 +1056,7 @@ layout: default
 <div class="card-row">
   <div class="feature-card purple">
     <h3>Drift</h3>
-    <p>Vi eier hele klyngen: oppgradering, hendelser og kapasitet.</p>
+    <p>Hvem tar oppgradering, hendelser og kapasitet når vi eier hele klyngen?</p>
   </div>
   <div class="feature-card green">
     <h3>Modeller</h3>
@@ -1064,7 +1064,7 @@ layout: default
   </div>
   <div class="feature-card">
     <h3>Leverandørbinding</h3>
-    <p>MCP og «ta med egen modell» gjør det billigere å bytte.</p>
+    <p>Blir vi bundet til én leverandør, eller holder MCP og egen modell det åpent?</p>
   </div>
 </div>
 
