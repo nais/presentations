@@ -113,15 +113,19 @@ clicks: 4
     </div>
     <div class="app dl" :class="{ on: $clicks === 1 }">
       <BrowserWindow url="dolly (skisse)" class="aw">
-        <div class="dl-grid">
-          <main>
-            <h4>Opprett testperson</h4>
-            <div class="dl-filters"><span>Alder: 30–40</span><span>Sivilstand: gift</span><span>Arbeidsforhold: 2</span><span>Barn: 1</span></div>
-            <table><tr><th>Navn</th><th>Alder</th><th>Arb.forhold</th><th>Barn</th></tr><tr><td>Testperson A</td><td>34</td><td>2</td><td>1</td></tr><tr><td>Testperson B</td><td>38</td><td>2</td><td>1</td></tr><tr><td>Testperson C</td><td>31</td><td>2</td><td>1</td></tr><tr><td>Testperson D</td><td>36</td><td>2</td><td>1</td></tr><tr><td>Testperson E</td><td>33</td><td>2</td><td>1</td></tr><tr><td>Testperson F</td><td>39</td><td>2</td><td>1</td></tr><tr><td>Testperson G</td><td>35</td><td>2</td><td>1</td></tr><tr><td>Testperson H</td><td>32</td><td>2</td><td>1</td></tr><tr><td>Testperson I</td><td>37</td><td>2</td><td>1</td></tr><tr><td>Testperson J</td><td>30</td><td>2</td><td>1</td></tr><tr><td colspan="4">… 10 til, bare syntetiske data</td></tr></table>
-            <div class="dl-order"><span>20 testpersoner klare</span><u>Bestill</u></div>
-          </main>
-          <aside class="dl-chat"><p class="me">Lag 20 testpersoner med to arbeidsforhold og et barn</p><div class="bot">Jeg har fylt ut skjemaet og laget en forhåndsvisning.<span class="dl-note">Ingenting bestilles før du trykker <u>Bestill</u></span></div></aside>
+        <div class="dl-bar"><b class="dl-nav">Nav</b><b class="dl-word">Dolly</b><span class="dl-ok">Systemstatus</span><span class="dl-menu">Personer · Organisasjoner · Endringsmelding · Dokumentasjon</span><span class="dl-user">Testbruker</span></div>
+        <div class="dl-page">
+          <small class="dl-crumb">Hjem / Personer / Gruppe</small>
+          <h4>Testgruppe for søknad</h4>
+          <div class="dl-info"><span><b>Eier</b> Testbruker</span><span><b>Antall personer</b> 12</span><span><b>Sist endret</b> 20.11</span><span><b>Hensikt</b> Testing av søknad</span></div>
+          <div class="dl-links">Legg til på alle · Flytt personer · Rediger · Eksporter til Excel</div>
+          <div class="dl-btns"><u>Opprett personer</u><i class="dl-out">Importer personer</i><span class="dl-search">Søk</span></div>
+          <div class="dl-toggle"><span>Personer (12)</span><span class="on">Bestillinger (3)</span></div>
+          <table class="dl-tab"><tr><th>ID</th><th>Antall personer</th><th>Type</th><th>Miljø</th><th>Status</th></tr><tr><td>•••••</td><td>12</td><td>NAV-syntetisk</td><td>Q1</td><td class="okc">✓</td></tr></table>
+          <div class="dl-exp"><div class="dl-sh">Bestillingsstatus</div><p>Opprett persondetaljer <span class="okc">✓</span></p><p>Ordre til PDL <span class="okc">✓</span></p><p>Person finnes i PDL <span class="okc">✓</span></p><div class="dl-sh">Bestillingskriterier</div><p>Antall: 12 · NAV-syntetisk · Q1</p></div>
         </div>
+        <div class="dl-chat"><p class="me">Lag 20 testpersoner med to arbeidsforhold og et barn</p><p class="bot">Jeg har fylt ut bestillingen: 20 × NAV-syntetisk, 2 arbeidsforhold, 1 barn, miljø Q1. Sjekk den og trykk «Opprett personer».</p></div>
+        <span class="dl-fab"><span class="i-carbon-chat" /></span>
       </BrowserWindow>
     </div>
     <div class="app nc" :class="{ on: $clicks === 2 }">
@@ -637,9 +641,9 @@ layout: default
     <text x="730" y="22" class="t" text-anchor="middle">Utviklerverktøy</text>
     <text x="730" y="40" class="s" text-anchor="middle">Copilot, nav-pilot og andre MCP-klienter</text>
   </g>
-  <g class="a-fade" style="--d: 0.4s"><line x1="150" y1="50" x2="150" y2="108" class="a" marker-end="url(#ar2)"/>
+  <g class="a-fade" style="--d: 0.4s"><line x1="150" y1="50" x2="150" y2="105" class="a" marker-end="url(#ar2)"/>
   <text x="160" y="80" class="s">jobb-API</text></g>
-  <g class="a-fade" style="--d: 0.7s"><line x1="730" y1="50" x2="730" y2="108" class="a" marker-end="url(#ar2)"/>
+  <g class="a-fade" style="--d: 0.7s"><line x1="730" y1="50" x2="730" y2="105" class="a" marker-end="url(#ar2)"/>
   <text x="740" y="80" class="s">verktøykall</text></g>
   <rect x="0" y="64" width="880" height="214" rx="10" class="p" style="fill-opacity: .55"/>
   <text x="440" y="86" class="h" text-anchor="middle">nav-fleet</text>
@@ -667,17 +671,17 @@ layout: default
     <text x="733" y="196" class="s" text-anchor="middle">verktøyliste, kvote og nødbryter</text>
     <text x="733" y="220" class="s x" text-anchor="middle">pilot i produksjon</text>
   </g>
-  <g class="a-fade" style="--d: 0.55s"><line x1="278" y1="170" x2="307" y2="170" class="a" marker-end="url(#ar2)"/></g>
-  <g class="a-fade" style="--d: 0.7s"><line x1="571" y1="170" x2="600" y2="170" class="a" marker-end="url(#ar2)"/></g>
+  <g class="a-fade" style="--d: 0.55s"><line x1="278" y1="170" x2="304" y2="170" class="a" marker-end="url(#ar2)"/></g>
+  <g class="a-fade" style="--d: 0.7s"><line x1="571" y1="170" x2="597" y2="170" class="a" marker-end="url(#ar2)"/></g>
   <g class="a-rise" style="--d: 0.85s">
     <rect x="16" y="242" width="848" height="28" rx="8" class="b"/>
     <image href="/icons/fleet/fleet-radar.svg?v=8" x="26" y="245" width="22" height="22"/>
     <text x="56" y="261" class="t" style="font-size: 13.5px">fleet-radar</text>
     <text x="150" y="261" class="s">innsyn og revisjon: hver jobb, hvert kall og hver endring, for teamet, eierne og revisorene</text>
   </g>
-  <g class="a-fade" style="--d: 0.4s"><line x1="147" y1="278" x2="147" y2="298" class="a" marker-end="url(#ar2)"/></g>
-  <g class="a-fade" style="--d: 0.55s"><line x1="440" y1="278" x2="440" y2="298" class="a" marker-end="url(#ar2)"/></g>
-  <g class="a-fade" style="--d: 0.7s"><line x1="733" y1="278" x2="733" y2="298" class="a" marker-end="url(#ar2)"/></g>
+  <g class="a-fade" style="--d: 0.4s"><line x1="147" y1="278" x2="147" y2="295" class="a" marker-end="url(#ar2)"/></g>
+  <g class="a-fade" style="--d: 0.55s"><line x1="440" y1="278" x2="440" y2="295" class="a" marker-end="url(#ar2)"/></g>
+  <g class="a-fade" style="--d: 0.7s"><line x1="733" y1="278" x2="733" y2="295" class="a" marker-end="url(#ar2)"/></g>
   <rect x="0" y="300" width="290" height="50" rx="8" class="n"/>
   <text x="145" y="321" class="t" text-anchor="middle">Registeret</text>
   <text x="145" y="339" class="s" text-anchor="middle">offentlig lesekopi av fleet-control</text>
@@ -723,9 +727,9 @@ layout: default
   <text x="90" y="28" class="t" text-anchor="middle">Nais</text>
   <rect x="16" y="70" width="136" height="70" rx="8" class="p"/>
   <text x="84" y="110" class="t" text-anchor="middle">fleet-control</text>
-  <rect x="152" y="80" width="12" height="50" rx="3" class="w"/>
-  <text x="158" y="150" class="s" text-anchor="middle" style="font-size: 10px">ingress</text>
-  <text x="158" y="163" class="s" text-anchor="middle" style="font-size: 10px">bare M2M</text>
+  <line x1="174" y1="105" x2="155" y2="105" class="a" marker-end="url(#ar6)"/>
+  <rect x="174" y="80" width="12" height="50" rx="3" class="w"/>
+  <text x="240" y="64" class="s" text-anchor="middle" style="font-size: 10px">ingress, bare M2M</text>
   <rect x="16" y="186" width="136" height="40" rx="8" class="b"/>
   <text x="84" y="211" class="s" text-anchor="middle">Nais-apper</text>
   <line x1="84" y1="186" x2="84" y2="142" class="a" marker-end="url(#ar6)"/>
@@ -738,10 +742,10 @@ layout: default
   <text x="410" y="149" class="s" text-anchor="middle">jobb · egen grense</text>
   <text x="410" y="200" class="s" text-anchor="middle">ingen trafikk ut</text>
   <text x="410" y="220" class="s" text-anchor="middle">nøkler utenfor sandkassen</text>
-  <text x="236" y="87" class="s" text-anchor="middle" style="font-size: 10px">henter kommandoer</text>
-  <line x1="298" y1="94" x2="168" y2="94" class="a" marker-end="url(#ar6)"/>
-  <text x="236" y="117" class="s" text-anchor="middle" style="font-size: 10px">sender status</text>
-  <line x1="298" y1="124" x2="168" y2="124" class="a" marker-end="url(#ar6)"/>
+  <text x="243" y="87" class="s" text-anchor="middle" style="font-size: 10px">henter kommandoer</text>
+  <line x1="298" y1="94" x2="189" y2="94" class="a" marker-end="url(#ar6)"/>
+  <text x="243" y="117" class="s" text-anchor="middle" style="font-size: 10px">sender status</text>
+  <line x1="298" y1="124" x2="189" y2="124" class="a" marker-end="url(#ar6)"/>
 </svg>
 <ul class="rt-list">
   <li><b>Hovedgrunnen:</b> Nais vil ikke ha agentsandkasser i sine clustere</li>
