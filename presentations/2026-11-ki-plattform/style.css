@@ -2840,3 +2840,16 @@ pre,
 .nc-list th {
   color: #64748b;
 }
+
+/* Building blocks span exactly the frame height, aligned with the mockup */
+.five {
+  align-items: end;
+}
+
+.five-blocks {
+  height: 345px;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
