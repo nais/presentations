@@ -265,7 +265,7 @@ layout: default
 ---
 
 ::header::
-<h1 class="text-3xl font-bold">Vi kan vise hva agenten gjorde, steg for steg</h1>
+<h1 class="text-3xl font-bold">Vi skal kunne vise hva agenten gjorde, steg for steg</h1>
 <p class="subtitle">Skisse av innsynet for én agentjobb. Teamet, eierne og revisorene ser det samme <span class="chip amber align-middle ml-2">Forslag</span></p>
 
 ::default::
@@ -284,7 +284,7 @@ layout: default
     </ol>
   </BrowserWindow>
   <div class="trace-side">
-    <h3>Dette logger vi</h3>
+    <h3>Dette skal logges</h3>
     <ul>
       <li>Hvem som spurte, fra hvilken app og når</li>
       <li>Hvilken agent og hvilken profil</li>
@@ -316,7 +316,7 @@ layout: default
 
 ::header::
 <h1 class="text-3xl font-bold">Teamet eier agenten. Fleet eier byggeklossene</h1>
-<p class="subtitle">Fleet tar ingen juridiske beslutninger på vegne av teamene <span class="chip green align-middle ml-2">Besluttet i styringsmodellen</span></p>
+<p class="subtitle">Fleet tar ingen juridiske beslutninger på vegne av teamene <span class="chip green align-middle ml-2">Gjeldende styringsmodell</span></p>
 
 ::default::
 <div class="card-row">
@@ -341,7 +341,7 @@ layout: default
 <!--
 - Én linje å ta med: teamet som bruker agenten, eier den og det den gjør. Fleet leverer byggeklosser og kontroller
 - Dette står i styringsmodellen for Fleet. Den er gjeldende retning, ikke låst
-- Teamet som eier agenten godkjenner egne endringer med to personer, som en PR-review. PVK for agenter som skriver godkjennes av ansvarlig eier, og personvernombudet gir råd
+- Teamet som eier agenten godkjenner egne endringer med to personer, som en PR-gjennomgang. PVK for agenter som skriver godkjennes av ansvarlig eier, og personvernombudet gir råd
 - Teamet som eier MCP-serveren har ROS for serveren og bestemmer hvilken datakategori ruten har
 - Fleet, det vil si team copilot, drifter plattformen og eier rekkverkene. Fleet tar ikke juridiske beslutninger og har ikke ansvaret for det agenten gjør
 - Nav er behandlingsansvarlig. Vi skriver derfor «teamet har ansvaret for tjenesten», ikke «behandlingsansvar». Ordlyden bør sjekkes med en jurist
@@ -456,7 +456,7 @@ Overgang: «Hva vil vi i stedet?»
 - nav-pilot: «nav-pilot gir GitHub Copilot Navs institusjonelle kunnskap, fra Nais-manifester til TokenX» (src/app/(nb)/nav-pilot/page.tsx)
 - Lokale agenter: Copilot CLI på utviklerens maskin. Klientene er beskrevet i src/app/(nb)/(nav-pilot)/nav-pilot/klienter/page.tsx
 - MCP-registeret: navikt/copilot/apps/mcp-registry, med 12 servere i allowlist.json. Offentlig på mcp-registry.nav.no (README.md)
-- Forslag: verktøykatalogen og god praksis blir katalogen og inngangen til Fleet, med katalog, veiledning og onboarding. Katalogen hører til fleet-control. Vi har ikke avtalt dette med noen
+- Forslag: verktøykatalogen og god praksis blir katalogen og inngangen til Fleet, med katalog, veiledning og hjelp til å komme i gang. Katalogen hører til fleet-control. Vi har ikke avtalt dette med noen
 -->
 
 ---
@@ -499,7 +499,7 @@ layout: default
 <!--
 - Formål, suksessmål og ikke-mål er eierens retning fra 22. november 2026. Den er ikke låst
 - Målgruppen er team som vil sette en KI-agent i produksjon i en Nais-app. Ikke enkeltpersoner som bruker Copilot eller en chat i hverdagen
-- Hva det betyr per rolle: for ledere synlig risiko og kostnad, for fagfolk sporbarhet og godkjenning, for utviklere slipper de å bygge alt under vannlinjen selv
+- Hva det betyr per rolle: ledere får synlig risiko og kostnad, fagfolk får sporbarhet og godkjenning, og utviklere slipper å bygge alt under vannlinjen selv
 - Piloten tar bare åpne og interne data og syntetiske testdata gjennom modellene. Saksbehandling og andre apper med brukerdata er en senere fase
 - Ikke-målene: vi drifter ikke språkmodeller, vi lager ikke tjenester for innbyggere, vi erstatter ikke Nais, og vi lager ikke et eget rammeverk eller SDK
 - Overgang: «Hvordan ser det ut når det virker?»
@@ -686,7 +686,7 @@ layout: default
     <text x="440" y="156" class="s" text-anchor="middle">sandkasse per jobb, egen GKE</text>
     <text x="440" y="176" class="s" text-anchor="middle">stengt for trafikk ut</text>
     <text x="440" y="196" class="s" text-anchor="middle">nøkler legges på utenfor</text>
-    <text x="440" y="220" class="s x" text-anchor="middle">ikke bygget, spike først</text>
+    <text x="440" y="220" class="s x" text-anchor="middle">ikke bygget, prøves ut først</text>
   </g>
   <g class="a-rise" style="--d: 0.7s">
     <rect x="602" y="110" width="262" height="124" rx="8" class="b"/>
@@ -694,7 +694,7 @@ layout: default
     <text x="733" y="156" class="s" text-anchor="middle">inngangen for alle verktøykall</text>
     <text x="733" y="176" class="s" text-anchor="middle">token per rute (OBO)</text>
     <text x="733" y="196" class="s" text-anchor="middle">verktøyliste, kvote og nødbryter</text>
-    <text x="733" y="220" class="s x" text-anchor="middle">pilot i prod</text>
+    <text x="733" y="220" class="s x" text-anchor="middle">pilot i produksjon</text>
   </g>
   <line x1="278" y1="170" x2="307" y2="170" class="a" marker-end="url(#ar2)"/>
   <line x1="571" y1="170" x2="600" y2="170" class="a" marker-end="url(#ar2)"/>
@@ -725,14 +725,14 @@ layout: default
 Overgang: «Hvorfor kjører agentene ikke på Nais?»
 
 - fleet-control er eneste kilde for servere, ruter, verktøy og agentprofiler. Appen starter en agentkjøring gjennom et asynkront jobb-API og får en jobb-ID. Resultatet kommer som et artefakt. fleet-runtime bare utfører
-- fleet-runtime er en sandkasse for agentkjøringer på egen GKE-klynge. Team tar med enten konfigurasjon for en standard agentharness eller sitt eget containerimage. Profilen avgjør om kjøringen er kort og uten tilstand eller en lang økt
+- fleet-runtime er en sandkasse for agentkjøringer på egen GKE-klynge. Team tar med enten konfigurasjon for et standard agentoppsett eller sitt eget containerimage. Profilen avgjør om kjøringen er kort og uten tilstand eller en lang økt
 - fleet-gateway håndhever per kall: token per rute, verktøyliste, hash-låsing av verktøy, kvote og nødbryter, og reviderer hvert kall
 - fleet-radar er innsyn og revisjon: hver jobb, hvert verktøykall og hver endring i fleet-control, samlet med trace-ID. Teamet, eierne og revisorene ser det samme. Ikonet er radaren
 - Registeret er en offentlig lesekopi av fleet-control
 - MCP-servere: teamene eier verktøyene, dataene og risikoen bak dem
 - Det enkle tilfellet er også med: en Nais-app med et standard MCP-SDK kaller ett eller to verktøy gjennom fleet-gateway, uten fleet-runtime
 - Vi lager ikke eget SDK eller agentrammeverk. Vi gir veiledning og maler
-- Status: fleet-gateway er i pilot i prod med leseruter bak naisdevice. fleet-control har lese-API. fleet-runtime er ikke bygget
+- Status: fleet-gateway er i pilot i produksjon med leseruter bak naisdevice. fleet-control har lese-API. fleet-runtime er ikke bygget
 -->
 
 ---
@@ -741,7 +741,7 @@ layout: default
 
 ::header::
 <h1 class="text-3xl font-bold">fleet-runtime kjører i vår egen GKE-klynge</h1>
-<p class="subtitle">Kode vi ikke stoler på, skal ikke dele klynge med Navs apper <span class="chip green align-middle ml-2">Besluttet retning</span> <span class="chip amber align-middle ml-1">Spike først</span></p>
+<p class="subtitle">Kode vi ikke stoler på, skal ikke dele klynge med Navs apper <span class="chip green align-middle ml-2">Besluttet retning</span> <span class="chip amber align-middle ml-1">Utprøving først</span></p>
 
 ::default::
 <div class="rt">
@@ -763,24 +763,24 @@ layout: default
   <text x="385" y="66" class="s" text-anchor="middle">Agent Substrate (førstevalg)</text>
   <rect x="266" y="84" width="238" height="56" rx="8" class="b"/>
   <text x="385" y="108" class="t" text-anchor="middle">namespace: jobb A</text>
-  <text x="385" y="127" class="s" text-anchor="middle">sandkasse · stengt ut</text>
+  <text x="385" y="127" class="s" text-anchor="middle">sandkasse · ingen trafikk ut</text>
   <rect x="266" y="152" width="238" height="56" rx="8" class="b"/>
   <text x="385" y="176" class="t" text-anchor="middle">namespace: jobb B</text>
-  <text x="385" y="195" class="s" text-anchor="middle">sandkasse · stengt ut</text>
+  <text x="385" y="195" class="s" text-anchor="middle">sandkasse · ingen trafikk ut</text>
   <text x="385" y="236" class="s" text-anchor="middle">nøkler legges på utenfor sandkassen</text>
   <text x="385" y="256" class="s" text-anchor="middle">ett namespace per jobb</text>
   <line x1="264" y1="124" x2="140" y2="124" class="a" marker-end="url(#ar6)"/>
   <text x="215" y="116" class="s" text-anchor="middle" style="font-size: 11px">henter</text>
   <line x1="140" y1="162" x2="264" y2="162" class="a" marker-end="url(#ar6)"/>
-  <text x="215" y="178" class="s" text-anchor="middle" style="font-size: 11px">status</text>
+  <text x="215" y="178" class="s" text-anchor="middle" style="font-size: 11px">kommandoer</text>
 </svg>
 <ul class="rt-list">
   <li><b>Hovedgrunnen:</b> Nais vil ikke ha agentsandkasser i sine klynger</li>
-  <li><b>Isolasjon</b> med gVisor eller microVM, root, CRD-er og operatorer peker samme vei</li>
+  <li><b>Behovene</b> peker samme vei: isolasjon (gVisor eller microVM), root, CRD-er og operatorer</li>
   <li><b>Agent Substrate</b> er førstevalget. Hver jobb får sitt eget namespace</li>
-  <li><b>Trafikk begge veier</b> går gjennom en offentlig ingress som bare tar imot maskin-til-maskin-kall</li>
+  <li><b>Trafikken mellom dem</b> går gjennom en offentlig ingress som bare tar imot maskin-til-maskin-kall</li>
   <li><b>fleet-runtime henter kommandoer</b> fra fleet-control og sender tilbake status og artefakter</li>
-  <li><b>Team copilot drifter klyngen,</b> med smalt omfang</li>
+  <li><b>Team copilot drifter klyngen,</b> med avgrenset omfang</li>
 </ul>
 </div>
 
@@ -788,11 +788,11 @@ layout: default
 <span class="font-mono text-sm opacity-70">nav-fleet · gjeldende retning · ikke låst</span>
 
 <!--
-- Retningen er bestemt: fleet-runtime kjører i vår egen GKE-klynge, med Agent Substrate som førstevalg. agent-sandbox er reserve. Vi tar spiken først, så go eller no-go fra produkteieren
+- Retningen er bestemt: fleet-runtime kjører i vår egen GKE-klynge, med Agent Substrate som førstevalg. agent-sandbox er reserve. Vi prøver det ut først. Så sier produkteieren ja eller nei
 - Hovedgrunnen er at Nais ikke vil ha det i sine klynger. Behovene for isolasjon peker samme vei
 - Ett namespace per jobb gir enkel opprydding og tydelige grenser
 - Nettverket: fleet-control kjører på Nais. Trafikk mellom fleet-control og fleet-runtime går gjennom en offentlig ingress som bare tar imot maskin-til-maskin-kall. fleet-runtime henter kommandoer fra fleet-control, så fleet-control trenger ikke å nå inn i klyngen
-- Dokumenterte alternativer, ikke valgt: Pub/Sub som kø mellom dem, et WireGuard-mesh (bare selvhostet) og peering via et nettverkshub
+- Dokumenterte alternativer, ikke valgt: Pub/Sub som kø mellom dem, et WireGuard-mesh (bare hvis vi drifter det selv) og peering via et nettverkshub
 - Vi eier hele klyngen: oppgradering, hendelser og kapasitet. Det står under åpne spørsmål
 - Overgang: «Den vanskeligste delen er identitet.»
 -->
@@ -887,7 +887,7 @@ layout: default
   <div class="feature-card">
     <h3>Teamene styrer selv</h3>
     <ul>
-      <li><b>To personer i teamet</b> godkjenner egne endringer, som en PR-review</li>
+      <li><b>To personer i teamet</b> godkjenner egne endringer, som en PR-gjennomgang</li>
       <li><b>Ruteeieren godkjenner</b> når en agent vil bruke et annet teams verktøy, som <code>accessPolicy</code></li>
       <li><b>Leseverktøy</b> publiseres automatisk fra teamets CI</li>
       <li><b>Godkjenninger</b> av skriveverktøy og agenter utløper etter seks måneder</li>
@@ -898,7 +898,7 @@ layout: default
     <h3>Plattformen passer på</h3>
     <ul>
       <li><b>Automatiske rekkverk:</b> sjekker i CI, kvote, nødbryter og utestenging</li>
-      <li><b>Policy på to nivåer:</b> plattformen setter grunnlinjen, teamet arbeider innenfor</li>
+      <li><b>Regler på to nivåer:</b> plattformen setter grunnlinjen, teamet arbeider innenfor</li>
       <li><b>Eiere og revisorer</b> (ledelsen, sikkerhet, personvernombudet og internrevisjonen) ser revisjon og rapporter for sine team</li>
       <li><b>Ledelsen og sikkerhet</b> kan stoppe og trekke tilbake</li>
       <li><b>Å stoppe</b> krever én person. Å starte eller utvide krever to</li>
@@ -913,7 +913,7 @@ layout: default
 - Samme tanke som i Nais: teamene eier sine egne objekter og godkjenner selv. Plattformteamet godkjenner ikke hver endring
 - Risikoen styres per verktøy: lesing, skriving, eksterne kall og kjøring på vertsmaskinen. Det avgjør hvem som godkjenner, og om det trengs ROS eller PVK
 - Et endret verktøy fjernes automatisk til det er godkjent på nytt
-- Eiere og revisorer setter ikke egen policy, men leser revisjonsspor og rapporter for teamene de har ansvar for
+- Eiere og revisorer setter ikke egne regler, men leser revisjonsspor og rapporter for teamene de har ansvar for
 - Hver fase i veikartet har egne krav til etterlevelse før den regnes som ferdig
 - Overgang: «Hva koster det, og hvilke modeller kan teamene bruke?»
 -->
@@ -970,17 +970,17 @@ layout: default
   <div class="feature-card">
     <h3>Dette kjører, og dette kommer</h3>
     <ul class="status">
-      <li><span class="chip green">kjører</span>fleet-gateway i pilot i prod, med leseruter bak naisdevice</li>
+      <li><span class="chip green">kjører</span>fleet-gateway i pilot i produksjon, med leseruter bak naisdevice</li>
       <li><span class="chip green">kjører</span>MCP-servere for Dolly, kodeverk og teamkatalogen, og det offentlige registeret</li>
-      <li><span class="chip blue">bygget</span>fleet-control med lese-API. Deploy til dev pågår</li>
-      <li><span class="chip amber">neste</span>skrive-API og godkjenning, parallelt med en spike for fleet-runtime</li>
+      <li><span class="chip blue">bygget</span>fleet-control med lese-API. Utrulling til dev pågår</li>
+      <li><span class="chip amber">neste</span>skrive-API og godkjenning, parallelt med utprøving av fleet-runtime</li>
       <li><span class="chip slate">venter</span>målbildet for identitet, avklares med Nais</li>
     </ul>
   </div>
   <div class="feature-card green">
     <h3>De første agentene <span class="chip amber align-middle ml-1">Forslag</span></h3>
     <ul>
-      <li><b>Aksel Studio:</b> bygg av prototyper blir første arbeidslast i fleet-runtime</li>
+      <li><b>Aksel Studio:</b> bygg av prototyper kan bli første arbeidslast i fleet-runtime</li>
       <li><b>Første agentprofil:</b> studio-api leser fra Dolly, godkjent av ruteeieren</li>
       <li><b>Våre egne verktøy:</b> Copilot og nav-pilot bruker verktøyene gjennom fleet-gateway</li>
       <li><b>Senere fase:</b> apper med brukerdata, som saksbehandling</li>
@@ -1011,7 +1011,7 @@ layout: timeline
 <TimelineNode version="Fase 1" year="pilot" title="Gateway og register" description="Gateway i prod med leseruter. Kvote som tåler omstart, hendelsesrutine og revisjon av hvert kall." icon="i-carbon-gateway" />
 <TimelineNode version="Fase 2" year="styring" title="fleet-control" description="Skrive-API, godkjenning, rekkverk, jobb-API, innsyn og budsjett." icon="i-carbon-settings-adjust" />
 <TimelineNode version="Fase 3" year="identitet" title="Første agent" description="Målbildet bestemt med Nais. studio-api leser fra Dolly." icon="i-carbon-user-identification" />
-<TimelineNode version="Fase 4" year="kjøretid" title="fleet-runtime" description="Spike, så go eller no-go. Pilot i dev med egen modell og testdata." icon="i-carbon-container-software" />
+<TimelineNode version="Fase 4" year="kjøretid" title="fleet-runtime" description="Utprøving, så ja eller nei. Pilot i dev med egen modell og testdata." icon="i-carbon-container-software" />
 <TimelineNode version="Fase 5" year="åpning" title="Bredere bruk" description="Sikkerhetstest, oppdatert ROS og gjennomgang med sikkerhet og internrevisjonen." icon="i-carbon-unlocked" />
 
 ::footer::
@@ -1024,7 +1024,7 @@ Overgang: «Det er ting vi ikke vet ennå.»
 - Fase 1: gatewayen kjører allerede. Det som gjenstår, er kvote som tåler omstart, en felles hendelsesrutine og at eiere og revisorer kan lese revisjonen
 - Fase 2: fleet-control med selvbetjening, godkjenning, automatiske rekkverk, jobb-API og budsjett, og fleet-radar med innsyn for eiere og revisorer
 - Fase 3: identitet gjøres riktig, uten frist. Første agent er studio-api fra Aksel Studio med lesetilgang til Dolly
-- Fase 4: spiken for fleet-runtime går parallelt med fase 2. Så go eller no-go fra produkteieren. Piloten bruker teamets egen modell og bare testdata
+- Fase 4: utprøvingen av fleet-runtime går parallelt med fase 2. Så sier produkteieren ja eller nei. Piloten bruker teamets egen modell og bare testdata
 - Fase 5: før plattformen åpnes bredere trengs uavhengig sikkerhetstest, oppdatert ROS og gjennomgang med sikkerhet og internrevisjonen
 - Etter dette: apper med brukerdata, som saksbehandling, krever egne avklaringer om personvern, KI-forordningen og risiko
 - Ytre datoer vi kjenner: statsråden vil fremme KI-loven for Stortinget våren 2027, og de første reglene for høyrisiko-KI i EU gjelder fra 2. desember 2027. https://www.regjeringen.no/no/aktuelt/id3169693/
@@ -1064,7 +1064,7 @@ layout: default
   </div>
   <div class="feature-card">
     <h3>Leverandørbinding</h3>
-    <p>MCP og «ta med egen modell» gjør det billig å bytte.</p>
+    <p>MCP og «ta med egen modell» gjør det billigere å bytte.</p>
   </div>
 </div>
 
