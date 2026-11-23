@@ -2999,3 +2999,12 @@ pre,
   font-size: 0.72rem;
   line-height: 1.45;
 }
+
+.rt4 {
+  width: 900px;
+  grid-template-columns: 330px 570px;
+}
+
+.rt4 .frd {
+  width: 570px;
+}

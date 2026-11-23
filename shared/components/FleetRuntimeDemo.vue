@@ -1,6 +1,7 @@
 <!-- Adapted from agent-substrate/substrate site demo (site/layouts/_shortcodes/home.html), Apache-2.0 -->
 <script setup>
   import { onMounted, onUnmounted, reactive, ref } from 'vue'
+  import './fleet-live.css'
 
   const DOTS = 84
   const TEAMS = {
@@ -133,11 +134,11 @@
 </script>
 
 <template>
-  <div class="frd">
-    <div class="frd-top"><span class="frd-live" /> eget GKE-cluster · fleet-runtime</div>
+  <div class="frd fl-panel">
+    <div class="fl-top"><span class="fl-live" /> eget GKE-cluster · fleet-runtime</div>
     <div class="frd-head">
-      <span class="frd-label">AGENTJOBBER</span>
-      <span class="frd-meta">{{ DOTS }} jobber · <b class="r">{{ count('running') }}</b> kjører · <b class="w">{{ count('resuming') }}</b> våkner · <b class="s">{{ count('suspending') }}</b> pauses</span>
+      <span class="fl-label">AGENTJOBBER</span>
+      <span class="frd-meta">{{ DOTS }} jobber · <b class="fl-num r">{{ count('running') }}</b> kjører · <b class="fl-num w">{{ count('resuming') }}</b> våkner · <b class="fl-num s">{{ count('suspending') }}</b> pauses</span>
     </div>
     <div class="frd-dots">
       <span
@@ -151,12 +152,12 @@
     <div class="frd-router">
       <i /><span class="frd-pill" :class="{ on: routing }" :style="routing ? teamStyle(routing) : null">henter kommandoer fra fleet-control</span><i />
     </div>
-    <div class="frd-head"><span class="frd-label">KLARE WORKER-PODER</span><span class="frd-meta">{{ workers.length }} poder · én jobb hver</span></div>
+    <div class="frd-head"><span class="fl-label">KLARE WORKER-PODER</span><span class="frd-meta">{{ workers.length }} poder · én jobb hver</span></div>
     <div class="frd-pods">
       <div v-for="w in workers" :key="w.id" class="frd-pod" :class="w.state" :style="teamStyle(w.team)">
-        <div class="frd-pod-top"><span>{{ w.id }}</span><i /></div>
-        <b>{{ w.name }}</b>
-        <small>{{ sub(w) }}</small>
+        <div class="frd-pod-top"><span class="fl-ellipsis">{{ w.id }}</span><i /></div>
+        <b class="fl-ellipsis">{{ w.name }}</b>
+        <small class="fl-ellipsis">{{ sub(w) }}</small>
         <div class="frd-track"><div :style="{ width: w.width + '%' }" /></div>
       </div>
     </div>
@@ -171,29 +172,13 @@
     display: flex;
     flex-direction: column;
     gap: 5px;
+    width: 100%;
+    height: 272px;
     padding: 8px 10px;
-    border: 1px solid #243028;
-    border-radius: 12px;
-    background: #0e130f;
-    color: #c8d3cb;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 9px;
-    line-height: 1.3;
+    overflow: hidden;
   }
 
-  .frd-top {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    color: #9aa89f;
-  }
 
-  .frd-live {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: #64d86b;
-  }
 
   .frd-head {
     display: flex;
@@ -203,12 +188,6 @@
     align-items: baseline;
   }
 
-  .frd-label {
-    font-family: 'Inter', sans-serif;
-    font-weight: 600;
-    letter-spacing: 0.1em;
-    color: #9aa89f;
-  }
 
   .frd-meta {
     color: #9aa89f;
@@ -396,5 +375,60 @@
     .frd * {
       transition: none !important;
     }
+  }
+</style>
+
+<style>
+  /* Fixed sizes so state changes never move anything */
+  .frd-head {
+    height: 13px;
+    overflow: hidden;
+  }
+
+  .frd-meta {
+    flex: none;
+  }
+
+  .frd-router {
+    height: 20px;
+  }
+
+  .frd-pill {
+    width: 230px;
+    height: 18px;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+
+  .frd-pod {
+    height: 56px;
+    overflow: hidden;
+    border-width: 1px;
+  }
+
+  .frd-pod-top {
+    height: 10px;
+  }
+
+  .frd-pod b,
+  .frd-pod small {
+    display: block;
+    height: 11px;
+  }
+
+  .frd-pod-top i {
+    flex: none;
+    border: 1px solid transparent;
+  }
+
+  .frd-dot {
+    border: 1px solid transparent;
+  }
+
+  .frd-legend {
+    height: 12px;
+    flex-wrap: nowrap;
+    overflow: hidden;
   }
 </style>
