@@ -2494,3 +2494,192 @@ pre,
   right: auto;
   left: 38%;
 }
+
+/* Five agents v4: app mockup left (2/3), building blocks stacked right (1/3) */
+.five {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 1rem;
+  max-width: 900px;
+  align-items: start;
+}
+
+.five-left {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.five-steps {
+  font-size: 0.64rem;
+  gap: 0.25rem;
+}
+
+.five-frame {
+  width: 100%;
+  height: 268px;
+}
+
+.app .aw .bw-body {
+  font-size: 0.56rem;
+}
+
+.five .five-blocks {
+  grid-template-columns: 1fr;
+  gap: 0.35rem;
+  margin-top: 1.9rem;
+}
+
+.five .five-blocks li {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto auto auto;
+  align-items: center;
+  justify-items: start;
+  column-gap: 0.5rem;
+  row-gap: 0.05rem;
+  padding: 0.35rem 0.55rem;
+  text-align: left;
+}
+
+.five .five-blocks li .pin {
+  grid-row: 1 / 4;
+}
+
+.five .five-blocks li code,
+.five .five-blocks li:not(.used) code {
+  padding: 0.02rem 0.35rem;
+  border: 1px solid #bfd4f2;
+  border-radius: 4px;
+  background: #e6f0ff;
+  color: #0b1528;
+  font-size: 0.6rem;
+}
+
+.five .five-blocks li:not(.used) {
+  opacity: 0.45;
+}
+
+/* Mockup fixes at the narrower width */
+.ax-grid {
+  grid-template-columns: 64px 1fr 150px;
+}
+
+.ax-chat .bot {
+  background: #2a2145;
+  border-color: #3b2f5c;
+  color: #e9e4f7;
+}
+
+.ax-file {
+  border: 0;
+  padding: 0;
+  color: #a99bd6;
+}
+
+.dl-grid {
+  grid-template-columns: 1fr 140px;
+}
+
+.dl-filters {
+  flex-wrap: wrap;
+}
+
+.dl-note {
+  display: block;
+  margin-top: 0.3rem;
+  color: #57534e;
+}
+
+.dl-note u {
+  font-size: 0.5rem;
+}
+
+.nc-grid {
+  grid-template-columns: 70px 1fr 130px;
+}
+
+.nc .warn .fx {
+  display: block;
+  width: max-content;
+  margin-top: 0.2rem;
+}
+
+.tt-grid {
+  grid-template-columns: 1fr 150px;
+}
+
+.tt-group + .tt-group {
+  margin-top: 0.3rem;
+}
+
+.sb-grid {
+  grid-template-columns: 72px 1fr 150px;
+}
+
+.sb-dl {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.2rem 0.6rem;
+  margin: 0 0 0.4rem;
+}
+
+.sb-dl dt {
+  color: #64748b;
+}
+
+.sb-dl dd {
+  margin: 0;
+}
+
+.sb-later {
+  left: auto;
+  right: 160px;
+}
+
+.five {
+  margin: 0 auto;
+}
+
+.five-frame {
+  height: 236px;
+}
+
+.five .five-blocks {
+  margin-top: 1.6rem;
+  gap: 0.3rem;
+}
+
+.five .five-blocks li {
+  grid-template-columns: auto 1fr auto;
+  grid-template-rows: auto auto;
+  padding: 0.25rem 0.5rem;
+}
+
+.five .five-blocks li .pin {
+  grid-row: 1 / 3;
+}
+
+.five .five-blocks li strong {
+  font-size: 0.72rem;
+}
+
+.five .five-blocks li span {
+  grid-column: 2;
+  font-size: 0.6rem;
+}
+
+.five .five-blocks li code {
+  grid-column: 3;
+  grid-row: 1 / 3;
+  font-size: 0.55rem;
+}
+
+.ax-banner span {
+  white-space: nowrap;
+}
+
+.five {
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+  width: 900px;
+}
