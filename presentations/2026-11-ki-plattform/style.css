@@ -1589,48 +1589,6 @@ pre,
   overflow: hidden;
 }
 
-.ag {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 0.45rem;
-  padding: 0.7rem 1rem;
-  font-size: 0.82rem;
-  opacity: 0;
-  transform: translateY(10px) scale(0.98);
-  transition: opacity 0.5s ease, transform 0.5s ease;
-}
-
-.ag.on {
-  opacity: 1;
-  transform: none;
-}
-
-.ag p {
-  margin: 0;
-}
-
-.ag .ch-tool {
-  font-size: 0.72rem;
-}
-
-.ag-head {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-family: Poppins, sans-serif;
-}
-
-.ag-head .chip {
-  margin-left: auto;
-}
-
-.ag-who {
-  color: var(--nais-text-secondary);
-  font-size: 0.7rem;
-}
-
 .five-blocks {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
@@ -1887,85 +1845,6 @@ pre,
 /* Five phases on the timeline: keep «Fase n (…)» on one line */
 .tl-label {
   white-space: nowrap;
-}
-
-/* Five agents v2: each frame has its own colour, a title bar, facts left and the chat right */
-.ag {
-  padding: 0;
-  gap: 0;
-  --c: var(--nais-accent);
-  --cl: var(--nais-accent-light);
-  border-top: 4px solid var(--c);
-  background: #fff;
-}
-
-.ag.c2 { --c: #059669; --cl: #ecfdf5; }
-.ag.c3 { --c: #7c3aed; --cl: #f5f3ff; }
-.ag.c4 { --c: #d97706; --cl: #fffbeb; }
-.ag.c5 { --c: #475569; --cl: #f1f5f9; }
-
-.ag-bar {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.45rem 0.9rem;
-  background: var(--cl);
-  color: var(--c);
-}
-
-.ag-bar strong {
-  font-family: Poppins, sans-serif;
-  color: var(--nais-heading);
-}
-
-.ag-bar em {
-  font-style: normal;
-  font-size: 0.72rem;
-  color: var(--nais-text-secondary);
-}
-
-.ag-bar .chip {
-  margin-left: auto;
-}
-
-.ag-body {
-  display: grid;
-  grid-template-columns: 1fr 1.2fr;
-  gap: 1rem;
-  padding: 0.7rem 0.9rem;
-  align-items: center;
-}
-
-.ag-body dl {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 0.3rem 0.7rem;
-  margin: 0;
-  font-size: 0.74rem;
-}
-
-.ag-body dt {
-  color: var(--c);
-  font-weight: 700;
-}
-
-.ag-body dd {
-  margin: 0;
-}
-
-.ag-chat {
-  display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
-  font-size: 0.76rem;
-}
-
-.ag-chat p {
-  margin: 0;
-}
-
-.ag-chat .ch-user {
-  background: var(--c);
 }
 
 /* Formål: little text, large type */
