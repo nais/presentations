@@ -733,33 +733,41 @@ layout: default
 
 ::header::
 <h1 class="text-3xl font-bold">fleet-runtime kjører i vårt eget GKE-cluster</h1>
-<p class="subtitle">Kode vi ikke stoler på, skal ikke dele cluster med Navs apper <span class="chip green align-middle ml-2">Besluttet retning</span> <span class="chip amber align-middle ml-1">Utprøving først</span></p>
+<p class="subtitle">Agentkode holdes unna Navs apper <span class="chip green align-middle ml-2">Besluttet: eget cluster</span> <span class="chip amber align-middle ml-1">Agent Substrate: forslag</span></p>
 
 ::default::
 <div class="rt4">
-<svg class="dg rt-nais" viewBox="0 0 380 300" preserveAspectRatio="xMaxYMid meet" role="img" aria-label="Nais til venstre med fleet-control og Nais-apper. En offentlig ingress på kanten av Nais tar bare imot maskin-til-maskin-kall. Begge pilene kommer fra fleet-runtime til høyre: den henter kommandoer og sender status.">
+<svg class="dg rt-nais" viewBox="0 0 380 300" preserveAspectRatio="xMaxYMid meet" role="img" aria-label="Nais til venstre med Nais-apper, fleet-control og fleet-gateway-runtime. Begge har en offentlig ingress på kanten av Nais som bare tar imot maskin-til-maskin-kall. Alle pilene kommer fra fleet-runtime til høyre: den henter kommandoer og sender status til fleet-control, og kaller MCP-servere gjennom fleet-gateway-runtime. Den siste veien er under utprøving og et forslag.">
   <defs><marker id="ar6" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" class="ah"/></marker></defs>
   <rect x="0" y="0" width="220" height="300" rx="10" class="n"/>
-  <text x="110" y="34" class="h" text-anchor="middle">Nais</text>
-  <rect x="20" y="100" width="176" height="70" rx="8" class="p"/>
-  <text x="108" y="141" class="t" text-anchor="middle">fleet-control</text>
-  <line x1="214" y1="135" x2="199" y2="135" class="a" marker-end="url(#ar6)"/>
-  <rect x="214" y="105" width="12" height="60" rx="3" class="w"/>
-  <rect x="20" y="220" width="176" height="44" rx="8" class="b"/>
-  <text x="108" y="247" class="s" text-anchor="middle">Nais-apper</text>
-  <line x1="108" y1="220" x2="108" y2="173" class="a" marker-end="url(#ar6)"/>
-  <text x="303" y="92" class="s x" text-anchor="middle">ingress, bare M2M</text>
-  <text x="303" y="117" class="s" text-anchor="middle">henter kommandoer</text>
-  <line x1="380" y1="124" x2="230" y2="124" class="a" marker-end="url(#ar6)"/>
-  <text x="303" y="152" class="s" text-anchor="middle">sender status</text>
-  <line x1="380" y1="159" x2="230" y2="159" class="a" marker-end="url(#ar6)"/>
+  <text x="110" y="28" class="h" text-anchor="middle">Nais</text>
+  <rect x="20" y="42" width="176" height="34" rx="8" class="b"/>
+  <text x="108" y="64" class="s" text-anchor="middle">Nais-apper</text>
+  <line x1="108" y1="76" x2="108" y2="97" class="a" marker-end="url(#ar6)"/>
+  <rect x="20" y="100" width="176" height="62" rx="8" class="p"/>
+  <text x="108" y="137" class="t" text-anchor="middle">fleet-control</text>
+  <line x1="214" y1="131" x2="199" y2="131" class="a" marker-end="url(#ar6)"/>
+  <rect x="214" y="104" width="12" height="54" rx="3" class="w"/>
+  <rect x="20" y="196" width="176" height="62" rx="8" class="b" style="stroke-dasharray: 5 4"/>
+  <text x="108" y="224" class="t" text-anchor="middle" style="font-size: 12.5px">fleet-gateway-runtime</text>
+  <text x="108" y="243" class="s" text-anchor="middle">til MCP-servere</text>
+  <line x1="214" y1="227" x2="199" y2="227" class="a" marker-end="url(#ar6)"/>
+  <rect x="214" y="200" width="12" height="54" rx="3" class="w"/>
+  <text x="303" y="84" class="s x" text-anchor="middle">ingress, bare M2M</text>
+  <text x="303" y="111" class="s" text-anchor="middle">henter kommandoer</text>
+  <line x1="380" y1="118" x2="230" y2="118" class="a" marker-end="url(#ar6)"/>
+  <text x="303" y="139" class="s" text-anchor="middle">sender status</text>
+  <line x1="380" y1="146" x2="230" y2="146" class="a" marker-end="url(#ar6)"/>
+  <text x="303" y="220" class="s" text-anchor="middle">verktøykall</text>
+  <line x1="380" y1="227" x2="230" y2="227" class="a" marker-end="url(#ar6)" style="stroke-dasharray: 5 4"/>
+  <text x="303" y="250" class="s x" text-anchor="middle">utprøving · forslag</text>
 </svg>
 <FleetRuntimeDemo />
 </div>
 <div class="rt-points">
   <p><b>Eget cluster:</b> Nais vil ikke ha agentsandkasser. Root, CRD-er og isolasjon peker samme vei.</p>
-  <p><b>Agent Substrate</b> er førstevalget, med en egen grense per jobb. Ingen trafikk ut, nøkler utenfor sandkassen.</p>
-  <p><b>Runtime tar alltid kontakt</b> med fleet-control. Team copilot drifter clusteret.</p>
+  <p><b>Agent Substrate (forslag)</b> med en egen grense per jobb. Ingen trafikk ut, nøkler utenfor sandkassen.</p>
+  <p><b>Runtime tar alltid kontakt:</b> med fleet-control, og med MCP-servere gjennom fleet-gateway-runtime. Team copilot drifter clusteret.</p>
 </div>
 
 ::footer::
@@ -768,7 +776,8 @@ layout: default
 <!--
 - Detaljer: isolasjon med gVisor eller microVM. fleet-control har en offentlig ingress som bare tar imot maskin-til-maskin-kall. fleet-runtime henter kommandoer og sender status og artefakter tilbake
 - Animasjonen er tilpasset fra demoen på nettsiden til agent-substrate/substrate (Apache-2.0). Jobbene og tallene er oppdiktet
-- Retningen er bestemt: fleet-runtime kjører i vårt eget GKE-cluster, med Agent Substrate som førstevalg. agent-sandbox er reserve. Vi prøver det ut først. Så sier produkteieren ja eller nei
+- Besluttet: fleet-runtime kjører i vårt eget GKE-cluster. Forslag: Agent Substrate, med agent-sandbox som reserve. Valget venter på utprøvingen. Så sier produkteieren ja eller nei
+- Trafikk går begge veier (besluttet): runtime kaller også MCP-servere gjennom sin egen Nais-app, fleet-gateway-runtime, med offentlig ingress og bare Entra M2M. Selve løsningen er under utprøving og et forslag. Den krever ROS og en gjennomgang med Digital sikkerhet før produksjon
 - Hovedgrunnen er at Nais ikke vil ha det i sine clustere. Behovene for isolasjon peker samme vei
 - Grense per jobb: hver jobb er isolert fra de andre og ryddes bort når den er ferdig. Teknisk blir det ett namespace per jobb
 - Nettverket: fleet-control kjører på Nais. Trafikk mellom fleet-control og fleet-runtime går gjennom en offentlig ingress som bare tar imot maskin-til-maskin-kall. fleet-runtime henter kommandoer fra fleet-control, så fleet-control trenger ikke å nå inn i clusteret
@@ -812,7 +821,7 @@ layout: default
 - Modellreglene er de samme som for Copilot. Vi lager ikke en egen liste for agenter
 - Gatewayen skal avvise kall fra piloten som er merket med en annen dataklasse
 - Måling skjer i Fleet, ikke hos agenten, så agenten kan ikke underrapportere
-- Åpent: om Navs GCP-avtale dekker alle modellene vi trenger
+- Åpent spørsmål: dekker GCP-avtalen modellene vi trenger?
 - Overgang: «Hvor står vi i dag?»
 -->
 
@@ -937,7 +946,7 @@ Avslutning: «Hva mener dere? Hva mangler, og hvem bør være med?»
 - Personvern: teamet som eier agenten eier PVK-en, men har ingen mal ennå. Malen lages sammen med personvernombudet
 - KI-loven: vi har ikke vurdert om noen Nav-agent blir høyrisiko etter KI-forordningen. Saksbehandling er det som ligger nærmest (vedlegg III nr. 5 bokstav a). Det må en jurist vurdere
 - Drift: vi eier hele clusteret for fleet-runtime. Det må planlegges før piloten går over i drift
-- Modeller: det er ikke sjekket om Navs GCP-avtale dekker alle modellene i Vertex AI
+- Modeller: dekker GCP-avtalen modellene vi trenger i Vertex AI? Det er et åpent spørsmål
 - Leverandørbinding: åpne standarder og «ta med egen modell» gjør det billigere å bytte (vår vurdering)
 - Lisensspørsmålet fra tidligere versjoner er avklart: agenter uten person bak bruker ikke Copilot-lisens. Eierskapet er også avklart: team copilot eier plattformen, og teamene eier sine agenter og verktøy
 
