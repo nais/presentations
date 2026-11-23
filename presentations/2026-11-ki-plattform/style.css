@@ -3050,3 +3050,36 @@ pre,
 .dl-exp {
   width: 58%;
 }
+
+/* Runtime slide: Nais side, live fleet-runtime panel, reasons */
+.rt3 {
+  grid-template-columns: 150px 330px minmax(0, 1fr);
+  gap: 0;
+  align-items: center;
+}
+
+.rt3 .rt-nais {
+  max-height: none;
+}
+
+.rt-demo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.rt-cap {
+  margin: 0;
+  text-align: center;
+  font-size: 0.62rem;
+  color: var(--nais-text-secondary);
+}
+
+.rt3 .rt-list {
+  margin-left: 1.2rem;
+  font-size: 0.72rem;
+}
+
+.rt3 {
+  grid-template-columns: 170px 300px minmax(0, 1fr);
+}

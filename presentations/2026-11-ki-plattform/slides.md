@@ -720,8 +720,8 @@ layout: default
 <p class="subtitle">Kode vi ikke stoler på, skal ikke dele cluster med Navs apper <span class="chip green align-middle ml-2">Besluttet retning</span> <span class="chip amber align-middle ml-1">Utprøving først</span></p>
 
 ::default::
-<div class="rt">
-<svg class="dg" viewBox="0 0 520 250" role="img" aria-label="fleet-control på Nais til venstre, med en offentlig ingress som bare tar imot maskin-til-maskin-kall. Til høyre et eget GKE-cluster med fleet-runtime og Agent Substrate, der hver jobb kjører bak sin egen grense. Begge pilene starter i fleet-runtime: den henter kommandoer fra fleet-control og sender status tilbake.">
+<div class="rt rt3">
+<svg class="dg rt-nais" viewBox="0 0 270 250" role="img" aria-label="fleet-control på Nais, med en offentlig ingress på kanten som bare tar imot maskin-til-maskin-kall. Begge pilene kommer fra fleet-runtime til høyre: den henter kommandoer og sender status.">
   <defs><marker id="ar6" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" class="ah"/></marker></defs>
   <rect x="0" y="0" width="180" height="250" rx="10" class="n"/>
   <text x="90" y="28" class="t" text-anchor="middle">Nais</text>
@@ -729,24 +729,19 @@ layout: default
   <text x="84" y="110" class="t" text-anchor="middle">fleet-control</text>
   <line x1="174" y1="105" x2="155" y2="105" class="a" marker-end="url(#ar6)"/>
   <rect x="174" y="80" width="12" height="50" rx="3" class="w"/>
-  <text x="240" y="64" class="s" text-anchor="middle" style="font-size: 10px">ingress, bare M2M</text>
+  <text x="228" y="64" class="s" text-anchor="middle" style="font-size: 10px">ingress, bare M2M</text>
   <rect x="16" y="186" width="136" height="40" rx="8" class="b"/>
   <text x="84" y="211" class="s" text-anchor="middle">Nais-apper</text>
   <line x1="84" y1="186" x2="84" y2="142" class="a" marker-end="url(#ar6)"/>
-  <rect x="300" y="0" width="220" height="250" rx="10" class="p"/>
-  <text x="410" y="28" class="t" text-anchor="middle">Eget GKE-cluster</text>
-  <text x="410" y="47" class="s" text-anchor="middle">fleet-runtime · Agent Substrate</text>
-  <rect x="320" y="66" width="180" height="44" rx="8" class="b" style="stroke-dasharray: 5 4"/>
-  <text x="410" y="93" class="s" text-anchor="middle">jobb · egen grense</text>
-  <rect x="320" y="122" width="180" height="44" rx="8" class="b" style="stroke-dasharray: 5 4"/>
-  <text x="410" y="149" class="s" text-anchor="middle">jobb · egen grense</text>
-  <text x="410" y="200" class="s" text-anchor="middle">ingen trafikk ut</text>
-  <text x="410" y="220" class="s" text-anchor="middle">nøkler utenfor sandkassen</text>
-  <text x="243" y="87" class="s" text-anchor="middle" style="font-size: 10px">henter kommandoer</text>
-  <line x1="298" y1="94" x2="189" y2="94" class="a" marker-end="url(#ar6)"/>
-  <text x="243" y="117" class="s" text-anchor="middle" style="font-size: 10px">sender status</text>
-  <line x1="298" y1="124" x2="189" y2="124" class="a" marker-end="url(#ar6)"/>
+  <text x="229" y="87" class="s" text-anchor="middle" style="font-size: 10px">henter kommandoer</text>
+  <line x1="270" y1="94" x2="189" y2="94" class="a" marker-end="url(#ar6)"/>
+  <text x="229" y="117" class="s" text-anchor="middle" style="font-size: 10px">sender status</text>
+  <line x1="270" y1="124" x2="189" y2="124" class="a" marker-end="url(#ar6)"/>
 </svg>
+<div class="rt-demo">
+  <FleetRuntimeDemo />
+  <p class="rt-cap">Agent Substrate · ingen trafikk ut · nøkler utenfor sandkassen</p>
+</div>
 <ul class="rt-list">
   <li><b>Hovedgrunnen:</b> Nais vil ikke ha agentsandkasser i sine clustere</li>
   <li><b>Behovene</b> peker samme vei: isolasjon (gVisor eller microVM), root, CRD-er og operatorer</li>
@@ -761,6 +756,7 @@ layout: default
 <span class="font-mono text-sm opacity-70">nav-fleet · gjeldende retning · ikke låst</span>
 
 <!--
+- Animasjonen er tilpasset fra demoen på nettsiden til agent-substrate/substrate (Apache-2.0). Jobbene og tallene er oppdiktet
 - Retningen er bestemt: fleet-runtime kjører i vårt eget GKE-cluster, med Agent Substrate som førstevalg. agent-sandbox er reserve. Vi prøver det ut først. Så sier produkteieren ja eller nei
 - Hovedgrunnen er at Nais ikke vil ha det i sine clustere. Behovene for isolasjon peker samme vei
 - Grense per jobb: hver jobb er isolert fra de andre og ryddes bort når den er ferdig. Teknisk blir det ett namespace per jobb
