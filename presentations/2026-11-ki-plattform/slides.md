@@ -748,42 +748,37 @@ layout: default
 <p class="subtitle">Kode vi ikke stoler på, skal ikke dele cluster med Navs apper <span class="chip green align-middle ml-2">Besluttet retning</span> <span class="chip amber align-middle ml-1">Utprøving først</span></p>
 
 ::default::
-<div class="rt rt3">
-<svg class="dg rt-nais" viewBox="0 0 270 250" role="img" aria-label="fleet-control på Nais, med en offentlig ingress på kanten som bare tar imot maskin-til-maskin-kall. Begge pilene kommer fra fleet-runtime til høyre: den henter kommandoer og sender status.">
+<div class="rt4">
+<svg class="dg rt-nais" viewBox="0 0 380 300" preserveAspectRatio="xMaxYMid meet" role="img" aria-label="Nais til venstre med fleet-control og Nais-apper. En offentlig ingress på kanten av Nais tar bare imot maskin-til-maskin-kall. Begge pilene kommer fra fleet-runtime til høyre: den henter kommandoer og sender status.">
   <defs><marker id="ar6" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" class="ah"/></marker></defs>
-  <rect x="0" y="0" width="180" height="250" rx="10" class="n"/>
-  <text x="90" y="28" class="t" text-anchor="middle">Nais</text>
-  <rect x="16" y="70" width="136" height="70" rx="8" class="p"/>
-  <text x="84" y="110" class="t" text-anchor="middle">fleet-control</text>
-  <line x1="174" y1="105" x2="155" y2="105" class="a" marker-end="url(#ar6)"/>
-  <rect x="174" y="80" width="12" height="50" rx="3" class="w"/>
-  <text x="228" y="64" class="s" text-anchor="middle" style="font-size: 10px">ingress, bare M2M</text>
-  <rect x="16" y="186" width="136" height="40" rx="8" class="b"/>
-  <text x="84" y="211" class="s" text-anchor="middle">Nais-apper</text>
-  <line x1="84" y1="186" x2="84" y2="142" class="a" marker-end="url(#ar6)"/>
-  <text x="229" y="87" class="s" text-anchor="middle" style="font-size: 10px">henter kommandoer</text>
-  <line x1="270" y1="94" x2="189" y2="94" class="a" marker-end="url(#ar6)"/>
-  <text x="229" y="117" class="s" text-anchor="middle" style="font-size: 10px">sender status</text>
-  <line x1="270" y1="124" x2="189" y2="124" class="a" marker-end="url(#ar6)"/>
+  <rect x="0" y="0" width="220" height="300" rx="10" class="n"/>
+  <text x="110" y="34" class="h" text-anchor="middle">Nais</text>
+  <rect x="20" y="100" width="176" height="70" rx="8" class="p"/>
+  <text x="108" y="141" class="t" text-anchor="middle">fleet-control</text>
+  <line x1="214" y1="135" x2="199" y2="135" class="a" marker-end="url(#ar6)"/>
+  <rect x="214" y="105" width="12" height="60" rx="3" class="w"/>
+  <rect x="20" y="220" width="176" height="44" rx="8" class="b"/>
+  <text x="108" y="247" class="s" text-anchor="middle">Nais-apper</text>
+  <line x1="108" y1="220" x2="108" y2="173" class="a" marker-end="url(#ar6)"/>
+  <text x="303" y="92" class="s x" text-anchor="middle">ingress, bare M2M</text>
+  <text x="303" y="117" class="s" text-anchor="middle">henter kommandoer</text>
+  <line x1="380" y1="124" x2="230" y2="124" class="a" marker-end="url(#ar6)"/>
+  <text x="303" y="152" class="s" text-anchor="middle">sender status</text>
+  <line x1="380" y1="159" x2="230" y2="159" class="a" marker-end="url(#ar6)"/>
 </svg>
-<div class="rt-demo">
-  <FleetRuntimeDemo />
-  <p class="rt-cap">Agent Substrate · ingen trafikk ut · nøkler utenfor sandkassen</p>
+<FleetRuntimeDemo />
 </div>
-<ul class="rt-list">
-  <li><b>Hovedgrunnen:</b> Nais vil ikke ha agentsandkasser i sine clustere</li>
-  <li><b>Behovene</b> peker samme vei: isolasjon (gVisor eller microVM), root, CRD-er og operatorer</li>
-  <li><b>Agent Substrate</b> er førstevalget. Hver jobb kjører bak sin egen grense</li>
-  <li><b>fleet-control har en offentlig ingress</b> som bare tar imot maskin-til-maskin-kall</li>
-  <li><b>fleet-runtime tar alltid kontakt:</b> den henter kommandoer fra fleet-control og sender status og artefakter tilbake</li>
-  <li><b>Team copilot drifter clusteret,</b> med avgrenset omfang</li>
-</ul>
+<div class="rt-points">
+  <p><b>Eget cluster:</b> Nais vil ikke ha agentsandkasser. Root, CRD-er og isolasjon peker samme vei.</p>
+  <p><b>Agent Substrate</b> er førstevalget, med en egen grense per jobb. Ingen trafikk ut, nøkler utenfor sandkassen.</p>
+  <p><b>Runtime tar alltid kontakt</b> med fleet-control. Team copilot drifter clusteret.</p>
 </div>
 
 ::footer::
 <span class="font-mono text-sm opacity-70">nav-fleet · gjeldende retning · ikke låst</span>
 
 <!--
+- Detaljer: isolasjon med gVisor eller microVM. fleet-control har en offentlig ingress som bare tar imot maskin-til-maskin-kall. fleet-runtime henter kommandoer og sender status og artefakter tilbake
 - Animasjonen er tilpasset fra demoen på nettsiden til agent-substrate/substrate (Apache-2.0). Jobbene og tallene er oppdiktet
 - Retningen er bestemt: fleet-runtime kjører i vårt eget GKE-cluster, med Agent Substrate som førstevalg. agent-sandbox er reserve. Vi prøver det ut først. Så sier produkteieren ja eller nei
 - Hovedgrunnen er at Nais ikke vil ha det i sine clustere. Behovene for isolasjon peker samme vei

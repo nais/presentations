@@ -4,7 +4,7 @@
 
   const DOTS = 84
   const TEAMS = {
-    'aksel-studio': { color: '#a78bfa', glow: 'rgba(167, 139, 250, 0.5)', job: 'prototype' },
+    'aksel-studio': { color: '#a78bfa', glow: 'rgba(167, 139, 250, 0.5)', job: 'proto' },
     dolly: { color: '#61d76b', glow: 'rgba(97, 215, 107, 0.5)', job: 'testdata' },
     nais: { color: '#64b9de', glow: 'rgba(100, 185, 222, 0.5)', job: 'forklar' },
     'titt-pa-ting': { color: '#e77cb2', glow: 'rgba(231, 124, 178, 0.5)', job: 'triage' },
@@ -56,7 +56,7 @@
   function sub(w) {
     if (w.state === 'resuming') return 'våkner · ' + w.latency + ' ms'
     if (w.state === 'suspending') return 'pauses'
-    return 'kjører i sandkasse'
+    return 'i sandkasse'
   }
 
   function pickDot() {
@@ -137,7 +137,7 @@
     <div class="frd-top"><span class="frd-live" /> eget GKE-cluster · fleet-runtime</div>
     <div class="frd-head">
       <span class="frd-label">AGENTJOBBER</span>
-      <span class="frd-meta">{{ DOTS }} · <b class="r">{{ count('running') }}</b> kjører · <b class="w">{{ count('resuming') }}</b> våkner · <b class="s">{{ count('suspending') }}</b> pauses</span>
+      <span class="frd-meta">{{ DOTS }} jobber · <b class="r">{{ count('running') }}</b> kjører · <b class="w">{{ count('resuming') }}</b> våkner · <b class="s">{{ count('suspending') }}</b> pauses</span>
     </div>
     <div class="frd-dots">
       <span
@@ -177,7 +177,7 @@
     background: #0e130f;
     color: #c8d3cb;
     font-family: 'JetBrains Mono', monospace;
-    font-size: 7.5px;
+    font-size: 9px;
     line-height: 1.3;
   }
 
@@ -197,6 +197,8 @@
 
   .frd-head {
     display: flex;
+    gap: 12px;
+    white-space: nowrap;
     justify-content: space-between;
     align-items: baseline;
   }
@@ -296,7 +298,7 @@
 
   .frd-pods {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 5px;
   }
 
@@ -314,6 +316,7 @@
   }
 
   .frd-pod b {
+    font-size: 8px;
     font-weight: 500;
     color: var(--c);
     white-space: nowrap;

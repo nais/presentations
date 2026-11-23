@@ -2972,3 +2972,30 @@ pre,
   font-size: 0.78rem;
   line-height: 1.45;
 }
+
+/* Runtime slide v2: one diagram across the width, points below */
+.rt4 {
+  display: grid;
+  grid-template-columns: 37% minmax(0, 1fr);
+  align-items: center;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.rt4 .rt-nais {
+  max-height: 290px;
+}
+
+.rt-points {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  max-width: 900px;
+  margin: 0.8rem auto 0;
+}
+
+.rt-points p {
+  margin: 0;
+  font-size: 0.72rem;
+  line-height: 1.45;
+}
