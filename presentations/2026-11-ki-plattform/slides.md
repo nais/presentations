@@ -933,7 +933,7 @@ layout: default
     <p>Én liste over godkjente modeller og leverandører. Copilot brukes bare på vegne av en bruker med lisens.</p>
   </div>
   <div class="feature-card amber">
-    <h3>Bare åpne data i piloten</h3>
+    <h3>Ingen persondata i piloten</h3>
     <p>Åpne og interne data og syntetiske testdata. Ingen personopplysninger gjennom modellene.</p>
   </div>
 </div>
