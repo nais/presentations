@@ -2011,3 +2011,607 @@ pre,
 .tip-fleet li code {
   color: #cbd5e1;
 }
+
+/* Five agents v3: a small app mockup per step, the agent docked inside the app */
+.five-steps span {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.five-steps .st {
+  font-style: normal;
+  font-size: 0.55rem;
+  font-weight: 400;
+  color: #94a3b8;
+}
+
+.five-steps .st.ok {
+  color: #059669;
+}
+
+.five-frame {
+  width: 640px;
+  height: 232px;
+  margin: 0 auto;
+  border: 0;
+  background: none;
+  overflow: visible;
+}
+
+.app {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transform: translateY(10px) scale(0.98);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  pointer-events: none;
+}
+
+.app.on {
+  opacity: 1;
+  transform: none;
+}
+
+.app .aw {
+  height: 100%;
+  box-shadow: 0 10px 24px rgb(0 0 0 / 0.18);
+}
+
+.app .aw .bw-body {
+  font-size: 0.5rem;
+  line-height: 1.35;
+  overflow: hidden;
+}
+
+.app h4 {
+  margin: 0 0 0.25rem;
+  font-family: Poppins, sans-serif;
+  font-size: 0.72rem;
+}
+
+.app p {
+  margin: 0;
+}
+
+.app u,
+.app i {
+  font-style: normal;
+  text-decoration: none;
+  padding: 0.05rem 0.4rem;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+
+.app u {
+  background: var(--nais-accent);
+  color: #fff;
+}
+
+.app .me {
+  align-self: flex-end;
+  padding: 0.25rem 0.4rem;
+  border-radius: 6px 6px 2px;
+  background: var(--nais-accent);
+  color: #fff;
+}
+
+.app .fld {
+  height: 0.55rem;
+  margin: 0.25rem 0;
+  border-radius: 3px;
+  background: #e2e8f0;
+}
+
+.app .fld.s {
+  width: 60%;
+}
+
+/* A: Aksel Studio, dark purple */
+.ax .bw-body {
+  background: #1b1530;
+  color: #e9e4f7;
+}
+
+.ax-grid {
+  display: grid;
+  grid-template-columns: 92px 1fr 150px;
+  height: 100%;
+}
+
+.ax-side {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  padding: 0.4rem;
+  border-right: 1px solid #3b2f5c;
+}
+
+.ax-side b {
+  margin-top: 0.3rem;
+  color: #a99bd6;
+}
+
+.ax-side .in1 {
+  padding-left: 0.5rem;
+}
+
+.ax-side .on {
+  background: #3b2f5c;
+  border-radius: 3px;
+}
+
+.ax-main {
+  padding: 0.4rem;
+}
+
+.ax-banner {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  margin-bottom: 0.35rem;
+  padding: 0.25rem 0.4rem;
+  border-radius: 5px;
+  background: #6d28d9;
+  color: #fff;
+}
+
+.ax-banner span {
+  flex: 1;
+}
+
+.ax-banner u {
+  background: #fff;
+  color: #4c1d95;
+}
+
+.ax-banner i,
+.ax-file i {
+  border: 1px solid #a99bd6;
+}
+
+.ax-page {
+  padding: 0 0 0.4rem;
+  border-radius: 5px;
+  background: #fff;
+  color: #0f172a;
+}
+
+.ax-head {
+  margin-bottom: 0.3rem;
+  padding: 0.2rem 0.5rem;
+  border-bottom: 1px solid #e2e8f0;
+  font-weight: 700;
+  color: #c30000;
+}
+
+.ax-page h4,
+.ax-page small {
+  display: block;
+  padding: 0 0.5rem;
+}
+
+.ax-page .bar {
+  height: 4px;
+  margin: 0.2rem 0.5rem 0.35rem;
+  background: #e2e8f0;
+}
+
+.ax-page .bar i {
+  display: block;
+  width: 33%;
+  height: 100%;
+  padding: 0;
+  background: #0067c5;
+}
+
+.ax-card {
+  margin: 0 0.5rem;
+  padding: 0.3rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 4px;
+}
+
+.ax-chat {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  padding: 0.4rem;
+  border-left: 1px solid #3b2f5c;
+}
+
+.ax-chat .me {
+  background: #6d28d9;
+}
+
+.ax-chat ul {
+  margin: 0;
+  padding-left: 0.8rem;
+}
+
+.ax-file {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.25rem;
+  border: 1px solid #3b2f5c;
+  border-radius: 4px;
+}
+
+.ax-file u {
+  margin-left: auto;
+  background: #6d28d9;
+}
+
+.inp {
+  margin-top: auto;
+  padding: 0.25rem;
+  border: 1px solid #3b2f5c;
+  border-radius: 4px;
+  color: #8b7fb3;
+}
+
+/* B: Dolly, light neutral */
+.dl .bw-body {
+  background: #fafaf9;
+}
+
+.dl-grid {
+  display: grid;
+  grid-template-columns: 1fr 170px;
+  height: 100%;
+}
+
+.dl-grid main {
+  padding: 0.5rem 0.6rem;
+}
+
+.dl-filters {
+  display: flex;
+  gap: 0.25rem;
+  margin-bottom: 0.35rem;
+}
+
+.dl-filters span {
+  padding: 0.1rem 0.35rem;
+  border: 1px solid #d6d3d1;
+  border-radius: 999px;
+  background: #fff;
+}
+
+.dl table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.dl th,
+.dl td {
+  padding: 0.1rem 0.3rem;
+  border-bottom: 1px solid #e7e5e4;
+  text-align: left;
+}
+
+.dl th {
+  color: #78716c;
+}
+
+.dl-order {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 0.35rem;
+}
+
+.dl-chat {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding: 0.5rem;
+  border-left: 1px solid #e7e5e4;
+  background: #fff;
+}
+
+.app .bot {
+  padding: 0.25rem 0.4rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px 6px 6px 2px;
+  background: #fff;
+  color: #0f172a;
+}
+
+/* C: Nais Console, light */
+.nc-top {
+  padding: 0.25rem 0.5rem;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.nc-grid {
+  display: grid;
+  grid-template-columns: 80px 1fr 160px;
+  height: calc(100% - 1.3rem);
+}
+
+.nc-grid nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  padding: 0.4rem;
+  border-right: 1px solid #e2e8f0;
+  color: #475569;
+}
+
+.nc-grid main {
+  padding: 0.4rem 0.5rem;
+}
+
+.nc-grid h4 em {
+  font-style: normal;
+  font-size: 0.5rem;
+  padding: 0.05rem 0.3rem;
+  border-radius: 999px;
+  background: #e0f2fe;
+  color: #075985;
+}
+
+.nc-tabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 0.35rem;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.nc-tabs .on {
+  border-bottom: 2px solid #0067c5;
+  font-weight: 700;
+}
+
+.nc-cards {
+  display: flex;
+  gap: 0.35rem;
+  margin-bottom: 0.4rem;
+}
+
+.nc-cards div {
+  flex: 1;
+  padding: 0.3rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 4px;
+}
+
+.nc-ask {
+  padding: 0.35rem;
+  border: 1px solid #0067c5;
+  border-radius: 5px;
+  background: #e6f1ff;
+}
+
+.nc-ask u {
+  display: inline-block;
+  margin-top: 0.2rem;
+}
+
+.nc-grid aside {
+  padding: 0.4rem;
+  border-left: 1px solid #e2e8f0;
+}
+
+.nc .warn {
+  margin-top: 0.3rem;
+  padding: 0.25rem;
+  border-left: 3px solid #f59e0b;
+  background: #fffbeb;
+}
+
+.nc .warn u {
+  background: #fff;
+  color: #0067c5;
+  border: 1px solid #0067c5;
+}
+
+/* D: Titt På Ting, dark navy */
+.tt .bw-body {
+  background: #0b1528;
+  color: #e2e8f0;
+}
+
+.tt-tabs {
+  display: flex;
+  gap: 0.6rem;
+  padding: 0.3rem 0.6rem;
+  border-bottom: 1px solid #1e2d4a;
+  color: #8fa3bf;
+}
+
+.tt-tabs .on {
+  color: #fff;
+  font-weight: 700;
+  border-bottom: 2px solid #fff;
+}
+
+.tt-grid {
+  display: grid;
+  grid-template-columns: 1fr 180px;
+  height: calc(100% - 1.4rem);
+}
+
+.tt-grid main {
+  padding: 0.5rem 0.6rem;
+}
+
+.tt-buckets {
+  display: flex;
+  gap: 0.35rem;
+  margin-bottom: 0.4rem;
+}
+
+.tt-buckets div {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 0.3rem;
+  border: 1px solid #1e2d4a;
+  border-radius: 5px;
+  color: #cbd5e1;
+}
+
+.tt-buckets b {
+  font-size: 0.85rem;
+  color: #fff;
+}
+
+.tt-buckets .m {
+  border-color: #f59e0b;
+}
+
+.tt-group {
+  padding: 0.35rem;
+  border: 1px solid #1e2d4a;
+  border-radius: 5px;
+}
+
+.tt-group span {
+  display: block;
+  color: #cbd5e1;
+}
+
+.tt-chat {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding: 0.5rem;
+  border-left: 1px solid #1e2d4a;
+}
+
+.tt-chat small {
+  color: #cbd5e1;
+}
+
+.tt-pr {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  padding: 0.3rem;
+  border: 1px solid #334766;
+  border-radius: 5px;
+}
+
+.tt-pr u {
+  align-self: flex-start;
+  background: #fff;
+  color: #0b1528;
+}
+
+/* E: Saksbehandling, grey and dashed: later phase */
+.sb .aw {
+  filter: grayscale(1);
+  opacity: 0.85;
+  border-style: dashed;
+}
+
+.sb-grid {
+  display: grid;
+  grid-template-columns: 90px 1fr 190px;
+  height: 100%;
+}
+
+.sb-grid nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  padding: 0.4rem;
+  border-right: 1px solid #e2e8f0;
+}
+
+.sb-grid main {
+  padding: 0.5rem;
+}
+
+.sb-grid aside {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  padding: 0.5rem;
+  border-left: 1px dashed #94a3b8;
+  background: #f8fafc;
+}
+
+.sb-act {
+  display: flex;
+  gap: 0.3rem;
+  margin-top: auto;
+}
+
+.sb-act span {
+  padding: 0.05rem 0.4rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 4px;
+}
+
+.sb-later {
+  position: absolute;
+  right: 0.6rem;
+  bottom: 0.5rem;
+  padding: 0.15rem 0.6rem;
+  border: 1px dashed #475569;
+  border-radius: 999px;
+  background: #fff;
+  font-size: 0.6rem;
+  font-weight: 700;
+  color: #334155;
+}
+
+/* Blocks: dim the ones the current agent does not use; module names dark on light */
+.five-blocks li:not(.used) {
+  opacity: 0.35;
+  background: #fff;
+  border-color: var(--nais-border);
+  animation: none;
+}
+
+.five-blocks code {
+  padding: 0.05rem 0.35rem;
+  border: 1px solid var(--nais-border);
+  border-radius: 4px;
+  background: #fff;
+  color: #0b1528;
+}
+
+/* Fit: smaller steps and blocks so the app frame fits above them */
+.five {
+  gap: 0.45rem;
+}
+
+.five-frame {
+  height: 210px;
+}
+
+.five-blocks li {
+  padding: 0.3rem 0.3rem;
+  font-size: 0.62rem;
+}
+
+.five-blocks strong {
+  font-size: 0.75rem;
+}
+
+.app li,
+.app p,
+.app span,
+.app b {
+  color: inherit;
+  margin: 0;
+  line-height: 1.35;
+}
+
+.ax-chat li {
+  margin: 0.1rem 0;
+}
+
+.tt h4 {
+  color: #fff;
+}
+
+.sb-later {
+  right: auto;
+  left: 38%;
+}

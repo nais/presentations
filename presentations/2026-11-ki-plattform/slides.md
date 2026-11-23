@@ -90,56 +90,83 @@ clicks: 4
 ::default::
 <div class="five">
   <div class="five-steps">
-    <span :class="{ on: $clicks === 0 }">Aksel Studio</span>
-    <span :class="{ on: $clicks === 1 }">Testdata</span>
-    <span :class="{ on: $clicks === 2 }">nav-pilot</span>
-    <span :class="{ on: $clicks === 3 }">Drift</span>
-    <span :class="{ on: $clicks === 4 }" class="later">Saksbehandling</span>
-    <em>interne verktøy først</em><em class="r">senere fase</em>
+    <span :class="{ on: $clicks === 0 }">Aksel Studio <i class="st ok">finnes</i></span>
+    <span :class="{ on: $clicks === 1 }">Dolly <i class="st">eksempel</i></span>
+    <span :class="{ on: $clicks === 2 }">Nais Console <i class="st">eksempel</i></span>
+    <span :class="{ on: $clicks === 3 }">Titt På Ting <i class="st">eksempel</i></span>
+    <span :class="{ on: $clicks === 4 }" class="later">Saksbehandling <i class="st">senere fase</i></span>
   </div>
   <div class="five-frame">
-    <div class="ag c1" :class="{ on: $clicks === 0 }">
-      <div class="ag-bar"><span class="i-carbon-paint-brush" /><strong>Aksel Studio</strong><em>designagent</em><span class="chip green">finnes</span></div>
-      <div class="ag-body">
-        <dl><dt>Bruker</dt><dd>Ingrid, designer</dd><dt>Verktøy</dt><dd>byggesandkasse med Aksel-komponenter</dd><dt>Godkjenning</dt><dd>Ingrid godtar eller forkaster forslaget</dd></dl>
-        <div class="ag-chat"><p class="ch-user">Lag en klikkbar prototype av søknadsskjemaet.</p><p class="ch-bot">Prototypen har tre sider. Vil du ta den inn i konseptet?</p></div>
-      </div>
+    <div class="app ax" :class="{ on: $clicks === 0 }">
+      <BrowserWindow url="aksel-studio (skisse)" class="aw">
+        <div class="ax-grid">
+          <aside class="ax-side"><b>Kontekst</b><span>notat.md</span><b>Prototyper</b><span>Søknad.puck</span><span class="in1">Start</span><span class="in1 on">Søknad</span><span class="in1">Kvittering</span></aside>
+          <main class="ax-main">
+            <div class="ax-banner"><span><b>Agenten har foreslått endringer</b> Ingress og hjelpetekster</span><u>Godta</u><i>Forkast</i></div>
+            <div class="ax-page"><div class="ax-head">Nav</div><h4>Søknad om tjeneste</h4><small>Steg 1 av 3</small><div class="bar"><i></i></div><div class="ax-card"><b>Om deg</b><div class="fld"></div><div class="fld"></div></div></div>
+          </main>
+          <aside class="ax-chat"><p class="me">Foreslå en endring for å gjøre dette litt mer forseggjort</p><ul><li>Legg til en ingress</li><li>Hjelpetekst på feltene</li><li>Tydeligere neste-knapp</li></ul><div class="ax-file">Forslag til 1 fil <u>Godta</u><i>Forkast</i></div><div class="inp">Melding til agenten …</div></aside>
+        </div>
+      </BrowserWindow>
     </div>
-    <div class="ag c2" :class="{ on: $clicks === 1 }">
-      <div class="ag-bar"><span class="i-carbon-data-base" /><strong>Dolly</strong><em>testdataagent</em><span class="chip green">finnes</span></div>
-      <div class="ag-body">
-        <dl><dt>Bruker</dt><dd>Jonas, tester</dd><dt>Verktøy</dt><dd>dolly · bestill testperson (skriving)</dd><dt>Godkjenning</dt><dd>Jonas sier ja før bestillingen sendes</dd></dl>
-        <div class="ag-chat"><p class="ch-user">Lag en syntetisk 67-åring med to arbeidsforhold.</p><p class="ch-bot">Klar til å bestille én syntetisk testperson.</p></div>
-      </div>
+    <div class="app dl" :class="{ on: $clicks === 1 }">
+      <BrowserWindow url="dolly (skisse)" class="aw">
+        <div class="dl-grid">
+          <main>
+            <h4>Opprett testperson</h4>
+            <div class="dl-filters"><span>Alder: 30–40</span><span>Sivilstand: gift</span><span>Arbeidsforhold: 2</span><span>Barn: 1</span></div>
+            <table><tr><th>Navn</th><th>Alder</th><th>Arbeidsforhold</th><th>Barn</th></tr><tr><td>Testperson A</td><td>34</td><td>2</td><td>1</td></tr><tr><td>Testperson B</td><td>38</td><td>2</td><td>1</td></tr><tr><td>Testperson C</td><td>31</td><td>2</td><td>1</td></tr><tr><td colspan="4">… 17 til, bare syntetiske data</td></tr></table>
+            <div class="dl-order"><span>20 testpersoner klare</span><u>Bestill</u></div>
+          </main>
+          <aside class="dl-chat"><p class="me">Lag 20 testpersoner med to arbeidsforhold og et barn</p><p class="bot">Jeg har fylt ut bestillingen. Se over og trykk Bestill.</p></aside>
+        </div>
+      </BrowserWindow>
     </div>
-    <div class="ag c3" :class="{ on: $clicks === 2 }">
-      <div class="ag-bar"><span class="i-carbon-terminal" /><strong>nav-pilot</strong><em>kodeagent i skyen</em><span class="chip amber">hypotese</span></div>
-      <div class="ag-body">
-        <dl><dt>Bruker</dt><dd>Sara, utvikler</dd><dt>Verktøy</dt><dd>github · bare repoene Sara har tilgang til</dd><dt>Godkjenning</dt><dd>teamet gjennomgår PR-en før merge</dd></dl>
-        <div class="ag-chat"><p class="ch-user">Oppgrader Spring Boot og åpne en utkast-PR.</p><p class="ch-bot">Utkast-PR er åpnet, og testene er grønne.</p></div>
-      </div>
+    <div class="app nc" :class="{ on: $clicks === 2 }">
+      <BrowserWindow url="nais console (skisse)" class="aw">
+        <div class="nc-top"><b>Nais Console</b> / team</div>
+        <div class="nc-grid">
+          <nav><span>Applications</span><span>Jobs</span><span>Secrets</span><span>Postgres</span><span>Alerts</span><span>Deployments</span><span>Cost</span></nav>
+          <main>
+            <h4>min-app <em>dev-gcp</em></h4>
+            <div class="nc-tabs"><span class="on">Overview</span><span>Deployments</span><span>Logs</span><span>Events</span></div>
+            <div class="nc-cards"><div><b>0</b> issues</div><div><b>1/1</b> instances ready</div></div>
+            <div class="nc-ask"><b>Spør Nais:</b> Hemmeligheten finnes ikke i miljøet. Jeg foreslår å legge den til i manifestet. <u>Opprett PR</u></div>
+          </main>
+          <aside><b>Recent events</b><p class="warn">Health check failed: readiness check failed, connection refused</p><p class="warn">Mount failed: secret not found <u>Forklar</u></p></aside>
+        </div>
+      </BrowserWindow>
     </div>
-    <div class="ag c4" :class="{ on: $clicks === 3 }">
-      <div class="ag-bar"><span class="i-carbon-cloud-monitoring" /><strong>Nais-drift</strong><em>driftsagent</em><span class="chip amber">hypotese</span></div>
-      <div class="ag-body">
-        <dl><dt>Bruker</dt><dd>Emil, utvikler med vakt</dd><dt>Verktøy</dt><dd>status og dokumentasjon, bare lesing</dd><dt>Godkjenning</dt><dd>ingen skriving, Emil endrer selv</dd></dl>
-        <div class="ag-chat"><p class="ch-user">Hvorfor restarter podden min hele tiden?</p><p class="ch-bot">Podden går tom for minne. Øk grensen i nais.yaml.</p></div>
-      </div>
+    <div class="app tt" :class="{ on: $clicks === 3 }">
+      <BrowserWindow url="titt på ting (skisse)" class="aw">
+        <div class="tt-tabs"><span class="on">Vulnerabilities</span><span>Compliance</span><span>Golden Path</span></div>
+        <div class="tt-grid">
+          <main>
+            <h4>Vulnerability prioritization that makes sense</h4>
+            <div class="tt-buckets"><div><b>0</b>Immediately</div><div class="m"><b>18</b>Must be prioritized</div><div><b>634</b>Must be scheduled</div></div>
+            <div class="tt-group"><b>team/app</b> (15 vulnerabilities)<span>Rebuild base image: 15 vulnerabilities in 2 OS packages</span></div>
+          </main>
+          <aside class="tt-chat"><p class="bot">Disse er prioritert fordi appene er eksponert og det finnes en fiks i et nyere base image.</p><div class="tt-pr">Bygg nytt base image · PR i 4 apper <u>Godkjenn</u></div><small>Teamets eier godkjenner</small></aside>
+        </div>
+      </BrowserWindow>
     </div>
-    <div class="ag c5" :class="{ on: $clicks === 4 }">
-      <div class="ag-bar"><span class="i-carbon-folder-details" /><strong>Saksbehandling</strong><em>eksempel</em><span class="chip slate">senere fase</span></div>
-      <div class="ag-body">
-        <dl><dt>Bruker</dt><dd>en saksbehandler</dd><dt>Verktøy</dt><dd>saksarkivet, med saksbehandlerens tilgang</dd><dt>Godkjenning</dt><dd>saksbehandleren godkjenner brevet</dd></dl>
-        <div class="ag-chat"><p class="ch-user">Oppsummer saken og foreslå neste steg.</p><p class="ch-bot">Søknaden mangler legeerklæring. Skal jeg lage et brevutkast?</p></div>
-      </div>
+    <div class="app sb" :class="{ on: $clicks === 4 }">
+      <BrowserWindow url="saksbehandling (skisse)" class="aw">
+        <div class="sb-grid">
+          <nav><b>Dokumenter</b><span>Søknad</span><span>Vedlegg 1</span><span>Vedlegg 2</span><span>Notat</span></nav>
+          <main><h4>Sak</h4><div class="fld"></div><div class="fld s"></div><div class="fld"></div><div class="fld s"></div></main>
+          <aside><b>Utkast til oppsummering</b><p>Søknaden mangler et vedlegg. <sup>[1]</sup></p><p>Søkeren har levert to av tre dokumenter. <sup>[2]</sup></p><div class="sb-act"><span>Rediger</span><u>Godkjenn</u></div></aside>
+        </div>
+        <div class="sb-later">senere fase</div>
+      </BrowserWindow>
     </div>
   </div>
   <ol class="five-blocks" :key="$clicks">
-    <li style="--d: 0.25s"><b class="pin">1</b><strong>Identitet</strong><span>på vegne av brukeren</span><code>fleet-gateway</code></li>
-    <li style="--d: 0.45s"><b class="pin">2</b><strong>Verktøyregler</strong><span>bare det agenten har lov til</span><code>fleet-control</code></li>
-    <li style="--d: 0.65s"><b class="pin">3</b><strong>Sandkasse</strong><span>isolert, uten nøkler</span><code>fleet-runtime</code></li>
-    <li style="--d: 0.85s"><b class="pin">4</b><strong>Godkjenning</strong><span>mennesket sier ja</span><code>appen</code></li>
-    <li style="--d: 1.05s"><b class="pin">5</b><strong>Revisjon</strong><span>og kostnad per steg</span><code>fleet-radar</code></li>
+    <li :class="{ used: true }" style="--d: 0.25s"><b class="pin">1</b><strong>Identitet</strong><span>på vegne av brukeren</span><code>fleet-gateway</code></li>
+    <li :class="{ used: true }" style="--d: 0.45s"><b class="pin">2</b><strong>Verktøyregler</strong><span>bare det agenten har lov til</span><code>fleet-control</code></li>
+    <li :class="{ used: $clicks === 0 || $clicks === 3 }" style="--d: 0.65s"><b class="pin">3</b><strong>Sandkasse</strong><span>bygger isolert, uten nøkler</span><code>fleet-runtime</code></li>
+    <li :class="{ used: true }" style="--d: 0.85s"><b class="pin">4</b><strong>Godkjenning</strong><span>mennesket sier ja</span><code>appen</code></li>
+    <li :class="{ used: true }" style="--d: 1.05s"><b class="pin">5</b><strong>Revisjon</strong><span>og kostnad per steg</span><code>fleet-radar</code></li>
   </ol>
 </div>
 
@@ -147,13 +174,14 @@ clicks: 4
 <span class="font-mono text-sm opacity-70">nav-fleet · gjeldende retning · ikke låst</span>
 
 <!--
-- Klikk gjennom de fem agentene. Hver har egen bruker, eget spørsmål, eget verktøy og egen godkjenning. Navnene er oppdiktet. Rammen er den samme, og de fem byggeklossene nederst lyser opp likt hver gang. Det er poenget: dette er ikke fem ting, men samme fundament brukt til ulike formål
-- Rekkefølgen går fra interne verktøy med åpne eller syntetiske data til en senere fase med brukerdata
-- Aksel Studio (finnes): designere lager prototyper med KI i et konsept. Bygg av prototyper er tenkt som første arbeidslast i fleet-runtime. Selve flyttingen er et forslag
-- Testdata fra Dolly (finnes): MCP-serveren for Dolly kjører bak fleet-gateway i dag. Bestilling er det første skriveverktøyet, og brukeren må si ja
-- nav-pilot-agent i skyen (hypotese): i dag kjører nav-pilot lokalt hos utvikleren. Å kjøre agentene i fleet-runtime er en hypotese
-- Driftsagent (hypotese): leser status og dokumentasjon og foreslår neste steg. Mennesket gjør endringen. Ingen har bestilt den
-- Saksbehandling (eksempel, senere fase): plattformen bygges slik at den kan bære dette trygt, men piloten tar bare åpne og interne data og testdata gjennom modellene. Saksbehandling krever egen avklaring av personvern, KI-forordningen og risiko
+- Klikk gjennom fem apper. Agenten sitter inne i appen, slik teamet har bygget den. Byggeklossene under lyser opp for det hver agent bruker
+- Alle skissene er forenklet. Navn og tall er oppdiktet
+- Aksel Studio (finnes): designeren ber agenten forbedre en prototype. Agenten foreslår, og ingenting endres før designeren trykker Godta. Byggingen kjører i en sandkasse
+- Dolly (eksempel): agenten gjør en setning om til en bestilling av syntetiske testpersoner. Bestill krever et klikk. Bare syntetiske data
+- Nais Console (eksempel): agenten forklarer en hendelse og finner årsaken. Den leser bare. Å opprette en PR krever et klikk
+- Titt På Ting (eksempel): en etterlevelsesagent forklarer hvorfor sårbarheter er prioritert, og foreslår å bygge nytt base image som en PR i flere apper. Teamets eier godkjenner. Bygget kjører i en sandkasse
+- Saksbehandling (senere fase): et utkast til oppsummering med kildehenvisninger, som saksbehandleren redigerer og godkjenner. Ikke i piloten. Krever brukerdata, PVK og juridisk avklaring
+- nav-pilot er også et aktuelt eksempel: agenter fra nav-pilot kan kjøre i fleet-runtime i stedet for på utviklerens maskin. Det er en hypotese
 - Vi har med vilje ikke tatt med en agent for innbyggere på nav.no. Tjenester for innbyggere er et ikke-mål
 - Overgang: «La oss se hva som skjer under vannlinjen for den første av dem.»
 -->
