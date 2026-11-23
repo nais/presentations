@@ -2711,3 +2711,132 @@ pre,
 .chip.blue {
   color: #1d4ed8;
 }
+
+/* Five agents v5: taller, about 4:3 frame */
+.five {
+  grid-template-columns: 470px minmax(0, 1fr);
+  width: 880px;
+  gap: 1.4rem;
+}
+
+.five-frame {
+  height: 345px;
+}
+
+.five-steps {
+  font-size: 0.58rem;
+}
+
+.ax-grid {
+  grid-template-columns: 0 1fr 140px;
+}
+
+.ax-side {
+  display: none;
+}
+
+.ax-card label {
+  display: block;
+  margin-top: 0.2rem;
+  color: #475569;
+}
+
+.ax-card .fld {
+  margin: 0.1rem 0 0;
+  border: 1px solid #cbd5e1;
+  background: #fff;
+}
+
+.ax-btns {
+  display: flex;
+  gap: 0.3rem;
+  margin: 0.4rem 0.5rem 0;
+}
+
+.ax-btns i {
+  border: 1px solid #cbd5e1;
+}
+
+.dl-grid {
+  grid-template-columns: 1fr 120px;
+}
+
+.nc-grid {
+  grid-template-columns: 62px 1fr 125px;
+}
+
+.nc .info {
+  margin-top: 0.3rem;
+  padding: 0.2rem 0.25rem;
+  border-left: 3px solid #94a3b8;
+  background: #f8fafc;
+}
+
+.tt-grid {
+  grid-template-columns: 1fr 130px;
+}
+
+.tt-buckets b {
+  font-size: 0.75rem;
+}
+
+.tt-list {
+  width: 100%;
+  margin-top: 0.4rem;
+  border-collapse: collapse;
+}
+
+.tt-list th,
+.tt-list td {
+  padding: 0.12rem 0.25rem;
+  border-bottom: 1px solid #1e2d4a;
+  text-align: left;
+}
+
+.tt-list th {
+  color: #8fa3bf;
+}
+
+.sb-grid {
+  grid-template-columns: 62px 1fr 130px;
+}
+
+.sb-doc {
+  padding: 0.35rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 4px;
+  background: #fff;
+}
+
+.sb-later {
+  right: 145px;
+}
+
+.ax-grid {
+  grid-template-columns: 1fr 140px;
+}
+
+.five-frame {
+  height: 318px;
+}
+
+.five-left {
+  gap: 0.5rem;
+}
+
+.nc-list {
+  width: 100%;
+  margin: 0.4rem 0;
+  border-collapse: collapse;
+}
+
+.nc-list th,
+.nc-list td {
+  padding: 0.12rem 0.25rem;
+  border-bottom: 1px solid #e2e8f0;
+  text-align: left;
+}
+
+.nc-list th {
+  color: #64748b;
+}

@@ -105,7 +105,7 @@ clicks: 4
           <aside class="ax-side"><b>Prototyper</b><span class="in1">Start</span><span class="in1 on">Søknad</span><span class="in1">Kvittering</span></aside>
           <main class="ax-main">
             <div class="ax-banner"><span><b>Agenten har foreslått endringer</b></span><u>Godta</u><i>Forkast</i></div>
-            <div class="ax-page"><div class="ax-head">Nav</div><h4>Søknad om tjeneste</h4><small>Steg 1 av 3</small><div class="bar"><i></i></div><div class="ax-card"><b>Om deg</b><div class="fld"></div><div class="fld"></div></div></div>
+            <div class="ax-page"><div class="ax-head">Nav</div><h4>Søknad om tjeneste</h4><small>Steg 1 av 3</small><div class="bar"><i></i></div><div class="ax-card"><b>Om deg</b><label>Fornavn</label><div class="fld"></div><label>Etternavn</label><div class="fld"></div><label>Telefon</label><div class="fld s"></div><label>E-post</label><div class="fld"></div></div><div class="ax-btns"><u>Neste</u><i>Avbryt</i></div></div>
           </main>
           <aside class="ax-chat"><p class="me">Foreslå en endring for å gjøre dette litt mer forseggjort</p><div class="bot">Jeg foreslår:<ul><li>en ingress øverst</li><li>hjelpetekst på feltene</li><li>tydeligere neste-knapp</li></ul></div><small class="ax-file">Forslag til 1 fil</small><div class="inp">Melding til agenten …</div></aside>
         </div>
@@ -117,7 +117,7 @@ clicks: 4
           <main>
             <h4>Opprett testperson</h4>
             <div class="dl-filters"><span>Alder: 30–40</span><span>Sivilstand: gift</span><span>Arbeidsforhold: 2</span><span>Barn: 1</span></div>
-            <table><tr><th>Navn</th><th>Alder</th><th>Arb.forhold</th><th>Barn</th></tr><tr><td>Testperson A</td><td>34</td><td>2</td><td>1</td></tr><tr><td>Testperson B</td><td>38</td><td>2</td><td>1</td></tr><tr><td>Testperson C</td><td>31</td><td>2</td><td>1</td></tr><tr><td>Testperson D</td><td>36</td><td>2</td><td>1</td></tr><tr><td colspan="4">… 16 til, bare syntetiske data</td></tr></table>
+            <table><tr><th>Navn</th><th>Alder</th><th>Arb.forhold</th><th>Barn</th></tr><tr><td>Testperson A</td><td>34</td><td>2</td><td>1</td></tr><tr><td>Testperson B</td><td>38</td><td>2</td><td>1</td></tr><tr><td>Testperson C</td><td>31</td><td>2</td><td>1</td></tr><tr><td>Testperson D</td><td>36</td><td>2</td><td>1</td></tr><tr><td>Testperson E</td><td>33</td><td>2</td><td>1</td></tr><tr><td>Testperson F</td><td>39</td><td>2</td><td>1</td></tr><tr><td>Testperson G</td><td>35</td><td>2</td><td>1</td></tr><tr><td>Testperson H</td><td>32</td><td>2</td><td>1</td></tr><tr><td>Testperson I</td><td>37</td><td>2</td><td>1</td></tr><tr><td>Testperson J</td><td>30</td><td>2</td><td>1</td></tr><tr><td colspan="4">… 10 til, bare syntetiske data</td></tr></table>
             <div class="dl-order"><span>20 testpersoner klare</span><u>Bestill</u></div>
           </main>
           <aside class="dl-chat"><p class="me">Lag 20 testpersoner med to arbeidsforhold og et barn</p><div class="bot">Jeg har fylt ut skjemaet og laget en forhåndsvisning.<span class="dl-note">Ingenting bestilles før du trykker <u>Bestill</u></span></div></aside>
@@ -133,9 +133,9 @@ clicks: 4
             <h4>min-app <em>dev-gcp</em></h4>
             <div class="nc-tabs"><span class="on">Overview</span><span>Deployments</span><span>Logs</span><span>Events</span></div>
             <div class="nc-cards"><div><b>0</b> issues</div><div><b>1/1</b> instances ready</div></div>
-            <div class="nc-ask"><b>Spør Nais:</b> Hemmeligheten finnes ikke i miljøet. Jeg foreslår å legge den til i manifestet. <u>Opprett PR</u></div>
+            <div class="nc-ask"><b>Spør Nais:</b> Hemmeligheten finnes ikke i miljøet. Jeg foreslår å legge den til i manifestet. <u>Opprett PR</u></div><table class="nc-list"><tr><th>Instans</th><th>Status</th><th>Restarter</th></tr><tr><td>min-app-7c9f</td><td>Running</td><td>0</td></tr><tr><td>min-app-5b2d</td><td>Terminated</td><td>3</td></tr></table><div class="nc-cards"><div><b>Siste utrulling</b><br>for 12 minutter siden</div><div><b>Image</b><br>min-app:2026.11</div></div>
           </main>
-          <aside><b>Recent events</b><p class="warn">Health check failed: readiness check failed, connection refused</p><p class="warn">Mount failed: secret not found<u class="fx">Forklar</u></p></aside>
+          <aside><b>Recent events</b><p class="warn">Health check failed: readiness check failed, connection refused</p><p class="warn">Mount failed: secret not found<u class="fx">Forklar</u></p><p class="info">Scaled up: 1 replica</p><p class="info">Deployment started</p><p class="info">Image pulled</p></aside>
         </div>
       </BrowserWindow>
     </div>
@@ -146,7 +146,7 @@ clicks: 4
           <main>
             <h4>Vulnerability prioritization that makes sense</h4>
             <div class="tt-buckets"><div><b>0</b>Immediately</div><div class="m"><b>18</b>Must be prioritized</div><div><b>634</b>Must be scheduled</div></div>
-            <div class="tt-group"><b>team/app</b> (15 vulnerabilities)<span>Rebuild base image: 15 vulnerabilities in 2 OS packages</span></div><div class="tt-group"><b>team/app-2</b> (3 vulnerabilities)<span>Upgrade dependency: 3 vulnerabilities in 1 library</span></div>
+            <div class="tt-group"><b>team/app</b> (15 vulnerabilities)<span>Rebuild base image: 15 vulnerabilities in 2 OS packages</span></div><div class="tt-group"><b>team/app-2</b> (3 vulnerabilities)<span>Upgrade dependency: 3 vulnerabilities in 1 library</span></div><table class="tt-list"><tr><th>App</th><th>Pakke</th><th>Prioritet</th></tr><tr><td>app</td><td>openssl</td><td>must be prioritized</td></tr><tr><td>app</td><td>libxml2</td><td>must be prioritized</td></tr><tr><td>app-2</td><td>json-bibliotek</td><td>must be scheduled</td></tr><tr><td>app-3</td><td>zlib</td><td>must be scheduled</td></tr></table>
           </main>
           <aside class="tt-chat"><p class="bot">Disse er prioritert fordi appene er eksponert og det finnes en fiks i et nyere base image.</p><div class="tt-pr">Bygg nytt base image · PR i 4 apper <u>Godkjenn</u></div><small>Teamets eier godkjenner</small></aside>
         </div>
@@ -156,7 +156,7 @@ clicks: 4
       <BrowserWindow url="saksbehandling (skisse)" class="aw">
         <div class="sb-grid">
           <nav><b>Dokumenter</b><span>Søknad</span><span>Vedlegg 1</span><span>Vedlegg 2</span><span>Notat</span></nav>
-          <main><h4>Sak</h4><dl class="sb-dl"><dt>Sakstype</dt><dd>Søknad om tjeneste</dd><dt>Mottatt</dt><dd>3. november</dd><dt>Status</dt><dd>Venter på vedlegg</dd><dt>Dokumenter</dt><dd>4</dd></dl><div class="fld"></div><div class="fld s"></div></main>
+          <main><h4>Sak</h4><dl class="sb-dl"><dt>Sakstype</dt><dd>Søknad om tjeneste</dd><dt>Mottatt</dt><dd>3. november</dd><dt>Status</dt><dd>Venter på vedlegg</dd><dt>Dokumenter</dt><dd>4</dd><dt>Saksbehandler</dt><dd>tildelt</dd><dt>Frist</dt><dd>om 14 dager</dd></dl><div class="sb-doc"><b>Søknad</b><div class="fld"></div><div class="fld"></div><div class="fld s"></div><div class="fld"></div><div class="fld s"></div></div></main>
           <aside><b>Utkast til oppsummering</b><p>Søknaden mangler et vedlegg. <sup>[1]</sup></p><p>Søkeren har levert to av tre dokumenter. <sup>[2]</sup></p><div class="sb-act"><span>Rediger</span><u>Godkjenn</u></div></aside>
         </div>
         <div class="sb-later">senere fase</div>
@@ -771,8 +771,8 @@ layout: default
 ---
 
 ::header::
-<h1 class="text-3xl font-bold">Plattformen koster infrastruktur og drift. Teamene tar med egen modell</h1>
-<p class="subtitle">Ingen felles modellpott <span class="chip green align-middle ml-2">Besluttet</span></p>
+<h1 class="text-3xl font-bold">Teamene tar med egen modell</h1>
+<p class="subtitle">Plattformen koster infrastruktur og drift. Ingen felles modellpott <span class="chip green align-middle ml-2">Besluttet</span></p>
 
 ::default::
 <div class="card-row">
