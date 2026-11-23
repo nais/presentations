@@ -1589,56 +1589,6 @@ pre,
   overflow: hidden;
 }
 
-.five-blocks {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 0.5rem;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.five-blocks li {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.1rem;
-  margin: 0;
-  padding: 0.55rem 0.3rem;
-  border: 1px solid var(--nais-border);
-  border-radius: 8px;
-  background: var(--nais-accent-light);
-  border-color: var(--nais-accent);
-  text-align: center;
-  font-size: 0.68rem;
-  animation: five-lit 0.9s var(--d, 0s) ease-out backwards;
-}
-
-.five-blocks strong {
-  font-size: 0.82rem;
-}
-
-.five-blocks span {
-  color: var(--nais-text-secondary);
-}
-
-.five-blocks code {
-  font-size: 0.62rem;
-  color: var(--nais-accent);
-}
-
-@keyframes five-lit {
-  from {
-    background: #fff;
-    border-color: var(--nais-border);
-    box-shadow: 0 0 0 0 rgba(0, 103, 197, 0);
-  }
-
-  60% {
-    box-shadow: 0 0 0 4px rgba(0, 103, 197, 0.25);
-  }
-}
-
 /* Innsyn: timeline for one agent job, with what we log beside it */
 .trace {
   display: grid;
@@ -2439,22 +2389,6 @@ pre,
   color: #334155;
 }
 
-/* Blocks: dim the ones the current agent does not use; module names dark on light */
-.five-blocks li:not(.used) {
-  opacity: 0.35;
-  background: #fff;
-  border-color: var(--nais-border);
-  animation: none;
-}
-
-.five-blocks code {
-  padding: 0.05rem 0.35rem;
-  border: 1px solid var(--nais-border);
-  border-radius: 4px;
-  background: #fff;
-  color: #0b1528;
-}
-
 /* Fit: smaller steps and blocks so the app frame fits above them */
 .five {
   gap: 0.45rem;
@@ -2462,15 +2396,6 @@ pre,
 
 .five-frame {
   height: 210px;
-}
-
-.five-blocks li {
-  padding: 0.3rem 0.3rem;
-  font-size: 0.62rem;
-}
-
-.five-blocks strong {
-  font-size: 0.75rem;
 }
 
 .app li,
@@ -2522,42 +2447,6 @@ pre,
 
 .app .aw .bw-body {
   font-size: 0.56rem;
-}
-
-.five .five-blocks {
-  grid-template-columns: 1fr;
-  gap: 0.35rem;
-  margin-top: 1.9rem;
-}
-
-.five .five-blocks li {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  grid-template-rows: auto auto auto;
-  align-items: center;
-  justify-items: start;
-  column-gap: 0.5rem;
-  row-gap: 0.05rem;
-  padding: 0.35rem 0.55rem;
-  text-align: left;
-}
-
-.five .five-blocks li .pin {
-  grid-row: 1 / 4;
-}
-
-.five .five-blocks li code,
-.five .five-blocks li:not(.used) code {
-  padding: 0.02rem 0.35rem;
-  border: 1px solid #bfd4f2;
-  border-radius: 4px;
-  background: #e6f0ff;
-  color: #0b1528;
-  font-size: 0.6rem;
-}
-
-.five .five-blocks li:not(.used) {
-  opacity: 0.45;
 }
 
 /* Mockup fixes at the narrower width */
@@ -2645,36 +2534,6 @@ pre,
   height: 236px;
 }
 
-.five .five-blocks {
-  margin-top: 1.6rem;
-  gap: 0.3rem;
-}
-
-.five .five-blocks li {
-  grid-template-columns: auto 1fr auto;
-  grid-template-rows: auto auto;
-  padding: 0.25rem 0.5rem;
-}
-
-.five .five-blocks li .pin {
-  grid-row: 1 / 3;
-}
-
-.five .five-blocks li strong {
-  font-size: 0.72rem;
-}
-
-.five .five-blocks li span {
-  grid-column: 2;
-  font-size: 0.6rem;
-}
-
-.five .five-blocks li code {
-  grid-column: 3;
-  grid-row: 1 / 3;
-  font-size: 0.55rem;
-}
-
 .ax-banner span {
   white-space: nowrap;
 }
@@ -2697,11 +2556,6 @@ pre,
   padding: 0;
   background: none;
   color: #cbd5e1;
-}
-
-.five .five-blocks li code {
-  background: #e6f0ff;
-  color: #0b1528;
 }
 
 .chip.green {
@@ -2844,23 +2698,6 @@ pre,
 /* Building blocks span exactly the frame height, aligned with the mockup */
 .five {
   align-items: end;
-}
-
-.five .five-blocks {
-  height: 345px;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: 0;
-}
-
-/* No entry animation: only the used/dimmed colouring changes */
-.five .five-blocks li {
-  animation: none;
-  transform: none;
-  transition: opacity 0.4s ease, background-color 0.4s ease, border-color 0.4s ease;
 }
 
 /* Cross-fade between mockups, no movement */
@@ -3082,4 +2919,56 @@ pre,
 
 .rt3 {
   grid-template-columns: 170px 300px minmax(0, 1fr);
+}
+
+/* Slide 2 text column: one use case per step, cross-fading with the mockup */
+.five-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 333px;
+  margin-top: 1.95rem;
+}
+
+.uc-stack {
+  position: relative;
+  flex: 1;
+}
+
+.uc {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.uc.on {
+  opacity: 1;
+}
+
+.uc h3 {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0 0 0.6rem;
+  font-size: 1.05rem;
+}
+
+.uc p {
+  margin: 0 0 0.45rem;
+  font-size: 0.85rem;
+  line-height: 1.45;
+}
+
+.uc.later {
+  color: var(--nais-text-secondary);
+}
+
+.uc-common {
+  margin: 0;
+  padding: 0.6rem 0.75rem;
+  border-left: 3px solid var(--nais-accent);
+  background: var(--nais-accent-light);
+  font-size: 0.78rem;
+  line-height: 1.45;
 }

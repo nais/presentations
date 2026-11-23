@@ -85,7 +85,7 @@ clicks: 4
 ---
 
 ::header::
-<h1 class="text-3xl font-bold">Fem agenter, de samme fem byggeklossene</h1>
+<h1 class="text-3xl font-bold">Fem agenter, samme behov</h1>
 <p class="subtitle">Ulike team og formål. Under vannlinjen trenger alle det samme</p>
 
 ::default::
@@ -168,20 +168,48 @@ clicks: 4
     </div>
   </div>
   </div>
-  <ol class="five-blocks">
-    <li :class="{ used: true }" style="--d: 0.25s"><b class="pin">1</b><strong>Identitet</strong><span>på vegne av brukeren</span><code>fleet-gateway</code></li>
-    <li :class="{ used: true }" style="--d: 0.45s"><b class="pin">2</b><strong>Verktøyregler</strong><span>bare det agenten har lov til</span><code>fleet-control</code></li>
-    <li :class="{ used: $clicks === 0 || $clicks === 3 }" style="--d: 0.65s"><b class="pin">3</b><strong>Sandkasse</strong><span>bygger isolert, uten nøkler</span><code>fleet-runtime</code></li>
-    <li :class="{ used: true }" style="--d: 0.85s"><b class="pin">4</b><strong>Godkjenning</strong><span>mennesket sier ja</span><code>appen</code></li>
-    <li :class="{ used: true }" style="--d: 1.05s"><b class="pin">5</b><strong>Revisjon</strong><span>og kostnad per steg</span><code>fleet-radar</code></li>
-  </ol>
+  <div class="five-text">
+  <div class="uc-stack">
+    <div class="uc" :class="{ on: $clicks === 0 }">
+      <h3>Aksel Studio <span class="chip green">finnes</span></h3>
+      <p>Designeren beskriver hva hun vil ha.</p>
+      <p>Agenten foreslår en prototype med Aksel-komponenter.</p>
+      <p>Ingenting endres før designeren trykker Godta.</p>
+    </div>
+    <div class="uc" :class="{ on: $clicks === 1 }">
+      <h3>Dolly <span class="chip amber">eksempel</span></h3>
+      <p>Testeren ber om testpersoner med vanlige ord.</p>
+      <p>Agenten fyller ut bestillingen med syntetiske data.</p>
+      <p>Ingenting bestilles før testeren trykker Opprett personer.</p>
+    </div>
+    <div class="uc" :class="{ on: $clicks === 2 }">
+      <h3>Nais Console <span class="chip amber">eksempel</span></h3>
+      <p>Utvikleren lurer på hvorfor appen feiler.</p>
+      <p>Agenten leser hendelsene og forklarer årsaken.</p>
+      <p>Utvikleren bestemmer om rettelsen skal bli en PR.</p>
+    </div>
+    <div class="uc" :class="{ on: $clicks === 3 }">
+      <h3>Titt På Ting <span class="chip amber">eksempel</span></h3>
+      <p>Teamet har mange sårbarheter å rydde i.</p>
+      <p>Agenten forklarer hva som haster, og foreslår et nytt base image.</p>
+      <p>Teamets eier godkjenner endringen.</p>
+    </div>
+    <div class="uc later" :class="{ on: $clicks === 4 }">
+      <h3>Saksbehandling <span class="chip slate">senere fase</span></h3>
+      <p>Saksbehandleren får et utkast til oppsummering med kilder.</p>
+      <p>Agenten skriver bare utkast.</p>
+      <p>Saksbehandleren retter og godkjenner. Kommer etter piloten.</p>
+    </div>
+  </div>
+  <p class="uc-common">Alle fem trenger det samme under: identitet, regler for verktøy, isolert kjøring, godkjenning og sporing.</p>
+</div>
 </div>
 
 ::footer::
 <span class="font-mono text-sm opacity-70">nav-fleet · gjeldende retning · ikke låst</span>
 
 <!--
-- Klikk gjennom fem apper. Agenten sitter inne i appen, slik teamet har bygget den. Byggeklossene under lyser opp for det hver agent bruker
+- Klikk gjennom fem apper. Agenten sitter inne i appen, slik teamet har bygget den. Linjen nederst til høyre leder over til isfjellet
 - Alle skissene er forenklet. Navn og tall er oppdiktet
 - Aksel Studio (finnes): designeren ber agenten forbedre en prototype. Agenten foreslår, og ingenting endres før designeren trykker Godta. Byggingen kjører i en sandkasse
 - Dolly (eksempel): agenten gjør en setning om til en bestilling av syntetiske testpersoner. Bestill krever et klikk. Bare syntetiske data
