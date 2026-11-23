@@ -333,19 +333,7 @@ layout: default
 
 ::default::
 <div class="trace">
-  <BrowserWindow url="fleet-radar · jobb 7f3a (skisse)" class="trace-win" role="img" aria-label="Skisse av en tidslinje for én agentjobb: start, regelsjekk, modellkall, verktøykall, en regelsjekk som krever godkjenning, godkjenningen, skrivekallet og slutten. Øverst står agent, team, hvem som startet jobben og trace-ID.">
-    <div class="trace-meta"><span><b>Agent</b> studio-prototype</span><span><b>Team</b> Aksel Studio</span><span><b>Startet av</b> Ola N.</span><span><b>Trace-ID</b> 4bf92f35…</span></div>
-    <ol class="trace-list">
-      <li class="a-rise" style="--d: 0.2s"><time>10:02:11</time><span class="k start">start</span><span>Ola N. starter jobben fra Aksel Studio</span><em>ok</em></li>
-      <li class="a-rise" style="--d: 0.4s"><time>10:02:12</time><span class="k pol">regel</span><span>Agentprofilen er godkjent av teamet og gyldig</span><em>ok</em></li>
-      <li class="a-rise" style="--d: 0.6s"><time>10:02:14</time><span class="k mod">modell</span><span>Vertex AI i teamets prosjekt · dataklasse: testdata</span><em>ok</em></li>
-      <li class="a-rise" style="--d: 0.8s"><time>10:02:20</time><span class="k tool">verktøy</span><span>dolly · søk etter testpersoner (lesing)</span><em>ok</em></li>
-      <li class="a-rise" style="--d: 1.0s"><time>10:02:31</time><span class="k pol">regel</span><span>Bestilling er skriving og krever godkjenning</span><em class="wait">venter</em></li>
-      <li class="a-rise" style="--d: 1.2s"><time>10:02:58</time><span class="k ok">godkjent</span><span>Ola N. sa ja i appen</span><em>ok</em></li>
-      <li class="a-rise" style="--d: 1.4s"><time>10:02:59</time><span class="k tool">verktøy</span><span>dolly · bestill testperson (skriving)</span><em>ok</em></li>
-      <li class="a-rise" style="--d: 1.6s"><time>10:03:05</time><span class="k start">slutt</span><span>Artefakt levert · sandkassen slettet</span><em>ok</em></li>
-    </ol>
-  </BrowserWindow>
+  <FleetRadarTrace />
   <div class="trace-side">
     <h3>Dette skal logges</h3>
     <ul>
@@ -365,7 +353,7 @@ layout: default
 
 <!--
 - Den som skal godkjenne en KI-tjeneste, spør først: kan vi se hva den gjorde? Dette er svaret vårt
-- Skissen viser fleet-radar, modulen for innsyn og revisjon, for samme jobb som forrige lysbilde. Tidslinjen er et forslag til hvordan innsynet kan se ut. Den er ikke bygget
+- Panelet viser fleet-radar, modulen for innsyn og revisjon. Radene kommer én og én for to oppdiktede jobber: én der skriving krever ja, og én der regelen avviser et kall. Det er et forslag til hvordan innsynet kan se ut. Det er ikke bygget
 - Det som finnes i dag: fleet-gateway reviderer hvert verktøykall med bruker og klient. Revisjon av hver jobb i fleet-runtime er et krav før kjøretiden går i pilot
 - Hvem ser hva: teamet ser sine egne agenter. Eiere og revisorer over teamet (ledelsen, sikkerhet, personvernombudet og internrevisjonen) ser revisjonen for teamene de har ansvar for
 - Vi lover ikke mer enn det som står her. Om innholdet i prompter og svar, eller agentens begrunnelse, skal lagres, er et åpent designvalg. Det avhenger av formål, grunnlag og lagringstid
