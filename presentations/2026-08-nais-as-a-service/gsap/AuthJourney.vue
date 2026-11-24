@@ -56,6 +56,7 @@
       >
         <span :class="n.icon" />
         <b>{{ n.label }}</b>
+        <small v-if="n.sub">{{ n.sub }}</small>
       </div>
       <div ref="packet" class="packet" />
       <div ref="block" class="block">✕ ikke i accessPolicy</div>
@@ -66,8 +67,8 @@
           >aud: {{ swapped ? "prod-gcp:team-b:api" : "min-app" }}</code
         >
         <code v-if="swapped" class="del"><i>-</i>aud: min-app</code>
-        <code><i> </i>pid: (innbygger)</code>
-        <code><i> </i>idp: {{ swapped ? "TokenX" : "ID-porten" }}</code>
+        <code><i> </i>pid: (sluttbruker)</code>
+        <code><i> </i>idp: {{ swapped ? "TokenX" : "OIDC-tilbyder" }}</code>
       </div>
       <pre ref="http" class="http"><code>POST ${NAIS_TOKEN_EXCHANGE_ENDPOINT}
 identity_provider=tokenx
@@ -97,15 +98,15 @@ import { POP, useSteps } from "./motion.js";
 gsap.registerPlugin(DrawSVGPlugin, MotionPathPlugin);
 
 // Behaviour checked against docs.nais.io (auth explanations, ID-porten login,
-// TokenX, Entra ID OBO, Maskinporten), 2026-10-22: Wonderwall logs the user in
-// and adds the Authorization header but does not validate tokens; apps validate
-// and exchange tokens through Texas (NAIS_TOKEN_INTROSPECTION_ENDPOINT,
-// NAIS_TOKEN_EXCHANGE_ENDPOINT, NAIS_TOKEN_ENDPOINT).
+// TokenX, Entra ID OBO), 2026-10-22: Wonderwall logs the user in and adds the
+// Authorization header but does not validate tokens; apps validate and exchange
+// tokens through Texas (NAIS_TOKEN_INTROSPECTION_ENDPOINT,
+// NAIS_TOKEN_EXCHANGE_ENDPOINT).
 // Coordinates in a 1000 x 320 box.
 const NODES = [
   {
     id: "user",
-    label: "Innbygger",
+    label: "Sluttbruker",
     icon: "i-carbon-user",
     x: 80,
     y: 190,
@@ -154,26 +155,11 @@ const NODES = [
   },
   {
     id: "idp",
-    label: "ID-porten",
+    label: "OIDC-tilbyder",
+    sub: "f.eks. ID-porten eller Entra ID",
     icon: "i-carbon-user-identification",
     x: 290,
-    y: 30,
-    kind: "ext",
-  },
-  {
-    id: "mp",
-    label: "Maskinporten",
-    icon: "i-carbon-api",
-    x: 560,
-    y: 30,
-    kind: "ext",
-  },
-  {
-    id: "ext",
-    label: "Eksternt API",
-    icon: "i-carbon-globe",
-    x: 860,
-    y: 30,
+    y: 34,
     kind: "ext",
   },
 ];
@@ -187,24 +173,21 @@ const WIRES = [
   { id: "ta-b", d: "M528 190 H662", kind: "b" },
   { id: "b-tb", d: "M738 190 H752", kind: "b" },
   { id: "c-b", d: "M920 208 V268 H700 V208", kind: "c" },
-  { id: "ta-mp", d: "M490 172 V110 H560 V50", kind: "d" },
-  { id: "ta-ext", d: "M490 172 V110 H860 V50", kind: "d" },
 ];
 const CAPTIONS = [
-  "Wonderwall sender innbyggeren til ID-porten. min-app får forespørselen med token, uten egen OIDC-kode.",
+  "Wonderwall sender sluttbrukeren til OIDC-tilbyderen. min-app får forespørselen med token, uten egen OIDC-kode.",
   "Tokenet er laget for min-app. Det kan ikke brukes mot andre tjenester.",
   "min-app ber Texas bytte tokenet via TokenX, med API-et som mottaker.",
-  "Samme bruker, ny mottaker. Tokenet gjelder bare for dette ene API-et. Lekker det, kan det ikke brukes andre steder.",
+  "Samme sluttbruker, ny mottaker. Tokenet gjelder bare for dette ene API-et. Lekker det, kan det ikke brukes andre steder.",
   "API-ets Texas sjekker tokenet: riktig mottaker, riktig bruker.",
   "API-et validerer tokenet via Texas. accessPolicy slipper bare inn appen som har lov.",
-  "Maskin til maskin: Texas henter et Maskinporten-token for et eksternt API.",
+  "Nais STS skal erstatte TokenX. Mønsteret er det samme.",
   "Alt dette er noen få linjer i manifestet.",
 ];
 const YAML = `idporten:
   enabled: true
   sidecar: { enabled: true }
 tokenx: { enabled: true }
-maskinporten: { enabled: true }
 accessPolicy:
   outbound:
     rules:
@@ -227,9 +210,10 @@ const http = ref();
 const ok = ref();
 const swapped = ref(false);
 
-// s0: boundaries and nodes. s1: login. s2-s5: the TokenX exchange (token claims,
-// call to Texas, new audience, introspection at the API). s6: an app outside
-// accessPolicy is blocked. s7: Maskinporten. s8: the manifest lines.
+// s0: boundaries and nodes. s1: login via OIDC provider. s2-s5: the TokenX
+// exchange (token claims, call to Texas, new audience, introspection at the API).
+// s6: an app outside accessPolicy is blocked. s7: Nais STS note (replaces TokenX).
+// s8: the manifest lines.
 useSteps(
   (tl) => {
     // Mounted mid view-transition, the ref can be gone: build nothing.
@@ -265,9 +249,9 @@ useSteps(
       if (i) tl.to(caps[i - 1], { autoAlpha: 0, duration: 0.2 });
       tl.to(caps[i], { autoAlpha: 1, duration: 0.3 }, i ? "<" : ">");
     };
-    // ID-porten, Maskinporten and the external API stay hidden until their
-    // step. The star (if shown) fades out as the journey builds.
-    const late = q(".n-idp, .n-mp, .n-ext");
+    // The OIDC provider stays hidden until the login step.
+    // The star (if shown) fades out as the journey builds.
+    const late = q(".n-idp");
     gsap.set(late, { autoAlpha: 0, y: -8 });
     if (props.star) tl.to(starEl.value, { autoAlpha: 0, duration: 0.4 });
     tl.from(
@@ -277,7 +261,7 @@ useSteps(
     )
       .from(q(".blabel"), { autoAlpha: 0, stagger: 0.1 }, "-=0.4")
       .from(
-        q(".stage .node:not(.n-idp):not(.n-mp):not(.n-ext)"),
+        q(".stage .node:not(.n-idp)"),
         { y: 12, autoAlpha: 0, stagger: 0.04 },
         "-=0.3",
       )
@@ -325,12 +309,7 @@ useSteps(
     travel([["c-b"]], "#f87171");
     tl.to(block.value, { autoAlpha: 1, ease: POP }).addLabel("s6");
     caption(6);
-    tl.to(block.value, { autoAlpha: 0, duration: 0.2 }, "<").to(
-      q(".n-mp, .n-ext"),
-      { autoAlpha: 1, y: 0, duration: 0.4, stagger: 0.1 },
-    );
-    travel([["ta-mp"], ["ta-mp", true], ["ta-ext"]], "#fbbf24");
-    tl.addLabel("s7");
+    tl.to(block.value, { autoAlpha: 0, duration: 0.2 }, "<").addLabel("s7");
     caption(7);
     // Final state: the manifest is the hero; the diagram stays readable, dimmed, on the left.
     tl.to(
@@ -418,10 +397,6 @@ useSteps(
   stroke-dasharray: 5 5;
 }
 
-.wire.d {
-  stroke: #fbbf24;
-}
-
 .node,
 .packet,
 .block {
@@ -448,6 +423,12 @@ useSteps(
 
 .node b {
   font-size: 0.78rem;
+}
+
+.node small {
+  font-size: 0.62rem;
+  line-height: 1.15;
+  color: var(--nais-text-secondary);
 }
 
 .node.side {

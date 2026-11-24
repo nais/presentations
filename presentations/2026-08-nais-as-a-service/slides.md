@@ -138,6 +138,7 @@ clicks: 6
 
 ::default::
 <ManifestDeep />
+<p class="footnote">ID-porten og Maskinporten krever egen avtale med Digdir. Nais gjør det enkelt å bruke dem.</p>
 
 <!--
 Overgang: «Så skal vi se hva som skjer når de trykker på knappen.»
@@ -203,6 +204,7 @@ clicks: 4
 
 ::default::
 <Toolbox mode="open" />
+<p class="footnote">ID-porten og Maskinporten krever egen avtale med Digdir. Nais gjør det enkelt å bruke dem.</p>
 
 <!--
 Overgang: «Og hva har alt dette betydd for Nav?»
@@ -348,6 +350,7 @@ clicks: 2
 
 ::default::
 <Toolbox mode="ops" />
+<p class="footnote">ID-porten og Maskinporten krever egen avtale med Digdir. Nais gjør det enkelt å bruke dem.</p>
 
 <!--
 Overgang: «Og når noe likevel skjer om natta?»
@@ -465,17 +468,17 @@ clicks: 9
 <!--
 Overgang: «Nå snakker jeg til dere som skal signere. Dere er ikke de første som spør om én felles plattform. Se på Europa.»
 
-- To sidecars gjør jobben: Wonderwall er en innloggings-sidecar foran appen (logger brukeren inn mot ID-porten eller Entra ID). Texas er en token-sidecar som appen spør for å validere, bytte og hente tokens
+- To sidecars gjør jobben: Wonderwall er en innloggings-sidecar foran appen (logger sluttbrukeren inn mot en OIDC-tilbyder, for eksempel ID-porten eller Entra ID). Texas er en token-sidecar som appen spør for å validere og bytte tokens
 - Klikk 0: ID-porten, Maskinporten, Entra ID og TokenX/Texas er innebygd
 - Klikk 1: oversikten viker for én forespørsel gjennom Nais, og grensene for cluster og pods tegnes
-- Klikk 2: Wonderwall (innloggings-sidecar) sender innbyggeren til ID-porten. min-app får forespørselen med Authorization-header. Wonderwall validerer ikke tokenet; appen gjør det via Texas
+- Klikk 2: Wonderwall (innloggings-sidecar) sender sluttbrukeren til OIDC-tilbyderen, for eksempel ID-porten eller Entra ID. min-app får forespørselen med Authorization-header. Wonderwall validerer ikke tokenet; appen gjør det via Texas
 - Klikk 3: tokenet har mottaker (aud) min-app. Et token er bare gyldig for mottakeren det er laget for
 - Klikk 4: min-app kaller Texas: POST til NAIS_TOKEN_EXCHANGE_ENDPOINT med identity_provider=tokenx, target=prod-gcp:team-b:api og user_token (docs.nais.io, TokenX)
-- Klikk 5: Texas bytter tokenet via TokenX. Samme bruker, ny mottaker: prod-gcp:team-b:api. Hvorfor: lekker tokenet, kan det ikke brukes mot andre tjenester, og hvert API ser hvem brukeren er
+- Klikk 5: Texas bytter tokenet via TokenX. Samme sluttbruker, ny mottaker: prod-gcp:team-b:api. Hvorfor: lekker tokenet, kan det ikke brukes mot andre tjenester, og hvert API ser hvem brukeren er
 - Klikk 6: API-ets Texas introspekterer tokenet (NAIS_TOKEN_INTROSPECTION_ENDPOINT): riktig mottaker, riktig bruker
 - Klikk 7: accessPolicy.inbound stopper en app som ikke har lov
-- Klikk 8: Maskinporten-token for et eksternt API, også via Texas
-- Klikk 9: manifestlinjene. Kilde: docs.nais.io (auth, ID-porten, TokenX, Entra ID, Maskinporten)
+- Klikk 8: Nais STS er planlagt å erstatte TokenX. Mønsteret for token-utveksling via Texas er det samme
+- Klikk 9: manifestlinjene. Kilde: docs.nais.io (auth, ID-porten, TokenX, Entra ID)
 -->
 
 ---
