@@ -16,11 +16,11 @@
       </div>
       <div class="link h">
         <i class="line" /><span class="chip"
-          ><span class="i-carbon-time" /> tidspunkt</span
+          ><span class="i-carbon-link" /> uses.postgres</span
         >
       </div>
       <div class="node branch">
-        <span class="i-carbon-branch" /><b>test</b><small>branch</small>
+        <span class="i-carbon-application" /><b>min-app</b><small>appen</small>
       </div>
       <div class="link v">
         <i class="line" /><span class="chip"
@@ -28,7 +28,7 @@
         >
       </div>
       <p class="note branch-note">
-        Branch fra et tidspunkt. Slik virker også point-in-time recovery.
+        Databasen står i manifestet, og appen kobler seg til med uses.postgres.
       </p>
       <div class="node me">
         <span class="i-carbon-user-admin" /><b>Personlig DBA-tilgang</b
@@ -49,12 +49,12 @@ import gsap from "gsap";
 import TerminalFrame from "./TerminalFrame.vue";
 import { useSteps, POP } from "./motion.js";
 
-// Output from nais/cli (internal/postgres/command/branch.go, access.go),
+// Output from nais/cli (internal/apply/apply.go, postgres/command/access.go),
 // cut to the first sentence / the address. The proxy port is random.
 const CMDS = [
   {
-    cmd: "nais postgres branch create min-db test",
-    out: 'Started creating branch "test".',
+    cmd: "nais apply .nais/postgres.yaml",
+    out: "Postgres/min-db: created",
   },
   {
     cmd: "nais postgres proxy min-db",
@@ -82,7 +82,7 @@ const type = (tl, el) => {
     .from(el.querySelector(".out"), { autoAlpha: 0, y: 6, duration: 0.3 });
 };
 
-// s0: terminal and the database. s1: branch. s2: DBA access via proxy. s3: Console.
+// s0: terminal and the database. s1: apply manifest, app connects. s2: DBA access via proxy. s3: Console.
 useSteps((tl) => {
   const q = gsap.utils.selector(root.value);
   const cmds = q(".cmd");
@@ -198,7 +198,7 @@ useSteps((tl) => {
   border-color: var(--nais-accent);
 }
 
-/* min-db shares the column with the wider DBA node; fill it so the branch line touches the box */
+/* min-db shares the column with the wider DBA node; fill it so the app line touches the box */
 .main,
 .me {
   justify-self: stretch;

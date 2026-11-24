@@ -108,7 +108,7 @@
 
       <!-- App overview -->
       <section v-show="view === 'app'" class="view">
-        <h2>min-app <em>prod</em></h2>
+        <h2 class="title">min-app <em>prod</em></h2>
         <div class="tabs">
           <span
             v-for="t in TABS"
@@ -118,28 +118,43 @@
             >{{ t }}</span
           >
         </div>
-        <div class="cols">
-          <div>
-            <h5>Application health</h5>
-            <div class="tiles">
-              <div class="tile ok"><b>0</b><small>Issues</small></div>
-              <div class="tile" :class="ke ? 'bad' : 'ok'">
-                <b>{{ ke }}</b
-                ><small>Known exploited</small>
-              </div>
-              <div class="tile ok"><b>2/2</b><small>Instances</small></div>
-              <div class="tile ok">
-                <b>+2&#8239;%</b><small>Cost vs last month</small>
-              </div>
+        <div class="card">
+          <h5>Application health</h5>
+          <div class="tiles four">
+            <div class="tile ok icon">
+              <span class="ib"><i class="i-carbon-activity" /></span><b>0</b
+              ><small class="pill-ok">● No issues</small>
+            </div>
+            <div class="tile icon" :class="ke ? 'bad' : 'ok'">
+              <span class="ib"><i class="i-carbon-debug" /></span><b>{{ ke }}</b
+              ><small>Known exploited</small>
+            </div>
+            <div class="tile ok icon">
+              <span class="ib"><i class="i-carbon-cube" /></span><b>2/2</b
+              ><small>Instances ready</small>
+            </div>
+            <div class="tile ok icon">
+              <span class="ib"><i class="i-carbon-wallet" /></span
+              ><b>+2&#8239;%</b><small>Cost vs last month</small>
             </div>
           </div>
-          <div>
-            <h5>Latest deployment <span class="badge">Success</span></h5>
-            <p class="act">2 hours ago</p>
-            <h5>Persistence</h5>
-            <p class="act mono">min-app-db (Cloud SQL)</p>
-            <p class="act mono">min-app-vedlegg (bucket)</p>
-            <p class="act mono">min_app_stats (BigQuery)</p>
+        </div>
+        <div class="cols">
+          <div class="card">
+            <h5>Instance groups</h5>
+            <p class="act">
+              <span class="green">●</span> <b>2/2 ready</b> ·
+              <span class="mono">2026.10.21-d4e5f6</span> · Updated 2 hours ago
+            </p>
+          </div>
+          <div class="card">
+            <h5>Recent events</h5>
+            <div v-for="e in EVENTS" :key="e.t" class="event">
+              <i class="i-carbon-warning-alt" />
+              <div>
+                <b>{{ e.t }}</b> <small>{{ e.when }}</small>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -287,7 +302,12 @@ const TABS = [
   "Utilization",
   "Network",
   "Logs",
+  "Events",
   "Activity Log",
+];
+const EVENTS = [
+  { t: "Health check failed", when: "3 hours ago" },
+  { t: "Automatic scaling failed", when: "yesterday" },
 ];
 const COST = [
   {
@@ -482,11 +502,13 @@ h2 {
 
 h2 em {
   font-style: normal;
-  font-size: 0.65rem;
-  padding: 0.05rem 0.4rem;
-  border-radius: 4px;
-  background: #475569;
-  color: #fff;
+  font-size: 0.6rem;
+  font-weight: 600;
+  padding: 0.05rem 0.45rem;
+  border-radius: 999px;
+  border: 1px solid #e2e8f0;
+  background: #f1f5f9;
+  color: #0f172a;
   vertical-align: middle;
 }
 
@@ -649,9 +671,70 @@ h2 em {
 }
 
 .tabs span.on {
+  padding: 0.1rem 0.4rem 0.15rem;
+  border-radius: 4px 4px 0 0;
+  background: #f1f5f9;
   color: #0f172a;
   font-weight: 700;
   border-bottom: 2px solid #0f172a;
+}
+
+.card {
+  margin-bottom: 0.5rem;
+  padding: 0.1rem 0.6rem 0.45rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+}
+
+.tiles.four {
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.5rem;
+}
+
+.tile.icon {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: 0.45rem;
+  align-items: center;
+}
+
+.tile.icon .ib {
+  grid-row: span 2;
+  display: flex;
+  padding: 0.25rem;
+  border-radius: 6px;
+  background: #ecfdf3;
+  color: #15803d;
+  font-size: 0.8rem;
+}
+
+.tile.bad .ib {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+.pill-ok {
+  justify-self: start;
+  padding: 0 0.3rem;
+  border-radius: 999px;
+  background: #dcfce7;
+  color: #166534 !important;
+}
+
+.event {
+  display: flex;
+  gap: 0.4rem;
+  margin-bottom: 0.25rem;
+}
+
+.event i {
+  flex: none;
+  color: #b45309;
+}
+
+.event small {
+  display: block;
+  color: #64748b;
 }
 
 .area {
@@ -766,6 +849,11 @@ h2 em {
   background: #f8fafc;
   border: 1px solid #e2e8f0;
   font-size: 0.64rem;
+}
+
+.detail code {
+  background: none;
+  color: #0f172a;
 }
 
 .detail small {

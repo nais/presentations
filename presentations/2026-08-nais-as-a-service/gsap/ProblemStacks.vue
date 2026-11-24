@@ -37,10 +37,7 @@
             : tileSlot(i)
         "
       >
-        <span class="generic">Tenant</span
-        ><span class="name"
-          >{{ t }}<small v-if="i >= STACKS.length">på vei inn</small></span
-        >
+        <span class="generic">Tenant</span><span class="name">{{ t }}</span>
       </div>
       <div ref="band" class="band">Drift og vakt for plattformen</div>
       <div ref="years" class="years">

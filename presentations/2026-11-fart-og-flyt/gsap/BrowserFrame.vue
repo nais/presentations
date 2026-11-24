@@ -7,9 +7,14 @@
     <div class="topbar">
       <strong><span class="logo" />Nais Console</strong>
       <span class="sep">/</span>
-      <span class="team">team-eksempel ▾</span>
+      <span class="team"
+        ><b class="av">TE</b>team-eksempel <i class="i-carbon-chevron-down"
+      /></span>
       <span v-for="t in TOP" :key="t" class="link">{{ t }}</span>
-      <span class="jump"><i class="i-carbon-search" /> Jump to</span>
+      <span class="jump"
+        ><i class="i-carbon-search" /> Jump to <kbd>⌘K</kbd></span
+      >
+      <span class="user">AB <i class="i-carbon-chevron-down" /></span>
     </div>
     <div class="body">
       <nav>
@@ -26,7 +31,8 @@
       <main>
         <div v-if="crumbs.length" class="crumbs">
           <template v-for="(c, i) in crumbs" :key="c">
-            <span :class="{ cur: i === crumbs.length - 1 }">{{ c }}</span> /
+            <span :class="{ cur: i === crumbs.length - 1 }">{{ c }}</span
+            ><span v-if="i < crumbs.length - 1" class="slash">/</span>
           </template>
         </div>
         <slot />
@@ -177,7 +183,7 @@ const NAV = [
   min-height: 0;
   display: grid;
   grid-template-columns: 9rem 1fr;
-  background: #f8fafc;
+  background: #fff;
 }
 
 nav {
@@ -199,6 +205,41 @@ nav {
   border-radius: 6px;
   font-weight: 700;
   color: #0f172a;
+}
+
+.team {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.av {
+  padding: 0 0.15rem;
+  border-radius: 3px;
+  background: #0f172a;
+  color: #fff;
+  font-size: 0.5rem;
+}
+
+kbd {
+  margin-left: 0.6rem;
+  padding: 0 0.2rem;
+  border: 1px solid var(--nais-border);
+  border-radius: 3px;
+  font-size: 0.5rem;
+}
+
+.user {
+  padding: 0 0.4rem;
+  border: 1px solid var(--nais-border);
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 0.55rem;
+}
+
+.slash {
+  margin: 0 0.3rem;
+  color: #cbd5e1;
 }
 
 .jump {
@@ -243,7 +284,7 @@ nav span i {
 }
 
 nav span.on {
-  background: #f1f5f9;
+  background: #eef2f7;
   color: #0f172a;
   font-weight: 700;
 }

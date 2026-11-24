@@ -359,7 +359,7 @@ Overgang: «Det var det dere ser. Nå det dere ikke skal trenge å tenke på.»
 
 - Kommandoene finnes i Nais CLI (binæren heter nais, sjekket mot nais -h). Utdata er illustrasjon
 - Kommandoene spiller av seg selv når sliden åpnes: nais login, apply, app set replicas, postgres proxy, vulnerability summary
-- Nytt: nais apply deployer manifester fra egen maskin eller pipeline. nais app set (image, env, replicas) endrer en app midlertidig til neste deploy. nais postgres har egne kommandoer for Nais Postgres (proxy, psql, branch), og Cloud SQL ligger nå under nais cloudsql
+- Nytt: nais apply deployer manifester fra egen maskin eller pipeline. nais app set (image, env, replicas) endrer en app midlertidig til neste deploy. nais postgres har egne kommandoer for Nais Postgres (proxy, psql), og Cloud SQL ligger nå under nais cloudsql
 -->
 
 ---
@@ -626,7 +626,7 @@ Overgang: «Én av dem fortjener egen plass: databasen.»
 - Apr.–jun. 2026: ingress flyttet fra nginx til HAProxy
 - Mai–jun. 2026: nais app set for midlertidige endringer (mai), nais apply ble en hovedkommando (juni)
 - Aug.–okt. 2026: sårbarheter prioriteres med EPSS, KEV og internetteksponering
-- Okt. 2026: Nais Postgres som nais.io/v1-ressurs, med point-in-time recovery: en branch er en kopi av databasen fra et tidspunkt (nais postgres branch create)
+- Okt. 2026: Nais Postgres som nais.io/v1-ressurs
 - Nov. 2026: Loki-utforskeren erstatter de gamle loggvisningene i Console
 - Ryddet bort: secure logs (jan. 2026), KrakenD utfases (varslet aug. 2026), Elastic APM. Gamle CLI-kommandoer: nais alpha postgres er nå nais postgres, Cloud SQL ligger under nais cloudsql, og migreringskommandoene er fjernet. nais aiven er erstattet av credentials-kommandoer
 - Bruker dere noe av dette, står det i dokumentasjonen hva dere skal gjøre
@@ -648,14 +648,13 @@ clicks: 3
 <!--
 Overgang: «Det var året som gikk. Nå: hvor vi er på vei.»
 
-- Klikk 1: branch fra et tidspunkt. Klikk 2: personlig DBA-tilgang via proxy. Klikk 3: Postgres i Console
+- Klikk 1: nais apply oppretter databasen, og appen kobler seg til med uses.postgres. Klikk 2: personlig DBA-tilgang via proxy. Klikk 3: Postgres i Console
 - Nais Postgres er nytt. Det er i preview (docs.nais.io), så si «preview», ikke «i drift for alle»
 - Ressursen ser slik ut: version: v1, type: Postgres i .nais/postgres.yaml, og appen kobler seg til med uses.postgres
 - Kjører på CloudNativePG (CNPG) i clusteret, i stedet for Cloud SQL. Det gir lavere kostnad og mindre avhengighet av Google
-- Branches: lag en inaktiv kopi fra et tidspunkt, og aktiver den ved behov. Det er også slik point-in-time recovery fungerer
 - Personlig DBA-tilgang: utvikleren får tilgang i eget navn, via en relay/proxy (nais postgres proxy og psql)
 - Console: opprette og endre, etiketter, logger, innsikt i spørringer, utvidelser og konfigurasjon
-- Kommandoene er sjekket mot nais/cli. Navnene min-db og test er eksempler
+- Kommandoene er sjekket mot nais/cli. Navnene min-db og min-app er eksempler
 - Cloud SQL finnes fortsatt, under nais cloudsql
 -->
 

@@ -4,10 +4,14 @@ Monorepo for nais presentation decks built with [Slidev](https://sli.dev/).
 
 ## Presentations
 
-| Name                                                                | Description                                | Port |
-| ------------------------------------------------------------------- | ------------------------------------------ | ---- |
-| [2026-02-nais-brukerforum](presentations/2026-02-nais-brukerforum/) | nais Brukerforum February 2026             | 3030 |
-| [2026-11-ki-plattform](presentations/2026-11-ki-plattform/)         | nav-fleet: plattform for agenter (utkast)  | 3033 |
+| Name                                                                          | Description                    | Port |
+| ----------------------------------------------------------------------------- | ------------------------------ | ---- |
+| [2026-02-nais-brukerforum](presentations/2026-02-nais-brukerforum/)           | nais Brukerforum, februar 2026 | 3031 |
+| [2026-08-nais-as-a-service](presentations/2026-08-nais-as-a-service/)         | Nais as a Service              | 3032 |
+| [2026-11-fart-og-flyt](presentations/2026-11-fart-og-flyt/)                   | Slipp utviklerne fri           | 3032 |
+| [2026-11-nais-er-fortsatt-nais](presentations/2026-11-nais-er-fortsatt-nais/) | Nais er fortsatt Nais          | 3032 |
+
+All decks are linked from the splash page at the site root (`public/index.html`).
 
 ## Structure
 
@@ -31,8 +35,10 @@ pnpm install
 
 ```bash
 pnpm dev              # All presentations
-pnpm dev:brukerforum  # Brukerforum presentation (port 3030)
-pnpm dev:ki           # KI-plattform presentation (port 3033)
+pnpm dev:brukerforum  # Brukerforum (port 3031)
+pnpm dev:naas         # Nais as a Service (port 3032)
+pnpm dev:fart         # Slipp utviklerne fri (port 3032)
+pnpm dev:fortsatt     # Nais er fortsatt Nais (port 3032)
 ```
 
 ## Code Quality

@@ -7,9 +7,11 @@
     <div class="topbar">
       <strong><span class="logo" />Nais Console</strong>
       <span class="sep">/</span>
-      <span class="team">team-eksempel ▾</span>
+      <span class="team"><b class="av">TE</b> team-eksempel ▾</span>
       <span v-for="t in TOP" :key="t" class="link">{{ t }}</span>
-      <span class="jump"><i class="i-carbon-search" /> Jump to</span>
+      <span class="jump"
+        ><i class="i-carbon-search" /> Jump to <kbd>⌘K</kbd></span
+      >
     </div>
     <div class="body">
       <nav>
@@ -201,6 +203,25 @@ nav {
   color: #0f172a;
 }
 
+.av {
+  display: inline-block;
+  margin-right: 0.15rem;
+  padding: 0 0.2rem;
+  border-radius: 4px;
+  background: #0f172a;
+  color: #fff;
+  font-size: 0.55rem;
+}
+
+.jump kbd {
+  margin-left: 0.6rem;
+  padding: 0 0.25rem;
+  border-radius: 4px;
+  background: #f1f5f9;
+  font-family: inherit;
+  font-size: 0.55rem;
+}
+
 .jump {
   margin-left: auto;
   padding: 0 0.5rem;
@@ -254,6 +275,7 @@ nav span.on i {
 
 main {
   position: relative;
+  background: #fff;
   min-width: 0;
   padding: 0.8rem 1.1rem;
   overflow: hidden;

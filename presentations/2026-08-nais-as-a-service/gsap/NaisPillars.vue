@@ -85,7 +85,7 @@ useEnter((tl) => {
 .card {
   display: flex;
   gap: 0.8rem;
-  align-items: flex-start;
+  align-items: center;
   padding: 0.7rem 0.7rem;
   border-radius: 16px;
   background: var(--nais-card);
@@ -98,8 +98,9 @@ useEnter((tl) => {
   height: 40px;
   border-radius: 14px;
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: center;
+  line-height: 1;
   font-size: 1.25rem;
   color: var(--pc);
   background: color-mix(in srgb, var(--pc) 18%, transparent);

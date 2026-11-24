@@ -118,28 +118,41 @@
             >{{ t }}</span
           >
         </div>
-        <div class="cols">
-          <div>
-            <h5>Application health</h5>
-            <div class="tiles">
-              <div class="tile ok"><b>0</b><small>Issues</small></div>
-              <div class="tile" :class="ke ? 'bad' : 'ok'">
-                <b>{{ ke }}</b
-                ><small>Known exploited</small>
-              </div>
-              <div class="tile ok"><b>2/2</b><small>Instances</small></div>
-              <div class="tile ok">
-                <b>+2&#8239;%</b><small>Cost vs last month</small>
-              </div>
+        <div class="card">
+          <h5>Application health</h5>
+          <div class="tiles four">
+            <div class="tile ok">
+              <i class="ic"><span class="i-carbon-activity" /></i><b>0</b
+              ><small class="ok-pill">● No issues</small>
+            </div>
+            <div class="tile" :class="ke ? 'bad' : 'ok'">
+              <i class="ic"><span class="i-carbon-debug" /></i><b>{{ ke }}</b
+              ><small>Known exploited</small>
+            </div>
+            <div class="tile ok">
+              <i class="ic"><span class="i-carbon-cube" /></i><b>2/2</b
+              ><small>Instances ready</small>
+            </div>
+            <div class="tile ok">
+              <i class="ic"><span class="i-carbon-wallet" /></i><b>+2&#8239;%</b
+              ><small>Cost vs last month</small>
             </div>
           </div>
-          <div>
-            <h5>Latest deployment <span class="badge">Success</span></h5>
-            <p class="act">2 hours ago</p>
-            <h5>Persistence</h5>
-            <p class="act mono">min-app-db (Cloud SQL)</p>
-            <p class="act mono">min-app-vedlegg (bucket)</p>
-            <p class="act mono">min_app_stats (BigQuery)</p>
+        </div>
+        <div class="cols">
+          <div class="card">
+            <h5>Instance groups</h5>
+            <p class="act">
+              <span class="green">●</span> <b>2/2 ready</b><br />
+              <span class="mono">2026.10.21-d4e5f6</span> · Updated 2 hours ago
+            </p>
+          </div>
+          <div class="card">
+            <h5>Recent events</h5>
+            <p class="act">
+              <span class="i-carbon-warning amber" /> <b>Health check failed</b
+              ><br /><small>Readiness check failed · 3 hours ago</small>
+            </p>
           </div>
         </div>
       </section>
@@ -287,6 +300,7 @@ const TABS = [
   "Utilization",
   "Network",
   "Logs",
+  "Events",
   "Activity Log",
 ];
 const COST = [
@@ -484,9 +498,10 @@ h2 em {
   font-style: normal;
   font-size: 0.65rem;
   padding: 0.05rem 0.4rem;
-  border-radius: 4px;
-  background: #475569;
-  color: #fff;
+  border-radius: 999px;
+  border: 1px solid #e2e8f0;
+  background: #f1f5f9;
+  color: #0f172a;
   vertical-align: middle;
 }
 
@@ -510,6 +525,54 @@ h2 em {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 0.75rem;
+}
+
+.tiles.four {
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.5rem;
+}
+
+.tiles.four .tile {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: 0.4rem;
+  align-items: center;
+}
+
+.tiles.four .tile .ic {
+  grid-row: span 2;
+  display: flex;
+  padding: 0.25rem;
+  border-radius: 6px;
+  background: #f0fdf4;
+  color: #15803d;
+  font-size: 0.9rem;
+}
+
+.tiles.four .tile b,
+.tiles.four .tile small {
+  grid-column: 2;
+  justify-self: start;
+}
+
+.tiles.four .tile.bad .ic {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+.ok-pill {
+  justify-self: start;
+  padding: 0 0.3rem;
+  border-radius: 999px;
+  background: #dcfce7;
+  color: #166534 !important;
+}
+
+.card {
+  margin-bottom: 0.5rem;
+  padding: 0.2rem 0.6rem 0.4rem;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
 }
 
 .tiles.three {

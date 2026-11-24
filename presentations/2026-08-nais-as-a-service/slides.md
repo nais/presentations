@@ -57,7 +57,7 @@ transition: fade
 <!--
 Overgang: «(Ingen overgang. La klippet gå, ikke snakk over det.)»
 
-- 6 tenants, 5 212 apper (Grafana, 21. oktober 2026). KS Digital og Novari har signert, men har ikke apper i produksjon ennå
+- 6 tenants, 5 212 apper (Grafana, 21. oktober 2026). KS Digital og Novari er nå i produksjon, men er ikke med i app-tallet
 - ≈ 21 500 deployer per uke er Nav, alle miljøer (Mimir)
 - Fargene viser de mindre tenantene spredt i bikuben
 -->
@@ -105,8 +105,8 @@ layout: default
     <img src="./assets/logos/ssb.svg" alt="SSB" class="h-7" />
     <img src="./assets/logos/ldir.svg" alt="Landbruksdirektoratet" class="h-8" />
     <img src="./assets/logos/atil.svg" alt="Arbeidstilsynet" class="h-7" />
-    <span class="incoming-logo"><img src="./assets/logos/ksdigital.png" alt="KS Digital" class="h-6" /><small>på vei inn</small></span>
-    <span class="incoming-logo"><img src="./assets/logos/novari.svg" alt="Novari" class="h-5" /><small>på vei inn</small></span>
+    <img src="./assets/logos/ksdigital.png" alt="KS Digital" class="h-6" />
+    <img src="./assets/logos/novari.svg" alt="Novari" class="h-5" />
   </div>
 </div>
 
@@ -115,7 +115,7 @@ Overgang: «Grunnen til at tallene er så store, kommer på de neste slidene.»
 
 - En tenant er en virksomhet som bruker Nais
 - 21 500 vises én gang, på flisa. Årsgrafen viser bare formen
-- 528 apper kjører hos SSB, Landbruksdirektoratet og Arbeidstilsynet. KS Digital og Novari er på vei inn
+- 528 apper kjører hos SSB, Landbruksdirektoratet og Arbeidstilsynet. KS Digital og Novari er nå i produksjon, men er ikke med i tallet fra 21. oktober
 - Apper per tenant: Grafana 21. oktober 2026 (72 + 164 + 292 = 528 utenfor Nav)
 - ≈ 21 500 deployer per uke i Nav, alle miljøer. ≈ 9 000 i prod (Mimir)
 - 154 team har deployet siste 28 dager (Nav). Deployer per uke er Nav, alle miljøer
@@ -405,7 +405,7 @@ layout: default
 
 ::header::
 <h1 class="text-3xl font-bold">Nais-teamet</h1>
-<p class="subtitle">15 personer i Nav. Drifter for seks tenants, fire i produksjon.</p>
+<p class="subtitle">15 personer i Nav. Drifter for seks tenants, alle i produksjon.</p>
 
 ::default::
 <TeamWall />
@@ -581,7 +581,7 @@ clicks: 3
 <h1 class="text-3xl font-bold">Deres data, deres exit</h1>
 
 ::default::
-<TenantMap :tenants="['Nav', 'SSB', 'Din virksomhet', 'Landbruksdirektoratet', 'Arbeidstilsynet', 'KS Digital', 'Novari']" :incoming="['KS Digital', 'Novari']" :detach="2" exit-text="Exit-planen er dokumentert. Ingen har trengt den." />
+<TenantMap :tenants="['Nav', 'SSB', 'Din virksomhet', 'Landbruksdirektoratet', 'Arbeidstilsynet', 'KS Digital', 'Novari']" :detach="2" exit-text="Exit-planen er dokumentert. Ingen har trengt den." />
 <p class="evidence anim-item text-center mt-3">«Planlegg for å kunne bytte ut skyleverandør effektivt og med kjent ressursbruk og kostnad.» <span>NSM, Risiko 2026</span></p>
 
 <!--
@@ -743,7 +743,7 @@ layout: default
 Overgang: «Slik kommer dere i gang.»
 
 - Egenregi i staten: statsforetak og private kan ikke bruke NaaS
-- Kommunal sektor er med gjennom offentlig-offentlig samarbeid via KS Digital og Novari
+- Kommunal sektor er med gjennom offentlig-offentlig samarbeid via KS Digital og Novari, som nå er i produksjon
 - Grønt passer, rødt passer ikke. Ikke for systemer som må kjøre i eget datasenter
 - Nais har tydelige meninger: én måte å bygge, deploye og drifte på. Det gir fart og selvstendige team, men passer ikke alle
 -->
