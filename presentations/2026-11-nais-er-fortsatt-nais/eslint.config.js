@@ -26,7 +26,7 @@ export default [
     },
     rules: {
       ...typescript.configs.recommended.rules,
-      'no-undef': 'off', // TypeScript checks this; eslint has no browser globals here
+      "no-undef": "off", // TypeScript checks this; eslint has no browser globals here
       "vue/multi-word-component-names": "off",
       "vue/no-v-html": "off",
       "vue/max-attributes-per-line": "off",
