@@ -669,7 +669,7 @@ layout: default
     <text x="147" y="156" class="s" text-anchor="middle">servere, ruter, verktøy, agentprofiler</text>
     <text x="147" y="176" class="s" text-anchor="middle">jobb-API: jobb-ID inn, artefakt ut</text>
     <text x="147" y="196" class="s" text-anchor="middle">godkjenning og budsjett</text>
-    <text x="147" y="220" class="s x" text-anchor="middle">lese-API bygget</text>
+    <text x="147" y="220" class="s x" text-anchor="middle">skrive-API og godkjenning i dev</text>
   </g>
   <g class="a-rise" style="--d: 0.55s">
     <rect x="309" y="110" width="262" height="124" rx="8" class="b"/>
@@ -725,7 +725,7 @@ Overgang: «Hvorfor kjører agentene ikke på Nais?»
 - Identitet i dag: fleet-gateway bytter til et nytt token per MCP-server (OBO), så tokenet til verktøyet gjelder bare den MCP-serveren. Agenten kan aldri mer enn brukeren, og modellen ser aldri tokenet. Nais STS som utsteder og egen agentidentitet for agenter uten bruker vurderes, men er ikke med i fase 1
 - Det enkle tilfellet er også med: en Nais-app med et standard MCP-SDK kaller ett eller to verktøy gjennom fleet-gateway, uten fleet-runtime
 - Vi lager ikke eget SDK eller agentrammeverk. Vi gir veiledning og maler
-- Status: fleet-gateway er i pilot i produksjon med leseruter bak naisdevice. fleet-control har lese-API. fleet-runtime er ikke bygget
+- Status: fleet-gateway er i pilot i produksjon med leseruter bak naisdevice. fleet-control har skrive-API med godkjenning av to og agentprofiler i dev. fleet-runtime er ikke bygget
 -->
 
 ---
@@ -819,7 +819,7 @@ layout: default
     </main>
   </div>
 </BrowserWindow>
-<p class="fl-api"><span class="chip amber">Forslag · utprøving</span> API formet som Kubernetes: <code>fleet.nav.no/v1alpha1</code>, <code>MCPServer</code>, <code>AgentProfile</code>, <code>AgentJob</code>. Kan bli CRD-er senere.</p>
+<p class="fl-api"><span class="chip amber">Utprøving i dev</span> API formet som Kubernetes: <code>fleet.nav.no/v1alpha1</code>, <code>MCPServer</code>, <code>AgentProfile</code>, <code>AgentJob</code>. MCPServer og AgentProfile kjører i dev, AgentJob er ikke bygget. Kan bli CRD-er senere.</p>
 
 ::footer::
 <span class="font-mono text-sm opacity-70">nav-fleet · gjeldende retning · ikke låst</span>
@@ -830,7 +830,7 @@ layout: default
 - Tabellen viser bare det som endres: ett nytt verktøy og en ny konsument. Datakategorien er uendret
 - Konsumenten er en agentprofil. Å gi konsumenten tilgang virker som accessPolicy.inbound i Nais: bare konsumenter på lista får kalle ruten
 - Besluttet: eierteamet eller plattformteamet kan stoppe en MCP-server. Å trekke tilbake en versjon er endelig for den versjonen. Neste versjon må godkjennes på nytt
-- Forslag under utprøving: API-et er formet som Kubernetes, fleet.nav.no/v1alpha1 med MCPServer, AgentProfile og AgentJob. Det kan bli CRD-er senere. Det er ikke bygget
+- Under utprøving: API-et er formet som Kubernetes, fleet.nav.no/v1alpha1 med MCPServer, AgentProfile og AgentJob. MCPServer og AgentProfile kjører i dev. AgentJob er ikke bygget. Det kan bli CRD-er senere
 -->
 
 ---
@@ -946,7 +946,7 @@ layout: default
     <ul class="status">
       <li><span class="chip green">kjører</span>fleet-gateway i pilot i produksjon, med leseruter bak naisdevice</li>
       <li><span class="chip green">kjører</span>MCP-servere for Dolly, kodeverk og teamkatalogen, og det offentlige registeret</li>
-      <li><span class="chip blue">bygget</span>fleet-control med lese-API. Utrulling til dev pågår</li>
+      <li><span class="chip blue">bygget</span>fleet-control med skrive-API, godkjenning og agentprofiler i dev</li>
       <li><span class="chip amber">neste</span>skrive-API og godkjenning i selvbetjeningen under /fleet, parallelt med utprøving av fleet-runtime</li>
       <li><span class="chip slate">venter</span>målbildet for identitet, avklares med Nais</li>
     </ul>
