@@ -17,10 +17,7 @@
       <div v-for="t in shown" :key="t" class="org">
         <div class="org-head">GCP-organisasjon</div>
         <strong>{{ t }}</strong>
-        <p v-if="!incoming.includes(t)" class="parts">
-          Clustere · data · apper
-        </p>
-        <p v-else class="incoming">På vei inn</p>
+        <p class="parts">Clustere · data · apper</p>
         <div class="owned">Eies av tenanten</div>
       </div>
     </div>
@@ -44,7 +41,6 @@ const props = defineProps({
   detach: { type: Number, default: 3 },
   exitText: { type: String, default: "" },
   // Signed tenants without production workloads yet.
-  incoming: { type: Array, default: () => [] },
 });
 
 // Only the first maxVisible tenants get a card; the rest collapse into «+N til».
@@ -200,13 +196,6 @@ useSteps((tl) => {
 .parts {
   margin: 0.1rem 0 0;
   font-size: 0.85rem;
-  color: var(--nais-text-secondary);
-}
-
-.incoming {
-  margin: 0.2rem 0 0;
-  font-size: 0.75rem;
-  font-style: italic;
   color: var(--nais-text-secondary);
 }
 
