@@ -852,6 +852,12 @@ h2 em {
   color: #b45309;
 }
 
+/* icon CSS here lacks display, so a bare span collapses to 0 width */
+.act .i-carbon-warning {
+  display: inline-block;
+  vertical-align: middle;
+}
+
 .scan {
   margin-bottom: 0.3rem;
   padding: 0.15rem 0.4rem;

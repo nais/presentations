@@ -240,7 +240,7 @@ useSteps((tl) => {
   color: #e2e8f0;
   font-family: "JetBrains Mono", monospace;
   font-size: 0.7rem;
-  line-height: 1.32;
+  line-height: 1.2;
   white-space: pre;
   overflow: hidden;
 }
