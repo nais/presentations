@@ -168,7 +168,7 @@ Overgang: «nais apply leverer appen. Men hva skjer egentlig på plattformsiden?
 - Alt går via GitHub: pull request, sjekker, review, merge
 - Klikk 1: sjekker (bygg, test, nais validate) og godkjenning. Klikk 2: merge, så bygger nais/docker-build-push med SBOM og signering, og nais apply deployer
 - Klikk 3: PR-en viser at den er deployet
-- Copilot-agenten åpner PR-en på vegne av utvikleren. Kari Nordmann reviewer, Copilot kommenterer, og et menneske merger
+- Copilot-agenten åpner PR-en på vegne av utvikleren. Kari Nordmann godkjenner, Copilot kommenterer, og et menneske merger
 -->
 
 ---
@@ -187,7 +187,7 @@ clicks: 2
 <!--
 Overgang: «Tusenvis av apper, og hver får den samme hylla. Her er den.»
 
-- Klikk 1 spiller alt i ett: klientene (Nais CLI, Console, nais deploy fra GitHub Actions og MCP-serveren for KI-agenter) kobler seg til Nais API, og nais deploy leverer manifestet inn i clusteret, der Naiserator gjør det om til Kubernetes-objekter (Deployment, Service, NetworkPolicy, ingress, secrets). Nais API setter opp teamressurser og datatjenester
+- Klikk 1 spiller alt i ett: Klientene (Nais CLI, Console, nais deploy fra GitHub Actions og MCP-serveren for KI-agenter) kobler seg til Nais API. nais deploy leverer manifestet til clusteret, der Naiserator gjør det om til Kubernetes-objekter (Deployment, Service, NetworkPolicy, ingress, secrets). Nais API setter opp teamressurser og datatjenester
 - Forenklet: deploy går gjennom nais deploy, Naiserator avstemmer appene, og api-reconcilers tar seg av teamressursene. Operatorer som Config Connector og aivenator gjør resten
 - Klikk 2: zoom ut fra én app til tusenvis av apper og ett plattformteam
 -->
@@ -211,7 +211,7 @@ Overgang: «Og hva har alt dette betydd for Nav?»
 
 - Én bølge med skuffer per klikk (tre bølger), til slutt alt på en gang
 - Gruppert etter inventaret over verktøykassa. Utfasede ting er utelatt
-- MCP for kodeagenter ligger i Verktøy-skuffen
+- MCP for KI-agenter ligger i Verktøy-skuffen
 -->
 
 ---
@@ -236,7 +236,7 @@ clicks: 5
 Overgang: «Hva skjer når noe feiler?»
 
 - Ett klikk per steg, konfetti til slutt
-- ≈ 9 000 prodsettinger per uke (Mimir, alle tenants, Nav dominerer). Mange ganger daglig per team
+- ≈ 9 000 prodsettinger per uke (Mimir, Nav). Mange ganger daglig per team
 -->
 
 ---
@@ -276,7 +276,7 @@ clicks: 3
 Overgang: «Og fordi teamet ser kostnaden, gjør de noe med den.»
 
 - Illustrasjon bygd etter strukturen i Console, ingen ekte data
-- Klikk 1: kostnad per tjeneste. Klikk 2: markøren går til Applications. Klikk 3: teamet åpner én app med helse, deploy, persistens og kostnad
+- Klikk 1: kostnad per tjeneste. Klikk 2: markøren går til Applications. Klikk 3: teamet åpner én app med helse, instanser, hendelser og kostnad
 -->
 
 ---
@@ -306,7 +306,7 @@ layout: default
 
 ::header::
 <h1 class="text-3xl font-bold">Ressursutnyttelse</h1>
-<p class="subtitle">Containere deler maskiner. Virtuelle maskiner står ofte halvtomme.</p>
+<p class="subtitle">Containere deler maskiner, mens virtuelle maskiner ofte står halvtomme</p>
 
 ::default::
 <ResourceIcebergs />
@@ -346,7 +346,7 @@ clicks: 2
 ::header::
 <div class="pillar-tag" style="--pc: #9b6fd6"><span class="i-carbon-settings" /> Automatisering</div>
 <h1 class="text-3xl font-bold">Hva dere slipper å drifte</h1>
-<p class="subtitle">Dere bruker verktøyene. Vi drifter alt under.</p>
+<p class="subtitle">Dere bruker verktøyene, vi drifter alt under</p>
 
 ::default::
 <Toolbox mode="ops" />
@@ -367,7 +367,7 @@ clicks: 3
 
 ::header::
 <h1 class="text-3xl font-bold">Kl. 03.00</h1>
-<p class="subtitle">Nais har vakt for plattformen. Teamene eier appene sine.</p>
+<p class="subtitle">Nais har vakt for plattformen, teamene eier appene sine</p>
 
 ::default::
 <div class="flex flex-col gap-6 w-full">
@@ -408,7 +408,7 @@ layout: default
 
 ::header::
 <h1 class="text-3xl font-bold">Nais-teamet</h1>
-<p class="subtitle">15 personer i Nav. Drifter for seks tenants, alle i produksjon.</p>
+<p class="subtitle">15 personer i Nav som drifter for seks tenants, alle i produksjon</p>
 
 ::default::
 <TeamWall />
@@ -446,7 +446,7 @@ Overgang: «Og sikkerheten gjelder ikke bare koden. Hvem slipper inn? Innlogging
 - Klikk 5: Console vokser ut av det siste leddet. Klikk 6–9: funnet åpnes, PR oppdaterer avhengigheten, bygg og deploy, ny skanning og løst
 - Console-delen er illustrasjon, ikke ekte data eller CVE-er
 - 5 608 workloads (apper og jobber) skannes for sårbarheter i Nav (Mimir, 21. oktober 2026). Tallet er tatt av sliden; nevn det muntlig
-- Kobling til NSM (tatt av sliden): SBOM og signering svarer til 2.1.4, sårbarhetsskanning til 3.1.1
+- Kobling til NSM: 2.1.4 (SBOM og signering) står på sliden; 3.1.1 (sårbarhetsskanning) kan nevnes muntlig
 - NSM anbefaler, loven krever ikke: Grunnprinsipper for IKT-sikkerhet 2.1.4 «Reduser risiko for målrettet manipulasjon av IKT-produkter i leverandørkjeden» (SBOM og signering) og 3.1.1 «Gjennomfør jevnlig sårbarhetskartlegging … ved hjelp av automatiserte verktøy» (skanning). https://nsm.no/grunnprinsipper-ikt
 - Digitalsikkerhetsforskriften § 14 (i kraft 1.10.2025) gjelder bare tilbydere av samfunnsviktige tjenester: https://lovdata.no/dokument/SF/forskrift/2025-06-20-1131. NSMs veileder: https://nsm.no/getfile.php/1314788-1759304646/NSM/Filer/Dokumenter/Veiledere/Veileder%20fra%20NSM%20i%20digitalsikkerhetsloven%20og%20-forskriften.pdf
 - NIS2 vurderes for EØS-avtalen, ingen norsk lov ennå: https://www.efta.int/eea-lex/32022L2555, https://www.regjeringen.no/no/sub/eos-notatbasen/notatene/2021/feb/nis2-direktivet/id2846097/
@@ -469,13 +469,13 @@ clicks: 9
 Overgang: «Nå snakker jeg til dere som skal signere. Dere er ikke de første som spør om én felles plattform. Se på Europa.»
 
 - To sidecars gjør jobben: Wonderwall er en innloggings-sidecar foran appen (logger sluttbrukeren inn mot en OIDC-tilbyder, for eksempel ID-porten eller Entra ID). Texas er en token-sidecar som appen spør for å validere og bytte tokens
-- Klikk 0: ID-porten, Maskinporten, Entra ID og TokenX/Texas er innebygd
+- Klikk 0: ID-porten, Maskinporten, Entra ID og TokenX/Texas er innebygd (ID-porten og Maskinporten krever egen avtale med Digdir)
 - Klikk 1: oversikten viker for én forespørsel gjennom Nais, og grensene for cluster og pods tegnes
 - Klikk 2: Wonderwall (innloggings-sidecar) sender sluttbrukeren til OIDC-tilbyderen, for eksempel ID-porten eller Entra ID. min-app får forespørselen med Authorization-header. Wonderwall validerer ikke tokenet; appen gjør det via Texas
 - Klikk 3: tokenet har mottaker (aud) min-app. Et token er bare gyldig for mottakeren det er laget for
 - Klikk 4: min-app kaller Texas: POST til NAIS_TOKEN_EXCHANGE_ENDPOINT med identity_provider=tokenx, target=prod-gcp:team-b:api og user_token (docs.nais.io, TokenX)
 - Klikk 5: Texas bytter tokenet via TokenX. Samme sluttbruker, ny mottaker: prod-gcp:team-b:api. Hvorfor: lekker tokenet, kan det ikke brukes mot andre tjenester, og hvert API ser hvem brukeren er
-- Klikk 6: API-ets Texas introspekterer tokenet (NAIS_TOKEN_INTROSPECTION_ENDPOINT): riktig mottaker, riktig bruker
+- Klikk 6: API-ets Texas sjekker tokenet (NAIS_TOKEN_INTROSPECTION_ENDPOINT): riktig mottaker, riktig bruker
 - Klikk 7: accessPolicy.inbound stopper en app som ikke har lov
 - Klikk 8: Nais STS er planlagt å erstatte TokenX. Mønsteret for token-utveksling via Texas er det samme
 - Klikk 9: manifestlinjene. Kilde: docs.nais.io (auth, ID-porten, TokenX, Entra ID)
@@ -704,7 +704,7 @@ clicks: 2
 <!--
 Overgang: «Så hva koster det?»
 
-- Anslag: ≈ 800 utviklere i Nav i dag; antatt ≈ 40 % konsulenter med ≈ 3 års oppdrag (≈ 100 nye i året) og ≈ 8 % turnover blant ansatte (≈ 40 nye i året); ≈ 9 år i produksjon → ≈ 1 300 som har gått videre + ≈ 800 i dag ≈ 2 000. Utviklere hos de andre tenantene er ikke med
+- Anslag: ≈ 800 utviklere i Nav i dag; antatt ≈ 40 % konsulenter med ≈ 3 års oppdrag (≈ 100 nye i året) og ≈ 8 % turnover blant ansatte (≈ 40 nye i året); ≈ 10 år i produksjon → ≈ 1 400 som har gått videre + ≈ 800 i dag ≈ 2 000. Utviklere hos de andre tenantene er ikke med
 - Rekruttering blir enklere, og opplæringen kortere
 - Konsulenter kjenner plattformen, og utviklere etterspør den
 - De fleste store konsulentselskapene har folk med Nais-erfaring
@@ -745,7 +745,7 @@ layout: default
 <!--
 Overgang: «Slik kommer dere i gang.»
 
-- Egenregi i staten: statsforetak og private kan ikke bruke NaaS
+- Egenregi i staten: statsforetak og private kan ikke bruke Nais as a Service
 - Kommunal sektor er med gjennom offentlig-offentlig samarbeid via KS Digital og Novari, som nå er i produksjon
 - Grønt passer, rødt passer ikke. Ikke for systemer som må kjøre i eget datasenter
 - Nais har tydelige meninger: én måte å bygge, deploye og drifte på. Det gir fart og selvstendige team, men passer ikke alle
@@ -781,7 +781,7 @@ layout: cta
 ---
 
 ::header::
-<h1 class="text-3xl font-bold">Book en demo eller pilot</h1>
+<h1 class="text-3xl font-bold">Bestill en demo eller pilot</h1>
 <p class="subtitle">Dere kan gå når som helst, med alt</p>
 
 ::default::
@@ -790,7 +790,7 @@ layout: cta
   <div class="flex flex-col items-center gap-5">
   <div class="anim-item qr-tile"><img src="./assets/kontakt-qr.svg" alt="QR-kode til e-post nais@nav.no" /></div>
   <div class="anim-item text-center">
-    <p class="text-2xl font-bold" style="font-family: Poppins">Book demo eller pilot</p>
+    <p class="text-2xl font-bold" style="font-family: Poppins">Bestill demo eller pilot</p>
     <p class="text-xl mt-3"><a href="mailto:nais@nav.no" class="text-accent font-bold">nais@nav.no</a> · <a href="https://nais.io" class="text-accent">nais.io</a></p>
   </div>
   </div>

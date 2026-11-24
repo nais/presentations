@@ -44,8 +44,8 @@
           <path ref="line1" class="line" :d="PATH1" />
           <path ref="line2" class="line" :d="PATH2" />
           <path ref="line3" class="line" :d="PATH3" />
-          <text x="34" y="168" class="tk">1. okt</text>
-          <text x="350" y="168" class="tk">31. okt</text>
+          <text x="34" y="168" class="tk">1. okt.</text>
+          <text x="350" y="168" class="tk">31. okt.</text>
         </svg>
         <p class="unit">kr per dag, team-eksempel</p>
       </div>

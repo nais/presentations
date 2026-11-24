@@ -66,7 +66,7 @@ const STEPS = [
   },
   {
     label: "nais apply",
-    sub: "via nais deploy til prod",
+    sub: "via Nais deploy til prod",
     icon: "i-carbon-rocket",
   },
   {

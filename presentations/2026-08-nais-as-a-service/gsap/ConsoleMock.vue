@@ -259,7 +259,7 @@
       <div v-if="story === 'vulns'" class="overlay pipe">
         <small class="ann">Utenfor Console · GitHub Actions</small>
         <div class="steps">
-          <span>Build</span><span>SBOM</span><span>Signering</span
+          <span>Bygg</span><span>SBOM</span><span>Signering</span
           ><span>Deploy</span>
         </div>
       </div>

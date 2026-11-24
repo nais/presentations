@@ -81,7 +81,7 @@ const GROUPS = [
   {
     title: "Verktøy",
     icon: "i-carbon-tool-box",
-    items: ["Console", "Nais CLI", "MCP for kodeagenter", "Kostnad per team"],
+    items: ["Console", "Nais CLI", "MCP for KI-agenter", "Kostnad per team"],
   },
 ];
 const OPS = [

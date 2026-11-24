@@ -35,8 +35,8 @@
         <header>Bølgen av åpen kildekode</header>
         <div class="chips">
           <span
-            >Schleswig-Holstein: ≈&#160;80 % LibreOffice, sparer >15 mill. euro
-            i året</span
+            >Schleswig-Holstein: ≈&#160;80 % LibreOffice, sparer over 15 mill.
+            euro i året</span
           >
           <span>openDesk: 100&#160;000 arbeidsplasser</span>
           <span>La Suite: over 500&#160;000 brukere (DINUM)</span>

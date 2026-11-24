@@ -11,9 +11,7 @@
       <div class="app" data-anchor="hex">
         <span class="i-carbon-application" /><strong>min-app</strong>
       </div>
-      <p ref="mine" class="mine">
-        Teamene: appen, dataene og oppdateringene av den
-      </p>
+      <p ref="mine" class="mine">Teamene: appen, dataene og oppdateringer</p>
     </div>
     <div class="col">
       <div v-for="g in GROUPS.slice(4)" :key="g.title" class="drawer">
@@ -81,7 +79,7 @@ const GROUPS = [
   {
     title: "Verktøy",
     icon: "i-carbon-tool-box",
-    items: ["Console", "Nais CLI", "MCP for kodeagenter", "Kostnad per team"],
+    items: ["Console", "Nais CLI", "MCP for KI-agenter", "Kostnad per team"],
   },
 ];
 const OPS = [

@@ -13,7 +13,7 @@ transition: fade
 
 ::default::
 <h1 class="text-5xl font-black">Slipp utviklerne fri</h1>
-<p class="subtitle text-xl mt-4">Slik skapte vi ekstrem fart og flyt i Nav. Lett å gjøre rett.</p>
+<p class="subtitle text-xl mt-4">Slik skapte vi ekstrem fart og flyt i Nav · lett å gjøre rett</p>
 <p class="text-sm mt-6 opacity-70">Hans Kristian Flaatten · Nais-teamet i Nav</p>
 
 <!--
@@ -39,7 +39,7 @@ layout: default
     <ul>
       <li><span class="i-carbon-cloud-services" /> Bygger og drifter Nais</li>
       <li><span class="i-carbon-chart-line" /> Innførte OpenTelemetry i Nav</li>
-      <li><span class="i-carbon-microphone" /> Foredrag, konferanser og podcaster</li>
+      <li><span class="i-carbon-microphone" /> Foredrag, konferanser og podkaster</li>
       <li><span class="i-carbon-partnership" /> Kontakt for Nais as a Service</li>
       <li><span class="i-carbon-bot" /> Leder KI-satsingen i Nav</li>
     </ul>
@@ -58,7 +58,7 @@ import avatar from "./assets/team/Starefossen.png";
 <!--
 Overgang: «Litt mer om Varden.» (bytt til varden.flaatten.org i nettleseren; Varden-sliden er skjult)
 
-- Jobber i Nais-teamet i Nav. Innførte OpenTelemetry i Nav, snakker om Nais på konferanser og i podcaster, er kontakt for Nais as a Service og leder KI-satsingen i Nav
+- Jobber i Nais-teamet i Nav. Innførte OpenTelemetry i Nav, snakker om Nais på konferanser og i podkaster, er kontakt for Nais as a Service og leder KI-satsingen i Nav
 - Utenfor jobb: Varden (varden.flaatten.org), en KI-assistent familien snakker med i iMessage. Bygd på OpenClaw og Gemini, kjører på en Mac mini og et Kubernetes-cluster hjemme
 - NisseKomm: adventskalender-app jeg har laget til barna. Ikke vis innhold, figurer eller historie
 - Ikke nevn barnas navn, alder, skole eller klubber
@@ -72,7 +72,7 @@ clicks: 5
 ---
 
 ::header::
-<h1 class="text-3xl font-bold">Varden (utenom jobb)</h1>
+<h1 class="text-3xl font-bold">Varden (utenfor jobb)</h1>
 <p class="subtitle">En KI-assistent som bor i familiens gruppechat</p>
 
 ::default::
@@ -286,7 +286,7 @@ clicks: 4
 
 ::header::
 <h1 class="text-3xl font-bold">Kl. 03.00</h1>
-<p class="subtitle">Nais har vakt for plattformen. Teamene eier appene sine.</p>
+<p class="subtitle">Nais har vakt for plattformen, teamene eier appene sine</p>
 
 ::default::
 <div class="flex flex-col gap-8 w-full">
@@ -334,7 +334,7 @@ Overgang: «Og når teamet merger?»
 
 - Kognitiv last: teamet beskriver hva appen trenger, ikke hvordan det settes opp. Ingen Terraform, ingen egen infrastruktur
 - Klikk 1: inn (adresse, innlogging, hvem som får kalle appen). Klikk 2: data (database, bucket, Kafka). Klikk 3: innsikt (logger, metrikker, traces)
-- Utvikleren ber en KI-agent om appen. Agenten bruker Nais MCP-serveren i Nais CLI og den åpne dokumentasjonen
+- Utvikleren ber en KI-agent om appen. Agenten bruker MCP-serveren i Nais CLI og den åpne dokumentasjonen
 - Feltnavn fra Application-eksempelet i nais/doc (docs.nais.io)
 -->
 
@@ -399,7 +399,7 @@ Overgang: «Veien er et produkt, med brukere.»
 
 - Klikk 1–3: hvert ledd skjer automatisk i bygget (nais/docker-build-push: SBOM i CycloneDX, signering og attestering)
 - Sårbarheter prioriteres etter risiko: EPSS, KEV og om appen er eksponert mot internett (nais/api, 2026)
-- Klikk 4: innlogging er også bygd inn. ID-porten, Maskinporten, Entra ID og TokenX skrus på i manifestet (docs.nais.io, auth)
+- Klikk 4: innlogging er også bygd inn. ID-porten, Maskinporten, Entra ID og TokenX skrus på i manifestet (docs.nais.io, auth). ID-porten og Maskinporten krever egen avtale med Digdir. Nais STS skal etter planen erstatte TokenX
 - NSM Grunnprinsipper 2.1.4 og 3.1.1 hvis noen spør: https://nsm.no/grunnprinsipper-ikt
 -->
 
@@ -451,9 +451,9 @@ clicks: 3
 <!--
 Overgang: «Og for dem som liker terminalen.»
 
-- Start: teamoversikten for team-eksempel med helse, sårbarheter, varsler og kostnad. Klikk 1: kostnad per tjeneste. Klikk 2: Applications med status. Klikk 3: én app med helse, sårbarheter, deploy og persistens
+- Start: teamoversikten for team-eksempel med helse, sårbarheter, varsler og kostnad. Klikk 1: kostnad per tjeneste. Klikk 2: Applications med status. Klikk 3: én app med helse, sårbarheter, instanser og hendelser
 - Illustrasjon bygd etter strukturen i Console, ingen ekte data
-- Teamet trenger ingen tilgang til klyngen for å se dette: Console henter det fra plattformen
+- Teamet trenger ingen tilgang til clusteret for å se dette: Console henter det fra plattformen
 -->
 
 ---
@@ -511,7 +511,7 @@ layout: default
 
 ::header::
 <h1 class="text-3xl font-bold">Åpne standarder</h1>
-<p class="subtitle">Standarder framfor leverandører. Kompetanse og verktøy flytter med.</p>
+<p class="subtitle">Standarder framfor leverandører, så kompetanse og verktøy flytter med</p>
 
 ::default::
 <div class="std-grid card-row grid grid-cols-3 gap-4 w-full max-w-5xl mx-auto">
@@ -588,7 +588,7 @@ clicks: 4
 Overgang: «Hvorfor bryr vi oss om dette?»
 
 - Lagene bygges nedenfra: infrastruktur fra skyleverandøren, Kubernetes, Nais og teamenes apper
-- Klikk 1: pods fordelt over tre soner i én region. Klikk 2: de skalerer ut
+- Klikk 1: poder fordelt over tre soner i én region. Klikk 2: de skalerer ut
 - Klikk 3: én sone faller ut, og podene startes i de andre. Appen merker det ikke
 - Klikk 4: laget nederst byttes (eget datasenter til Google Cloud). Nais startet i eget datasenter i 2016 og kjører i dag i Google Cloud. Appene merket ikke flyttingen
 -->
@@ -600,7 +600,7 @@ clicks: 2
 
 ::header::
 <h1 class="text-3xl font-bold">Handlingsrom</h1>
-<p class="subtitle">Målet er ikke å flytte, men å kunne.</p>
+<p class="subtitle">Målet er ikke å flytte, men å kunne</p>
 
 ::default::
 <div class="hr-scale">
@@ -698,7 +698,7 @@ layout: default
 
 ::header::
 <h1 class="text-3xl font-bold">Teamet bak</h1>
-<p class="subtitle">15 personer holder plattformen for ≈ 150 team. Totalt ≈ 150 årsverk (anslag) siden 2016.</p>
+<p class="subtitle">15 personer holder plattformen for ≈ 150 team · ≈ 150 årsverk (anslag) siden 2016</p>
 
 ::default::
 <TeamWall />
@@ -726,17 +726,16 @@ layout: default
     <img src="./assets/logos/ssb.svg" alt="SSB" class="h-9" />
     <img src="./assets/logos/ldir.svg" alt="Landbruksdirektoratet" class="h-10" />
     <img src="./assets/logos/atil.svg" alt="Arbeidstilsynet" class="h-9" />
-    <span class="incoming-logo"><img src="./assets/logos/ksdigital.png" alt="KS Digital" class="h-7" /><small>på vei inn</small></span>
-    <span class="incoming-logo"><img src="./assets/logos/novari.svg" alt="Novari" class="h-6" /><small>på vei inn</small></span>
+    <img src="./assets/logos/ksdigital.png" alt="KS Digital" class="h-7" />
+    <img src="./assets/logos/novari.svg" alt="Novari" class="h-6" />
   </div>
-  <p class="anim-item text-center">Fire virksomheter i dag, to på vei inn. Det som bygges for én, får alle.</p>
+  <p class="anim-item text-center">Seks virksomheter i produksjon. Det som bygges for én, får alle.</p>
 </div>
 
 <!--
 Overgang: «Hva kan dere ta med hjem?»
 
-- Nav, SSB, Landbruksdirektoratet og Arbeidstilsynet kjører apper på Nais i dag (Grafana, 21. oktober 2026)
-- KS Digital og Novari har signert, men har ikke apper i produksjon ennå
+- Nav, SSB, Landbruksdirektoratet, Arbeidstilsynet, KS Digital og Novari er i produksjon på Nais
 - Poenget: man trenger ikke være Nav for å få dette
 -->
 
@@ -780,6 +779,6 @@ layout: cover
 <!--
 Overgang: «Takk!»
 
-- Tesen fra coveret: lett å gjøre rett
+- Tesen fra forsiden: lett å gjøre rett
 - Dokumentasjon: docs.nais.io. Kildekode: github.com/nais
 -->

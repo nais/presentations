@@ -71,7 +71,7 @@
           />
           <path v-for="s in COST" :key="s.name" :d="s.d" :fill="s.color" />
           <text
-            v-for="(d, i) in ['1. sep', '15. sep', '1. okt', '15. okt']"
+            v-for="(d, i) in ['1. sep.', '15. sep.', '1. okt.', '15. okt.']"
             :key="d"
             :x="30 + i * 110"
             y="150"

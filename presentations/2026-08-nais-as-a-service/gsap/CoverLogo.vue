@@ -8,7 +8,7 @@
       :class="{ part: i < LOGO.length }"
       :style="c"
     />
-    <img ref="logo" src="/logos/nais-v2-rosa.svg" alt="nais" class="mark" />
+    <img ref="logo" src="/logos/nais-v2-rosa.svg" alt="Nais" class="mark" />
   </div>
 </template>
 

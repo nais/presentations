@@ -30,7 +30,7 @@ transition: fade
 <!--
 Overgang: «(Ingen overgang. La klippet gå, ikke snakk over det.)»
 
-- 6 tenants, 5 212 apper (Grafana, 21. oktober 2026). KS Digital og Novari har signert, men har ikke apper i produksjon ennå
+- 6 tenants, 5 212 apper (Grafana, 21. oktober 2026). Alle seks tenants er i produksjon, også KS Digital og Novari
 - ≈ 21 500 deployer per uke er Nav, alle miljøer (Mimir)
 - Fargene viser de mindre tenantene spredt i bikuben
 -->
@@ -78,8 +78,8 @@ layout: default
     <img src="./assets/logos/ssb.svg" alt="SSB" class="h-7" />
     <img src="./assets/logos/ldir.svg" alt="Landbruksdirektoratet" class="h-8" />
     <img src="./assets/logos/atil.svg" alt="Arbeidstilsynet" class="h-7 tenant-highlight" />
-    <span class="incoming-logo"><img src="./assets/logos/ksdigital.png" alt="KS Digital" class="h-6" /><small>på vei inn</small></span>
-    <span class="incoming-logo"><img src="./assets/logos/novari.svg" alt="Novari" class="h-5" /><small>på vei inn</small></span>
+    <img src="./assets/logos/ksdigital.png" alt="KS Digital" class="h-6" />
+    <img src="./assets/logos/novari.svg" alt="Novari" class="h-5" />
   </div>
 </div>
 
@@ -88,7 +88,7 @@ Overgang: «Dere deler plattform med mange. Det er derfor den blir bedre hvert �
 
 - En tenant er en virksomhet som bruker Nais. Arbeidstilsynet er uthevet: det er dere
 - 21 500 vises én gang, på flisa. Årsgrafen viser bare formen
-- 528 apper kjører hos SSB, Landbruksdirektoratet og Arbeidstilsynet. KS Digital og Novari er på vei inn
+- 528 apper målt hos SSB, Landbruksdirektoratet og Arbeidstilsynet (21. oktober 2026). KS Digital og Novari er nå også i produksjon
 - Apper per tenant: Grafana 21. oktober 2026 (72 + 164 + 292 = 528 utenfor Nav)
 - ≈ 21 500 deployer per uke i Nav, alle miljøer. ≈ 9 000 i prod (Mimir)
 - 154 team har deployet siste 28 dager (Nav). Deployer per uke er Nav, alle miljøer
@@ -120,7 +120,7 @@ Overgang: «Så skal vi se hva som skjer når dere merger.»
 - Feltnavn fra Application-eksempelet i nais/doc og Postgres-veiledningen (docs.nais.io, persistence/postgres)
 - Hvert klikk skriver én blokk, og ressursen dukker opp rundt appen
 - Ingen Terraform, ingen egen infrastruktur
-- Utvikleren ber KI-agenten om en app med Postgres og ID-porten. Agenten bruker Nais MCP-serveren (nais/cli, read-only GraphQL: get_nais_context, schema og nais://schema) og den åpne dokumentasjonen, og skriver manifestet vi ser bygge seg opp
+- Utvikleren ber KI-agenten om en app med Postgres og ID-porten. Agenten bruker Nais MCP-serveren (nais/cli, skrivebeskyttet GraphQL: get_nais_context, schema og nais://schema) og den åpne dokumentasjonen, og skriver manifestet vi ser bygge seg opp
 -->
 
 ---
@@ -153,13 +153,13 @@ clicks: 3
 ::header::
 <div class="pillar-tag" style="--pc: #FF9100"><span class="i-carbon-rocket" /> Utviklingsfart</div>
 <h1 class="text-3xl font-bold">KI: MCP i Nais CLI</h1>
-<p class="subtitle">Kodeagenten spør Nais, ikke deg (alfa)</p>
+<p class="subtitle">KI-agenten spør Nais, ikke deg (alfa)</p>
 
 ::default::
 <div class="flex flex-col gap-6 w-full">
   <FlowChain :nodes="[
     { icon: 'i-carbon-user', label: 'Utvikler', sub: 'Ber agenten om en app med Postgres' },
-    { icon: 'i-carbon-bot', label: 'Kodeagent', sub: 'Copilot, Claude eller en annen' },
+    { icon: 'i-carbon-bot', label: 'KI-agent', sub: 'Copilot, Claude eller en annen' },
     { icon: 'i-carbon-terminal', label: 'nais mcp', sub: 'nais alpha mcp serve, lokalt som deg' },
     { icon: 'i-carbon-api', label: 'Nais API', sub: 'Bare lesing' },
   ]" />
@@ -173,7 +173,7 @@ Overgang: «Agenten leser, nais apply leverer. Nå åpner vi panseret og ser hva
 
 - MCP (Model Context Protocol) er en åpen standard for å gi KI-agenter verktøy. Nais CLI har en innebygd MCP-server: nais alpha mcp serve
 - Den kjører lokalt, logger inn som deg og ser bare det du har tilgang til. Standard er stdio; HTTP lytter på 127.0.0.1
-- Verktøyene bare leser: get_nais_context (hvem du er, teamene dine), schema-verktøy (schema_search, schema_get_type m.fl.), validate_graphql og execute_graphql. Hemmelige verdier filtreres bort
+- Verktøyene kan bare lese: get_nais_context (hvem du er, teamene dine), schema-verktøy (schema_search, schema_get_type m.fl.), validate_graphql og execute_graphql. Hemmelige verdier filtreres bort
 - Det er dette vi så på manifest-sliden: agenten slår opp teamet og skjemaet og skriver manifestet. Et menneske reviewer og merger, og koden går gjennom samme forsyningskjede som all annen kode
 - Fortsatt under alpha i CLI-en
 - Klikk 1–3: forespørselen går fra utvikleren via agenten og MCP-serveren til Nais API
@@ -195,7 +195,7 @@ clicks: 2
 <!--
 Overgang: «Hver app får den samme hylla. Her er den, slik den ser ut nå.»
 
-- Klikk 1 spiller alt i ett: klientene (Nais CLI, Console, nais deploy fra GitHub Actions og MCP-serveren for KI-agenter) kobler seg til Nais API, og nais deploy leverer manifestet inn i clusteret, der Naiserator gjør det om til Kubernetes-objekter (Deployment, Service, NetworkPolicy, ingress, secrets). Nais API setter opp teamressurser og datatjenester
+- Klikk 1 spiller alt i ett. Klientene (Nais CLI, Console, nais deploy fra GitHub Actions og MCP-serveren for KI-agenter) kobler seg til Nais API. nais deploy leverer manifestet inn i clusteret, der Naiserator gjør det om til Kubernetes-objekter (Deployment, Service, NetworkPolicy, ingress, secrets). Nais API setter opp teamressurser og datatjenester
 - Under panseret: CRD-ene (Application, Naisjob, IdportenClient, MaskinportenClient, AzureAdApplication, Kafka-topics m.fl.) er definert i liberator. Naiserator leser Application og Naisjob og lager Kubernetes-objektene og CRD-er for de andre operatorene
 - api-reconcilers lager teamressursene: GCP-prosjekt, GitHub-team, Entra ID-gruppe. Operatorer som Config Connector og aivenator gjør resten
 - Nais Postgres-ressursen håndteres av en egen operator (pgrator)
@@ -220,7 +220,7 @@ Overgang: «Hva har dette gitt i praksis? Nav har kjørt lengst.»
 
 - Én bølge med skuffer per klikk (tre bølger), til slutt alt på en gang
 - Gruppert etter inventaret over verktøykassa. Utfasede ting er utelatt
-- MCP for kodeagenter ligger i Verktøy-skuffen
+- MCP for KI-agenter ligger i Verktøy-skuffen
 - Nytt siden i fjor: Valkey og OpenSearch er ute av alfa (Nais Postgres er i preview), og teamene endrer versjon og størrelse selv, Kafka-tilganger styres via API og CLI, og Unleash har selvbetjening med release-kanaler
 -->
 
@@ -234,7 +234,7 @@ layout: default
 
 ::default::
 <div class="flex flex-col items-center gap-6 w-full">
-  <CountUp number="9000" prefix="≈" label="prodsettinger per uke i Nav" />
+  <CountUp number="9000" prefix="≈" label="Prodsettinger per uke i Nav" />
   <p class="anim-item text-center max-w-3xl">Små endringer, ofte. Teamene setter i produksjon mange ganger om dagen, uten å vente på et driftsvindu.</p>
 </div>
 
@@ -482,13 +482,13 @@ clicks: 9
 Overgang: «Og når noe likevel går galt om natta?»
 
 - To sidecars gjør jobben: Wonderwall er en innloggings-sidecar foran appen (logger brukeren inn mot ID-porten eller Entra ID). Texas er en token-sidecar som appen spør for å validere, bytte og hente tokens
-- Klikk 0: ID-porten, Maskinporten, Entra ID og TokenX/Texas er innebygd
+- Klikk 0: ID-porten, Maskinporten, Entra ID og TokenX/Texas er innebygd. ID-porten og Maskinporten krever tenantens egen avtale med Digdir
 - Klikk 1: oversikten viker for én forespørsel gjennom Nais, og grensene for cluster og pods tegnes
 - Klikk 2: Wonderwall (innloggings-sidecar) sender innbyggeren til ID-porten. min-app får forespørselen med Authorization-header. Wonderwall validerer ikke tokenet; appen gjør det via Texas
 - Klikk 3: tokenet har mottaker (aud) min-app. Et token er bare gyldig for mottakeren det er laget for
 - Klikk 4: min-app kaller Texas: POST til NAIS_TOKEN_EXCHANGE_ENDPOINT med identity_provider=tokenx, target=atil-prod:team-b:api og user_token (docs.nais.io, TokenX)
-- Klikk 5: Texas bytter tokenet via TokenX. Samme bruker, ny mottaker: atil-prod:team-b:api. Hvorfor: lekker tokenet, kan det ikke brukes mot andre tjenester, og hvert API ser hvem brukeren er
-- Klikk 6: API-ets Texas introspekterer tokenet (NAIS_TOKEN_INTROSPECTION_ENDPOINT): riktig mottaker, riktig bruker
+- Klikk 5: Texas bytter tokenet via TokenX. Samme bruker, ny mottaker: atil-prod:team-b:api. Hvorfor: lekker tokenet, kan det ikke brukes mot andre tjenester, og hvert API ser hvem brukeren er. Nais STS er planlagt å erstatte TokenX
+- Klikk 6: API-ets Texas sjekker tokenet (NAIS_TOKEN_INTROSPECTION_ENDPOINT): riktig mottaker, riktig bruker
 - Klikk 7: accessPolicy.inbound stopper en app som ikke har lov
 - Klikk 8: Maskinporten-token for et eksternt API, også via Texas
 - Klikk 9: manifestlinjene. Kilde: docs.nais.io (auth, ID-porten, TokenX, Entra ID, Maskinporten)
@@ -502,7 +502,7 @@ clicks: 3
 
 ::header::
 <h1 class="text-3xl font-bold">Kl. 03.00</h1>
-<p class="subtitle">Nais har vakt for plattformen. Teamene eier appene sine.</p>
+<p class="subtitle">Nais har vakt for plattformen. Teamene eier appene sine</p>
 
 ::default::
 <div class="flex flex-col gap-6 w-full">
@@ -543,7 +543,7 @@ layout: default
 
 ::header::
 <h1 class="text-3xl font-bold">Nais-teamet</h1>
-<p class="subtitle">15 personer i Nav. Drifter for seks tenants, fire i produksjon.</p>
+<p class="subtitle">15 personer i Nav som drifter for seks tenants i produksjon</p>
 
 ::default::
 <TeamWall />
@@ -562,7 +562,7 @@ layout: default
 ::header::
 <div class="pillar-tag" style="--pc: #ff5c6c"><span class="i-carbon-partnership" /> Et Nais-fellesskap</div>
 <h1 class="text-3xl font-bold">Velkommen, KS Digital og Novari</h1>
-<p class="subtitle">To nye tenants har signert. Appene kommer i 2027.</p>
+<p class="subtitle">To nye tenants er i produksjon på Nais</p>
 
 ::default::
 <div class="flex flex-col items-center gap-8 w-full">
@@ -583,8 +583,7 @@ layout: default
 <!--
 Overgang: «Mye av det nye har dere sett på veien. Her er året samlet.»
 
-- KS Digital og Novari (for fylkeskommunene) har signert avtale om å bruke Nais, gjennom offentlig-offentlig samarbeid
-- De har ingen apper i produksjon ennå. Appene ventes i 2027
+- KS Digital og Novari (for fylkeskommunene) er nå i produksjon på Nais, gjennom offentlig-offentlig samarbeid
 - Hva betyr det for Arbeidstilsynet? Flere som bruker plattformen gir flere innspill og flere som finner feil. Det som bygges for én tenant, får alle
 - Nais-teamet er fortsatt de samme 15 i Nav
 -->
@@ -619,7 +618,7 @@ layout: default
 Overgang: «Én av dem fortjener egen plass: databasen.»
 
 - Datoene er fra når endringen kom i kildekoden (commits i nais/cli, api, console-frontend, system), ikke fra en lansering. Månedene er omtrentlige
-- Des. 2025: MCP-serveren kom i Nais CLI (nais alpha mcp serve). Den så dere i Akt 2
+- Des. 2025: MCP-serveren kom i Nais CLI (nais alpha mcp serve). Den så dere i akt 2
 - Jan.–nov. 2026: logger og metrikker skalerer bedre. Metrikkene flyttet til Mimir (jan.), og Loki-utforskeren kom i Console (nov.)
 - Jan. 2026: innsyn i hemmelige verdier krever begrunnelse og logges
 - Vår 2026: Valkey og OpenSearch ute av alfa, med selvbetjening for versjon og størrelse (mars–september)
@@ -669,9 +668,9 @@ layout: default
 
 ::default::
 <div class="card-row grid grid-cols-3 gap-6 w-full max-w-5xl mx-auto">
-  <IconCard icon="i-carbon-dashboard" title="Ett produkt" description="Forsiden, teamoversikten og app-sidene skal henge sammen og vise status og neste steg på samme måte." />
+  <IconCard icon="i-carbon-dashboard" title="Ett produkt" description="Forsiden, teamoversikten og appsidene skal henge sammen og vise status og neste steg på samme måte." />
   <IconCard icon="i-carbon-group" title="Teamoversikt først" description="Teamsiden blir en inngang til status og prioriteringer, ikke bare en kostnadsgraf." color="blue" />
-  <IconCard icon="i-carbon-terminal" title="Samme svar i terminalen" description="Nais CLI skal gi de vanligste oppslagene fra Console: oversikt, feilsøking og scripting." color="yellow" />
+  <IconCard icon="i-carbon-terminal" title="Samme svar i terminalen" description="Nais CLI skal gi de vanligste oppslagene fra Console: oversikt, feilsøking og skripting." color="yellow" />
 </div>
 
 <!--
@@ -724,7 +723,7 @@ clicks: 2
 ::header::
 <div class="pillar-tag" style="--pc: #4a9be8"><span class="i-carbon-migrate" /> Suveren og autonom</div>
 <h1 class="text-3xl font-bold">Handlingsrom</h1>
-<p class="subtitle">Poenget er leverandøravhengighet. Målet er ikke å flytte, men å kunne.</p>
+<p class="subtitle">Poenget er leverandøravhengighet. Målet er ikke å flytte, men å kunne</p>
 
 ::default::
 <div class="hr-scale">
@@ -738,7 +737,7 @@ clicks: 2
   <div v-click="2" class="hr-col hr-room">
     <div><span class="i-carbon-checkmark-filled" /><span><b>Samme manifest</b> uansett hva som ligger under</span></div>
     <div><span class="i-carbon-checkmark-filled" /><span><b>Nais har flyttet før:</b> startet i eget datasenter, kjører i dag i Google Cloud</span></div>
-    <div><span class="i-carbon-checkmark-filled" /><span><b>Færre Google-tjenester:</b> Nais Postgres nå, Nais Buckets utredes</span></div>
+    <div><span class="i-carbon-checkmark-filled" /><span><b>Færre Google-tjenester:</b> Nais Postgres (preview), Nais Buckets utredes</span></div>
     <div><span class="i-carbon-checkmark-filled" /><span><b>Selvdriftet:</b> observability, ingress og Console</span></div>
   </div>
 </div>
@@ -756,7 +755,7 @@ Overgang: «Hvem bestemmer egentlig hva som bygges?»
 - Strøm og tomter: CBRE European outlook 2026 https://www.cbre.com/insights/books/european-real-estate-market-outlook-2026/data-centres og JLL 2026 https://www.jll.com/en-de/newsroom/ai-boom-redraws-europes-data-centre-map-as-power-access
 - NSM Risiko 2026, side 35, «Omfattende bruk av et fåtall utenlandske skytjenester» (sjekket mot PDF-en 5. nov. 2026). Markedet er dominert av amerikanske selskaper som Amazon, Google og Microsoft. Anbefaling: «Planlegg for å kunne bytte ut skyleverandør effektivt og med kjent ressursbruk og kostnad dersom behovet skulle oppstå.» https://nsm.no/getfile.php/1314962-1770630853/NSM/Filer/Dokumenter/Rapporter/Risiko%202026.pdf
 - EU: forslag til Cloud and AI Development Act, COM(2026) 502, juni 2026. Bare et forslag. https://digital-strategy.ec.europa.eu/en/library/proposal-cloud-and-ai-development-act-cada
-- Høyre side: appene beskriver hva de trenger i manifestet, ikke hvilken sky de kjører i. Nais startet i eget datasenter i 2016 og kjører i dag i Google Cloud (Nav har fortsatt on-prem-clustre). Nais Postgres og Nais Buckets gjør oss mindre avhengige av Google-spesifikke tjenester
+- Høyre side: appene beskriver hva de trenger i manifestet, ikke hvilken sky de kjører i. Nais startet i eget datasenter i 2016 og kjører i dag i Google Cloud (Nav har fortsatt on-prem-clustere). Nais Postgres og Nais Buckets gjør oss mindre avhengige av Google-spesifikke tjenester
 - Exit-planen er dokumentert. Ingen har trengt den
 -->
 
@@ -793,7 +792,7 @@ layout: default
 ::default::
 <div class="card-row grid grid-cols-3 gap-6 w-full max-w-5xl mx-auto">
   <IconCard icon="i-carbon-events" title="Naisdag" description="Møteplassen for alle tenants. Her får Nais-teamet innspill til veikartet." />
-  <IconCard icon="i-carbon-user-favorite" title="Champions" description="En eller flere i hvert team som holder seg oppdatert og deler videre." color="blue" />
+  <IconCard icon="i-carbon-user-favorite" title="Champions" description="Én eller flere i hvert team som holder seg oppdatert og deler videre." color="blue" />
   <IconCard icon="i-carbon-logo-slack" title="#nais på Slack" description="Felles kanal for alle tenants. Spør, foreslå og meld fra om feil." color="yellow" />
 </div>
 
@@ -810,7 +809,7 @@ layout: default
 ---
 
 ::header::
-<h1 class="text-3xl font-bold">Samme løfte, bedre under panseret.</h1>
+<h1 class="text-3xl font-bold">Samme løfte, bedre under panseret</h1>
 <p class="subtitle">De seks søylene fra starten, med det som er nytt i år</p>
 
 ::default::
@@ -818,9 +817,9 @@ layout: default
   'nais apply og MCP for KI-agenter (alfa)',
   'point-in-time recovery, selvbetjent Valkey og OpenSearch',
   'skalering av logger og metrikker, Loki-utforsker i Console',
-  'Sårbarheter prioritert etter risiko',
+  'sårbarheter prioritert etter risiko',
   'Nais Postgres (preview), Nais Buckets utredes',
-  'Velkommen, KS Digital og Novari',
+  'KS Digital og Novari i produksjon',
 ]" />
 <div class="flex items-center justify-center gap-6 mt-8">
   <div class="anchor-hex" data-anchor="hex">Nais</div>

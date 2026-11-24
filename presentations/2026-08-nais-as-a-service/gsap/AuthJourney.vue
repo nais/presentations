@@ -181,7 +181,7 @@ const CAPTIONS = [
   "Samme sluttbruker, ny mottaker. Tokenet gjelder bare for dette ene API-et. Lekker det, kan det ikke brukes andre steder.",
   "API-ets Texas sjekker tokenet: riktig mottaker, riktig bruker.",
   "API-et validerer tokenet via Texas. accessPolicy slipper bare inn appen som har lov.",
-  "Nais STS skal erstatte TokenX. Mønsteret er det samme.",
+  "Nais STS er planlagt å erstatte TokenX. Mønsteret er det samme.",
   "Alt dette er noen få linjer i manifestet.",
 ];
 const YAML = `idporten:
