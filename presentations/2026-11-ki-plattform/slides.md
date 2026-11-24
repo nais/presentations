@@ -73,7 +73,7 @@ Overgang: «La oss se på fem agenter.»
 
 - Dette er en plan med gjeldende retning. Den er ikke låst, og eieren har sagt at ingenting er hugget i stein
 - Merkelappene: «besluttet» er bestemt av eieren, «forslag» er vår anbefaling, «visjon» er retningen uten plan, «hypotese» er noe vi tror, men ikke har avtalt med noen
-- Rekkefølgen: fem agenter med samme byggeklosser, isfjellet, ett spørsmål gjennom Fleet, innsyn, ansvar, behovet, det som virker i dag, formål og grenser, visjonen, modulene, kjøretiden, identitet, styring, kostnad, status, veikartet og åpne spørsmål
+- Rekkefølgen: fem agenter med samme byggeklosser, isfjellet, ett spørsmål gjennom Fleet, innsyn, ansvar, behovet, det som virker i dag, formål og grenser, visjonen, modulene, selvbetjening og godkjenning, kjøretiden, identitet, styring, kostnad, status, veikartet og åpne spørsmål
 - Navnet: nav-fleet, til daglig Fleet, på linje med Nais, Nada og Aksel. nav-pilot var én pilot. Fleet er en flåte i produksjon, og plattformen er flåtestyringen
 - Modulene er fire: fleet-gateway, fleet-control, fleet-runtime og fleet-radar for innsyn og revisjon. I tillegg kommer et offentlig register og MCP-servere som teamene eier
 - Kjente navn utenfor Nav: Rancher Fleet, Fleet (enhetsstyring) og JetBrains Fleet. Vi har ikke sjekket varemerker
@@ -280,7 +280,7 @@ layout: default
 - Eksemplet er Aksel Studio, der designere lager prototyper med KI. Navnet Ola og konseptet er oppdiktet. Flyttingen til Fleet er et forslag
 - Gå gjennom punktene i rekkefølge. Hvert nummer i chatten svarer til en byggekloss
 - Punkt 1: fleet-gateway vet hvem brukeren er og hvilken agent som spør, og bytter til et token per verktøy
-- Punkt 2: fleet-control har agentprofilen. Den sier hvilke verktøy agenten får bruke. Rettighetene er snittet av det brukeren, ruten og agenten har lov til
+- Punkt 2: fleet-control har agentprofilen. Den sier hvilke verktøy agenten får bruke. Rettighetene er snittet av det brukeren, MCP-serveren og agenten har lov til
 - Punkt 3: bygget kjører i fleet-runtime. Sandkassen er stengt for trafikk ut, og modellnøkler legges på utenfor sandkassen
 - Punkt 4: å bestille i Dolly er skriving. Appen spør brukeren, og jobben venter på svaret. At jobben kan pause og spørre, kommer etter fase 1
 - Punkt 5: fleet-radar viser revisjonen av hvert kall med bruker og agent, og bruken per team og agent
@@ -389,10 +389,10 @@ layout: default
 - Én linje å ta med: teamet som bruker agenten, eier den og det den gjør. Fleet leverer byggeklosser og kontroller
 - Dette står i styringsmodellen for Fleet. Den er gjeldende retning, ikke låst
 - Teamet som eier agenten godkjenner egne endringer med to personer, som en PR-gjennomgang. PVK for agenter som skriver godkjennes av ansvarlig eier, og personvernombudet gir råd
-- Teamet som eier MCP-serveren har ROS for serveren og bestemmer hvilken datakategori ruten har
+- Eierteamet til MCP-serveren har ROS for serveren og bestemmer datakategorien: Åpen, Intern eller Fortrolig (besluttet). Strengt fortrolig er ikke tillatt ennå
 - Fleet, det vil si team copilot, drifter plattformen og eier rekkverkene. Fleet tar ikke juridiske beslutninger og har ikke ansvaret for det agenten gjør
 - Nav er behandlingsansvarlig. Vi skriver derfor «teamet har ansvaret for tjenesten», ikke «behandlingsansvar». Ordlyden bør sjekkes med en jurist
-- Styring, fra det tidligere lysbildet om selvbetjening: To personer i teamet godkjenner egne endringer, som en PR-gjennomgang. Ruteeieren godkjenner når en agent vil bruke et annet teams verktøy, som accessPolicy. Leseverktøy publiseres automatisk fra teamets CI. Godkjenninger av skriveverktøy og agenter utløper etter seks måneder. Alt via API og CI, ikke klikk. Automatiske rekkverk: sjekker i CI, kvote, nødbryter og utestenging. Eiere og revisorer (ledelsen, sikkerhet, personvernombudet og internrevisjonen) ser revisjon og rapporter for sine team. Ledelsen og sikkerhet kan stoppe og trekke tilbake. Å stoppe krever én person. Å starte eller utvide krever to
+- Styring (besluttet): to personer i eierteamet godkjenner hver versjon av en MCP-server. Den som sender inn, kan ikke godkjenne sin egen. Eierteamet bestemmer hvilke konsumenter (agentprofiler) som får tilgang, som accessPolicy.inbound i Nais. Eierteamet eller plattformteamet kan stoppe en MCP-server. Å trekke tilbake en versjon er endelig. Se skissene av selvbetjeningen senere i presentasjonen. Automatiske rekkverk: sjekker i CI, kvote, nødbryter og utestenging. Eiere og revisorer (ledelsen, sikkerhet, personvernombudet og internrevisjonen) ser revisjon og rapporter for sine team
 - Samme tanke som i Nais: teamene eier sine egne objekter og godkjenner selv. Plattformteamet godkjenner ikke hver endring
 - Risikoen styres per verktøy: lesing, skriving, eksterne kall og kjøring på vertsmaskinen. Det avgjør hvem som godkjenner, og om det trengs ROS eller PVK
 - Et endret verktøy fjernes automatisk til det er godkjent på nytt
@@ -454,7 +454,7 @@ Det som virker i dag (fra det tidligere lysbildet «I dag virker det for utvikle
 - Verktøykatalogen på ki-utvikling.nav.no har agenter, skills, instruksjoner og MCP-servere tilpasset Nav. God praksis og guider ligger samme sted
 - nav-pilot legger agentpakker i repoet. MCP-registeret har godkjente servere, og ukjente blokkeres
 - Agentene kjører lokalt på utviklerens maskin. Det dekker ikke agenter som kjører som tjenester
-- Forslag: katalogen og god praksis kan bli inngangen til Fleet. Vi har ikke avtalt dette med noen
+- Besluttet: selvbetjeningen for Fleet ligger i my-copilot under /fleet, med myk lansering på ki-utvikling.nav.no når den er klar. Alle publiserte MCP-servere vises i en katalog for alle som er logget inn
 -->
 
 ---
@@ -618,7 +618,7 @@ layout: default
   <text x="20" y="281" class="t">fleet-runtime</text>
   <text x="200" y="281" class="s">på eget GKE-cluster, utenfor Nais-clusterne</text>
   <text x="0" y="322" class="t">ki-utvikling.nav.no</text>
-  <text x="170" y="322" class="s">verktøykatalogen og god praksis kan bli katalogen og inngangen til Fleet (forslag)</text>
+  <text x="170" y="322" class="s">selvbetjening under /fleet og katalog over MCP-servere (besluttet)</text>
 </svg>
 
 ::footer::
@@ -683,7 +683,7 @@ layout: default
     <rect x="602" y="110" width="262" height="124" rx="8" class="b"/>
     <text x="733" y="134" class="t" text-anchor="middle">fleet-gateway</text>
     <text x="733" y="156" class="s" text-anchor="middle">inngangen for alle verktøykall</text>
-    <text x="733" y="176" class="s" text-anchor="middle">token per rute (OBO)</text>
+    <text x="733" y="176" class="s" text-anchor="middle">alle ruter fra fleet-control</text>
     <text x="733" y="196" class="s" text-anchor="middle">verktøyliste, kvote og nødbryter</text>
     <text x="733" y="220" class="s x" text-anchor="middle">pilot i produksjon</text>
   </g>
@@ -717,14 +717,120 @@ Overgang: «Hvorfor kjører agentene ikke på Nais?»
 
 - fleet-control er eneste kilde for servere, ruter, verktøy og agentprofiler. Appen starter en agentkjøring gjennom et asynkront jobb-API og får en jobb-ID. Resultatet kommer som et artefakt. fleet-runtime bare utfører
 - fleet-runtime er en sandkasse for agentkjøringer på eget GKE-cluster. Team tar med enten konfigurasjon for et standard agentoppsett eller sitt eget containerimage. Profilen avgjør om kjøringen er kort og uten tilstand eller en lang økt
-- fleet-gateway håndhever per kall: token per rute, verktøyliste, hash-låsing av verktøy, kvote og nødbryter, og reviderer hvert kall
+- fleet-gateway håndhever per kall: token per MCP-server, verktøyliste, hash-låsing av verktøy, kvote og nødbryter, og reviderer hvert kall
 - fleet-radar er innsyn og revisjon: hver jobb, hvert verktøykall og hver endring i fleet-control, samlet med trace-ID. Teamet, eierne og revisorene ser det samme. Ikonet er radaren
 - Registeret er en offentlig lesekopi av fleet-control
 - MCP-servere: teamene eier verktøyene, dataene og risikoen bak dem
-- Identitet i dag: fleet-gateway bytter til et nytt token per rute (OBO), så tokenet til verktøyet gjelder bare den MCP-serveren. Agenten kan aldri mer enn brukeren, og modellen ser aldri tokenet. Nais STS som utsteder og egen agentidentitet for agenter uten bruker vurderes, men er ikke med i fase 1
+- Besluttet: fleet-gateway i produksjon henter alle ruter fra fleet-control ved lansering. En rute er bare adressen til en MCP-server
+- Identitet i dag: fleet-gateway bytter til et nytt token per MCP-server (OBO), så tokenet til verktøyet gjelder bare den MCP-serveren. Agenten kan aldri mer enn brukeren, og modellen ser aldri tokenet. Nais STS som utsteder og egen agentidentitet for agenter uten bruker vurderes, men er ikke med i fase 1
 - Det enkle tilfellet er også med: en Nais-app med et standard MCP-SDK kaller ett eller to verktøy gjennom fleet-gateway, uten fleet-runtime
 - Vi lager ikke eget SDK eller agentrammeverk. Vi gir veiledning og maler
 - Status: fleet-gateway er i pilot i produksjon med leseruter bak naisdevice. fleet-control har lese-API. fleet-runtime er ikke bygget
+-->
+
+---
+layout: default
+---
+
+::header::
+<h1 class="text-3xl font-bold">Teamet ser sine MCP-servere først</h1>
+<p class="subtitle">Selvbetjening i my-copilot under /fleet, som i Nais Console <span class="chip green align-middle ml-2">Besluttet</span> <span class="chip amber align-middle ml-1">Skisse · forslag</span></p>
+
+::default::
+<BrowserWindow url="ki-utvikling.nav.no/fleet/team-eksempel (skisse)" class="fl-win" role="img" aria-label="Skisse av teamoversikten for team-eksempel i Fleet. Til venstre en meny med Oversikt, MCP-servere, Agentprofiler, Til godkjenning og Historikk, og Katalog for alle team. Fire tall: tre av fire MCP-servere publisert, to venter på godkjenning, 10 720 kall og 214 unike brukere siste sju dager. En tabell viser fire MCP-servere med status, neste steg og kall siste sju dager.">
+  <div class="fl-grid">
+    <nav class="fl-side">
+      <small>team-eksempel</small>
+      <span class="on">Oversikt</span><span>MCP-servere</span><span>Agentprofiler</span><span>Til godkjenning <em>2</em></span><span>Historikk</span>
+      <small>For alle team</small>
+      <span>Katalog</span>
+    </nav>
+    <main class="fl-main">
+      <div class="fl-head"><h4>team-eksempel</h4><u>Registrer MCP-server</u></div>
+      <div class="fl-stats">
+        <div><b>3 av 4</b>publisert</div>
+        <div class="w"><b>2</b>venter på godkjenning</div>
+        <div><b>10 720</b>kall, 7 dager</div>
+        <div><b>214</b>unike brukere, 7 dager</div>
+      </div>
+      <table class="fl-tab">
+        <tr><th>MCP-server</th><th>Status</th><th>Neste steg</th><th class="n">Kall, 7 dager</th></tr>
+        <tr><td><b>kodeverk</b><code>/mcp/team-eksempel/kodeverk</code><i class="fl-dc">Åpen</i></td><td><span class="fl-tag ok">Publisert v3</span></td><td>Versjon 4 venter på deg</td><td class="n">5 990</td></tr>
+        <tr><td><b>oppslag</b><code>/mcp/team-eksempel/oppslag</code><i class="fl-dc">Intern</i></td><td><span class="fl-tag ok">Publisert v1</span></td><td>Versjon 2 venter på en annen i teamet</td><td class="n">3 410</td></tr>
+        <tr><td><b>enhetsregister</b><code>/mcp/team-eksempel/enhetsregister</code><i class="fl-dc">Intern</i></td><td><span class="fl-tag ok">Publisert v2</span></td><td class="mu">Ingen</td><td class="n">1 320</td></tr>
+        <tr><td><b>saksarkiv</b><code>ingen rute ennå</code><i class="fl-dc">Fortrolig</i></td><td><span class="fl-tag neu">Utkast</span></td><td>Send inn til godkjenning</td><td class="n mu">–</td></tr>
+      </table>
+      <p class="fl-note">Utkast og historikk ser bare teamet. Publiserte MCP-servere står i katalogen for alle som er logget inn.</p>
+    </main>
+  </div>
+</BrowserWindow>
+
+::footer::
+<span class="font-mono text-sm opacity-70">nav-fleet · gjeldende retning · ikke låst</span>
+
+<!--
+- Besluttet: selvbetjeningen ligger i my-copilot under /fleet. Du velger team først, som i Nais Console. Myk lansering på ki-utvikling.nav.no når den er klar. Ingen frist
+- Skissen er et forslag til hvordan oversikten kan se ut. Team og tall er oppdiktet
+- Hver rad er én MCP-server med status, neste steg og kall siste sju dager. Ruten er bare adressen
+- Besluttet: alle publiserte MCP-servere vises i en katalog for alle som er logget inn. Utkast og historikk blir i teamet
+- Besluttet: datakategoriene er Åpen, Intern og Fortrolig. Strengt fortrolig er ikke tillatt ennå
+- Overgang: «Hva skjer når noen sender inn en ny versjon?»
+-->
+
+---
+layout: default
+---
+
+::header::
+<h1 class="text-3xl font-bold">To i eierteamet godkjenner hver versjon</h1>
+<p class="subtitle">Den som sender inn, kan ikke godkjenne sin egen endring <span class="chip green align-middle ml-2">Besluttet</span> <span class="chip amber align-middle ml-1">Skisse · forslag</span></p>
+
+::default::
+<BrowserWindow url="ki-utvikling.nav.no/fleet/team-eksempel/mcp-servere/kodeverk (skisse)" class="fl-win" role="img" aria-label="Skisse av siden for MCP-serveren kodeverk, sett av Kari som sendte inn versjon 4. Et godkjenningskort sier at Kari ikke kan godkjenne sin egen versjon, og at Nora eller Ola i eierteamet kan godkjenne. Ved siden av viser en tabell hva som endres fra versjon 3 til 4: ett nytt verktøy og en ny konsument. Nederst nødtiltak: stopp MCP-serveren eller trekk tilbake en versjon.">
+  <div class="fl-grid">
+    <nav class="fl-side">
+      <small>team-eksempel</small>
+      <span>Oversikt</span><span class="on">MCP-servere</span><span>Agentprofiler</span><span>Til godkjenning <em>2</em></span><span>Historikk</span>
+      <small>For alle team</small>
+      <span>Katalog</span>
+    </nav>
+    <main class="fl-main">
+      <div class="fl-head"><h4>kodeverk <span class="fl-tag ok">Publisert v3</span></h4><small class="mu">Ser siden som Kari Testesen</small></div>
+      <p class="fl-meta"><code>/mcp/team-eksempel/kodeverk</code> · Eierteam: team-eksempel · 3 verktøy · <i class="fl-dc">Åpen</i></p>
+      <div class="fl-two">
+        <div class="fl-card w">
+          <b>Versjon 4 venter på godkjenning</b>
+          <p>Sendt inn av Kari Testesen, 20. nov. kl. 14.02</p>
+          <div class="fl-btns"><span class="off">Godkjenn versjon 4</span><i>Avvis</i></div>
+          <p class="fl-why">Du sendte inn denne versjonen, så du kan ikke godkjenne den selv. Nora Navnesen eller Ola Eksempel i eierteamet kan godkjenne.</p>
+        </div>
+        <div class="fl-card">
+          <b>Hva endres, versjon 3 mot 4</b>
+          <table class="fl-tab fl-diff">
+            <tr><th>Felt</th><th>v3</th><th>v4</th></tr>
+            <tr><td>Verktøy</td><td>hent_kode, sok_kode</td><td>hent_kode, sok_kode, <ins>+ list_kodeverk</ins></td></tr>
+            <tr><td>Datakategori</td><td>Åpen</td><td class="mu">uendret</td></tr>
+            <tr><td>Konsumenter</td><td>saksflyt-agent</td><td>saksflyt-agent, <ins>+ dokument-agent</ins></td></tr>
+          </table>
+          <p class="fl-why">En konsument er en agentprofil. «Gi konsumenten tilgang» virker som accessPolicy.inbound i Nais.</p>
+        </div>
+      </div>
+      <div class="fl-stop"><b>Nødtiltak</b><span>Eierteamet eller plattformteamet kan stoppe MCP-serveren med en gang.</span><span>Å trekke tilbake en versjon er endelig.</span><u>Stopp</u><u>Trekk tilbake</u></div>
+    </main>
+  </div>
+</BrowserWindow>
+<p class="fl-api"><span class="chip amber">Forslag · utprøving</span> API formet som Kubernetes: <code>fleet.nav.no/v1alpha1</code>, <code>MCPServer</code>, <code>AgentProfile</code>, <code>AgentJob</code>. Kan bli CRD-er senere.</p>
+
+::footer::
+<span class="font-mono text-sm opacity-70">nav-fleet · gjeldende retning · ikke låst</span>
+
+<!--
+- Besluttet: to personer i eierteamet godkjenner hver endring. Én sender inn, en annen godkjenner, som en PR-gjennomgang
+- Skissen viser siden slik Kari ser den. Hun sendte inn versjon 4, så knappen er av. Navn og data er oppdiktet
+- Tabellen viser bare det som endres: ett nytt verktøy og en ny konsument. Datakategorien er uendret
+- Konsumenten er en agentprofil. Å gi konsumenten tilgang virker som accessPolicy.inbound i Nais: bare konsumenter på lista får kalle ruten
+- Besluttet: eierteamet eller plattformteamet kan stoppe en MCP-server. Å trekke tilbake en versjon er endelig for den versjonen. Neste versjon må godkjennes på nytt
+- Forslag under utprøving: API-et er formet som Kubernetes, fleet.nav.no/v1alpha1 med MCPServer, AgentProfile og AgentJob. Det kan bli CRD-er senere. Det er ikke bygget
 -->
 
 ---
@@ -841,7 +947,7 @@ layout: default
       <li><span class="chip green">kjører</span>fleet-gateway i pilot i produksjon, med leseruter bak naisdevice</li>
       <li><span class="chip green">kjører</span>MCP-servere for Dolly, kodeverk og teamkatalogen, og det offentlige registeret</li>
       <li><span class="chip blue">bygget</span>fleet-control med lese-API. Utrulling til dev pågår</li>
-      <li><span class="chip amber">neste</span>skrive-API og godkjenning, parallelt med utprøving av fleet-runtime</li>
+      <li><span class="chip amber">neste</span>skrive-API og godkjenning i selvbetjeningen under /fleet, parallelt med utprøving av fleet-runtime</li>
       <li><span class="chip slate">venter</span>målbildet for identitet, avklares med Nais</li>
     </ul>
   </div>
@@ -849,7 +955,7 @@ layout: default
     <h3>De første agentene <span class="chip amber align-middle ml-1">Forslag</span></h3>
     <ul>
       <li><b>Aksel Studio:</b> bygg av prototyper kan bli første arbeidslast i fleet-runtime</li>
-      <li><b>Første agentprofil:</b> studio-api leser fra Dolly, godkjent av ruteeieren</li>
+      <li><b>Første agentprofil:</b> studio-api leser fra Dolly, godkjent av eierteamet</li>
       <li><b>Våre egne verktøy:</b> Copilot og nav-pilot bruker verktøyene gjennom fleet-gateway</li>
       <li><b>Senere fase:</b> apper med brukerdata, som saksbehandling</li>
     </ul>
@@ -862,8 +968,9 @@ layout: default
 <!--
 - Vi beviser plattformen på interne verktøy først, flere parallelt. Aksel Studio tester både gatewayen og kjøretiden
 - Aksel Studio: designere skal lage prototyper med KI. Studio beholder domenet sitt, som forslagsflyten der brukeren godtar eller forkaster. Fleet tar kjøretiden, tokenbyttet og revisjonen
-- Første agent er studio-api med lesetilgang til Dolly. Profilen skal godkjennes både av Aksel Studio og av teamet som eier Dolly-ruten. Ingen frist, og ingen snarvei for å gå raskere
+- Første agent er studio-api med lesetilgang til Dolly. Profilen skal godkjennes både av Aksel Studio og av eierteamet til Dolly. Ingen frist, og ingen snarvei for å gå raskere
 - Det som kjører i dag, er en pilot. Det er ikke åpnet for alle
+- Besluttet: selvbetjeningen får myk lansering på ki-utvikling.nav.no når den er klar. Ingen frist. fleet-gateway i produksjon henter da alle ruter fra fleet-control
 - Overgang: «Hvordan kommer vi videre?»
 -->
 

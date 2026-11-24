@@ -2187,3 +2187,280 @@ pre,
 .rt4 .frd {
   width: 570px;
 }
+
+/* Fleet self-service sketches (team overview and MCP-server page) */
+.fl-win {
+  height: 21rem;
+  box-shadow: 0 10px 24px rgb(0 0 0 / 0.18);
+}
+
+.fl-win .bw-body {
+  font-size: 0.66rem;
+  line-height: 1.35;
+  overflow: hidden;
+}
+
+.fl-grid {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  height: 100%;
+}
+
+.fl-side {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  padding: 0.5rem;
+  border-right: 1px solid #e2e8f0;
+  background: #f8fafc;
+  color: #334155;
+}
+
+.fl-side small {
+  margin-top: 0.3rem;
+  color: #64748b;
+  font-weight: 700;
+}
+
+.fl-side span {
+  padding: 0.15rem 0.35rem;
+  border-radius: 4px;
+}
+
+.fl-side .on {
+  background: #e0ecff;
+  color: #1e3a8a;
+  font-weight: 700;
+  box-shadow: inset 2px 0 0 #2563eb;
+}
+
+.fl-side em {
+  font-style: normal;
+  padding: 0 0.3rem;
+  border-radius: 999px;
+  background: #fef3c7;
+  color: #78350f;
+  font-weight: 700;
+}
+
+.fl-main {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  padding: 0.55rem 0.75rem;
+  min-width: 0;
+}
+
+.fl-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.fl-head h4 {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.fl-head u,
+.fl-stop u {
+  text-decoration: none;
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
+  background: #1e40af;
+  color: #fff;
+}
+
+.fl-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.4rem;
+}
+
+.fl-stats div,
+.fl-card {
+  padding: 0.35rem 0.5rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  background: #fff;
+  color: #475569;
+}
+
+.fl-stats b {
+  display: block;
+  font-size: 0.95rem;
+  color: #0f172a;
+}
+
+.fl-stats .w,
+.fl-card.w {
+  border-color: #f59e0b;
+  background: #fffbeb;
+}
+
+.fl-tab {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.fl-tab th {
+  text-align: left;
+  color: #475569;
+  font-weight: 600;
+  border-bottom: 1px solid #cbd5e1;
+  padding: 0.15rem 0.3rem;
+}
+
+.fl-tab td {
+  padding: 0.25rem 0.3rem;
+  border-bottom: 1px solid #e2e8f0;
+  vertical-align: top;
+}
+
+.fl-tab td b {
+  margin-right: 0.35rem;
+}
+
+.fl-tab code,
+.fl-meta code,
+.fl-api code {
+  font-size: 0.9em;
+  color: #475569;
+}
+
+.fl-tab .n {
+  text-align: right;
+}
+
+.fl-win .mu {
+  color: #64748b;
+}
+
+.fl-tag,
+.fl-dc {
+  display: inline-block;
+  padding: 0 0.35rem;
+  border: 1px solid;
+  border-radius: 4px;
+  font-style: normal;
+  font-size: 0.9em;
+  white-space: nowrap;
+}
+
+.fl-dc {
+  margin-left: 0.35rem;
+  border-color: #64748b;
+  color: #334155;
+  background: #f1f5f9;
+}
+
+.fl-tag.ok {
+  border-color: #15803d;
+  color: #14532d;
+  background: #dcfce7;
+}
+
+.fl-tag.neu {
+  border-color: #64748b;
+  color: #1e293b;
+  background: #f1f5f9;
+}
+
+.fl-note,
+.fl-why,
+.fl-meta {
+  margin: 0;
+  color: #475569;
+}
+
+.fl-two {
+  display: grid;
+  grid-template-columns: 1fr 1.35fr;
+  gap: 0.5rem;
+}
+
+.fl-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  color: #334155;
+}
+
+.fl-card > b {
+  color: #0f172a;
+}
+
+.fl-card p {
+  margin: 0;
+}
+
+.fl-btns {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.fl-btns span,
+.fl-btns i {
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
+  font-style: normal;
+  border: 1px solid #94a3b8;
+}
+
+.fl-btns .off {
+  background: #e2e8f0;
+  color: #475569;
+}
+
+.fl-diff ins {
+  text-decoration: none;
+  color: #14532d;
+  background: #dcfce7;
+  padding: 0 0.2rem;
+  border-radius: 3px;
+}
+
+.fl-stop {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.35rem 0.5rem;
+  border: 1px solid #fecaca;
+  border-radius: 6px;
+  background: #fef2f2;
+  color: #334155;
+}
+
+.fl-stop b {
+  color: #7f1d1d;
+}
+
+.fl-stop u {
+  background: #b91c1c;
+  white-space: nowrap;
+}
+
+.fl-stop u:first-of-type {
+  margin-left: auto;
+}
+
+.fl-api {
+  margin: 0.5rem 0 0;
+  font-size: 0.72rem;
+  line-height: 1.4;
+  color: #334155;
+}
+
+.fl-win .bw-body p,
+.fl-win .bw-body h4 {
+  margin: 0;
+  line-height: 1.35;
+}
+
+.fl-win .bw-body .fl-tag,
+.fl-win .bw-body .fl-dc {
+  padding: 0 0.35rem;
+  font-size: 0.6rem;
+  line-height: 1.5;
+}
