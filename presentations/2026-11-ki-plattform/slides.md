@@ -590,7 +590,7 @@ layout: default
 
 <!--
 - Svar på spørsmålet om hvordan dette kan skalere i stort. Dette er retning, ikke beslutning
-- Nå: vi piloterer med to–tre team som er motivert, og flere har allerede egne løsninger på gang. De første interne agentene er designagenter, en støtteagent for Nais og agenter for sikkerhet og etterlevelse
+- Nå: vi piloterer med to–tre team som er motivert, og flere har allerede egne løsninger på gang. De første interne agentene er designagenter og en støtteagent for Nais. Agenter for sikkerhet og etterlevelse er retning, ikke på plass ennå
 - Neste: byggeklossene blir selvbetjente for alle produktteam, på samme måte som apper i Nais. Teamet eier agenten og risikoen
 - På sikt: kunnskapsarbeidere utenfor utviklingsteamene, på seksjonsnivå. Samme gateway og samme finmaskede tilgangsstyring avgjør hvem som får bruke hva, når og hvordan
 - Hvert steg krever at vi har sett verdien i steget før. Mye blir enklere når vi har erfaring
