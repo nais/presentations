@@ -786,7 +786,7 @@ layout: default
 <p class="subtitle">Den som sender inn, kan ikke godkjenne sin egen endring <span class="chip green align-middle ml-2">Besluttet</span> <span class="chip amber align-middle ml-1">I dev</span></p>
 
 ::default::
-<BrowserWindow url="ki-utvikling.nav.no/fleet/team-eksempel/kodeverk" class="fl-win" role="img" aria-label="Siden for MCP-serveren kodeverk, slik den ser ut i dev. Versjon 4 venter på godkjenning fra en annen i eierteamet. Til høyre ligger kodebiten fra nais.yaml som slipper inn fleet-gateway. Nederst kan teamet trekke tilbake MCP-serveren, og en boks forklarer hva teamet gjør hvis MCP-serveren har et problem.">
+<BrowserWindow url="ki-utvikling.nav.no/fleet/mcp-servere/team-eksempel/kodeverk" class="fl-win" role="img" aria-label="Siden for MCP-serveren kodeverk, slik den ser ut i dev. Versjon 4 venter på godkjenning fra en annen i eierteamet. Til høyre ligger kodebiten fra nais.yaml som slipper inn fleet-gateway. Nederst kan teamet trekke tilbake MCP-serveren, og en boks forklarer hva teamet gjør hvis MCP-serveren har et problem.">
   <div class="fl-grid">
     <nav class="fl-side">
       <small>Team</small>
