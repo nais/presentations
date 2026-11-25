@@ -2272,13 +2272,6 @@ pre,
   color: #fff;
 }
 
-.fl-stats {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 0.4rem;
-}
-
-.fl-stats div,
 .fl-card {
   padding: 0.35rem 0.5rem;
   border: 1px solid #e2e8f0;
@@ -2287,13 +2280,6 @@ pre,
   color: #475569;
 }
 
-.fl-stats b {
-  display: block;
-  font-size: 0.95rem;
-  color: #0f172a;
-}
-
-.fl-stats .w,
 .fl-card.w {
   border-color: #f59e0b;
   background: #fffbeb;
@@ -2413,14 +2399,6 @@ pre,
   color: #475569;
 }
 
-.fl-diff ins {
-  text-decoration: none;
-  color: #14532d;
-  background: #dcfce7;
-  padding: 0 0.2rem;
-  border-radius: 3px;
-}
-
 .fl-stop {
   display: flex;
   align-items: center;
@@ -2463,4 +2441,44 @@ pre,
   padding: 0 0.35rem;
   font-size: 0.6rem;
   line-height: 1.5;
+}
+
+.fl-side .fl-pick {
+  border: 1px solid #94a3b8;
+  background: #fff;
+  margin-bottom: 0.3rem;
+}
+
+.fl-kort {
+  padding: 0.35rem 0.5rem;
+  border-radius: 6px;
+  background: #eef4fc;
+  color: #334155;
+}
+
+.fl-tag.w {
+  border-color: #1e40af;
+  color: #1e3a8a;
+  background: #eff6ff;
+}
+
+.fl-btn {
+  padding: 0 0.4rem;
+  border: 1px solid #1e40af;
+  border-radius: 4px;
+  color: #1e40af;
+  white-space: nowrap;
+}
+
+.fl-code {
+  margin: 0;
+  padding: 0.3rem 0.4rem;
+  border-radius: 4px;
+  background: #f1f5f9;
+  font-size: 0.9em;
+  line-height: 1.25;
+}
+
+.fl-stop u.red {
+  background: #c30000;
 }

@@ -734,33 +734,31 @@ layout: default
 
 ::header::
 <h1 class="text-3xl font-bold">Teamet ser sine MCP-servere først</h1>
-<p class="subtitle">Selvbetjening i my-copilot under /fleet, som i Nais Console <span class="chip green align-middle ml-2">Besluttet</span> <span class="chip amber align-middle ml-1">Skisse · forslag</span></p>
+<p class="subtitle">Selvbetjening i my-copilot under /fleet, som i Nais Console <span class="chip green align-middle ml-2">Besluttet</span> <span class="chip amber align-middle ml-1">I dev</span></p>
 
 ::default::
-<BrowserWindow url="ki-utvikling.nav.no/fleet/team-eksempel (skisse)" class="fl-win" role="img" aria-label="Skisse av teamoversikten for team-eksempel i Fleet. Til venstre en meny med Oversikt, MCP-servere, Agentprofiler, Til godkjenning og Historikk, og Katalog for alle team. Fire tall: tre av fire MCP-servere publisert, to venter på godkjenning, 10 720 kall og 214 unike brukere siste sju dager. En tabell viser fire MCP-servere med status, neste steg og kall siste sju dager.">
+<BrowserWindow url="ki-utvikling.nav.no/fleet" class="fl-win" role="img" aria-label="Teamoversikten i Fleet for team-eksempel, slik den ser ut i dev. Til venstre velger du team, og menyen har Oversikt, MCP-servere, Katalog og Registrer MCP-server. Et kort forklarer kort hvordan MCP-servere og agentprofiler virker. Under står en agentprofil som venter på tilgang, med knappen Gi tilgang, og en tabell med teamets to MCP-servere.">
   <div class="fl-grid">
     <nav class="fl-side">
-      <small>team-eksempel</small>
-      <span class="on">Oversikt</span><span>MCP-servere</span><span>Agentprofiler</span><span>Til godkjenning <em>2</em></span><span>Historikk</span>
+      <small>Team</small>
+      <span class="fl-pick">team-eksempel ▾</span>
+      <span class="on">Oversikt</span><span>MCP-servere</span>
       <small>For alle team</small>
-      <span>Katalog</span>
+      <span>Katalog</span><span>Registrer MCP-server</span>
     </nav>
     <main class="fl-main">
-      <div class="fl-head"><h4>team-eksempel</h4><u>Registrer MCP-server</u></div>
-      <div class="fl-stats">
-        <div><b>3 av 4</b>publisert</div>
-        <div class="w"><b>2</b>venter på godkjenning</div>
-        <div><b>10 720</b>kall, 7 dager</div>
-        <div><b>214</b>unike brukere, 7 dager</div>
+      <div class="fl-head"><h4>team-eksempel</h4><u>Registrer en MCP-server</u></div>
+      <div class="fl-kort"><b>Kort fortalt</b> Teamet registrerer en MCP-server. En annen i teamet godkjenner. Da får den en rute i fleet-gateway, <code>/mcp/team/navn</code>. En agentprofil bestemmer hvilken app som får bruke hvilke verktøy, på vegne av en innlogget bruker.</div>
+      <div class="fl-card w"><b>Til godkjenning</b>
+        <table class="fl-tab"><tr><th>Agentprofil</th><th>MCP-server</th><th>Verktøy</th><th></th></tr>
+        <tr><td>team-saksflyt/studio</td><td>kodeverk</td><td>sok_kode</td><td class="n"><span class="fl-btn">Gi tilgang</span></td></tr></table>
       </div>
       <table class="fl-tab">
-        <tr><th>MCP-server</th><th>Status</th><th>Neste steg</th><th class="n">Kall, 7 dager</th></tr>
-        <tr><td><b>kodeverk</b><code>/mcp/team-eksempel/kodeverk</code><i class="fl-dc">Åpen</i></td><td><span class="fl-tag ok">Publisert v3</span></td><td>Versjon 4 venter på deg</td><td class="n">5 990</td></tr>
-        <tr><td><b>oppslag</b><code>/mcp/team-eksempel/oppslag</code><i class="fl-dc">Intern</i></td><td><span class="fl-tag ok">Publisert v1</span></td><td>Versjon 2 venter på en annen i teamet</td><td class="n">3 410</td></tr>
-        <tr><td><b>enhetsregister</b><code>/mcp/team-eksempel/enhetsregister</code><i class="fl-dc">Intern</i></td><td><span class="fl-tag ok">Publisert v2</span></td><td class="mu">Ingen</td><td class="n">1 320</td></tr>
-        <tr><td><b>saksarkiv</b><code>ingen rute ennå</code><i class="fl-dc">Fortrolig</i></td><td><span class="fl-tag neu">Utkast</span></td><td>Send inn til godkjenning</td><td class="n mu">–</td></tr>
+        <tr><th>MCP-server</th><th>Status</th><th>Publisert versjon</th></tr>
+        <tr><td><b>kodeverk</b><i class="fl-dc">Åpne data</i></td><td><span class="fl-tag w">Ny versjon venter</span></td><td>3</td></tr>
+        <tr><td><b>oppslag</b><i class="fl-dc">Interne data</i></td><td><span class="fl-tag ok">Publisert</span></td><td>1</td></tr>
       </table>
-      <p class="fl-note">Utkast og historikk ser bare teamet. Publiserte MCP-servere står i katalogen for alle som er logget inn.</p>
+      <p class="fl-note">Publiserte MCP-servere står i katalogen for alle som er logget inn. Andre team ber eierteamet om tilgang der.</p>
     </main>
   </div>
 </BrowserWindow>
@@ -769,12 +767,14 @@ layout: default
 <span class="font-mono text-sm opacity-70">nav-fleet · gjeldende retning · ikke låst</span>
 
 <!--
-- Besluttet: selvbetjeningen ligger i my-copilot under /fleet. Du velger team først, som i Nais Console. Myk lansering på ki-utvikling.nav.no når den er klar. Ingen frist
-- Skissen er et forslag til hvordan oversikten kan se ut. Team og tall er oppdiktet
-- Hver rad er én MCP-server med status, neste steg og kall siste sju dager. Ruten er bare adressen
-- Besluttet: alle publiserte MCP-servere vises i en katalog for alle som er logget inn. Utkast og historikk blir i teamet
-- Besluttet: datakategoriene er Åpen, Intern og Fortrolig. Strengt fortrolig er ikke tillatt ennå
-- Overgang: «Hva skjer når noen sender inn en ny versjon?»
+- Besluttet: selvbetjeningen ligger i my-copilot under /fleet. Du velger team først, som i Nais Console, og siden husker teamet til neste gang
+- Sidene er bygget og kjører i dev. De er skjult i produksjon til myk lansering. Teamene og dataene på sliden er oppdiktet
+- Oversikten viser hva som venter på teamet: agentprofiler som vil bruke en MCP-server, med «Gi tilgang»
+- Besluttet: alle publiserte MCP-servere står i en katalog for alle som er logget inn, med søk og filter på datakategori. Andre team ber eierteamet om tilgang
+- Registrering skjer i seks steg: navn, app fra teamets Nais-apper, adresse, verktøy, datakategori, se over og send inn
+- Besluttet: datakategoriene er Åpne, Interne og Fortrolige data. Strengt fortrolig er ikke tillatt ennå
+- Ikke bygget ennå: verktøyene hentes ikke automatisk, og bruksstatistikk blir en lenke til Grafana
+- Overgang: «Hva skjer når noen endrer en MCP-server?»
 -->
 
 ---
@@ -783,39 +783,39 @@ layout: default
 
 ::header::
 <h1 class="text-3xl font-bold">To i eierteamet godkjenner hver versjon</h1>
-<p class="subtitle">Den som sender inn, kan ikke godkjenne sin egen endring <span class="chip green align-middle ml-2">Besluttet</span> <span class="chip amber align-middle ml-1">Skisse · forslag</span></p>
+<p class="subtitle">Den som sender inn, kan ikke godkjenne sin egen endring <span class="chip green align-middle ml-2">Besluttet</span> <span class="chip amber align-middle ml-1">I dev</span></p>
 
 ::default::
-<BrowserWindow url="ki-utvikling.nav.no/fleet/team-eksempel/mcp-servere/kodeverk (skisse)" class="fl-win" role="img" aria-label="Skisse av siden for MCP-serveren kodeverk, sett av Kari som sendte inn versjon 4. Et godkjenningskort sier at Kari ikke kan godkjenne sin egen versjon, og at Nora eller Ola i eierteamet kan godkjenne. Ved siden av viser en tabell hva som endres fra versjon 3 til 4: ett nytt verktøy og en ny konsument. Nederst nødtiltak: stopp MCP-serveren eller trekk tilbake en versjon.">
+<BrowserWindow url="ki-utvikling.nav.no/fleet/team-eksempel/kodeverk" class="fl-win" role="img" aria-label="Siden for MCP-serveren kodeverk, slik den ser ut i dev. Versjon 4 venter på godkjenning fra en annen i eierteamet. Til høyre ligger kodebiten fra nais.yaml som slipper inn fleet-gateway. Nederst kan teamet trekke tilbake MCP-serveren, og en boks forklarer hva teamet gjør hvis MCP-serveren har et problem.">
   <div class="fl-grid">
     <nav class="fl-side">
-      <small>team-eksempel</small>
-      <span>Oversikt</span><span class="on">MCP-servere</span><span>Agentprofiler</span><span>Til godkjenning <em>2</em></span><span>Historikk</span>
+      <small>Team</small>
+      <span class="fl-pick">team-eksempel ▾</span>
+      <span>Oversikt</span><span class="on">MCP-servere</span>
       <small>For alle team</small>
-      <span>Katalog</span>
+      <span>Katalog</span><span>Registrer MCP-server</span>
     </nav>
     <main class="fl-main">
-      <div class="fl-head"><h4>kodeverk <span class="fl-tag ok">Publisert v3</span></h4><small class="mu">Ser siden som Kari Testesen</small></div>
-      <p class="fl-meta"><code>/mcp/team-eksempel/kodeverk</code> · Eierteam: team-eksempel · 3 verktøy · <i class="fl-dc">Åpen</i></p>
+      <div class="fl-head"><h4>kodeverk <span class="fl-tag ok">Publisert</span></h4></div>
+      <p class="fl-meta"><code>/mcp/team-eksempel/kodeverk</code> · Eierteam: team-eksempel · <i class="fl-dc">Åpne data</i></p>
       <div class="fl-two">
         <div class="fl-card w">
           <b>Versjon 4 venter på godkjenning</b>
-          <p>Sendt inn av Kari Testesen, 20. nov. kl. 14.02</p>
-          <div class="fl-btns"><span class="off">Godkjenn versjon 4</span><i>Avvis</i></div>
-          <p class="fl-why">Du sendte inn denne versjonen, så du kan ikke godkjenne den selv. Nora Navnesen eller Ola Eksempel i eierteamet kan godkjenne.</p>
+          <p>Endringen blir en ny versjon. En annen i team-eksempel må godkjenne den før den gjelder.</p>
+          <div class="fl-btns"><span class="off">Godkjenn versjon 4</span></div>
+          <p class="fl-why">Du sendte inn denne versjonen, så du kan ikke godkjenne den selv.</p>
         </div>
         <div class="fl-card">
-          <b>Hva endres, versjon 3 mot 4</b>
-          <table class="fl-tab fl-diff">
-            <tr><th>Felt</th><th>v3</th><th>v4</th></tr>
-            <tr><td>Verktøy</td><td>hent_kode, sok_kode</td><td>hent_kode, sok_kode, <ins>+ list_kodeverk</ins></td></tr>
-            <tr><td>Datakategori</td><td>Åpen</td><td class="mu">uendret</td></tr>
-            <tr><td>Konsumenter</td><td>saksflyt-agent</td><td>saksflyt-agent, <ins>+ dokument-agent</ins></td></tr>
-          </table>
-          <p class="fl-why">En konsument er en agentprofil. «Gi konsumenten tilgang» virker som accessPolicy.inbound i Nais.</p>
+          <b>Slipp inn fleet-gateway</b>
+          <pre class="fl-code">spec:
+  accessPolicy:
+    inbound:
+      rules:
+        - application: fleet-gateway</pre>
+          <p class="fl-why">Mangler regelen, svarer fleet-gateway med feil når agentene kaller verktøyene.</p>
         </div>
       </div>
-      <div class="fl-stop"><b>Nødtiltak</b><span>Eierteamet eller plattformteamet kan stoppe MCP-serveren med en gang.</span><span>Å trekke tilbake en versjon er endelig.</span><u>Stopp</u><u>Trekk tilbake</u></div>
+      <div class="fl-stop"><b>Har MCP-serveren et problem?</b><span>Trekk den tilbake, så kan ingen bruke den. Er feilen i appen, ruller dere den tilbake i Nais. Haster det for alle, bruker plattformteamet nødstopp.</span><u class="red">Trekk tilbake</u></div>
     </main>
   </div>
 </BrowserWindow>
@@ -826,10 +826,9 @@ layout: default
 
 <!--
 - Besluttet: to personer i eierteamet godkjenner hver endring. Én sender inn, en annen godkjenner, som en PR-gjennomgang
-- Skissen viser siden slik Kari ser den. Hun sendte inn versjon 4, så knappen er av. Navn og data er oppdiktet
-- Tabellen viser bare det som endres: ett nytt verktøy og en ny konsument. Datakategorien er uendret
-- Konsumenten er en agentprofil. Å gi konsumenten tilgang virker som accessPolicy.inbound i Nais: bare konsumenter på lista får kalle ruten
-- Besluttet: eierteamet eller plattformteamet kan stoppe en MCP-server. Å trekke tilbake en versjon er endelig for den versjonen. Neste versjon må godkjennes på nytt
+- Sliden viser siden slik den som sendte inn versjon 4, ser den. Derfor er godkjenn-knappen av. Data er oppdiktet
+- Siden gir kodebiten til nais.yaml som slipper inn fleet-gateway. Fleet kan ikke sjekke dette selv ennå
+- Eierteamet kan trekke tilbake en MCP-server uten godkjenning fra andre. Er feilen i koden, ruller teamet tilbake appen i Nais. Plattformteamet har nødstopp i fleet-gateway
 - Under utprøving: API-et er formet som Kubernetes, fleet.nav.no/v1alpha1 med MCPServer, AgentProfile og AgentJob. MCPServer og AgentProfile kjører i dev. AgentJob er ikke bygget. Det kan bli CRD-er senere
 -->
 
