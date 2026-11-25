@@ -373,7 +373,7 @@ layout: default
 <div class="two">
   <div class="feature-card">
     <h3>Produktteamet</h3>
-    <p>Eier agenten, formålet og det agenten gjør. Har risikovurderingen (ROS) og personvernkonsekvensvurderingen (PVK).</p>
+    <p>Eier agenten, formålet og det agenten gjør. Har risikovurderingen (ROS) og personvernkonsekvensvurderingen (PVK). Teamets risikoeier eier risikoen som en del av produktet.</p>
   </div>
   <div class="feature-card purple">
     <h3>Fleet</h3>
@@ -548,7 +548,7 @@ layout: default
 <span class="font-mono text-sm opacity-70">nav-fleet · gjeldende retning · ikke låst</span>
 
 <!--
-Overgang: «Hvor hører Fleet hjemme blant det vi har?»
+Overgang: «Hvordan kan dette vokse?»
 
 - Visjonen i én setning: det skal være enkelt, trygt og raskt for produktteam å bygge, drifte og videreutvikle KI i produksjon, med etterlevelse innebygd og uten dobbeltarbeid
 - Selvbetjent: som i Nais. Teamet godkjenner egne endringer med to personer. Team copilot godkjenner ikke hver endring
@@ -558,6 +558,43 @@ Overgang: «Hvor hører Fleet hjemme blant det vi har?»
 - Underlaget: agentsandkassene kjører i et eget GKE-cluster utenfor Nais. Modellene følger samme regler som for Copilot. Resten kjører på Nais der det passer
 - Figuren: fem piler i formasjon, samme tegn som i logoen
 - Navs oppdrag er utgangspunktet: Arbeids- og velferdsforvaltningen skal «møte det enkelte mennesket med respekt, bidra til sosial og økonomisk trygghet og fremme overgang til arbeid og aktiv virksomhet» (Nav-loven § 1 andre ledd, https://lovdata.no/lov/2006-06-16-20/§1)
+-->
+
+---
+layout: default
+---
+
+::header::
+<h1 class="text-3xl font-bold">Vi krabber før vi går</h1>
+<p class="subtitle">Slik kan det vokse. Retning, ikke besluttet <span class="chip amber align-middle ml-2">Visjon</span></p>
+
+::default::
+<div class="three">
+  <div class="feature-card blue">
+    <h3>Nå: to–tre team</h3>
+    <p>Vi prøver ut byggeklossene med team som allerede er godt i gang, og lærer hvor agentene gir verdi.</p>
+  </div>
+  <div class="feature-card purple">
+    <h3>Neste: alle produktteam</h3>
+    <p>Teamene tar byggeklossene i bruk selv, slik de tar i bruk Nais for apper i dag.</p>
+  </div>
+  <div class="feature-card green">
+    <h3>På sikt: hele seksjoner</h3>
+    <p>Også andre enn utviklere får trygge agenter i arbeidet sitt, med samme tilgangsstyring og innsyn.</p>
+  </div>
+</div>
+<p class="footnote tight">Vi går videre først når vi har sett hvor det gir verdi. Det vi lærer i ett steg, avgjør det neste.</p>
+
+::footer::
+<span class="font-mono text-sm opacity-70">nav-fleet · gjeldende retning · ikke låst</span>
+
+<!--
+- Svar på spørsmålet om hvordan dette kan skalere i stort. Dette er retning, ikke beslutning
+- Nå: vi piloterer med to–tre team som er motivert, og flere har allerede egne løsninger på gang. De første interne agentene er designagenter, en støtteagent for Nais og agenter for sikkerhet og etterlevelse
+- Neste: byggeklossene blir selvbetjente for alle produktteam, på samme måte som apper i Nais. Teamet eier agenten og risikoen
+- På sikt: kunnskapsarbeidere utenfor utviklingsteamene, på seksjonsnivå. Samme gateway og samme finmaskede tilgangsstyring avgjør hvem som får bruke hva, når og hvordan
+- Hvert steg krever at vi har sett verdien i steget før. Mye blir enklere når vi har erfaring
+- Overgang: «Hvor hører Fleet hjemme blant det vi har?»
 -->
 
 ---
@@ -620,6 +657,7 @@ layout: default
   <text x="0" y="322" class="t">ki-utvikling.nav.no</text>
   <text x="170" y="322" class="s">selvbetjening under /fleet og katalog over MCP-servere (besluttet)</text>
 </svg>
+<p class="footnote tight">Bygget på samme premiss og integrasjoner som plattformen og verktøyene teamene allerede kjenner.</p>
 
 ::footer::
 <span class="font-mono text-sm opacity-70">nav-fleet · gjeldende retning · ikke låst</span>

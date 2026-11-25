@@ -1207,6 +1207,18 @@ pre,
   color: var(--nais-heading);
 }
 
+/* Three equal cards */
+.three {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+}
+
+.three h3 {
+  font-size: 1.05rem;
+  margin-bottom: 0.5rem;
+}
+
 /* Two equal cards */
 .two {
   display: grid;
