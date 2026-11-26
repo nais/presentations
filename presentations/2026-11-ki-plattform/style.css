@@ -2494,3 +2494,7 @@ pre,
 .fl-stop u.red {
   background: #c30000;
 }
+
+.fl-win.fl-short {
+  height: 17.5rem;
+}
