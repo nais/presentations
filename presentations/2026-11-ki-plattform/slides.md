@@ -445,7 +445,7 @@ layout: default
     <text x="440" y="160" text-anchor="middle" class="pillt">nav-fleet</text>
     <rect x="185" y="172" width="210" height="44" rx="8" class="card"/>
     <text x="290" y="191" text-anchor="middle" class="t">Selvbetjent</text>
-    <text x="290" y="208" text-anchor="middle" class="s">Teamet godkjenner egne endringer</text>
+    <text x="290" y="208" text-anchor="middle" class="s">Teamet endrer selv, alt logges</text>
     <rect x="485" y="172" width="210" height="44" rx="8" class="card"/>
     <text x="590" y="191" text-anchor="middle" class="t">Automatiske rekkverk</text>
     <text x="590" y="208" text-anchor="middle" class="s">Kvote, nødstopp og revisjon</text>
@@ -475,7 +475,7 @@ layout: default
 Overgang: «Hvor hører Fleet hjemme blant plattformene vi allerede har?»
 
 - Visjonen i én setning: det skal være enkelt, trygt og raskt for produktteam å bygge, drifte og videreutvikle KI i produksjon, med etterlevelse innebygd og uten dobbeltarbeid
-- Selvbetjent: som i Nais. Teamet godkjenner egne endringer med to personer. Team copilot godkjenner ikke hver endring
+- Selvbetjent: som i Nais. Teamet endrer selv, og alt logges. Bare endringer som gir mer tilgang, går til team copilot for godkjenning
 - Automatiske rekkverk: plattformen håndhever kvote, nødstopp, utestenging og revisjon, og sjekker i CI
 - Egen modelltilgang: hvert team tar med sin egen modelltilgang og betaler selv. Plattformen koster infrastruktur og folk til drift
 - Fullt innsyn: ikke bare for teamet, men for dem som eier og reviderer teamet
@@ -775,11 +775,11 @@ layout: default
 <!--
 - Én linje å ta med: teamet som bruker agenten, eier den og det den gjør. Fleet leverer byggeklosser og kontroller
 - Dette står i styringsmodellen for Fleet. Den er gjeldende retning, ikke låst
-- Teamet godkjenner egne endringer med to personer, som en PR-gjennomgang, men mer tilgang, ny datakategori eller endret ROS går til team copilot for godkjenning. PVK for agenter som skriver godkjennes av ansvarlig eier, og personvernombudet gir råd
+- Teamet publiserer egne endringer med en gang, og alt logges. Endringer som gir mer tilgang (nytt verktøy, høyere risiko, ny datakategori eller endret ROS) går til team copilot for godkjenning. PVK for agenter som skriver godkjennes av ansvarlig eier, og personvernombudet gir råd
 - Eierteamet til MCP-serveren har ROS for serveren og bestemmer datakategorien: Åpne data, Interne data og Fortrolige data (besluttet). Strengt fortrolig er ikke tillatt ennå
 - Fleet, det vil si team copilot, drifter plattformen og eier rekkverkene. Fleet tar ikke juridiske beslutninger og har ikke ansvaret for det agenten gjør
 - Nav er behandlingsansvarlig. Vi skriver derfor «teamet har ansvaret for tjenesten», ikke «behandlingsansvar». Ordlyden bør sjekkes med en jurist
-- Styring (besluttet): to personer i eierteamet godkjenner hver versjon av en MCP-server. Den som sender inn, kan ikke godkjenne sin egen. Eierteamet bestemmer hvilke konsumenter (agentprofiler) som får tilgang, som accessPolicy.inbound i Nais. Eierteamet eller plattformteamet kan stoppe en MCP-server. Å trekke tilbake en versjon er endelig. Se skissene av selvbetjeningen senere i presentasjonen. Automatiske rekkverk: sjekker i CI, kvote, nødstopp og utestenging. Eiere og revisorer (ledelsen, sikkerhet, personvernombudet og internrevisjonen) ser revisjon og rapporter for sine team
+- Styring (besluttet): endringer som gir mer tilgang, godkjennes av team copilot. Andre endringer publiseres med en gang og logges. Eierteamet bestemmer hvilke konsumenter (agentprofiler) som får tilgang, som accessPolicy.inbound i Nais. Eierteamet eller plattformteamet kan stoppe en MCP-server. Å trekke tilbake en versjon er endelig. Se skissene av selvbetjeningen senere i presentasjonen. Automatiske rekkverk: sjekker i CI, kvote, nødstopp og utestenging. Eiere og revisorer (ledelsen, sikkerhet, personvernombudet og internrevisjonen) ser revisjon og rapporter for sine team
 - Samme tanke som i Nais: teamene eier sine egne objekter og godkjenner selv. Plattformteamet godkjenner ikke hver endring
 - Risikoen styres per verktøy: lesing, skriving, eksterne kall og kjøring på vertsmaskinen. Det avgjør hvem som godkjenner, og om det trengs ROS eller PVK
 - Et endret verktøy fjernes automatisk til det er godkjent på nytt
@@ -808,7 +808,7 @@ layout: default
     </nav>
     <main class="fl-main">
       <div class="fl-head"><h4>team-eksempel</h4><u>Registrer en MCP-server</u></div>
-      <div class="fl-kort"><b>Kort fortalt</b> Teamet registrerer en MCP-server. En annen i teamet godkjenner. Da får den en rute i fleet-gateway, <code>/mcp/team/navn</code>. En agentprofil skal bestemme hvilke verktøy en app får bruke, på vegne av en innlogget bruker. Det håndheves i neste steg.</div>
+      <div class="fl-kort"><b>Kort fortalt</b> Teamet registrerer en MCP-server. Gir den mer tilgang, godkjenner team copilot. Da får den en rute i fleet-gateway, <code>/mcp/team/navn</code>. En agentprofil skal bestemme hvilke verktøy en app får bruke, på vegne av en innlogget bruker. Det håndheves i neste steg.</div>
       <div class="fl-card w"><b>Til godkjenning</b>
         <table class="fl-tab"><tr><th>Agentprofil</th><th>MCP-server</th><th>Verktøy</th><th></th></tr>
         <tr><td>team-saksflyt/studio</td><td>kodeverk</td><td>sok_kode</td><td class="n"><span class="fl-btn">Gi tilgang</span></td></tr></table>
@@ -842,11 +842,11 @@ layout: default
 ---
 
 ::header::
-<h1 class="text-3xl font-bold">To i eierteamet godkjenner hver versjon</h1>
-<p class="subtitle">Den som sender inn, kan ikke godkjenne sin egen endring <span class="chip green align-middle ml-2">Besluttet</span> <span class="chip amber align-middle ml-1">I dev</span></p>
+<h1 class="text-3xl font-bold">Mer tilgang krever godkjenning fra team copilot</h1>
+<p class="subtitle">Endringer som ikke gir mer tilgang, publiseres med en gang. Alt logges <span class="chip green align-middle ml-2">Besluttet</span> <span class="chip amber align-middle ml-1">I dev</span></p>
 
 ::default::
-<BrowserWindow url="ki-utvikling.nav.no/fleet/mcp-servere/team-eksempel/kodeverk" class="fl-win fl-short" role="img" aria-label="Siden for MCP-serveren kodeverk, slik den ser ut i dev. Versjon 4 venter på godkjenning fra en annen i eierteamet. Til høyre ligger kodebiten fra nais.yaml som slipper inn fleet-gateway. Nederst kan teamet trekke tilbake MCP-serveren, og en boks forklarer hva teamet gjør hvis MCP-serveren har et problem.">
+<BrowserWindow url="ki-utvikling.nav.no/fleet/mcp-servere/team-eksempel/kodeverk" class="fl-win fl-short" role="img" aria-label="Siden for MCP-serveren kodeverk, slik den ser ut i dev. Versjon 4 legger til et verktøy og venter på godkjenning fra team copilot. Til høyre ligger kodebiten fra nais.yaml som slipper inn fleet-gateway. Nederst kan teamet trekke tilbake MCP-serveren, og en boks forklarer hva teamet gjør hvis MCP-serveren har et problem.">
   <div class="fl-grid">
     <nav class="fl-side">
       <small>Team</small>
@@ -861,9 +861,9 @@ layout: default
       <div class="fl-two">
         <div class="fl-card w">
           <b>Versjon 4 venter på godkjenning</b>
-          <p>Endringen blir en ny versjon. En annen i team-eksempel må godkjenne den før den gjelder.</p>
-          <div class="fl-btns"><span class="off">Godkjenn versjon 4</span></div>
-          <p class="fl-why">Du sendte inn denne versjonen, så du kan ikke godkjenne den selv.</p>
+          <p>Versjon 4 legger til et nytt verktøy. Det gir mer tilgang, så team copilot må godkjenne den før den gjelder.</p>
+          <div class="fl-btns"><span class="off">Venter på team copilot</span></div>
+          <p class="fl-why">Endringer som ikke gir mer tilgang, publiseres med en gang.</p>
         </div>
         <div class="fl-card">
           <b>Slipp inn fleet-gateway</b>
@@ -885,8 +885,8 @@ layout: default
 <span class="font-mono text-sm opacity-70">nav-fleet · gjeldende retning · ikke låst</span>
 
 <!--
-- Besluttet: to personer i eierteamet godkjenner hver endring. Én sender inn, en annen godkjenner, som en PR-gjennomgang
-- Sliden viser siden slik den som sendte inn versjon 4, ser den. Derfor er godkjenn-knappen av. Data er oppdiktet
+- Besluttet: alle team kan sende inn. Endringer som gir mer tilgang (nytt verktøy, høyere risiko, ny datakategori eller endret ROS), godkjennes av team copilot. Andre endringer publiseres med en gang. Teamet kan godkjenne egne endringer, og alt logges
+- Sliden viser siden for eierteamet mens versjon 4 venter på team copilot, fordi den legger til et verktøy. Data er oppdiktet
 - Siden gir kodebiten til nais.yaml som slipper inn fleet-gateway. Fleet kan ikke sjekke dette selv ennå
 - Eierteamet kan trekke tilbake en MCP-server uten godkjenning fra andre. Er feilen i koden, ruller teamet tilbake appen i Nais. Plattformteamet har nødstopp i fleet-gateway
 - Under utprøving: API-et er formet som Kubernetes, fleet.nav.no/v1alpha1 med MCPServer, AgentProfile og AgentJob. MCPServer og AgentProfile kjører i dev. AgentJob er ikke bygget. Det kan bli CRD-er senere
