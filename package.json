@@ -16,7 +16,8 @@
     "lint:fix": "pnpm -r lint:fix",
     "format": "pnpm -r format",
     "format:check": "pnpm -r format:check",
-    "check": "pnpm -r check"
+    "check": "pnpm -r check",
+    "shot": "scripts/shot.sh"
   },
   "pnpm": {
     "overrides": {

@@ -3,3 +3,4 @@ dist/
 .slidev/
 *.pdf
 .DS_Store
+.shots/
