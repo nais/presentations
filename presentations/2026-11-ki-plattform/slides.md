@@ -883,15 +883,16 @@ layout: default
   <div class="feature-card">
     <h3>Slik er det i dag</h3>
     <ul class="status">
-      <li><span class="chip green">kjører</span>Bare en person i eierteamet kan opprette agentprofiler og gi tilgang. Agenter og apper blir avvist.</li>
-      <li><span class="chip green">kjører</span>MCP-serverne slipper bare inn kall fra fleet-gateway, med en innlogget bruker. Andre veier er stengt.</li>
-      <li><span class="chip green">kjører</span>Agenten handler som brukeren og får aldri flere rettigheter enn brukeren har.</li>
-      <li><span class="chip green">kjører</span>Endringer som gir mer tilgang, må godkjennes av plattformteamet.</li>
+      <li><span class="chip green">kjører</span>Bare en person på eierteamet kan registrere og endre MCP-servere. Agenter og apper blir avvist.</li>
+      <li><span class="chip green">kjører</span>MCP-serverne slipper bare inn kall fra fleet-gateway, med en innlogget bruker.</li>
+      <li><span class="chip green">kjører</span>Agenten opptrer som brukeren. MCP-serveren ser brukerens identitet og gir aldri mer enn brukeren har lov til.</li>
+      <li><span class="chip green">kjører</span>Mer tilgang, ny datakategori eller endret ROS må godkjennes av team copilot (plattformteamet).</li>
     </ul>
   </div>
   <div class="feature-card amber">
     <h3>Neste steg</h3>
     <ul class="status">
+      <li><span class="chip amber">neste</span>Eierteamet oppretter agentprofiler og gir tilgang, bare personer.</li>
       <li><span class="chip amber">neste</span>Agenter får egen identitet, atskilt fra brukeren.</li>
       <li><span class="chip amber">neste</span>fleet-gateway sjekker agentprofilen for hvert verktøykall.</li>
       <li><span class="chip amber">neste</span>fleet-runtime stenger all trafikk ut, unntatt til fleet-gateway.</li>
@@ -905,10 +906,10 @@ layout: default
 
 <!--
 - Spørsmålet vi får: hva hindrer agenten i å bare gjøre kallet selv, før eierteamet har gitt tilgang?
-- Bare personer kan skrive: fleet-control krever et personlig token med medlemskap i teamet. Apptokener får 401. Agenten kan derfor ikke lage profil eller gi seg selv tilgang
+- Bare personer kan skrive: fleet-control krever et personlig token med medlemskap i teamet. Apptokener får 401. Agenten kan derfor ikke registrere eller endre noe selv. Agentprofiler er ikke i bruk i produksjon ennå
 - Ingen omvei: MCP-serverne godtar bare tokener utstedt for fleet-gateway, med en innlogget person. accessPolicy.inbound slipper bare inn fleet-gateway. Begge deler kjører i produksjon
 - I dag kjenner fleet-gateway bare brukeren. Den logger inn personen og bytter tokenet (OBO) for hver MCP-server. En agent i Copilot har derfor brukerens egne rettigheter, ikke flere
-- Endringer som gir mer tilgang, går til godkjenning hos plattformteamet. Det er bygget i API-et
+- Endringer som gir mer tilgang, og endringer i datakategori eller ROS, går til godkjenning hos team copilot. Det er bygget i API-et
 - Ikke bygget ennå: egen agentidentitet, at gatewayen håndhever agentprofilen per verktøy, fleet-runtime i produksjon med trafikk ut bare til gatewayen, og at det å trekke tilbake én tilgang stopper en jobb som kjører
 -->
 
