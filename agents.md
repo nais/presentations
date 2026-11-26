@@ -291,3 +291,7 @@ layout: [layout-name]
 3. Symlink shared resources: `ln -s ../../shared/{components,layouts,public} .`
 4. Define CSS variables in `style.css` for your theme
 5. Update root `package.json` with dev script
+
+## Before pushing a deck
+
+Follow [docs/deck-checklist.md](docs/deck-checklist.md). Take screenshots with `pnpm shot <deck> <slide>...`.
