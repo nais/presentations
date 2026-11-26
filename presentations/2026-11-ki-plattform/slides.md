@@ -918,6 +918,49 @@ layout: default
 ---
 
 ::header::
+<h1 class="text-3xl font-bold">Agenten foreslår, mennesket bestemmer</h1>
+<p class="subtitle">Beslutningen tas i fagsystemet, med brukerens egen innlogging <span class="chip amber align-middle ml-2">Forslag</span></p>
+
+::default::
+<div class="two">
+  <div class="feature-card">
+    <h3>Slik skal det virke</h3>
+    <ul class="status">
+      <li><span class="chip blue">1</span>Agenten lager et forslag. Fagsystemet lagrer det med egen ID.</li>
+      <li><span class="chip blue">2</span>Brukeren åpner forslaget i fagsystemet og ser nøyaktig hva som foreslås.</li>
+      <li><span class="chip blue">3</span>Brukeren bestemmer med sin egen innlogging. Kallet går fra brukeren til fagsystemet, ikke via agenten.</li>
+    </ul>
+  </div>
+  <div class="feature-card amber">
+    <h3>Sperrene</h3>
+    <ul class="status">
+      <li><span class="chip amber">forslag</span>Fagsystemet avviser alle beslutninger som kommer via fleet-gateway.</li>
+      <li><span class="chip amber">forslag</span>fleet-gateway gir agenter bare verktøy som leser eller foreslår.</li>
+      <li><span class="chip amber">forslag</span>Fagsystemer kan bare registrere verktøy som leser eller foreslår.</li>
+    </ul>
+  </div>
+</div>
+<p class="footnote tight">I dag går ingen innbygger- eller saksdata gjennom Copilot eller KI-agenter. Å endre det krever en ny beslutning fra risikoeier og ny ROS.</p>
+
+::footer::
+<span class="font-mono text-sm opacity-70">nav-fleet · gjeldende retning · ikke låst</span>
+
+<!--
+- Spørsmålet: hvordan sikrer vi at et menneske faktisk har bestemt, når agenten har gjort forarbeidet, for eksempel i saksbehandling?
+- Svaret er å holde beslutningen utenfor agentløkka. Agenten skriver bare forslag. Brukeren bestemmer i fagsystemets eget skjermbilde, med sin egen innlogging og vanlige regler for fire øyne
+- Alt som går gjennom fleet-gateway, er agenttrafikk. Tokenet viser hvilken app som ber om tilgang, og det kan ikke forfalskes. Fagsystemet kan derfor avvise beslutninger som kommer via gatewayen. Det er én sjekk per fagsystem
+- Forsvar i dybden: gatewayen kan skjule og avvise verktøy over «Foreslår» for agenter, og be om smale rettigheter per rute i stedet for alt
+- Forslaget lagres med ID og kontrollsum. Revisjonen kobler forslaget til agentøkten som laget det
+- Signering med passkey over selve forslaget er mulig senere, for de få tilfellene som trenger det. Innlogging med ekstra faktor alene beviser bare at brukeren er til stede, ikke hva brukeren godkjente
+- Status: risikoklasser per verktøy finnes i fleet i dag, men styrer bare godkjenning. Sperrene på sliden er forslag og ikke bygget
+- Besluttet: i dag går ingen innbygger- eller saksdata gjennom Copilot eller KI-agenter. Risikoeier er seksjonslederen, og ROS-en oppdateres årlig
+-->
+
+---
+layout: default
+---
+
+::header::
 <h1 class="text-3xl font-bold">fleet-runtime kjører i vårt eget GKE-cluster</h1>
 <p class="subtitle">Agentkode holdes unna Navs apper <span class="chip green align-middle ml-2">Besluttet: eget cluster</span> <span class="chip amber align-middle ml-1">Agent Substrate: forslag</span></p>
 
