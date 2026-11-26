@@ -73,7 +73,7 @@ Overgang: «La oss se på fem agenter.»
 
 - Dette er en plan med gjeldende retning. Den er ikke låst, og eieren har sagt at ingenting er hugget i stein
 - Merkelappene: «besluttet» er bestemt av eieren, «forslag» er vår anbefaling, «visjon» er retningen uten plan, «hypotese» er noe vi tror, men ikke har avtalt med noen
-- Rekkefølgen: fem agenter med samme byggeklosser, isfjellet, ett spørsmål gjennom Fleet, innsyn, ansvar, behovet, det som virker i dag, formål og grenser, visjonen, modulene, selvbetjening og godkjenning, kjøretiden, identitet, styring, kostnad, status, veikartet og åpne spørsmål
+- Rekkefølgen i fem deler: 1) Eksempel: fem agenter, isfjellet og ett spørsmål gjennom Fleet. 2) Hvorfor: felles behov, formål og grenser, og visjonen. 3) Hvordan: laget mellom appene og modellene, fire moduler, fleet-runtime og egen modell. 4) Tillit: ansvar, selvbetjening og godkjenning, tilgang, forslag mot beslutning, og innsyn. 5) Veien videre: status, skalering, fem faser, seks spørsmål og avslutning
 - Navnet: nav-fleet, til daglig Fleet, på linje med Nais, Nada og Aksel. nav-pilot var én pilot. Fleet er en flåte i produksjon, og plattformen er flåtestyringen
 - Modulene er fire: fleet-gateway, fleet-control, fleet-runtime og fleet-radar for innsyn og revisjon. I tillegg kommer et offentlig register og MCP-servere som teamene eier
 - Kjente navn utenfor Nav: Rancher Fleet, Fleet (enhetsstyring) og JetBrains Fleet. Vi har ikke sjekket varemerker
@@ -283,6 +283,7 @@ layout: default
 - Punkt 2: fleet-control har agentprofilen. Den sier hvilke verktøy agenten får bruke. Rettighetene er snittet av det brukeren, MCP-serveren og agenten har lov til
 - Punkt 3: bygget kjører i fleet-runtime. Sandkassen er stengt for trafikk ut, og modellnøkler legges på utenfor sandkassen
 - Punkt 4: å bestille i Dolly er skriving. Appen spør brukeren, og jobben venter på svaret. At jobben kan pause og spørre, kommer etter fase 1
+- Ja/Nei i chatten bekrefter bare ett enkelt verktøykall. Bindende beslutninger, som i saksbehandling, tas i fagsystemet (se «Agenten foreslår, mennesket bestemmer»)
 - Punkt 5: fleet-radar viser revisjonen av hvert kall med bruker og agent, og bruken per team og agent
 - Data: bare åpne og interne data og syntetiske testdata går gjennom modellene i piloten
 - Overgang: «Hva skjer egentlig under vannlinjen når Ola trykker enter?»
@@ -317,10 +318,11 @@ layout: default
 - 2: Agenten spør teamets egen modell, først Vertex AI i teamets eget GCP-prosjekt. Nøkkelen legges på utenfor sandkassen, så agenten ser den aldri
 - 3: Agenten søker i Dolly gjennom fleet-gateway. fleet-control sier hva agentprofilen har lov til. Dolly lager bare syntetiske testpersoner
 - 4: Å bestille er skriving. Appen spør Ola, og jobben venter. At jobben kan pause og spørre via appen, er utenfor fase 1
+- Ja/Nei i appen bekrefter bare ett enkelt verktøykall. Bindende beslutninger, som i saksbehandling, tas i fagsystemet (se «Agenten foreslår, mennesket bestemmer»)
 - 5: Bestillingen går gjennom fleet-gateway, som sjekker godkjenningen. Jobben avsluttes, og resultatet kommer som et artefakt
 - Nederst: fleet-radar viser én revisjonslinje per steg, med bruker, agent, verktøy, utfall og trace-ID
 - Teamet har skrevet appen, chatten og agenten. Resten er Fleet
-- Overgang: «Kan vi i ettertid se hva agenten gjorde?»
+- Overgang: «Hvorfor skal ikke hvert team bygge alt dette selv?»
 -->
 
 ---
@@ -446,7 +448,7 @@ layout: default
     <text x="290" y="208" text-anchor="middle" class="s">Teamet godkjenner egne endringer</text>
     <rect x="485" y="172" width="210" height="44" rx="8" class="card"/>
     <text x="590" y="191" text-anchor="middle" class="t">Automatiske rekkverk</text>
-    <text x="590" y="208" text-anchor="middle" class="s">Kvote, nødbryter og revisjon</text>
+    <text x="590" y="208" text-anchor="middle" class="s">Kvote, nødstopp og revisjon</text>
     <rect x="0" y="222" width="210" height="44" rx="8" class="card"/>
     <text x="105" y="241" text-anchor="middle" class="t">Egen modelltilgang</text>
     <text x="105" y="258" text-anchor="middle" class="s">Teamet tar med sin egen</text>
@@ -470,11 +472,11 @@ layout: default
 <span class="font-mono text-sm opacity-70">nav-fleet · gjeldende retning · ikke låst</span>
 
 <!--
-Overgang: «Hvordan kan dette vokse?»
+Overgang: «Hvor hører Fleet hjemme blant plattformene vi allerede har?»
 
 - Visjonen i én setning: det skal være enkelt, trygt og raskt for produktteam å bygge, drifte og videreutvikle KI i produksjon, med etterlevelse innebygd og uten dobbeltarbeid
 - Selvbetjent: som i Nais. Teamet godkjenner egne endringer med to personer. Team copilot godkjenner ikke hver endring
-- Automatiske rekkverk: plattformen håndhever kvote, nødbryter, utestenging og revisjon, og sjekker i CI
+- Automatiske rekkverk: plattformen håndhever kvote, nødstopp, utestenging og revisjon, og sjekker i CI
 - Egen modelltilgang: hvert team tar med sin egen modelltilgang og betaler selv. Plattformen koster infrastruktur og folk til drift
 - Fullt innsyn: ikke bare for teamet, men for dem som eier og reviderer teamet
 - Underlaget: agentsandkassene kjører i et eget GKE-cluster utenfor Nais. Modellene følger samme regler som for Copilot. Resten kjører på Nais der det passer
@@ -592,7 +594,6 @@ layout: default
     <text x="147" y="156" class="s" text-anchor="middle">servere, ruter, verktøy, agentprofiler</text>
     <text x="147" y="176" class="s" text-anchor="middle">jobb-API: jobb-ID inn, artefakt ut</text>
     <text x="147" y="196" class="s" text-anchor="middle">godkjenning og budsjett</text>
-    <text x="147" y="220" class="s x" text-anchor="middle">skrive-API og godkjenning i dev</text>
   </g>
   <g class="a-rise" style="--d: 0.55s">
     <rect x="309" y="110" width="262" height="124" rx="8" class="b"/>
@@ -600,15 +601,13 @@ layout: default
     <text x="440" y="156" class="s" text-anchor="middle">sandkasse per jobb, egen GKE</text>
     <text x="440" y="176" class="s" text-anchor="middle">stengt for trafikk ut</text>
     <text x="440" y="196" class="s" text-anchor="middle">nøkler legges på utenfor</text>
-    <text x="440" y="220" class="s x" text-anchor="middle">ikke bygget, prøves ut først</text>
   </g>
   <g class="a-rise" style="--d: 0.7s">
     <rect x="602" y="110" width="262" height="124" rx="8" class="b"/>
     <text x="733" y="134" class="t" text-anchor="middle">fleet-gateway</text>
     <text x="733" y="156" class="s" text-anchor="middle">inngangen for alle verktøykall</text>
     <text x="733" y="176" class="s" text-anchor="middle">alle ruter fra fleet-control</text>
-    <text x="733" y="196" class="s" text-anchor="middle">verktøyliste, kvote og nødbryter</text>
-    <text x="733" y="220" class="s x" text-anchor="middle">pilot i produksjon</text>
+    <text x="733" y="196" class="s" text-anchor="middle">verktøyliste, kvote og nødstopp</text>
   </g>
   <g class="a-fade" style="--d: 0.55s"><line x1="278" y1="170" x2="304" y2="170" class="a" marker-end="url(#ar2)"/></g>
   <g class="a-fade" style="--d: 0.7s"><line x1="571" y1="170" x2="597" y2="170" class="a" marker-end="url(#ar2)"/></g>
@@ -640,7 +639,7 @@ Overgang: «Hvorfor kjører agentene ikke på Nais?»
 
 - fleet-control er eneste kilde for servere, ruter, verktøy og agentprofiler. Appen starter en agentkjøring gjennom et asynkront jobb-API og får en jobb-ID. Resultatet kommer som et artefakt. fleet-runtime bare utfører
 - fleet-runtime er en sandkasse for agentkjøringer på eget GKE-cluster. Team tar med enten konfigurasjon for et standard agentoppsett eller sitt eget containerimage. Profilen avgjør om kjøringen er kort og uten tilstand eller en lang økt
-- fleet-gateway håndhever per kall: token per MCP-server, verktøyliste, hash-låsing av verktøy, kvote og nødbryter, og reviderer hvert kall
+- fleet-gateway håndhever per kall: token per MCP-server, verktøyliste, hash-låsing av verktøy, kvote og nødstopp, og reviderer hvert kall
 - fleet-radar er innsyn og revisjon: hver jobb, hvert verktøykall og hver endring i fleet-control, samlet med trace-ID. Teamet, eierne og revisorene ser det samme. Ikonet er radaren
 - Registeret er en offentlig lesekopi av fleet-control
 - MCP-servere: teamene eier verktøyene, dataene og risikoen bak dem
@@ -743,10 +742,10 @@ layout: default
 - Copilot-lisensen er personlig. En agent uten en person bak bruker ikke Copilot-lisens, men Vertex AI i teamets prosjekt eller en annen kobling teamet tar med selv
 - Vertex AI først: ingen statisk nøkkel, faktura til teamets prosjekt, og den brukes allerede av apper i Nav
 - Modellreglene er de samme som for Copilot. Vi lager ikke en egen liste for agenter
-- Gatewayen skal avvise kall fra piloten som er merket med en annen dataklasse
+- Gatewayen skal avvise kall fra piloten som er merket med en annen datakategori
 - Måling skjer i Fleet, ikke hos agenten, så agenten kan ikke underrapportere
 - Åpent spørsmål: dekker GCP-avtalen modellene vi trenger?
-- Overgang: «Hvor står vi i dag?»
+- Overgang: «Hvem har ansvaret for det agenten gjør?»
 -->
 
 ---
@@ -776,17 +775,17 @@ layout: default
 <!--
 - Én linje å ta med: teamet som bruker agenten, eier den og det den gjør. Fleet leverer byggeklosser og kontroller
 - Dette står i styringsmodellen for Fleet. Den er gjeldende retning, ikke låst
-- Teamet som eier agenten godkjenner egne endringer med to personer, som en PR-gjennomgang. PVK for agenter som skriver godkjennes av ansvarlig eier, og personvernombudet gir råd
-- Eierteamet til MCP-serveren har ROS for serveren og bestemmer datakategorien: Åpen, Intern eller Fortrolig (besluttet). Strengt fortrolig er ikke tillatt ennå
+- Teamet godkjenner egne endringer med to personer, som en PR-gjennomgang, men mer tilgang, ny datakategori eller endret ROS går til team copilot for godkjenning. PVK for agenter som skriver godkjennes av ansvarlig eier, og personvernombudet gir råd
+- Eierteamet til MCP-serveren har ROS for serveren og bestemmer datakategorien: Åpne data, Interne data og Fortrolige data (besluttet). Strengt fortrolig er ikke tillatt ennå
 - Fleet, det vil si team copilot, drifter plattformen og eier rekkverkene. Fleet tar ikke juridiske beslutninger og har ikke ansvaret for det agenten gjør
 - Nav er behandlingsansvarlig. Vi skriver derfor «teamet har ansvaret for tjenesten», ikke «behandlingsansvar». Ordlyden bør sjekkes med en jurist
-- Styring (besluttet): to personer i eierteamet godkjenner hver versjon av en MCP-server. Den som sender inn, kan ikke godkjenne sin egen. Eierteamet bestemmer hvilke konsumenter (agentprofiler) som får tilgang, som accessPolicy.inbound i Nais. Eierteamet eller plattformteamet kan stoppe en MCP-server. Å trekke tilbake en versjon er endelig. Se skissene av selvbetjeningen senere i presentasjonen. Automatiske rekkverk: sjekker i CI, kvote, nødbryter og utestenging. Eiere og revisorer (ledelsen, sikkerhet, personvernombudet og internrevisjonen) ser revisjon og rapporter for sine team
+- Styring (besluttet): to personer i eierteamet godkjenner hver versjon av en MCP-server. Den som sender inn, kan ikke godkjenne sin egen. Eierteamet bestemmer hvilke konsumenter (agentprofiler) som får tilgang, som accessPolicy.inbound i Nais. Eierteamet eller plattformteamet kan stoppe en MCP-server. Å trekke tilbake en versjon er endelig. Se skissene av selvbetjeningen senere i presentasjonen. Automatiske rekkverk: sjekker i CI, kvote, nødstopp og utestenging. Eiere og revisorer (ledelsen, sikkerhet, personvernombudet og internrevisjonen) ser revisjon og rapporter for sine team
 - Samme tanke som i Nais: teamene eier sine egne objekter og godkjenner selv. Plattformteamet godkjenner ikke hver endring
 - Risikoen styres per verktøy: lesing, skriving, eksterne kall og kjøring på vertsmaskinen. Det avgjør hvem som godkjenner, og om det trengs ROS eller PVK
 - Et endret verktøy fjernes automatisk til det er godkjent på nytt
 - Eiere og revisorer setter ikke egne regler, men leser revisjonsspor og rapporter for teamene de har ansvar for
 - Hver fase i veikartet har egne krav til etterlevelse før den regnes som ferdig
-- Overgang: «Hvorfor skal ikke hvert team bygge dette selv?»
+- Overgang: «Hvordan ser dette ut for et team i praksis?»
 -->
 
 ---
@@ -833,7 +832,7 @@ layout: default
 - Oversikten viser hva som venter på teamet: agentprofiler som vil bruke en MCP-server, med «Gi tilgang»
 - Besluttet: alle publiserte MCP-servere står i en katalog for alle som er logget inn, med søk og filter på datakategori. Andre team ber eierteamet om tilgang
 - Registrering skjer i seks steg: navn, app fra teamets Nais-apper, adresse, verktøy, datakategori, se over og send inn
-- Besluttet: datakategoriene er Åpne, Interne og Fortrolige data. Strengt fortrolig er ikke tillatt ennå
+- Besluttet: datakategoriene er Åpne data, Interne data og Fortrolige data. Strengt fortrolig er ikke tillatt ennå
 - Ikke bygget ennå: verktøyene hentes ikke automatisk, og bruksstatistikk blir en lenke til Grafana
 - Overgang: «Hva skjer når noen endrer en MCP-server?»
 -->
@@ -891,6 +890,7 @@ layout: default
 - Siden gir kodebiten til nais.yaml som slipper inn fleet-gateway. Fleet kan ikke sjekke dette selv ennå
 - Eierteamet kan trekke tilbake en MCP-server uten godkjenning fra andre. Er feilen i koden, ruller teamet tilbake appen i Nais. Plattformteamet har nødstopp i fleet-gateway
 - Under utprøving: API-et er formet som Kubernetes, fleet.nav.no/v1alpha1 med MCPServer, AgentProfile og AgentJob. MCPServer og AgentProfile kjører i dev. AgentJob er ikke bygget. Det kan bli CRD-er senere
+- Overgang: «Hva hindrer agenten i å bare gi seg selv tilgang?»
 -->
 
 ---
@@ -934,6 +934,7 @@ layout: default
 - I dag kjenner fleet-gateway bare brukeren. Den logger inn personen og bytter tokenet (OBO) for hver MCP-server. En agent i Copilot har derfor brukerens egne rettigheter, ikke flere
 - Endringer som gir mer tilgang, og endringer i datakategori eller ROS, går til godkjenning hos team copilot. Det er bygget i API-et
 - Ikke bygget ennå: egen agentidentitet, at gatewayen håndhever agentprofilen per verktøy, fleet-runtime i produksjon med trafikk ut bare til gatewayen, og at det å trekke tilbake én tilgang stopper en jobb som kjører
+- Overgang: «Hva når agenten forbereder noe viktig, som i saksbehandling?»
 -->
 
 ---
@@ -977,6 +978,7 @@ layout: default
 - Signering med passkey over selve forslaget er mulig senere, for de få tilfellene som trenger det. Innlogging med ekstra faktor alene beviser bare at brukeren er til stede, ikke hva brukeren godkjente
 - Status: risikoklasser per verktøy finnes i fleet i dag, men styrer bare godkjenning. Sperrene på sliden er forslag og ikke bygget
 - Besluttet: i dag går ingen innbygger- eller saksdata gjennom Copilot eller KI-agenter. Risikoeier er seksjonslederen, og ROS-en oppdateres årlig
+- Overgang: «Og kan vi i ettertid vise nøyaktig hva agenten gjorde?»
 -->
 
 ---
@@ -1014,7 +1016,7 @@ layout: default
 - Hvem ser hva: teamet ser sine egne agenter. Eiere og revisorer over teamet (ledelsen, sikkerhet, personvernombudet og internrevisjonen) ser revisjonen for teamene de har ansvar for
 - Vi lover ikke mer enn det som står her. Om innholdet i prompter og svar, eller agentens begrunnelse, skal lagres, er et åpent designvalg. Det avhenger av formål, grunnlag og lagringstid
 - KI-forordningen har krav om logging og menneskelig tilsyn for høyrisiko-KI (artikkel 12 og 14). Hva som gjelder for Navs agenter, må en jurist vurdere
-- Overgang: «Hvem har ansvaret for det agenten gjør?»
+- Overgang: «Hvor står vi i dag, og hvilke verktøy begynner vi med?»
 -->
 
 ---
@@ -1057,7 +1059,7 @@ layout: default
 - Første agent er studio-api med lesetilgang til Dolly. Profilen skal godkjennes både av Aksel Studio og av eierteamet til Dolly. Ingen frist, og ingen snarvei for å gå raskere
 - Det som kjører i dag, er en pilot. Det er ikke åpnet for alle
 - Besluttet: selvbetjeningen får myk lansering på ki-utvikling.nav.no når den er klar. Ingen frist. fleet-gateway i produksjon henter da alle ruter fra fleet-control
-- Overgang: «Hvordan kommer vi videre?»
+- Overgang: «Hvordan kan dette vokse?»
 -->
 
 ---
@@ -1094,7 +1096,7 @@ layout: default
 - Neste: byggeklossene blir selvbetjente for alle produktteam, på samme måte som apper i Nais. Teamet eier agenten og risikoen
 - På sikt: kunnskapsarbeidere utenfor utviklingsteamene, på seksjonsnivå. Samme gateway og samme finmaskede tilgangsstyring avgjør hvem som får bruke hva, når og hvordan
 - Hvert steg krever at vi har sett verdien i steget før. Mye blir enklere når vi har erfaring
-- Overgang: «Hvor hører Fleet hjemme blant det vi har?»
+- Overgang: «Hva er stegene for å komme dit?»
 -->
 
 ---
@@ -1170,7 +1172,7 @@ layout: default
 <span class="font-mono text-sm opacity-70">nav-fleet · gjeldende retning · ikke låst</span>
 
 <!--
-Avslutning: «Hva mener dere? Hva mangler, og hvem bør være med?»
+Overgang: «La oss oppsummere poenget i én setning.»
 
 - Identitet: målbildet er ikke bestemt. Vi har sendt spørsmål til Nais om Nais STS. Det er det største hullet
 - Personvern: teamet som eier agenten eier PVK-en, men har ingen mal ennå. Malen lages sammen med personvernombudet
