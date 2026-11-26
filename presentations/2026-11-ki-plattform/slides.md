@@ -959,8 +959,7 @@ layout: default
     <h3>Sperrene</h3>
     <ul class="status">
       <li><span class="chip amber">forslag</span>Fagsystemet avviser alle beslutninger som kommer via fleet-gateway.</li>
-      <li><span class="chip amber">forslag</span>fleet-gateway gir agenter bare verktøy som leser eller foreslår.</li>
-      <li><span class="chip amber">forslag</span>Fagsystemer kan bare registrere verktøy som leser eller foreslår.</li>
+      <li><span class="chip amber">forslag</span>Fagsystemer kan bare registrere verktøy som leser eller foreslår, og fleet-gateway slipper bare gjennom de verktøyene.</li>
     </ul>
   </div>
 </div>
@@ -973,7 +972,7 @@ layout: default
 - Spørsmålet: hvordan sikrer vi at et menneske faktisk har bestemt, når agenten har gjort forarbeidet, for eksempel i saksbehandling?
 - Svaret er å holde beslutningen utenfor agentløkka. Agenten skriver bare forslag. Brukeren bestemmer i fagsystemets eget skjermbilde, med sin egen innlogging og vanlige regler for fire øyne
 - Alt som går gjennom fleet-gateway, er agenttrafikk. Tokenet viser hvilken app som ber om tilgang, og det kan ikke forfalskes. Fagsystemet kan derfor avvise beslutninger som kommer via gatewayen. Det er én sjekk per fagsystem
-- Forsvar i dybden: gatewayen kan skjule og avvise verktøy over «Foreslår» for agenter, og be om smale rettigheter per rute i stedet for alt
+- Forsvar i dybden: for fagsystemer og fortrolige data kan gatewayen skjule og avvise verktøy over «Foreslår». Andre ruter beholder verktøy som endrer, med spørsmål til brukeren først, og be om smale rettigheter per rute i stedet for alt
 - Forslaget lagres med ID og kontrollsum. Revisjonen kobler forslaget til agentøkten som laget det
 - Signering med passkey over selve forslaget er mulig senere, for de få tilfellene som trenger det. Innlogging med ekstra faktor alene beviser bare at brukeren er til stede, ikke hva brukeren godkjente
 - Status: risikoklasser per verktøy finnes i fleet i dag, men styrer bare godkjenning. Sperrene på sliden er forslag og ikke bygget
