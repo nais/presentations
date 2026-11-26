@@ -786,7 +786,7 @@ layout: default
     </nav>
     <main class="fl-main">
       <div class="fl-head"><h4>team-eksempel</h4><u>Registrer en MCP-server</u></div>
-      <div class="fl-kort"><b>Kort fortalt</b> Teamet registrerer en MCP-server. En annen i teamet godkjenner. Da får den en rute i fleet-gateway, <code>/mcp/team/navn</code>. En agentprofil bestemmer hvilken app som får bruke hvilke verktøy, på vegne av en innlogget bruker.</div>
+      <div class="fl-kort"><b>Kort fortalt</b> Teamet registrerer en MCP-server. En annen i teamet godkjenner. Da får den en rute i fleet-gateway, <code>/mcp/team/navn</code>. En agentprofil skal bestemme hvilke verktøy en app får bruke, på vegne av en innlogget bruker. Det håndheves i neste steg.</div>
       <div class="fl-card w"><b>Til godkjenning</b>
         <table class="fl-tab"><tr><th>Agentprofil</th><th>MCP-server</th><th>Verktøy</th><th></th></tr>
         <tr><td>team-saksflyt/studio</td><td>kodeverk</td><td>sok_kode</td><td class="n"><span class="fl-btn">Gi tilgang</span></td></tr></table>
@@ -868,6 +868,48 @@ layout: default
 - Siden gir kodebiten til nais.yaml som slipper inn fleet-gateway. Fleet kan ikke sjekke dette selv ennå
 - Eierteamet kan trekke tilbake en MCP-server uten godkjenning fra andre. Er feilen i koden, ruller teamet tilbake appen i Nais. Plattformteamet har nødstopp i fleet-gateway
 - Under utprøving: API-et er formet som Kubernetes, fleet.nav.no/v1alpha1 med MCPServer, AgentProfile og AgentJob. MCPServer og AgentProfile kjører i dev. AgentJob er ikke bygget. Det kan bli CRD-er senere
+-->
+
+---
+layout: default
+---
+
+::header::
+<h1 class="text-3xl font-bold">Agenten kan ikke gi seg selv tilgang</h1>
+<p class="subtitle">Bare mennesker godkjenner, og fleet-gateway er eneste vei inn</p>
+
+::default::
+<div class="two">
+  <div class="feature-card">
+    <h3>Slik er det i dag</h3>
+    <ul class="status">
+      <li><span class="chip green">kjører</span>Bare en person i eierteamet kan opprette agentprofiler og gi tilgang. Agenter og apper blir avvist.</li>
+      <li><span class="chip green">kjører</span>MCP-serverne slipper bare inn kall fra fleet-gateway, med en innlogget bruker. Andre veier er stengt.</li>
+      <li><span class="chip green">kjører</span>Agenten handler som brukeren og får aldri flere rettigheter enn brukeren har.</li>
+      <li><span class="chip green">kjører</span>Endringer som gir mer tilgang, må godkjennes av plattformteamet.</li>
+    </ul>
+  </div>
+  <div class="feature-card amber">
+    <h3>Neste steg</h3>
+    <ul class="status">
+      <li><span class="chip amber">neste</span>Agenter får egen identitet, atskilt fra brukeren.</li>
+      <li><span class="chip amber">neste</span>fleet-gateway sjekker agentprofilen for hvert verktøykall.</li>
+      <li><span class="chip amber">neste</span>fleet-runtime stenger all trafikk ut, unntatt til fleet-gateway.</li>
+      <li><span class="chip amber">neste</span>Når en tilgang trekkes tilbake, stopper også jobber som kjører.</li>
+    </ul>
+  </div>
+</div>
+
+::footer::
+<span class="font-mono text-sm opacity-70">nav-fleet · gjeldende retning · ikke låst</span>
+
+<!--
+- Spørsmålet vi får: hva hindrer agenten i å bare gjøre kallet selv, før eierteamet har gitt tilgang?
+- Bare personer kan skrive: fleet-control krever et personlig token med medlemskap i teamet. Apptokener får 401. Agenten kan derfor ikke lage profil eller gi seg selv tilgang
+- Ingen omvei: MCP-serverne godtar bare tokener utstedt for fleet-gateway, med en innlogget person. accessPolicy.inbound slipper bare inn fleet-gateway. Begge deler kjører i produksjon
+- I dag kjenner fleet-gateway bare brukeren. Den logger inn personen og bytter tokenet (OBO) for hver MCP-server. En agent i Copilot har derfor brukerens egne rettigheter, ikke flere
+- Endringer som gir mer tilgang, går til godkjenning hos plattformteamet. Det er bygget i API-et
+- Ikke bygget ennå: egen agentidentitet, at gatewayen håndhever agentprofilen per verktøy, fleet-runtime i produksjon med trafikk ut bare til gatewayen, og at det å trekke tilbake én tilgang stopper en jobb som kjører
 -->
 
 ---
